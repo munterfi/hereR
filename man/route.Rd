@@ -6,7 +6,7 @@
 \usage{
 route(start, destination, type = "fastest", mode = "car",
   traffic = FALSE, vehicle_type = "diesel,5.5", departure = NULL,
-  arrival = NULL)
+  arrival = NULL, url_only = FALSE)
 }
 \arguments{
 \item{arrival}{}
