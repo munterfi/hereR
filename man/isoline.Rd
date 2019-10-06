@@ -10,7 +10,7 @@ isoline(poi, range = seq(5, 15, 5) * 60, rangetype = "time",
   url_only = FALSE)
 }
 \arguments{
-\item{aggregate}{}
+\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
 }
 \description{
 Calcuates a isoline (POLYGON) that connects the end points of all routes

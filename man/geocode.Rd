@@ -8,6 +8,8 @@ geocode(addresses, url_only = FALSE)
 }
 \arguments{
 \item{addresses}{character, addresses to geocode.}
+
+\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
 }
 \value{
 An sf object, containing the coordinates of the geocoded addresses.

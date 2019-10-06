@@ -6,6 +6,7 @@
 #' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
 #'
 #' @param addresses character, addresses to geocode.
+#' @param url_only boolean, only return the generated URLs (default = FALSE)?
 #'
 #' @return
 #' An sf object, containing the coordinates of the geocoded addresses.

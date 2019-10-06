@@ -7,6 +7,7 @@
 #'
 #' @param poi
 #' @param product
+#' @param url_only boolean, only return the generated URLs (default = FALSE)?
 #'
 #' @return
 #' An sf object, containing the coordinates of the geocoded addresses.

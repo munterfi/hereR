@@ -9,7 +9,7 @@ route(start, destination, type = "fastest", mode = "car",
   arrival = NULL, url_only = FALSE)
 }
 \arguments{
-\item{arrival}{}
+\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
 }
 \description{
 Calcualtes a route between two points.

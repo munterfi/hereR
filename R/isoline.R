@@ -16,6 +16,7 @@
 #' @param departure
 #' @param start
 #' @param aggregate
+#' @param url_only boolean, only return the generated URLs (default = FALSE)?
 #'
 #' @return
 #' @export

@@ -1,4 +1,4 @@
-#' HERE Routing API: Matrix
+#' HERE Routing API: Route Matrix
 #'
 #' Calcuates a matrix of route summaries.
 #'
@@ -13,6 +13,7 @@
 #' @param searchRange
 #' @param attribute
 #' @param departure
+#' @param url_only boolean, only return the generated URLs (default = FALSE)?
 #'
 #' @return
 #' @export

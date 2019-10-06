@@ -7,7 +7,7 @@
 weather(poi, product = "observation", url_only = FALSE)
 }
 \arguments{
-\item{product}{}
+\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
 }
 \value{
 An sf object, containing the coordinates of the geocoded addresses.

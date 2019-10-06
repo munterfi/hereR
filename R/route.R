@@ -13,6 +13,7 @@
 #' @param vehicle_type
 #' @param departure
 #' @param arrival
+#' @param url_only boolean, only return the generated URLs (default = FALSE)?
 #'
 #' @return
 #' @export
@@ -127,8 +128,8 @@ route <- function(start, destination,
         sf::st_as_sf(
           data.table::data.table(
             cbind(
-              fromLabel = head(df$response$route$waypoint, 1)[[1]]$label[1],
-              toLabel = tail(df$response$route$waypoint, 1)[[1]]$label[2],
+              fromLabel = utils::head(df$response$route$waypoint, 1)[[1]]$label[1],
+              toLabel = utils::tail(df$response$route$waypoint, 1)[[1]]$label[2],
               mode = paste(Reduce(c, df$response$route$mode$transportModes),
                            collapse = ", "),
               traffic = df$response$route$mode$trafficMode,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/matrix.R
 \name{route_matrix}
 \alias{route_matrix}
-\title{HERE Routing API: Matrix}
+\title{HERE Routing API: Route Matrix}
 \usage{
 route_matrix(start, destination = start, type = "fastest",
   mode = "car", traffic = FALSE, searchRange = 10000,
@@ -10,7 +10,7 @@ route_matrix(start, destination = start, type = "fastest",
   url_only = FALSE)
 }
 \arguments{
-\item{departure}{}
+\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
 }
 \description{
 Calcuates a matrix of route summaries.
