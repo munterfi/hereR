@@ -1,13 +1,13 @@
 #' HERE Routing API: Isoline
 #'
 #' Calcuates a isoline (POLYGON) that connects the end points of all routes
-#' leaving from one defined center with either a specified length or a
+#' leaving from defined centers (POIs) with either a specified length or a
 #' specified travel time.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}
 #'
-#' @param points
+#' @param poi
 #' @param range
 #' @param rangetype
 #' @param type
@@ -21,13 +21,13 @@
 #' @export
 #'
 #' @examples
-isoline <- function(points, range = seq(100, 1000, 100), rangetype = "distance",
+isoline <- function(poi, range = seq(5, 15, 5) * 60, rangetype = "time",
                     type = "fastest", mode = "car", traffic = FALSE,
                     departure = NULL, start = TRUE, aggregate = TRUE,
                     url_only = FALSE) {
 
   # Checks
-  .check_points(points)
+  .check_points(poi)
   .check_datetime(departure)
   .check_rangetype(rangetype)
   .check_type(type = type, request = "calculateisoline")
@@ -39,16 +39,16 @@ isoline <- function(points, range = seq(100, 1000, 100), rangetype = "distance",
   )
 
   # Add point coords
-  points <- sf::st_coordinates(
-    sf::st_transform(points, 4326)
+  poi <- sf::st_coordinates(
+    sf::st_transform(poi, 4326)
   )
-  points <- paste0(
-    "geo!", points[, 2], ",", points[, 1]
+  poi <- paste0(
+    "geo!", poi[, 2], ",", poi[, 1]
   )
   url = paste0(
     url,
     if (start) {"&start="} else {"&destination="},
-    points
+    poi
   )
 
   # Add range and rangetype
