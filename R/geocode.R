@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-geocode <- function(addresses) {
+geocode <- function(addresses, url_only = FALSE) {
 
   # Check and preprocess addresses
   .check_addresses(addresses)
@@ -29,6 +29,9 @@ geocode <- function(addresses) {
     "&searchtext=",
     addresses
   )
+
+  # Return urls if chosen
+  if (url_only) return(url)
 
   # Request and get content
   data <- .get_content(

@@ -23,7 +23,8 @@
 #' @examples
 isoline <- function(points, range = seq(100, 1000, 100), rangetype = "distance",
                     type = "fastest", mode = "car", traffic = FALSE,
-                    departure = NULL, start = TRUE, aggregate = TRUE) {
+                    departure = NULL, start = TRUE, aggregate = TRUE,
+                    url_only = FALSE) {
 
   # Checks
   .check_points(points)
@@ -82,6 +83,9 @@ isoline <- function(points, range = seq(100, 1000, 100), rangetype = "distance",
     url,
     departure
   )
+
+  # Return urls if chosen
+  if (url_only) return(url)
 
   # Request and get content
   data <- .get_content(

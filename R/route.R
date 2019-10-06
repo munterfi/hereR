@@ -20,7 +20,9 @@
 #' @examples
 route <- function(start, destination,
                   type = "fastest", mode = "car", traffic = FALSE,
-                  vehicle_type = "diesel,5.5", departure = NULL, arrival = NULL) {
+                  vehicle_type = "diesel,5.5",
+                  departure = NULL, arrival = NULL,
+                  url_only = FALSE) {
   # Checks
   .check_points(start)
   .check_points(destination)
@@ -103,6 +105,9 @@ route <- function(start, destination,
     url,
     "&alternatives=0"
   )
+
+  # Return urls if chosen
+  if (url_only) return(url)
 
   # Request and get content
   data <- .get_content(

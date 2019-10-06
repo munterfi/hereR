@@ -21,7 +21,7 @@
 route_matrix <- function(start, destination = start, type = "fastest", mode = "car",
                          traffic = FALSE, searchRange = 10000,
                          attribute = c("distance", "traveltime"),
-                         departure = NULL) {
+                         departure = NULL, url_only = FALSE) {
   # Checks
   .check_points(start)
   .check_points(destination)
@@ -121,6 +121,9 @@ route_matrix <- function(start, destination = start, type = "fastest", mode = "c
     "&summaryAttributes=",
     paste0(attribute, collapse = ",")
   )
+
+  # Return urls if chosen
+  if (url_only) return(url)
 
   # Request and get content
   data <- .get_content(

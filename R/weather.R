@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-weather <- function(poi, product = "observation") {
+weather <- function(poi, product = "observation", url_only = FALSE) {
 
   # Add authentification
   url <- .add_auth(
@@ -54,6 +54,9 @@ weather <- function(poi, product = "observation") {
   } else {
     stop("Invalid input for 'poi'")
   }
+
+  # Return urls if chosen
+  if (url_only) return(url)
 
   # Request and get content
   data <- .get_content(
