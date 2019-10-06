@@ -6,7 +6,8 @@
 \usage{
 route_matrix(start, destination = start, type = "fastest",
   mode = "car", traffic = FALSE, searchRange = 10000,
-  attribute = c("distance", "traveltime"), departure = NULL)
+  attribute = c("distance", "traveltime"), departure = NULL,
+  url_only = FALSE)
 }
 \arguments{
 \item{departure}{}

@@ -4,7 +4,7 @@
 \alias{weather}
 \title{HERE Destination Weather API: Observation, Forecast or Astronomy}
 \usage{
-weather(poi, product = "observation")
+weather(poi, product = "observation", url_only = FALSE)
 }
 \arguments{
 \item{product}{}

@@ -4,16 +4,17 @@
 \alias{isoline}
 \title{HERE Routing API: Isoline}
 \usage{
-isoline(points, range = seq(100, 1000, 100), rangetype = "distance",
+isoline(poi, range = seq(5, 15, 5) * 60, rangetype = "time",
   type = "fastest", mode = "car", traffic = FALSE,
-  departure = NULL, start = TRUE, aggregate = TRUE)
+  departure = NULL, start = TRUE, aggregate = TRUE,
+  url_only = FALSE)
 }
 \arguments{
 \item{aggregate}{}
 }
 \description{
 Calcuates a isoline (POLYGON) that connects the end points of all routes
-leaving from one defined center with either a specified length or a
+leaving from defined centers (POIs) with either a specified length or a
 specified travel time.
 }
 \references{

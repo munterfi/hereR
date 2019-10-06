@@ -4,7 +4,7 @@
 \alias{geocode}
 \title{HERE Geocoder API: Geocode}
 \usage{
-geocode(addresses)
+geocode(addresses, url_only = FALSE)
 }
 \arguments{
 \item{addresses}{character, addresses to geocode.}
