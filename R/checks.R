@@ -1,5 +1,5 @@
 .check_addresses <- function(addresses) {
-  if (!is.character(addresses)) stop("'addresses' must be a character vector")
+  if (!is.character(addresses)) stop("'addresses' must be a 'character' vector")
 }
 
 .check_points <- function(points) {
@@ -10,7 +10,7 @@
 
 .check_datetime <- function(datetime) {
   if (!any(class(Sys.time()) %in% c("POSIXct", "POSIXt")))
-    stop("'datetime' must be of type POSIXct, POSIXt")
+    stop("'datetime' must be of type 'POSIXct', 'POSIXt'")
 }
 
 .check_mode <- function(mode, request) {
@@ -100,7 +100,7 @@
 .check_auth <- function(app_id, app_code) {
   if (!(is.character(app_id) & app_id != "" &
         is.character(app_code) & app_code != ""))
-    stop("Please provide an app_id and an app_code for a HERE project.
+    stop("Please provide an 'app_id' and an 'app_code' for a HERE project.
          Get your login here: https://developer.here.com/")
 }
 

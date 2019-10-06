@@ -6,11 +6,13 @@
 
 Interface to the 'HERE REST APIs':
 
-(1) geocode addresses based on the 'Geocoder API', returned as `sf` objects;
+(1) geocode addresses based on the 'Geocoder API';
 (2) routing directions, travel distance or time matrices based on the 'Routing API';
 (3) real-time and predicted traffic information based on the 'Traffic API';
 (4) weather forecasts, reports on current weather conditions and astronomical information at a specific location based on the 'Destination Weather API'.
-  
+
+Locations and routes are returned as `sf` objects.
+
 ## Installation
 
 You can install the released version of hereR from [CRAN](https://cran.r-project.org/web/packages/hereR/) with:

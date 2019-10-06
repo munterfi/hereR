@@ -1,16 +1,17 @@
 Package: hereR
 Type: Package
-Title: 'sf'-Compatible Interface to 'HERE REST APIs'
+Title: 'sf'-Compatible Interface to the 'HERE REST APIs'
 Version: 0.1.0
 Authors@R: c(
     person("Merlin", "Unterfinger", email = "info@munterfinger.ch", role = c("aut", "cre")))
 Maintainer: Merlin Unterfinger <info@munterfinger.ch>
 Description: Interface to the 'HERE REST APIs':
-  (1) geocode addresses based on the 'Geocoder API', returned as 'sf' objects;
+  (1) geocode addresses based on the 'Geocoder API';
   (2) routing directions, travel distance or time matrices based on the 'Routing API';
   (!3) real-time and predicted traffic information based on the 'Traffic API';
   (4) weather forecasts, reports on current weather conditions and astronomical
   information at a specific location based on the 'Destination Weather API'.
+  Locations and routes are returned as 'sf' objects.
 Depends: R (>= 3.5.0)
 Imports: 
     curl (>= 4.2),
