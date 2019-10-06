@@ -15,6 +15,9 @@
 #' @examples
 weather <- function(poi, product = "observation", url_only = FALSE) {
 
+  # Checks
+  .check_weather_product(product)
+
   # Add authentification
   url <- .add_auth(
     url = "https://weather.api.here.com/weather/1.0/report.json?"
@@ -64,7 +67,28 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   )
 
   # Extract information
-  weather <- data.table::rbindlist(
+  if (product == "observation") {
+    weather <- .extract_weather_observation(data)
+  } else if (product == "forecast_hourly") {
+    weather <- NULL
+  } else if (product == "forecast_astronomy") {
+    weather <- NULL
+  } else if (product == "alerts") {
+    weather <- NULL
+  } else {
+    weather <- NULL
+  }
+
+  # Create sf, data.table, data.frame
+  return(
+    sf::st_set_crs(
+      sf::st_as_sf(weather, coords = c("lng", "lat")),
+    4326)
+  )
+}
+
+.extract_weather_observation <- function(data) {
+  observation <- data.table::rbindlist(
     lapply(data, function(con) {
       df <- jsonlite::fromJSON(con)
       station <- data.table::data.table(
@@ -86,11 +110,5 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
       )
     })
   )
-
-  # Create sf, data.table, data.frame
-  return(
-    sf::st_set_crs(
-      sf::st_as_sf(weather, coords = c("lng", "lat")),
-    4326)
-  )
+  return(observation)
 }

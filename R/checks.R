@@ -110,4 +110,8 @@
     stop(sprintf("'vehicle_type' must be '%s'", paste(vehicle_types, collapse = "', '")))
 }
 
-
+.check_weather_product <- function(product) {
+  weather_product_types <- c("observation", "forecast_hourly", "forecast_astronomy", "alerts")
+  if (!strsplit(product, ",")[[1]][1] %in% weather_product_types)
+    stop(sprintf("'product' must be '%s'", paste(weather_product_types, collapse = "', '")))
+}
