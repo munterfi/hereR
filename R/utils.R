@@ -1,3 +1,5 @@
+## API URLs
+
 .add_auth <- function(url) {
   app_id = Sys.getenv("HERE_APP_ID")
   app_code = Sys.getenv("HERE_APP_CODE")
@@ -25,6 +27,18 @@
   )
 }
 
+.add_datetime <- function(url, datetime, field_name) {
+  if (is.null(datetime)) {
+    return(url)
+  } else {
+    paste0(
+      url,
+      paste0("&", field_name, "="),
+      .encode_datetime(datetime)
+    )
+  }
+}
+
 .add_departure <- function(url, departure) {
   paste0(
     url,
@@ -36,7 +50,6 @@
     }
   )
 }
-
 
 .add_arrival <- function(url, arrival) {
   paste0(
@@ -51,6 +64,9 @@
     as.character(datetime), " ", "T"
   )
 }
+
+
+## Requests
 
 .get_content <- function(url, encoding = "UTF-8") {
   # Code: https://hydroecology.net/asynchronous-web-requests-with-curl/
@@ -96,33 +112,19 @@
 }
 
 
+## Geometries
 
-# .get_content <- function(url, proxy, proxyuserpwd) {
-#   data <- list()
-#
-#   # Create pool and define return functions
-#   pool <- curl::new_pool()
-#   success <- function(res) {
-#     if (res$status != 200)
-#       stop(sprintf("Request failed with HTTP status code %s", res$status))
-#     data <<- c(data, list(res$content))
-#   }
-#   failure <- function(res) {
-#     stop(sprintf("Request failed with HTTP status code %s", res$status))
-#   }
-#
-#   # Add to pool
-#   for (u in url) {
-#     handle <- curl::new_handle()
-#     curl::handle_setopt(handle,
-#                         proxy = proxy,
-#                         proxyuserpwd = proxyuserpwd)
-#     curl::curl_fetch_multi(url = utils::URLencode(u),
-#                            done = success, fail = failure,
-#                            pool = pool, handle = handle)
-#   }
-#
-#   # Process pool
-#   out <- curl::multi_run(pool = pool)
-#   return(data)
-# }
+.line_from_pointList <- function(pointList) {
+  coords <- strsplit(pointList, ",")
+  lng <- as.numeric(sapply(coords, function(x) x[2]))
+  lat <- as.numeric(sapply(coords, function(x) x[1]))
+  sf::st_linestring(cbind(lng, lat))
+}
+
+.polygon_from_pointList <- function(pointList) {
+  coords <- strsplit(pointList, ",")
+  lng <- as.numeric(sapply(coords, function(x) x[2]))
+  lat <- as.numeric(sapply(coords, function(x) x[1]))
+  sf::st_polygon(list(cbind(lng, lat)))
+}
+

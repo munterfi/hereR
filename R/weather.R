@@ -1,19 +1,24 @@
-#' HERE Destination Weather API: Observation, Forecast or Astronomy
+#' HERE Destination Weather API: Observations, Forecast, Astronomy and Alerts
 #'
-#' Current weather conditions at Points of Interest (location or address).
+#' Weather forecasts, reports on current weather conditions,
+#' astronomical information and alerts at a specific location (coordinates or
+#' location name) based on the 'Destination Weather API'.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation }
+#' \href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation}
 #'
-#' @param poi
-#' @param product
-#' @param url_only boolean, only return the generated URLs (default = FALSE)?
+#' @param poi \code{sf} object or character, Points of Interest (POIs) of geometry type \code{POINT} or location names (e.g. cities or regions).
+#' @param product character, weather product of the 'Destination Weather API'. Supported products: \code{"observation"}, \code{"forecast_hourly"}, \code{"forecast_astronomy"} and \code{"alerts"}.
+#' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
-#' An sf object, containing the coordinates of the geocoded addresses.
+#' An \code{sf} object containing the requested weather information.
 #' @export
 #'
 #' @examples
+#' \donttest{
+#' weather(poi = locations, product = "observation")
+#' }
 weather <- function(poi, product = "observation", url_only = FALSE) {
 
   # Checks
@@ -71,13 +76,11 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   if (product == "observation") {
     weather <- .extract_weather_observation(data)
   } else if (product == "forecast_hourly") {
-    weather <- NULL
+    weather <- .extract_weather_forecast_hourly(data)
   } else if (product == "forecast_astronomy") {
-    weather <- NULL
+    weather <- .extract_weather_forecast_astronomy(data)
   } else if (product == "alerts") {
-    weather <- NULL
-  } else {
-    weather <- NULL
+    weather <- .extract_weather_alerts(data)
   }
 
   # Create sf, data.table, data.frame
@@ -112,4 +115,58 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
     })
   )
   return(observation)
+}
+
+.extract_weather_forecast_hourly <- function(data) {
+  dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
+  forecast <- data.table::rbindlist(
+    lapply(dfs, function(df) {
+      station <- data.table::data.table(
+        city = df$hourlyForecasts$forecastLocation$city[1],
+        lng = df$hourlyForecasts$forecastLocation$longitude[1],
+        state = df$hourlyForecasts$forecastLocation$state[1],
+        country = df$hourlyForecasts$forecastLocation$country[1],
+        lat = df$hourlyForecasts$forecastLocation$latitude[1]
+      )
+    })
+  )
+  forecast$forecast <- lapply(dfs, function(df)
+    {df$hourlyForecasts$forecastLocation$forecast})
+  return(forecast)
+}
+
+.extract_weather_forecast_astronomy <- function(data) {
+  dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
+  astronomy <- data.table::rbindlist(
+    lapply(dfs, function(df) {
+      station <- data.table::data.table(
+        city = df$astronomy$city[1],
+        state = df$astronomy$state[1],
+        country = df$astronomy$country[1],
+        lng = df$astronomy$longitude[1],
+        lat = df$astronomy$latitude[1]
+      )
+    })
+  )
+  astronomy$astronomy <- lapply(dfs, function(df)
+    {df$astronomy$astronomy})
+  return(astronomy)
+}
+
+.extract_weather_alerts <- function(data) {
+  dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
+  alerts <- data.table::rbindlist(
+    lapply(dfs, function(df) {
+      station <- data.table::data.table(
+        city = df$alerts$city[1],
+        state = df$alerts$state[1],
+        country = df$alerts$country[1],
+        lng = df$alerts$longitude[1],
+        lat = df$alerts$latitude[1]
+      )
+    })
+  )
+  alerts$alerts <- lapply(dfs, function(df)
+    {df$alerts$alerts})
+  return(alerts)
 }

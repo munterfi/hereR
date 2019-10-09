@@ -5,17 +5,16 @@ test_that("route_matrix works", {
     app_code = "dummy_app_code"
   )
 
-  # Load API response mock and example
-  data(example_geocode)
-  data(mock_route_matrix)
+  # Load package example data
+  data(poi)
 
-  # Test with mocked API response
+  # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {mock_route_matrix},
-    r_mat <- route_matrix(start = example_geocode),
+    "hereR:::.get_content" = function(url) {hereR:::mock$route_matrix_response},
+    r_mat <- route_matrix(start = poi),
 
     # Tests
     expect_is(r_mat, c("data.table", "data.frame")),
-    expect_equal(nrow(r_mat), nrow(example_geocode) ** 2)
+    expect_equal(nrow(r_mat), nrow(poi) ** 2)
   )
 })

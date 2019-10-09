@@ -1,28 +1,32 @@
 #' HERE Routing API: Isoline
 #'
-#' Calcuates a isoline (POLYGON) that connects the end points of all routes
-#' leaving from defined centers (POIs) with either a specified length or a
-#' specified travel time.
+#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) that connect the end points of all routes
+#' leaving from defined centers (POIs) with either a specified length, a
+#' specified travel time or consumption.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}
 #'
-#' @param poi
-#' @param range
-#' @param rangetype
-#' @param type
-#' @param mode
-#' @param traffic
-#' @param departure
-#' @param start
-#' @param aggregate
-#' @param url_only boolean, only return the generated URLs (default = FALSE)?
+#' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
+#' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in minutes; (2) distance in meters; (3) consumption in costfactor.
+#' @param rangetype character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
+#' @param type character, set the routing type: \code{"fastest"} or \code{"shortest"}.
+#' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
+#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
+#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
+#' @param start boolean, are the provided Points of Interest (POIs) the start or destination (\code{default = TRUE})?
+#' @param aggregate boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?
+#' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
+#' An \code{sf} object containing the requested isolines.
 #' @export
 #'
 #' @examples
-isoline <- function(poi, range = seq(5, 15, 5) * 60, rangetype = "time",
+#' \donttest{
+#' isolines <- isoline(poi = poi, range = seq(5, 30, 5) * 60)
+#' }
+isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
                     type = "fastest", mode = "car", traffic = FALSE,
                     departure = NULL, start = TRUE, aggregate = TRUE,
                     url_only = FALSE) {
@@ -117,9 +121,11 @@ isoline <- function(poi, range = seq(5, 15, 5) * 60, rangetype = "time",
   # Aggregate
   if (aggregate) {
     isolines <- sf::st_set_precision(isolines, 1e4)
+    isolines <- lwgeom::st_make_valid(isolines)
     isolines <- stats::aggregate(isolines, by = list(isolines$range),
                                  FUN = min, do_union = TRUE, simplify = TRUE,
                                  join = sf::st_intersects)
+    isolines <- lwgeom::st_make_valid(isolines)
     isolines <- sf::st_difference(isolines)
     isolines$Group.1 <- NULL
 
@@ -133,11 +139,3 @@ isoline <- function(poi, range = seq(5, 15, 5) * 60, rangetype = "time",
 
   return(isolines)
 }
-
-.polygon_from_pointList <- function(pointList) {
-  coords <- strsplit(pointList, ",")
-  lng <- as.numeric(sapply(coords, function(x) x[2]))
-  lat <- as.numeric(sapply(coords, function(x) x[1]))
-  sf::st_polygon(list(cbind(lng, lat)))
-}
-

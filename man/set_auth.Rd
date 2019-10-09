@@ -11,14 +11,20 @@ set_auth(app_id, app_code)
 
 \item{app_code}{character, the APP CODE from a HERE project.}
 }
+\value{
+None.
+}
 \description{
 Provide application credentials (APP ID and APP CODE) for a HERE project
-of type "REST & XYZ HUB API/CLI", that will be used to authenticate in
+of type 'REST & XYZ HUB API/CLI', that will be used to authenticate in
 the requests to the APIs.
 }
 \details{
 No login yet? Get your free login here: \href{https://developer.here.com/}{klick}
 }
 \examples{
-set_auth("123456", "XXX-XXX-XXX")
+set_auth(
+  app_id = "<YOUR APP ID>",
+  app_code = "<YOUR APP CODE>"
+)
 }

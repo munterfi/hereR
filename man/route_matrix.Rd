@@ -5,15 +5,39 @@
 \title{HERE Routing API: Route Matrix}
 \usage{
 route_matrix(start, destination = start, type = "fastest",
-  mode = "car", traffic = FALSE, searchRange = 10000,
+  mode = "car", traffic = FALSE, searchRange = 99999999,
   attribute = c("distance", "traveltime"), departure = NULL,
   url_only = FALSE)
 }
 \arguments{
-\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
+\item{start}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.}
+
+\item{destination}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the destination locations.}
+
+\item{type}{character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.}
+
+\item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"} or \code{"truck"}.}
+
+\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.}
+
+\item{searchRange}{numeric, value in meters to limit the search radius in the route generation (\code{default = 99999999}).}
+
+\item{attribute}{character, attributes to be calculated on the routes: \code{"distance"} or \code{"traveltime"} (\code{default = c("distance", "traveltime")}.}
+
+\item{departure}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.}
+
+\item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
+}
+\value{
+A \code{data.table} containing the requested route matrix data.
 }
 \description{
 Calcuates a matrix of route summaries.
+}
+\examples{
+\donttest{
+mat <- route_matrix(start = poi)
+}
 }
 \references{
 \href{https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html}{HERE Routing API: Calculate Matrix}

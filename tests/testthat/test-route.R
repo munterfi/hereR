@@ -5,18 +5,16 @@ test_that("route works", {
     app_code = "dummy_app_code"
   )
 
-  # Load API response mock and example
-  data(example_geocode)
-  data(mock_route)
+  # Load package example data
+  data(poi)
 
-  # Test with mocked API response
+  # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {mock_route},
-    routes <- route(start = example_geocode[1:2, ],
-                                     destination = example_geocode[3:4, ]),
+    "hereR:::.get_content" = function(url) {hereR:::mock$route_response},
+    routes <- route(start = poi[1:2, ], destination = poi[3:4, ]),
 
     # Tests
     expect_equal(any(sf::st_geometry_type(routes) != "LINESTRING"), FALSE),
-    expect_equal(nrow(routes), nrow(example_geocode[1:2, ]))
+    expect_equal(nrow(routes), nrow(poi[1:2, ]))
   )
 })

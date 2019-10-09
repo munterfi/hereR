@@ -2,19 +2,30 @@
 % Please edit documentation in R/weather.R
 \name{weather}
 \alias{weather}
-\title{HERE Destination Weather API: Observation, Forecast or Astronomy}
+\title{HERE Destination Weather API: Observations, Forecast, Astronomy and Alerts}
 \usage{
 weather(poi, product = "observation", url_only = FALSE)
 }
 \arguments{
-\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
+\item{poi}{\code{sf} object or character, Points of Interest (POIs) of geometry type \code{POINT} or location names (e.g. cities or regions).}
+
+\item{product}{character, weather product of the 'Destination Weather API'. Supported products: \code{"observation"}, \code{"forecast_hourly"}, \code{"forecast_astronomy"} and \code{"alerts"}.}
+
+\item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
 \value{
-An sf object, containing the coordinates of the geocoded addresses.
+An \code{sf} object containing the requested weather information.
 }
 \description{
-Current weather conditions at Points of Interest (location or address).
+Weather forecasts, reports on current weather conditions,
+astronomical information and alerts at a specific location (coordinates or
+location name) based on the 'Destination Weather API'.
+}
+\examples{
+\donttest{
+weather(poi = locations, product = "observation")
+}
 }
 \references{
-\href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation }
+\href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation}
 }
