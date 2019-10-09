@@ -5,17 +5,16 @@ test_that("geocode works", {
     app_code = "dummy_app_code"
   )
 
-  # Load API response mock and example
-  data(example_addresses)
-  data(mock_geocode)
+  # Load package example data
+  data(poi)
 
-  # Test with mocked API response
+  # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {mock_geocode},
-    geocoded <- geocode(addresses = example_addresses),
+    "hereR:::.get_content" = function(url) {hereR:::mock$geocode_response},
+    geocoded <- geocode(addresses = poi$city),
 
     # Tests
     expect_equal(any(sf::st_geometry_type(geocoded) != "POINT"), FALSE),
-    expect_equal(nrow(geocoded), length(example_addresses))
+    expect_equal(nrow(geocoded), length(poi$city))
   )
 })

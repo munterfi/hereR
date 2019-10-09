@@ -5,22 +5,26 @@
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html}{HERE Routing API: Calculate Matrix}
 #'
-#' @param start
-#' @param destination
-#' @param type
-#' @param mode
-#' @param traffic
-#' @param searchRange
-#' @param attribute
-#' @param departure
-#' @param url_only boolean, only return the generated URLs (default = FALSE)?
+#' @param start \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.
+#' @param destination \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the destination locations.
+#' @param type character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.
+#' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"} or \code{"truck"}.
+#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
+#' @param searchRange numeric, value in meters to limit the search radius in the route generation (\code{default = 99999999}).
+#' @param attribute character, attributes to be calculated on the routes: \code{"distance"} or \code{"traveltime"} (\code{default = c("distance", "traveltime")}.
+#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
+#' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
+#' A \code{data.table} containing the requested route matrix data.
 #' @export
 #'
 #' @examples
+#' \donttest{
+#' mat <- route_matrix(start = poi)
+#' }
 route_matrix <- function(start, destination = start, type = "fastest", mode = "car",
-                         traffic = FALSE, searchRange = 10000,
+                         traffic = FALSE, searchRange = 99999999,
                          attribute = c("distance", "traveltime"),
                          departure = NULL, url_only = FALSE) {
   # Checks

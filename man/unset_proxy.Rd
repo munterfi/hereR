@@ -6,8 +6,11 @@
 \usage{
 unset_proxy()
 }
+\value{
+None.
+}
 \description{
-Remove Proxy Configuration
+Remove a previously set proxy configuration from the current R session.
 }
 \examples{
 unset_proxy()
