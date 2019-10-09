@@ -6,13 +6,16 @@
 #' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
 #'
 #' @param addresses character, addresses to geocode.
-#' @param url_only boolean, only return the generated URLs (default = FALSE)?
+#' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
-#' An sf object, containing the coordinates of the geocoded addresses.
+#' An \code{sf} object, containing the coordinates of the geocoded addresses.
 #' @export
 #'
 #' @examples
+#' \donttest{
+#' geocode(addresses = poi$city)
+#' }
 geocode <- function(addresses, url_only = FALSE) {
 
   # Check and preprocess addresses

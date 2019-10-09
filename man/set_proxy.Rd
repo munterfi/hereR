@@ -7,15 +7,21 @@
 set_proxy(proxy, proxyuserpwd)
 }
 \arguments{
-\item{proxy}{character, the URL of the proxy ("https://your-proxy.net:port/").}
+\item{proxy}{character, the URL of the proxy (\code{"https://your-proxy.net:port/"}).}
 
-\item{proxyuserpwd}{character, user and password for the authentication ("user:pwd").}
+\item{proxyuserpwd}{character, user and password for the authentication (\code{"user:pwd"}).}
+}
+\value{
+None.
 }
 \description{
 If a proxy is needed, for example because the computer is behind a corporate proxy,
-it can be set as follows: proxy = "http://your-proxy.net:port/" or
-"https://your-proxy.net:port/" and "proxyuserpwd" = "user:pwd".
+it can be set as follows: \code{proxy = "http://your-proxy.net:port/"} or
+\code{"https://your-proxy.net:port/"} and \code{"proxyuserpwd" = "user:pwd"}.
 }
 \examples{
-set_proxy("https://your-proxy.net:port/", "user:pwd")
+set_proxy(
+  proxy = "https://your-proxy.net:port/",
+  proxyuserpwd = "user:pwd"
+)
 }

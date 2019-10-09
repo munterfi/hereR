@@ -6,8 +6,11 @@
 \usage{
 unset_auth()
 }
+\value{
+None.
+}
 \description{
-Remove HERE Application Credentials
+Remove previously set HERE application credentials from the current R session.
 }
 \examples{
 unset_auth()

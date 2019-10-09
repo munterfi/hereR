@@ -9,13 +9,18 @@ geocode(addresses, url_only = FALSE)
 \arguments{
 \item{addresses}{character, addresses to geocode.}
 
-\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
+\item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
 \value{
-An sf object, containing the coordinates of the geocoded addresses.
+An \code{sf} object, containing the coordinates of the geocoded addresses.
 }
 \description{
 Geocodes addresses using the HERE Geocoder API.
+}
+\examples{
+\donttest{
+geocode(addresses = poi$city)
+}
 }
 \references{
 \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}

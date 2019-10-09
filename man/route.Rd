@@ -9,10 +9,45 @@ route(start, destination, type = "fastest", mode = "car",
   arrival = NULL, url_only = FALSE)
 }
 \arguments{
-\item{url_only}{boolean, only return the generated URLs (default = FALSE)?}
+\item{start}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.}
+
+\item{destination}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the destination locations.}
+
+\item{type}{character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.}
+
+\item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"publicTransportTimeTable"}, \code{"truck"} or \code{"bicycle"}.}
+
+\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} or \code{arrival} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.}
+
+\item{vehicle_type}{character, specify the motor type of the vehicle: \code{"diesel"}, \code{"gasoline"} or \code{"electric"}. And set the consumption per 100km im liters (\code{default = "diesel,5.5"}).}
+
+\item{departure}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.}
+
+\item{arrival}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the arrival. Only specify a departure or an arrival.}
+
+\item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
+}
+\value{
+An \code{sf} object containing the requested routes.
 }
 \description{
-Calcualtes a route between two points.
+Calculates routes (\code{LINESTRING}) between given pairs of points.
+}
+\examples{
+\donttest{
+# Get all from - to combinations from POIs
+to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
+from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
+idx <- apply(to != from, any, MARGIN = 1)
+to <- to[idx, ]
+from <- from[idx, ]
+
+# Routing
+routes <- route(start = from, destination = to,
+                mode = "car", type = "fastest", traffic = TRUE,
+                vehicle_type = "diesel,5.5")
+
+}
 }
 \references{
 \href{https://developer.here.com/documentation/routing/topics/resource-calculate-route.html}{HERE Routing API: Calculate Route}
