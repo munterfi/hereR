@@ -4,18 +4,18 @@
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/hereR)](https://CRAN.R-project.org/package=hereR)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/last-month/hereR?color=brightgreen)](https://CRAN.R-project.org/package=hereR)
+[![License: GPL v3](https://img.shields.io/badge/license-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!--[![GitHub version](https://badge.fury.io/gh/munterfinger%hereR.svg)](https://badge.fury.io/gh/munterfinger%hereR)-->
 <!--[![Travis build status](https://travis-ci.org/munterfinger/hereR.svg?branch=master)](https://travis-ci.org/munterfinger/hereR)-->
 <!--[![codecov](https://codecov.io/gh/munterfinger/hereR/branch/master/graph/badge.svg)](https://codecov.io/gh/munterfinger/hereR)-->
-[![License: GPL v3](https://img.shields.io/badge/license-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
 Interface to the **HERE REST APIs**:
 
-(1) geocode addresses based on the **Geocoder API**;
-(2) routing directions, travel distance or time matrices based on the **Routing API**;
-(3) real-time and predicted traffic information based on the **Traffic AP**;
-(4) weather forecasts, reports on current weather conditions and astronomical information at a specific location based on the **Destination Weather API**.
+(1) geocode addresses using the **Geocoder API**;
+(2) routing directions, travel distance or time matrices using the **Routing API**;
+(3) traffic flow and incident information from the **Traffic API**;
+(4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
 Locations and routes are returned as `sf` objects.
 
@@ -30,7 +30,7 @@ install.packages("hereR")
 ... or install the development version from [GitHub](https://github.com/munterfinger/hereR/) with:
 
 ``` r
-devtools::install_github("munterfinger/eRTG3D")
+devtools::install_github("munterfinger/hereR")
 ```
 
 ## Application credentials
