@@ -5,17 +5,16 @@ test_that("isoline works", {
     app_code = "dummy_app_code"
   )
 
-  # Load API response mock and example
-  data(example_geocode)
-  data(mock_isoline)
+  # Load package example data
+  data(poi)
 
-  # Test with mocked API response
+  # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {mock_isoline},
+    "hereR:::.get_content" = function(url) {hereR:::mock$isoline_response},
 
     # With and without aggregation
-    isolines_aggr <- isoline(poi = example_geocode, aggregate = TRUE),
-    isolines_mult <- isoline(poi = example_geocode, aggregate = FALSE),
+    isolines_aggr <- isoline(poi = poi, aggregate = TRUE),
+    isolines_mult <- isoline(poi = poi, aggregate = FALSE),
 
     # Tests
     expect_equal(any(sf::st_geometry_type(isolines_aggr) != "MULTIPOLYGON"), FALSE),
