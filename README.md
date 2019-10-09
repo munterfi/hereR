@@ -45,7 +45,7 @@ set_auth(
   app_code = "<YOUR APP CODE>"
 )
 ```
-No login yet? Get your free login here: [klick](https://developer.here.com/)
+No login yet? Get your free login here: [developer.here.com](https://developer.here.com/)
 
 ## Examples
 
