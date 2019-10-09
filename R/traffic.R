@@ -20,7 +20,14 @@
 #'
 #' @examples
 #' \donttest{
+#' # Traffic flow
 #' traffic(aoi = aoi[aoi$code == "LI", ], product = "flow")
+#'
+#' # Traffic incidents
+#' traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents")
+#'
+#' # Empty requests:
+#' test <- st_set_crs(st_as_sf(data.frame(x = 7.47070, y = 43.08494), coords = c("x", "y")), 4326)
 #' }
 traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
                     local_time = FALSE, url_only = FALSE) {
@@ -55,10 +62,6 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
     "&responseattributes=shape"
   )
 
-  # Check product combinations
-  # if (product == "flow" & any(!c(is.null(from_dt), is.null(to_dt))))
-  #   message("Datetime not supported by product 'flow': 'from_dt' and 'to_dt' will be ignored.")
-
   # Add datetime range
   url <- .add_datetime(
     url = url,
@@ -89,7 +92,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   # Extract information
   if (product == "flow") {
     traffic <- .extract_traffic_flow(data)
-  } else if (product == "flow") {
+  } else if (product == "incidents") {
     traffic <- .extract_traffic_incidents(data)
   }
 
@@ -104,6 +107,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   geoms <- list()
   flow <- data.table::rbindlist(lapply(data, function(con) {
     df <- jsonlite::fromJSON(con)
+    if (is.null(df$RWS$RW)) {return(NULL)}
     data.table::rbindlist(lapply(df$RWS$RW, function(rw) {
       data.table::rbindlist(lapply(rw$FIS, function(fis) {
         data.table::rbindlist(lapply(fis$FI, function(fi) {
@@ -137,37 +141,38 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 }
 
 .extract_traffic_incidents <- function(data) {
-  geoms <- list()
-  flow <- data.table::rbindlist(lapply(data, function(con) {
+  #geoms_line <- list()
+  incidents <- data.table::rbindlist(lapply(data, function(con) {
     df <- jsonlite::fromJSON(con)
-    data.table::rbindlist(lapply(df$RWS$RW, function(rw) {
-      data.table::rbindlist(lapply(rw$FIS, function(fis) {
-        data.table::rbindlist(lapply(fis$FI, function(fi) {
-          dat <- data.table::data.table(
-            cbind(
-              fi$TM[, c("PC", "DE", "QD", "LE")],
-              data.table::rbindlist(
-                fi$CF, fill = TRUE
-              )[, c("TY", "SP", "FF", "JF","CN")]
-            )
-          )
-          geoms <<- append(geoms,
-                           geometry <- lapply(fi$SHP, function(shp) {
-                             lines <- lapply(shp$value, function(pointList) {
-                               .line_from_pointList(strsplit(pointList, " ")[[1]])
-                             })
-                             sf::st_multilinestring(lines)
-                           })
-          )
-          return(dat)
-        }), fill = TRUE)
-      }), fill = TRUE)
-    }), fill = TRUE)
+    if (is.null(df$TRAFFIC_ITEMS)) {return(NULL)}
+    info <- data.table::data.table(
+      id = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_ID,
+      entry_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$ENTRY_TIME, format="%m/%d/%Y %H:%M:%S"),
+      from_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$START_TIME, format="%m/%d/%Y %H:%M:%S"),
+      to_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$END_TIME, format="%m/%d/%Y %H:%M:%S"),
+      status = tolower(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_STATUS_SHORT_DESC),
+      type = tolower(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_TYPE_DESC),
+      verified = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$VERIFIED,
+      criticality = as.numeric(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$CRITICALITY$ID),
+      road_closed = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DETAIL$ROAD_CLOSED,
+      location_name = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$POLITICAL_BOUNDARY$COUNTY,
+      lng = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LONGITUDE,
+      lat = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LATITUDE,
+      description = sapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DESCRIPTION, function(x) x$value[2])
+    )
+    # geometry_line <- lapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$GEOMETRY$SHAPES$SHP, function(shp) {
+    #   lines <- lapply(shp$value, function(pointList) {
+    #     .line_from_pointList(strsplit(pointList, " ")[[1]])
+    #   })
+    #   if (length(lines) > 1) {sf::st_multilinestring(lines)}
+    # })
+    # geoms_line <<- append(geoms_line, geometry_line)
+    # return(info)
   }), fill = TRUE)
-  flow$geometry <- geoms
+  #incidents$geometry_line <- geoms_line
   return(
     sf::st_set_crs(
-      sf::st_as_sf(flow), 4326
+      sf::st_as_sf(incidents, coords = c("lng", "lat")), 4326
     )
   )
 }
