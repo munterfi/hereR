@@ -17,6 +17,10 @@ url_weather_forecast_astronomy <-
   weather(poi = poi, product = "forecast_astronomy", url_only = TRUE)
 url_weather_alerts <-
   weather(poi = poi, product = "alerts", url_only = TRUE)
+url_traffic_flow <-
+  traffic(aoi = aoi[aoi$code == "LI", ], product = "flow", url_only = TRUE)
+url_traffic_incidents <-
+  traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents", url_only = TRUE)
 
 ## Get response mocks
 mock <- list(
@@ -27,7 +31,9 @@ mock <- list(
   weather_observation_response = hereR:::.get_content(url_weather_observation),
   weather_forecast_hourly_response = hereR:::.get_content(url_weather_forecast_hourly),
   weather_forecast_astronomy_response = hereR:::.get_content(url_weather_forecast_astronomy),
-  weather_alerts_response = hereR:::.get_content(url_weather_alerts)
+  weather_alerts_response = hereR:::.get_content(url_weather_alerts),
+  traffic_flow_response = hereR:::.get_content(url_traffic_flow),
+  traffic_incidents_response = hereR:::.get_content(url_traffic_incidents)
 )
 
 ## Get examples
@@ -39,7 +45,9 @@ example <- list(
   weather_observation = weather(poi = poi, product = "observation"),
   weather_forecast_hourly = weather(poi = poi, product = "forecast_hourly"),
   weather_forecast_astronomy = weather(poi = poi, product = "forecast_astronomy"),
-  weather_alerts = weather(poi = poi, product = "alerts")
+  weather_alerts = weather(poi = poi, product = "alerts"),
+  traffic_flow = traffic(aoi = aoi[aoi$code == "LI", ], product = "flow"),
+  traffic_incidents = traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents")
 )
 
 ## Save as internal package data
