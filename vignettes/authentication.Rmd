@@ -1,0 +1,29 @@
+---
+title: "Authentication"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{authentication}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(hereR)
+```
+
+## Application credentials
+```{r set}
+library(hereR)
+```
+
+## Remove credentials
+```{r unset}
+library(hereR)
+```

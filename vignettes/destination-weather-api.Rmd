@@ -1,0 +1,40 @@
+---
+title: "Destination Weather API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{destination-weather-api}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(hereR)
+```
+
+## Observations
+```{r observations}
+library(hereR)
+```
+
+## Forecast
+```{r forecast}
+library(hereR)
+```
+
+## Astronomy
+```{r astronomy}
+library(hereR)
+```
+
+## Alerts
+
+```{r alerts}
+library(hereR)
+```
