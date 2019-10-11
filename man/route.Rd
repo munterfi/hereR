@@ -43,9 +43,11 @@ to <- to[idx, ]
 from <- from[idx, ]
 
 # Routing
-routes <- route(start = from, destination = to,
-                mode = "car", type = "fastest", traffic = TRUE,
-                vehicle_type = "diesel,5.5")
+routes <- route(
+  start = from, destination = to,
+  mode = "car", type = "fastest", traffic = TRUE,
+  vehicle_type = "diesel,5.5"
+)
 
 }
 }

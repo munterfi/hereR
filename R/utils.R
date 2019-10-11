@@ -39,26 +39,6 @@
   }
 }
 
-.add_departure <- function(url, departure) {
-  paste0(
-    url,
-    "&departure=",
-    if (is.null(departure)) {
-      "now"
-    } else {
-      .encode_datetime(departure)
-    }
-  )
-}
-
-.add_arrival <- function(url, arrival) {
-  paste0(
-    url,
-    "&arrival=",
-      .encode_datetime(arrival)
-  )
-}
-
 .encode_datetime <- function(datetime) {
   stringr::str_replace(
     as.character(datetime), " ", "T"
@@ -74,9 +54,26 @@
   results = list()
   cb_gen = function(id) {
     function(res) {
-      if (res$status != 200)
-        stop(sprintf("Request failed with HTTP status code %s", res$status))
-      results[[id]] <<- res
+      if (is.character(res))
+        stop("Connection error: Please check connection to the internet and proxy configuration.")
+      if (res$status != 200) {
+        if (as.numeric(substr(as.character(res$status), 1, 1)) == 4) {
+          errorChar <- rawToChar(res$content)
+          Encoding(errorChar) <- encoding
+          error <- jsonlite::fromJSON(errorChar)
+          errorMessage <- sprintf(
+            "Request failed with HTTP status code %s: %s: %s: %s",
+            res$status, error$type, error$subtype, error$details)
+        } else {
+          errorMessage <- sprintf(
+            "Request failed with HTTP status code %s.",
+            res$status)
+        }
+        message(errorMessage)
+        ids <<- ids[ids != id]
+      } else {
+        results[[id]] <<- res
+      }
     }
   }
 
@@ -104,11 +101,12 @@
   out = curl::multi_run(pool = pool)
 
   # Process the results in the same order that the URLs were given
-  lapply(results[ids], function(x) {
+  results <- lapply(results[ids], function(x) {
     rawChar <- rawToChar(x$content)
     Encoding(rawChar) <- encoding
     rawChar
   })
+  results
 }
 
 
@@ -127,4 +125,3 @@
   lat <- as.numeric(sapply(coords, function(x) x[1]))
   sf::st_polygon(list(cbind(lng, lat)))
 }
-

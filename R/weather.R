@@ -17,7 +17,17 @@
 #'
 #' @examples
 #' \donttest{
-#' weather(poi = locations, product = "observation")
+#' # Observation
+#' observation <- weather(poi = poi, product = "observation")
+#'
+#' # Forecast
+#' forecast <- weather(poi = poi, product = "forecast_hourly")
+#'
+#' # Astronomy
+#' astronomy <- weather(poi = poi, product = "forecast_astronomy")
+#'
+#' # Alerts
+#' alerts <- weather(poi = poi, product = "alerts")
 #' }
 weather <- function(poi, product = "observation", url_only = FALSE) {
 
@@ -71,6 +81,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
   if (product == "observation") {

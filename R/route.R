@@ -29,9 +29,11 @@
 #' from <- from[idx, ]
 #'
 #' # Routing
-#' routes <- route(start = from, destination = to,
-#'                 mode = "car", type = "fastest", traffic = TRUE,
-#'                 vehicle_type = "diesel,5.5")
+#' routes <- route(
+#'   start = from, destination = to,
+#'   mode = "car", type = "fastest", traffic = TRUE,
+#'   vehicle_type = "diesel,5.5"
+#' )
 #'
 #' }
 route <- function(start, destination,
@@ -86,14 +88,16 @@ route <- function(start, destination,
 
   # Add departure or arrival time
   if (is.null(arrival)) {
-    url <- .add_departure(
+    url <- .add_datetime(
       url,
-      departure
+      departure,
+      "departure"
     )
   } else {
-    url <- .add_arrival(
+    url <- .add_datetime(
       url,
-      arrival
+      arrival,
+      "arrival"
     )
   }
 
@@ -129,6 +133,7 @@ route <- function(start, destination,
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
   routes <- sf::st_as_sf(

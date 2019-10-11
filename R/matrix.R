@@ -21,7 +21,10 @@
 #'
 #' @examples
 #' \donttest{
-#' mat <- route_matrix(start = poi)
+#' mat <- route_matrix(
+#'   start = poi,
+#'   departure = as.POSIXct("2019-10-10 15:45:00")
+#' )
 #' }
 route_matrix <- function(start, destination = start, type = "fastest", mode = "car",
                          traffic = FALSE, searchRange = 99999999,
@@ -115,9 +118,10 @@ route_matrix <- function(start, destination = start, type = "fastest", mode = "c
   )
 
   # Add departure time
-  url <- .add_departure(
+  url <- .add_datetime(
     url,
-    departure
+    departure,
+    "departure"
   )
 
   # Add summaryAttributes
@@ -134,6 +138,7 @@ route_matrix <- function(start, destination = start, type = "fastest", mode = "c
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
   count <- 1

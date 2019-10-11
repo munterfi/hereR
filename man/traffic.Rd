@@ -12,9 +12,9 @@ traffic(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 
 \item{product}{character, traffic product of the 'Traffic API'. Supported products: \code{"flow"} and \code{"incidents"}.}
 
-\item{from_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the earliest incident.}
+\item{from_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the earliest traffic information.}
 
-\item{to_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest incident.}
+\item{to_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic information.}
 
 \item{local_time}{boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (\code{default = FALSE})?}
 
@@ -30,7 +30,21 @@ Traffic incidents contain information about location, time, duration, severity, 
 }
 \examples{
 \donttest{
-traffic(aoi = aoi[aoi$code == "LI", ], product = "flow")
+# Traffic flow for the last hour
+flow <- traffic(
+  aoi = aoi[aoi$code == "LI", ],
+  product = "flow",
+  from_dt = Sys.time() - 60*60*1,
+  to_dt = Sys.time()
+)
+
+# All traffic incidents from 2018 till end of 2019
+incidents <- traffic(
+  aoi = aoi[aoi$code == "LI", ],
+  product = "incidents",
+  from_dt = as.POSIXct("2018-01-01 00:00:00"),
+  to_dt = as.POSIXct("2019-12-31 23:59:59")
+)
 }
 }
 \references{

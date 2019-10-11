@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' \donttest{
-#' geocode(addresses = poi$city)
+#' locs <- geocode(addresses = poi$city)
 #' }
 geocode <- function(addresses, url_only = FALSE) {
 
@@ -41,11 +41,18 @@ geocode <- function(addresses, url_only = FALSE) {
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
+  count <- 0
   geocoded <- data.table::rbindlist(
     lapply(data, function(con) {
+      count <<- count + 1
       df <- jsonlite::fromJSON(con)
+      if (length(df$Response$View) == 0) {
+        message(sprintf("Address '%s' not found.", addresses[count]))
+        return(NULL)
+      }
       result <- data.table::data.table(
         address = df$Response$View$Result[[1]]$Location$Address$Label,
         street = df$Response$View$Result[[1]]$Location$Address$Street,
@@ -65,9 +72,13 @@ geocode <- function(addresses, url_only = FALSE) {
   )
 
   # Create sf, data.table, data.frame
-  return(
-    sf::st_set_crs(
-      sf::st_as_sf(geocoded, coords = c("lng", "lat")),
-    4326)
-  )
+  if (nrow(geocoded) > 0) {
+    return(
+      sf::st_set_crs(
+        sf::st_as_sf(geocoded, coords = c("lng", "lat")),
+        4326)
+    )
+  } else {
+    return(NULL)
+  }
 }

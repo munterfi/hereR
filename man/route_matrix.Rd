@@ -36,7 +36,10 @@ Calcuates a matrix of route summaries.
 }
 \examples{
 \donttest{
-mat <- route_matrix(start = poi)
+mat <- route_matrix(
+  start = poi,
+  departure = as.POSIXct("2019-10-10 15:45:00")
+)
 }
 }
 \references{

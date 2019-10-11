@@ -19,7 +19,7 @@ Geocodes addresses using the HERE Geocoder API.
 }
 \examples{
 \donttest{
-geocode(addresses = poi$city)
+locs <- geocode(addresses = poi$city)
 }
 }
 \references{

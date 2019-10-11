@@ -84,9 +84,10 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   )
 
   # Add departure time
-  url <- .add_departure(
+  url <- .add_datetime(
     url,
-    departure
+    departure,
+    "departure"
   )
 
   # Return urls if chosen
@@ -96,6 +97,7 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
   isolines <-  sf::st_as_sf(
