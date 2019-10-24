@@ -93,16 +93,16 @@
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/destination-weather-api.html">Destination Weather API</a>
+      <a href="../articles/geocoder.html">Geocoder API</a>
     </li>
     <li>
-      <a href="../articles/geocoder-api.html">Geocoder API</a>
+      <a href="../articles/routing.html">Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing-api.html">Routing API</a>
+      <a href="../articles/traffic.html">Traffic API</a>
     </li>
     <li>
-      <a href="../articles/traffic-api.html">Traffic API</a>
+      <a href="../articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
 </li>
@@ -111,7 +111,24 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/munterfinger/hereR">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/munterfi1">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://munterfinger.ch">
+    <span class="fa fa-globe fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -132,9 +149,18 @@
     <div id="herer-0-1-0" class="section level1">
 <h1 class="page-header">
 <a href="#herer-0-1-0" class="anchor"></a>hereR 0.1.0</h1>
+<p>First release of the <code>hereR</code> package, an <code>sf</code>-based interface to the <strong>HERE REST APIs</strong>. The packages binds to the following HERE APIs:</p>
 <ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>
+<strong>Geocoder API:</strong> Get coordinates (lng, lat) from addresses.</li>
+<li>
+<strong>Routing API:</strong> Routing directions, travel distance or time matrices, optionally incorporating the current traffic situation.</li>
+<li>
+<strong>Traffic API:</strong> Real-time traffic flow and incident information.</li>
+<li>
+<strong>Destination Weather API:</strong> Weather forecasts, reports on current weather conditions, astronomical information and weather alerts at a specific location.</li>
 </ul>
+<p>Locations and routes are returned as <code>sf</code> objects and tables as <code>data.table</code> objects.</p>
 </div>
   </div>
 

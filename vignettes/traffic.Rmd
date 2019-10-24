@@ -45,6 +45,7 @@ mapview(flow,
         zcol = "JF",
         lwd = flow$JF,
         layer.name = "Jam factor",
+        map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
 )
 ```
@@ -65,6 +66,7 @@ Print the traffic incidents on an interactive leaflet map:
 mapview(incidents,
         zcol = "type",
         layer.name = "Incident type",
+        map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
 )
 ```

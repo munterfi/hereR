@@ -53,6 +53,7 @@ mapview(observation,
         zcol = "temperature",
         cex = as.numeric(observation$humidity)/4,
         layer.name = "Observation",
+        map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
 )
 ```
@@ -91,6 +92,7 @@ mapview(forecast,
         col.region = "yellow",
         layer.name = "Forecast",
         zcol = "city",
+        map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE,
         legend = FALSE,
         popup = leafpop::popupGraph(g)

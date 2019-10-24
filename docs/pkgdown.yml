@@ -3,8 +3,8 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   authentication: authentication.html
-  destination-weather-api: destination-weather-api.html
-  geocoder-api: geocoder-api.html
-  routing-api: routing-api.html
-  traffic-api: traffic-api.html
+  geocoder: geocoder.html
+  routing: routing.html
+  traffic: traffic.html
+  weather: weather.html
 

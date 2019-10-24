@@ -13,11 +13,11 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="sf-Based Interface to the HERE REST APIs">
 <meta property="og:description" content="Interface to the HERE REST APIs:
   (1) geocode addresses using the Geocoder API;
-  (2) routing directions, travel distance or time matrices using the Routing API;
+  (2) routing directions, travel distance or time matrices and isolines using the Routing API;
   (3) traffic flow and incident information from the Traffic API;
   (4) weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the Destination Weather API.
-  Locations and routes are returned as sf objects.">
+  Locations, routes and isolines are returned as sf objects.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -63,16 +63,16 @@
       <a href="articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="articles/destination-weather-api.html">Destination Weather API</a>
+      <a href="articles/geocoder.html">Geocoder API</a>
     </li>
     <li>
-      <a href="articles/geocoder-api.html">Geocoder API</a>
+      <a href="articles/routing.html">Routing API</a>
     </li>
     <li>
-      <a href="articles/routing-api.html">Routing API</a>
+      <a href="articles/traffic.html">Traffic API</a>
     </li>
     <li>
-      <a href="articles/traffic-api.html">Traffic API</a>
+      <a href="articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
 </li>
@@ -80,7 +80,26 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/munterfinger/hereR">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/munterfi1">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://munterfinger.ch">
+    <span class="fa fa-globe fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -99,10 +118,10 @@
 
 <p>Interface to the <strong>HERE REST APIs</strong>:</p>
 <p>(1) geocode addresses using the <strong>Geocoder API</strong>;</p>
-<p>(2) routing directions, travel distance or time matrices using the <strong>Routing API</strong>;</p>
+<p>(2) routing directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
 <p>(3) traffic flow and incident information from the <strong>Traffic API</strong>;</p>
 <p>(4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
-<p>Locations and routes are returned as <code>sf</code> objects.</p>
+<p>Locations, routes and isolines are returned as <code>sf</code> objects.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>

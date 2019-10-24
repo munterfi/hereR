@@ -42,6 +42,7 @@ Print the geocoded addresses on an interactive leaflet map:
 mapview(geocoded,
         label = geocoded$address,
         col.regions = "yellow",
+        map.types = c("Esri.WorldTopoMap"),
         legend = FALSE,
         homebutton = FALSE
 )

@@ -42,6 +42,7 @@ mapview(routes,
         zcol = "label",
         lwd = routes$travelTime/max(routes$travelTime)*5,
         layer.name = "Route [from - to]",
+        map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
 )
 ```
@@ -88,6 +89,7 @@ mapview(iso,
         zcol = "minutes",
         layer.name = "Isoline [min]",
         alpha = 0,
+        map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
 )
 ```

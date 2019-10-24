@@ -36,7 +36,11 @@
 
 
 <meta property="og:title" content="HERE Routing API: Route — route" />
-<meta property="og:description" content="Calculates routes (LINESTRING) between given pairs of points." />
+<meta property="og:description" content="Calculates route geometries (LINESTRING) between given pairs of points using the 'Routing API'.
+Routes can be created for various transport modes, as for example 'car' or 'public transport',
+incorporating current traffic information, if available.
+For routes using the transport mode &quot;car&quot; a vehicle type can be specified,
+to obtain an estimate of the consumption." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -95,16 +99,16 @@
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/destination-weather-api.html">Destination Weather API</a>
+      <a href="../articles/geocoder.html">Geocoder API</a>
     </li>
     <li>
-      <a href="../articles/geocoder-api.html">Geocoder API</a>
+      <a href="../articles/routing.html">Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing-api.html">Routing API</a>
+      <a href="../articles/traffic.html">Traffic API</a>
     </li>
     <li>
-      <a href="../articles/traffic-api.html">Traffic API</a>
+      <a href="../articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
 </li>
@@ -113,7 +117,24 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/munterfinger/hereR">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/munterfi1">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://munterfinger.ch">
+    <span class="fa fa-globe fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -133,7 +154,11 @@
     </div>
 
     <div class="ref-description">
-    <p>Calculates routes (<code>LINESTRING</code>) between given pairs of points.</p>
+    <p>Calculates route geometries (<code>LINESTRING</code>) between given pairs of points using the 'Routing API'.
+Routes can be created for various transport modes, as for example 'car' or 'public transport',
+incorporating current traffic information, if available.
+For routes using the transport mode <code>"car"</code> a vehicle type can be specified,
+to obtain an estimate of the consumption.</p>
     </div>
 
     <pre class="usage"><span class='fu'>route</span>(<span class='no'>start</span>, <span class='no'>destination</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fastest"</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"car"</span>,
