@@ -12,7 +12,7 @@ isoline(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
 \arguments{
 \item{poi}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.}
 
-\item{range}{numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in minutes; (2) distance in meters; (3) consumption in costfactor.}
+\item{range}{numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.}
 
 \item{rangetype}{character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.}
 
