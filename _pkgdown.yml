@@ -1,1 +1,43 @@
 destination: docs
+navbar:
+  structure:
+    right:
+    - github
+    - twitter
+    - website
+  components:
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/munterfinger/hereR
+    twitter:
+      icon: fa-twitter fa-lg
+      href: https://twitter.com/munterfi1
+    website:
+      icon: fa-globe fa-lg
+      href: https://munterfinger.ch
+reference:
+  - text: Reference
+  - title: Authentication
+    contents:
+    - '`set_auth`'
+    - '`set_proxy`'
+    - '`unset_auth`'
+    - '`unset_proxy`'
+  - title: Example data
+    contents:
+    - '`poi`'
+    - '`aoi`'
+  - title: Geocoder API
+    contents:
+    - '`geocode`'
+  - title: Routing API
+    contents:
+    - '`route`'
+    - '`route_matrix`'
+    - '`isoline`'
+  - title: Traffic API
+    contents:
+    - '`traffic`'
+  - title: Destination Weather API
+    contents:
+    - '`weather`'
