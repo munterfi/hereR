@@ -11,9 +11,8 @@
 <!-- badges: end -->
 
 Interface to the **HERE REST APIs**:
-
 (1) geocode addresses using the **Geocoder API**;
-(2) routing directions, travel distance or time matrices using the **Routing API**;
+(2) routing directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) traffic flow and incident information from the **Traffic API**;
 (4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
