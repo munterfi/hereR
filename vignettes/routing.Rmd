@@ -1,0 +1,99 @@
+---
+title: "Routing API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Routing API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(hereR)
+library(mapview)
+mapviewOptions(
+  vector.palette = colorRampPalette(
+    c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
+  )
+)
+routes <- hereR:::example$route
+mat <- hereR:::example$route_matrix
+iso <- hereR:::example$isoline
+```
+
+Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the 'HERE Routing API'.
+
+## Routing directions
+In order to calculate route geometries (`LINESTRING`) between pairs of points using the 'HERE Routing API' the function `route` is used. The function takes start and destination locations as `sf` objects containing geometries of type `POINT` as input. Routes can be created for various transport modes, as for example car or public transport. Optionally the current or predicted traffic information is considered. For routes using the transport mode `"car"` a vehicle type can be specified, to obtain an estimate of the energy consumption on the routes.
+```{r directions, eval=FALSE}
+routes <- route(
+  start = poi[1:2, ],
+  destination = poi[3:4, ]
+)
+```
+
+Construct a route label and print the routes on an interactive leaflet map:
+```{r map_routes, eval=TRUE, out.width='100%'}
+routes$label <- paste(routes$fromLabel, routes$toLabel, sep =  " - ")
+mapview(routes,
+        zcol = "label",
+        lwd = routes$travelTime/max(routes$travelTime)*5,
+        layer.name = "Route [from - to]",
+        homebutton = FALSE
+)
+```
+
+## Routing matrix
+The function `route_matrix` calculates a matrix of route summaries between given POIs. The function takes start and destination locations as `sf` objects containing geometries of type `POINT` as input. If only one `sf` object is provided as `start` an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function `route_matrix` is one route summary matrix, that fits the order of the provided POIs: startIndex, destinationIndex.
+```{r matrix, eval=FALSE}
+# From - to
+mat <- route_matrix(
+  start = poi[1:2, ],
+  end = poi[3:4, ]
+)
+
+# Construct O-D matrix (all routes between the POIs)
+mat <- route_matrix(
+  start = poi
+)
+```
+
+Print the first 10 rows of the matrix table, created from the POIs above, where the distance is in meters, the travel time in seconds and the consumption in cost factor units:
+
+```{r table_route_matrix, eval=TRUE, out.width='100%', echo=FALSE}
+knitr::kable(head(mat, 10), format = "html")
+```
+
+## Isoline
+Isoline are constructed by the function `isoline`. The calculated isolines (`POLYGON` or `MULTIPOLYGON`) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption as costfactor. By default the `aggregate` parameter is set to `TRUE`, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polyons are aggregated to polygons of geometry type `MULTIPOLYGON`. Thereby overlapping isolines are avoided.
+```{r isoline, eval=FALSE}
+iso <- isoline(
+  poi,
+  range = seq(5, 30, 5) * 60,
+  rangetype = "time",
+  type = "fastest",
+  mode = "car",
+  aggregate = TRUE,
+  traffic = FALSE
+)
+```
+
+Convert range from seconds to minutes and print the aggregated isolines on an interactive leaflet map:
+```{r map_isoline, eval=TRUE, out.width='100%'}
+iso$minutes <- iso$range/60
+mapview(iso,
+        zcol = "minutes",
+        layer.name = "Isoline [min]",
+        alpha = 0,
+        homebutton = FALSE
+)
+```
+
+## API Reference
+
+* Routing directions
+* Routing matrix
+* Isoline

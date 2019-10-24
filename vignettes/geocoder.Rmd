@@ -1,0 +1,52 @@
+---
+title: "Geocoder API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Geocoder API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(hereR)
+library(mapview)
+addresses <- poi$city
+geocoded <- hereR:::example$geocode
+```
+
+Geocode addresses using the 'HERE Geocoder API'.
+
+## Geocode addresses
+In order to geocode addresses, the function `geocode` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type `character`:
+
+```{r print_addresses, eval=TRUE, echo=TRUE, out.width='100%'}
+head(addresses, 3)
+```
+
+Geocode the character vector containing the addresses:
+```{r geocode, eval=FALSE}
+geocoded <- geocode(addresses)
+```
+
+The return value is an `sf` object containing `POINT` geometries of the addresses:
+```{r head_geocoded, eval=TRUE, echo=TRUE, out.width='100%'}
+head(geocoded, 3)
+```
+
+Print the geocoded addresses on an interactive leaflet map:
+```{r map_geocoded, eval=TRUE, out.width='100%'}
+mapview(geocoded,
+        label = geocoded$address,
+        col.regions = "yellow",
+        legend = FALSE,
+        homebutton = FALSE
+)
+```
+
+## API Reference
+
+* Geocoder
