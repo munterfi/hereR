@@ -1,6 +1,10 @@
 #' HERE Routing API: Route Matrix
 #'
-#' Calcuates a matrix of route summaries.
+#' Calculates a matrix of route summaries between given points of interest (POIs).
+#' Various transport modes and traffic information at a provided timestamp are supported.
+#' The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
+#' maximum matrix size per request and thereby minimize the number of overall needed requests.
+#' The result is one route summary matrix, that fits the order of the provided POIs: \code{startIndex}, \code{destinationIndex}.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html}{HERE Routing API: Calculate Matrix}
@@ -23,7 +27,8 @@
 #' \donttest{
 #' mat <- route_matrix(
 #'   start = poi,
-#'   departure = as.POSIXct("2019-10-10 15:45:00")
+#'   departure = as.POSIXct("2019-10-10 15:45:00"),
+#'   traffic = TRUE
 #' )
 #' }
 route_matrix <- function(start, destination = start, type = "fastest", mode = "car",

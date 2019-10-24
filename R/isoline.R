@@ -8,7 +8,7 @@
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
-#' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in minutes; (2) distance in meters; (3) consumption in costfactor.
+#' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.
 #' @param rangetype character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
 #' @param type character, set the routing type: \code{"fastest"} or \code{"shortest"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
