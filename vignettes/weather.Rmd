@@ -51,7 +51,7 @@ Print the weather observation information on an interactive leaflet map:
 ```{r map_obs, eval=TRUE, out.width='100%'}
 mapview(observation,
         zcol = "temperature",
-        cex = as.numeric(observation$humidity)/4,
+        cex = observation$humidity/4,
         layer.name = "Observation",
         map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
@@ -111,7 +111,6 @@ astronomy <- weather(
 Print a table for the sun and moon times of the first example POI, where the nearest station is 'Emmenbrücke':
 ```{r table_ast, eval=TRUE, out.width='100%', echo=FALSE}
 ast <- astronomy$astronomy[[1]]
-ast$date <- as.Date(as.POSIXct(ast$utcTime))
 ast$phase <- ast$moonPhaseDesc
 cols <- c("date", "sunrise", "sunset", "moonrise", "moonset", "phase")
 knitr::kable(ast[, cols], format = "html", )

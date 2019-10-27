@@ -109,7 +109,9 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
         })
         sf::st_as_sf(
           data.table::data.table(
-            timestamp = df$response$metaInfo$timestamp,
+            timestamp = as.POSIXlt(df$response$metaInfo$timestamp,
+                                   tz = "UTC",
+                                   format = "%Y-%m-%dT%H:%M:%SZ"),
             range = df$response$isoline$range,
             lng = df$response$center$longitude,
             lat = df$response$center$latitude

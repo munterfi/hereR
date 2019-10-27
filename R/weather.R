@@ -111,7 +111,9 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
         lng = df$observations$location$longitude[1],
         lat = df$observations$location$latitude[1],
         distance = df$observations$location$distance[1] * 1000,
-        timestamp = df$observations$location$observation[[1]]$utcTime,
+        timestamp = as.POSIXct(
+          df$observations$location$observation[[1]]$utcTime,
+          format = "%Y-%m-%dT%H:%M:%OS"),
         state = df$observations$location$state[1],
         country = df$observations$location$country[1])
       obs <- df$observations$location$observation[[1]]
@@ -120,6 +122,8 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
         "temperatureDesc", "iconName", "iconLink", "windDesc", "icon",
         "country", "state", "city", "latitude", "longitude", "distance",
         "utcTime", "elevation"), ]
+      obs[, c(4:9, 16, 17, 19, 23, 24)] <-
+        sapply(obs[, c(4:9, 16, 17, 19, 23, 24)], as.numeric)
       return(
         cbind(station, obs)
       )
@@ -159,8 +163,13 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
       )
     })
   )
-  astronomy$astronomy <- lapply(dfs, function(df)
-    {df$astronomy$astronomy})
+  astronomy$astronomy <- lapply(dfs, function(df) {
+    ast <- df$astronomy$astronomy
+    ast$date <- as.Date(as.POSIXct(ast$utcTime, tz = "UTC"))
+    ast$utcTime <- NULL
+    ast
+    }
+  )
   return(astronomy)
 }
 
