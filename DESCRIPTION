@@ -28,7 +28,8 @@ Suggests:
     mapview (>= 2.7.0),
     testthat (>= 2.1.0),
     knitr (>= 1.25),
-    rmarkdown (>= 1.16)
+    rmarkdown (>= 1.16),
+    covr (>= 3.3.1)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
