@@ -8,6 +8,13 @@
 
 <title>HERE Routing API: Route Matrix — route_matrix • hereR</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@ Various transport modes and traffic information at a provided timestamp are supp
 The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 maximum matrix size per request and thereby minimize the number of overall needed requests.
 The result is one route summary matrix, that fits the order of the provided POIs: startIndex, destinationIndex." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -220,9 +228,8 @@ The result is one route summary matrix, that fits the order of the provided POIs
   <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>poi</span>,
   <span class='kw'>departure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-10-10 15:45:00"</span>),
   <span class='kw'>traffic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='error'>Error in .check_auth(app_id, app_code): Please provide an 'app_id' and an 'app_code' for a HERE project.</span>
-#&gt; <span class='error'>         Get your login here: https://developer.here.com/</span></div><div class='input'># }
-</div></pre>
+)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
