@@ -20,7 +20,7 @@ url_weather_alerts <-
 url_traffic_flow <-
   traffic(aoi = aoi[aoi$code == "LI", ], product = "flow", url_only = TRUE)
 url_traffic_incidents <-
-  traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents", url_only = TRUE)
+  traffic(aoi = aoi, product = "incidents", from_dt = Sys.time()-60*60*1.5, url_only = TRUE)
 
 ## Get response mocks
 mock <- list(
@@ -47,7 +47,7 @@ example <- list(
   weather_forecast_astronomy = weather(poi = poi, product = "forecast_astronomy"),
   weather_alerts = weather(poi = poi, product = "alerts"),
   traffic_flow = traffic(aoi = aoi[aoi$code == "LI", ], product = "flow"),
-  traffic_incidents = traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents")
+  traffic_incidents = traffic(aoi = aoi, product = "incidents", from_dt = Sys.time()-60*60*1.5)
 )
 
 ## Save as internal package data
