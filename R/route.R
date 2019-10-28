@@ -1,6 +1,10 @@
 #' HERE Routing API: Route
 #'
-#' Calculates routes (\code{LINESTRING}) between given pairs of points.
+#' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the 'Routing API'.
+#' Routes can be created for various transport modes, as for example 'car' or 'public transport',
+#' incorporating current traffic information, if available.
+#' For routes using the transport mode \code{"car"} a vehicle type can be specified,
+#' to obtain an estimate of the consumption.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-route.html}{HERE Routing API: Calculate Route}
@@ -21,6 +25,8 @@
 #'
 #' @examples
 #' \donttest{
+#' library(sf)
+#'
 #' # Get all from - to combinations from POIs
 #' to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
 #' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
@@ -29,9 +35,11 @@
 #' from <- from[idx, ]
 #'
 #' # Routing
-#' routes <- route(start = from, destination = to,
-#'                 mode = "car", type = "fastest", traffic = TRUE,
-#'                 vehicle_type = "diesel,5.5")
+#' routes <- route(
+#'   start = from, destination = to,
+#'   mode = "car", type = "fastest", traffic = TRUE,
+#'   vehicle_type = "diesel,5.5"
+#' )
 #'
 #' }
 route <- function(start, destination,
@@ -86,14 +94,16 @@ route <- function(start, destination,
 
   # Add departure or arrival time
   if (is.null(arrival)) {
-    url <- .add_departure(
+    url <- .add_datetime(
       url,
-      departure
+      departure,
+      "departure"
     )
   } else {
-    url <- .add_arrival(
+    url <- .add_datetime(
       url,
-      arrival
+      arrival,
+      "arrival"
     )
   }
 
@@ -129,6 +139,7 @@ route <- function(start, destination,
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
   routes <- sf::st_as_sf(

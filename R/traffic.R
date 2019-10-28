@@ -20,14 +20,21 @@
 #'
 #' @examples
 #' \donttest{
-#' # Traffic flow
-#' traffic(aoi = aoi[aoi$code == "LI", ], product = "flow")
+#' # Traffic flow for the last hour
+#' flow <- traffic(
+#'   aoi = aoi[aoi$code == "LI", ],
+#'   product = "flow",
+#'   from_dt = Sys.time() - 60*60*1,
+#'   to_dt = Sys.time()
+#' )
 #'
-#' # Traffic incidents
-#' traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents")
-#'
-#' # Empty requests:
-#' test <- st_set_crs(st_as_sf(data.frame(x = 7.47070, y = 43.08494), coords = c("x", "y")), 4326)
+#' # All traffic incidents from 2018 till end of 2019
+#' incidents <- traffic(
+#'   aoi = aoi[aoi$code == "LI", ],
+#'   product = "incidents",
+#'   from_dt = as.POSIXct("2018-01-01 00:00:00"),
+#'   to_dt = as.POSIXct("2019-12-31 23:59:59")
+#' )
 #' }
 traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
                     local_time = FALSE, url_only = FALSE) {
@@ -88,6 +95,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
   if (product == "flow") {
@@ -95,6 +103,9 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   } else if (product == "incidents") {
     traffic <- .extract_traffic_incidents(data)
   }
+
+  # Check for empty response
+  if (is.null(traffic)) {return(NULL)}
 
   # Spatial
   traffic <- suppressMessages(
@@ -133,11 +144,15 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
       }), fill = TRUE)
     }), fill = TRUE)
   flow$geometry <- geoms
-  return(
-    sf::st_set_crs(
-      sf::st_as_sf(flow), 4326
+  if (nrow(flow) > 0) {
+    return(
+      sf::st_set_crs(
+        sf::st_as_sf(flow), 4326
+      )
     )
-  )
+  } else {
+    return(NULL)
+  }
 }
 
 .extract_traffic_incidents <- function(data) {
@@ -170,9 +185,15 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
     # return(info)
   }), fill = TRUE)
   #incidents$geometry_line <- geoms_line
-  return(
-    sf::st_set_crs(
-      sf::st_as_sf(incidents, coords = c("lng", "lat")), 4326
+
+  # Create sf, data.frame
+  if (nrow(incidents) > 0) {
+    return(
+      sf::st_set_crs(
+        sf::st_as_sf(incidents, coords = c("lng", "lat")), 4326
+      )
     )
-  )
+  } else {
+    return(NULL)
+  }
 }

@@ -1,5 +1,5 @@
 
-# hereR
+# hereR <img src="man/figures/logo.svg" align="right" alt="" width="120" />
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/hereR)](https://CRAN.R-project.org/package=hereR)
@@ -11,13 +11,12 @@
 <!-- badges: end -->
 
 Interface to the **HERE REST APIs**:
-
 (1) geocode addresses using the **Geocoder API**;
-(2) routing directions, travel distance or time matrices using the **Routing API**;
+(2) routing directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) traffic flow and incident information from the **Traffic API**;
 (4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
-Locations and routes are returned as `sf` objects.
+Locations, routes and isolines are returned as `sf` objects.
 
 ## Installation
 

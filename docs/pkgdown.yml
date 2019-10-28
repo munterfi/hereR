@@ -1,0 +1,10 @@
+pandoc: 2.3.1
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  authentication: authentication.html
+  geocoder: geocoder.html
+  routing: routing.html
+  traffic: traffic.html
+  weather: weather.html
+

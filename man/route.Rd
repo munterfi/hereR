@@ -31,10 +31,16 @@ route(start, destination, type = "fastest", mode = "car",
 An \code{sf} object containing the requested routes.
 }
 \description{
-Calculates routes (\code{LINESTRING}) between given pairs of points.
+Calculates route geometries (\code{LINESTRING}) between given pairs of points using the 'Routing API'.
+Routes can be created for various transport modes, as for example 'car' or 'public transport',
+incorporating current traffic information, if available.
+For routes using the transport mode \code{"car"} a vehicle type can be specified,
+to obtain an estimate of the consumption.
 }
 \examples{
 \donttest{
+library(sf)
+
 # Get all from - to combinations from POIs
 to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
 from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
@@ -43,9 +49,11 @@ to <- to[idx, ]
 from <- from[idx, ]
 
 # Routing
-routes <- route(start = from, destination = to,
-                mode = "car", type = "fastest", traffic = TRUE,
-                vehicle_type = "diesel,5.5")
+routes <- route(
+  start = from, destination = to,
+  mode = "car", type = "fastest", traffic = TRUE,
+  vehicle_type = "diesel,5.5"
+)
 
 }
 }

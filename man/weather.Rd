@@ -23,7 +23,17 @@ location name) based on the 'Destination Weather API'.
 }
 \examples{
 \donttest{
-weather(poi = locations, product = "observation")
+# Observation
+observation <- weather(poi = poi, product = "observation")
+
+# Forecast
+forecast <- weather(poi = poi, product = "forecast_hourly")
+
+# Astronomy
+astronomy <- weather(poi = poi, product = "forecast_astronomy")
+
+# Alerts
+alerts <- weather(poi = poi, product = "alerts")
 }
 }
 \references{

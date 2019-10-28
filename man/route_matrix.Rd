@@ -32,11 +32,19 @@ route_matrix(start, destination = start, type = "fastest",
 A \code{data.table} containing the requested route matrix data.
 }
 \description{
-Calcuates a matrix of route summaries.
+Calculates a matrix of route summaries between given points of interest (POIs).
+Various transport modes and traffic information at a provided timestamp are supported.
+The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
+maximum matrix size per request and thereby minimize the number of overall needed requests.
+The result is one route summary matrix, that fits the order of the provided POIs: \code{startIndex}, \code{destinationIndex}.
 }
 \examples{
 \donttest{
-mat <- route_matrix(start = poi)
+mat <- route_matrix(
+  start = poi,
+  departure = as.POSIXct("2019-10-10 15:45:00"),
+  traffic = TRUE
+)
 }
 }
 \references{

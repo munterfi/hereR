@@ -8,7 +8,7 @@
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
-#' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in minutes; (2) distance in meters; (3) consumption in costfactor.
+#' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.
 #' @param rangetype character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
 #' @param type character, set the routing type: \code{"fastest"} or \code{"shortest"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
@@ -84,9 +84,10 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   )
 
   # Add departure time
-  url <- .add_departure(
+  url <- .add_datetime(
     url,
-    departure
+    departure,
+    "departure"
   )
 
   # Return urls if chosen
@@ -96,6 +97,7 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   data <- .get_content(
     url = url
   )
+  if (length(data) == 0) return(NULL)
 
   # Extract information
   isolines <-  sf::st_as_sf(
@@ -107,7 +109,9 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
         })
         sf::st_as_sf(
           data.table::data.table(
-            timestamp = df$response$metaInfo$timestamp,
+            timestamp = as.POSIXct(df$response$metaInfo$timestamp,
+                                   tz = "UTC",
+                                   format = "%Y-%m-%dT%H:%M:%SZ"),
             range = df$response$isoline$range,
             lng = df$response$center$longitude,
             lat = df$response$center$latitude

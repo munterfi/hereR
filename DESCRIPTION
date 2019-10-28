@@ -5,13 +5,15 @@ Version: 0.1.0
 Authors@R: c(
     person("Merlin", "Unterfinger", email = "info@munterfinger.ch", role = c("aut", "cre")))
 Maintainer: Merlin Unterfinger <info@munterfinger.ch>
+URL: https://munterfinger.github.io/hereR/, https://github.com/munterfinger/hereR
+BugReports: https://github.com/munterfinger/hereR/issues
 Description: Interface to the 'HERE REST APIs':
   (1) geocode addresses using the 'Geocoder API';
-  (2) routing directions, travel distance or time matrices using the 'Routing API';
+  (2) routing directions, travel distance or time matrices and isolines using the 'Routing API';
   (3) traffic flow and incident information from the 'Traffic API';
   (4) weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the 'Destination Weather API'.
-  Locations and routes are returned as 'sf' objects.
+  Locations, routes and isolines are returned as 'sf' objects.
 Depends: R (>= 3.5.0)
 Imports: 
     curl (>= 4.2),
@@ -20,9 +22,15 @@ Imports:
     lwgeom (>= 0.1-7),
     sf (>= 0.8-0),
     stringr (>= 1.4.0)
-Suggests: 
-    testthat (>= 2.1.0)
+Suggests:
+    ggplot2 (>= 3.2.1),
+    leafpop (>= 0.0.1),
+    mapview (>= 2.7.0),
+    testthat (>= 2.1.0),
+    knitr (>= 1.25),
+    rmarkdown (>= 1.16)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr
