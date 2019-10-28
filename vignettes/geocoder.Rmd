@@ -50,4 +50,4 @@ mapview(geocoded,
 
 ## API Reference
 
-* Geocoder
+* [Geocoder](https://developer.here.com/documentation/geocoder/topics/resource-geocode.html)

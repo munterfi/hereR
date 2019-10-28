@@ -40,7 +40,7 @@ observation <- weather(
 
 The return value is an `sf` object, which contains the `POINT` geometries of the provided POIs and the most recent record on the observed weather. The measurements are taken from the nearest weather observation stations with respect to the POIs. The distance of the stations to the provided POIs is an indicator for the reliabilty of the weather information at each POI. A table of the observed weather near the example POIs:
 
-```{r table_obs, eval=TRUE, out.width='100%', echo=FALSE}
+```{r table_obs, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE}
 cols <- c("station", "distance", "description",
           "temperature", "humidity",
           "windSpeed", "windDirection")
@@ -109,7 +109,7 @@ astronomy <- weather(
 ```
 
 Print a table for the sun and moon times of the first example POI, where the nearest station is 'Emmenbrücke':
-```{r table_ast, eval=TRUE, out.width='100%', echo=FALSE}
+```{r table_ast, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE}
 ast <- astronomy$astronomy[[1]]
 ast$phase <- ast$moonPhaseDesc
 cols <- c("date", "sunrise", "sunset", "moonrise", "moonset", "phase")
@@ -128,7 +128,7 @@ This returns an `sf` object with the POIs and the attribute `"alerts"`, which is
 
 ## API Reference
 
-* Observations
-* Forecast
-* Astronomy
-* Alerts
+* [Observation](https://developer.here.com/documentation/weather/topics/resource-type-observations.html)
+* [Forecast](https://developer.here.com/documentation/weather/topics/resource-type-hourly-forecasts.html)
+* [Astronomy](https://developer.here.com/documentation/weather/topics/resource-type-astronomy-items.html)
+* [Alerts](https://developer.here.com/documentation/weather/topics/resource-type-alert-items.html)

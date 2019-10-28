@@ -20,11 +20,11 @@ Set up a valid authentication to the 'HERE REST APIs' and optionally configure a
 In order to use the functionality of the `hereR` package, application credentials for a HERE project must be provided. The HERE application credentials (APP ID and APP CODE) can be obtained for free as follows:
 
 1. Go to [developer.here.com](https://developer.here.com/)
-2. Signup for a HERE developer account
+2. Sign up for a HERE developer account
 3. Create a new project of type 'REST & XYZ HUB API/CLI'
 4. Copy the **APP ID** and **APP CODE** from the project
 
-The APP ID and APP CODE are set for the current R session and will be used to authenticate in the requests to the HERE REST APIs.
+The APP ID and APP CODE are set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month).
 To set the credentials, please use:
 
 ```{r set}
@@ -52,6 +52,8 @@ set_proxy(
 ## Remove credentials
 To remove previously set credentials from the current R session use `unset_auth()`. In order to delete the proxy information use `unset_proxy()`. For overwriting application credentials or proxy settings use again the `set_auth()` and `set_proxy()` functions.
 
-## API Reference
+## Reference
 
-* TO DO
+* [Sign up as developer](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
+* [Pricing and plans](https://developer.here.com/pricing)
+

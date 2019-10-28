@@ -96,6 +96,6 @@ mapview(iso,
 
 ## API Reference
 
-* Routing directions
-* Routing matrix
-* Isoline
+* [Route direction](https://developer.here.com/documentation/routing/topics/resource-calculate-route.html)
+* [Route matrix](https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html)
+* [Isoline](https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html)

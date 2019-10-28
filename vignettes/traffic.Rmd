@@ -18,7 +18,7 @@ library(hereR)
 library(mapview)
 mapviewOptions(
   vector.palette = colorRampPalette(
-    c("#F7F7F7","#F4A582", "#CA0020")
+    c("#FFD700", "#CA0020")
   )
 )
 flow <- hereR:::example$traffic_flow
@@ -39,11 +39,12 @@ flow <- traffic(
 )
 ```
 
-Print the 'jam factor' of the traffic flow on an interactive leaflet map:
+Print the (ordered) 'jam factor' of the traffic flow on an interactive leaflet map:
 ```{r map_flow, eval=TRUE, out.width='100%'}
+flow <- flow[order(flow$JF), ]
 mapview(flow,
         zcol = "JF",
-        lwd = flow$JF,
+        lwd = flow$JF*2,
         layer.name = "Jam factor",
         map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
@@ -73,6 +74,5 @@ mapview(incidents,
 
 ## API Reference
 
-* Flow
-* Incidents
-
+* [Flow](https://developer.here.com/documentation/traffic/topics_v6.1/resource-parameters-flow.html)
+* [Incidents](https://developer.here.com/documentation/traffic/topics/resource-parameters-incidents.html)
