@@ -6,6 +6,7 @@ Authors@R: c(
     person("Merlin", "Unterfinger", email = "info@munterfinger.ch", role = c("aut", "cre")))
 Maintainer: Merlin Unterfinger <info@munterfinger.ch>
 URL: https://munterfinger.github.io/hereR/, https://github.com/munterfinger/hereR
+BugReports: https://github.com/munterfinger/hereR/issues
 Description: Interface to the 'HERE REST APIs':
   (1) geocode addresses using the 'Geocoder API';
   (2) routing directions, travel distance or time matrices and isolines using the 'Routing API';
