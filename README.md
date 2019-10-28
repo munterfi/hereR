@@ -1,5 +1,5 @@
 
-# hereR
+# hereR <img src="man/figures/logo.svg" align="right" alt="" width="120" />
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/hereR)](https://CRAN.R-project.org/package=hereR)

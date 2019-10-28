@@ -4,7 +4,7 @@ First release of the `hereR` package, an `sf`-based interface to the **HERE REST
 The packages binds to the following HERE APIs:
 
 * **Geocoder API:** Get coordinates (lng, lat) from addresses.
-* **Routing API:** Routing directions, travel distance or time matrices, optionally incorporating the current traffic situation.
+* **Routing API:** Routing directions, isolines and travel distance or time matrices, optionally incorporating the current traffic situation.
 * **Traffic API:** Real-time traffic flow and incident information.
 * **Destination Weather API:** Weather forecasts, reports on current weather conditions, astronomical information and weather alerts at a specific location.
 
