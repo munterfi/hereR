@@ -2,9 +2,9 @@ destination: docs
 navbar:
   structure:
     right:
-    - github
-    - twitter
-    - website
+      - github
+      - twitter
+      - website
   components:
     github:
       icon: fa-github fa-lg
@@ -15,6 +15,7 @@ navbar:
     website:
       icon: fa-globe fa-lg
       href: https://munterfinger.ch
+
 reference:
   - text: Reference
   - title: Authentication
