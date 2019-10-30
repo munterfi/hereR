@@ -192,20 +192,23 @@ location name) based on the 'Destination Weather API'.</p>
     <p><a href='https://developer.here.com/documentation/weather/topics/example-weather-observation.html'>HERE Destination Weather API: Observation</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
+<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
+  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
+  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
+)
+
 <span class='co'># Observation</span>
-<span class='no'>observation</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"observation"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .check_auth(app_id, app_code): Please provide an 'app_id' and an 'app_code' for a HERE project.</span>
-#&gt; <span class='error'>         Get your login here: https://developer.here.com/</span></div><div class='input'>
+<span class='no'>observation</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"observation"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='co'># Forecast</span>
-<span class='no'>forecast</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"forecast_hourly"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .check_auth(app_id, app_code): Please provide an 'app_id' and an 'app_code' for a HERE project.</span>
-#&gt; <span class='error'>         Get your login here: https://developer.here.com/</span></div><div class='input'>
+<span class='no'>forecast</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"forecast_hourly"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='co'># Astronomy</span>
-<span class='no'>astronomy</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"forecast_astronomy"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .check_auth(app_id, app_code): Please provide an 'app_id' and an 'app_code' for a HERE project.</span>
-#&gt; <span class='error'>         Get your login here: https://developer.here.com/</span></div><div class='input'>
+<span class='no'>astronomy</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"forecast_astronomy"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='co'># Alerts</span>
-<span class='no'>alerts</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"alerts"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .check_auth(app_id, app_code): Please provide an 'app_id' and an 'app_code' for a HERE project.</span>
-#&gt; <span class='error'>         Get your login here: https://developer.here.com/</span></div><div class='input'># }
-</div></pre>
+<span class='no'>alerts</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"alerts"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

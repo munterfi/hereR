@@ -18,9 +18,13 @@ An \code{sf} object, containing the coordinates of the geocoded addresses.
 Geocodes addresses using the HERE Geocoder API.
 }
 \examples{
-\donttest{
-locs <- geocode(addresses = poi$city)
-}
+# Authentication
+set_auth(
+  app_id = "<YOUR APP ID>",
+  app_code = "<YOUR APP CODE>"
+)
+
+locs <- geocode(addresses = poi$city, url_only = TRUE)
 }
 \references{
 \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}

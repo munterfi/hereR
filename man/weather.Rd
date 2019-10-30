@@ -22,19 +22,23 @@ astronomical information and alerts at a specific location (coordinates or
 location name) based on the 'Destination Weather API'.
 }
 \examples{
-\donttest{
+# Authentication
+set_auth(
+  app_id = "<YOUR APP ID>",
+  app_code = "<YOUR APP CODE>"
+)
+
 # Observation
-observation <- weather(poi = poi, product = "observation")
+observation <- weather(poi = poi, product = "observation", url_only = TRUE)
 
 # Forecast
-forecast <- weather(poi = poi, product = "forecast_hourly")
+forecast <- weather(poi = poi, product = "forecast_hourly", url_only = TRUE)
 
 # Astronomy
-astronomy <- weather(poi = poi, product = "forecast_astronomy")
+astronomy <- weather(poi = poi, product = "forecast_astronomy", url_only = TRUE)
 
 # Alerts
-alerts <- weather(poi = poi, product = "alerts")
-}
+alerts <- weather(poi = poi, product = "alerts", url_only = TRUE)
 }
 \references{
 \href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation}

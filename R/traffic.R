@@ -19,13 +19,19 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' # Authentication
+#' set_auth(
+#'   app_id = "<YOUR APP ID>",
+#'   app_code = "<YOUR APP CODE>"
+#' )
+#'
 #' # Traffic flow for the last hour
 #' flow <- traffic(
 #'   aoi = aoi[aoi$code == "LI", ],
 #'   product = "flow",
 #'   from_dt = Sys.time() - 60*60*1,
-#'   to_dt = Sys.time()
+#'   to_dt = Sys.time(),
+#'   url_only = TRUE
 #' )
 #'
 #' # All traffic incidents from 2018 till end of 2019
@@ -33,9 +39,9 @@
 #'   aoi = aoi[aoi$code == "LI", ],
 #'   product = "incidents",
 #'   from_dt = as.POSIXct("2018-01-01 00:00:00"),
-#'   to_dt = as.POSIXct("2019-12-31 23:59:59")
+#'   to_dt = as.POSIXct("2019-12-31 23:59:59"),
+#'   url_only = TRUE
 #' )
-#' }
 traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
                     local_time = FALSE, url_only = FALSE) {
 

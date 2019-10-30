@@ -58,6 +58,7 @@ AOIs also must be provided in order to request information about traffic inciden
 incidents <- traffic(
   aoi = aoi[aoi$code == "LI", ],
   product = "incidents",
+  from_dt = Sys.time()-60*60*1.5,
   local_time = FALSE
 )
 ```

@@ -13,9 +13,13 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
-#' locs <- geocode(addresses = poi$city)
-#' }
+#' # Authentication
+#' set_auth(
+#'   app_id = "<YOUR APP ID>",
+#'   app_code = "<YOUR APP CODE>"
+#' )
+#'
+#' locs <- geocode(addresses = poi$city, url_only = TRUE)
 geocode <- function(addresses, url_only = FALSE) {
 
   # Check and preprocess addresses

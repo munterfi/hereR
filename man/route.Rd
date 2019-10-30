@@ -38,10 +38,14 @@ For routes using the transport mode \code{"car"} a vehicle type can be specified
 to obtain an estimate of the consumption.
 }
 \examples{
-\donttest{
-library(sf)
+# Authentication
+set_auth(
+  app_id = "<YOUR APP ID>",
+  app_code = "<YOUR APP CODE>"
+)
 
 # Get all from - to combinations from POIs
+library(sf)
 to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
 from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
 idx <- apply(to != from, any, MARGIN = 1)
@@ -52,10 +56,9 @@ from <- from[idx, ]
 routes <- route(
   start = from, destination = to,
   mode = "car", type = "fastest", traffic = TRUE,
-  vehicle_type = "diesel,5.5"
+  vehicle_type = "diesel,5.5",
+  url_only = TRUE
 )
-
-}
 }
 \references{
 \href{https://developer.here.com/documentation/routing/topics/resource-calculate-route.html}{HERE Routing API: Calculate Route}

@@ -223,9 +223,18 @@ specified travel time or consumption.</p>
     <p><a href='https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html'>HERE Routing API: Calculate Isoline</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>isolines</span> <span class='kw'>&lt;-</span> <span class='fu'>isoline</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>5</span>, <span class='fl'>30</span>, <span class='fl'>5</span>) * <span class='fl'>60</span>)</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</span></div><div class='input'># }
-</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
+<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
+  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
+  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
+)
+
+<span class='co'># Isochrone for 5, 10, 15, 20, 25 and 30 minutes driving time</span>
+<span class='no'>isolines</span> <span class='kw'>&lt;-</span> <span class='fu'>isoline</span>(
+  <span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>5</span>, <span class='fl'>30</span>, <span class='fl'>5</span>) * <span class='fl'>60</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

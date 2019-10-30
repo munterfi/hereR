@@ -39,9 +39,18 @@ leaving from defined centers (POIs) with either a specified length, a
 specified travel time or consumption.
 }
 \examples{
-\donttest{
-isolines <- isoline(poi = poi, range = seq(5, 30, 5) * 60)
-}
+# Authentication
+set_auth(
+  app_id = "<YOUR APP ID>",
+  app_code = "<YOUR APP CODE>"
+)
+
+# Isochrone for 5, 10, 15, 20, 25 and 30 minutes driving time
+isolines <- isoline(
+  poi = poi,
+  range = seq(5, 30, 5) * 60,
+  url_only = TRUE
+)
 }
 \references{
 \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}

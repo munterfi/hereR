@@ -222,11 +222,14 @@ to obtain an estimate of the consumption.</p>
     <p><a href='https://developer.here.com/documentation/routing/topics/resource-calculate-route.html'>HERE Routing API: Calculate Route</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)
+    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
+<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
+  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
+  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
+)
 
 <span class='co'># Get all from - to combinations from POIs</span>
-<span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), ]
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</span></div><div class='input'><span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), ]
 <span class='no'>from</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='kw'>each</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)),]
 <span class='no'>idx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>to</span> <span class='kw'>!=</span> <span class='no'>from</span>, <span class='no'>any</span>, <span class='kw'>MARGIN</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>to</span>[<span class='no'>idx</span>, ]
@@ -236,10 +239,9 @@ to obtain an estimate of the consumption.</p>
 <span class='no'>routes</span> <span class='kw'>&lt;-</span> <span class='fu'>route</span>(
   <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>from</span>, <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>to</span>,
   <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"car"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fastest"</span>, <span class='kw'>traffic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>vehicle_type</span> <span class='kw'>=</span> <span class='st'>"diesel,5.5"</span>
-)
-
-<span class='co'># }</span></div></pre>
+  <span class='kw'>vehicle_type</span> <span class='kw'>=</span> <span class='st'>"diesel,5.5"</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

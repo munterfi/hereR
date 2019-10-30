@@ -16,7 +16,7 @@ Interface to the **HERE REST APIs**:
 (3) traffic flow and incident information from the **Traffic API**;
 (4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
-Locations, routes and isolines are returned as `sf` objects.
+Locations, routes and isolines are returned as `sf` objects and tables as `data.table` objects.
 
 ## Installation
 

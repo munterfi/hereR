@@ -53,7 +53,7 @@ The function `route_matrix` calculates a matrix of route summaries between given
 # From - to
 mat <- route_matrix(
   start = poi[1:2, ],
-  end = poi[3:4, ]
+  destination = poi[3:4, ]
 )
 
 # Construct O-D matrix (all routes between the POIs)

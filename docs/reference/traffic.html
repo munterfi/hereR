@@ -205,22 +205,29 @@ Traffic incidents contain information about location, time, duration, severity, 
     <p><a href='https://developer.here.com/api-explorer/rest/traffic'>HERE Traffic API</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
+<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
+  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
+  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
+)
+
 <span class='co'># Traffic flow for the last hour</span>
 <span class='no'>flow</span> <span class='kw'>&lt;-</span> <span class='fu'>traffic</span>(
   <span class='kw'>aoi</span> <span class='kw'>=</span> <span class='no'>aoi</span>[<span class='no'>aoi</span>$<span class='no'>code</span> <span class='kw'>==</span> <span class='st'>"LI"</span>, ],
   <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
   <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() - <span class='fl'>60</span>*<span class='fl'>60</span>*<span class='fl'>1</span>,
-  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
-)</div><div class='output co'>#&gt; <span class='error'>Error in (function (res) {    if (is.character(res))         stop("Connection error: Please check connection to the internet and proxy configuration.")    if (res$status != 200) {        if (as.numeric(substr(as.character(res$status), 1, 1)) ==             4) {            errorChar &lt;- rawToChar(res$content)            Encoding(errorChar) &lt;- encoding            error &lt;- jsonlite::fromJSON(errorChar)            errorMessage &lt;- sprintf("Request failed with HTTP status code %s: %s: %s: %s",                 res$status, error$type, error$subtype, error$details)        }        else {            errorMessage &lt;- sprintf("Request failed with HTTP status code %s.",                 res$status)        }        message(errorMessage)        ids &lt;&lt;- ids[ids != id]    }    else {        results[[id]] &lt;&lt;- res    }})("Could not resolve proxy: your-proxy.net"): Connection error: Please check connection to the internet and proxy configuration.</span></div><div class='input'>
+  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
+
 <span class='co'># All traffic incidents from 2018 till end of 2019</span>
 <span class='no'>incidents</span> <span class='kw'>&lt;-</span> <span class='fu'>traffic</span>(
   <span class='kw'>aoi</span> <span class='kw'>=</span> <span class='no'>aoi</span>[<span class='no'>aoi</span>$<span class='no'>code</span> <span class='kw'>==</span> <span class='st'>"LI"</span>, ],
   <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"incidents"</span>,
   <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2018-01-01 00:00:00"</span>),
-  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-12-31 23:59:59"</span>)
-)</div><div class='output co'>#&gt; <span class='error'>Error in (function (res) {    if (is.character(res))         stop("Connection error: Please check connection to the internet and proxy configuration.")    if (res$status != 200) {        if (as.numeric(substr(as.character(res$status), 1, 1)) ==             4) {            errorChar &lt;- rawToChar(res$content)            Encoding(errorChar) &lt;- encoding            error &lt;- jsonlite::fromJSON(errorChar)            errorMessage &lt;- sprintf("Request failed with HTTP status code %s: %s: %s: %s",                 res$status, error$type, error$subtype, error$details)        }        else {            errorMessage &lt;- sprintf("Request failed with HTTP status code %s.",                 res$status)        }        message(errorMessage)        ids &lt;&lt;- ids[ids != id]    }    else {        results[[id]] &lt;&lt;- res    }})("Could not resolve proxy: your-proxy.net"): Connection error: Please check connection to the internet and proxy configuration.</span></div><div class='input'># }
-</div></pre>
+  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-12-31 23:59:59"</span>),
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

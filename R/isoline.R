@@ -23,9 +23,18 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
-#' isolines <- isoline(poi = poi, range = seq(5, 30, 5) * 60)
-#' }
+#' # Authentication
+#' set_auth(
+#'   app_id = "<YOUR APP ID>",
+#'   app_code = "<YOUR APP CODE>"
+#' )
+#'
+#' # Isochrone for 5, 10, 15, 20, 25 and 30 minutes driving time
+#' isolines <- isoline(
+#'   poi = poi,
+#'   range = seq(5, 30, 5) * 60,
+#'   url_only = TRUE
+#' )
 isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
                     type = "fastest", mode = "car", traffic = FALSE,
                     departure = NULL, start = TRUE, aggregate = TRUE,

@@ -39,13 +39,19 @@ maximum matrix size per request and thereby minimize the number of overall neede
 The result is one route summary matrix, that fits the order of the provided POIs: \code{startIndex}, \code{destinationIndex}.
 }
 \examples{
-\donttest{
+# Authentication
+set_auth(
+  app_id = "<YOUR APP ID>",
+  app_code = "<YOUR APP CODE>"
+)
+
+# Create routes summaries between all POIs
 mat <- route_matrix(
   start = poi,
   departure = as.POSIXct("2019-10-10 15:45:00"),
-  traffic = TRUE
+  traffic = TRUE,
+  url_only = TRUE
 )
-}
 }
 \references{
 \href{https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html}{HERE Routing API: Calculate Matrix}

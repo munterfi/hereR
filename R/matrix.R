@@ -24,13 +24,19 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' # Authentication
+#' set_auth(
+#'   app_id = "<YOUR APP ID>",
+#'   app_code = "<YOUR APP CODE>"
+#' )
+#'
+#' # Create routes summaries between all POIs
 #' mat <- route_matrix(
 #'   start = poi,
 #'   departure = as.POSIXct("2019-10-10 15:45:00"),
-#'   traffic = TRUE
+#'   traffic = TRUE,
+#'   url_only = TRUE
 #' )
-#' }
 route_matrix <- function(start, destination = start, type = "fastest", mode = "car",
                          traffic = FALSE, searchRange = 99999999,
                          attribute = c("distance", "traveltime"),

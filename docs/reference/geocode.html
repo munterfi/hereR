@@ -184,9 +184,13 @@
     <p><a href='https://developer.here.com/documentation/geocoder/topics/resource-geocode.html'>HERE Geocoder API: Geocode</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>locs</span> <span class='kw'>&lt;-</span> <span class='fu'>geocode</span>(<span class='kw'>addresses</span> <span class='kw'>=</span> <span class='no'>poi</span>$<span class='no'>city</span>)
-<span class='co'># }</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
+<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
+  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
+  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
+)
+
+<span class='no'>locs</span> <span class='kw'>&lt;-</span> <span class='fu'>geocode</span>(<span class='kw'>addresses</span> <span class='kw'>=</span> <span class='no'>poi</span>$<span class='no'>city</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

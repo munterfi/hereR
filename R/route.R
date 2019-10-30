@@ -24,10 +24,14 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
-#' library(sf)
+#' # Authentication
+#' set_auth(
+#'   app_id = "<YOUR APP ID>",
+#'   app_code = "<YOUR APP CODE>"
+#' )
 #'
 #' # Get all from - to combinations from POIs
+#' library(sf)
 #' to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
 #' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
 #' idx <- apply(to != from, any, MARGIN = 1)
@@ -38,10 +42,9 @@
 #' routes <- route(
 #'   start = from, destination = to,
 #'   mode = "car", type = "fastest", traffic = TRUE,
-#'   vehicle_type = "diesel,5.5"
+#'   vehicle_type = "diesel,5.5",
+#'   url_only = TRUE
 #' )
-#'
-#' }
 route <- function(start, destination,
                   type = "fastest", mode = "car", traffic = FALSE,
                   vehicle_type = "diesel,5.5",
