@@ -17,7 +17,7 @@ Locations, routes and isolines are returned as `sf` objects and tables as `data.
 
 ## Installation
 
-You can install the released version of `hereR` from [CRAN](https://cran.r-project.org/web/packages/hereR/) with:
+You can install the released version of `hereR` from [CRAN](https://CRAN.R-project.org/package=hereR/) with:
 
 ``` r
 install.packages("hereR")
