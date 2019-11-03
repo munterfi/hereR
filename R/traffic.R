@@ -122,7 +122,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 
 .extract_traffic_flow <- function(data) {
   geoms <- list()
-  flow <- data.table::rbindlist(lapply(data, function(con) {
+  flow <- suppressWarnings(data.table::rbindlist(lapply(data, function(con) {
     df <- jsonlite::fromJSON(con)
     if (is.null(df$RWS$RW)) {return(NULL)}
     data.table::rbindlist(lapply(df$RWS$RW, function(rw) {
@@ -148,7 +148,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
           }), fill = TRUE)
         }), fill = TRUE)
       }), fill = TRUE)
-    }), fill = TRUE)
+    }), fill = TRUE))
   flow$geometry <- geoms
   if (nrow(flow) > 0) {
     return(
