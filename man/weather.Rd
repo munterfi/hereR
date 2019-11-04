@@ -19,7 +19,7 @@ An \code{sf} object containing the requested weather information.
 \description{
 Weather forecasts, reports on current weather conditions,
 astronomical information and alerts at a specific location (coordinates or
-location name) based on the 'Destination Weather API'.
+location name) based on the 'Destination Weather' API.
 }
 \examples{
 # Authentication

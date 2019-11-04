@@ -31,7 +31,7 @@ route(start, destination, type = "fastest", mode = "car",
 An \code{sf} object containing the requested routes.
 }
 \description{
-Calculates route geometries (\code{LINESTRING}) between given pairs of points using the 'Routing API'.
+Calculates route geometries (\code{LINESTRING}) between given pairs of points using the 'Routing' API.
 Routes can be created for various transport modes, as for example 'car' or 'public transport',
 incorporating current traffic information, if available.
 For routes using the transport mode \code{"car"} a vehicle type can be specified,

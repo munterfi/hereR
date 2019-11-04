@@ -15,7 +15,7 @@ geocode(addresses, url_only = FALSE)
 An \code{sf} object, containing the coordinates of the geocoded addresses.
 }
 \description{
-Geocodes addresses using the HERE Geocoder API.
+Geocodes addresses using the 'Geocoder' API.
 }
 \examples{
 # Authentication
