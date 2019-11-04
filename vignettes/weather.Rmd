@@ -26,7 +26,7 @@ astronomy <- hereR:::example$weather_forecast_astronomy
 alerts <- hereR:::example$weather_alerts
 ```
 
-Weather forecasts, reports on current weather conditions, astronomical information and alerts at a specific location based on the 'HERE Destination Weather API'.
+Weather forecasts, reports on current weather conditions, astronomical information and alerts at a specific location based on the 'HERE Destination Weather' API.
 
 ## Observations
 In order to request information about the current weather situation points of interest (POIs) have to be provided. The POIs must be an `sf` object containing geometries of type `POINT` or a `character` vector containing place names (e.g. cities).

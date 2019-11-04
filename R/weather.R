@@ -2,7 +2,7 @@
 #'
 #' Weather forecasts, reports on current weather conditions,
 #' astronomical information and alerts at a specific location (coordinates or
-#' location name) based on the 'Destination Weather API'.
+#' location name) based on the 'Destination Weather' API.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation}

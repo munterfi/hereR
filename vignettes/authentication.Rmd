@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Set up a valid authentication to the 'HERE REST APIs' and optionally configure a proxy.
+Set up a valid authentication to the 'HERE' REST APIs and optionally configure a proxy.
 
 ## Application credentials
 In order to use the functionality of the `hereR` package, application credentials for a HERE project must be provided. The HERE application credentials (APP ID and APP CODE) can be obtained for free as follows:

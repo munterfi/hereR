@@ -1,6 +1,6 @@
 #' HERE Traffic API: Flow and Incidents
 #'
-#' Traffic flow and incident information based on the 'Traffic API'.
+#' Traffic flow and incident information based on the 'Traffic' API.
 #' The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
 #' Traffic incidents contain information about location, time, duration, severity, description and other details.
 #'

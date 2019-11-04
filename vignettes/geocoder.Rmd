@@ -18,7 +18,7 @@ addresses <- poi$city
 geocoded <- hereR:::example$geocode
 ```
 
-Geocode addresses using the 'HERE Geocoder API'.
+Geocode addresses using the 'HERE Geocoder' API.
 
 ## Geocode addresses
 In order to geocode addresses, the function `geocode` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type `character`:
