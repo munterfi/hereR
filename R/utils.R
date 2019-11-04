@@ -57,19 +57,7 @@
       if (is.character(res))
         stop("Connection error: Please check connection to the internet and proxy configuration.")
       if (res$status != 200) {
-        if (as.numeric(substr(as.character(res$status), 1, 1)) == 4) {
-          errorChar <- rawToChar(res$content)
-          Encoding(errorChar) <- encoding
-          error <- jsonlite::fromJSON(errorChar)
-          errorMessage <- sprintf(
-            "Request failed with HTTP status code %s: %s: %s: %s",
-            res$status, error$type, error$subtype, error$details)
-        } else {
-          errorMessage <- sprintf(
-            "Request failed with HTTP status code %s.",
-            res$status)
-        }
-        message(errorMessage)
+        message(sprintf("Request failed: HTTP status code %s.", res$status))
         ids <<- ids[ids != id]
       } else {
         results[[id]] <<- res
