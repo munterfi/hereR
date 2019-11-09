@@ -69,7 +69,7 @@ knitr::kable(head(mat, 10), format = "html")
 ```
 
 ## Isoline
-Isoline are constructed by the function `isoline`. The calculated isolines (`POLYGON` or `MULTIPOLYGON`) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption as costfactor. By default the `aggregate` parameter is set to `TRUE`, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polyons are aggregated to polygons of geometry type `MULTIPOLYGON`. Thereby overlapping isolines are avoided.
+Isolines are constructed by the function `isoline`. The calculated polygons (`POLYGON` or `MULTIPOLYGON`) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption as costfactor. By default the `aggregate` parameter is set to `TRUE`, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polyons are aggregated to polygons of geometry type `MULTIPOLYGON`. Thereby overlapping isolines are avoided.
 ```{r isoline, eval=FALSE}
 iso <- isoline(
   poi,
