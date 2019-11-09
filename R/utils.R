@@ -57,7 +57,7 @@
       if (is.character(res))
         stop("Connection error: Please check connection to the internet and proxy configuration.")
       if (res$status != 200) {
-        message(sprintf("Request failed: HTTP status code %s.", res$status))
+        warning(sprintf("Request failed: HTTP status code %s.", res$status))
         ids <<- ids[ids != id]
       } else {
         results[[id]] <<- res
