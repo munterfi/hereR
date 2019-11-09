@@ -1,5 +1,7 @@
 .check_addresses <- function(addresses) {
   if (!is.character(addresses)) stop("'addresses' must be a 'character' vector.")
+  if (any(is.na(addresses))) stop("'addresses' contains NAs.")
+  if ("" %in% gsub(" ", "", addresses)) stop("'addresses' contains empty strings.")
 }
 
 .check_points <- function(points) {

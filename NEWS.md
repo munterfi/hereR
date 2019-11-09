@@ -1,3 +1,7 @@
+# hereR 0.1.1
+
+* Enhanced `geocode()`: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks.
+
 # hereR 0.1.0
 
 First release of the `hereR` package, an `sf`-based interface to the **HERE REST APIs**.
