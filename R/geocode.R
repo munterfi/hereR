@@ -49,12 +49,14 @@ geocode <- function(addresses, url_only = FALSE) {
 
   # Extract information
   count <- 0
+  rows <- seq(1, length(addresses))
   geocoded <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
       df <- jsonlite::fromJSON(con)
       if (length(df$Response$View) == 0) {
         message(sprintf("Address '%s' not found.", addresses[count]))
+        rows <<- rows[rows != count]
         return(NULL)
       }
       result <- data.table::data.table(
@@ -77,6 +79,7 @@ geocode <- function(addresses, url_only = FALSE) {
 
   # Create sf, data.table, data.frame
   if (nrow(geocoded) > 0) {
+    row.names(geocoded) <- rows
     return(
       sf::st_set_crs(
         sf::st_as_sf(geocoded, coords = c("lng", "lat")),
