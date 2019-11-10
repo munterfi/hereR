@@ -20,7 +20,7 @@
 #'   app_code = "<YOUR APP CODE>"
 #' )
 #'
-#' addresses <- autocomplete(addresses = poi$city, url_only = TRUE)
+#' suggestions <- autocomplete(addresses = poi$city, url_only = TRUE)
 autocomplete <- function(addresses, results = 5, url_only = FALSE) {
 
   # Check addresses
