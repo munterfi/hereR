@@ -26,7 +26,7 @@ set_auth(
   app_code = "<YOUR APP CODE>"
 )
 
-addresses <- autocomplete(addresses = poi$city, url_only = TRUE)
+suggestions <- autocomplete(addresses = poi$city, url_only = TRUE)
 }
 \references{
 \href{https://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html}{HERE Geocoder API: Autocomplete}

@@ -18,10 +18,10 @@ addresses <- poi$city
 geocoded <- hereR:::example$geocode
 ```
 
-Geocode addresses using the 'HERE Geocoder' API.
+Geocode addresses using the 'HERE Geocoder' and 'HERE Geocoder Autocomplete' APIs.
 
 ## Geocode addresses
-In order to geocode addresses, the function `geocode` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type `character`:
+In order to geocode addresses, the function `geocode` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. If the option `autocomplete` is set to `TRUE`, the addresses are sent to the 'Geocoder Autocomplete' API before geocoding, which doubles the requests. The addresses have to be of type `character`:
 
 ```{r print_addresses, eval=TRUE, echo=TRUE, out.width='100%'}
 head(addresses, 3)
@@ -29,7 +29,7 @@ head(addresses, 3)
 
 Geocode the character vector containing the addresses:
 ```{r geocode, eval=FALSE}
-geocoded <- geocode(addresses)
+geocoded <- geocode(addresses, autocomplete = TRUE)
 ```
 
 The return value is an `sf` object containing `POINT` geometries of the addresses:
@@ -48,6 +48,14 @@ mapview(geocoded,
 )
 ```
 
+## Autocomplete addresses
+
+The Geocoder Autocomplete API can be accessed using the `autocomplete` function. The `results` paramteres defines the maximum number of suggestions that should be requested per address.
+```{r autocomplete, eval=FALSE}
+autocomplete(addresses, results = 3)
+```
+
 ## API Reference
 
+* [Autocomplete](hhttps://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html)
 * [Geocoder](https://developer.here.com/documentation/geocoder/topics/resource-geocode.html)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hereR</title>
+<title>HERE Geocoder API: Autocomplete — autocomplete • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="HERE Geocoder API: Autocomplete — autocomplete" />
+<meta property="og:description" content="Completes addresses using the 'Geocoder Autocomplete' API." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +64,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -149,159 +150,61 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>HERE Geocoder API: Autocomplete</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/autocomplete.R'><code>R/autocomplete.R</code></a></small>
+    <div class="hidden name"><code>autocomplete.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Completes addresses using the 'Geocoder Autocomplete' API.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>autocomplete</span>(<span class='no'>addresses</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="set_auth.html">set_auth()</a></code> </p>
-        </td>
-        <td><p>HERE Application Credentials</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="set_proxy.html">set_proxy()</a></code> </p>
-        </td>
-        <td><p>Proxy Configuration</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="unset_auth.html">unset_auth()</a></code> </p>
-        </td>
-        <td><p>Remove HERE Application Credentials</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="unset_proxy.html">unset_proxy()</a></code> </p>
-        </td>
-        <td><p>Remove Proxy Configuration</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-example-data" class="hasAnchor"><a href="#section-example-data" class="anchor"></a>Example data</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="poi.html">poi</a></code> </p>
-        </td>
-        <td><p>Example POIs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="aoi.html">aoi</a></code> </p>
-        </td>
-        <td><p>Example AOIs</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-geocoder-api" class="hasAnchor"><a href="#section-geocoder-api" class="anchor"></a>Geocoder API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="autocomplete.html">autocomplete()</a></code> </p>
-        </td>
-        <td><p>HERE Geocoder API: Autocomplete</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geocode.html">geocode()</a></code> </p>
-        </td>
-        <td><p>HERE Geocoder API: Geocode</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-routing-api" class="hasAnchor"><a href="#section-routing-api" class="anchor"></a>Routing API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="route.html">route()</a></code> </p>
-        </td>
-        <td><p>HERE Routing API: Route</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="route_matrix.html">route_matrix()</a></code> </p>
-        </td>
-        <td><p>HERE Routing API: Route Matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="isoline.html">isoline()</a></code> </p>
-        </td>
-        <td><p>HERE Routing API: Isoline</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-traffic-api" class="hasAnchor"><a href="#section-traffic-api" class="anchor"></a>Traffic API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="traffic.html">traffic()</a></code> </p>
-        </td>
-        <td><p>HERE Traffic API: Flow and Incidents</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-destination-weather-api" class="hasAnchor"><a href="#section-destination-weather-api" class="anchor"></a>Destination Weather API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="weather.html">weather()</a></code> </p>
-        </td>
-        <td><p>HERE Destination Weather API: Observations, Forecast, Astronomy and Alerts</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>addresses</th>
+      <td><p>character, addresses to autocomplete.</p></td>
+    </tr>
+    <tr>
+      <th>results</th>
+      <td><p>numeric, maximum number of suggestions (Valid range: 1 and 20).</p></td>
+    </tr>
+    <tr>
+      <th>url_only</th>
+      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code>data.table</code> object, containing the autocomplete suggestions for the addresses.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p><a href='https://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html'>HERE Geocoder API: Autocomplete</a></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
+<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
+  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
+  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
+)
+
+<span class='no'>suggestions</span> <span class='kw'>&lt;-</span> <span class='fu'>autocomplete</span>(<span class='kw'>addresses</span> <span class='kw'>=</span> <span class='no'>poi</span>$<span class='no'>city</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-authentication">Authentication</a></li>
-      <li><a href="#section-example-data">Example data</a></li>
-      <li><a href="#section-geocoder-api">Geocoder API</a></li>
-      <li><a href="#section-routing-api">Routing API</a></li>
-      <li><a href="#section-traffic-api">Traffic API</a></li>
-      <li><a href="#section-destination-weather-api">Destination Weather API</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

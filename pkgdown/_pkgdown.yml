@@ -30,6 +30,7 @@ reference:
     - '`aoi`'
   - title: Geocoder API
     contents:
+    - '`autocomplete`'
     - '`geocode`'
   - title: Routing API
     contents:
