@@ -46,6 +46,7 @@ No login yet? Get your free login here: [developer.here.com](https://developer.h
 ## Examples
 
 * **Geocode** addresses:<br>`locs <- geocode(addresses = c("Schweighofstrasse 190, Zürich, Schweiz", "Hardstrasse 48, Zürich, Schweiz"))`<br><br>
+* **Autocomplete** addresses:<br>`suggestions <- autocomplete(addresses = c("Schweighofstrasse", "Hardstrasse"))`<br><br>
 * Construct a **route** between points:<br>`routes <- route(start = locs_start, destination = locs_dest, mode = "car")`<br><br>
 * Create a **route matrix** between points:<br>`route_matrix <- route_matrix(start = locs, mode = "car")`<br><br>
 * Request **weather observations** at specific locations:<br>`observations <- weather(poi = locs, product = "observation")`<br><br>
