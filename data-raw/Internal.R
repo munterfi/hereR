@@ -1,8 +1,11 @@
 ## Create internal `mock` and `example` dataset
+library(sf)
 
 ## URLs
 url_geocode <-
   geocode(addresses = poi$city, url_only = TRUE)
+url_autocomplete <-
+  autocomplete(addresses = poi$city, results = 3, url_only = TRUE)
 url_route <-
   route(start = poi[1:2, ], destination = poi[3:4, ], url_only = TRUE)
 url_route_matrix <-
@@ -25,6 +28,7 @@ url_traffic_incidents <-
 ## Get response mocks
 mock <- list(
   geocode_response = hereR:::.get_content(url_geocode),
+  autocomplete_response = hereR:::.get_content(url_autocomplete),
   route_response = hereR:::.get_content(url_route),
   route_matrix_response = hereR:::.get_content(url_route_matrix),
   isoline_response = hereR:::.get_content(url_isoline),
@@ -39,6 +43,7 @@ mock <- list(
 ## Get examples
 example <- list(
   geocode = geocode(addresses = poi$city),
+  autocomplete = autocomplete(addresses = poi$city, results = 3),
   route = route(start = poi[1:2, ], destination = poi[3:4, ]),
   route_matrix = route_matrix(start = poi),
   isoline = isoline(poi = poi),
