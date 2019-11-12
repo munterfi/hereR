@@ -13,15 +13,17 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
+library(data.table)
 library(mapview)
 addresses <- poi$city
 geocoded <- hereR:::example$geocode
+suggestions <- hereR:::example$autocomplete
 ```
 
-Geocode addresses using the 'HERE Geocoder' API.
+Geocode addresses using the 'HERE Geocoder' and 'HERE Geocoder Autocomplete' APIs.
 
 ## Geocode addresses
-In order to geocode addresses, the function `geocode` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type `character`:
+In order to geocode addresses, the function `geocode` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. If the option `autocomplete` is set to `TRUE`, the addresses are sent to the 'Geocoder Autocomplete' API before geocoding, which improves matches but doubles the amount of requests. The addresses have to be of type `character`:
 
 ```{r print_addresses, eval=TRUE, echo=TRUE, out.width='100%'}
 head(addresses, 3)
@@ -29,7 +31,7 @@ head(addresses, 3)
 
 Geocode the character vector containing the addresses:
 ```{r geocode, eval=FALSE}
-geocoded <- geocode(addresses)
+geocoded <- geocode(addresses, autocomplete = FALSE)
 ```
 
 The return value is an `sf` object containing `POINT` geometries of the addresses:
@@ -48,6 +50,28 @@ mapview(geocoded,
 )
 ```
 
+## Autocomplete addresses
+
+The Geocoder Autocomplete API can be accessed using the `autocomplete` function. The `results` parameter defines the maximum number of suggestions that should be requested per address.
+```{r autocomplete, eval=FALSE}
+suggestions <- autocomplete(addresses, results = 3)
+```
+
+The return value is a `data.table` containing autocomplete suggestions for the addresses. The variable `id` matches the index of the initial address vector, which was used as input and `order` stores the rank of the suggestion.
+
+```{r results_autocomplete, eval=TRUE, echo=TRUE, out.width='100%'}
+results <- data.table(
+  input = addresses[suggestions$id],
+  rank = suggestions$order,
+  suggestion = suggestions$label
+)
+```
+
+```{r table_results, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center'}
+knitr::kable(head(results), format = "html")
+```
+
 ## API Reference
 
+* [Autocomplete](hhttps://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html)
 * [Geocoder](https://developer.here.com/documentation/geocoder/topics/resource-geocode.html)

@@ -1,6 +1,7 @@
 # hereR 0.1.1
 
-* Enhanced `geocode()`: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks.
+* Enhanced `geocode()`: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting `autocomplete = TRUE`.
+* **Geocoder Autocompete API:** The new feature `autocomplete()` allows autocompleting addresses.
 
 # hereR 0.1.0
 

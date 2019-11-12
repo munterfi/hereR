@@ -134,3 +134,10 @@
   if (!product %in% traffic_product_types)
     stop(sprintf("'product' must be '%s'.", paste(traffic_product_types, collapse = "', '")))
 }
+
+.check_autocomplete_results <- function(results) {
+  if (!is.numeric(results))
+    stop("'results' must be of type 'numeric'.")
+  if (results < 1 | results > 20)
+    stop("'results' must be of in the valid range from 1 to 20.")
+}

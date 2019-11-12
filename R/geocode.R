@@ -6,6 +6,7 @@
 #' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
 #'
 #' @param addresses character, addresses to geocode.
+#' @param autocomplete boolean, use the 'Geocoder Autocomplete' API to autocomplete addresses? Note: This options doubles the amount of requests (\code{default = TRUE}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -20,16 +21,26 @@
 #' )
 #'
 #' locs <- geocode(addresses = poi$city, url_only = TRUE)
-geocode <- function(addresses, url_only = FALSE) {
+geocode <- function(addresses, autocomplete = TRUE, url_only = FALSE) {
 
   # Check and preprocess addresses
   .check_addresses(addresses)
-  addresses[addresses == ""] = NA
 
-  # Add authentification
+  # Add authentication
   url <- .add_auth(
     url = "https://geocoder.api.here.com/6.2/geocode.json?"
   )
+
+  # Autocomplete addresses
+  if (autocomplete) {
+    suggestions <- autocomplete(
+      addresses = addresses,
+      results = 1
+    )
+    if (!is.null(suggestions)) {
+      addresses[suggestions$id] <- suggestions$label
+    }
+  }
 
   # Add addresses
   url = paste0(
