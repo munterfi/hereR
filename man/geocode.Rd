@@ -4,12 +4,12 @@
 \alias{geocode}
 \title{HERE Geocoder API: Geocode}
 \usage{
-geocode(addresses, autocomplete = TRUE, url_only = FALSE)
+geocode(addresses, autocomplete = FALSE, url_only = FALSE)
 }
 \arguments{
 \item{addresses}{character, addresses to geocode.}
 
-\item{autocomplete}{boolean, use the 'Geocoder Autocomplete' API to autocomplete addresses? Note: This options doubles the amount of requests (\code{default = TRUE}).}
+\item{autocomplete}{boolean, use the 'Geocoder Autocomplete' API to autocomplete addresses? Note: This options doubles the amount of requests (\code{default = FALSE}).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }

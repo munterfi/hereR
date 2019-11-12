@@ -39,6 +39,11 @@ The return value is an `sf` object containing `POINT` geometries of the addresse
 head(geocoded, 3)
 ```
 
+Not found addresses are deleted from the result. This means that the sf object may contain fewer rows than the original number of addresses. However, the row names of the returned `sf` object are still matching the index of the geocoded addresses. Using the row names a corresponding `data.frame` `"df"` could be added to the geocoded addresses.
+```{r join_geocoded, eval=FALSE, echo=TRUE, out.width='100%'}
+geocoded_sfdf <- st_as_sf(data.frame(geocoded, df[row.names(geocoded), ]))
+```
+
 Print the geocoded addresses on an interactive leaflet map:
 ```{r map_geocoded, eval=TRUE, out.width='100%'}
 mapview(geocoded,
@@ -52,7 +57,7 @@ mapview(geocoded,
 
 ## Autocomplete addresses
 
-The Geocoder Autocomplete API can be accessed using the `autocomplete` function. The `results` parameter defines the maximum number of suggestions that should be requested per address.
+The Geocoder Autocomplete API can be accessed using the `autocomplete` function. The `results` parameter defines the maximum number of suggestions that should be requested for each address.
 ```{r autocomplete, eval=FALSE}
 suggestions <- autocomplete(addresses, results = 3)
 ```
