@@ -18,12 +18,14 @@ library(mapview)
 addresses <- poi$city
 geocoded <- hereR:::example$geocode
 suggestions <- hereR:::example$autocomplete
+rev_addresses <- hereR:::example$reverse_geocode_addresses
+rev_landmarks <- hereR:::example$reverse_geocode_landmarks
 ```
 
 Geocode addresses using the 'HERE Geocoder' and 'HERE Geocoder Autocomplete' APIs.
 
 ## Geocode addresses
-In order to geocode addresses, the function `geocode` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. If the option `autocomplete` is set to `TRUE`, the addresses are sent to the 'Geocoder Autocomplete' API before geocoding, which improves matches but doubles the amount of requests. The addresses have to be of type `character`:
+In order to geocode addresses, the function `geocode()` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. If the option `autocomplete` is set to `TRUE`, the addresses are sent to the 'Geocoder Autocomplete' API before geocoding, which improves matches but doubles the amount of requests. The addresses have to be of type `character`:
 
 ```{r print_addresses, eval=TRUE, echo=TRUE, out.width='100%'}
 head(addresses, 3)
@@ -57,7 +59,7 @@ mapview(geocoded,
 
 ## Autocomplete addresses
 
-The Geocoder Autocomplete API can be accessed using the `autocomplete` function. The `results` parameter defines the maximum number of suggestions that should be requested for each address.
+The Geocoder Autocomplete API can be accessed using the `autocomplete()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each address.
 ```{r autocomplete, eval=FALSE}
 suggestions <- autocomplete(addresses, results = 3)
 ```
@@ -76,7 +78,34 @@ results <- data.table(
 knitr::kable(head(results), format = "html")
 ```
 
+## Reverse geocode POIs
+The reverse geocoding feature of the Geocoder API can be accessed using the `reverse_geocode()` function. The function allows to retrieve addresses (`landmarks = FALSE`) or landmarks (`landmarks = TRUE`) near POIs. 
+
+```{r reverse_geocode, eval=FALSE, echo=TRUE, out.width='100%'}
+rev_addresses <- reverse_geocode(poi = poi, results = 3, landmarks = FALSE)
+rev_landmarks <- reverse_geocode(poi = poi, results = 3, landmarks = TRUE)
+```
+
+The function returns an `sf` object, containing the suggested addresses or landmark names of the reverse geocoded POIs. The coordinates are different from the initially provided POIs since they represent the locations of the suggested addresses or landmarks.
+
+```{r map_reverse_geocode, eval=TRUE, echo=TRUE, out.width='100%'}
+m <-
+  mapview(poi, alpha.region = 0, col.region = "transparent",
+          label = poi$city, cex = 30, layer.name = "POIs",
+          map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
+  mapview(rev_addresses, col.region = "yellow", alpha = 0,
+          label = rev_addresses$label, layer.name = "Adresses",
+          homebutton = FALSE) +
+  mapview(rev_landmarks, col.region = "red", alpha = 0,
+          label = rev_landmarks$name, layer.name = "Landmarks",
+          homebutton = FALSE)
+m
+```
+
+If no addresses or landmarks are found near a POI, `NULL` for this POI is returned. In this case the rows corresponding to this particular POI are missing and merging the POIs by row is not possible. However, in the returned `sf` object, the column `"id"` matches the rows of the input POIs. The `"id"` column can be used to join the original POIs.
+
 ## API Reference
 
 * [Autocomplete](hhttps://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html)
 * [Geocoder](https://developer.here.com/documentation/geocoder/topics/resource-geocode.html)
+* [Reverse Geocoder](https://developer.here.com/documentation/geocoder/dev_guide/topics/resource-reverse-geocode.html)

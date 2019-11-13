@@ -6,6 +6,10 @@ url_geocode <-
   geocode(addresses = poi$city, url_only = TRUE)
 url_autocomplete <-
   autocomplete(addresses = poi$city, results = 3, url_only = TRUE)
+url_reverse_geocode_addresses <-
+  reverse_geocode(poi = poi, landmarks = FALSE, results = 3, url_only = TRUE)
+url_reverse_geocode_landmarks <-
+  reverse_geocode(poi = poi, landmarks = TRUE, results = 3, url_only = TRUE)
 url_route <-
   route(start = poi[1:2, ], destination = poi[3:4, ], url_only = TRUE)
 url_route_matrix <-
@@ -29,6 +33,8 @@ url_traffic_incidents <-
 mock <- list(
   geocode_response = hereR:::.get_content(url_geocode),
   autocomplete_response = hereR:::.get_content(url_autocomplete),
+  reverse_geocode_addresses = hereR:::.get_content(url_reverse_geocode_addresses),
+  reverse_geocode_landmarks = hereR:::.get_content(url_reverse_geocode_landmarks),
   route_response = hereR:::.get_content(url_route),
   route_matrix_response = hereR:::.get_content(url_route_matrix),
   isoline_response = hereR:::.get_content(url_isoline),
@@ -44,6 +50,8 @@ mock <- list(
 example <- list(
   geocode = geocode(addresses = poi$city),
   autocomplete = autocomplete(addresses = poi$city, results = 3),
+  reverse_geocode_addresses = reverse_geocode(poi = poi, results = 3, landmarks = FALSE),
+  reverse_geocode_landmarks = reverse_geocode(poi = poi, results = 3, landmarks = TRUE),
   route = route(start = poi[1:2, ], destination = poi[3:4, ]),
   route_matrix = route_matrix(start = poi),
   isoline = isoline(poi = poi),

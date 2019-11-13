@@ -3,6 +3,7 @@
 export(autocomplete)
 export(geocode)
 export(isoline)
+export(reverse_geocode)
 export(route)
 export(route_matrix)
 export(set_auth)
