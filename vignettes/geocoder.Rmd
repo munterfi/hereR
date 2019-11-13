@@ -106,6 +106,6 @@ If no addresses or landmarks are found near a POI, `NULL` for this POI is return
 
 ## API Reference
 
-* [Autocomplete](hhttps://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html)
+* [Autocomplete](https://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html)
 * [Geocoder](https://developer.here.com/documentation/geocoder/topics/resource-geocode.html)
 * [Reverse Geocoder](https://developer.here.com/documentation/geocoder/dev_guide/topics/resource-reverse-geocode.html)
