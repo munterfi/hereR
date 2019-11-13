@@ -1,9 +1,10 @@
-# hereR 0.1.1
+# version 0.2.0
 
 * Enhanced `geocode()`: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting `autocomplete = TRUE`.
-* **Geocoder Autocompete API:** The new feature `autocomplete()` allows autocompleting addresses.
+* **Geocoder API: Autocomplete** The new feature `autocomplete()` allows autocompleting addresses.
+* **Geocoder API: Reverse geocode** The new feature `reverse_geocode()` implements reverse geocoding POIs in order to retrieve suggestions for addresses or landmarks.
 
-# hereR 0.1.0
+# version 0.1.0
 
 First release of the `hereR` package, an `sf`-based interface to the **HERE REST APIs**.
 The packages binds to the following HERE APIs:
