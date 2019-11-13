@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • hereR</title>
+<title>HERE Geocoder API: Reverse Geocode — reverse_geocode • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="HERE Geocoder API: Reverse Geocode — reverse_geocode" />
+<meta property="og:description" content="Get addresses or landmarks from locations using the 'Geocoder' API.
+The return value is an sf object, containing point geometries
+with suggestions for addresses or landmarks near the provided POIs." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +66,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -151,51 +154,78 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>HERE Geocoder API: Reverse Geocode</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/reverse.R'><code>R/reverse.R</code></a></small>
+    <div class="hidden name"><code>reverse_geocode.Rd</code></div>
     </div>
 
-    <div id="version-0-2-0" class="section level1">
-<h1 class="page-header">
-<a href="#version-0-2-0" class="anchor"></a>version 0.2.0<small> Unreleased </small>
-</h1>
-<ul>
-<li>Enhanced <code><a href="../reference/geocode.html">geocode()</a></code>: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting <code>autocomplete = TRUE</code>.</li>
-<li>
-<strong>Geocoder API: Autocomplete</strong> The new feature <code><a href="../reference/autocomplete.html">autocomplete()</a></code> allows autocompleting addresses.</li>
-<li>
-<strong>Geocoder API: Reverse geocode</strong> The new feature <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> implements reverse geocoding POIs in order to retrieve suggestions for addresses or landmarks.</li>
-</ul>
-</div>
-    <div id="version-0-1-0" class="section level1">
-<h1 class="page-header">
-<a href="#version-0-1-0" class="anchor"></a>version 0.1.0<small> 2019-11-05 </small>
-</h1>
-<p>First release of the <code>hereR</code> package, an <code>sf</code>-based interface to the <strong>HERE REST APIs</strong>. The packages binds to the following HERE APIs:</p>
-<ul>
-<li>
-<strong>Geocoder API:</strong> Get coordinates (lng, lat) from addresses.</li>
-<li>
-<strong>Routing API:</strong> Routing directions, isolines and travel distance or time matrices, optionally incorporating the current traffic situation.</li>
-<li>
-<strong>Traffic API:</strong> Real-time traffic flow and incident information.</li>
-<li>
-<strong>Destination Weather API:</strong> Weather forecasts, reports on current weather conditions, astronomical information and weather alerts at a specific location.</li>
-</ul>
-<p>Locations and routes are returned as <code>sf</code> objects and tables as <code>data.table</code> objects.</p>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Get addresses or landmarks from locations using the 'Geocoder' API.
+The return value is an <code>sf</code> object, containing point geometries
+with suggestions for addresses or landmarks near the provided POIs.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>reverse_geocode</span>(<span class='no'>poi</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>landmarks</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>poi</th>
+      <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code>.</p></td>
+    </tr>
+    <tr>
+      <th>results</th>
+      <td><p>numeric, maximum number of results (Valid range: 1 and 20).</p></td>
+    </tr>
+    <tr>
+      <th>landmarks</th>
+      <td><p>boolean, retrieve landmarks instead of addresses (<code>default = FALSE</code>)?.</p></td>
+    </tr>
+    <tr>
+      <th>url_only</th>
+      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An <code>sf</code> object, containing the suggested addresses or landmark names of the reverse geocoded POIs.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>If no addresses or landmarks are found near a POI, <code>NULL</code> for this POI is returned.
+In this case the rows corresponding to this particular POI are missing and merging the POIs by row is not possible.
+However, in the returned <code>sf</code> object, the column <code>"id"</code> matches the rows of the input POIs.
+The <code>"id"</code> column can be used to join the original POIs.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p><a href='https://developer.here.com/documentation/geocoder/topics/resource-geocode.html'>HERE Geocoder API: Geocode</a></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
+<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
+  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
+  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
+)
+
+<span class='co'># Get addresses</span>
+<span class='no'>addresses</span> <span class='kw'>&lt;-</span> <span class='fu'>reverse_geocode</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>landmarks</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'># Get landmarks</span>
+<span class='no'>landmarks</span> <span class='kw'>&lt;-</span> <span class='fu'>reverse_geocode</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>landmarks</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#version-0-2-0">0.2.0</a></li>
-        <li><a href="#version-0-1-0">0.1.0</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
+  </div>
 </div>
 
 
