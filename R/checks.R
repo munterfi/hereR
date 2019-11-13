@@ -5,9 +5,10 @@
 }
 
 .check_points <- function(points) {
-  if (!"sf" %in% class(points) |
-      any(sf::st_geometry_type(points) != "POINT"))
-    stop("'points' must be an sf object with geometry type 'POINT'.")
+  if (!"sf" %in% class(points))
+      stop("'points' must be an sf object.")
+  if (any(sf::st_geometry_type(points) != "POINT"))
+      stop("'points' must be an sf object with geometry type 'POINT'.")
 }
 
 .check_polygon <- function(polygon) {
@@ -135,7 +136,7 @@
     stop(sprintf("'product' must be '%s'.", paste(traffic_product_types, collapse = "', '")))
 }
 
-.check_autocomplete_results <- function(results) {
+.check_max_results <- function(results) {
   if (!is.numeric(results))
     stop("'results' must be of type 'numeric'.")
   if (results < 1 | results > 20)
