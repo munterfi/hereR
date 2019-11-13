@@ -7,7 +7,7 @@
 <!-- badges: end -->
 
 R interface to the **HERE REST APIs**:
-(1) geocode and autocomplete addresses using the **Geocoder API**;
+(1) geocode and autocomplete addresses or reverse geocode POIs using the **Geocoder API**;
 (2) routing directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) traffic flow and incident information from the **Traffic API**;
 (4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
@@ -46,6 +46,7 @@ No login yet? Get your free login here: [developer.here.com](https://developer.h
 
 * **Geocode** addresses:<br>`locs <- geocode(addresses = c("Schweighofstrasse 190, Zürich, Schweiz", "Hardstrasse 48, Zürich, Schweiz"))`<br><br>
 * **Autocomplete** addresses:<br>`suggestions <- autocomplete(addresses = c("Schweighofstrasse", "Hardstrasse"))`<br><br>
+* **Reverse geocode** POIs:<br>`addresses <- reverse_geocode(poi = locs)`<br><br>
 * Construct a **route** between points:<br>`routes <- route(start = locs_start, destination = locs_dest, mode = "car")`<br><br>
 * Create a **route matrix** between points:<br>`route_matrix <- route_matrix(start = locs, mode = "car")`<br><br>
 * Request **weather observations** at specific locations:<br>`observations <- weather(poi = locs, product = "observation")`<br><br>
