@@ -5,14 +5,14 @@ test_that("geocode works", {
     app_code = "dummy_app_code"
   )
 
+  # Load package example data
+  data(poi)
+
   # Input checks
   expect_error(geocode(c(1, 2, 3)), "'addresses' must be a 'character' vector.")
   expect_error(geocode(c("character", NA)), "'addresses' contains NAs.")
   expect_error(geocode(c("")), "'addresses' contains empty strings.")
   expect_error(geocode(c("  ")), "'addresses' contains empty strings.")
-
-  # Load package example data
-  data(poi)
 
   # Test with API response mock
   with_mock(
