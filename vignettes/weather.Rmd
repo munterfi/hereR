@@ -30,7 +30,7 @@ Weather forecasts, reports on current weather conditions, astronomical informati
 
 ## Observations
 In order to request information about the current weather situation points of interest (POIs) have to be provided. The POIs must be an `sf` object containing geometries of type `POINT` or a `character` vector containing place names (e.g. cities).
-These POIs are passed to the `weather` function, whereby the `product` parameter is set to `"observation"`:
+These POIs are passed to the `weather()` function, whereby the `product` parameter is set to `"observation"`:
 ```{r observations, eval = FALSE}
 observation <- weather(
   poi = poi,
