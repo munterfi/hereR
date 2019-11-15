@@ -8,6 +8,14 @@ test_that("traffic incidents works", {
   # Load package example data
   data(aoi)
 
+  # Input checks
+  expect_error(traffic(aoi = c(1, 2, 3), product = "incidents"), "'polygon' must be an sf object.")
+  expect_error(traffic(aoi = NA, product = "incidents"), "'polygon' must be an sf object.")
+  expect_error(traffic(aoi = aoi, product = "not_a_product"), "'product' must be 'flow', 'incidents'.")
+
+  # Test URL
+  expect_is(traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents", from_dt = Sys.time()-60*60, to_dt = Sys.time(), url_only = TRUE), "character")
+
   # Test with API response mock
   with_mock(
     "hereR:::.get_content" = function(url) {hereR:::mock$traffic_incidents_response},
