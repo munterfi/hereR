@@ -12,6 +12,8 @@
 }
 
 .check_polygon <- function(polygon) {
+  if (!"sf" %in% class(polygon))
+    stop("'polygon' must be an sf object.")
   if (!"sf" %in% class(polygon) |
       any(!(sf::st_geometry_type(polygon) %in% c("POLYGON", "MULTIPOLYGON"))))
     stop("'polygon' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.")

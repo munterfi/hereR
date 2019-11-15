@@ -8,6 +8,15 @@ test_that("traffic flow works", {
   # Load package example data
   data(aoi)
 
+  # Input checks
+  expect_error(traffic(aoi = c(1, 2, 3), product = "flow"), "'polygon' must be an sf object.")
+  expect_error(traffic(aoi = NA, product = "flow"), "'polygon' must be an sf object.")
+  expect_error(traffic(aoi = aoi, product = "not_a_product"), "'product' must be 'flow', 'incidents'.")
+
+  # Test URL
+  # Following message should appear: "Note: 'from_dt' and 'to_dt' have no effect on traffic flow. Traffic flow is always real-time."
+  expect_is(traffic(aoi = aoi[aoi$code == "LI", ], product = "flow", from_dt = Sys.time()-60*60, to_dt = Sys.time(), url_only = TRUE), "character")
+
   # Test with API response mock
   with_mock(
     "hereR:::.get_content" = function(url) {hereR:::mock$traffic_flow_response},

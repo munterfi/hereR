@@ -12,9 +12,9 @@ traffic(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 
 \item{product}{character, traffic product of the 'Traffic API'. Supported products: \code{"flow"} and \code{"incidents"}.}
 
-\item{from_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the earliest traffic information.}
+\item{from_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
 
-\item{to_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic information.}
+\item{to_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
 
 \item{local_time}{boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (\code{default = FALSE})?}
 
@@ -24,9 +24,23 @@ traffic(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 An \code{sf} object containing the requested traffic information.
 }
 \description{
-Traffic flow and incident information based on the 'Traffic' API.
+Real-time traffic flow and incident information based on the 'Traffic' API.
 The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details.
+}
+\note{
+Explanation of the returned traffic flow variables:
+\itemize{
+  \item\code{"PC"}: Point TMC location code.
+  \item\code{"DE"}: Text description of the road.
+  \item\code{"QD"}: Queuing direction. '+' or '-'. Note this is the opposite of the travel direction in the fully qualified ID, For example for location 107+03021 the QD would be ‚-‚.
+  \item\code{"LE"}: Length of the stretch of road.
+  \item\code{"TY"}: Type information for the given Location Referencing container. This may be a freely defined string.
+  \item\code{"SP"}: Speed (based on UNITS) capped by speed limit.
+  \item\code{"FF"}: The free flow speed on this stretch of the road.
+  \item\code{"JF"}: The number between 0.0 and 10.0 indicating the expected quality of travel. When there is a road closure, the Jam Factor will be 10. As the number approaches 10.0 the quality of travel is getting worse. -1.0 indicates that a Jam Factor could not be calculated.
+  \item\code{"CN"}: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100%.
+}
 }
 \examples{
 # Authentication
@@ -35,12 +49,10 @@ set_auth(
   app_code = "<YOUR APP CODE>"
 )
 
-# Traffic flow for the last hour
+# Real-time traffic flow
 flow <- traffic(
   aoi = aoi[aoi$code == "LI", ],
   product = "flow",
-  from_dt = Sys.time() - 60*60*1,
-  to_dt = Sys.time(),
   url_only = TRUE
 )
 
@@ -54,5 +66,8 @@ incidents <- traffic(
 )
 }
 \references{
-\href{https://developer.here.com/api-explorer/rest/traffic}{HERE Traffic API}
+\itemize{
+  \item\href{https://developer.here.com/api-explorer/rest/traffic}{HERE Traffic API}
+  \item\href{https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api}{Flow explanation, stackoverflow}
+}
 }
