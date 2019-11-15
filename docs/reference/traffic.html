@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="HERE Traffic API: Flow and Incidents — traffic" />
-<meta property="og:description" content="Traffic flow and incident information based on the 'Traffic' API.
+<meta property="og:description" content="Real-time traffic flow and incident information based on the 'Traffic' API.
 The traffic flow data contains speed (&quot;SP&quot;) and congestion (jam factor: &quot;JF&quot;) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details." />
 <meta property="og:image" content="/logo.png" />
@@ -79,7 +79,7 @@ Traffic incidents contain information about location, time, duration, severity, 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -160,7 +160,7 @@ Traffic incidents contain information about location, time, duration, severity, 
     </div>
 
     <div class="ref-description">
-    <p>Traffic flow and incident information based on the 'Traffic' API.
+    <p>Real-time traffic flow and incident information based on the 'Traffic' API.
 The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
     </div>
@@ -181,11 +181,11 @@ Traffic incidents contain information about location, time, duration, severity, 
     </tr>
     <tr>
       <th>from_dt</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the earliest traffic information.</p></td>
+      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the earliest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
     </tr>
     <tr>
       <th>to_dt</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the latest traffic information.</p></td>
+      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
     </tr>
     <tr>
       <th>local_time</th>
@@ -200,9 +200,28 @@ Traffic incidents contain information about location, time, duration, severity, 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An <code>sf</code> object containing the requested traffic information.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Explanation of the returned traffic flow variables:</p><ul>
+<li><p><code>"PC"</code>: Point TMC location code.</p></li>
+<li><p><code>"DE"</code>: Text description of the road.</p></li>
+<li><p><code>"QD"</code>: Queuing direction. '+' or '-'. Note this is the opposite of the travel direction in the fully qualified ID, For example for location 107+03021 the QD would be ‚-‚.</p></li>
+<li><p><code>"LE"</code>: Length of the stretch of road.</p></li>
+<li><p><code>"TY"</code>: Type information for the given Location Referencing container. This may be a freely defined string.</p></li>
+<li><p><code>"SP"</code>: Speed (based on UNITS) capped by speed limit.</p></li>
+<li><p><code>"FF"</code>: The free flow speed on this stretch of the road.</p></li>
+<li><p><code>"JF"</code>: The number between 0.0 and 10.0 indicating the expected quality of travel. When there is a road closure, the Jam Factor will be 10. As the number approaches 10.0 the quality of travel is getting worse. -1.0 indicates that a Jam Factor could not be calculated.</p></li>
+<li><p><code>"CN"</code>: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100<!-- %. --></p></li>
+</ul>
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/api-explorer/rest/traffic'>HERE Traffic API</a></p>
+    
+<ul>
+<li><p><a href='https://developer.here.com/api-explorer/rest/traffic'>HERE Traffic API</a></p></li>
+<li><p><a href='https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api'>Flow explanation, stackoverflow</a></p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Authentication</span>
@@ -211,12 +230,10 @@ Traffic incidents contain information about location, time, duration, severity, 
   <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
 )
 
-<span class='co'># Traffic flow for the last hour</span>
+<span class='co'># Real-time traffic flow</span>
 <span class='no'>flow</span> <span class='kw'>&lt;-</span> <span class='fu'>traffic</span>(
   <span class='kw'>aoi</span> <span class='kw'>=</span> <span class='no'>aoi</span>[<span class='no'>aoi</span>$<span class='no'>code</span> <span class='kw'>==</span> <span class='st'>"LI"</span>, ],
   <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
-  <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() - <span class='fl'>60</span>*<span class='fl'>60</span>*<span class='fl'>1</span>,
-  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )
 
@@ -234,6 +251,7 @@ Traffic incidents contain information about location, time, duration, severity, 
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
       <li><a href="#references">References</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

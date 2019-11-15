@@ -20,7 +20,7 @@
 <meta property="og:description" content="Interface to the HERE REST APIs &lt;https://developer.here.com/develop/rest-apis&gt;:
   (1) geocode and autocomplete addresses or reverse geocode POIs using the Geocoder API;
   (2) routing directions, travel distance or time matrices and isolines using the Routing API;
-  (3) traffic flow and incident information from the Traffic API;
+  (3) real-time traffic flow and incident information from the Traffic API;
   (4) weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the Destination Weather API.
   Locations, routes and isolines are returned as sf objects.">
@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -127,7 +127,7 @@
 <p>R interface to the <strong>HERE REST APIs</strong>:</p>
 <p>(1) geocode and autocomplete addresses or reverse geocode POIs using the <strong>Geocoder API</strong>;</p>
 <p>(2) routing directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
-<p>(3) traffic flow and incident information from the <strong>Traffic API</strong>;</p>
+<p>(3) real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
 <p>(4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
 <p>Locations, routes and isolines are returned as <code>sf</code> objects and tables as <code>data.table</code> objects.</p>
 <div id="installation" class="section level2">
@@ -175,7 +175,7 @@
 </li>
 <li>Request <strong>weather alerts</strong> at specific locations:<br><code>alerts &lt;- weather(poi = locs, product = "alerts")</code><br><br>
 </li>
-<li>Get <strong>traffic flow</strong> in a specific area:<br><code>flow &lt;- traffic(aoi = area, product = "flow")</code><br><br>
+<li>Get real-time <strong>traffic flow</strong> in a specific area:<br><code>flow &lt;- traffic(aoi = area, product = "flow")</code><br><br>
 </li>
 <li>Get <strong>traffic incidents</strong> in a specific area:<br><code>incidents &lt;- traffic(aoi = area, product = "incidents")</code>
 </li>
