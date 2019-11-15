@@ -9,7 +9,7 @@
 R interface to the **HERE REST APIs**:
 (1) geocode and autocomplete addresses or reverse geocode POIs using the **Geocoder API**;
 (2) routing directions, travel distance or time matrices and isolines using the **Routing API**;
-(3) traffic flow and incident information from the **Traffic API**;
+(3) real-time traffic flow and incident information from the **Traffic API**;
 (4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
 Locations, routes and isolines are returned as `sf` objects and tables as `data.table` objects.
@@ -53,6 +53,6 @@ No login yet? Get your free login here: [developer.here.com](https://developer.h
 * Request **weather forecast** at specific locations:<br>`forecast <- weather(poi = locs, product = "forecast_hourly")`<br><br>
 * Request **astronomical information** at specific locations:<br>`astronomy <- weather(poi = locs, product = "forecast_astronomy")`<br><br>
 * Request **weather alerts** at specific locations:<br>`alerts <- weather(poi = locs, product = "alerts")`<br><br>
-* Get **traffic flow** in a specific area:<br>`flow <- traffic(aoi = area, product = "flow")`<br><br>
+* Get real-time **traffic flow** in a specific area:<br>`flow <- traffic(aoi = area, product = "flow")`<br><br>
 * Get **traffic incidents** in a specific area:<br>`incidents <- traffic(aoi = area, product = "incidents")`
 

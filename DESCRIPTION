@@ -10,7 +10,7 @@ BugReports: https://github.com/munterfinger/hereR/issues/
 Description: Interface to the 'HERE' REST APIs <https://developer.here.com/develop/rest-apis>:
   (1) geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;
   (2) routing directions, travel distance or time matrices and isolines using the 'Routing' API;
-  (3) traffic flow and incident information from the 'Traffic' API;
+  (3) real-time traffic flow and incident information from the 'Traffic' API;
   (4) weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the 'Destination Weather' API.
   Locations, routes and isolines are returned as 'sf' objects.
