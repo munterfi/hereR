@@ -76,7 +76,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
     )
   # Not valid
   } else {
-    stop("Invalid input for 'poi'")
+    stop("Invalid input for 'poi'.")
   }
 
   # Return urls if chosen
