@@ -46,8 +46,12 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   .check_rangetype(rangetype)
   .check_type(type = type, request = "calculateisoline")
   .check_mode(mode = mode, request = "calculateisoline")
+  .check_boolean(traffic)
+  .check_boolean(start)
+  .check_boolean(aggregate)
+  .check_boolean(url_only)
 
-  # Add authentification
+  # Add authentication
   url <- .add_auth(
     url = "https://isoline.route.api.here.com/routing/7.2/calculateisoline.json?"
   )

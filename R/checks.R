@@ -19,6 +19,11 @@
     stop("'polygon' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.")
 }
 
+.check_boolean <- function(bool) {
+  if (!bool %in% c(TRUE, FALSE))
+    stop(sprintf("'%s' must be a 'boolean' value.", deparse(substitute(bool))))
+}
+
 .check_datetime <- function(datetime) {
   if (!any(class(Sys.time()) %in% c("POSIXct", "POSIXt")))
     stop("'datetime' must be of type 'POSIXct', 'POSIXt'.")

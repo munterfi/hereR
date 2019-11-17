@@ -71,8 +71,10 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
     from_dt <- to_dt <- NULL
     message("Note: 'from_dt' and 'to_dt' have no effect on traffic flow. Traffic flow is always real-time.")
   }
+  .check_boolean(local_time)
+  .check_boolean(url_only)
 
-  # Add authentification
+  # Add authentication
   url <- .add_auth(
     url = sprintf("https://traffic.api.here.com/traffic/6.2/%s.json?",
                   product)

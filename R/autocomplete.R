@@ -26,6 +26,7 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
   # Check addresses
   .check_addresses(addresses)
   .check_max_results(results)
+  .check_boolean(url_only)
 
   # Add authentication
   url <- .add_auth(

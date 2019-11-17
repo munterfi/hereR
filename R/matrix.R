@@ -48,6 +48,8 @@ route_matrix <- function(start, destination = start, type = "fastest", mode = "c
   .check_attributes(attribute)
   .check_type(type = type, request = "calculatematrix")
   .check_mode(mode = mode, request = "calculatematrix")
+  .check_boolean(traffic)
+  .check_boolean(url_only)
 
   # CRS transformation and formatting
   start <- sf::st_coordinates(
@@ -63,7 +65,7 @@ route_matrix <- function(start, destination = start, type = "fastest", mode = "c
     "geo!", destination[, 2], ",", destination[, 1]
   )
 
-  # Add authentification
+  # Add authentication
   url <- .add_auth(
     url = "https://matrix.route.api.here.com/routing/7.2/calculatematrix.json?"
   )
