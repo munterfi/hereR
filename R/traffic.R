@@ -32,7 +32,7 @@
 #'   \item\code{"SP"}: Speed (based on UNITS) capped by speed limit.
 #'   \item\code{"FF"}: The free flow speed on this stretch of the road.
 #'   \item\code{"JF"}: The number between 0.0 and 10.0 indicating the expected quality of travel. When there is a road closure, the Jam Factor will be 10. As the number approaches 10.0 the quality of travel is getting worse. -1.0 indicates that a Jam Factor could not be calculated.
-#'   \item\code{"CN"}: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100%.
+#'   \item\code{"CN"}: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100\%.
 #' }
 #'
 #' @examples
