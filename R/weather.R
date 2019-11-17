@@ -37,8 +37,9 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
 
   # Checks
   .check_weather_product(product)
+  .check_boolean(url_only)
 
-  # Add authentification
+  # Add authentication
   url <- .add_auth(
     url = "https://weather.api.here.com/weather/1.0/report.json?"
   )
@@ -75,7 +76,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
     )
   # Not valid
   } else {
-    stop("Invalid input for 'poi'")
+    stop("Invalid input for 'poi'.")
   }
 
   # Return urls if chosen

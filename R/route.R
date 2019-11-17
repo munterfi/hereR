@@ -58,6 +58,8 @@ route <- function(start, destination,
   .check_type(type, request = "calculateroute")
   .check_mode(mode, request = "calculateroute")
   .check_vehicle_type(vehicle_type)
+  .check_boolean(traffic)
+  .check_boolean(url_only)
 
   # CRS transformation and formatting
   start <- sf::st_coordinates(
@@ -73,7 +75,7 @@ route <- function(start, destination,
     "geo!", destination[, 2], ",", destination[, 1]
   )
 
-  # Add authentification
+  # Add authentication
   url <- .add_auth(
     url = "https://route.api.here.com/routing/7.2/calculateroute.json?"
   )

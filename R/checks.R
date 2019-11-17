@@ -19,6 +19,11 @@
     stop("'polygon' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.")
 }
 
+.check_boolean <- function(bool) {
+  if (!bool %in% c(TRUE, FALSE))
+    stop(sprintf("'%s' must be a 'boolean' value.", deparse(substitute(bool))))
+}
+
 .check_datetime <- function(datetime) {
   if (!any(class(Sys.time()) %in% c("POSIXct", "POSIXt")))
     stop("'datetime' must be of type 'POSIXct', 'POSIXt'.")
@@ -98,7 +103,7 @@
 .check_proxy <- function(proxy) {
   if (!is.null(proxy)) {
     if (!is.character(proxy))
-      stop("'proxy' must be of type 'character'")
+      stop("'proxy' must be of type 'character'.")
     if (!strsplit(proxy, "://")[[1]][1] %in% c("http", "https"))
       stop("'proxy' is not in the required format: 'http://your-proxy.com:port/' or 'https://your-proxy.org:port/'.")
   }
@@ -107,7 +112,7 @@
 .check_proxyuserpwd <- function(proxyuserpwd) {
   if (!is.null(proxyuserpwd)) {
     if (!is.character(proxyuserpwd))
-      stop("'proxyuserpwd' must be of type 'character'")
+      stop("'proxyuserpwd' must be of type 'character'.")
     if (length(strsplit(proxyuserpwd, ":")[[1]]) != 2)
       stop("'proxyuserpwd' is not in the required format: 'user:pwd'.")
   }

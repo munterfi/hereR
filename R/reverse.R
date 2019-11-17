@@ -38,6 +38,8 @@ reverse_geocode <- function(poi, results = 1, landmarks = FALSE, url_only = FALS
   # Check and preprocess addresses
   .check_points(poi)
   .check_max_results(results)
+  .check_boolean(landmarks)
+  .check_boolean(url_only)
 
   # Add authentication
   url <- .add_auth(

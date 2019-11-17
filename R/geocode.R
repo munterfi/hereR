@@ -25,6 +25,8 @@ geocode <- function(addresses, autocomplete = FALSE, url_only = FALSE) {
 
   # Check and preprocess addresses
   .check_addresses(addresses)
+  .check_boolean(autocomplete)
+  .check_boolean(url_only)
 
   # Add authentication
   url <- .add_auth(

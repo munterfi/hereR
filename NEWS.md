@@ -1,5 +1,6 @@
 # version 0.2.0.9000
-* Enhanced `traffic()`: Clarified that `from_dt` and `to_dt` have no effect the traffic flow (`product = "flow"`). Traffic flow is always real-time. Detailed documentation of the variables in the return value.
+* Enhanced `traffic()`: Clarified that `from_dt` and `to_dt` have no effect on the traffic flow (`product = "flow"`). Traffic flow is always real-time. Detailed documentation of the variables in the return value.
+* Improved coverage of `testthat`.
 
 # version 0.2.0
 
