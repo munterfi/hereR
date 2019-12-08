@@ -162,6 +162,7 @@
 <ul>
 <li>Enhanced <code><a href="../reference/traffic.html">traffic()</a></code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
 <li>Improved coverage of <code>testthat</code>.</li>
+<li>Added an <code>"id"</code> column to the output of <code><a href="../reference/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>"id"</code> column the addresses to geocode can be joined to the coordinates after geocoding.</li>
 </ul>
 </div>
     <div id="version-0-2-0" class="section level1">
