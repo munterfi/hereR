@@ -41,9 +41,15 @@ The return value is an `sf` object containing `POINT` geometries of the addresse
 head(geocoded, 3)
 ```
 
-Not found addresses are deleted from the result. This means that the sf object may contain fewer rows than the original number of addresses. However, the row names of the returned `sf` object are still matching the index of the geocoded addresses. Using the row names a corresponding `data.frame` `"df"` could be added to the geocoded addresses.
+Not found addresses are deleted from the result. This means that the `sf` object may contain fewer rows than the original number of addresses. The column `"id"` matches the order of the the input addresses. Using the `"id"` column a corresponding `data.frame` `"df"` with the addresses to geocode could be joined to the coordinates after geocoding.
 ```{r join_geocoded, eval=FALSE, echo=TRUE, out.width='100%'}
-geocoded_sfdf <- st_as_sf(data.frame(geocoded, df[row.names(geocoded), ]))
+df <- data.frame(
+  company = c("Schweizerische Bundesbahnen SBB", "Bahnhof AG", "Deutsche Bahn AG"),
+  address = c("Wylerstrasse 123, 3000 Bern 65", "not_an_address", "Potsdamer Platz 2, 10785 Berlin"),
+  stringsAsFactors = FALSE
+)
+locs <- geocode(df$address)
+geocoded_sfdf <- st_as_sf(data.frame(locs, df[locs$id, ]))
 ```
 
 Print the geocoded addresses on an interactive leaflet map:

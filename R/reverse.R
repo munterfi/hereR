@@ -35,7 +35,7 @@
 #' landmarks <- reverse_geocode(poi = poi, results = 3, landmarks = TRUE, url_only = TRUE)
 reverse_geocode <- function(poi, results = 1, landmarks = FALSE, url_only = FALSE) {
 
-  # Check and preprocess addresses
+  # Input checks
   .check_points(poi)
   .check_max_results(results)
   .check_boolean(landmarks)
