@@ -64,7 +64,7 @@ mat <- route_matrix(
 
 Print the first 10 rows of the matrix table, created from the POIs above, where the distance is in meters, the travel time in seconds and the consumption in cost factor units:
 
-```{r table_route_matrix, eval=TRUE, out.width='100%', echo=FALSE}
+```{r table_route_matrix, eval=TRUE, out.width='100%', echo=FALSE, screenshot.force=FALSE}
 knitr::kable(head(mat, 10), format = "html")
 ```
 
