@@ -40,7 +40,7 @@ observation <- weather(
 
 The return value is an `sf` object, which contains the `POINT` geometries of the provided POIs and the most recent record on the observed weather. The measurements are taken from the nearest weather observation stations with respect to the POIs. The distance of the stations to the provided POIs is an indicator for the reliabilty of the weather information at each POI. A table of the observed weather near the example POIs:
 
-```{r table_obs, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE}
+```{r table_obs, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE, screenshot.force=FALSE}
 cols <- c("station", "distance", "description",
           "temperature", "humidity",
           "windSpeed", "windDirection")
@@ -109,7 +109,7 @@ astronomy <- weather(
 ```
 
 Print a table for the sun and moon times of the first example POI, where the nearest station is 'Emmenbrücke':
-```{r table_ast, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE}
+```{r table_ast, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE, screenshot.force=FALSE}
 ast <- astronomy$astronomy[[1]]
 ast$phase <- ast$moonPhaseDesc
 cols <- c("date", "sunrise", "sunset", "moonrise", "moonset", "phase")

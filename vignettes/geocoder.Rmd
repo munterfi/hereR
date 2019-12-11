@@ -75,12 +75,13 @@ The return value is a `data.table` containing autocomplete suggestions for the a
 ```{r results_autocomplete, eval=TRUE, echo=TRUE, out.width='100%'}
 results <- data.table(
   input = addresses[suggestions$id],
+  id = suggestions$id,
   rank = suggestions$order,
   suggestion = suggestions$label
 )
 ```
 
-```{r table_results, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center'}
+```{r table_results, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center', screenshot.force=FALSE}
 knitr::kable(head(results), format = "html")
 ```
 
