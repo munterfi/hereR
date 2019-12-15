@@ -22,7 +22,7 @@ test_that("traffic incidents works", {
     traffic_incidents <- traffic(aoi = aoi[aoi$code == "LI", ], product = "incidents"),
 
     # Tests
-    expect_equal(class(traffic_incidents), c("sf", "data.frame")),
+    expect_equal(class(traffic_incidents), c("sf", "data.table", "data.frame")),
     expect_equal(any(sf::st_geometry_type(traffic_incidents) != "POINT"), FALSE)
   )
 })

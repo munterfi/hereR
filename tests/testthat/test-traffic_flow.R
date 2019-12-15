@@ -23,7 +23,7 @@ test_that("traffic flow works", {
     traffic_flow <- traffic(aoi = aoi[aoi$code == "LI", ], product = "flow"),
 
     # Tests
-    expect_equal(class(traffic_flow), c("sf", "data.frame")),
+    expect_equal(class(traffic_flow), c("sf", "data.table", "data.frame")),
     expect_equal(any(sf::st_geometry_type(traffic_flow) != "MULTILINESTRING"), FALSE)
   )
 })
