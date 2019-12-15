@@ -162,7 +162,11 @@
 <ul>
 <li>Enhanced <code><a href="../reference/traffic.html">traffic()</a></code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
 <li>Improved coverage of <code>testthat</code>.</li>
-<li>Added an <code>"id"</code> column to the output of <code><a href="../reference/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>"id"</code> column the addresses to geocode can be joined to the coordinates after geocoding.</li>
+<li>Added an <code>"id"</code> column to the output of <code><a href="../reference/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>"id"</code> column the addresses to geocode can be joined to the coordinates after geocoding (see <a href="https://github.com/munterfinger/hereR/issues/9"><a href='https://github.com/munterfinger/hereR/issues/9'>#9</a></a>).</li>
+<li>Added an <code>"id"</code> column also to <code><a href="../reference/autocomplete.html">autocomplete()</a></code>, <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code>, <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code>, <code><a href="../reference/traffic.html">traffic()</a></code> and <code><a href="../reference/weather.html">weather()</a></code>. Using the <code>"id"</code> column the result can be joined to the input.</li>
+<li>Fixed the handling of failing requests in <code>.get_content()</code>. The <code>"id"</code> column is still in correct order, even if there are failing requests in a function call (see <a href="https://github.com/munterfinger/hereR/issues/17"><a href='https://github.com/munterfinger/hereR/issues/17'>#17</a></a>).</li>
+<li>Added <code>rownames() &lt;- NULL</code> to all functions before returning the result.</li>
+<li>Renamed the <code>"city"</code> column in the returned object of <code><a href="../reference/weather.html">weather()</a></code> to <code>"station"</code>, as it stands for the name of the nearest meteorological station.</li>
 </ul>
 </div>
     <div id="version-0-2-0" class="section level1">

@@ -61,7 +61,9 @@ m <-
           zcol = "city",
           cex = 1,
           col.region = "black",
-          legend = FALSE)
+          legend = FALSE,
+          homebutton = FALSE
+  )
 m
 ```
 
@@ -109,7 +111,9 @@ m <-
           zcol = "city",
           cex = 1,
           col.region = "black",
-          legend = FALSE)
+          legend = FALSE,
+          homebutton = FALSE
+  )
 m
 ```
 
