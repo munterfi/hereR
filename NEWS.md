@@ -1,7 +1,12 @@
 # version 0.2.0.9000
+
 * Enhanced `traffic()`: Clarified that `from_dt` and `to_dt` have no effect on the traffic flow (`product = "flow"`). Traffic flow is always real-time. Detailed documentation of the variables in the return value.
 * Improved coverage of `testthat`.
-* Added an `"id"` column to the output of `geocode()` and removed the id ordered `row.names` in order to be consistent with other functions of the package. Using the `"id"` column the addresses to geocode can be joined to the coordinates after geocoding.
+* Added an `"id"` column to the output of `geocode()` and removed the id ordered `row.names` in order to be consistent with other functions of the package. Using the `"id"` column the addresses to geocode can be joined to the coordinates after geocoding (see [#9](https://github.com/munterfinger/hereR/issues/9)).
+* Added an `"id"` column also to `autocomplete()`, `reverse_geocode()`, `route()`, `isoline()`, `traffic()` and `weather()`. Using the `"id"` column the result can be joined to the input.
+* Fixed the handling of failing requests in `.get_content()`. The `"id"` column is still in correct order, even if there are failing requests in a function call (see [#17](https://github.com/munterfinger/hereR/issues/17)).
+* Added `rownames() <- NULL` to all functions before returning the result.
+* Renamed the `"city"` column in the returned object of `weather()` to `"station"`, as it stands for the name of the nearest meteorological station.
 
 # version 0.2.0
 

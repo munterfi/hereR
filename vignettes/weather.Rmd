@@ -49,13 +49,22 @@ knitr::kable(as.data.frame(observation)[, cols], format = "html")
 
 Print the weather observation information on an interactive leaflet map:
 ```{r map_obs, eval=TRUE, out.width='100%'}
-mapview(observation,
-        zcol = "temperature",
-        cex = observation$humidity/4,
-        layer.name = "Observation",
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE
-)
+m <-
+  mapview(observation,
+          zcol = "temperature",
+          cex = observation$humidity/4,
+          layer.name = "Observation",
+          map.types = c("Esri.WorldTopoMap"),
+          homebutton = FALSE
+  ) + 
+  mapview(poi,
+          zcol = "city",
+          cex = 1,
+          col.region = "black",
+          legend = FALSE,
+          homebutton = FALSE
+  )
+m
 ```
 
 ## Forecast
@@ -80,23 +89,32 @@ g <- lapply(1:nrow(forecast), function(x) {
               colour = 'blue') +
     xlab("Time from now [h]") +
     ylab("Temperature [°C] / Humidity [%]") +
-    ggtitle(forecast$city[x]) +
+    ggtitle(forecast$station[x]) +
     theme_classic()
 })
 ```
 
 2. Then add list of graphs to the leaflet map using the the `popup` parameter:
 ```{r map_forecast, eval=TRUE, out.width='100%'}
-mapview(forecast,
-        color = "black",
-        col.region = "yellow",
-        layer.name = "Forecast",
-        zcol = "city",
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE,
-        legend = FALSE,
-        popup = leafpop::popupGraph(g)
-)
+m <-
+  mapview(forecast,
+          color = "black",
+          col.region = "yellow",
+          layer.name = "Forecast",
+          zcol = "station",
+          map.types = c("Esri.WorldTopoMap"),
+          homebutton = FALSE,
+          legend = FALSE,
+          popup = leafpop::popupGraph(g)
+  ) + 
+  mapview(poi,
+          zcol = "city",
+          cex = 1,
+          col.region = "black",
+          legend = FALSE,
+          homebutton = FALSE
+  )
+m
 ```
 
 ## Astronomy

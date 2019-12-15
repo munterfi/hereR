@@ -57,6 +57,7 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
   if (length(data) == 0) return(NULL)
 
   # Autocomplete suggestions
+  ids <- .get_ids(data)
   count <- 0
   suggestion <- data.table::rbindlist(
     lapply(data, function(con) {
@@ -65,8 +66,7 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
       if (length(df$suggestions) == 0) return(NULL)
       df <- data.table::data.table(df$suggestions)
       addr <- data.table::data.table(
-        id = rep(count, nrow(df)),
-        #input = rep(addresses[count], nrow(df)),
+        id = rep(ids[count], nrow(df)),
         order = seq(1, nrow(df))
       )
       cbind(addr, df)
@@ -75,6 +75,7 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
 
   # Return if not NULL data.talbe
   if (nrow(suggestion) > 0) {
+    rownames(suggestion) <- NULL
     return(suggestion)
   } else {
     return(NULL)

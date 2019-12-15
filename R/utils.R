@@ -57,7 +57,10 @@
       if (is.character(res))
         stop("Connection error: Please check connection to the internet and proxy configuration.")
       if (res$status != 200) {
-        warning(sprintf("Request failed: HTTP status code %s.", res$status))
+        warning(
+          sprintf("Request 'id = %s' failed: Status %s. ",
+                  strsplit(id, "_")[[1]][2], res$status)
+        )
         ids <<- ids[ids != id]
       } else {
         results[[id]] <<- res
@@ -95,6 +98,10 @@
     rawChar
   })
   results
+}
+
+.get_ids <- function(content) {
+  as.numeric(sapply(strsplit(names(content), "_"), function(x){x[[2]]}))
 }
 
 

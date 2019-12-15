@@ -113,15 +113,19 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   if (length(data) == 0) return(NULL)
 
   # Extract information
+  ids <- .get_ids(data)
+  count <- 0
   isolines <-  sf::st_as_sf(
     data.table::rbindlist(
       lapply(data, function(con) {
+        count <<- count + 1
         df <- jsonlite::fromJSON(con)
         geometry <- lapply(df$response$isoline$component, function(iso){
           .polygon_from_pointList(iso$shape[[1]])
         })
         sf::st_as_sf(
           data.table::data.table(
+            id = ids[count],
             timestamp = as.POSIXct(df$response$metaInfo$timestamp,
                                    tz = "UTC",
                                    format = "%Y-%m-%dT%H:%M:%SZ"),
@@ -145,6 +149,7 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
     isolines <- lwgeom::st_make_valid(isolines)
     isolines <- sf::st_difference(isolines)
     isolines$Group.1 <- NULL
+    isolines$id <- NA
 
     # Fix geometry collections
     suppressWarnings(
@@ -153,6 +158,6 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
       )
     )
   }
-
+  rownames(isolines) <- NULL
   return(isolines)
 }
