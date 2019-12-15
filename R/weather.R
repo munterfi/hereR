@@ -100,6 +100,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   }
 
   # Create sf, data.table, data.frame
+  rownames(weather) <- NULL
   return(
     sf::st_set_crs(
       sf::st_as_sf(weather, coords = c("lng", "lat")),
@@ -108,10 +109,14 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_observation <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
   observation <- data.table::rbindlist(
     lapply(data, function(con) {
+      count <<- count + 1
       df <- jsonlite::fromJSON(con)
       station <- data.table::data.table(
+        id = ids[count],
         station = df$observations$location$city[1],
         lng = df$observations$location$longitude[1],
         lat = df$observations$location$latitude[1],
@@ -138,15 +143,20 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_forecast_hourly <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
   dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
   forecast <- data.table::rbindlist(
     lapply(dfs, function(df) {
+      count <<- count + 1
       station <- data.table::data.table(
-        city = df$hourlyForecasts$forecastLocation$city[1],
+        id = ids[count],
+        station = df$hourlyForecasts$forecastLocation$city[1],
         lng = df$hourlyForecasts$forecastLocation$longitude[1],
+        lat = df$hourlyForecasts$forecastLocation$latitude[1],
+        distance = df$hourlyForecasts$forecastLocation$distance[1] * 1000,
         state = df$hourlyForecasts$forecastLocation$state[1],
-        country = df$hourlyForecasts$forecastLocation$country[1],
-        lat = df$hourlyForecasts$forecastLocation$latitude[1]
+        country = df$hourlyForecasts$forecastLocation$country[1]
       )
     })
   )
@@ -156,15 +166,20 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_forecast_astronomy <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
   dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
   astronomy <- data.table::rbindlist(
     lapply(dfs, function(df) {
+      count <<- count + 1
       station <- data.table::data.table(
-        city = df$astronomy$city[1],
-        state = df$astronomy$state[1],
-        country = df$astronomy$country[1],
+        id = ids[count],
+        station = df$astronomy$city[1],
         lng = df$astronomy$longitude[1],
-        lat = df$astronomy$latitude[1]
+        lat = df$astronomy$latitude[1],
+        tz = df$astronomy$timezone[1],
+        state = df$astronomy$state[1],
+        country = df$astronomy$country[1]
       )
     })
   )
@@ -179,15 +194,19 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_alerts <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
   dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
   alerts <- data.table::rbindlist(
     lapply(dfs, function(df) {
+      count <<- count + 1
       station <- data.table::data.table(
-        city = df$alerts$city[1],
-        state = df$alerts$state[1],
-        country = df$alerts$country[1],
+        id = ids[count],
+        station = df$alerts$city[1],
         lng = df$alerts$longitude[1],
-        lat = df$alerts$latitude[1]
+        lat = df$alerts$latitude[1],
+        state = df$alerts$state[1],
+        country = df$alerts$country[1]
       )
     })
   )

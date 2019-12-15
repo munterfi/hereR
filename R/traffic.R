@@ -134,22 +134,26 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   # Check for empty response
   if (is.null(traffic)) {return(NULL)}
 
-  # Spatial
-  traffic <- suppressMessages(
-    sf::st_join(traffic, aoi, left = FALSE)
-  )
+  # Spatial contains
+  traffic <-
+    traffic[Reduce(c, suppressMessages(sf::st_contains(aoi, traffic))), ]
+  rownames(traffic) <- NULL
   return(traffic)
 }
 
 .extract_traffic_flow <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
   geoms <- list()
   flow <- suppressWarnings(data.table::rbindlist(lapply(data, function(con) {
+    count <<- count + 1
     df <- jsonlite::fromJSON(con)
     if (is.null(df$RWS$RW)) {return(NULL)}
     data.table::rbindlist(lapply(df$RWS$RW, function(rw) {
       data.table::rbindlist(lapply(rw$FIS, function(fis) {
         data.table::rbindlist(lapply(fis$FI, function(fi) {
           dat <- data.table::data.table(
+            id = ids[count],
             cbind(
               fi$TM[, c("PC", "DE", "QD", "LE")],
               data.table::rbindlist(
@@ -184,11 +188,15 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 
 .extract_traffic_incidents <- function(data) {
   #geoms_line <- list()
+  ids <- .get_ids(data)
+  count <- 0
   incidents <- data.table::rbindlist(lapply(data, function(con) {
+    count <<- count + 1
     df <- jsonlite::fromJSON(con)
     if (is.null(df$TRAFFIC_ITEMS)) {return(NULL)}
     info <- data.table::data.table(
-      id = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_ID,
+      id = ids[count],
+      incident_id = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_ID,
       entry_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$ENTRY_TIME, format="%m/%d/%Y %H:%M:%S"),
       from_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$START_TIME, format="%m/%d/%Y %H:%M:%S"),
       to_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$END_TIME, format="%m/%d/%Y %H:%M:%S"),

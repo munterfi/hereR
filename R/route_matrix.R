@@ -177,5 +177,6 @@ route_matrix <- function(start, destination = start, type = "fastest", mode = "c
   # Reorder
   routes <- routes[order(routes$startIndex,
                          routes$destinationIndex), ]
+  rownames(routes) <- NULL
   return(routes)
 }
