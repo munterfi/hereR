@@ -7,6 +7,7 @@
 * Fixed the handling of failing requests in `.get_content()`. The `"id"` column is still in correct order, even if there are failing requests in a function call (see [#17](https://github.com/munterfinger/hereR/issues/17)).
 * Added `rownames() <- NULL` to all functions before returning the result.
 * Renamed the `"city"` column in the returned object of `weather()` to `"station"`, as it stands for the name of the nearest meteorological station.
+* Test for empty geometries in the input POIs and AOIs and throw an error if some are found (see [#16](https://github.com/munterfinger/hereR/issues/16)).
 
 # version 0.2.0
 

@@ -7,6 +7,8 @@
 .check_points <- function(points) {
   if (!"sf" %in% class(points))
       stop("'points' must be an sf object.")
+  if (any(sf::st_is_empty(points)))
+    stop("'points' has empty entries in the geometry column.")
   if (any(sf::st_geometry_type(points) != "POINT"))
       stop("'points' must be an sf object with geometry type 'POINT'.")
 }
@@ -14,6 +16,8 @@
 .check_polygon <- function(polygon) {
   if (!"sf" %in% class(polygon))
     stop("'polygon' must be an sf object.")
+  if (any(sf::st_is_empty(polygon)))
+    stop("'polygon' has empty entries in the geometry column.")
   if (!"sf" %in% class(polygon) |
       any(!(sf::st_geometry_type(polygon) %in% c("POLYGON", "MULTIPOLYGON"))))
     stop("'polygon' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.")
