@@ -9,6 +9,12 @@ test_that("traffic flow works", {
   data(aoi)
 
   # Input checks
+  nrows <- 3
+  (x <- sf::st_sf(
+    id = 1:nrows,
+    geometry = sf::st_sfc(lapply(1:nrows, function(x) sf::st_geometrycollection()))
+  ))
+  expect_error(traffic(aoi = x, product = "flow"), "'polygon' has empty entries in the geometry column.")
   expect_error(traffic(aoi = c(1, 2, 3), product = "flow"), "'polygon' must be an sf object.")
   expect_error(traffic(aoi = NA, product = "flow"), "'polygon' must be an sf object.")
   expect_error(traffic(aoi = aoi, product = "not_a_product"), "'product' must be 'flow', 'incidents'.")
