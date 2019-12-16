@@ -14,12 +14,14 @@ weather(poi, product = "observation", url_only = FALSE)
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
 \value{
-An \code{sf} object containing the requested weather information.
+An \code{sf} object containing the requested weather information at the nearest weather station.
+The point geometry in the \code{sf} object is the location of the weather station.
 }
 \description{
 Weather forecasts, reports on current weather conditions,
 astronomical information and alerts at a specific location (coordinates or
 location name) based on the 'Destination Weather' API.
+The information comes from the nearest available weather station and is not interpolated.
 }
 \examples{
 # Authentication

@@ -45,7 +45,8 @@
 <meta property="og:title" content="HERE Destination Weather API: Observations, Forecast, Astronomy and Alerts — weather" />
 <meta property="og:description" content="Weather forecasts, reports on current weather conditions,
 astronomical information and alerts at a specific location (coordinates or
-location name) based on the 'Destination Weather' API." />
+location name) based on the 'Destination Weather' API.
+The information comes from the nearest available weather station and is not interpolated." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -79,7 +80,7 @@ location name) based on the 'Destination Weather' API." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -162,7 +163,8 @@ location name) based on the 'Destination Weather' API." />
     <div class="ref-description">
     <p>Weather forecasts, reports on current weather conditions,
 astronomical information and alerts at a specific location (coordinates or
-location name) based on the 'Destination Weather' API.</p>
+location name) based on the 'Destination Weather' API.
+The information comes from the nearest available weather station and is not interpolated.</p>
     </div>
 
     <pre class="usage"><span class='fu'>weather</span>(<span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"observation"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -186,7 +188,8 @@ location name) based on the 'Destination Weather' API.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>sf</code> object containing the requested weather information.</p>
+    <p>An <code>sf</code> object containing the requested weather information at the nearest weather station.
+The point geometry in the <code>sf</code> object is the location of the weather station.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://developer.here.com/documentation/weather/topics/example-weather-observation.html'>HERE Destination Weather API: Observation</a></p>

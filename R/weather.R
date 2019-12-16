@@ -3,6 +3,7 @@
 #' Weather forecasts, reports on current weather conditions,
 #' astronomical information and alerts at a specific location (coordinates or
 #' location name) based on the 'Destination Weather' API.
+#' The information comes from the nearest available weather station and is not interpolated.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation}
@@ -12,7 +13,8 @@
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
-#' An \code{sf} object containing the requested weather information.
+#' An \code{sf} object containing the requested weather information at the nearest weather station.
+#' The point geometry in the \code{sf} object is the location of the weather station.
 #' @export
 #'
 #' @examples
