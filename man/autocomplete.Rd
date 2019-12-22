@@ -20,11 +20,8 @@ A \code{data.table} object, containing the autocomplete suggestions for the addr
 Completes addresses using the 'Geocoder Autocomplete' API.
 }
 \examples{
-# Authentication
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+# Provide an API Key for a HERE project
+set_key("<YOUR API KEY>")
 
 suggestions <- autocomplete(addresses = poi$city, url_only = TRUE)
 }

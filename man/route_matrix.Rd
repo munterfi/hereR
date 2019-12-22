@@ -4,10 +4,17 @@
 \alias{route_matrix}
 \title{HERE Routing API: Route Matrix}
 \usage{
-route_matrix(start, destination = start, type = "fastest",
-  mode = "car", traffic = FALSE, searchRange = 99999999,
-  attribute = c("distance", "traveltime"), departure = NULL,
-  url_only = FALSE)
+route_matrix(
+  start,
+  destination = start,
+  type = "fastest",
+  mode = "car",
+  traffic = FALSE,
+  searchRange = 99999999,
+  attribute = c("distance", "traveltime"),
+  departure = NULL,
+  url_only = FALSE
+)
 }
 \arguments{
 \item{start}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.}
@@ -39,11 +46,8 @@ maximum matrix size per request and thereby minimize the number of overall neede
 The result is one route summary matrix, that fits the order of the provided POIs: \code{startIndex}, \code{destinationIndex}.
 }
 \examples{
-# Authentication
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+# Provide an API Key for a HERE project
+set_key("<YOUR API KEY>")
 
 # Create routes summaries between all POIs
 mat <- route_matrix(

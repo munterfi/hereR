@@ -24,11 +24,8 @@ location name) based on the 'Destination Weather' API.
 The information comes from the nearest available weather station and is not interpolated.
 }
 \examples{
-# Authentication
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+# Provide an API Key for a HERE project
+set_key("<YOUR API KEY>")
 
 # Observation
 observation <- weather(poi = poi, product = "observation", url_only = TRUE)

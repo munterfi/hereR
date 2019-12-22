@@ -4,8 +4,7 @@
 \alias{reverse_geocode}
 \title{HERE Geocoder API: Reverse Geocode}
 \usage{
-reverse_geocode(poi, results = 1, landmarks = FALSE,
-  url_only = FALSE)
+reverse_geocode(poi, results = 1, landmarks = FALSE, url_only = FALSE)
 }
 \arguments{
 \item{poi}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.}
@@ -31,11 +30,8 @@ However, in the returned \code{sf} object, the column \code{"id"} matches the ro
 The \code{"id"} column can be used to join the original POIs.
 }
 \examples{
-# Authentication
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+# Provide an API Key for a HERE project
+set_key("<YOUR API KEY>")
 
 # Get addresses
 addresses <- reverse_geocode(poi = poi, results = 3, landmarks = FALSE, url_only = TRUE)
