@@ -1,9 +1,6 @@
 test_that("weather alerts works", {
-  # Set dummy login
-  set_auth(
-    app_id = "dummy_app_id",
-    app_code = "dummy_app_code"
-  )
+  # Set dummy key
+  set_key("dummy_api_key")
 
   # Load package example data
   data(poi)

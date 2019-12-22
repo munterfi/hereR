@@ -1,9 +1,6 @@
 test_that("traffic flow works", {
-  # Set dummy login
-  set_auth(
-    app_id = "dummy_app_id",
-    app_code = "dummy_app_code"
-  )
+  # Set dummy key
+  set_key("dummy_api_key")
 
   # Load package example data
   data(aoi)
@@ -18,6 +15,8 @@ test_that("traffic flow works", {
   expect_error(traffic(aoi = c(1, 2, 3), product = "flow"), "'polygon' must be an sf object.")
   expect_error(traffic(aoi = NA, product = "flow"), "'polygon' must be an sf object.")
   expect_error(traffic(aoi = aoi, product = "not_a_product"), "'product' must be 'flow', 'incidents'.")
+  expect_error(traffic(aoi = aoi, product = "flow", min_jam_factor = -1), "'min_jam_factor' must be in the valid range from 0 to 10.")
+  expect_error(traffic(aoi = aoi, product = "flow", min_jam_factor = "11"), "'min_jam_factor' must be of type 'numeric'.")
 
   # Test URL
   # Following message should appear: "Note: 'from_dt' and 'to_dt' have no effect on traffic flow. Traffic flow is always real-time."
