@@ -18,11 +18,8 @@
 #' @export
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' # Observation
 #' observation <- weather(poi = poi, product = "observation", url_only = TRUE)
@@ -41,9 +38,9 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   .check_weather_product(product)
   .check_boolean(url_only)
 
-  # Add authentication
-  url <- .add_auth(
-    url = "https://weather.api.here.com/weather/1.0/report.json?"
+  # Add API key
+  url <- .add_key(
+    url = "https://weather.ls.hereapi.com/weather/1.0/report.json?"
   )
 
   # Add product

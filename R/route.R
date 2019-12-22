@@ -24,11 +24,8 @@
 #' @export
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' # Get all from - to combinations from POIs
 #' library(sf)
@@ -75,9 +72,9 @@ route <- function(start, destination,
     "geo!", destination[, 2], ",", destination[, 1]
   )
 
-  # Add authentication
-  url <- .add_auth(
-    url = "https://route.api.here.com/routing/7.2/calculateroute.json?"
+  # Add API key
+  url <- .add_key(
+    url = "https://route.ls.hereapi.com/routing/7.2/calculateroute.json?"
   )
 
   # Add waypoints

@@ -22,11 +22,8 @@
 #' The \code{"id"} column can be used to join the original POIs.
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' # Get addresses
 #' addresses <- reverse_geocode(poi = poi, results = 3, landmarks = FALSE, url_only = TRUE)
@@ -41,9 +38,9 @@ reverse_geocode <- function(poi, results = 1, landmarks = FALSE, url_only = FALS
   .check_boolean(landmarks)
   .check_boolean(url_only)
 
-  # Add authentication
-  url <- .add_auth(
-    url = "https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?"
+  # Add API key
+  url <- .add_key(
+    url = "https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?"
   )
 
   # Add point coords

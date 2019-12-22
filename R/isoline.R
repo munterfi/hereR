@@ -23,11 +23,8 @@
 #' @export
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' # Isochrone for 5, 10, 15, 20, 25 and 30 minutes driving time
 #' isolines <- isoline(
@@ -51,9 +48,9 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   .check_boolean(aggregate)
   .check_boolean(url_only)
 
-  # Add authentication
-  url <- .add_auth(
-    url = "https://isoline.route.api.here.com/routing/7.2/calculateisoline.json?"
+  # Add API key
+  url <- .add_key(
+    url = "https://isoline.route.ls.hereapi.com/routing/7.2/calculateisoline.json?"
   )
 
   # Add point coords

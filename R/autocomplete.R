@@ -14,11 +14,8 @@
 #' @export
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' suggestions <- autocomplete(addresses = poi$city, url_only = TRUE)
 autocomplete <- function(addresses, results = 5, url_only = FALSE) {
@@ -28,9 +25,9 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
   .check_max_results(results)
   .check_boolean(url_only)
 
-  # Add authentication
-  url <- .add_auth(
-    url = "https://autocomplete.geocoder.api.here.com/6.2/suggest.json?"
+  # Add API key
+  url <- .add_key(
+    url = "https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?"
   )
 
   # Add addresses

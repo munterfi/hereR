@@ -14,11 +14,8 @@
 #' @export
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' locs <- geocode(addresses = poi$city, url_only = TRUE)
 geocode <- function(addresses, autocomplete = FALSE, url_only = FALSE) {
@@ -28,9 +25,9 @@ geocode <- function(addresses, autocomplete = FALSE, url_only = FALSE) {
   .check_boolean(autocomplete)
   .check_boolean(url_only)
 
-  # Add authentication
-  url <- .add_auth(
-    url = "https://geocoder.api.here.com/6.2/geocode.json?"
+  # Add API key
+  url <- .add_key(
+    url = "https://geocoder.ls.hereapi.com/6.2/geocode.json?"
   )
 
   # Autocomplete addresses
