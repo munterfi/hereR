@@ -1,7 +1,7 @@
 Package: hereR
 Type: Package
 Title: 'sf'-Based Interface to the 'HERE' REST APIs
-Version: 0.2.1
+Version: 0.2.1.9000
 Authors@R: c(
     person("Merlin", "Unterfinger", email = "info@munterfinger.ch", role = c("aut", "cre")))
 Maintainer: Merlin Unterfinger <info@munterfinger.ch>
@@ -33,5 +33,5 @@ Suggests:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr

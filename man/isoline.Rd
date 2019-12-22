@@ -4,10 +4,18 @@
 \alias{isoline}
 \title{HERE Routing API: Isoline}
 \usage{
-isoline(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
-  type = "fastest", mode = "car", traffic = FALSE,
-  departure = NULL, start = TRUE, aggregate = TRUE,
-  url_only = FALSE)
+isoline(
+  poi,
+  range = seq(5, 30, 5) * 60,
+  rangetype = "time",
+  type = "fastest",
+  mode = "car",
+  traffic = FALSE,
+  departure = NULL,
+  start = TRUE,
+  aggregate = TRUE,
+  url_only = FALSE
+)
 }
 \arguments{
 \item{poi}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.}
@@ -39,11 +47,8 @@ leaving from defined centers (POIs) with either a specified length, a
 specified travel time or consumption.
 }
 \examples{
-# Authentication
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+# Provide an API Key for a HERE project
+set_key("<YOUR API KEY>")
 
 # Isochrone for 5, 10, 15, 20, 25 and 30 minutes driving time
 isolines <- isoline(

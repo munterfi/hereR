@@ -1,28 +1,23 @@
 #' HERE Application Credentials
 #'
-#' Provide application credentials (APP ID and APP CODE) for a HERE project
-#' of type 'REST & XYZ HUB API/CLI', that will be used to authenticate in
+#' Provide application credentials (API Key) for a HERE project
+#' of type 'REST', that will be used to authenticate in
 #' the requests to the APIs.
 #'
 #' No login yet? Get your free login here: \href{https://developer.here.com/}{klick}
 #'
-#' @param app_id character, the APP ID from a HERE project.
-#' @param app_code character, the APP CODE from a HERE project.
+#' @param api_key character, the API key from a HERE project.
 #'
 #' @return
 #' None.
 #' @export
 #'
 #' @examples
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
-set_auth <- function(app_id, app_code){
-  .check_auth(app_id, app_code)
+#' set_key("<YOUR API KEY>")
+set_key <- function(api_key){
+  .check_key(api_key)
   Sys.setenv(
-    "HERE_APP_ID" = app_id,
-    "HERE_APP_CODE" = app_code
+    "HERE_API_KEY" = api_key
   )
 }
 
@@ -55,17 +50,16 @@ set_proxy <- function(proxy, proxyuserpwd){
 
 #' Remove HERE Application Credentials
 #'
-#' Remove previously set HERE application credentials from the current R session.
+#' Remove previously set HERE API KEY from the current R session.
 #'
 #' @return
 #' None.
 #' @export
 #'
 #' @examples
-#' unset_auth()
-unset_auth <- function() {
-  Sys.unsetenv("HERE_APP_ID")
-  Sys.unsetenv("HERE_APP_CODE")
+#' unset_key()
+unset_key <- function() {
+  Sys.unsetenv("HERE_API_KEY")
 }
 
 #' Remove Proxy Configuration

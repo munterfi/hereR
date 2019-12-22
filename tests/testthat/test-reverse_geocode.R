@@ -1,9 +1,6 @@
 test_that("reverse_geocode works", {
-  # Set dummy login
-  set_auth(
-    app_id = "dummy_app_id",
-    app_code = "dummy_app_code"
-  )
+  # Set dummy key
+  set_key("dummy_api_key")
 
   # Load package example data
   data(poi)
@@ -17,7 +14,7 @@ test_that("reverse_geocode works", {
   expect_error(reverse_geocode(poi = x), "'points' has empty entries in the geometry column.")
   expect_error(reverse_geocode(poi = c(1, 2, 3)), "'points' must be an sf object.")
   expect_error(reverse_geocode(poi = c("character", NA)), "'points' must be an sf object.")
-  expect_error(reverse_geocode(poi = poi, results = -100), "'results' must be of in the valid range from 1 to 20.")
+  expect_error(reverse_geocode(poi = poi, results = -100), "'results' must be in the valid range from 1 to 20.")
   expect_error(reverse_geocode(poi = poi, results = "-100"), "'results' must be of type 'numeric'.")
 
   # Test with API response mock: addresses

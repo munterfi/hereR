@@ -4,8 +4,15 @@
 \alias{traffic}
 \title{HERE Traffic API: Flow and Incidents}
 \usage{
-traffic(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
-  local_time = FALSE, url_only = FALSE)
+traffic(
+  aoi,
+  product = "flow",
+  from_dt = NULL,
+  to_dt = NULL,
+  local_time = FALSE,
+  min_jam_factor = 0,
+  url_only = FALSE
+)
 }
 \arguments{
 \item{aoi}{\code{sf} object, Areas of Interest (POIs) of geometry type \code{POLYGON}.}
@@ -17,6 +24,8 @@ traffic(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 \item{to_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
 
 \item{local_time}{boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (\code{default = FALSE})?}
+
+\item{min_jam_factor}{numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
@@ -43,11 +52,8 @@ Explanation of the returned traffic flow variables:
 }
 }
 \examples{
-# Authentication
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+# Provide an API Key for a HERE project
+set_key("<YOUR API KEY>")
 
 # Real-time traffic flow
 flow <- traffic(

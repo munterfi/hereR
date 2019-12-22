@@ -4,9 +4,17 @@
 \alias{route}
 \title{HERE Routing API: Route}
 \usage{
-route(start, destination, type = "fastest", mode = "car",
-  traffic = FALSE, vehicle_type = "diesel,5.5", departure = NULL,
-  arrival = NULL, url_only = FALSE)
+route(
+  start,
+  destination,
+  type = "fastest",
+  mode = "car",
+  traffic = FALSE,
+  vehicle_type = "diesel,5.5",
+  departure = NULL,
+  arrival = NULL,
+  url_only = FALSE
+)
 }
 \arguments{
 \item{start}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.}
@@ -38,11 +46,8 @@ For routes using the transport mode \code{"car"} a vehicle type can be specified
 to obtain an estimate of the consumption.
 }
 \examples{
-# Authentication
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+# Provide an API Key for a HERE project
+set_key("<YOUR API KEY>")
 
 # Get all from - to combinations from POIs
 library(sf)

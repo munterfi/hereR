@@ -24,11 +24,8 @@
 #' @export
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' # Create routes summaries between all POIs
 #' mat <- route_matrix(
@@ -65,9 +62,9 @@ route_matrix <- function(start, destination = start, type = "fastest", mode = "c
     "geo!", destination[, 2], ",", destination[, 1]
   )
 
-  # Add authentication
-  url <- .add_auth(
-    url = "https://matrix.route.api.here.com/routing/7.2/calculatematrix.json?"
+  # Add API key
+  url <- .add_key(
+    url = "https://matrix.route.ls.hereapi.com/routing/7.2/calculatematrix.json?"
   )
 
   # Switch coordinates to use max request size of 15x100

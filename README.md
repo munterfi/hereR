@@ -30,15 +30,11 @@ devtools::install_github("munterfinger/hereR")
 
 ## Application credentials
 
-In order to use the functionality of the `hereR` package, application credentials (APP ID and APP CODE) for a HERE project of type **REST & XYZ HUB API/CLI** have to be provided. These credentials will be set for the current R session and will be used to authenticate in the reqeusts to the **HERE REST APIs**.
+In order to use the functionality of the `hereR` package, application credentials (**API key**) for a HERE project have to be provided. The API key will be set for the current R session and will be used to authenticate in the requests to the APIs.
 To set the credentials, please use:
 ``` r
 library(hereR)
-
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+set_key("<YOUR API KEY>")
 ```
 No login yet? Get your free login here: [developer.here.com](https://developer.here.com/)
 

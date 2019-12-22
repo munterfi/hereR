@@ -79,7 +79,7 @@ Traffic incidents contain information about location, time, duration, severity, 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -165,8 +165,15 @@ The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam fac
 Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>traffic</span>(<span class='no'>aoi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>, <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>local_time</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>traffic</span>(
+  <span class='no'>aoi</span>,
+  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
+  <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>local_time</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,6 +197,10 @@ Traffic incidents contain information about location, time, duration, severity, 
     <tr>
       <th>local_time</th>
       <td><p>boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (<code>default = FALSE</code>)?</p></td>
+    </tr>
+    <tr>
+      <th>min_jam_factor</th>
+      <td><p>numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if <code>product</code> is set to <code>"flow"</code>, <code>default = 0</code>).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -224,11 +235,8 @@ Traffic incidents contain information about location, time, duration, severity, 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
-<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
-  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
-  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
-)
+    <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
+<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Real-time traffic flow</span>
 <span class='no'>flow</span> <span class='kw'>&lt;-</span> <span class='fu'>traffic</span>(

@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -155,6 +155,15 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="version-0-2-1-9000" class="section level1">
+<h1 class="page-header">
+<a href="#version-0-2-1-9000" class="anchor"></a>version 0.2.1.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code><a href="../reference/hereR-defunct.html">set_auth()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_auth()</a></code> are defunct and replaced by <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/23"><a href='https://github.com/munterfinger/hereR/issues/23'>#23</a></a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
+<li>Added a minimum jam factor filter <code>"min_jam_factor"</code> to <code><a href="../reference/traffic.html">traffic(..., product = "flow")</a></code>. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than <code>"min_jam_factor"</code>, which speeds up requests.</li>
+</ul>
+</div>
     <div id="version-0-2-1" class="section level1">
 <h1 class="page-header">
 <a href="#version-0-2-1" class="anchor"></a>version 0.2.1<small> 2019-12-16 </small>
@@ -205,6 +214,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#version-0-2-1-9000">0.2.1.9000</a></li>
         <li><a href="#version-0-2-1">0.2.1</a></li>
         <li><a href="#version-0-2-0">0.2.0</a></li>
         <li><a href="#version-0-1-0">0.1.0</a></li>

@@ -15,6 +15,7 @@
 #' @param from_dt datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
 #' @param to_dt datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
 #' @param local_time boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (\code{default = FALSE})?
+#' @param min_jam_factor numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -36,11 +37,8 @@
 #' }
 #'
 #' @examples
-#' # Authentication
-#' set_auth(
-#'   app_id = "<YOUR APP ID>",
-#'   app_code = "<YOUR APP CODE>"
-#' )
+#' # Provide an API Key for a HERE project
+#' set_key("<YOUR API KEY>")
 #'
 #' # Real-time traffic flow
 #' flow <- traffic(
@@ -58,7 +56,7 @@
 #'   url_only = TRUE
 #' )
 traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
-                    local_time = FALSE, url_only = FALSE) {
+                    local_time = FALSE, min_jam_factor = 0, url_only = FALSE) {
 
   # Checks
   .check_polygon(aoi)
@@ -72,11 +70,12 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
     message("Note: 'from_dt' and 'to_dt' have no effect on traffic flow. Traffic flow is always real-time.")
   }
   .check_boolean(local_time)
+  .check_min_jam_factor(min_jam_factor)
   .check_boolean(url_only)
 
-  # Add authentication
-  url <- .add_auth(
-    url = sprintf("https://traffic.api.here.com/traffic/6.2/%s.json?",
+  # Add API key
+  url <- .add_key(
+    url = sprintf("https://traffic.ls.hereapi.com/traffic/6.2/%s.json?",
                   product)
   )
 
@@ -115,6 +114,15 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
     local_time
   )
 
+  # Add min jam factor
+  if (product == "flow") {
+    url <- paste0(
+      url,
+      "&minjamfactor=",
+      min_jam_factor
+    )
+  }
+
   # Return urls if chosen
   if (url_only) return(url)
 
@@ -126,7 +134,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
 
   # Extract information
   if (product == "flow") {
-    traffic <- .extract_traffic_flow(data)
+    traffic <- .extract_traffic_flow(data, min_jam_factor)
   } else if (product == "incidents") {
     traffic <- .extract_traffic_incidents(data)
   }
@@ -141,7 +149,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   return(traffic)
 }
 
-.extract_traffic_flow <- function(data) {
+.extract_traffic_flow <- function(data, min_jam_factor) {
   ids <- .get_ids(data)
   count <- 0
   geoms <- list()
@@ -175,6 +183,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
       }), fill = TRUE)
     }), fill = TRUE))
   flow$geometry <- geoms
+  flow <- flow[flow$JF >= min_jam_factor, ]
   if (nrow(flow) > 0) {
     return(
       sf::st_set_crs(

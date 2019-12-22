@@ -20,9 +20,9 @@ reference:
   - text: Reference
   - title: Authentication
     contents:
-    - '`set_auth`'
+    - '`set_key`'
     - '`set_proxy`'
-    - '`unset_auth`'
+    - '`unset_key`'
     - '`unset_proxy`'
   - title: Example data
     contents:
