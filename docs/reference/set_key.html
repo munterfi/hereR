@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Example POIs — poi • hereR</title>
+<title>HERE Application Credentials — set_key • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,10 @@
 
 
 
-<meta property="og:title" content="Example POIs — poi" />
-<meta property="og:description" content="Some example Points of Interest (POIs):
-Cities in Switzerland and Liechtenstein with more than 100'000 inhabitants." />
+<meta property="og:title" content="HERE Application Credentials — set_key" />
+<meta property="og:description" content="Provide application credentials (API Key) for a HERE project
+of type 'REST', that will be used to authenticate in
+the requests to the APIs." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -153,34 +154,44 @@ Cities in Switzerland and Liechtenstein with more than 100'000 inhabitants." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Example POIs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>poi.Rd</code></div>
+    <h1>HERE Application Credentials</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/authentication.R'><code>R/authentication.R</code></a></small>
+    <div class="hidden name"><code>set_key.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Some example Points of Interest (POIs):
-Cities in Switzerland and Liechtenstein with more than 100'000 inhabitants.</p>
+    <p>Provide application credentials (API Key) for a HERE project
+of type 'REST', that will be used to authenticate in
+the requests to the APIs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>poi</span>)</pre>
+    <pre class="usage"><span class='fu'>set_key</span>(<span class='no'>api_key</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>api_key</th>
+      <td><p>character, the API key from a HERE project.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>"sf", "data.frame"</code>.</p>
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+    <p>None.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Made with Natural Earth. Free vector and raster map data <a href='https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_populated_places_simple.geojson'>@naturalearthdata.com</a></p>
+    <p>No login yet? Get your free login here: <a href='https://developer.here.com/'>klick</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>poi</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>set_key</span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#source">Source</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

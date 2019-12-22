@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -141,13 +141,9 @@
 <div id="application-credentials" class="section level2">
 <h2 class="hasAnchor">
 <a href="#application-credentials" class="anchor"></a>Application credentials</h2>
-<p>In order to use the functionality of the <code>hereR</code> package, application credentials (APP ID and APP CODE) for a HERE project of type <strong>REST &amp; XYZ HUB API/CLI</strong> have to be provided. These credentials will be set for the current R session and will be used to authenticate in the reqeusts to the <strong>HERE REST APIs</strong>. To set the credentials, please use:</p>
+<p>In order to use the functionality of the <code>hereR</code> package, application credentials (<strong>API key</strong>) for a HERE project have to be provided. The API key will be set for the current R session and will be used to authenticate in the requests to the APIs. To set the credentials, please use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hereR)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="reference/set_auth.html">set_auth</a></span>(</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="dt">app_id =</span> <span class="st">"&lt;YOUR APP ID&gt;"</span>,</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="dt">app_code =</span> <span class="st">"&lt;YOUR APP CODE&gt;"</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">)</a></code></pre></div>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)</a></code></pre></div>
 <p>No login yet? Get your free login here: <a href="https://developer.here.com/">developer.here.com</a></p>
 </div>
 <div id="examples" class="section level2">

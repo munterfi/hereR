@@ -79,7 +79,7 @@ with suggestions for addresses or landmarks near the provided POIs." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -165,8 +165,7 @@ The return value is an <code>sf</code> object, containing point geometries
 with suggestions for addresses or landmarks near the provided POIs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reverse_geocode</span>(<span class='no'>poi</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>landmarks</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>reverse_geocode</span>(<span class='no'>poi</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>landmarks</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,11 +202,8 @@ The <code>"id"</code> column can be used to join the original POIs.</p>
     <p><a href='https://developer.here.com/documentation/geocoder/topics/resource-geocode.html'>HERE Geocoder API: Geocode</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Authentication</span>
-<span class='fu'><a href='set_auth.html'>set_auth</a></span>(
-  <span class='kw'>app_id</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP ID&gt;"</span>,
-  <span class='kw'>app_code</span> <span class='kw'>=</span> <span class='st'>"&lt;YOUR APP CODE&gt;"</span>
-)
+    <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
+<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Get addresses</span>
 <span class='no'>addresses</span> <span class='kw'>&lt;-</span> <span class='fu'>reverse_geocode</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>landmarks</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)

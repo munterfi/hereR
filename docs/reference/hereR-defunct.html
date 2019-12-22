@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Example POIs — poi • hereR</title>
+<title>Defunct functions in package <span class="pkg">hereR</span>. — hereR-defunct • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,11 @@
 
 
 
-<meta property="og:title" content="Example POIs — poi" />
-<meta property="og:description" content="Some example Points of Interest (POIs):
-Cities in Switzerland and Liechtenstein with more than 100'000 inhabitants." />
+<meta property="og:title" content="Defunct functions in package <span class="pkg">hereR</span>. — hereR-defunct" />
+<meta property="og:description" content="The functions listed below are defunct.
+  When possible, alternative functions with similar
+  functionality are also mentioned. Help pages for defunct functions are
+  available at help(&quot;-defunct&quot;)." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -153,35 +155,40 @@ Cities in Switzerland and Liechtenstein with more than 100'000 inhabitants." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Example POIs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>poi.Rd</code></div>
+    <h1>Defunct functions in package <span class="pkg">hereR</span>.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/defunct.R'><code>R/defunct.R</code></a></small>
+    <div class="hidden name"><code>hereR-defunct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Some example Points of Interest (POIs):
-Cities in Switzerland and Liechtenstein with more than 100'000 inhabitants.</p>
+    <p>The functions listed below are defunct.
+  When possible, alternative functions with similar
+  functionality are also mentioned. Help pages for defunct functions are
+  available at <code><a href='https://rdrr.io/r/utils/help.html'>help("-defunct")</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>poi</span>)</pre>
+    <pre class="usage"><span class='fu'>set_auth</span>(<span class='no'>app_id</span>, <span class='no'>app_code</span>)
+
+<span class='fu'>unset_auth</span>()</pre>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="set-auth"><a class="anchor" href="#set-auth"></a><code>set_auth</code></h2>
 
-    <p>An object of class <code>"sf", "data.frame"</code>.</p>
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+    
 
-    <p>Made with Natural Earth. Free vector and raster map data <a href='https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_populated_places_simple.geojson'>@naturalearthdata.com</a></p>
+<p>For <code>set_auth</code>, use <code><a href='set_key.html'>set_key</a></code>.</p>
+    <h2 class="hasAnchor" id="unset-auth"><a class="anchor" href="#unset-auth"></a><code>unset_auth</code></h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>poi</span>)</div></pre>
+    
+
+<p>For <code>unset_auth</code>, use <code><a href='unset_key.html'>unset_key</a></code>.</p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#source">Source</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#set-auth"><code>set_auth</code></a></li>
+      <li><a href="#unset-auth"><code>unset_auth</code></a></li>
     </ul>
 
   </div>
