@@ -122,10 +122,9 @@
   }
 }
 
-.check_auth <- function(app_id, app_code) {
-  if (!(is.character(app_id) & app_id != "" &
-        is.character(app_code) & app_code != ""))
-    stop("Please provide an 'app_id' and an 'app_code' for a HERE project.
+.check_key <- function(api_key) {
+  if (!(is.character(api_key) & api_key != ""))
+    stop("Please provide an 'API key' for a HERE project.
          Get your login here: https://developer.here.com/")
 }
 
@@ -147,9 +146,16 @@
     stop(sprintf("'product' must be '%s'.", paste(traffic_product_types, collapse = "', '")))
 }
 
+.check_min_jam_factor <- function(min_jam_factor) {
+  if (!is.numeric(min_jam_factor))
+    stop("'min_jam_factor' must be of type 'numeric'.")
+  if (min_jam_factor < 0 | min_jam_factor > 10)
+    stop("'min_jam_factor' must be in the valid range from 0 to 10.")
+}
+
 .check_max_results <- function(results) {
   if (!is.numeric(results))
     stop("'results' must be of type 'numeric'.")
   if (results < 1 | results > 20)
-    stop("'results' must be of in the valid range from 1 to 20.")
+    stop("'results' must be in the valid range from 1 to 20.")
 }

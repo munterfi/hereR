@@ -1,15 +1,12 @@
 ## API URLs
 
-.add_auth <- function(url) {
-  app_id = Sys.getenv("HERE_APP_ID")
-  app_code = Sys.getenv("HERE_APP_CODE")
-  .check_auth(app_id, app_code)
+.add_key <- function(url) {
+  api_key = Sys.getenv("HERE_API_KEY")
+  .check_key(api_key)
   paste0(
     url,
-    "&app_id=",
-    app_id,
-    "&app_code=",
-    app_code)
+    "&apiKey=",
+    api_key)
 }
 
 .add_mode <- function(url, type, mode, traffic) {
