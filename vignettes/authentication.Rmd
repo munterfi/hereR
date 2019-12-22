@@ -17,23 +17,19 @@ knitr::opts_chunk$set(
 Set up a valid authentication to the 'HERE' REST APIs and optionally configure a proxy.
 
 ## Application credentials
-In order to use the functionality of the `hereR` package, application credentials for a HERE project must be provided. The HERE application credentials (APP ID and APP CODE) can be obtained for free as follows:
+In order to use the functionality of the `hereR` package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:
 
 1. Go to [developer.here.com](https://developer.here.com/)
-2. Sign up for a HERE developer account
-3. Create a new project of type 'REST & XYZ HUB API/CLI'
-4. Copy the **APP ID** and **APP CODE** from the project
+2. Sign up for a HERE developer account, which automatically creates a new project 
+3. Click 'REST: Generate APP'
+4. Click 'Create API Key' and copy the key
 
-The APP ID and APP CODE are set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month).
-To set the credentials, please use:
+The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month).
+To set the key, please use:
 
 ```{r set}
 library(hereR)
-
-set_auth(
-  app_id = "<YOUR APP ID>",
-  app_code = "<YOUR APP CODE>"
-)
+set_key("<YOUR API KEY>")
 ```
 
 ## Proxy
@@ -50,7 +46,7 @@ set_proxy(
 **Note:** Only functions of the `hereR` package are now using the proxy. Other functions sending requests to the web continue to encounter timeout errors.
 
 ## Remove credentials
-To remove previously set credentials from the current R session use `unset_auth()`. In order to delete the proxy information use `unset_proxy()`. For overwriting application credentials or proxy settings use again the `set_auth()` and `set_proxy()` functions.
+To remove previously set credentials from the current R session use `unset_key()`. In order to delete the proxy information use `unset_proxy()`. For overwriting application credentials or proxy settings use again the `set_key()` and `set_proxy()` functions.
 
 ## Reference
 

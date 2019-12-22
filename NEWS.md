@@ -1,3 +1,8 @@
+# version 0.2.1.9000
+
+* HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore `set_auth()` and `unset_auth()` are defunct and replaced by `set_key()` and `unset_key()` (see [#23](https://github.com/munterfinger/hereR/issues/23)).<br>**NOTE:** `.Deprecated()` was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 **the authentication must be adjusted**.
+* Added a minimum jam factor filter `"min_jam_factor"` to `traffic(..., product = "flow")`. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than `"min_jam_factor"`, which speeds up requests.
+
 # version 0.2.1
 
 * Enhanced `traffic()`: Clarified that `from_dt` and `to_dt` have no effect on the traffic flow (`product = "flow"`). Traffic flow is always real-time. Detailed documentation of the variables in the return value.
