@@ -4,7 +4,7 @@
 \alias{set_auth-defunct}
 \title{Defunct: HERE Application Credentials}
 \usage{
-set_auth()
+set_auth(app_id, app_code)
 }
 \arguments{
 \item{app_id}{character, the APP ID from a HERE project.}

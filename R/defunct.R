@@ -21,7 +21,7 @@ NULL
 #' @return
 #' None.
 #' @name set_auth-defunct
-#' @usage set_auth()
+#' @usage set_auth(app_id, app_code)
 #' @seealso \code{\link{hereR-defunct}}
 #' @keywords internal
 NULL

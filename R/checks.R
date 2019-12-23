@@ -53,6 +53,7 @@
       stop(.stop_print_modes(mode = mode, modes = modes, request = request))
 
   } else if (request == "calculateroute") {
+    modes <- modes[c(1, 2, 3, 4, 6, 7)]
     if (!mode %in% modes)
       stop(.stop_print_modes(mode = mode, modes = modes, request = request))
 
