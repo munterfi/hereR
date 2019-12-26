@@ -6,5 +6,6 @@ articles:
   geocoder: geocoder.html
   routing: routing.html
   traffic: traffic.html
+  transit: transit.html
   weather: weather.html
 

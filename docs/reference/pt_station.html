@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Traffic API: Flow and Incidents — traffic • hereR</title>
+<title>HERE Public Transit API: Stations — pt_station • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,8 @@
 
 
 
-<meta property="og:title" content="HERE Traffic API: Flow and Incidents — traffic" />
-<meta property="og:description" content="Real-time traffic flow and incident information based on the 'Traffic' API.
-The traffic flow data contains speed (&quot;SP&quot;) and congestion (jam factor: &quot;JF&quot;) information.
-Traffic incidents contain information about location, time, duration, severity, description and other details." />
+<meta property="og:title" content="HERE Public Transit API: Stations — pt_station" />
+<meta property="og:description" content="Retrieve stations with the corresponding line information around given locations." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,53 +155,31 @@ Traffic incidents contain information about location, time, duration, severity, 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Traffic API: Flow and Incidents</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/traffic.R'><code>R/traffic.R</code></a></small>
-    <div class="hidden name"><code>traffic.Rd</code></div>
+    <h1>HERE Public Transit API: Stations</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/pt_station.R'><code>R/pt_station.R</code></a></small>
+    <div class="hidden name"><code>pt_station.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Real-time traffic flow and incident information based on the 'Traffic' API.
-The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information.
-Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
+    <p>Retrieve stations with the corresponding line information around given locations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>traffic</span>(
-  <span class='no'>aoi</span>,
-  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
-  <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>local_time</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>pt_station</span>(<span class='no'>poi</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>aoi</th>
-      <td><p><code>sf</code> object, Areas of Interest (POIs) of geometry type <code>POLYGON</code>.</p></td>
+      <th>poi</th>
+      <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
-      <th>product</th>
-      <td><p>character, traffic product of the 'Traffic API'. Supported products: <code>"flow"</code> and <code>"incidents"</code>.</p></td>
+      <th>radius</th>
+      <td><p>numeric, the search radius in meters (<code>default = 500</code>).</p></td>
     </tr>
     <tr>
-      <th>from_dt</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the earliest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
-    </tr>
-    <tr>
-      <th>to_dt</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
-    </tr>
-    <tr>
-      <th>local_time</th>
-      <td><p>boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (<code>default = FALSE</code>)?</p></td>
-    </tr>
-    <tr>
-      <th>min_jam_factor</th>
-      <td><p>numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if <code>product</code> is set to <code>"flow"</code>, <code>default = 0</code>).</p></td>
+      <th>results</th>
+      <td><p>numeric, maximum number of suggested public transit stations (Valid range: 1 and 50, <code>default = 5</code>).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -213,56 +189,23 @@ Traffic incidents contain information about location, time, duration, severity, 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>sf</code> object containing the requested traffic information.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Explanation of the returned traffic flow variables:</p><ul>
-<li><p><code>"PC"</code>: Point TMC location code.</p></li>
-<li><p><code>"DE"</code>: Text description of the road.</p></li>
-<li><p><code>"QD"</code>: Queuing direction. '+' or '-'. Note this is the opposite of the travel direction in the fully qualified ID, For example for location 107+03021 the QD would be ‚-‚.</p></li>
-<li><p><code>"LE"</code>: Length of the stretch of road.</p></li>
-<li><p><code>"TY"</code>: Type information for the given Location Referencing container. This may be a freely defined string.</p></li>
-<li><p><code>"SP"</code>: Speed (based on UNITS) capped by speed limit.</p></li>
-<li><p><code>"FF"</code>: The free flow speed on this stretch of the road.</p></li>
-<li><p><code>"JF"</code>: The number between 0.0 and 10.0 indicating the expected quality of travel. When there is a road closure, the Jam Factor will be 10. As the number approaches 10.0 the quality of travel is getting worse. -1.0 indicates that a Jam Factor could not be calculated.</p></li>
-<li><p><code>"CN"</code>: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100%.</p></li>
-</ul>
-
+    <p>An <code>sf</code> object containing the requested stations with the corresponding line information.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    
-<ul>
-<li><p><a href='https://developer.here.com/api-explorer/rest/traffic'>HERE Traffic API</a></p></li>
-<li><p><a href='https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api'>Flow explanation, stackoverflow</a></p></li>
-</ul>
-
+    <p><a href='https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity'>HERE Public Transit API: Find Stations Nearby</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
-<span class='co'># Real-time traffic flow</span>
-<span class='no'>flow</span> <span class='kw'>&lt;-</span> <span class='fu'>traffic</span>(
-  <span class='kw'>aoi</span> <span class='kw'>=</span> <span class='no'>aoi</span>[<span class='no'>aoi</span>$<span class='no'>code</span> <span class='kw'>==</span> <span class='st'>"LI"</span>, ],
-  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
-  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
-
-<span class='co'># All traffic incidents from 2018 till end of 2019</span>
-<span class='no'>incidents</span> <span class='kw'>&lt;-</span> <span class='fu'>traffic</span>(
-  <span class='kw'>aoi</span> <span class='kw'>=</span> <span class='no'>aoi</span>[<span class='no'>aoi</span>$<span class='no'>code</span> <span class='kw'>==</span> <span class='st'>"LI"</span>, ],
-  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"incidents"</span>,
-  <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2018-01-01 00:00:00"</span>),
-  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-12-31 23:59:59"</span>),
-  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div></pre>
+<span class='co'># Stations</span>
+<span class='no'>stations</span> <span class='kw'>&lt;-</span> <span class='fu'>pt_station</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#note">Note</a></li>
       <li><a href="#references">References</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

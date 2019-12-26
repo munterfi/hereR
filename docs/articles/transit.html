@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Authentication • hereR</title>
+<title>Public Transit API • hereR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Authentication">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Public Transit API">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -116,53 +116,33 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Authentication</h1>
+      <h1>Public Transit API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/authentication.Rmd"><code>vignettes/authentication.Rmd</code></a></small>
-      <div class="hidden name"><code>authentication.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/transit.Rmd"><code>vignettes/transit.Rmd</code></a></small>
+      <div class="hidden name"><code>transit.Rmd</code></div>
 
     </div>
 
     
     
-<p>Set up a valid authentication to the ‘HERE’ REST APIs and optionally configure a proxy.</p>
-<div id="application-credentials" class="section level2">
+<p>Route public transit between given points and extract stations around locations based on the ‘HERE Public Transit’ API.</p>
+<div id="routes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#application-credentials" class="anchor"></a>Application credentials</h2>
-<p>In order to use the functionality of the <code>hereR</code> package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:</p>
-<ol style="list-style-type: decimal">
-<li>Go to <a href="https://developer.here.com/">developer.here.com</a>
-</li>
-<li>Sign up for a HERE developer account, which automatically creates a new project</li>
-<li>Click ‘REST: Generate APP’</li>
-<li>Click ‘Create API Key’ and copy the key</li>
-</ol>
-<p>The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). To set the key, please use:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hereR)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)</a></code></pre></div>
+<a href="#routes" class="anchor"></a>Routes</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hereR)</a></code></pre></div>
 </div>
-<div id="proxy" class="section level2">
+<div id="stations" class="section level2">
 <h2 class="hasAnchor">
-<a href="#proxy" class="anchor"></a>Proxy</h2>
-<p>If you are working behind a proxy and you don’t want to change the global proxy settings of RStudio, the proxy information can be passed directly to the <code>hereR</code> package. If a proxy is needed, it can be set as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/set_proxy.html">set_proxy</a></span>(</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">proxy =</span> <span class="st">"https://&lt;YOUR-PROXY.NET&gt;:&lt;PORT&gt;/"</span>,</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">proxyuserpwd =</span> <span class="st">"&lt;USER&gt;:&lt;PASSWORD&gt;"</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">)</a></code></pre></div>
-<p><strong>Note:</strong> Only functions of the <code>hereR</code> package are now using the proxy. Other functions sending requests to the web continue to encounter timeout errors.</p>
+<a href="#stations" class="anchor"></a>Stations</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hereR)</a></code></pre></div>
 </div>
-<div id="remove-credentials" class="section level2">
+<div id="api-reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#remove-credentials" class="anchor"></a>Remove credentials</h2>
-<p>To remove previously set credentials from the current R session use <code><a href="../reference/unset_key.html">unset_key()</a></code>. In order to delete the proxy information use <code><a href="../reference/unset_proxy.html">unset_proxy()</a></code>. For overwriting application credentials or proxy settings use again the <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/set_proxy.html">set_proxy()</a></code> functions.</p>
-</div>
-<div id="reference" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reference" class="anchor"></a>Reference</h2>
+<a href="#api-reference" class="anchor"></a>API Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/sign-up?create=Freemium-Basic&amp;keepState=true&amp;step=account">Sign up as developer</a></li>
-<li><a href="https://developer.here.com/pricing">Pricing and plans</a></li>
+<li><a href="https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html">Transit Route</a></li>
+<li><a href="https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity">Find Stations Nearby</a></li>
 </ul>
 </div>
   </div>
@@ -173,10 +153,9 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#application-credentials">Application credentials</a></li>
-      <li><a href="#proxy">Proxy</a></li>
-      <li><a href="#remove-credentials">Remove credentials</a></li>
-      <li><a href="#reference">Reference</a></li>
+<li><a href="#routes">Routes</a></li>
+      <li><a href="#stations">Stations</a></li>
+      <li><a href="#api-reference">API Reference</a></li>
       </ul>
 </div>
       </div>

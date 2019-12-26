@@ -21,7 +21,8 @@
   (1) geocode and autocomplete addresses or reverse geocode POIs using the Geocoder API;
   (2) routing directions, travel distance or time matrices and isolines using the Routing API;
   (3) real-time traffic flow and incident information from the Traffic API;
-  (4) weather forecasts, reports on current weather conditions, astronomical
+  (4) request public transit routes and nearby stations from the Public Transit API;
+  (5) weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the Destination Weather API.
   Locations, routes and isolines are returned as sf objects.">
 <meta property="og:image" content="/logo.png">
@@ -79,6 +80,9 @@
       <a href="articles/traffic.html">Traffic API</a>
     </li>
     <li>
+      <a href="articles/transit.html">Public Transit API</a>
+    </li>
+    <li>
       <a href="articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
@@ -128,7 +132,8 @@
 <p>(1) geocode and autocomplete addresses or reverse geocode POIs using the <strong>Geocoder API</strong>;</p>
 <p>(2) routing directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
 <p>(3) real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
-<p>(4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
+<p>(4) request public transit routes and nearby stations using the <strong>Public Transit API</strong>;</p>
+<p>(5) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
 <p>Locations, routes and isolines are returned as <code>sf</code> objects and tables as <code>data.table</code> objects.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -163,17 +168,21 @@
 </li>
 <li>Create a <strong>route matrix</strong> between points:<br><code>route_matrix &lt;- route_matrix(start = locs, mode = "car")</code><br><br>
 </li>
+<li>Get real-time <strong>traffic flow</strong> in a specific area:<br><code>flow &lt;- traffic(aoi = area, product = "flow")</code><br><br>
+</li>
+<li>Get <strong>traffic incidents</strong> in a specific area:<br><code>incidents &lt;- traffic(aoi = area, product = "incidents")</code><br><br>
+</li>
+<li>Request <strong>public transit routes</strong> between points:<br><code>stations &lt;- pt_route(locs_start, destination = locs_dest)</code><br><br>
+</li>
+<li>Get <strong>public transit stations</strong> around locations:<br><code>stations &lt;- pt_station(poi = locs)</code><br><br>
+</li>
 <li>Request <strong>weather observations</strong> at specific locations:<br><code>observations &lt;- weather(poi = locs, product = "observation")</code><br><br>
 </li>
 <li>Request <strong>weather forecast</strong> at specific locations:<br><code>forecast &lt;- weather(poi = locs, product = "forecast_hourly")</code><br><br>
 </li>
 <li>Request <strong>astronomical information</strong> at specific locations:<br><code>astronomy &lt;- weather(poi = locs, product = "forecast_astronomy")</code><br><br>
 </li>
-<li>Request <strong>weather alerts</strong> at specific locations:<br><code>alerts &lt;- weather(poi = locs, product = "alerts")</code><br><br>
-</li>
-<li>Get real-time <strong>traffic flow</strong> in a specific area:<br><code>flow &lt;- traffic(aoi = area, product = "flow")</code><br><br>
-</li>
-<li>Get <strong>traffic incidents</strong> in a specific area:<br><code>incidents &lt;- traffic(aoi = area, product = "incidents")</code>
+<li>Request <strong>weather alerts</strong> at specific locations:<br><code>alerts &lt;- weather(poi = locs, product = "alerts")</code>
 </li>
 </ul>
 </div>

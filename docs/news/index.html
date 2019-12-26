@@ -111,6 +111,9 @@
       <a href="../articles/traffic.html">Traffic API</a>
     </li>
     <li>
+      <a href="../articles/transit.html">Public Transit API</a>
+    </li>
+    <li>
       <a href="../articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
@@ -161,7 +164,9 @@
 </h1>
 <ul>
 <li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code><a href="../reference/hereR-defunct.html">set_auth()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_auth()</a></code> are defunct and replaced by <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/23"><a href='https://github.com/munterfinger/hereR/issues/23'>#23</a></a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
-<li>Added a minimum jam factor filter <code>"min_jam_factor"</code> to <code><a href="../reference/traffic.html">traffic(..., product = "flow")</a></code>. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than <code>"min_jam_factor"</code>, which speeds up requests.</li>
+<li>Added a minimum jam factor filter to <code><a href="../reference/traffic.html">traffic(..., product = "flow")</a></code>. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than <code>"min_jam_factor"</code>, which speeds up requests.</li>
+<li>
+<strong>Public Transit API:</strong> The new features <code><a href="../reference/pt_route.html">pt_route()</a></code> and <code><a href="../reference/pt_station.html">pt_station()</a></code> allow requesting the most efficient and relavant transit routes between given pair of locations and retrieve nearby stations with corresponding line information.</li>
 </ul>
 </div>
     <div id="version-0-2-1" class="section level1">
