@@ -28,6 +28,10 @@ url_traffic_flow <-
   traffic(aoi = aoi[aoi$code == "LI", ], product = "flow", url_only = TRUE)
 url_traffic_incidents <-
   traffic(aoi = aoi, product = "incidents", from_dt = Sys.time()-60*60*1.5, url_only = TRUE)
+url_pt_route <-
+  pt_route(start = poi[3:4, ], destination = poi[5:6, ], results = 2, url_only = TRUE)
+url_pt_station <-
+  pt_station(poi = poi, url_only = TRUE)
 
 ## Get response mocks
 mock <- list(
@@ -43,7 +47,9 @@ mock <- list(
   weather_forecast_astronomy_response = hereR:::.get_content(url_weather_forecast_astronomy),
   weather_alerts_response = hereR:::.get_content(url_weather_alerts),
   traffic_flow_response = hereR:::.get_content(url_traffic_flow),
-  traffic_incidents_response = hereR:::.get_content(url_traffic_incidents)
+  traffic_incidents_response = hereR:::.get_content(url_traffic_incidents),
+  pt_route_response = hereR:::.get_content(url_pt_route),
+  pt_station_response = hereR:::.get_content(url_pt_station)
 )
 
 ## Get examples
@@ -60,7 +66,9 @@ example <- list(
   weather_forecast_astronomy = weather(poi = poi, product = "forecast_astronomy"),
   weather_alerts = weather(poi = poi, product = "alerts"),
   traffic_flow = traffic(aoi = aoi[aoi$code == "LI", ], product = "flow"),
-  traffic_incidents = traffic(aoi = aoi, product = "incidents", from_dt = Sys.time()-60*60*1.5)
+  traffic_incidents = traffic(aoi = aoi, product = "incidents", from_dt = Sys.time()-60*60*1.5),
+  pt_route = pt_route(start = poi[3:4, ], destination = poi[5:6, ], results = 2),
+  pt_station = pt_station(poi)
 )
 
 ## Save as internal package data
