@@ -11,7 +11,8 @@ Description: Interface to the 'HERE' REST APIs <https://developer.here.com/devel
   (1) geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;
   (2) routing directions, travel distance or time matrices and isolines using the 'Routing' API;
   (3) real-time traffic flow and incident information from the 'Traffic' API;
-  (4) weather forecasts, reports on current weather conditions, astronomical
+  (4) request public transit routes and nearby stations from the 'Public Transit' API;
+  (5) weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the 'Destination Weather' API.
   Locations, routes and isolines are returned as 'sf' objects.
 Depends: R (>= 3.5.0)

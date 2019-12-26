@@ -1,0 +1,41 @@
+---
+title: "Public Transit API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Public Transit API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(hereR)
+library(mapview)
+mapviewOptions(
+  vector.palette = colorRampPalette(
+    c("#0571B0", "#92C5DE", "#F7F7F7","#F4A582", "#CA0020")
+  )
+)
+pt_routes <- hereR:::example$pt_route
+stations <- hereR:::example$pt_station
+```
+
+Route public transit between given points and extract stations around locations based on the 'HERE Public Transit' API.
+
+## Routes
+```{r pt_routes}
+library(hereR)
+```
+
+## Stations
+```{r pt_stations}
+library(hereR)
+```
+
+## API Reference
+
+* [Transit Route](https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html)
+* [Find Stations Nearby](https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity)

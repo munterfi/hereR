@@ -10,7 +10,8 @@ R interface to the **HERE REST APIs**:
 (1) geocode and autocomplete addresses or reverse geocode POIs using the **Geocoder API**;
 (2) routing directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) real-time traffic flow and incident information from the **Traffic API**;
-(4) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
+(4) request public transit routes and nearby stations using the **Public Transit API**;
+(5) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
 Locations, routes and isolines are returned as `sf` objects and tables as `data.table` objects.
 
@@ -45,10 +46,11 @@ No login yet? Get your free login here: [developer.here.com](https://developer.h
 * **Reverse geocode** POIs:<br>`addresses <- reverse_geocode(poi = locs)`<br><br>
 * Construct a **route** between points:<br>`routes <- route(start = locs_start, destination = locs_dest, mode = "car")`<br><br>
 * Create a **route matrix** between points:<br>`route_matrix <- route_matrix(start = locs, mode = "car")`<br><br>
+* Get real-time **traffic flow** in a specific area:<br>`flow <- traffic(aoi = area, product = "flow")`<br><br>
+* Get **traffic incidents** in a specific area:<br>`incidents <- traffic(aoi = area, product = "incidents")`<br><br>
+* Request **public transit routes** between points:<br>`stations <- pt_route(locs_start, destination = locs_dest)`<br><br>
+* Get **public transit stations** around locations:<br>`stations <- pt_station(poi = locs)`<br><br>
 * Request **weather observations** at specific locations:<br>`observations <- weather(poi = locs, product = "observation")`<br><br>
 * Request **weather forecast** at specific locations:<br>`forecast <- weather(poi = locs, product = "forecast_hourly")`<br><br>
 * Request **astronomical information** at specific locations:<br>`astronomy <- weather(poi = locs, product = "forecast_astronomy")`<br><br>
-* Request **weather alerts** at specific locations:<br>`alerts <- weather(poi = locs, product = "alerts")`<br><br>
-* Get real-time **traffic flow** in a specific area:<br>`flow <- traffic(aoi = area, product = "flow")`<br><br>
-* Get **traffic incidents** in a specific area:<br>`incidents <- traffic(aoi = area, product = "incidents")`
-
+* Request **weather alerts** at specific locations:<br>`alerts <- weather(poi = locs, product = "alerts")`

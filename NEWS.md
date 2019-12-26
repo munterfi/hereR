@@ -1,7 +1,8 @@
 # version 0.2.1.9000
 
 * HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore `set_auth()` and `unset_auth()` are defunct and replaced by `set_key()` and `unset_key()` (see [#23](https://github.com/munterfinger/hereR/issues/23)).<br>**NOTE:** `.Deprecated()` was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 **the authentication must be adjusted**.
-* Added a minimum jam factor filter `"min_jam_factor"` to `traffic(..., product = "flow")`. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than `"min_jam_factor"`, which speeds up requests.
+* Added a minimum jam factor filter to `traffic(..., product = "flow")`. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than `"min_jam_factor"`, which speeds up requests.
+* **Public Transit API:** The new features `pt_route()` and `pt_station()` allow requesting the most efficient and relavant transit routes between given pair of locations and retrieve nearby stations with corresponding line information.
 
 # version 0.2.1
 
