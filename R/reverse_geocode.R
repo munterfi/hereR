@@ -34,7 +34,7 @@ reverse_geocode <- function(poi, results = 1, landmarks = FALSE, url_only = FALS
 
   # Input checks
   .check_points(poi)
-  .check_max_results(results)
+  .check_numeric_range(results, 1, 20)
   .check_boolean(landmarks)
   .check_boolean(url_only)
 

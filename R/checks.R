@@ -30,7 +30,8 @@
 
 .check_datetime <- function(datetime) {
   if (!any(class(Sys.time()) %in% c("POSIXct", "POSIXt")))
-    stop("'datetime' must be of type 'POSIXct', 'POSIXt'.")
+    stop(sprintf("'%s' must be of type 'POSIXct', 'POSIXt'.",
+                 deparse(substitute(datetime))))
 }
 
 .check_datetime_range <- function(from, to) {
@@ -154,9 +155,10 @@
     stop("'min_jam_factor' must be in the valid range from 0 to 10.")
 }
 
-.check_max_results <- function(results) {
-  if (!is.numeric(results))
-    stop("'results' must be of type 'numeric'.")
-  if (results < 1 | results > 20)
-    stop("'results' must be in the valid range from 1 to 20.")
+.check_numeric_range <- function(num, lower, upper) {
+  var_name = deparse(substitute(num))
+  if (!is.numeric(num))
+    stop(sprintf("'%s' must be of type 'numeric'.", var_name))
+  if (num < lower | num > upper)
+    stop(sprintf("'%s' must be in the valid range from %s to %s.", var_name, lower, upper))
 }

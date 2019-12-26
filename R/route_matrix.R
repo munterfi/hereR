@@ -1,6 +1,6 @@
 #' HERE Routing API: Route Matrix
 #'
-#' Calculates a matrix of route summaries between given points of interest (POIs).
+#' Calculates a matrix of route summaries between given points of interest (POIs) using the 'Routing' API.
 #' Various transport modes and traffic information at a provided timestamp are supported.
 #' The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 #' maximum matrix size per request and thereby minimize the number of overall needed requests.

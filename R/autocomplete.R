@@ -22,7 +22,7 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
 
   # Check addresses
   .check_addresses(addresses)
-  .check_max_results(results)
+  .check_numeric_range(results, 1, 20)
   .check_boolean(url_only)
 
   # Add API key
