@@ -17,9 +17,9 @@ route_matrix(
 )
 }
 \arguments{
-\item{start}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.}
+\item{start}{\code{sf} object, the start locations of geometry type \code{POINT}.}
 
-\item{destination}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the destination locations.}
+\item{destination}{\code{sf} object, the destination locations of geometry type \code{POINT}.}
 
 \item{type}{character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.}
 

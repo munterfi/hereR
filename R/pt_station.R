@@ -86,7 +86,6 @@ pt_station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
         rank = seq(1, nrow(df$Res$Stations$Stn)),
         station = df$Res$Stations$Stn$name,
         distance = df$Res$Stations$Stn$distance,
-        # duration = .parse_duration(df$Res$Stations$Stn$duration),
         lines = lapply(df$Res$Stations$Stn$Transports$Transport, function(x)
           unique(as.character(x$name))),
         lng = df$Res$Stations$Stn$x,

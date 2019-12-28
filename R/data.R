@@ -1,4 +1,4 @@
-#' Example POIs
+#' Example Points of Interest
 #'
 #' Some example Points of Interest (POIs):
 #' Cities in Switzerland and Liechtenstein with more than 100'000 inhabitants.
@@ -17,7 +17,7 @@
 #' data(poi)
 "poi"
 
-#' Example AOIs
+#' Example Areas of Interest
 #'
 #' Some example Areas of Interest (AOIs):
 #' The boundary polygons of Switzerland and Liechtenstein.

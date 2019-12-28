@@ -3,7 +3,7 @@
 \docType{data}
 \name{aoi}
 \alias{aoi}
-\title{Example AOIs}
+\title{Example Areas of Interest}
 \format{An object of class \code{"sf", "data.frame"}.}
 \source{
 Made with Natural Earth. Free vector and raster map data \href{https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson}{@naturalearthdata.com}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{poi}
 \alias{poi}
-\title{Example POIs}
+\title{Example Points of Interest}
 \format{An object of class \code{"sf", "data.frame"}.}
 \source{
 Made with Natural Earth. Free vector and raster map data \href{https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_populated_places_simple.geojson}{@naturalearthdata.com}

@@ -9,8 +9,8 @@
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html}{HERE Routing API: Calculate Matrix}
 #'
-#' @param start \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.
-#' @param destination \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the destination locations.
+#' @param start \code{sf} object, the start locations of geometry type \code{POINT}.
+#' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
 #' @param type character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"} or \code{"truck"}.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
