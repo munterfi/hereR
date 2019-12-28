@@ -3,8 +3,10 @@ title: "Public Transit API"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Public Transit API}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -14,25 +16,96 @@ knitr::opts_chunk$set(
 )
 library(hereR)
 library(mapview)
+library(sf)
 mapviewOptions(
   vector.palette = colorRampPalette(
-    c("#0571B0", "#92C5DE", "#F7F7F7","#F4A582", "#CA0020")
+    c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
   )
 )
-pt_routes <- hereR:::example$pt_route
+route_sections <- hereR:::example$pt_route
+route_summary <- hereR:::example$pt_route_summary
 stations <- hereR:::example$pt_station
 ```
 
-Route public transit between given points and extract stations around locations based on the 'HERE Public Transit' API.
+Get public transit connections between given points and extract stations around locations based on the 'HERE Public Transit' API.
 
-## Routes
-```{r pt_routes}
-library(hereR)
+## Connections
+The function `pt_route()` allows to request public transit connections from the API. Two types ot requests are provided:
+
+* `pt_route(..., summary = FALSE)`: The public transit connections are returned as mulitple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
+* `pt_route(..., summary = TRUE)`: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
+
+### 1. Sections
+Request available public transit connections as detailed sections:
+```{r pt_route_sections, eval = FALSE}
+route_sections <- pt_route(
+  start = poi[3:4, ],
+  destination = poi[5:6, ],
+  summary = FALSE
+)
+```
+
+The `id` column corresponds to the row of the input locations (`start` and `destination`) and the `rank` column enumerates the alternative routes. The maximum number of alternatives can be set by the `results` parameter. Each row in the returned `sf` object corresponds to a route section with a transport mode in a vehicle without a transfer.
+
+```{r table_route_sections, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center', screenshot.force=FALSE}
+knitr::kable(head(as.data.frame(route_sections)[, colnames(route_sections) != "geometry"]), format = "html")
+```
+
+Print the public transit sections on an interactive leaflet map:
+```{r pt_route_sections_map, eval=TRUE, out.width='100%'}
+mapview(route_sections,
+        zcol = "mode",
+        layer.name = "Transport mode",
+        map.types = c("Esri.WorldTopoMap"),
+        homebutton = FALSE
+)
+```
+
+**Note:** The geometries of walking sections are straight lines between the start, station or destination points instead of routed paths on the pedestrian network. The reason for this is that it is not possible to match the *"maneuvers"* to the *"connections-sections"* in the API response using the section id (`sec_id`). The walking segments can be routed in hindsight using the `route()` function with transport mode set to `"pedestrian"`.
+
+### 2. Summary
+Request a summary of the available public transit connections:
+```{r pt_route_summary, eval = FALSE}
+route_summary <- pt_route(
+  start = poi[3:4, ],
+  destination = poi[5:6, ],
+  summary = TRUE
+)
+```
+
+```{r table_route_summary, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center', screenshot.force=FALSE}
+knitr::kable(head(as.data.frame(route_summary)[, colnames(route_summary) != "geometry"]), format = "html")
 ```
 
 ## Stations
-```{r pt_stations}
-library(hereR)
+The function `pt_station()` allows to request public transit stations nearby points of interest (POIs). The `radius` defines the maximum search distance in meters and `results` specifies the maximum number of returned stations. The returned `sf` object contains the locations of the stations and the available public transit lines at the station.
+
+```{r pt_stations, eval=FALSE}
+stations <- pt_station(
+  poi = poi,
+  radius = 500,
+  results = 5
+)
+```
+
+Print the POIs, the radius and stations on an interactive leaflet map:
+```{r pt_stations_map, eval=TRUE, out.width='100%'}
+buffer <-
+  poi %>%
+  st_transform(2056) %>% # LV95
+  st_buffer(500) %>%
+  st_transform(4326)     # WGS84
+
+m <-
+  mapview(poi, alpha.region = 1, col.region = "black",
+          label = poi$city, layer.name = "POIs",
+          map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
+  mapview(stations, col.region = "yellow", alpha = 1,
+          label = stations$station, layer.name = "Stations",
+          homebutton = FALSE) +
+  mapview(buffer, col.region = "transparent", alpha.region = 0,
+          layer.name = "Buffer", homebutton = FALSE, legend = FALSE)
+m
 ```
 
 ## API Reference
