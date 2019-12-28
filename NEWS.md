@@ -1,18 +1,19 @@
 # version 0.2.1.9000
 
 * HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore `set_auth()` and `unset_auth()` are defunct and replaced by `set_key()` and `unset_key()` (see [#23](https://github.com/munterfinger/hereR/issues/23)).<br>**NOTE:** `.Deprecated()` was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 **the authentication must be adjusted**.
-* Added a minimum jam factor filter to `traffic(..., product = "flow")`. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than `"min_jam_factor"`, which speeds up requests.
-* **Public Transit API:** The new features `pt_route()` and `pt_station()` allow requesting the most efficient and relavant transit routes between given pair of locations and retrieve nearby stations with corresponding line information.
+* Added a minimum jam factor filter to `traffic(..., product = "flow")`. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than `min_jam_factor`, which speeds up requests.
+* **Public Transit API: Transit route** The new feature `pt_route()` implements requesting the most efficient and relevant transit connections between given pairs of locations.
+* **Public Transit API: Find Stations Nearby** The new feature `pt_station()` retrieves nearby public transit stations with corresponding line information.
 
 # version 0.2.1
 
 * Enhanced `traffic()`: Clarified that `from_dt` and `to_dt` have no effect on the traffic flow (`product = "flow"`). Traffic flow is always real-time. Detailed documentation of the variables in the return value.
 * Improved coverage of `testthat`.
-* Added an `"id"` column to the output of `geocode()` and removed the id ordered `row.names` in order to be consistent with other functions of the package. Using the `"id"` column the addresses to geocode can be joined to the coordinates after geocoding (see [#9](https://github.com/munterfinger/hereR/issues/9)).
-* Added an `"id"` column also to `autocomplete()`, `reverse_geocode()`, `route()`, `isoline()`, `traffic()` and `weather()`. Using the `"id"` column the result can be joined to the input.
-* Fixed the handling of failing requests in `.get_content()`. The `"id"` column is still in correct order, even if there are failing requests in a function call (see [#17](https://github.com/munterfinger/hereR/issues/17)).
+* Added an `id` column to the output of `geocode()` and removed the id ordered `row.names` in order to be consistent with other functions of the package. Using the `id` column the addresses to geocode can be joined to the coordinates after geocoding (see [#9](https://github.com/munterfinger/hereR/issues/9)).
+* Added an `id` column also to `autocomplete()`, `reverse_geocode()`, `route()`, `isoline()`, `traffic()` and `weather()`. Using the `id` column the result can be joined to the input.
+* Fixed the handling of failing requests in `.get_content()`. The `id` column is still in correct order, even if there are failing requests in a function call (see [#17](https://github.com/munterfinger/hereR/issues/17)).
 * Added `rownames() <- NULL` to all functions before returning the result.
-* Renamed the `"city"` column in the returned object of `weather()` to `"station"`, as it stands for the name of the nearest meteorological station.
+* Renamed the `city` column in the returned object of `weather()` to `station`, as it stands for the name of the nearest meteorological station.
 * Test for empty geometries in the input POIs and AOIs and throw an error if some are found (see [#16](https://github.com/munterfinger/hereR/issues/16)).
 
 # version 0.2.0
