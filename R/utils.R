@@ -38,7 +38,9 @@
 
 .encode_datetime <- function(datetime) {
   stringr::str_replace(
-    as.character(datetime), " ", "T"
+    as.character(
+      format(datetime, tz = "UTC", usetz = FALSE) ### Check!!!
+    ), " ", "T"
   )
 }
 
@@ -101,6 +103,12 @@
   as.numeric(sapply(strsplit(names(content), "_"), function(x){x[[2]]}))
 }
 
+.parse_datetime <- function(datetime) {
+  format(
+    as.POSIXct(datetime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
+    tz = Sys.timezone(), usetz = TRUE ### Check!!!
+  )
+}
 
 ## Geometries
 

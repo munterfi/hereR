@@ -67,7 +67,8 @@ example <- list(
   weather_alerts = weather(poi = poi, product = "alerts"),
   traffic_flow = traffic(aoi = aoi[aoi$code == "LI", ], product = "flow"),
   traffic_incidents = traffic(aoi = aoi, product = "incidents", from_dt = Sys.time()-60*60*1.5),
-  pt_route = pt_route(start = poi[3:4, ], destination = poi[5:6, ], results = 2),
+  pt_route = pt_route(start = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = FALSE),
+  pt_route_summary = pt_route(start = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = TRUE),
   pt_station = pt_station(poi)
 )
 

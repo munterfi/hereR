@@ -14,12 +14,24 @@ test_that("pt_route works", {
   expect_error(pt_route(start = poi, destination = poi, changes = "not_numeric"))
   expect_error(pt_route(start = poi, destination = poi, changes = -10))
   expect_error(pt_route(start = poi, destination = poi, arrival = "not_a_bool"))
+  expect_error(pt_route(start = poi, destination = poi, summary = "not_a_bool"))
   expect_error(pt_route(start = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
-  # Test with API response mock
+  ## Test with API response mock
+  # Route segments: "summary = FALSE"
   with_mock(
     "hereR:::.get_content" = function(url) {hereR:::mock$pt_route_response},
-    routes <- pt_route(start = poi[3:4, ], destination = poi[5:6, ]),
+    routes <- pt_route(start = poi[3:4, ], destination = poi[5:6, ], summary = FALSE),
+
+    # Tests
+    expect_equal(any(sf::st_geometry_type(routes) != "LINESTRING"), FALSE),
+    expect_equal(length(unique(routes$id)), 2)
+  )
+
+  # Route summary: "summary = FALSE"
+  with_mock(
+    "hereR:::.get_content" = function(url) {hereR:::mock$pt_route_response},
+    routes <- pt_route(start = poi[3:4, ], destination = poi[5:6, ], summary = TRUE),
 
     # Tests
     expect_equal(any(sf::st_geometry_type(routes) != "LINESTRING"), FALSE),

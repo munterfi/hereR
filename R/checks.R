@@ -29,7 +29,7 @@
 }
 
 .check_datetime <- function(datetime) {
-  if (!any(class(Sys.time()) %in% c("POSIXct", "POSIXt")))
+  if (!any(class(datetime) %in% c("POSIXct", "POSIXt")) & !is.null(datetime))
     stop(sprintf("'%s' must be of type 'POSIXct', 'POSIXt'.",
                  deparse(substitute(datetime))))
 }

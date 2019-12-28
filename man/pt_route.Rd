@@ -11,13 +11,14 @@ pt_route(
   changes = -1,
   time = Sys.time(),
   arrival = FALSE,
+  summary = FALSE,
   url_only = FALSE
 )
 }
 \arguments{
-\item{start}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.}
+\item{start}{\code{sf} object, the start locations of geometry type \code{POINT}.}
 
-\item{destination}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the destination locations.}
+\item{destination}{\code{sf} object, the destination locations of geometry type \code{POINT}.}
 
 \item{results}{numeric, maximum number of suggested public transit routes (Valid range: 1 and 6).}
 
@@ -27,22 +28,40 @@ pt_route(
 
 \item{arrival}{boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?}
 
+\item{summary}{boolean, return a summary of the public transit connections instead of the sections of the routes (\code{default = FALSE})?}
+
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
 \value{
 An \code{sf} object containing the requested routes.
 }
 \description{
-Calculates public transit route geometries (\code{LINESTRING}) between given pairs of points using the 'Public Transit' API.
+Calculates public transit connections with geometries (\code{LINESTRING}) between pairs of points using the 'Public Transit' API.
+Two modes are provided:
+\itemize{
+  \item\code{summary = FALSE}: The public transit connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
+  \item\code{summary = TRUE}: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
+}
+}
+\note{
+As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (\code{sec_id}),
+the returned geometries of walking sections are straight lines between the station (or start and destination) points instead of routed lines on the pedestrian network.
+The walking segments can be routed in hindsight using the \link[hereR]{route} function with mode set to \code{"pedestrian"}.
 }
 \examples{
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
-# Routing
+# Connection segments
 routes <- pt_route(
   start = poi[3:4, ], destination = poi[5:6, ],
-  url_only = TRUE
+  summary = FALSE, url_only = TRUE
+)
+
+# Connection summary
+routes <- pt_route(
+  start = poi[3:4, ], destination = poi[5:6, ],
+  summary = TRUE, url_only = TRUE
 )
 }
 \references{
