@@ -8,7 +8,8 @@ test_that("pt_route works", {
   # Input checks
   expect_error(pt_route(start = c(1, 2, 3), destination = poi), "'points' must be an sf object.")
   expect_error(pt_route(start = c("character", NA), destination = poi), "'points' must be an sf object.")
-  #expect_error(pt_route(start = poi, destination = poi, time = "not_POSIXct"))
+  expect_error(pt_route(start = aoi, destination = poi), "'points' must be an sf object with geometry type 'POINT'.")
+  expect_error(pt_route(start = poi, destination = poi, time = "not_POSIXct"))
   expect_error(pt_route(start = poi, destination = poi, results = "not_numeric"))
   expect_error(pt_route(start = poi, destination = poi, results = -1))
   expect_error(pt_route(start = poi, destination = poi, changes = "not_numeric"))

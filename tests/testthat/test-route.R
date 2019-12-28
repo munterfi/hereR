@@ -10,6 +10,7 @@ test_that("route works", {
   expect_error(route(start = c("character", NA), destination = poi), "'points' must be an sf object.")
   expect_error(route(start = poi, destination = poi, mode = "not_a_mode"))
   expect_error(route(start = poi, destination = poi, type = "not_a_type"))
+  expect_error(route(start = poi, destination = poi, vehicle_type = "not_a_vehicle_type"))
   expect_error(route(start = poi, destination = poi, traffic = "not_a_bool"), "'traffic' must be a 'boolean' value.")
   expect_error(route(start = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
