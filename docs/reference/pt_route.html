@@ -43,7 +43,12 @@
 
 
 <meta property="og:title" content="HERE Public Transit API: Route — pt_route" />
-<meta property="og:description" content="Calculates public transit route geometries (LINESTRING) between given pairs of points using the 'Public Transit' API." />
+<meta property="og:description" content="Calculates public transit connections with geometries (LINESTRING) between pairs of points using the 'Public Transit' API.
+Two modes are provided:
+summary = FALSE: The public transit connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
+summary = TRUE: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
+
+" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -161,7 +166,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Calculates public transit route geometries (<code>LINESTRING</code>) between given pairs of points using the 'Public Transit' API.</p>
+    <p>Calculates public transit connections with geometries (<code>LINESTRING</code>) between pairs of points using the 'Public Transit' API.
+Two modes are provided:</p><ul>
+<li><p><code>summary = FALSE</code>: The public transit connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.</p></li>
+<li><p><code>summary = TRUE</code>: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>pt_route</span>(
@@ -171,6 +181,7 @@
   <span class='kw'>changes</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
   <span class='kw'>time</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
   <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
@@ -179,11 +190,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>start</th>
-      <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code> for the start locations.</p></td>
+      <td><p><code>sf</code> object, the start locations of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
       <th>destination</th>
-      <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code> for the destination locations.</p></td>
+      <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
       <th>results</th>
@@ -202,6 +213,10 @@
       <td><p>boolean, calculate routes for arrival at the defined time (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
+      <th>summary</th>
+      <td><p>boolean, return a summary of the public transit connections instead of the sections of the routes (<code>default = FALSE</code>)?</p></td>
+    </tr>
+    <tr>
       <th>url_only</th>
       <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
     </tr>
@@ -210,6 +225,11 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An <code>sf</code> object containing the requested routes.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (<code>sec_id</code>),
+the returned geometries of walking sections are straight lines between the station (or start and destination) points instead of routed lines on the pedestrian network.
+The walking segments can be routed in hindsight using the <a href='route.html'>route</a> function with mode set to <code>"pedestrian"</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html'>HERE Public Transit API: Transit Route</a></p>
@@ -218,10 +238,16 @@
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
-<span class='co'># Routing</span>
+<span class='co'># Connection segments</span>
 <span class='no'>routes</span> <span class='kw'>&lt;-</span> <span class='fu'>pt_route</span>(
   <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>3</span>:<span class='fl'>4</span>, ], <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>5</span>:<span class='fl'>6</span>, ],
-  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
+
+<span class='co'># Connection summary</span>
+<span class='no'>routes</span> <span class='kw'>&lt;-</span> <span class='fu'>pt_route</span>(
+  <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>3</span>:<span class='fl'>4</span>, ], <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>5</span>:<span class='fl'>6</span>, ],
+  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -229,6 +255,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
       <li><a href="#references">References</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
