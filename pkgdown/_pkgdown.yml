@@ -41,6 +41,10 @@ reference:
   - title: Traffic API
     contents:
     - '`traffic`'
+  - title: Public Transit API
+    contents:
+    - '`connection`'
+    - '`station`'
   - title: Destination Weather API
     contents:
     - '`weather`'

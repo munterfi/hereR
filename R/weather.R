@@ -1,8 +1,8 @@
-#' HERE Destination Weather API: Observations, Forecast, Astronomy and Alerts
+#' Destination Weather API: Observations, Forecast, Astronomy and Alerts
 #'
 #' Weather forecasts, reports on current weather conditions,
 #' astronomical information and alerts at a specific location (coordinates or
-#' location name) based on the 'Destination Weather' API.
+#' location name) based on the HERE 'Destination Weather' API.
 #' The information comes from the nearest available weather station and is not interpolated.
 #'
 #' @references
@@ -120,9 +120,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
         lng = df$observations$location$longitude[1],
         lat = df$observations$location$latitude[1],
         distance = df$observations$location$distance[1] * 1000,
-        timestamp = as.POSIXct(
-          df$observations$location$observation[[1]]$utcTime,
-          format = "%Y-%m-%dT%H:%M:%OS"),
+        timestamp = .parse_datetime(df$observations$location$observation[[1]]$utcTime),
         state = df$observations$location$state[1],
         country = df$observations$location$country[1])
       obs <- df$observations$location$observation[[1]]
@@ -184,7 +182,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   )
   astronomy$astronomy <- lapply(dfs, function(df) {
     ast <- df$astronomy$astronomy
-    ast$date <- as.Date(as.POSIXct(ast$utcTime, tz = "UTC"))
+    ast$date <- as.Date(.parse_datetime(ast$utcTime))
     ast$utcTime <- NULL
     ast
     }

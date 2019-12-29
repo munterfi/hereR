@@ -2,7 +2,7 @@
 % Please edit documentation in R/autocomplete.R
 \name{autocomplete}
 \alias{autocomplete}
-\title{HERE Geocoder API: Autocomplete}
+\title{Geocoder API: Autocomplete}
 \usage{
 autocomplete(addresses, results = 5, url_only = FALSE)
 }
@@ -17,7 +17,7 @@ autocomplete(addresses, results = 5, url_only = FALSE)
 A \code{data.table} object, containing the autocomplete suggestions for the addresses.
 }
 \description{
-Completes addresses using the 'Geocoder Autocomplete' API.
+Completes addresses using the HERE 'Geocoder Autocomplete' API.
 }
 \examples{
 # Provide an API Key for a HERE project

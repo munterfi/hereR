@@ -1,6 +1,6 @@
-#' HERE Geocoder API: Geocode
+#' Geocoder API: Geocode
 #'
-#' Geocodes addresses using the 'Geocoder' API.
+#' Geocodes addresses using the HERE 'Geocoder' API.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}

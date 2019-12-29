@@ -1,6 +1,6 @@
-#' HERE Geocoder API: Autocomplete
+#' Geocoder API: Autocomplete
 #'
-#' Completes addresses using the 'Geocoder Autocomplete' API.
+#' Completes addresses using the HERE 'Geocoder Autocomplete' API.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html}{HERE Geocoder API: Autocomplete}
@@ -22,7 +22,7 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
 
   # Check addresses
   .check_addresses(addresses)
-  .check_max_results(results)
+  .check_numeric_range(results, 1, 20)
   .check_boolean(url_only)
 
   # Add API key

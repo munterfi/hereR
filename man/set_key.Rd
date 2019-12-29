@@ -2,7 +2,7 @@
 % Please edit documentation in R/authentication.R
 \name{set_key}
 \alias{set_key}
-\title{HERE Application Credentials}
+\title{Set Application Credentials}
 \usage{
 set_key(api_key)
 }

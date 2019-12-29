@@ -14,6 +14,7 @@ test_that("traffic flow works", {
   expect_error(traffic(aoi = x, product = "flow"), "'polygon' has empty entries in the geometry column.")
   expect_error(traffic(aoi = c(1, 2, 3), product = "flow"), "'polygon' must be an sf object.")
   expect_error(traffic(aoi = NA, product = "flow"), "'polygon' must be an sf object.")
+  expect_error(traffic(aoi = poi, product = "flow"), "'polygon' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.")
   expect_error(traffic(aoi = aoi, product = "not_a_product"), "'product' must be 'flow', 'incidents'.")
   expect_error(traffic(aoi = aoi, product = "flow", min_jam_factor = -1), "'min_jam_factor' must be in the valid range from 0 to 10.")
   expect_error(traffic(aoi = aoi, product = "flow", min_jam_factor = "11"), "'min_jam_factor' must be of type 'numeric'.")

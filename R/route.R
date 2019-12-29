@@ -1,6 +1,6 @@
-#' HERE Routing API: Route
+#' Routing API: Route
 #'
-#' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the 'Routing' API.
+#' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the HERE 'Routing' API.
 #' Routes can be created for various transport modes, as for example 'car' or 'public transport',
 #' incorporating current traffic information, if available.
 #' For routes using the transport mode \code{"car"} a vehicle type can be specified,
@@ -9,14 +9,14 @@
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-route.html}{HERE Routing API: Calculate Route}
 #'
-#' @param start \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the start locations.
-#' @param destination \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT} for the destination locations.
+#' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
+#' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
+#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
+#' @param arrival boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?
 #' @param type character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"publicTransportTimeTable"}, \code{"truck"} or \code{"bicycle"}.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} or \code{arrival} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
 #' @param vehicle_type character, specify the motor type of the vehicle: \code{"diesel"}, \code{"gasoline"} or \code{"electric"}. And set the consumption per 100km im liters (\code{default = "diesel,5.5"}).
-#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
-#' @param arrival datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the arrival. Only specify a departure or an arrival.
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -37,21 +37,19 @@
 #'
 #' # Routing
 #' routes <- route(
-#'   start = from, destination = to,
+#'   origin = from, destination = to,
 #'   mode = "car", type = "fastest", traffic = TRUE,
 #'   vehicle_type = "diesel,5.5",
 #'   url_only = TRUE
 #' )
-route <- function(start, destination,
+route <- function(origin, destination, departure = Sys.time(), arrival = FALSE,
                   type = "fastest", mode = "car", traffic = FALSE,
-                  vehicle_type = "diesel,5.5",
-                  departure = NULL, arrival = NULL,
-                  url_only = FALSE) {
+                  vehicle_type = "diesel,5.5", url_only = FALSE) {
   # Checks
-  .check_points(start)
+  .check_points(origin)
   .check_points(destination)
   .check_datetime(departure)
-  .check_datetime(arrival)
+  .check_boolean(arrival)
   .check_type(type, request = "calculateroute")
   .check_mode(mode, request = "calculateroute")
   .check_vehicle_type(vehicle_type)
@@ -59,11 +57,11 @@ route <- function(start, destination,
   .check_boolean(url_only)
 
   # CRS transformation and formatting
-  start <- sf::st_coordinates(
-    sf::st_transform(start, 4326)
+  origin <- sf::st_coordinates(
+    sf::st_transform(origin, 4326)
   )
-  start <- paste0(
-    "geo!", start[, 2], ",", start[, 1]
+  origin <- paste0(
+    "geo!", origin[, 2], ",", origin[, 1]
   )
   destination <- sf::st_coordinates(
     sf::st_transform(destination, 4326)
@@ -81,7 +79,7 @@ route <- function(start, destination,
   url = paste0(
     url,
     "&waypoint0=",
-    start,
+    origin,
     "&waypoint1=",
     destination
   )
@@ -95,17 +93,17 @@ route <- function(start, destination,
   )
 
   # Add departure or arrival time
-  if (is.null(arrival)) {
+  if (arrival) {
     url <- .add_datetime(
       url,
       departure,
-      "departure"
+      "arrival"
     )
   } else {
     url <- .add_datetime(
       url,
-      arrival,
-      "arrival"
+      departure,
+      "departure"
     )
   }
 
@@ -162,8 +160,8 @@ route <- function(start, destination,
           data.table::data.table(
             cbind(
               id = ids[count],
-              fromLabel = utils::head(df$response$route$waypoint, 1)[[1]]$label[1],
-              toLabel = utils::tail(df$response$route$waypoint, 1)[[1]]$label[2],
+              origin = utils::head(df$response$route$waypoint, 1)[[1]]$label[1],
+              destination = utils::tail(df$response$route$waypoint, 1)[[1]]$label[2],
               mode = paste(Reduce(c, df$response$route$mode$transportModes),
                            collapse = ", "),
               traffic = df$response$route$mode$trafficMode,

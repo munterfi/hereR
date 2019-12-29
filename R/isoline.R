@@ -1,6 +1,6 @@
-#' HERE Routing API: Isoline
+#' Routing API: Isoline
 #'
-#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) that connect the end points of all routes
+#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API that connect the end points of all routes
 #' leaving from defined centers (POIs) with either a specified length, a
 #' specified travel time or consumption.
 #'
@@ -8,13 +8,13 @@
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
+#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
+#' @param arrival boolean, are the provided Points of Interest (POIs) the origin or destination locations (\code{default = FALSE})?
 #' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.
 #' @param rangetype character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
 #' @param type character, set the routing type: \code{"fastest"} or \code{"shortest"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
-#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
-#' @param start boolean, are the provided Points of Interest (POIs) the start or destination (\code{default = TRUE})?
 #' @param aggregate boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -32,10 +32,10 @@
 #'   range = seq(5, 30, 5) * 60,
 #'   url_only = TRUE
 #' )
-isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
+isoline <- function(poi, departure = Sys.time(), arrival = FALSE,
+                    range = seq(5, 30, 5) * 60, rangetype = "time",
                     type = "fastest", mode = "car", traffic = FALSE,
-                    departure = NULL, start = TRUE, aggregate = TRUE,
-                    url_only = FALSE) {
+                    aggregate = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(poi)
@@ -44,7 +44,7 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   .check_type(type = type, request = "calculateisoline")
   .check_mode(mode = mode, request = "calculateisoline")
   .check_boolean(traffic)
-  .check_boolean(start)
+  .check_boolean(arrival)
   .check_boolean(aggregate)
   .check_boolean(url_only)
 
@@ -62,7 +62,7 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
   )
   url = paste0(
     url,
-    if (start) {"&start="} else {"&destination="},
+    if (!arrival) {"&start="} else {"&destination="},
     poi
   )
 
@@ -123,9 +123,8 @@ isoline <- function(poi, range = seq(5, 30, 5) * 60, rangetype = "time",
         sf::st_as_sf(
           data.table::data.table(
             id = ids[count],
-            timestamp = as.POSIXct(df$response$metaInfo$timestamp,
-                                   tz = "UTC",
-                                   format = "%Y-%m-%dT%H:%M:%SZ"),
+            departure = .parse_datetime(df$response$metaInfo$timestamp),
+            arrival = .parse_datetime(df$response$metaInfo$timestamp) + df$response$isoline$range,
             range = df$response$isoline$range,
             lng = df$response$center$longitude,
             lat = df$response$center$latitude
