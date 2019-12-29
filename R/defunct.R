@@ -7,7 +7,7 @@
 #' @keywords internal
 NULL
 
-#' Defunct: HERE Application Credentials
+#' Defunct: Set Application Credentials
 #'
 #' Provide application credentials (APP ID and APP CODE) for a HERE project
 #' of type 'REST & XYZ HUB API/CLI', that will be used to authenticate in
@@ -35,7 +35,7 @@ set_auth <- function(app_id, app_code){
   .Defunct(new = "set_key", package = "hereR")
 }
 
-#' Remove HERE Application Credentials
+#' Remove Application Credentials
 #'
 #' Remove previously set HERE application credentials from the current R session.
 #'

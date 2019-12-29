@@ -1,4 +1,4 @@
-#' HERE Application Credentials
+#' Set Application Credentials
 #'
 #' Provide application credentials (API Key) for a HERE project
 #' of type 'REST', that will be used to authenticate in
@@ -48,7 +48,7 @@ set_proxy <- function(proxy, proxyuserpwd){
   )
 }
 
-#' Remove HERE Application Credentials
+#' Remove Application Credentials
 #'
 #' Remove previously set HERE API KEY from the current R session.
 #'

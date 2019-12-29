@@ -1,6 +1,6 @@
-#' HERE Geocoder API: Reverse Geocode
+#' Geocoder API: Reverse Geocode
 #'
-#' Get addresses or landmarks from locations using the 'Geocoder' API.
+#' Get addresses or landmarks from locations using the HERE 'Geocoder' API.
 #' The return value is an \code{sf} object, containing point geometries
 #' with suggestions for addresses or landmarks near the provided POIs.
 #'

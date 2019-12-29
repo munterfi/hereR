@@ -1,6 +1,6 @@
-#' HERE Traffic API: Flow and Incidents
+#' Traffic API: Flow and Incidents
 #'
-#' Real-time traffic flow and incident information based on the 'Traffic' API.
+#' Real-time traffic flow and incident information based on the HERE 'Traffic' API.
 #' The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
 #' Traffic incidents contain information about location, time, duration, severity, description and other details.
 #'
@@ -14,7 +14,6 @@
 #' @param product character, traffic product of the 'Traffic API'. Supported products: \code{"flow"} and \code{"incidents"}.
 #' @param from_dt datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
 #' @param to_dt datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
-#' @param local_time boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (\code{default = FALSE})?
 #' @param min_jam_factor numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -56,7 +55,7 @@
 #'   url_only = TRUE
 #' )
 traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
-                    local_time = FALSE, min_jam_factor = 0, url_only = FALSE) {
+                    min_jam_factor = 0, url_only = FALSE) {
 
   # Checks
   .check_polygon(aoi)
@@ -69,7 +68,6 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
     from_dt <- to_dt <- NULL
     message("Note: 'from_dt' and 'to_dt' have no effect on traffic flow. Traffic flow is always real-time.")
   }
-  .check_boolean(local_time)
   .check_min_jam_factor(min_jam_factor)
   .check_boolean(url_only)
 
@@ -110,8 +108,7 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   # Add time zone
   url <- paste0(
     url,
-    "&localtime=",
-    local_time
+    "&localtime=FALSE"
   )
 
   # Add min jam factor
@@ -205,16 +202,16 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
     if (is.null(df$TRAFFIC_ITEMS)) {return(NULL)}
     info <- data.table::data.table(
       id = ids[count],
-      incident_id = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_ID,
-      entry_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$ENTRY_TIME, format="%m/%d/%Y %H:%M:%S"),
-      from_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$START_TIME, format="%m/%d/%Y %H:%M:%S"),
-      to_dt = as.POSIXct(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$END_TIME, format="%m/%d/%Y %H:%M:%S"),
+      incidentId = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_ID,
+      entryTime = .parse_datetime(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$ENTRY_TIME),
+      fromTime = .parse_datetime(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$START_TIME),
+      toTime = .parse_datetime(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$END_TIME),
       status = tolower(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_STATUS_SHORT_DESC),
       type = tolower(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_TYPE_DESC),
       verified = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$VERIFIED,
       criticality = as.numeric(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$CRITICALITY$ID),
-      road_closed = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DETAIL$ROAD_CLOSED,
-      location_name = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$POLITICAL_BOUNDARY$COUNTY,
+      roadClosed = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DETAIL$ROAD_CLOSED,
+      locationName = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$POLITICAL_BOUNDARY$COUNTY,
       lng = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LONGITUDE,
       lat = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LATITUDE,
       description = sapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DESCRIPTION, function(x) x$value[2])

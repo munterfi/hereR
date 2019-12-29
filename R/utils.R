@@ -104,9 +104,11 @@
 }
 
 .parse_datetime <- function(datetime) {
-  format(
-    as.POSIXct(datetime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
-    tz = Sys.timezone(), usetz = TRUE ### Check!!!
+  as.POSIXct(
+    format(
+      as.POSIXct(datetime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
+      tz = Sys.timezone(), usetz = TRUE ### Check!!!
+    )
   )
 }
 

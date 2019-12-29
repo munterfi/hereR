@@ -1,6 +1,6 @@
-#' HERE Geocoder API: Autocomplete
+#' Geocoder API: Autocomplete
 #'
-#' Completes addresses using the 'Geocoder Autocomplete' API.
+#' Completes addresses using the HERE 'Geocoder Autocomplete' API.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html}{HERE Geocoder API: Autocomplete}
