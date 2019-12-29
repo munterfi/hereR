@@ -43,8 +43,8 @@ reference:
     - '`traffic`'
   - title: Public Transit API
     contents:
-    - '`pt_route`'
-    - '`pt_station`'
+    - '`connection`'
+    - '`station`'
   - title: Destination Weather API
     contents:
     - '`weather`'

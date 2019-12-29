@@ -22,38 +22,38 @@ mapviewOptions(
     c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
   )
 )
-route_sections <- hereR:::example$pt_route
-route_summary <- hereR:::example$pt_route_summary
-stations <- hereR:::example$pt_station
+connection_section <- hereR:::example$connection_section
+connection_summary <- hereR:::example$connection_summary
+stations <- hereR:::example$station
 ```
 
-Get public transit connections between given points and extract stations around locations based on the 'HERE Public Transit' API.
+Get public transport connections between given points and extract stations around locations based on the 'HERE Public Transit' API.
 
 ## Connections
-The function `pt_route()` allows to request public transit connections from the API. Two types ot requests are provided:
+The function `connection()` allows to request public transport connections from the API. Two types of requests are provided:
 
-* `pt_route(..., summary = FALSE)`: The public transit connections are returned as mulitple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
-* `pt_route(..., summary = TRUE)`: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
+* `connection(..., summary = FALSE)`: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
+* `connection(..., summary = TRUE)`: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
 
 ### 1. Sections
-Request available public transit connections as detailed sections:
-```{r pt_route_sections, eval = FALSE}
-route_sections <- pt_route(
-  start = poi[3:4, ],
+Request available public transport connections as detailed sections:
+```{r pt_connection_section, eval = FALSE}
+connection_section <- connection(
+  origin = poi[3:4, ],
   destination = poi[5:6, ],
   summary = FALSE
 )
 ```
 
-The `id` column corresponds to the row of the input locations (`start` and `destination`) and the `rank` column enumerates the alternative routes. The maximum number of alternatives can be set by the `results` parameter. Each row in the returned `sf` object corresponds to a route section with a transport mode in a vehicle without a transfer.
+The `id` column corresponds to the row of the input locations (`origin` and `destination`) and the `rank` column enumerates the alternative routes. The maximum number of alternatives can be set by the `results` parameter. Each row in the returned `sf` object corresponds to a route section with a transport mode in a vehicle without a transfer.
 
-```{r table_route_sections, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center', screenshot.force=FALSE}
-knitr::kable(head(as.data.frame(route_sections)[, colnames(route_sections) != "geometry"]), format = "html")
+```{r table_connection_section, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center', screenshot.force=FALSE}
+knitr::kable(head(as.data.frame(connection_section)[, colnames(connection_section) != "geometry"]), format = "html")
 ```
 
-Print the public transit sections on an interactive leaflet map:
-```{r pt_route_sections_map, eval=TRUE, out.width='100%'}
-mapview(route_sections,
+Print the public transport sections on an interactive leaflet map:
+```{r pt_connection_section_map, eval=TRUE, out.width='100%'}
+mapview(connection_section,
         zcol = "mode",
         layer.name = "Transport mode",
         map.types = c("Esri.WorldTopoMap"),
@@ -61,27 +61,27 @@ mapview(route_sections,
 )
 ```
 
-**Note:** The geometries of walking sections are straight lines between the start, station or destination points instead of routed paths on the pedestrian network. The reason for this is that it is not possible to match the *"maneuvers"* to the *"connections-sections"* in the API response using the section id (`sec_id`). The walking segments can be routed in hindsight using the `route()` function with transport mode set to `"pedestrian"`.
+**Note:** The geometries of walking sections are straight lines between the origin, station or destination points instead of routed paths on the pedestrian network. The reason for this is that it is not possible to match the *"maneuvers"* to the *"connections-sections"* in the API response using the section id (`sec_id`). The walking segments can be routed in hindsight using the `route()` function with transport mode set to `"pedestrian"`.
 
 ### 2. Summary
-Request a summary of the available public transit connections:
-```{r pt_route_summary, eval = FALSE}
-route_summary <- pt_route(
-  start = poi[3:4, ],
+Request a summary of the available public transport connections:
+```{r pt_connection_summary, eval = FALSE}
+connection_summary <- connection(
+  origin = poi[3:4, ],
   destination = poi[5:6, ],
   summary = TRUE
 )
 ```
 
-```{r table_route_summary, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center', screenshot.force=FALSE}
-knitr::kable(head(as.data.frame(route_summary)[, colnames(route_summary) != "geometry"]), format = "html")
+```{r table_connection_summary, eval=TRUE, echo=FALSE, out.width='100%', fig.align='center', screenshot.force=FALSE}
+knitr::kable(head(as.data.frame(connection_summary)[, colnames(connection_summary) != "geometry"]), format = "html")
 ```
 
 ## Stations
-The function `pt_station()` allows to request public transit stations nearby points of interest (POIs). The `radius` defines the maximum search distance in meters and `results` specifies the maximum number of returned stations. The returned `sf` object contains the locations of the stations and the available public transit lines at the station.
+The function `station()` allows to request public transport stations nearby points of interest (POIs). The `radius` defines the maximum search distance in meters and `results` specifies the maximum number of returned stations. The returned `sf` object contains the locations of the stations and the available public transport lines at the station.
 
-```{r pt_stations, eval=FALSE}
-stations <- pt_station(
+```{r stations, eval=FALSE}
+stations <- station(
   poi = poi,
   radius = 500,
   results = 5
@@ -89,7 +89,7 @@ stations <- pt_station(
 ```
 
 Print the POIs, the radius and stations on an interactive leaflet map:
-```{r pt_stations_map, eval=TRUE, out.width='100%'}
+```{r stations_map, eval=TRUE, out.width='100%'}
 buffer <-
   poi %>%
   st_transform(2056) %>% # LV95

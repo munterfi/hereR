@@ -1,13 +1,13 @@
-#' HERE Public Transit API: Stations
+#' Public Transit API: Find Stations Nearby
 #'
-#' Retrieve stations with the corresponding line information around given locations.
+#' Retrieve stations with the corresponding line information around given locations using the HERE 'Public Transit' API.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity}{HERE Public Transit API: Find Stations Nearby}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
 #' @param radius numeric, the search radius in meters (\code{default = 500}).
-#' @param results numeric, maximum number of suggested public transit stations (Valid range: 1 and 50, \code{default = 5}).
+#' @param results numeric, maximum number of suggested public transport stations (Valid range: 1 and 50, \code{default = 5}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -19,8 +19,8 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' # Stations
-#' stations <- pt_station(poi = poi, url_only = TRUE)
-pt_station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
+#' stations <- station(poi = poi, url_only = TRUE)
+station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
 
   # Checks
   .check_points(poi)
@@ -96,7 +96,7 @@ pt_station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
 
   # Check success
   if (nrow(stations) < 1) {
-    message("No public transit stations found.")
+    message("No public transport stations found.")
     return(NULL)
   }
 

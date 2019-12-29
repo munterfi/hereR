@@ -1,22 +1,22 @@
-#' HERE Public Transit API: Route
+#' Public Transit API: Route Transit
 #'
-#' Calculates public transit connections with geometries (\code{LINESTRING}) between pairs of points using the 'Public Transit' API.
+#' Calculates public transport connections with geometries (\code{LINESTRING}) between pairs of points using the HERE 'Public Transit' API.
 #' Two modes are provided:
 #' \itemize{
-#'   \item\code{summary = FALSE}: The public transit connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
+#'   \item\code{summary = FALSE}: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
 #'   \item\code{summary = TRUE}: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
 #' }
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html}{HERE Public Transit API: Transit Route}
 #'
-#' @param start \code{sf} object, the start locations of geometry type \code{POINT}.
+#' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
-#' @param results numeric, maximum number of suggested public transit routes (Valid range: 1 and 6).
-#' @param changes numeric, maximum number of changes allowed per route (Valid range: -1 and 6, \code{default = -1}).
-#' @param time datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure (or arrival if \code{arrival = TRUE}).
-#' @param arrival boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?
-#' @param summary boolean, return a summary of the public transit connections instead of the sections of the routes (\code{default = FALSE})?
+#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure (or arrival if \code{arrival = TRUE}).
+#' @param arrival boolean, calculate connections for arrival at the defined time (\code{default = FALSE})?
+#' @param results numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).
+#' @param transfers numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, \code{default = -1}).
+#' @param summary boolean, return a summary of the public transport connections instead of the sections of the routes (\code{default = FALSE})?
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -25,42 +25,45 @@
 #'
 #' @note
 #' As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (\code{sec_id}),
-#' the returned geometries of walking sections are straight lines between the station (or start and destination) points instead of routed lines on the pedestrian network.
+#' the returned geometries of walking sections are straight lines between the station (or origin and destination) points instead of routed lines on the pedestrian network.
 #' The walking segments can be routed in hindsight using the \link[hereR]{route} function with mode set to \code{"pedestrian"}.
 #'
 #' @examples
+#' library(sf)
+#'
 #' # Provide an API Key for a HERE project
 #' set_key("<YOUR API KEY>")
 #'
-#' # Connection segments
-#' routes <- pt_route(
-#'   start = poi[3:4, ], destination = poi[5:6, ],
+#' # Connection sections
+#' sections <- connection(
+#'   origin = poi[3:4, ], destination = poi[5:6, ],
 #'   summary = FALSE, url_only = TRUE
 #' )
 #'
 #' # Connection summary
-#' routes <- pt_route(
-#'   start = poi[3:4, ], destination = poi[5:6, ],
+#' summary <- connection(
+#'   origin = poi[3:4, ], destination = poi[5:6, ],
 #'   summary = TRUE, url_only = TRUE
 #' )
-pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.time(),
-                     arrival = FALSE, summary = FALSE, url_only = FALSE) {
+connection <- function(origin, destination, departure = Sys.time(),
+                       arrival = FALSE, results = 3, transfers = -1,
+                       summary = FALSE, url_only = FALSE) {
   # Checks
-  .check_points(start)
+  .check_points(origin)
   .check_points(destination)
   .check_numeric_range(results, 1, 6)
-  .check_numeric_range(changes, -1, 6)
-  .check_datetime(time)
+  .check_numeric_range(transfers, -1, 6)
+  .check_datetime(departure)
   .check_boolean(arrival)
   .check_boolean(summary)
   .check_boolean(url_only)
 
   # CRS transformation and formatting
-  start <- sf::st_coordinates(
-    sf::st_transform(start, 4326)
+  origin <- sf::st_coordinates(
+    sf::st_transform(origin, 4326)
   )
-  start <- paste0(
-    start[, 2], ",", start[, 1]
+  origin <- paste0(
+    origin[, 2], ",", origin[, 1]
   )
   destination <- sf::st_coordinates(
     sf::st_transform(destination, 4326)
@@ -78,15 +81,15 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
   url = paste0(
     url,
     "&dep=",
-    start,
+    origin,
     "&arr=",
     destination
   )
 
-  # Add time
+  # Add departure time
   url <- .add_datetime(
     url,
-    time,
+    departure,
     "time"
   )
 
@@ -104,11 +107,11 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
     results
   )
 
-  # Number of changes
+  # Number of transfers
   url <- paste0(
     url,
     "&changes=",
-    changes
+    transfers
   )
 
   # Add route attributes
@@ -128,21 +131,21 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
 
   # Extract information
   if (summary) {
-    routes <- .extract_pt_route_summary(data, start, destination)
+    routes <- .extract_connection_summary(data, origin, destination)
   } else {
-    routes <- .extract_pt_route(data, start, destination)
+    routes <- .extract_connection_sections(data, origin, destination)
   }
 
   # Checks success
   if (is.null(routes)) {
-    message("No public transit routes found.")
+    message("No public transport routes found.")
     return(NULL)
   }
 
   # Postprocess
   routes <- routes[routes$rank <= results, ]
-  routes$arr_time <- .parse_datetime(routes$arr_time)
-  routes$dep_time <- .parse_datetime(routes$dep_time)
+  routes$departure <- .parse_datetime(routes$departure)
+  routes$arrival <- .parse_datetime(routes$arrival)
   rownames(routes) <- NULL
 
   # Create sf object
@@ -154,7 +157,7 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
   )
 }
 
-.extract_pt_route <- function(data, start, destination) {
+.extract_connection_sections <- function(data, origin, destination) {
   ids <- .get_ids(data)
   count <- 0
 
@@ -164,7 +167,7 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
       count <<- count + 1
 
       # O-D
-      orig <- rev(as.numeric(strsplit(start[[count]], ",")[[1]]))
+      orig <- rev(as.numeric(strsplit(origin[[count]], ",")[[1]]))
       dest <- rev(as.numeric(strsplit(destination[[count]], ",")[[1]]))
 
       # Parse JSON
@@ -182,18 +185,18 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
             rank <<- rank + 1
             data.table::data.table(
               rank = rank,
-              dep_time = sec$Dep$time,
-              dep_station = c("START", sec$Dep$Stn$name[2:length(sec$Dep$Stn$name)]),
-              arr_time = sec$Arr$time,
-              arr_station = c(sec$Arr$Stn$name[1:(length(sec$Arr$Stn$name)-1)], "DEST"),
+              departure = sec$Dep$time,
+              origin = c("ORIG", sec$Dep$Stn$name[2:length(sec$Dep$Stn$name)]),
+              arrival = sec$Arr$time,
+              destination = c(sec$Arr$Stn$name[1:(length(sec$Arr$Stn$name)-1)], "DEST"),
               mode = sec$Dep$Transport$At$category,
               vehicle = sec$Dep$Transport$name,
               direction = sec$Dep$Transport$dir,
               distance = sec$Journey$distance,
-              dep_lng = c(orig[1], sec$Dep$Stn$x[2:length(sec$Dep$Stn$x)]),
-              dep_lat = c(orig[2], sec$Dep$Stn$y[2:length(sec$Dep$Stn$y)]),
-              arr_lng = c(sec$Arr$Stn$x[1:(length(sec$Arr$Stn$x)-1)], dest[1]),
-              arr_lat = c(sec$Arr$Stn$y[1:(length(sec$Arr$Stn$y)-1)], dest[2]),
+              depLng = c(orig[1], sec$Dep$Stn$x[2:length(sec$Dep$Stn$x)]),
+              depLat = c(orig[2], sec$Dep$Stn$y[2:length(sec$Dep$Stn$y)]),
+              arrLng = c(sec$Arr$Stn$x[1:(length(sec$Arr$Stn$x)-1)], dest[1]),
+              arrLat = c(sec$Arr$Stn$y[1:(length(sec$Arr$Stn$y)-1)], dest[2]),
               graph = sec$graph
             )
           }), fill = TRUE)
@@ -209,8 +212,8 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
       NULL
       sf::st_linestring(
         rbind(
-          cbind(routes[i, ]$dep_lng, routes[i, ]$dep_lat),
-          cbind(routes[i, ]$arr_lng, routes[i, ]$arr_lat)
+          cbind(routes[i, ]$depLng, routes[i, ]$depLat),
+          cbind(routes[i, ]$arrLng, routes[i, ]$arrLat)
         )
       )
     } else {
@@ -219,15 +222,15 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
   }), crs = 4326)
 
   # Postprocess
-  routes[, c("dep_lng", "dep_lat",
-             "arr_lng", "arr_lat",
+  routes[, c("depLng", "depLat",
+             "arrLng", "arrLat",
              "graph")] <- NULL
   routes[is.na(routes$mode), ]$mode <- "Walk"
 
   return(routes)
 }
 
-.extract_pt_route_summary <- function(data, start, destination) {
+.extract_connection_summary <- function(data, origin, destination) {
   ids <- .get_ids(data)
   count <- 0
   geoms <- list()
@@ -238,7 +241,7 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
       count <<- count + 1
 
       # O-D
-      orig <- rev(as.numeric(strsplit(start[[count]], ",")[[1]]))
+      orig <- rev(as.numeric(strsplit(origin[[count]], ",")[[1]]))
       dest <- rev(as.numeric(strsplit(destination[[count]], ",")[[1]]))
 
       # Parse JSON
@@ -260,11 +263,11 @@ pt_route <- function(start, destination, results = 3, changes = -1, time = Sys.t
           data.table::data.table(
             id = ids[count],
             rank = rank,
-            dep_time = df$Res$Connections$Connection$Dep$time[rank],
-            dep_station = sec$Dep$Stn$name[2],
-            arr_time = df$Res$Connections$Connection$Arr$time[rank],
-            arr_station = sec$Arr$Stn$name[length(sec$Arr$Stn$name)-1],
-            changes = df$Res$Connections$Connection$transfers[rank],
+            departure = df$Res$Connections$Connection$Dep$time[rank],
+            origin = sec$Dep$Stn$name[2],
+            arrival = df$Res$Connections$Connection$Arr$time[rank],
+            destination = sec$Arr$Stn$name[length(sec$Arr$Stn$name)-1],
+            transfers = df$Res$Connections$Connection$transfers[rank],
             modes = paste(stats::na.exclude(sec$Dep$Transport$At$category), collapse = ", "),
             vehicles = paste(stats::na.exclude(sec$Dep$Transport$name), collapse = ", "),
             distance = sum(sec$Journey$distance)
