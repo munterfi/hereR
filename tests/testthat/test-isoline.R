@@ -12,7 +12,7 @@ test_that("isoline works", {
   expect_error(isoline(poi = poi, type = "not_a_type"))
   expect_error(isoline(poi = poi, rangetype = "not_a_rangetype"))
   expect_error(isoline(poi = poi, traffic = "not_a_bool"), "'traffic' must be a 'boolean' value.")
-  expect_error(isoline(poi = poi, start = "not_a_bool"), "'start' must be a 'boolean' value.")
+  expect_error(isoline(poi = poi, arrival = "not_a_bool"), "'arrival' must be a 'boolean' value.")
   expect_error(isoline(poi = poi, aggregate = "not_a_bool"), "'aggregate' must be a 'boolean' value.")
   expect_error(isoline(poi = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
