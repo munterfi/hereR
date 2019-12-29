@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Public Transit API: Stations — pt_station • hereR</title>
+<title>Public Transit API: Route Transit — connection • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,13 @@
 
 
 
-<meta property="og:title" content="HERE Public Transit API: Stations — pt_station" />
-<meta property="og:description" content="Retrieve stations with the corresponding line information around given locations." />
+<meta property="og:title" content="Public Transit API: Route Transit — connection" />
+<meta property="og:description" content="Calculates public transport connections with geometries (LINESTRING) between pairs of points using the HERE 'Public Transit' API.
+Two modes are provided:
+summary = FALSE: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
+summary = TRUE: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
+
+" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -155,31 +160,61 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Public Transit API: Stations</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/pt_station.R'><code>R/pt_station.R</code></a></small>
-    <div class="hidden name"><code>pt_station.Rd</code></div>
+    <h1>Public Transit API: Route Transit</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/connection.R'><code>R/connection.R</code></a></small>
+    <div class="hidden name"><code>connection.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Retrieve stations with the corresponding line information around given locations.</p>
+    <p>Calculates public transport connections with geometries (<code>LINESTRING</code>) between pairs of points using the HERE 'Public Transit' API.
+Two modes are provided:</p><ul>
+<li><p><code>summary = FALSE</code>: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.</p></li>
+<li><p><code>summary = TRUE</code>: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>pt_station</span>(<span class='no'>poi</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>connection</span>(
+  <span class='no'>origin</span>,
+  <span class='no'>destination</span>,
+  <span class='kw'>departure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
+  <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>transfers</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
+  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>poi</th>
-      <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code>.</p></td>
+      <th>origin</th>
+      <td><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
-      <th>radius</th>
-      <td><p>numeric, the search radius in meters (<code>default = 500</code>).</p></td>
+      <th>destination</th>
+      <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
+    </tr>
+    <tr>
+      <th>departure</th>
+      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the departure (or arrival if <code>arrival = TRUE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>arrival</th>
+      <td><p>boolean, calculate connections for arrival at the defined time (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
       <th>results</th>
-      <td><p>numeric, maximum number of suggested public transit stations (Valid range: 1 and 50, <code>default = 5</code>).</p></td>
+      <td><p>numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).</p></td>
+    </tr>
+    <tr>
+      <th>transfers</th>
+      <td><p>numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, <code>default = -1</code>).</p></td>
+    </tr>
+    <tr>
+      <th>summary</th>
+      <td><p>boolean, return a summary of the public transport connections instead of the sections of the routes (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -189,23 +224,39 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>sf</code> object containing the requested stations with the corresponding line information.</p>
+    <p>An <code>sf</code> object containing the requested routes.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (<code>sec_id</code>),
+the returned geometries of walking sections are straight lines between the station (or origin and destination) points instead of routed lines on the pedestrian network.
+The walking segments can be routed in hindsight using the <a href='route.html'>route</a> function with mode set to <code>"pedestrian"</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity'>HERE Public Transit API: Find Stations Nearby</a></p>
+    <p><a href='https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html'>HERE Public Transit API: Transit Route</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</span></div><div class='input'>
+<span class='co'># Provide an API Key for a HERE project</span>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
-<span class='co'># Stations</span>
-<span class='no'>stations</span> <span class='kw'>&lt;-</span> <span class='fu'>pt_station</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='co'># Connection sections</span>
+<span class='no'>sections</span> <span class='kw'>&lt;-</span> <span class='fu'>connection</span>(
+  <span class='kw'>origin</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>3</span>:<span class='fl'>4</span>, ], <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>5</span>:<span class='fl'>6</span>, ],
+  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
+
+<span class='co'># Connection summary</span>
+<span class='no'>summary</span> <span class='kw'>&lt;-</span> <span class='fu'>connection</span>(
+  <span class='kw'>origin</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>3</span>:<span class='fl'>4</span>, ], <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>5</span>:<span class='fl'>6</span>, ],
+  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
       <li><a href="#references">References</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

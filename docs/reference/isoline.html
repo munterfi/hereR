@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Routing API: Isoline — isoline • hereR</title>
+<title>Routing API: Isoline — isoline • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="HERE Routing API: Isoline — isoline" />
-<meta property="og:description" content="Calcuates isolines (POLYGON or MULTIPOLYGON) that connect the end points of all routes
+<meta property="og:title" content="Routing API: Isoline — isoline" />
+<meta property="og:description" content="Calcuates isolines (POLYGON or MULTIPOLYGON) using the HERE 'Routing' API that connect the end points of all routes
 leaving from defined centers (POIs) with either a specified length, a
 specified travel time or consumption." />
 <meta property="og:image" content="/logo.png" />
@@ -157,26 +157,26 @@ specified travel time or consumption." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Routing API: Isoline</h1>
+    <h1>Routing API: Isoline</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/isoline.R'><code>R/isoline.R</code></a></small>
     <div class="hidden name"><code>isoline.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calcuates isolines (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) that connect the end points of all routes
+    <p>Calcuates isolines (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) using the HERE 'Routing' API that connect the end points of all routes
 leaving from defined centers (POIs) with either a specified length, a
 specified travel time or consumption.</p>
     </div>
 
     <pre class="usage"><span class='fu'>isoline</span>(
   <span class='no'>poi</span>,
+  <span class='kw'>departure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
+  <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>5</span>, <span class='fl'>30</span>, <span class='fl'>5</span>) * <span class='fl'>60</span>,
   <span class='kw'>rangetype</span> <span class='kw'>=</span> <span class='st'>"time"</span>,
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fastest"</span>,
   <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"car"</span>,
   <span class='kw'>traffic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>departure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>aggregate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
@@ -187,6 +187,14 @@ specified travel time or consumption.</p>
     <tr>
       <th>poi</th>
       <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code>.</p></td>
+    </tr>
+    <tr>
+      <th>departure</th>
+      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the departure.</p></td>
+    </tr>
+    <tr>
+      <th>arrival</th>
+      <td><p>boolean, are the provided Points of Interest (POIs) the origin or destination locations (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
       <th>range</th>
@@ -207,14 +215,6 @@ specified travel time or consumption.</p>
     <tr>
       <th>traffic</th>
       <td><p>boolean, use real-time traffic or prediction in routing (<code>default = FALSE</code>)? If no <code>departure</code> date and time is set, the current timestamp at the moment of the request is used for <code>departure</code>.</p></td>
-    </tr>
-    <tr>
-      <th>departure</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the departure.</p></td>
-    </tr>
-    <tr>
-      <th>start</th>
-      <td><p>boolean, are the provided Points of Interest (POIs) the start or destination (<code>default = TRUE</code>)?</p></td>
     </tr>
     <tr>
       <th>aggregate</th>

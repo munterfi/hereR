@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Routing API: Route — route • hereR</title>
+<title>Routing API: Route — route • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="HERE Routing API: Route — route" />
-<meta property="og:description" content="Calculates route geometries (LINESTRING) between given pairs of points using the 'Routing' API.
+<meta property="og:title" content="Routing API: Route — route" />
+<meta property="og:description" content="Calculates route geometries (LINESTRING) between given pairs of points using the HERE 'Routing' API.
 Routes can be created for various transport modes, as for example 'car' or 'public transport',
 incorporating current traffic information, if available.
 For routes using the transport mode &quot;car&quot; a vehicle type can be specified,
@@ -159,13 +159,13 @@ to obtain an estimate of the consumption." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Routing API: Route</h1>
+    <h1>Routing API: Route</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/route.R'><code>R/route.R</code></a></small>
     <div class="hidden name"><code>route.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculates route geometries (<code>LINESTRING</code>) between given pairs of points using the 'Routing' API.
+    <p>Calculates route geometries (<code>LINESTRING</code>) between given pairs of points using the HERE 'Routing' API.
 Routes can be created for various transport modes, as for example 'car' or 'public transport',
 incorporating current traffic information, if available.
 For routes using the transport mode <code>"car"</code> a vehicle type can be specified,
@@ -173,14 +173,14 @@ to obtain an estimate of the consumption.</p>
     </div>
 
     <pre class="usage"><span class='fu'>route</span>(
-  <span class='no'>start</span>,
+  <span class='no'>origin</span>,
   <span class='no'>destination</span>,
+  <span class='kw'>departure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
+  <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fastest"</span>,
   <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"car"</span>,
   <span class='kw'>traffic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>vehicle_type</span> <span class='kw'>=</span> <span class='st'>"diesel,5.5"</span>,
-  <span class='kw'>departure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
@@ -188,12 +188,20 @@ to obtain an estimate of the consumption.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>start</th>
-      <td><p><code>sf</code> object, the start locations of geometry type <code>POINT</code>.</p></td>
+      <th>origin</th>
+      <td><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
       <th>destination</th>
       <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
+    </tr>
+    <tr>
+      <th>departure</th>
+      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the departure.</p></td>
+    </tr>
+    <tr>
+      <th>arrival</th>
+      <td><p>boolean, calculate routes for arrival at the defined time (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -210,14 +218,6 @@ to obtain an estimate of the consumption.</p>
     <tr>
       <th>vehicle_type</th>
       <td><p>character, specify the motor type of the vehicle: <code>"diesel"</code>, <code>"gasoline"</code> or <code>"electric"</code>. And set the consumption per 100km im liters (<code>default = "diesel,5.5"</code>).</p></td>
-    </tr>
-    <tr>
-      <th>departure</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the departure.</p></td>
-    </tr>
-    <tr>
-      <th>arrival</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the arrival. Only specify a departure or an arrival.</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -237,7 +237,8 @@ to obtain an estimate of the consumption.</p>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Get all from - to combinations from POIs</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</span></div><div class='input'><span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), ]
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)
+<span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), ]
 <span class='no'>from</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='kw'>each</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)),]
 <span class='no'>idx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>to</span> <span class='kw'>!=</span> <span class='no'>from</span>, <span class='no'>any</span>, <span class='kw'>MARGIN</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>to</span>[<span class='no'>idx</span>, ]
@@ -245,7 +246,7 @@ to obtain an estimate of the consumption.</p>
 
 <span class='co'># Routing</span>
 <span class='no'>routes</span> <span class='kw'>&lt;-</span> <span class='fu'>route</span>(
-  <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>from</span>, <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>to</span>,
+  <span class='kw'>origin</span> <span class='kw'>=</span> <span class='no'>from</span>, <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>to</span>,
   <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"car"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fastest"</span>, <span class='kw'>traffic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>vehicle_type</span> <span class='kw'>=</span> <span class='st'>"diesel,5.5"</span>,
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>

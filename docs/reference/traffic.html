@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Traffic API: Flow and Incidents — traffic • hereR</title>
+<title>Traffic API: Flow and Incidents — traffic • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="HERE Traffic API: Flow and Incidents — traffic" />
-<meta property="og:description" content="Real-time traffic flow and incident information based on the 'Traffic' API.
+<meta property="og:title" content="Traffic API: Flow and Incidents — traffic" />
+<meta property="og:description" content="Real-time traffic flow and incident information based on the HERE 'Traffic' API.
 The traffic flow data contains speed (&quot;SP&quot;) and congestion (jam factor: &quot;JF&quot;) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details." />
 <meta property="og:image" content="/logo.png" />
@@ -157,13 +157,13 @@ Traffic incidents contain information about location, time, duration, severity, 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Traffic API: Flow and Incidents</h1>
+    <h1>Traffic API: Flow and Incidents</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/traffic.R'><code>R/traffic.R</code></a></small>
     <div class="hidden name"><code>traffic.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Real-time traffic flow and incident information based on the 'Traffic' API.
+    <p>Real-time traffic flow and incident information based on the HERE 'Traffic' API.
 The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
     </div>
@@ -173,7 +173,6 @@ Traffic incidents contain information about location, time, duration, severity, 
   <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
   <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>local_time</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
@@ -196,10 +195,6 @@ Traffic incidents contain information about location, time, duration, severity, 
     <tr>
       <th>to_dt</th>
       <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
-    </tr>
-    <tr>
-      <th>local_time</th>
-      <td><p>boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
       <th>min_jam_factor</th>
