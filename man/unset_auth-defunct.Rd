@@ -2,7 +2,7 @@
 % Please edit documentation in R/defunct.R
 \name{unset_auth-defunct}
 \alias{unset_auth-defunct}
-\title{Remove HERE Application Credentials}
+\title{Remove Application Credentials}
 \usage{
 unset_auth()
 }

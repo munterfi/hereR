@@ -2,14 +2,13 @@
 % Please edit documentation in R/traffic.R
 \name{traffic}
 \alias{traffic}
-\title{HERE Traffic API: Flow and Incidents}
+\title{Traffic API: Flow and Incidents}
 \usage{
 traffic(
   aoi,
   product = "flow",
   from_dt = NULL,
   to_dt = NULL,
-  local_time = FALSE,
   min_jam_factor = 0,
   url_only = FALSE
 )
@@ -23,8 +22,6 @@ traffic(
 
 \item{to_dt}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
 
-\item{local_time}{boolean, should time values in the response for traffic incidents be in the local time of the incident or in UTC (\code{default = FALSE})?}
-
 \item{min_jam_factor}{numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
@@ -33,7 +30,7 @@ traffic(
 An \code{sf} object containing the requested traffic information.
 }
 \description{
-Real-time traffic flow and incident information based on the 'Traffic' API.
+Real-time traffic flow and incident information based on the HERE 'Traffic' API.
 The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details.
 }

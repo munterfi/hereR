@@ -2,7 +2,7 @@
 % Please edit documentation in R/defunct.R
 \name{set_auth-defunct}
 \alias{set_auth-defunct}
-\title{Defunct: HERE Application Credentials}
+\title{Defunct: Set Application Credentials}
 \usage{
 set_auth(app_id, app_code)
 }

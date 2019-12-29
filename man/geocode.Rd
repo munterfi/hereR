@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocode.R
 \name{geocode}
 \alias{geocode}
-\title{HERE Geocoder API: Geocode}
+\title{Geocoder API: Geocode}
 \usage{
 geocode(addresses, autocomplete = FALSE, url_only = FALSE)
 }
@@ -17,7 +17,7 @@ geocode(addresses, autocomplete = FALSE, url_only = FALSE)
 An \code{sf} object, containing the coordinates of the geocoded addresses.
 }
 \description{
-Geocodes addresses using the 'Geocoder' API.
+Geocodes addresses using the HERE 'Geocoder' API.
 }
 \examples{
 # Provide an API Key for a HERE project
