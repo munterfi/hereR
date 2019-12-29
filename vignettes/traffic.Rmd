@@ -52,14 +52,13 @@ mapview(flow,
 ```
 
 ## Incidents
-AOIs also must be provided in order to request information about traffic incidents in specific regions. The optional time interval, which defines the traffic incidents that should be considered, can be specitified by the `from_dt` and `to_dt` parameters. The datetime information passed to the function must be a timestamp of type `POSIXct`, `POSIXt`. The `local_time` parameter defines if the time values in the response for traffic incidents should be in the local time of the incident or in UTC (default).
+AOIs also must be provided in order to request information about traffic incidents in specific regions. The optional time interval, which defines the traffic incidents that should be considered, can be specitified by the `from_dt` and `to_dt` parameters. The datetime information passed to the function must be a timestamp of type `POSIXct`, `POSIXt`.
 
 ```{r incidents, eval=FALSE}
 incidents <- traffic(
   aoi = aoi[aoi$code == "LI", ],
   product = "incidents",
-  from_dt = Sys.time()-60*60*1.5,
-  local_time = FALSE
+  from_dt = Sys.time()-60*60*1.5
 )
 ```
 
