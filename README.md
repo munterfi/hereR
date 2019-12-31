@@ -6,54 +6,82 @@
 [![Codecov test coverage](https://codecov.io/gh/munterfinger/hereR/branch/master/graph/badge.svg)](https://codecov.io/gh/munterfinger/hereR?branch=master)
 <!-- badges: end -->
 
-R interface to the **HERE REST APIs**:
+The hereR package provides an interface to the **HERE REST APIs** for R:
 (1) geocode and autocomplete addresses or reverse geocode POIs using the **Geocoder API**;
-(2) routing directions, travel distance or time matrices and isolines using the **Routing API**;
-(3) real-time traffic flow and incident information from the **Traffic API**;
-(4) request public transport connections and nearby stations using the **Public Transit API**;
-(5) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
+(2) route directions, travel distance or time matrices and isolines using the **Routing API**;
+(3) request real-time traffic flow and incident information from the **Traffic API**;
+(4) find public transport connections and nearby stations using the **Public Transit API**;
+(5) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
 Locations, routes and isolines are returned as `sf` objects and tables as `data.table` objects.
 
 ## Installation
 
-You can install the released version of `hereR` from [CRAN](https://CRAN.R-project.org/package=hereR/) with:
+Install the released version from [CRAN](https://CRAN.R-project.org/package=hereR/) with:
 
 ``` r
 install.packages("hereR")
 ```
 
-... or install the development version from [GitHub](https://github.com/munterfinger/hereR/) with:
+Install the development version from [GitHub](https://github.com/munterfinger/hereR/) with:
 
 ``` r
 devtools::install_github("munterfinger/hereR")
 ```
 
-## Application credentials
+## Usage
+This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A free login and project can be created on [developer.here.com](https://developer.here.com/). In order to obtain the API key navigate to a project of your choice in the developer portal, select '**REST: Generate APP**' and then '**Create API Key**'.
 
-In order to use the functionality of the `hereR` package, application credentials (**API key**) for a HERE project have to be provided. The API key will be set for the current R session and will be used to authenticate in the requests to the APIs.
-To set the credentials, please use:
+To set the API key, please use:
 ``` r
 library(hereR)
 set_key("<YOUR API KEY>")
 ```
-No login yet? Get your free login here: [developer.here.com](https://developer.here.com/)
 
-## Examples
+Once valid application credentials have been created and set in the R session, the APIs can be addressed as follows:
 
-* **Geocode** addresses:<br>`locs <- geocode(addresses = c("Schweighofstrasse 190, Zürich, Schweiz", "Hardstrasse 48, Zürich, Schweiz"))`<br><br>
-* **Autocomplete** addresses:<br>`suggestions <- autocomplete(addresses = c("Schweighofstrasse", "Hardstrasse"))`<br><br>
-* **Reverse geocode** POIs:<br>`addresses <- reverse_geocode(poi = locs)`<br><br>
-* Construct a **route** between points:<br>`routes <- route(origin = locs_origin, destination = locs_dest, mode = "car")`<br><br>
-* Create a **route matrix** between points:<br>`route_matrix <- route_matrix(origin = locs, mode = "car")`<br><br>
-* Get real-time **traffic flow** in a specific area:<br>`flow <- traffic(aoi = area, product = "flow")`<br><br>
-* Get **traffic incidents** in a specific area:<br>`incidents <- traffic(aoi = area, product = "incidents")`<br><br>
-* Request **public transport connections** between points:<br>`stations <- connection(origin = locs_origin, destination = locs_dest)`<br><br>
-* Get **public transit stations** around locations:<br>`stations <- station(poi = locs)`<br><br>
-* Request **weather observations** at specific locations:<br>`observations <- weather(poi = locs, product = "observation")`<br><br>
-* Request **weather forecast** at specific locations:<br>`forecast <- weather(poi = locs, product = "forecast_hourly")`<br><br>
-* Request **astronomical information** at specific locations:<br>`astronomy <- weather(poi = locs, product = "forecast_astronomy")`<br><br>
-* Request **weather alerts** at specific locations:<br>`alerts <- weather(poi = locs, product = "alerts")`
+**Geocoder API:** Autocomplete and geocode addresses or reverse geocode POIs.
+``` r
+geocode(c("Schweighofstrasse 190, Zürich, Schweiz", "Hardstrasse 48, Zürich, Schweiz"))
+
+autocomplete(c("Schweighofstrasse", "Hardstrasse"))
+
+reverse_geocode(poi, landmarks = FALSE)
+```
+
+**Routing API:** Construct a route, create a route matrix or request an isochrone around points.
+``` r
+route(poi[1:2, ], poi[3:4, ], mode = "car")
+
+route_matrix(poi, mode = "car")
+
+isoline(poi, rangetype = "time", mode = "car")
+```
+
+**Traffic API:** Get real-time traffic flow or incidents in a specific area.
+``` r
+traffic(aoi, product = "flow")
+
+traffic(aoi, product = "incidents")
+```
+
+**Public Transit API:** Request public transport connections between points or find public transit stations nearby locations.
+``` r
+connection(poi[1:2, ], poi[3:4, ])
+
+station(poi, radius = 500)
+```
+
+**Destination Weather API:** Request weather observations, forecasts, astronomical information or alerts at specific locations.
+``` r
+weather(poi, product = "observation")
+
+weather(poi, product = "forecast_hourly")
+
+weather(poi, product = "forecast_astronomy")
+
+weather(poi, product = "alerts")
+```
 
 ## References
 
