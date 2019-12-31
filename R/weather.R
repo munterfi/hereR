@@ -1,4 +1,4 @@
-#' Destination Weather API: Observations, Forecast, Astronomy and Alerts
+#' Destination Weather API: Observations, Forecasts, Astronomy and Alerts
 #'
 #' Weather forecasts, reports on current weather conditions,
 #' astronomical information and alerts at a specific location (coordinates or

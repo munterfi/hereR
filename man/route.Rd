@@ -27,7 +27,7 @@ route(
 
 \item{type}{character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.}
 
-\item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"publicTransportTimeTable"}, \code{"truck"} or \code{"bicycle"}.}
+\item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"truck"} or \code{"bicycle"}.}
 
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} or \code{arrival} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.}
 
@@ -50,7 +50,6 @@ to obtain an estimate of the consumption.
 set_key("<YOUR API KEY>")
 
 # Get all from - to combinations from POIs
-library(sf)
 to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
 from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
 idx <- apply(to != from, any, MARGIN = 1)

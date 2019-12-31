@@ -2,7 +2,7 @@
 % Please edit documentation in R/weather.R
 \name{weather}
 \alias{weather}
-\title{Destination Weather API: Observations, Forecast, Astronomy and Alerts}
+\title{Destination Weather API: Observations, Forecasts, Astronomy and Alerts}
 \usage{
 weather(poi, product = "observation", url_only = FALSE)
 }

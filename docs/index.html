@@ -19,10 +19,10 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="sf-Based Interface to the HERE REST APIs">
 <meta property="og:description" content="Interface to the HERE REST APIs &lt;https://developer.here.com/develop/rest-apis&gt;:
   (1) geocode and autocomplete addresses or reverse geocode POIs using the Geocoder API;
-  (2) routing directions, travel distance or time matrices and isolines using the Routing API;
-  (3) real-time traffic flow and incident information from the Traffic API;
-  (4) request public transport connections and nearby stations from the Public Transit API;
-  (5) weather forecasts, reports on current weather conditions, astronomical
+  (2) route directions, travel distance or time matrices and isolines using the Routing API;
+  (3) request real-time traffic flow and incident information from the Traffic API;
+  (4) find request public transport connections and nearby stations from the Public Transit API;
+  (5) get weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the Destination Weather API.
   Locations, routes and isolines are returned as sf objects.">
 <meta property="og:image" content="/logo.png">
@@ -128,63 +128,57 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>R interface to the <strong>HERE REST APIs</strong>:</p>
+<p>The <code>hereR</code> package provides an interface to the <strong>HERE REST APIs</strong> for R:</p>
 <p>(1) geocode and autocomplete addresses or reverse geocode POIs using the <strong>Geocoder API</strong>;</p>
-<p>(2) routing directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
-<p>(3) real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
-<p>(4) request public transport connections and nearby stations using the <strong>Public Transit API</strong>;</p>
-<p>(5) weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
+<p>(2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
+<p>(3) request real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
+<p>(4) find public transport connections and nearby stations using the <strong>Public Transit API</strong>;</p>
+<p>(5) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
 <p>Locations, routes and isolines are returned as <code>sf</code> objects and tables as <code>data.table</code> objects.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of <code>hereR</code> from <a href="https://CRAN.R-project.org/package=hereR/">CRAN</a> with:</p>
+<p>Install the released version from <a href="https://CRAN.R-project.org/package=hereR/">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"hereR"</span>)</a></code></pre></div>
-<p>… or install the development version from <a href="https://github.com/munterfinger/hereR/">GitHub</a> with:</p>
+<p>Install the development version from <a href="https://github.com/munterfinger/hereR/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"munterfinger/hereR"</span>)</a></code></pre></div>
 </div>
-<div id="application-credentials" class="section level2">
+<div id="usage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#application-credentials" class="anchor"></a>Application credentials</h2>
-<p>In order to use the functionality of the <code>hereR</code> package, application credentials (<strong>API key</strong>) for a HERE project have to be provided. The API key will be set for the current R session and will be used to authenticate in the requests to the APIs. To set the credentials, please use:</p>
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A free login and project can be created on <a href="https://developer.here.com/">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
+<p>To set the API key, please use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hereR)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)</a></code></pre></div>
-<p>No login yet? Get your free login here: <a href="https://developer.here.com/">developer.here.com</a></p>
-</div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<ul>
-<li>
-<strong>Geocode</strong> addresses:<br><code>locs &lt;- geocode(addresses = c("Schweighofstrasse 190, Zürich, Schweiz", "Hardstrasse 48, Zürich, Schweiz"))</code><br><br>
-</li>
-<li>
-<strong>Autocomplete</strong> addresses:<br><code>suggestions &lt;- autocomplete(addresses = c("Schweighofstrasse", "Hardstrasse"))</code><br><br>
-</li>
-<li>
-<strong>Reverse geocode</strong> POIs:<br><code>addresses &lt;- reverse_geocode(poi = locs)</code><br><br>
-</li>
-<li>Construct a <strong>route</strong> between points:<br><code>routes &lt;- route(origin = locs_origin, destination = locs_dest, mode = "car")</code><br><br>
-</li>
-<li>Create a <strong>route matrix</strong> between points:<br><code>route_matrix &lt;- route_matrix(origin = locs, mode = "car")</code><br><br>
-</li>
-<li>Get real-time <strong>traffic flow</strong> in a specific area:<br><code>flow &lt;- traffic(aoi = area, product = "flow")</code><br><br>
-</li>
-<li>Get <strong>traffic incidents</strong> in a specific area:<br><code>incidents &lt;- traffic(aoi = area, product = "incidents")</code><br><br>
-</li>
-<li>Request <strong>public transport connections</strong> between points:<br><code>stations &lt;- connection(origin = locs_origin, destination = locs_dest)</code><br><br>
-</li>
-<li>Get <strong>public transit stations</strong> around locations:<br><code>stations &lt;- station(poi = locs)</code><br><br>
-</li>
-<li>Request <strong>weather observations</strong> at specific locations:<br><code>observations &lt;- weather(poi = locs, product = "observation")</code><br><br>
-</li>
-<li>Request <strong>weather forecast</strong> at specific locations:<br><code>forecast &lt;- weather(poi = locs, product = "forecast_hourly")</code><br><br>
-</li>
-<li>Request <strong>astronomical information</strong> at specific locations:<br><code>astronomy &lt;- weather(poi = locs, product = "forecast_astronomy")</code><br><br>
-</li>
-<li>Request <strong>weather alerts</strong> at specific locations:<br><code>alerts &lt;- weather(poi = locs, product = "alerts")</code>
-</li>
-</ul>
+<p>Once valid application credentials have been created and the key is set in the R session, the APIs can be addressed using the functions, which are illustrated by examples below. For a more detailed description check the documentation of the functions and the package vignettes.</p>
+<p><strong>Geocoder API:</strong> Autocomplete and geocode addresses or reverse geocode POIs.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/geocode.html">geocode</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse 190, Zürich, Schweiz"</span>, <span class="st">"Hardstrasse 48, Zürich, Schweiz"</span>))</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="reference/autocomplete.html">autocomplete</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span>))</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw"><a href="reference/reverse_geocode.html">reverse_geocode</a></span>(poi, <span class="dt">landmarks =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><strong>Routing API:</strong> Construct a route, create a route matrix or request an isochrone around points.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/route.html">route</a></span>(poi[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ], poi[<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>, ], <span class="dt">mode =</span> <span class="st">"car"</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="reference/route_matrix.html">route_matrix</a></span>(poi, <span class="dt">mode =</span> <span class="st">"car"</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="reference/isoline.html">isoline</a></span>(poi, <span class="dt">rangetype =</span> <span class="st">"time"</span>, <span class="dt">mode =</span> <span class="st">"car"</span>)</a></code></pre></div>
+<p><strong>Traffic API:</strong> Get real-time traffic flow or incidents in a specific area.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/traffic.html">traffic</a></span>(aoi, <span class="dt">product =</span> <span class="st">"flow"</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="reference/traffic.html">traffic</a></span>(aoi, <span class="dt">product =</span> <span class="st">"incidents"</span>)</a></code></pre></div>
+<p><strong>Public Transit API:</strong> Request public transport connections between points or find public transit stations nearby locations.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/connection.html">connection</a></span>(poi[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ], poi[<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>, ])</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="reference/station.html">station</a></span>(poi, <span class="dt">radius =</span> <span class="dv">500</span>)</a></code></pre></div>
+<p><strong>Destination Weather API:</strong> Request weather observations, forecasts, astronomical information or alerts at specific locations.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/weather.html">weather</a></span>(poi, <span class="dt">product =</span> <span class="st">"observation"</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="reference/weather.html">weather</a></span>(poi, <span class="dt">product =</span> <span class="st">"forecast_hourly"</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="reference/weather.html">weather</a></span>(poi, <span class="dt">product =</span> <span class="st">"forecast_astronomy"</span>)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="kw"><a href="reference/weather.html">weather</a></span>(poi, <span class="dt">product =</span> <span class="st">"alerts"</span>)</a></code></pre></div>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hereR</title>
+<title>'sf'-Based Interface to the 'HERE' REST APIs — hereR-package • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,15 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="'sf'-Based Interface to the 'HERE' REST APIs — hereR-package" />
+<meta property="og:description" content="The hereR package provides an interface to the 'HERE' REST APIs:
+Geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;
+Route directions, travel distance or time matrices and isolines using the 'Routing' API;
+Request real-time traffic flow and incident information from the 'Traffic' API;
+Find request public transport connections and nearby stations from the 'Public Transit' API;
+Get weather forecasts, reports on current weather conditions, astronomical
+information and alerts at a specific location from the 'Destination Weather' API.
+Locations, routes and isolines are returned as sf objects." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +71,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -152,186 +160,68 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>'sf'-Based Interface to the 'HERE' REST APIs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/package.R'><code>R/package.R</code></a></small>
+    <div class="hidden name"><code>hereR-package.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>The hereR package provides an interface to the 'HERE' REST APIs:</p><ul>
+<li><p>Geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;</p></li>
+<li><p>Route directions, travel distance or time matrices and isolines using the 'Routing' API;</p></li>
+<li><p>Request real-time traffic flow and incident information from the 'Traffic' API;</p></li>
+<li><p>Find request public transport connections and nearby stations from the 'Public Transit' API;</p></li>
+<li><p>Get weather forecasts, reports on current weather conditions, astronomical
+information and alerts at a specific location from the 'Destination Weather' API.</p></li>
+</ul><p>Locations, routes and isolines are returned as <code>sf</code> objects.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="set_key.html">set_key()</a></code> </p>
-        </td>
-        <td><p>Set Application Credentials</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="set_proxy.html">set_proxy()</a></code> </p>
-        </td>
-        <td><p>Proxy Configuration</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="unset_key.html">unset_key()</a></code> </p>
-        </td>
-        <td><p>Remove Application Credentials</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="unset_proxy.html">unset_proxy()</a></code> </p>
-        </td>
-        <td><p>Remove Proxy Configuration</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-example-data" class="hasAnchor"><a href="#section-example-data" class="anchor"></a>Example data</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="poi.html">poi</a></code> </p>
-        </td>
-        <td><p>Example Points of Interest</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="aoi.html">aoi</a></code> </p>
-        </td>
-        <td><p>Example Areas of Interest</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-geocoder-api" class="hasAnchor"><a href="#section-geocoder-api" class="anchor"></a>Geocoder API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="autocomplete.html">autocomplete()</a></code> </p>
-        </td>
-        <td><p>Geocoder API: Autocomplete</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geocode.html">geocode()</a></code> </p>
-        </td>
-        <td><p>Geocoder API: Geocode</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="reverse_geocode.html">reverse_geocode()</a></code> </p>
-        </td>
-        <td><p>Geocoder API: Reverse Geocode</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-routing-api" class="hasAnchor"><a href="#section-routing-api" class="anchor"></a>Routing API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="route.html">route()</a></code> </p>
-        </td>
-        <td><p>Routing API: Route</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="route_matrix.html">route_matrix()</a></code> </p>
-        </td>
-        <td><p>Routing API: Route Matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="isoline.html">isoline()</a></code> </p>
-        </td>
-        <td><p>Routing API: Isoline</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-traffic-api" class="hasAnchor"><a href="#section-traffic-api" class="anchor"></a>Traffic API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="traffic.html">traffic()</a></code> </p>
-        </td>
-        <td><p>Traffic API: Flow and Incidents</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-public-transit-api" class="hasAnchor"><a href="#section-public-transit-api" class="anchor"></a>Public Transit API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="connection.html">connection()</a></code> </p>
-        </td>
-        <td><p>Public Transit API: Route Transit</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="station.html">station()</a></code> </p>
-        </td>
-        <td><p>Public Transit API: Find Stations Nearby</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-destination-weather-api" class="hasAnchor"><a href="#section-destination-weather-api" class="anchor"></a>Destination Weather API</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="weather.html">weather()</a></code> </p>
-        </td>
-        <td><p>Destination Weather API: Observations, Forecasts, Astronomy and Alerts</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+    <h2 class="hasAnchor" id="application-credentials"><a class="anchor" href="#application-credentials"></a>Application credentials</h2>
+
+    
+
+<p>In order to use the hereR package, an API key for a HERE project has to be provided.
+The key is set for the current R session and is used to authenticate in the requests to the APIs.
+To set the credentials, please use: <code><a href='set_key.html'>set_key</a>("&lt;YOUR API KEY&gt;")</code><br /><br />
+No login yet? Get a free login here: <a href='https://developer.here.com/'>https://developer.here.com/</a></p>
+    <h2 class="hasAnchor" id="interesting-functions"><a class="anchor" href="#interesting-functions"></a>Interesting functions</h2>
+
+    
+
+<ul>
+<li><p><code><a href='geocode.html'>geocode</a></code> - Get coordinates from address strings.</p></li>
+<li><p><code><a href='route.html'>route</a></code> - Find the fastest routes between places.</p></li>
+<li><p><code><a href='isoline.html'>isoline</a></code> - Create isochrone, isodistance or isoconsumption lines around places.</p></li>
+<li><p><code><a href='traffic.html'>traffic</a></code> - Get information about traffic jam and incidents in areas.</p></li>
+<li><p><code><a href='connection.html'>connection</a></code> - Find public transport connections between places.</p></li>
+<li><p><code><a href='weather.html'>weather</a></code> - Get weather observations, forecasts and alerts at places.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'>
+<ul>
+<li><p><a href='https://github.com/munterfinger/hereR'>https://github.com/munterfinger/hereR/</a></p></li>
+<li><p><a href='https://munterfinger.github.io/hereR'>https://munterfinger.github.io/hereR/</a></p></li>
+<li><p><a href='https://developer.here.com/develop/rest-apis/'>https://developer.here.com/develop/rest-apis/</a></p></li>
+</ul>
+</div>
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-authentication">Authentication</a></li>
-      <li><a href="#section-example-data">Example data</a></li>
-      <li><a href="#section-geocoder-api">Geocoder API</a></li>
-      <li><a href="#section-routing-api">Routing API</a></li>
-      <li><a href="#section-traffic-api">Traffic API</a></li>
-      <li><a href="#section-public-transit-api">Public Transit API</a></li>
-      <li><a href="#section-destination-weather-api">Destination Weather API</a></li>
+      <li><a href="#application-credentials">Application credentials</a></li>
+      <li><a href="#interesting-functions">Interesting functions</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
+
+    <h2>Author</h2>
+    <p>Merlin Unterfinger - <a href='mailto:info@munterfinger.ch'>info@munterfinger.ch</a></p>
   </div>
 </div>
 
