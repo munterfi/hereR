@@ -128,7 +128,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The hereR package provides an interface to the <strong>HERE REST APIs</strong> for R:</p>
+<p>The <code>hereR</code> package provides an interface to the <strong>HERE REST APIs</strong> for R:</p>
 <p>(1) geocode and autocomplete addresses or reverse geocode POIs using the <strong>Geocoder API</strong>;</p>
 <p>(2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
 <p>(3) request real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
@@ -150,7 +150,7 @@
 <p>To set the API key, please use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hereR)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)</a></code></pre></div>
-<p>Once valid application credentials have been created and set in the R session, the APIs can be addressed as follows:</p>
+<p>Once valid application credentials have been created and the key is set in the R session, the APIs can be addressed using the functions, which are illustrated by examples below. For a more detailed description check the documentation of the functions and the package vignettes.</p>
 <p><strong>Geocoder API:</strong> Autocomplete and geocode addresses or reverse geocode POIs.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/geocode.html">geocode</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse 190, Zürich, Schweiz"</span>, <span class="st">"Hardstrasse 48, Zürich, Schweiz"</span>))</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>

@@ -6,7 +6,7 @@
 [![Codecov test coverage](https://codecov.io/gh/munterfinger/hereR/branch/master/graph/badge.svg)](https://codecov.io/gh/munterfinger/hereR?branch=master)
 <!-- badges: end -->
 
-The hereR package provides an interface to the **HERE REST APIs** for R:
+The `hereR` package provides an interface to the **HERE REST APIs** for R:
 (1) geocode and autocomplete addresses or reverse geocode POIs using the **Geocoder API**;
 (2) route directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) request real-time traffic flow and incident information from the **Traffic API**;
@@ -38,7 +38,7 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-Once valid application credentials have been created and set in the R session, the APIs can be addressed as follows:
+Once valid application credentials have been created and the key is set in the R session, the APIs can be addressed using the functions, which are illustrated by examples below. For a more detailed description check the documentation of the functions and the package vignettes.
 
 **Geocoder API:** Autocomplete and geocode addresses or reverse geocode POIs.
 ``` r
