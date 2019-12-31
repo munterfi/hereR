@@ -9,7 +9,7 @@ test_that("connection works", {
   expect_error(connection(origin = c(1, 2, 3), destination = poi), "'points' must be an sf object.")
   expect_error(connection(origin = c("character", NA), destination = poi), "'points' must be an sf object.")
   expect_error(connection(origin = aoi, destination = poi), "'points' must be an sf object with geometry type 'POINT'.")
-  expect_error(connection(origin = poi, destination = poi, time = "not_POSIXct"))
+  expect_error(connection(origin = poi, destination = poi, datetime = "not_POSIXct"))
   expect_error(connection(origin = poi, destination = poi, results = "not_numeric"))
   expect_error(connection(origin = poi, destination = poi, results = -1))
   expect_error(connection(origin = poi, destination = poi, changes = "not_numeric"))

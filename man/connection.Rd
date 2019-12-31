@@ -7,7 +7,7 @@
 connection(
   origin,
   destination,
-  departure = Sys.time(),
+  datetime = Sys.time(),
   arrival = FALSE,
   results = 3,
   transfers = -1,
@@ -20,7 +20,7 @@ connection(
 
 \item{destination}{\code{sf} object, the destination locations of geometry type \code{POINT}.}
 
-\item{departure}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure (or arrival if \code{arrival = TRUE}).}
+\item{datetime}{\code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).}
 
 \item{arrival}{boolean, calculate connections for arrival at the defined time (\code{default = FALSE})?}
 

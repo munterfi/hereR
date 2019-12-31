@@ -7,7 +7,7 @@
 route_matrix(
   origin,
   destination = origin,
-  departure = Sys.time(),
+  datetime = Sys.time(),
   type = "fastest",
   mode = "car",
   traffic = FALSE,
@@ -21,13 +21,13 @@ route_matrix(
 
 \item{destination}{\code{sf} object, the destination locations of geometry type \code{POINT}.}
 
-\item{departure}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.}
+\item{datetime}{\code{POSIXct} object, datetime for the departure.}
 
 \item{type}{character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.}
 
 \item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"} or \code{"truck"}.}
 
-\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.}
+\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.}
 
 \item{search_range}{numeric, value in meters to limit the search radius in the route generation (\code{default = 99999999}).}
 
@@ -52,7 +52,6 @@ set_key("<YOUR API KEY>")
 # Create routes summaries between all POIs
 mat <- route_matrix(
   origin = poi,
-  departure = as.POSIXct("2019-10-10 15:45:00"),
   traffic = TRUE,
   url_only = TRUE
 )
