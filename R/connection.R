@@ -29,8 +29,6 @@
 #' The walking segments can be routed in hindsight using the \link[hereR]{route} function with mode set to \code{"pedestrian"}.
 #'
 #' @examples
-#' library(sf)
-#'
 #' # Provide an API Key for a HERE project
 #' set_key("<YOUR API KEY>")
 #'

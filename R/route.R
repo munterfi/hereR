@@ -14,7 +14,7 @@
 #' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
 #' @param arrival boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?
 #' @param type character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.
-#' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"publicTransportTimeTable"}, \code{"truck"} or \code{"bicycle"}.
+#' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"truck"} or \code{"bicycle"}.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} or \code{arrival} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
 #' @param vehicle_type character, specify the motor type of the vehicle: \code{"diesel"}, \code{"gasoline"} or \code{"electric"}. And set the consumption per 100km im liters (\code{default = "diesel,5.5"}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
@@ -28,7 +28,6 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' # Get all from - to combinations from POIs
-#' library(sf)
 #' to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
 #' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
 #' idx <- apply(to != from, any, MARGIN = 1)
@@ -55,6 +54,10 @@ route <- function(origin, destination, departure = Sys.time(), arrival = FALSE,
   .check_vehicle_type(vehicle_type)
   .check_boolean(traffic)
   .check_boolean(url_only)
+
+  # Note: Link to 'connection()'
+  if (mode == "publicTransport")
+    message("Note: Use 'connection()' for public transport routes that consider time tables.")
 
   # CRS transformation and formatting
   origin <- sf::st_coordinates(
