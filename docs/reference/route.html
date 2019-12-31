@@ -209,7 +209,7 @@ to obtain an estimate of the consumption.</p>
     </tr>
     <tr>
       <th>mode</th>
-      <td><p>character, set the transport mode: <code>"car"</code>, <code>"pedestrian"</code>, <code>"carHOV"</code>, <code>"publicTransport"</code>, <code>"publicTransportTimeTable"</code>, <code>"truck"</code> or <code>"bicycle"</code>.</p></td>
+      <td><p>character, set the transport mode: <code>"car"</code>, <code>"pedestrian"</code>, <code>"carHOV"</code>, <code>"publicTransport"</code>, <code>"truck"</code> or <code>"bicycle"</code>.</p></td>
     </tr>
     <tr>
       <th>traffic</th>
@@ -237,7 +237,6 @@ to obtain an estimate of the consumption.</p>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Get all from - to combinations from POIs</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)
 <span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), ]
 <span class='no'>from</span> <span class='kw'>&lt;-</span> <span class='no'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)), <span class='kw'>each</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>poi</span>)),]
 <span class='no'>idx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>to</span> <span class='kw'>!=</span> <span class='no'>from</span>, <span class='no'>any</span>, <span class='kw'>MARGIN</span> <span class='kw'>=</span> <span class='fl'>1</span>)
