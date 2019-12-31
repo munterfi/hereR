@@ -1,4 +1,4 @@
-#' Routing API: Route
+#' Route Directions Between POIs
 #'
 #' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the HERE 'Routing' API.
 #' Routes can be created for various transport modes, as for example 'car' or 'public transport',
@@ -6,16 +6,20 @@
 #' For routes using the transport mode \code{"car"} a vehicle type can be specified,
 #' to obtain an estimate of the consumption.
 #'
+#' @note The public transport routes (\code{mode = "publicTransport"}) provided by \code{\link{route}}
+#' are not considering the time tables of the public transport providers.
+#' Use \code{\link{connection}} for public transport routes that consider time tables.
+#'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-route.html}{HERE Routing API: Calculate Route}
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
-#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
+#' @param datetime \code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).
 #' @param arrival boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?
 #' @param type character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"truck"} or \code{"bicycle"}.
-#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} or \code{arrival} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
+#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.
 #' @param vehicle_type character, specify the motor type of the vehicle: \code{"diesel"}, \code{"gasoline"} or \code{"electric"}. And set the consumption per 100km im liters (\code{default = "diesel,5.5"}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -41,13 +45,13 @@
 #'   vehicle_type = "diesel,5.5",
 #'   url_only = TRUE
 #' )
-route <- function(origin, destination, departure = Sys.time(), arrival = FALSE,
+route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   type = "fastest", mode = "car", traffic = FALSE,
                   vehicle_type = "diesel,5.5", url_only = FALSE) {
   # Checks
   .check_points(origin)
   .check_points(destination)
-  .check_datetime(departure)
+  .check_datetime(datetime)
   .check_boolean(arrival)
   .check_type(type, request = "calculateroute")
   .check_mode(mode, request = "calculateroute")
@@ -99,13 +103,13 @@ route <- function(origin, destination, departure = Sys.time(), arrival = FALSE,
   if (arrival) {
     url <- .add_datetime(
       url,
-      departure,
+      datetime,
       "arrival"
     )
   } else {
     url <- .add_datetime(
       url,
-      departure,
+      datetime,
       "departure"
     )
   }

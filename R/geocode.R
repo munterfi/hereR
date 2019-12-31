@@ -1,4 +1,4 @@
-#' Geocoder API: Geocode
+#' Geocode Addresses
 #'
 #' Geocodes addresses using the HERE 'Geocoder' API.
 #'

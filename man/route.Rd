@@ -2,12 +2,12 @@
 % Please edit documentation in R/route.R
 \name{route}
 \alias{route}
-\title{Routing API: Route}
+\title{Route Directions Between POIs}
 \usage{
 route(
   origin,
   destination,
-  departure = Sys.time(),
+  datetime = Sys.time(),
   arrival = FALSE,
   type = "fastest",
   mode = "car",
@@ -21,7 +21,7 @@ route(
 
 \item{destination}{\code{sf} object, the destination locations of geometry type \code{POINT}.}
 
-\item{departure}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.}
+\item{datetime}{\code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).}
 
 \item{arrival}{boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?}
 
@@ -29,7 +29,7 @@ route(
 
 \item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"}, \code{"publicTransport"}, \code{"truck"} or \code{"bicycle"}.}
 
-\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} or \code{arrival} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.}
+\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.}
 
 \item{vehicle_type}{character, specify the motor type of the vehicle: \code{"diesel"}, \code{"gasoline"} or \code{"electric"}. And set the consumption per 100km im liters (\code{default = "diesel,5.5"}).}
 
@@ -44,6 +44,11 @@ Routes can be created for various transport modes, as for example 'car' or 'publ
 incorporating current traffic information, if available.
 For routes using the transport mode \code{"car"} a vehicle type can be specified,
 to obtain an estimate of the consumption.
+}
+\note{
+The public transport routes (\code{mode = "publicTransport"}) provided by \code{\link{route}}
+are not considering the time tables of the public transport providers.
+Use \code{\link{connection}} for public transport routes that consider time tables.
 }
 \examples{
 # Provide an API Key for a HERE project

@@ -18,20 +18,25 @@ Locations, routes and isolines are returned as \code{\link{sf}} objects.
 }
 \section{Application credentials}{
 
-In order to use the hereR package, an API key for a HERE project has to be provided.
+This package requires an API key for a HERE project.
 The key is set for the current R session and is used to authenticate in the requests to the APIs.
-To set the credentials, please use: \code{\link{set_key}("<YOUR API KEY>")}\cr\cr
-No login yet? Get a free login here: \href{https://developer.here.com/}{https://developer.here.com/}
+A free login and project can be created on \href{https://developer.here.com/}{https://developer.here.com/}.
+In order to obtain the API key navigate to a project of your choice in the developer portal, select 'REST: Generate APP' and then 'Create API Key'.
+To set the API key, please use: \code{\link{set_key}("<YOUR API KEY>")}
 }
 
-\section{Interesting functions}{
+\section{Functions to access the APIs}{
 
 \itemize{
- \item\code{\link{geocode}} - Get coordinates from address strings.
+ \item\code{\link{autocomplete}} - Get suggestions for address strings.
+ \item\code{\link{geocode}} - Get coordinates from addresses.
+ \item\code{\link{reverse_geocode}} - Get addresses or landmarks from locations.
  \item\code{\link{route}} - Find the fastest routes between places.
+ \item\code{\link{route_matrix}} - Request a matrix of route summaries between places.
  \item\code{\link{isoline}} - Create isochrone, isodistance or isoconsumption lines around places.
  \item\code{\link{traffic}} - Get information about traffic jam and incidents in areas.
- \item\code{\link{connection}} - Find public transport connections between places.
+ \item\code{\link{connection}} - Request public transport connections between places.
+ \item\code{\link{station}} - Find stations nearby places.
  \item\code{\link{weather}} - Get weather observations, forecasts and alerts at places.
 }
 }

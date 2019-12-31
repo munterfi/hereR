@@ -1,20 +1,20 @@
-#' Routing API: Isoline
+#' Create Isolines Around POIs
 #'
-#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API that connect the end points of all routes
-#' leaving from defined centers (POIs) with either a specified length, a
-#' specified travel time or consumption.
+#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API
+#' that connect the end points of all routes leaving from defined centers (POIs) with either
+#' a specified length, a specified travel time or consumption.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
-#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
+#' @param datetime \code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).
 #' @param arrival boolean, are the provided Points of Interest (POIs) the origin or destination locations (\code{default = FALSE})?
 #' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.
 #' @param rangetype character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
 #' @param type character, set the routing type: \code{"fastest"} or \code{"shortest"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
-#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
+#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.
 #' @param aggregate boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -32,14 +32,14 @@
 #'   range = seq(5, 30, 5) * 60,
 #'   url_only = TRUE
 #' )
-isoline <- function(poi, departure = Sys.time(), arrival = FALSE,
+isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
                     range = seq(5, 30, 5) * 60, rangetype = "time",
                     type = "fastest", mode = "car", traffic = FALSE,
                     aggregate = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(poi)
-  .check_datetime(departure)
+  .check_datetime(datetime)
   .check_rangetype(rangetype)
   .check_type(type = type, request = "calculateisoline")
   .check_mode(mode = mode, request = "calculateisoline")
@@ -96,7 +96,7 @@ isoline <- function(poi, departure = Sys.time(), arrival = FALSE,
   # Add departure time
   url <- .add_datetime(
     url,
-    departure,
+    datetime,
     "departure"
   )
 

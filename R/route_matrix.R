@@ -1,4 +1,4 @@
-#' Routing API: Route Matrix
+#' Matrix of Route Summaries between POIs
 #'
 #' Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.
 #' Various transport modes and traffic information at a provided timestamp are supported.
@@ -11,10 +11,10 @@
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
-#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.
+#' @param datetime \code{POSIXct} object, datetime for the departure.
 #' @param type character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"} or \code{"truck"}.
-#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.
+#' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.
 #' @param search_range numeric, value in meters to limit the search radius in the route generation (\code{default = 99999999}).
 #' @param attribute character, attributes to be calculated on the routes: \code{"distance"} or \code{"traveltime"} (\code{default = c("distance", "traveltime")}.
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
@@ -30,18 +30,17 @@
 #' # Create routes summaries between all POIs
 #' mat <- route_matrix(
 #'   origin = poi,
-#'   departure = as.POSIXct("2019-10-10 15:45:00"),
 #'   traffic = TRUE,
 #'   url_only = TRUE
 #' )
-route_matrix <- function(origin, destination = origin, departure = Sys.time(),
+route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
                          type = "fastest", mode = "car", traffic = FALSE,
                          search_range = 99999999, attribute = c("distance", "traveltime"),
                          url_only = FALSE) {
   # Checks
   .check_points(origin)
   .check_points(destination)
-  .check_datetime(departure)
+  .check_datetime(datetime)
   .check_attributes(attribute)
   .check_type(type = type, request = "calculatematrix")
   .check_mode(mode = mode, request = "calculatematrix")
@@ -130,7 +129,7 @@ route_matrix <- function(origin, destination = origin, departure = Sys.time(),
   # Add departure time
   url <- .add_datetime(
     url,
-    departure,
+    datetime,
     "departure"
   )
 

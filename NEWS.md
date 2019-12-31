@@ -4,7 +4,7 @@
 * Added a minimum jam factor filter to `traffic(..., product = "flow")`. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than `min_jam_factor`, which speeds up requests.
 * **Public Transit API: Transit route** The new feature `connection()` implements requesting the most efficient and relevant transit connections between given pairs of locations.
 * **Public Transit API: Find stations nearby** The new feature `station()` retrieves nearby public transit stations with corresponding line information.
-* Package cosmetics: Renamed the `start` parameter to `origin` and unified the utilization of the `departure` and `arrival` parameters in `route()`, `route_matrix()`, `isoline()` and `connection()`.
+* Package cosmetics: Renamed the `start` parameter to `origin` and unified the utilization of the `datetime` and `arrival` parameters in `route()`, `route_matrix()`, `isoline()` and `connection()`.
 * Adjusted the handling of datetime objects in the requests: All `c("POSIXct", "POSIXt")` inputs for the requests (mostly `departure`) are converted to UTC using `.encode_datetime()` and the responses are parsed and returned in `Sys.timezone()` using `.parse_datetime()`.
 * Added `@import sf` to the package documentation to ensure `sf` objects are handled correctly.
 * Added `departure` and `arrival` datetime column to the return value of `route()`. 

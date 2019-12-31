@@ -1,4 +1,4 @@
-#' Public Transit API: Route Transit
+#' Route Connections Between POIs
 #'
 #' Calculates public transport connections with geometries (\code{LINESTRING}) between pairs of points using the HERE 'Public Transit' API.
 #' Two modes are provided:
@@ -12,7 +12,7 @@
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
-#' @param departure datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure (or arrival if \code{arrival = TRUE}).
+#' @param datetime \code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).
 #' @param arrival boolean, calculate connections for arrival at the defined time (\code{default = FALSE})?
 #' @param results numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).
 #' @param transfers numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, \code{default = -1}).
@@ -43,7 +43,7 @@
 #'   origin = poi[3:4, ], destination = poi[5:6, ],
 #'   summary = TRUE, url_only = TRUE
 #' )
-connection <- function(origin, destination, departure = Sys.time(),
+connection <- function(origin, destination, datetime = Sys.time(),
                        arrival = FALSE, results = 3, transfers = -1,
                        summary = FALSE, url_only = FALSE) {
   # Checks
@@ -51,7 +51,7 @@ connection <- function(origin, destination, departure = Sys.time(),
   .check_points(destination)
   .check_numeric_range(results, 1, 6)
   .check_numeric_range(transfers, -1, 6)
-  .check_datetime(departure)
+  .check_datetime(datetime)
   .check_boolean(arrival)
   .check_boolean(summary)
   .check_boolean(url_only)
@@ -87,7 +87,7 @@ connection <- function(origin, destination, departure = Sys.time(),
   # Add departure time
   url <- .add_datetime(
     url,
-    departure,
+    datetime,
     "time"
   )
 

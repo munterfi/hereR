@@ -1,6 +1,6 @@
-#' Traffic API: Flow and Incidents
+#' Traffic Flow and Incidents in AOIs
 #'
-#' Real-time traffic flow and incident information based on the HERE 'Traffic' API.
+#' Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
 #' The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
 #' Traffic incidents contain information about location, time, duration, severity, description and other details.
 #'
@@ -12,8 +12,8 @@
 #'
 #' @param aoi \code{sf} object, Areas of Interest (POIs) of geometry type \code{POLYGON}.
 #' @param product character, traffic product of the 'Traffic API'. Supported products: \code{"flow"} and \code{"incidents"}.
-#' @param from_dt datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
-#' @param to_dt datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
+#' @param from_dt \code{POSIXct} object, datetime of the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
+#' @param to_dt \code{POSIXct} object, datetime of the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
 #' @param min_jam_factor numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'

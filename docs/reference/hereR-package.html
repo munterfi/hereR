@@ -184,20 +184,25 @@ information and alerts at a specific location from the 'Destination Weather' API
 
     
 
-<p>In order to use the hereR package, an API key for a HERE project has to be provided.
+<p>This package requires an API key for a HERE project.
 The key is set for the current R session and is used to authenticate in the requests to the APIs.
-To set the credentials, please use: <code><a href='set_key.html'>set_key</a>("&lt;YOUR API KEY&gt;")</code><br /><br />
-No login yet? Get a free login here: <a href='https://developer.here.com/'>https://developer.here.com/</a></p>
-    <h2 class="hasAnchor" id="interesting-functions"><a class="anchor" href="#interesting-functions"></a>Interesting functions</h2>
+A free login and project can be created on <a href='https://developer.here.com/'>https://developer.here.com/</a>.
+In order to obtain the API key navigate to a project of your choice in the developer portal, select 'REST: Generate APP' and then 'Create API Key'.
+To set the API key, please use: <code><a href='set_key.html'>set_key</a>("&lt;YOUR API KEY&gt;")</code></p>
+    <h2 class="hasAnchor" id="functions-to-access-the-apis"><a class="anchor" href="#functions-to-access-the-apis"></a>Functions to access the APIs</h2>
 
     
 
 <ul>
-<li><p><code><a href='geocode.html'>geocode</a></code> - Get coordinates from address strings.</p></li>
+<li><p><code><a href='autocomplete.html'>autocomplete</a></code> - Get suggestions for address strings.</p></li>
+<li><p><code><a href='geocode.html'>geocode</a></code> - Get coordinates from addresses.</p></li>
+<li><p><code><a href='reverse_geocode.html'>reverse_geocode</a></code> - Get addresses or landmarks from locations.</p></li>
 <li><p><code><a href='route.html'>route</a></code> - Find the fastest routes between places.</p></li>
+<li><p><code><a href='route_matrix.html'>route_matrix</a></code> - Request a matrix of route summaries between places.</p></li>
 <li><p><code><a href='isoline.html'>isoline</a></code> - Create isochrone, isodistance or isoconsumption lines around places.</p></li>
 <li><p><code><a href='traffic.html'>traffic</a></code> - Get information about traffic jam and incidents in areas.</p></li>
-<li><p><code><a href='connection.html'>connection</a></code> - Find public transport connections between places.</p></li>
+<li><p><code><a href='connection.html'>connection</a></code> - Request public transport connections between places.</p></li>
+<li><p><code><a href='station.html'>station</a></code> - Find stations nearby places.</p></li>
 <li><p><code><a href='weather.html'>weather</a></code> - Get weather observations, forecasts and alerts at places.</p></li>
 </ul>
 
@@ -216,7 +221,7 @@ No login yet? Get a free login here: <a href='https://developer.here.com/'>https
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#application-credentials">Application credentials</a></li>
-      <li><a href="#interesting-functions">Interesting functions</a></li>
+      <li><a href="#functions-to-access-the-apis">Functions to access the APIs</a></li>
       <li><a href="#see-also">See also</a></li>
     </ul>
 

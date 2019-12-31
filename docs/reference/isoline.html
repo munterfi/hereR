@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Routing API: Isoline — isoline • hereR</title>
+<title>Create Isolines Around POIs — isoline • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,10 @@
 
 
 
-<meta property="og:title" content="Routing API: Isoline — isoline" />
-<meta property="og:description" content="Calcuates isolines (POLYGON or MULTIPOLYGON) using the HERE 'Routing' API that connect the end points of all routes
-leaving from defined centers (POIs) with either a specified length, a
-specified travel time or consumption." />
+<meta property="og:title" content="Create Isolines Around POIs — isoline" />
+<meta property="og:description" content="Calcuates isolines (POLYGON or MULTIPOLYGON) using the HERE 'Routing' API
+that connect the end points of all routes leaving from defined centers (POIs) with either
+a specified length, a specified travel time or consumption." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,20 +157,20 @@ specified travel time or consumption." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Routing API: Isoline</h1>
+    <h1>Create Isolines Around POIs</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/isoline.R'><code>R/isoline.R</code></a></small>
     <div class="hidden name"><code>isoline.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calcuates isolines (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) using the HERE 'Routing' API that connect the end points of all routes
-leaving from defined centers (POIs) with either a specified length, a
-specified travel time or consumption.</p>
+    <p>Calcuates isolines (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) using the HERE 'Routing' API
+that connect the end points of all routes leaving from defined centers (POIs) with either
+a specified length, a specified travel time or consumption.</p>
     </div>
 
     <pre class="usage"><span class='fu'>isoline</span>(
   <span class='no'>poi</span>,
-  <span class='kw'>departure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
+  <span class='kw'>datetime</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
   <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>5</span>, <span class='fl'>30</span>, <span class='fl'>5</span>) * <span class='fl'>60</span>,
   <span class='kw'>rangetype</span> <span class='kw'>=</span> <span class='st'>"time"</span>,
@@ -189,8 +189,8 @@ specified travel time or consumption.</p>
       <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
-      <th>departure</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the departure.</p></td>
+      <th>datetime</th>
+      <td><p><code>POSIXct</code> object, datetime for the departure (or arrival if <code>arrival = TRUE</code>).</p></td>
     </tr>
     <tr>
       <th>arrival</th>
@@ -214,7 +214,7 @@ specified travel time or consumption.</p>
     </tr>
     <tr>
       <th>traffic</th>
-      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = FALSE</code>)? If no <code>departure</code> date and time is set, the current timestamp at the moment of the request is used for <code>departure</code>.</p></td>
+      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = FALSE</code>)? If no <code>datetime</code> is set, the current timestamp at the moment of the request is used for <code>datetime</code>.</p></td>
     </tr>
     <tr>
       <th>aggregate</th>

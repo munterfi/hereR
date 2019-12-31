@@ -2,11 +2,11 @@
 % Please edit documentation in R/isoline.R
 \name{isoline}
 \alias{isoline}
-\title{Routing API: Isoline}
+\title{Create Isolines Around POIs}
 \usage{
 isoline(
   poi,
-  departure = Sys.time(),
+  datetime = Sys.time(),
   arrival = FALSE,
   range = seq(5, 30, 5) * 60,
   rangetype = "time",
@@ -20,7 +20,7 @@ isoline(
 \arguments{
 \item{poi}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.}
 
-\item{departure}{datetime, timestamp of type \code{POSIXct}, \code{POSIXt} for the departure.}
+\item{datetime}{\code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).}
 
 \item{arrival}{boolean, are the provided Points of Interest (POIs) the origin or destination locations (\code{default = FALSE})?}
 
@@ -32,7 +32,7 @@ isoline(
 
 \item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.}
 
-\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{departure} date and time is set, the current timestamp at the moment of the request is used for \code{departure}.}
+\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.}
 
 \item{aggregate}{boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?}
 
@@ -42,9 +42,9 @@ isoline(
 An \code{sf} object containing the requested isolines.
 }
 \description{
-Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API that connect the end points of all routes
-leaving from defined centers (POIs) with either a specified length, a
-specified travel time or consumption.
+Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API
+that connect the end points of all routes leaving from defined centers (POIs) with either
+a specified length, a specified travel time or consumption.
 }
 \examples{
 # Provide an API Key for a HERE project
