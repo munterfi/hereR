@@ -2,7 +2,7 @@
 % Please edit documentation in R/isoline.R
 \name{isoline}
 \alias{isoline}
-\title{Routing API: Isoline}
+\title{Create Isolines Around POIs}
 \usage{
 isoline(
   poi,
@@ -42,9 +42,9 @@ isoline(
 An \code{sf} object containing the requested isolines.
 }
 \description{
-Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API that connect the end points of all routes
-leaving from defined centers (POIs) with either a specified length, a
-specified travel time or consumption.
+Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API
+that connect the end points of all routes leaving from defined centers (POIs) with either
+a specified length, a specified travel time or consumption.
 }
 \examples{
 # Provide an API Key for a HERE project

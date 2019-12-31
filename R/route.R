@@ -1,10 +1,14 @@
-#' Routing API: Route
+#' Route Directions Between POIs
 #'
 #' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the HERE 'Routing' API.
 #' Routes can be created for various transport modes, as for example 'car' or 'public transport',
 #' incorporating current traffic information, if available.
 #' For routes using the transport mode \code{"car"} a vehicle type can be specified,
 #' to obtain an estimate of the consumption.
+#'
+#' @note The public transport routes (\code{mode = "publicTransport"}) provided by \code{\link{route}}
+#' are not considering the time tables of the public transport providers.
+#' Use \code{\link{connection}} for public transport routes that consider time tables.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-route.html}{HERE Routing API: Calculate Route}

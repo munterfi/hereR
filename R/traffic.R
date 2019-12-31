@@ -1,6 +1,6 @@
-#' Traffic API: Flow and Incidents
+#' Traffic Flow and Incidents in AOIs
 #'
-#' Real-time traffic flow and incident information based on the HERE 'Traffic' API.
+#' Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
 #' The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
 #' Traffic incidents contain information about location, time, duration, severity, description and other details.
 #'

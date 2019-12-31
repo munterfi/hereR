@@ -2,7 +2,7 @@
 % Please edit documentation in R/connection.R
 \name{connection}
 \alias{connection}
-\title{Public Transit API: Route Transit}
+\title{Route Transit Connections Between POIs}
 \usage{
 connection(
   origin,

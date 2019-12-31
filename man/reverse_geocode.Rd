@@ -2,7 +2,7 @@
 % Please edit documentation in R/reverse_geocode.R
 \name{reverse_geocode}
 \alias{reverse_geocode}
-\title{Geocoder API: Reverse Geocode}
+\title{Reverse Geocode POIs}
 \usage{
 reverse_geocode(poi, results = 1, landmarks = FALSE, url_only = FALSE)
 }

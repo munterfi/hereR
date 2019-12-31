@@ -1,4 +1,4 @@
-#' Routing API: Route Matrix
+#' Matrix of Route Summaries between POIs
 #'
 #' Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.
 #' Various transport modes and traffic information at a provided timestamp are supported.

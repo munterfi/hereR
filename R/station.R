@@ -1,4 +1,4 @@
-#' Public Transit API: Find Stations Nearby
+#' Find Stations Nearby POIs
 #'
 #' Retrieve stations with the corresponding line information around given locations using the HERE 'Public Transit' API.
 #'

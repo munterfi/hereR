@@ -2,7 +2,7 @@
 % Please edit documentation in R/route.R
 \name{route}
 \alias{route}
-\title{Routing API: Route}
+\title{Route Directions Between POIs}
 \usage{
 route(
   origin,
@@ -44,6 +44,11 @@ Routes can be created for various transport modes, as for example 'car' or 'publ
 incorporating current traffic information, if available.
 For routes using the transport mode \code{"car"} a vehicle type can be specified,
 to obtain an estimate of the consumption.
+}
+\note{
+The public transport routes (\code{mode = "publicTransport"}) provided by \code{\link{route}}
+are not considering the time tables of the public transport providers.
+Use \code{\link{connection}} for public transport routes that consider time tables.
 }
 \examples{
 # Provide an API Key for a HERE project

@@ -2,7 +2,7 @@
 % Please edit documentation in R/route_matrix.R
 \name{route_matrix}
 \alias{route_matrix}
-\title{Routing API: Route Matrix}
+\title{Matrix of Route Summaries between POIs}
 \usage{
 route_matrix(
   origin,

@@ -1,4 +1,4 @@
-#' Geocoder API: Autocomplete
+#' Autocomplete Addresses
 #'
 #' Completes addresses using the HERE 'Geocoder Autocomplete' API.
 #'

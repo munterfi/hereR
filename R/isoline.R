@@ -1,8 +1,8 @@
-#' Routing API: Isoline
+#' Create Isolines Around POIs
 #'
-#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API that connect the end points of all routes
-#' leaving from defined centers (POIs) with either a specified length, a
-#' specified travel time or consumption.
+#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API
+#' that connect the end points of all routes leaving from defined centers (POIs) with either
+#' a specified length, a specified travel time or consumption.
 #'
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/traffic.R
 \name{traffic}
 \alias{traffic}
-\title{Traffic API: Flow and Incidents}
+\title{Traffic Flow and Incidents in AOIs}
 \usage{
 traffic(
   aoi,
@@ -30,7 +30,7 @@ traffic(
 An \code{sf} object containing the requested traffic information.
 }
 \description{
-Real-time traffic flow and incident information based on the HERE 'Traffic' API.
+Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
 The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details.
 }
