@@ -7,6 +7,7 @@
 * Package cosmetics: Renamed the `start` parameter to `origin` and unified the utilization of the `departure` and `arrival` parameters in `route()`, `route_matrix()`, `isoline()` and `connection()`.
 * Adjusted the handling of datetime objects in the requests: All `c("POSIXct", "POSIXt")` inputs for the requests (mostly `departure`) are converted to UTC using `.encode_datetime()` and the responses are parsed and returned in `Sys.timezone()` using `.parse_datetime()`.
 * Added `@import sf` to the package documentation to ensure `sf` objects are handled correctly.
+* Added `departure` and `arrival` datetime column to the return value of `route()`. 
 
 # version 0.2.1
 
