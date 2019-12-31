@@ -28,8 +28,8 @@ To set the API key, please use: \code{\link{set_key}("<YOUR API KEY>")}
 \section{Functions to access the APIs}{
 
 \itemize{
- \item\code{\link{autocomplete}} - Get suggestions for addresses strings.
- \item\code{\link{geocode}} - Get coordinates from address strings.
+ \item\code{\link{autocomplete}} - Get suggestions for address strings.
+ \item\code{\link{geocode}} - Get coordinates from addresses.
  \item\code{\link{reverse_geocode}} - Get addresses or landmarks from locations.
  \item\code{\link{route}} - Find the fastest routes between places.
  \item\code{\link{route_matrix}} - Request a matrix of route summaries between places.

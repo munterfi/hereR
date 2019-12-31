@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Public Transit API: Route Transit — connection • hereR</title>
+<title>Route Connections Between POIs — connection • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,7 @@
 
 
 
-<meta property="og:title" content="Public Transit API: Route Transit — connection" />
+<meta property="og:title" content="Route Connections Between POIs — connection" />
 <meta property="og:description" content="Calculates public transport connections with geometries (LINESTRING) between pairs of points using the HERE 'Public Transit' API.
 Two modes are provided:
 summary = FALSE: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
@@ -160,7 +160,7 @@ summary = TRUE: A summary of the connections is retrieved, where each connection
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Public Transit API: Route Transit</h1>
+    <h1>Route Connections Between POIs</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/connection.R'><code>R/connection.R</code></a></small>
     <div class="hidden name"><code>connection.Rd</code></div>
     </div>
@@ -177,7 +177,7 @@ Two modes are provided:</p><ul>
     <pre class="usage"><span class='fu'>connection</span>(
   <span class='no'>origin</span>,
   <span class='no'>destination</span>,
-  <span class='kw'>departure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
+  <span class='kw'>datetime</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
   <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>transfers</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
@@ -197,8 +197,8 @@ Two modes are provided:</p><ul>
       <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
-      <th>departure</th>
-      <td><p>datetime, timestamp of type <code>POSIXct</code>, <code>POSIXt</code> for the departure (or arrival if <code>arrival = TRUE</code>).</p></td>
+      <th>datetime</th>
+      <td><p><code>POSIXct</code> object, datetime for the departure (or arrival if <code>arrival = TRUE</code>).</p></td>
     </tr>
     <tr>
       <th>arrival</th>

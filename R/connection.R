@@ -1,4 +1,4 @@
-#' Route Transit Connections Between POIs
+#' Route Connections Between POIs
 #'
 #' Calculates public transport connections with geometries (\code{LINESTRING}) between pairs of points using the HERE 'Public Transit' API.
 #' Two modes are provided:
