@@ -152,7 +152,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   ids <- .get_ids(data)
   count <- 0
   routes <- sf::st_as_sf(
-    data.table::rbindlist(
+    as.data.frame(data.table::rbindlist(
       lapply(data, function(con) {
         count <<- count + 1
         df <- jsonlite::fromJSON(con)
@@ -164,7 +164,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
 
         # Build sf object
         sf::st_as_sf(
-          as.data.frame(data.table::data.table(
+          data.table::data.table(
             cbind(
               id = ids[count],
               departure = if(arrival) (datetime - summary$travelTime) else datetime,
@@ -176,7 +176,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
               traffic = df$response$route$mode$trafficMode,
               summary
             )
-          )),
+          ),
           geometry = sf::st_sfc(
             .line_from_pointList(
               Reduce(c, df$response$route$shape)
@@ -184,7 +184,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
           )
         )
       })
-    )
+    ))
   )
   rownames(routes) <- NULL
   return(routes)
