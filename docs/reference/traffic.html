@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Traffic Flow and Incidents in AOIs — traffic • hereR</title>
+<title>HERE Traffic API: Flow and Incidents — traffic • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,7 @@
 
 
 
-<meta property="og:title" content="Traffic Flow and Incidents in AOIs — traffic" />
+<meta property="og:title" content="HERE Traffic API: Flow and Incidents — traffic" />
 <meta property="og:description" content="Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
 The traffic flow data contains speed (&quot;SP&quot;) and congestion (jam factor: &quot;JF&quot;) information.
 Traffic incidents contain information about location, time, duration, severity, description and other details." />
@@ -79,7 +79,7 @@ Traffic incidents contain information about location, time, duration, severity, 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@ Traffic incidents contain information about location, time, duration, severity, 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Traffic Flow and Incidents in AOIs</h1>
+    <h1>HERE Traffic API: Flow and Incidents</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/traffic.R'><code>R/traffic.R</code></a></small>
     <div class="hidden name"><code>traffic.Rd</code></div>
     </div>
@@ -171,8 +171,8 @@ Traffic incidents contain information about location, time, duration, severity, 
     <pre class="usage"><span class='fu'>traffic</span>(
   <span class='no'>aoi</span>,
   <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
-  <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
@@ -189,11 +189,11 @@ Traffic incidents contain information about location, time, duration, severity, 
       <td><p>character, traffic product of the 'Traffic API'. Supported products: <code>"flow"</code> and <code>"incidents"</code>.</p></td>
     </tr>
     <tr>
-      <th>from_dt</th>
+      <th>from</th>
       <td><p><code>POSIXct</code> object, datetime of the earliest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
     </tr>
     <tr>
-      <th>to_dt</th>
+      <th>to</th>
       <td><p><code>POSIXct</code> object, datetime of the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
     </tr>
     <tr>
@@ -247,8 +247,8 @@ Traffic incidents contain information about location, time, duration, severity, 
 <span class='no'>incidents</span> <span class='kw'>&lt;-</span> <span class='fu'>traffic</span>(
   <span class='kw'>aoi</span> <span class='kw'>=</span> <span class='no'>aoi</span>[<span class='no'>aoi</span>$<span class='no'>code</span> <span class='kw'>==</span> <span class='st'>"LI"</span>, ],
   <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"incidents"</span>,
-  <span class='kw'>from_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2018-01-01 00:00:00"</span>),
-  <span class='kw'>to_dt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-12-31 23:59:59"</span>),
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2018-01-01 00:00:00"</span>),
+  <span class='kw'>to</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-12-31 23:59:59"</span>),
   <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</div></pre>
   </div>
