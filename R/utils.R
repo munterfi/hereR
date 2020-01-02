@@ -103,8 +103,8 @@
   as.numeric(sapply(strsplit(names(content), "_"), function(x){x[[2]]}))
 }
 
-.parse_datetime <- function(datetime, tz = Sys.timezone()) {
-  datetime <- as.POSIXct(datetime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC")
+.parse_datetime <- function(datetime, format = "%Y-%m-%dT%H:%M:%OS", tz = Sys.timezone()) {
+  datetime <- as.POSIXct(datetime, format = format, tz = "UTC")
   attr(datetime, "tzone") <- tz
   datetime
 }
