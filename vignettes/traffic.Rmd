@@ -34,8 +34,8 @@ In order to request the traffic flow, areas of interest (AOIs) have to be provid
 flow <- traffic(
   aoi = aoi[aoi$code == "LI", ],
   product = "flow",
-  from_dt = Sys.time() - (60*60*2),
-  to_dt = Sys.time()
+  from = Sys.time() - (60*60*2),
+  to = Sys.time()
 )
 ```
 
@@ -52,13 +52,13 @@ mapview(flow,
 ```
 
 ## Incidents
-AOIs also must be provided in order to request information about traffic incidents in specific regions. The optional time interval, which defines the traffic incidents that should be considered, can be specitified by the `from_dt` and `to_dt` parameters. The datetime information passed to the function must be a timestamp of type `POSIXct`, `POSIXt`.
+AOIs also must be provided in order to request information about traffic incidents in specific regions. The optional time interval, which defines the traffic incidents that should be considered, can be specitified by the `from` and `to` parameters. The datetime information passed to the function must be a timestamp of type `POSIXct`.
 
 ```{r incidents, eval=FALSE}
 incidents <- traffic(
   aoi = aoi[aoi$code == "LI", ],
   product = "incidents",
-  from_dt = Sys.time()-60*60*1.5
+  from = Sys.time()-60*60*1.5
 )
 ```
 

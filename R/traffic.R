@@ -12,8 +12,8 @@
 #'
 #' @param aoi \code{sf} object, Areas of Interest (POIs) of geometry type \code{POLYGON}.
 #' @param product character, traffic product of the 'Traffic API'. Supported products: \code{"flow"} and \code{"incidents"}.
-#' @param from_dt \code{POSIXct} object, datetime of the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
-#' @param to_dt \code{POSIXct} object, datetime of the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
+#' @param from \code{POSIXct} object, datetime of the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
+#' @param to \code{POSIXct} object, datetime of the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
 #' @param min_jam_factor numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -50,23 +50,23 @@
 #' incidents <- traffic(
 #'   aoi = aoi[aoi$code == "LI", ],
 #'   product = "incidents",
-#'   from_dt = as.POSIXct("2018-01-01 00:00:00"),
-#'   to_dt = as.POSIXct("2019-12-31 23:59:59"),
+#'   from = as.POSIXct("2018-01-01 00:00:00"),
+#'   to = as.POSIXct("2019-12-31 23:59:59"),
 #'   url_only = TRUE
 #' )
-traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
+traffic <- function(aoi, product = "flow", from = NULL, to = NULL,
                     min_jam_factor = 0, url_only = FALSE) {
 
   # Checks
   .check_polygon(aoi)
-  .check_datetime(from_dt)
-  .check_datetime(to_dt)
-  if (!(is.null(from_dt) | is.null(to_dt)))
-    .check_datetime_range(from_dt, to_dt)
+  .check_datetime(from)
+  .check_datetime(to)
+  if (!(is.null(from) | is.null(to)))
+    .check_datetime_range(from, to)
   .check_traffic_product(product)
-  if ((!is.null(from_dt) | !is.null(to_dt)) & product == "flow") {
-    from_dt <- to_dt <- NULL
-    message("Note: 'from_dt' and 'to_dt' have no effect on traffic flow. Traffic flow is always real-time.")
+  if ((!is.null(from) | !is.null(to)) & product == "flow") {
+    from <- to <- NULL
+    message("Note: 'from' and 'to' have no effect on traffic flow. Traffic flow is always real-time.")
   }
   .check_min_jam_factor(min_jam_factor)
   .check_boolean(url_only)
@@ -96,19 +96,19 @@ traffic <- function(aoi, product = "flow", from_dt = NULL, to_dt = NULL,
   # Add datetime range
   url <- .add_datetime(
     url = url,
-    datetime = from_dt,
+    datetime = from,
     field_name = "startTime"
   )
   url <- .add_datetime(
     url = url,
-    datetime = to_dt,
+    datetime = to,
     field_name = "endTime"
   )
 
   # Add time zone
   url <- paste0(
     url,
-    "&localtime=FALSE"
+    "&localtime=false"
   )
 
   # Add min jam factor
