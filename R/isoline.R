@@ -1,4 +1,4 @@
-#' Create Isolines Around POIs
+#' HERE Routing API: Calculate Isoline
 #'
 #' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API
 #' that connect the end points of all routes leaving from defined centers (POIs) with either
@@ -113,7 +113,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   ids <- .get_ids(data)
   count <- 0
   isolines <-  sf::st_as_sf(
-    data.table::rbindlist(
+    as.data.frame(data.table::rbindlist(
       lapply(data, function(con) {
         count <<- count + 1
         df <- jsonlite::fromJSON(con)
@@ -132,7 +132,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
           geometry = sf::st_as_sfc(geometry, crs = 4326)
         )
       })
-    )
+    ))
   )
 
   # Aggregate

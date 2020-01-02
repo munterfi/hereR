@@ -2,7 +2,7 @@
 % Please edit documentation in R/isoline.R
 \name{isoline}
 \alias{isoline}
-\title{Create Isolines Around POIs}
+\title{HERE Routing API: Calculate Isoline}
 \usage{
 isoline(
   poi,

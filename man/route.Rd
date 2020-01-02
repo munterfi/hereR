@@ -2,7 +2,7 @@
 % Please edit documentation in R/route.R
 \name{route}
 \alias{route}
-\title{Route Directions Between POIs}
+\title{HERE Routing API: Calculate Route}
 \usage{
 route(
   origin,

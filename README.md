@@ -13,7 +13,7 @@ The `hereR` package provides an interface to the **HERE REST APIs** for R:
 (4) find public transport connections and nearby stations using the **Public Transit API**;
 (5) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
-Locations, routes and isolines are returned as `sf` objects and tables as `data.table` objects.
+Locations, routes and isolines are returned as `sf` objects.
 
 ## Installation
 

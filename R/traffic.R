@@ -1,4 +1,4 @@
-#' Traffic Flow and Incidents in AOIs
+#' HERE Traffic API: Flow and Incidents
 #'
 #' Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
 #' The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
@@ -184,7 +184,8 @@ traffic <- function(aoi, product = "flow", from = NULL, to = NULL,
   if (nrow(flow) > 0) {
     return(
       sf::st_set_crs(
-        sf::st_as_sf(flow), 4326
+        sf::st_as_sf(
+          as.data.frame(flow)), 4326
       )
     )
   } else {
@@ -231,7 +232,9 @@ traffic <- function(aoi, product = "flow", from = NULL, to = NULL,
   if (nrow(incidents) > 0) {
     return(
       sf::st_set_crs(
-        sf::st_as_sf(incidents, coords = c("lng", "lat")), 4326
+        sf::st_as_sf(
+          as.data.frame(incidents),
+          coords = c("lng", "lat")), 4326
       )
     )
   } else {

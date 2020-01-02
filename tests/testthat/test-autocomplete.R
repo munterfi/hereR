@@ -17,7 +17,7 @@ test_that("autocomplete works", {
     suggestions <- autocomplete(addresses = poi$city),
 
     # Tests
-    expect_is(suggestions,  c("data.table", "data.frame")),
+    expect_is(suggestions,  c("data.frame")),
     expect_equal(length(unique(suggestions$id)), length(poi$city))
   )
 })

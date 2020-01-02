@@ -2,7 +2,7 @@
 % Please edit documentation in R/connection.R
 \name{connection}
 \alias{connection}
-\title{Route Connections Between POIs}
+\title{HERE Public Transit API: Transit Route}
 \usage{
 connection(
   origin,
@@ -36,7 +36,7 @@ connection(
 An \code{sf} object containing the requested routes.
 }
 \description{
-Calculates public transport connections with geometries (\code{LINESTRING}) between pairs of points using the HERE 'Public Transit' API.
+Route public transport connections with geometries (\code{LINESTRING}) between pairs of points using the HERE 'Public Transit' API.
 Two modes are provided:
 \itemize{
   \item\code{summary = FALSE}: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.

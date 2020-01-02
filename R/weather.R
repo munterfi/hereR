@@ -1,4 +1,4 @@
-#' Weather Observations, Forecasts, Astronomy and Alerts at POIs
+#' HERE Destination Weather API: Observations, Forecasts, Astronomy and Alerts
 #'
 #' Weather forecasts, reports on current weather conditions,
 #' astronomical information and alerts at a specific location (coordinates or
@@ -102,7 +102,9 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   rownames(weather) <- NULL
   return(
     sf::st_set_crs(
-      sf::st_as_sf(weather, coords = c("lng", "lat")),
+      sf::st_as_sf(
+        as.data.frame(weather),
+        coords = c("lng", "lat")),
     4326)
   )
 }

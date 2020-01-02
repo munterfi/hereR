@@ -1,4 +1,4 @@
-#' Route Directions Between POIs
+#' HERE Routing API: Calculate Route
 #'
 #' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the HERE 'Routing' API.
 #' Routes can be created for various transport modes, as for example 'car' or 'public transport',
@@ -164,7 +164,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
 
         # Build sf object
         sf::st_as_sf(
-          data.table::data.table(
+          as.data.frame(data.table::data.table(
             cbind(
               id = ids[count],
               departure = if(arrival) (datetime - summary$travelTime) else datetime,
@@ -176,7 +176,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
               traffic = df$response$route$mode$trafficMode,
               summary
             )
-          ),
+          )),
           geometry = sf::st_sfc(
             .line_from_pointList(
               Reduce(c, df$response$route$shape)

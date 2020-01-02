@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocode.R
 \name{geocode}
 \alias{geocode}
-\title{Geocode Addresses}
+\title{HERE Geocoder API: Geocode}
 \usage{
 geocode(addresses, autocomplete = FALSE, url_only = FALSE)
 }
