@@ -2,7 +2,7 @@
 % Please edit documentation in R/authentication.R
 \name{unset_key}
 \alias{unset_key}
-\title{Remove Application Credentials}
+\title{Remove HERE Application Credentials}
 \usage{
 unset_key()
 }

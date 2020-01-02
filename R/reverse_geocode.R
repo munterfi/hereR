@@ -1,4 +1,4 @@
-#' Reverse Geocode POIs
+#' HERE Geocoder API: Reverse Geocode
 #'
 #' Get addresses or landmarks from locations using the HERE 'Geocoder' API.
 #' The return value is an \code{sf} object, containing point geometries
@@ -87,7 +87,9 @@ reverse_geocode <- function(poi, results = 1, landmarks = FALSE, url_only = FALS
     rownames(reverse) <- NULL
     return(
       sf::st_set_crs(
-        sf::st_as_sf(reverse, coords = c("lng", "lat")),
+        sf::st_as_sf(
+          as.data.frame(reverse),
+          coords = c("lng", "lat")),
         4326)
     )
   } else {

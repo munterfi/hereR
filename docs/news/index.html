@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -158,9 +158,9 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-0-2-1-9000" class="section level1">
+    <div id="version-0-3-0" class="section level1">
 <h1 class="page-header">
-<a href="#version-0-2-1-9000" class="anchor"></a>version 0.2.1.9000<small> Unreleased </small>
+<a href="#version-0-3-0" class="anchor"></a>version 0.3.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code><a href="../reference/hereR-defunct.html">set_auth()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_auth()</a></code> are defunct and replaced by <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/23"><a href='https://github.com/munterfinger/hereR/issues/23'>#23</a></a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
@@ -170,9 +170,10 @@
 <li>
 <strong>Public Transit API: Find stations nearby</strong> The new feature <code><a href="../reference/station.html">station()</a></code> retrieves nearby public transit stations with corresponding line information.</li>
 <li>Package cosmetics: Renamed the <code>start</code> parameter to <code>origin</code> and unified the utilization of the <code>datetime</code> and <code>arrival</code> parameters in <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/route_matrix.html">route_matrix()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code> and <code><a href="../reference/connection.html">connection()</a></code>.</li>
-<li>Adjusted the handling of datetime objects in the requests: All <code><a href="https://rdrr.io/r/base/c.html">c("POSIXct", "POSIXt")</a></code> inputs for the requests (mostly <code>departure</code>) are converted to UTC using <code>.encode_datetime()</code> and the responses are parsed and returned in <code><a href="https://rdrr.io/r/base/timezones.html">Sys.timezone()</a></code> using <code>.parse_datetime()</code>.</li>
+<li>Adjusted the handling of datetime objects in the requests: All <code><a href="https://rdrr.io/r/base/c.html">c("POSIXct", "POSIXt")</a></code> inputs for the requests (mostly <code>departure</code>) are converted to UTC using <code>.encode_datetime()</code> and the responses are parsed and returned in the input timezone (or if missing: <code><a href="https://rdrr.io/r/base/timezones.html">Sys.timezone()</a></code>) using <code>.parse_datetime()</code> (see <a href="https://github.com/munterfinger/hereR/issues/28"><a href='https://github.com/munterfinger/hereR/issues/28'>#28</a></a>).</li>
 <li>Added <code>@import sf</code> to the package documentation to ensure <code>sf</code> objects are handled correctly.</li>
-<li>Added <code>departure</code> and <code>arrival</code> datetime column to the return value of <code><a href="../reference/route.html">route()</a></code>.</li>
+<li>Added <code>departure</code> and <code>arrival</code> datetime column to the return value of <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/route_matrix.html">route_matrix()</a></code> and <code><a href="../reference/isoline.html">isoline()</a></code>.</li>
+<li>Removed <code>data.table</code> object type from function return values. New: Pure <code>data.frame</code> or <code>sf, data.frame</code> because this integrates better with other packages (e.g. the <code>overline2()</code> function from the <code>stplanr</code> package).</li>
 </ul>
 </div>
     <div id="version-0-2-1" class="section level1">
@@ -225,7 +226,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#version-0-2-1-9000">0.2.1.9000</a></li>
+        <li><a href="#version-0-3-0">0.3.0</a></li>
         <li><a href="#version-0-2-1">0.2.1</a></li>
         <li><a href="#version-0-2-0">0.2.0</a></li>
         <li><a href="#version-0-1-0">0.1.0</a></li>

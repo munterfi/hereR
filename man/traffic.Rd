@@ -2,13 +2,13 @@
 % Please edit documentation in R/traffic.R
 \name{traffic}
 \alias{traffic}
-\title{Traffic Flow and Incidents in AOIs}
+\title{HERE Traffic API: Flow and Incidents}
 \usage{
 traffic(
   aoi,
   product = "flow",
-  from_dt = NULL,
-  to_dt = NULL,
+  from = NULL,
+  to = NULL,
   min_jam_factor = 0,
   url_only = FALSE
 )
@@ -18,9 +18,9 @@ traffic(
 
 \item{product}{character, traffic product of the 'Traffic API'. Supported products: \code{"flow"} and \code{"incidents"}.}
 
-\item{from_dt}{\code{POSIXct} object, datetime of the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
+\item{from}{\code{POSIXct} object, datetime of the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
 
-\item{to_dt}{\code{POSIXct} object, datetime of the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
+\item{to}{\code{POSIXct} object, datetime of the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).}
 
 \item{min_jam_factor}{numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).}
 
@@ -63,8 +63,8 @@ flow <- traffic(
 incidents <- traffic(
   aoi = aoi[aoi$code == "LI", ],
   product = "incidents",
-  from_dt = as.POSIXct("2018-01-01 00:00:00"),
-  to_dt = as.POSIXct("2019-12-31 23:59:59"),
+  from = as.POSIXct("2018-01-01 00:00:00"),
+  to = as.POSIXct("2019-12-31 23:59:59"),
   url_only = TRUE
 )
 }

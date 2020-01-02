@@ -2,7 +2,7 @@
 % Please edit documentation in R/route_matrix.R
 \name{route_matrix}
 \alias{route_matrix}
-\title{Matrix of Route Summaries between POIs}
+\title{HERE Routing API: Calculate Matrix}
 \usage{
 route_matrix(
   origin,
@@ -36,7 +36,7 @@ route_matrix(
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
 \value{
-A \code{data.table} containing the requested route matrix data.
+A \code{data.frame} containing the requested route matrix data.
 }
 \description{
 Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.

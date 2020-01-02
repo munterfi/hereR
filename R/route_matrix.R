@@ -1,4 +1,4 @@
-#' Matrix of Route Summaries between POIs
+#' HERE Routing API: Calculate Matrix
 #'
 #' Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.
 #' Various transport modes and traffic information at a provided timestamp are supported.
@@ -20,7 +20,7 @@
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
-#' A \code{data.table} containing the requested route matrix data.
+#' A \code{data.frame} containing the requested route matrix data.
 #' @export
 #'
 #' @examples
@@ -170,9 +170,15 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
     routes$destIndex <- tmp
   }
 
+  # Add departure and arrival
+  routes$departure <- datetime
+  routes$arrival <- datetime + routes$travelTime
+  routes <- routes[, c("origIndex", "destIndex", "departure", "arrival",
+                       "distance", "travelTime", "costFactor")]
+
   # Reorder
   routes <- routes[order(routes$origIndex,
                          routes$destIndex), ]
   rownames(routes) <- NULL
-  return(routes)
+  return(as.data.frame(routes))
 }

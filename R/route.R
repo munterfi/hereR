@@ -1,4 +1,4 @@
-#' Route Directions Between POIs
+#' HERE Routing API: Calculate Route
 #'
 #' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the HERE 'Routing' API.
 #' Routes can be created for various transport modes, as for example 'car' or 'public transport',
@@ -152,7 +152,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   ids <- .get_ids(data)
   count <- 0
   routes <- sf::st_as_sf(
-    data.table::rbindlist(
+    as.data.frame(data.table::rbindlist(
       lapply(data, function(con) {
         count <<- count + 1
         df <- jsonlite::fromJSON(con)
@@ -167,9 +167,9 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
           data.table::data.table(
             cbind(
               id = ids[count],
-              departure = .parse_datetime(df$response$metaInfo$timestamp),
+              departure = if(arrival) (datetime - summary$travelTime) else datetime,
               origin = utils::head(df$response$route$waypoint, 1)[[1]]$label[1],
-              arrival = .parse_datetime(df$response$metaInfo$timestamp) + summary$travelTime,
+              arrival = if(arrival) (datetime) else (datetime + summary$travelTime),
               destination = utils::tail(df$response$route$waypoint, 1)[[1]]$label[2],
               mode = paste(Reduce(c, df$response$route$mode$transportModes),
                            collapse = ", "),
@@ -184,7 +184,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
           )
         )
       })
-    )
+    ))
   )
   rownames(routes) <- NULL
   return(routes)

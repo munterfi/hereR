@@ -2,7 +2,7 @@
 % Please edit documentation in R/autocomplete.R
 \name{autocomplete}
 \alias{autocomplete}
-\title{Autocomplete Addresses}
+\title{HERE Geocoder API: Autocomplete}
 \usage{
 autocomplete(addresses, results = 5, url_only = FALSE)
 }

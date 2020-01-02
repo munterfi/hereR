@@ -1,6 +1,6 @@
-#' Route Connections Between POIs
+#' HERE Public Transit API: Transit Route
 #'
-#' Calculates public transport connections with geometries (\code{LINESTRING}) between pairs of points using the HERE 'Public Transit' API.
+#' Route public transport connections with geometries (\code{LINESTRING}) between pairs of points using the HERE 'Public Transit' API.
 #' Two modes are provided:
 #' \itemize{
 #'   \item\code{summary = FALSE}: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
@@ -142,14 +142,14 @@ connection <- function(origin, destination, datetime = Sys.time(),
 
   # Postprocess
   routes <- routes[routes$rank <= results, ]
-  routes$departure <- .parse_datetime(routes$departure)
-  routes$arrival <- .parse_datetime(routes$arrival)
+  routes$departure <- .parse_datetime(routes$departure, tz = attr(datetime, "tzone"))
+  routes$arrival <- .parse_datetime(routes$arrival, tz = attr(datetime, "tzone"))
   rownames(routes) <- NULL
 
   # Create sf object
   return(
     sf::st_as_sf(
-      routes, sf_column_name = "geometry",
+      as.data.frame(routes), sf_column_name = "geometry",
       crs = 4326
     )
   )

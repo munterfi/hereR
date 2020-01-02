@@ -27,7 +27,7 @@ connection_summary <- hereR:::example$connection_summary
 stations <- hereR:::example$station
 ```
 
-Get public transport connections between given points and extract stations around locations based on the 'HERE Public Transit' API.
+Request public transport connections between given points and find stations around locations based on the 'HERE Public Transit' API.
 
 ## Connections
 The function `connection()` allows to request public transport connections from the API. Two types of requests are provided:

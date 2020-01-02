@@ -1,4 +1,4 @@
-#' Find Stations Nearby POIs
+#' HERE Public Transit API: Find Stations Nearby
 #'
 #' Retrieve stations with the corresponding line information around given locations using the HERE 'Public Transit' API.
 #'
@@ -104,7 +104,10 @@ station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
   rownames(stations) <- NULL
   return(
     sf::st_set_crs(
-      sf::st_as_sf(stations, coords = c("lng", "lat")),
+      sf::st_as_sf(
+        as.data.frame(stations),
+        coords = c("lng", "lat")
+        ),
     4326)
   )
 }

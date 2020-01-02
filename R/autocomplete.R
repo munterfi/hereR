@@ -1,4 +1,4 @@
-#' Autocomplete Addresses
+#' HERE Geocoder API: Autocomplete
 #'
 #' Completes addresses using the HERE 'Geocoder Autocomplete' API.
 #'
@@ -73,7 +73,7 @@ autocomplete <- function(addresses, results = 5, url_only = FALSE) {
   # Return if not NULL data.talbe
   if (nrow(suggestion) > 0) {
     rownames(suggestion) <- NULL
-    return(suggestion)
+    return(as.data.frame(suggestion))
   } else {
     return(NULL)
   }

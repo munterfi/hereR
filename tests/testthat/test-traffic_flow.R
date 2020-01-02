@@ -20,8 +20,8 @@ test_that("traffic flow works", {
   expect_error(traffic(aoi = aoi, product = "flow", min_jam_factor = "11"), "'min_jam_factor' must be of type 'numeric'.")
 
   # Test URL
-  # Following message should appear: "Note: 'from_dt' and 'to_dt' have no effect on traffic flow. Traffic flow is always real-time."
-  expect_is(traffic(aoi = aoi[aoi$code == "LI", ], product = "flow", from_dt = Sys.time()-60*60, to_dt = Sys.time(), url_only = TRUE), "character")
+  # Following message should appear: "Note: 'from' and 'to' have no effect on traffic flow. Traffic flow is always real-time."
+  expect_is(traffic(aoi = aoi[aoi$code == "LI", ], product = "flow", from = Sys.time()-60*60, to = Sys.time(), url_only = TRUE), "character")
 
   # Test with API response mock
   with_mock(
@@ -29,7 +29,7 @@ test_that("traffic flow works", {
     traffic_flow <- traffic(aoi = aoi[aoi$code == "LI", ], product = "flow"),
 
     # Tests
-    expect_equal(class(traffic_flow), c("sf", "data.table", "data.frame")),
+    expect_equal(class(traffic_flow), c("sf", "data.frame")),
     expect_equal(any(sf::st_geometry_type(traffic_flow) != "MULTILINESTRING"), FALSE)
   )
 })

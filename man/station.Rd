@@ -2,7 +2,7 @@
 % Please edit documentation in R/station.R
 \name{station}
 \alias{station}
-\title{Find Stations Nearby POIs}
+\title{HERE Public Transit API: Find Stations Nearby}
 \usage{
 station(poi, radius = 500, results = 5, url_only = FALSE)
 }
