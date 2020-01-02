@@ -170,6 +170,12 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
     routes$destIndex <- tmp
   }
 
+  # Add departure and arrival
+  routes$departure <- datetime
+  routes$arrival <- datetime + routes$travelTime
+  routes <- routes[, c("origIndex", "destIndex", "departure", "arrival",
+                       "distance", "travelTime", "costFactor")]
+
   # Reorder
   routes <- routes[order(routes$origIndex,
                          routes$destIndex), ]

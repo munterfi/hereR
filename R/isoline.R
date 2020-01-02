@@ -97,7 +97,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   url <- .add_datetime(
     url,
     datetime,
-    "departure"
+    if (arrival) "arrival" else "departure"
   )
 
   # Return urls if chosen
@@ -123,9 +123,9 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
         sf::st_as_sf(
           data.table::data.table(
             id = ids[count],
-            departure = .parse_datetime(df$response$metaInfo$timestamp),
-            arrival = .parse_datetime(df$response$metaInfo$timestamp) + df$response$isoline$range,
-            range = df$response$isoline$range,
+            departure = if(arrival) (datetime - df$response$isoline$range) else datetime,
+            arrival = if(arrival) datetime else (datetime + df$response$isoline$range),
+            range =  df$response$isoline$range,
             lng = df$response$center$longitude,
             lat = df$response$center$latitude
           ),
@@ -137,6 +137,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
 
   # Aggregate
   if (aggregate) {
+    tz <- attr(isolines$departure, "tzone")
     isolines <- sf::st_set_precision(isolines, 1e4)
     isolines <- lwgeom::st_make_valid(isolines)
     isolines <- stats::aggregate(isolines, by = list(isolines$range),
@@ -146,6 +147,8 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     isolines <- sf::st_difference(isolines)
     isolines$Group.1 <- NULL
     isolines$id <- NA
+    attr(isolines$departure, "tzone") <- tz
+    attr(isolines$arrival, "tzone") <- tz
 
     # Fix geometry collections
     suppressWarnings(
@@ -154,6 +157,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       )
     )
   }
+
   rownames(isolines) <- NULL
   return(isolines)
 }

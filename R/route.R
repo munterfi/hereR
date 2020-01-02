@@ -167,9 +167,9 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
           data.table::data.table(
             cbind(
               id = ids[count],
-              departure = .parse_datetime(df$response$metaInfo$timestamp),
+              departure = if(arrival) (datetime - summary$travelTime) else datetime,
               origin = utils::head(df$response$route$waypoint, 1)[[1]]$label[1],
-              arrival = .parse_datetime(df$response$metaInfo$timestamp) + summary$travelTime,
+              arrival = if(arrival) (datetime) else (datetime + summary$travelTime),
               destination = utils::tail(df$response$route$waypoint, 1)[[1]]$label[2],
               mode = paste(Reduce(c, df$response$route$mode$transportModes),
                            collapse = ", "),
