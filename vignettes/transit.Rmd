@@ -27,12 +27,12 @@ connection_summary <- hereR:::example$connection_summary
 stations <- hereR:::example$station
 ```
 
-Request public transport connections between given points and find stations around locations based on the 'HERE Public Transit' API.
+Request public transport connections between given points and find stations nearby using the 'HERE Public Transit' API.
 
 ## Connections
 The function `connection()` allows to request public transport connections from the API. Two types of requests are provided:
 
-* `connection(..., summary = FALSE)`: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
+* `connection(..., summary = FALSE)`: The public transport connections are returned as multiple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
 * `connection(..., summary = TRUE)`: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
 
 ### 1. Sections
@@ -92,9 +92,9 @@ Print the POIs, the radius and stations on an interactive leaflet map:
 ```{r stations_map, eval=TRUE, out.width='100%'}
 buffer <-
   poi %>%
-  st_transform(2056) %>% # LV95
+  st_transform(2056) %>%
   st_buffer(500) %>%
-  st_transform(4326)     # WGS84
+  st_transform(4326)
 
 m <-
   mapview(poi, alpha.region = 1, col.region = "black",

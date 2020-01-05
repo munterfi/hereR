@@ -10,7 +10,7 @@ unset_key()
 None.
 }
 \description{
-Remove previously set HERE API KEY from the current R session.
+Remove previously set HERE API key from the current R session.
 }
 \examples{
 unset_key()

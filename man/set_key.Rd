@@ -13,12 +13,12 @@ set_key(api_key)
 None.
 }
 \description{
-Provide application credentials (API Key) for a HERE project
-of type 'REST', that will be used to authenticate in
-the requests to the APIs.
+Provide an API Key for a HERE project of type 'REST'.
+The key is set for the current R session and is used
+to authenticate in the requests to the APIs.
 }
 \details{
-No login yet? Get your free login here: \href{https://developer.here.com/}{klick}
+No login yet? Get a free login and key here: \href{https://developer.here.com/}{klick}
 }
 \examples{
 set_key("<YOUR API KEY>")

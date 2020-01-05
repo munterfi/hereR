@@ -38,7 +38,7 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-Once valid application credentials have been created and the key is set in the R session, the APIs can be addressed using the functions, which are illustrated by examples below. For a more detailed description check the documentation of the functions and the package vignettes.
+Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the following examples. A more detailed description can be found in the documentation of the functions and the package vignettes.
 
 **Geocoder API:** Autocomplete and geocode addresses or reverse geocode POIs.
 ``` r
@@ -46,7 +46,7 @@ geocode(c("Schweighofstrasse 190, Zürich, Schweiz", "Hardstrasse 48, Zürich, S
 
 autocomplete(c("Schweighofstrasse", "Hardstrasse"))
 
-reverse_geocode(poi, landmarks = FALSE)
+reverse_geocode(poi)
 ```
 
 **Routing API:** Construct a route, create a route matrix or request an isochrone around points.
@@ -60,12 +60,12 @@ isoline(poi, rangetype = "time", mode = "car")
 
 **Traffic API:** Get real-time traffic flow or incidents in a specific area.
 ``` r
-traffic(aoi, product = "flow")
+traffic(aoi[2, ], product = "flow")
 
 traffic(aoi, product = "incidents")
 ```
 
-**Public Transit API:** Request public transport connections between points or find public transit stations nearby locations.
+**Public Transit API:** Request public transport connections between points or find stations nearby.
 ``` r
 connection(poi[1:2, ], poi[3:4, ])
 

@@ -3,8 +3,10 @@ title: "Destination Weather API"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Destination Weather API}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -81,16 +83,20 @@ Print the weather observation information on an interactive leaflet map with pop
 1. Create a list containing the temperature and humidity graphs for every POI:
 ```{r plots_forecast, eval=TRUE, out.width='100%'}
 g <- lapply(1:nrow(forecast), function(x) {
-  fc <- forecast$forecast[[x]]
-  ggplot() + 
-    geom_line(aes(x = seq(1, nrow(fc)), y = as.numeric(fc$temperature)),
-              colour = 'red') +
-    geom_line(aes(x = seq(1, nrow(fc)), y = as.numeric(fc$humidity)),
-              colour = 'blue') +
-    xlab("Time from now [h]") +
-    ylab("Temperature [°C] / Humidity [%]") +
+  fc <- data.frame(
+    dt = as.POSIXct(forecast$forecast[[x]]$utcTime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
+    te = as.numeric(forecast$forecast[[x]]$temperature),
+    rh = as.numeric(forecast$forecast[[x]]$humidity)
+  )
+  ggplot(fc, aes(x = dt)) + 
+    geom_line(aes(y = te, colour = "Temperature")) +
+    geom_line(aes(y = rh/5, colour = "Humidity")) +
+    scale_y_continuous(sec.axis = sec_axis(~.*5, name = "Relative humidity [%]")) + 
+    scale_colour_manual(values = c("blue", "red")) +
+    labs(y = "Air temperature [°C]", x = "", colour = "") +
     ggtitle(forecast$station[x]) +
-    theme_classic()
+    theme_minimal() +
+    theme(legend.position="bottom", panel.background = element_rect(color = NA))
 })
 ```
 
