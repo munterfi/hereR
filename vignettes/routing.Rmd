@@ -85,7 +85,7 @@ Isolines are constructed by the function `isoline()`. The calculated polygons (`
 iso <- isoline(
   poi,
   range = seq(5, 30, 5) * 60,
-  rangetype = "time",
+  range_type = "time",
   type = "fastest",
   mode = "car",
   aggregate = TRUE,

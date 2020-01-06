@@ -11,7 +11,7 @@
 #' @param datetime \code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).
 #' @param arrival boolean, are the provided Points of Interest (POIs) the origin or destination locations (\code{default = FALSE})?
 #' @param range numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.
-#' @param rangetype character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
+#' @param range_type character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
 #' @param type character, set the routing type: \code{"fastest"} or \code{"shortest"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.
@@ -33,14 +33,14 @@
 #'   url_only = TRUE
 #' )
 isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
-                    range = seq(5, 30, 5) * 60, rangetype = "time",
+                    range = seq(5, 30, 5) * 60, range_type = "time",
                     type = "fastest", mode = "car", traffic = FALSE,
                     aggregate = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(poi)
   .check_datetime(datetime)
-  .check_rangetype(rangetype)
+  .check_range_type(range_type)
   .check_type(type = type, request = "calculateisoline")
   .check_mode(mode = mode, request = "calculateisoline")
   .check_boolean(traffic)
@@ -66,17 +66,17 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     poi
   )
 
-  # Add range and rangetype
+  # Add range and range type
   url = paste0(
     url,
     "&range=",
     paste0(range, collapse = ","),
     "&rangetype=",
-    rangetype
+    range_type
   )
 
   # Add consumption details
-  if (rangetype == "consumption") {
+  if (range_type == "consumption") {
     url <- paste0(
       url,
       "&consumptionmodel=",

@@ -9,7 +9,7 @@ isoline(
   datetime = Sys.time(),
   arrival = FALSE,
   range = seq(5, 30, 5) * 60,
-  rangetype = "time",
+  range_type = "time",
   type = "fastest",
   mode = "car",
   traffic = FALSE,
@@ -26,7 +26,7 @@ isoline(
 
 \item{range}{numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.}
 
-\item{rangetype}{character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.}
+\item{range_type}{character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.}
 
 \item{type}{character, set the routing type: \code{"fastest"} or \code{"shortest"}.}
 

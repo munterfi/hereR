@@ -97,10 +97,10 @@
     stop(sprintf("'attribute' must be in '%s'.", paste(attributes, collapse = "', '")))
 }
 
-.check_rangetype <- function(rangetype) {
-  rangetypes <- c("distance", "time", "consumption")
-  if (!rangetype %in% rangetypes)
-    stop(sprintf("'rangetype' must be '%s'.", paste(rangetypes, collapse = "', '")))
+.check_range_type <- function(range_type) {
+  range_types <- c("distance", "time", "consumption")
+  if (!range_type %in% range_types)
+    stop(sprintf("'range_type' must be '%s'.", paste(range_types, collapse = "', '")))
 }
 
 .check_proxy <- function(proxy) {
