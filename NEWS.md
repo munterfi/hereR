@@ -1,6 +1,7 @@
 # version 0.3.0.9000
 
-* Fixed `route_matrix()`: All M:N route combinations are now returned in the edge list (see [#30](https://github.com/munterfinger/hereR/issues/30)). All lengths of `origin` and `destination` are now accepted as input (see [#31](https://github.com/munterfinger/hereR/issues/31)).
+* There are no more missing M:N route combinations in the the edge list returned by `route_matrix()` (see [#30](https://github.com/munterfinger/hereR/issues/30)).
+* All lengths of `origin` and `destination` are now accepted as input in `route_matrix()` (see [#31](https://github.com/munterfinger/hereR/issues/31)).
 
 # version 0.3.0
 

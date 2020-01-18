@@ -1,5 +1,6 @@
 destination: docs
 navbar:
+  type: inverse
   structure:
     right:
       - github
@@ -48,3 +49,7 @@ reference:
   - title: Destination Weather API
     contents:
     - '`weather`'
+
+authors:
+  Merlin Unterfinger:
+    href: https://www.munterfinger.ch
