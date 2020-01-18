@@ -1,3 +1,7 @@
+# version 0.3.0.9000
+
+* Fixed `route_matrix()`: All route M:N combinations are now returned in the edge list (see [#30](https://github.com/munterfinger/hereR/issues/30)). All lengths of `origin` and `destination` are now accepted as input (see [#31](https://github.com/munterfinger/hereR/issues/31)).
+
 # version 0.3.0
 
 * HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore `set_auth()` and `unset_auth()` are defunct and replaced by `set_key()` and `unset_key()` (see [#23](https://github.com/munterfinger/hereR/issues/23)).<br>**NOTE:** `.Deprecated()` was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 **the authentication must be adjusted**.
