@@ -1,6 +1,6 @@
 #' HERE Routing API: Calculate Matrix
 #'
-#' Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.
+#' Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Routing' API.
 #' Various transport modes and traffic information at a provided timestamp are supported.
 #' The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 #' maximum matrix size per request and thereby minimize the number of overall needed requests.
@@ -9,8 +9,8 @@
 #' @references
 #' \href{https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html}{HERE Routing API: Calculate Matrix}
 #'
-#' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
-#' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
+#' @param origin \code{sf} object, the origin locations (M) of geometry type \code{POINT}.
+#' @param destination \code{sf} object, the destination locations (N) of geometry type \code{POINT}.
 #' @param datetime \code{POSIXct} object, datetime for the departure.
 #' @param type character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.
 #' @param mode character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"} or \code{"truck"}.
@@ -20,7 +20,7 @@
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
-#' A \code{data.frame} containing the requested route matrix data.
+#' A \code{data.frame}, which is an edge list containing the requested M:N route combinations.
 #' @export
 #'
 #' @examples
@@ -79,31 +79,30 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   # Create batches, indices and format coordinates
   batch_size_origin <- 15
   batch_size_dest <- 100
-  orig_div <- seq(0, length(origin), batch_size_origin)
-  dest_div <- seq(0, length(destination), batch_size_dest)
+  orig_div <- seq(0, length(origin) - 1, batch_size_origin)
+  dest_div <- seq(0, length(destination) - 1, batch_size_dest)
   orig_idx <- list()
   dest_idx <- list()
-
-  coords <- sapply(X = orig_div, FUN = function(i) {
+  coords <- as.character(sapply(X = orig_div, FUN = function(i) {
     origin_batch <- origin[(i + 1):(i + batch_size_origin)]
     origin_batch <- origin_batch[!is.na(origin_batch)]
-    for (j in dest_div) {
+    sapply(X = dest_div, FUN = function(j) {
       dest_batch <- destination[(j + 1):(j + batch_size_dest)]
       dest_batch <- dest_batch[!is.na(dest_batch)]
       orig_idx <<- append(orig_idx, list(seq(0 + i, length(origin_batch) - 1 + i, 1)))
       dest_idx <<- append(dest_idx, list(seq(0 + j, length(dest_batch) - 1 + j, 1)))
       return(paste0("&",
-             paste0("start",
-                    seq(0, length(origin_batch) - 1, 1), "=",
-                    origin_batch,
-                    collapse = "&"), "&",
-             paste0("destination",
-                    seq(0, length(dest_batch) - 1, 1), "=",
-                    dest_batch,
-                    collapse = "&")
+                    paste0("start",
+                           seq(0, length(origin_batch) - 1, 1), "=",
+                           origin_batch,
+                           collapse = "&"), "&",
+                    paste0("destination",
+                           seq(0, length(dest_batch) - 1, 1), "=",
+                           dest_batch,
+                           collapse = "&")
       ))
-    }
-  })
+    })
+  }))
 
   # Add origin coords
   url = paste0(
