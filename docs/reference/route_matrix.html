@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="HERE Routing API: Calculate Matrix — route_matrix" />
-<meta property="og:description" content="Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.
+<meta property="og:description" content="Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Routing' API.
 Various transport modes and traffic information at a provided timestamp are supported.
 The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 maximum matrix size per request and thereby minimize the number of overall needed requests.
@@ -81,7 +81,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -165,7 +165,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
     </div>
 
     <div class="ref-description">
-    <p>Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.
+    <p>Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Routing' API.
 Various transport modes and traffic information at a provided timestamp are supported.
 The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 maximum matrix size per request and thereby minimize the number of overall needed requests.
@@ -189,11 +189,11 @@ The result is one route summary matrix, that fits the order of the provided POIs
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>origin</th>
-      <td><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></td>
+      <td><p><code>sf</code> object, the origin locations (M) of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
       <th>destination</th>
-      <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
+      <td><p><code>sf</code> object, the destination locations (N) of geometry type <code>POINT</code>.</p></td>
     </tr>
     <tr>
       <th>datetime</th>
@@ -227,7 +227,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>data.frame</code> containing the requested route matrix data.</p>
+    <p>A <code>data.frame</code>, which is an edge list containing the requested M:N route combinations.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html'>HERE Routing API: Calculate Matrix</a></p>

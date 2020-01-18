@@ -17,9 +17,9 @@ route_matrix(
 )
 }
 \arguments{
-\item{origin}{\code{sf} object, the origin locations of geometry type \code{POINT}.}
+\item{origin}{\code{sf} object, the origin locations (M) of geometry type \code{POINT}.}
 
-\item{destination}{\code{sf} object, the destination locations of geometry type \code{POINT}.}
+\item{destination}{\code{sf} object, the destination locations (N) of geometry type \code{POINT}.}
 
 \item{datetime}{\code{POSIXct} object, datetime for the departure.}
 
@@ -36,10 +36,10 @@ route_matrix(
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
 \value{
-A \code{data.frame} containing the requested route matrix data.
+A \code{data.frame}, which is an edge list containing the requested M:N route combinations.
 }
 \description{
-Calculates a matrix of route summaries between given points of interest (POIs) using the HERE 'Routing' API.
+Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Routing' API.
 Various transport modes and traffic information at a provided timestamp are supported.
 The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 maximum matrix size per request and thereby minimize the number of overall needed requests.
