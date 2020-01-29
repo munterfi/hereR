@@ -41,7 +41,8 @@ reference:
     - '`isoline`'
   - title: Traffic API
     contents:
-    - '`traffic`'
+    - '`flow`'
+    - '`incident`'
   - title: Public Transit API
     contents:
     - '`connection`'
