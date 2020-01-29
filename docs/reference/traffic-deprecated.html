@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set HERE Application Credentials — set_key • hereR</title>
+<title>HERE Traffic API: Flow and Incidents — traffic-deprecated • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,10 @@
 
 
 
-<meta property="og:title" content="Set HERE Application Credentials — set_key" />
-<meta property="og:description" content="Provide an API Key for a HERE project of type 'REST'.
-The key is set for the current R session and is used
-to authenticate in the requests to the APIs." />
+<meta property="og:title" content="HERE Traffic API: Flow and Incidents — traffic-deprecated" />
+<meta property="og:description" content="Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
+The traffic flow data contains speed (&quot;SP&quot;) and congestion (jam factor: &quot;JF&quot;) information.
+Traffic incidents contain information about location, time, duration, severity, description and other details." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,45 +157,93 @@ to authenticate in the requests to the APIs." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set HERE Application Credentials</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/authentication.R'><code>R/authentication.R</code></a></small>
-    <div class="hidden name"><code>set_key.Rd</code></div>
+    <h1>HERE Traffic API: Flow and Incidents</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>traffic-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Provide an API Key for a HERE project of type 'REST'.
-The key is set for the current R session and is used
-to authenticate in the requests to the APIs.</p>
+    <p>Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
+The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information.
+Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_key</span>(<span class='no'>api_key</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='hereR-deprecated.html'>traffic</a></span>(
+  <span class='no'>aoi</span>,
+  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>api_key</th>
-      <td><p>character, the API key from a HERE project.</p></td>
+      <th>aoi</th>
+      <td><p><code>sf</code> object, Areas of Interest (POIs) of geometry type <code>POLYGON</code>.</p></td>
+    </tr>
+    <tr>
+      <th>product</th>
+      <td><p>character, traffic product of the 'Traffic API'. Supported products: <code>"flow"</code> and <code>"incidents"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>from</th>
+      <td><p><code>POSIXct</code> object, datetime of the earliest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td><p><code>POSIXct</code> object, datetime of the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
+    </tr>
+    <tr>
+      <th>min_jam_factor</th>
+      <td><p>numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if <code>product</code> is set to <code>"flow"</code>, <code>default = 0</code>).</p></td>
+    </tr>
+    <tr>
+      <th>url_only</th>
+      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>None.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>An <code>sf</code> object containing the requested traffic information.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>No login yet? Get a free login and key here: <a href='https://developer.here.com/'>klick</a></p>
+    <p>Explanation of the returned traffic flow variables:</p><ul>
+<li><p><code>"PC"</code>: Point TMC location code.</p></li>
+<li><p><code>"DE"</code>: Text description of the road.</p></li>
+<li><p><code>"QD"</code>: Queuing direction. '+' or '-'. Note this is the opposite of the travel direction in the fully qualified ID, For example for location 107+03021 the QD would be ‚-‚.</p></li>
+<li><p><code>"LE"</code>: Length of the stretch of road.</p></li>
+<li><p><code>"TY"</code>: Type information for the given Location Referencing container. This may be a freely defined string.</p></li>
+<li><p><code>"SP"</code>: Speed (based on UNITS) capped by speed limit.</p></li>
+<li><p><code>"FF"</code>: The free flow speed on this stretch of the road.</p></li>
+<li><p><code>"JF"</code>: The number between 0.0 and 10.0 indicating the expected quality of travel. When there is a road closure, the Jam Factor will be 10. As the number approaches 10.0 the quality of travel is getting worse. -1.0 indicates that a Jam Factor could not be calculated.</p></li>
+<li><p><code>"CN"</code>: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100%.</p></li>
+</ul>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set_key</span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)</div></pre>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    
+<ul>
+<li><p><a href='https://developer.here.com/api-explorer/rest/traffic'>HERE Traffic API</a></p></li>
+<li><p><a href='https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api'>Flow explanation, stackoverflow</a></p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='hereR-deprecated.html'>hereR-deprecated</a></code></p></div>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#note">Note</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>

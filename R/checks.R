@@ -23,6 +23,12 @@
     stop("'polygon' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.")
 }
 
+.check_bbox <- function(bbox) {
+  if (any(c(bbox[3, ] - bbox[1, ], bbox[4, ] - bbox[2, ]) >= 10)) {
+    stop("The polygons in 'aoi' must fit in a 10 x 10 degree bbox.")
+  }
+}
+
 .check_boolean <- function(bool) {
   if (!bool %in% c(TRUE, FALSE))
     stop(sprintf("'%s' must be a 'boolean' value.", deparse(substitute(bool))))
@@ -32,11 +38,6 @@
   if (!any(class(datetime) %in% c("POSIXct", "POSIXt")) & !is.null(datetime))
     stop(sprintf("'%s' must be of type 'POSIXct', 'POSIXt'.",
                  deparse(substitute(datetime))))
-}
-
-.check_datetime_range <- function(from, to) {
-  if (from > to)
-    stop("Invalid datetime range: 'from' must be smaller than 'to'.")
 }
 
 .check_mode <- function(mode, request) {
@@ -137,12 +138,6 @@
   weather_product_types <- c("observation", "forecast_hourly", "forecast_astronomy", "alerts")
   if (!product %in% weather_product_types)
     stop(sprintf("'product' must be '%s'.", paste(weather_product_types, collapse = "', '")))
-}
-
-.check_traffic_product <- function(product) {
-  traffic_product_types <- c("flow", "incidents")
-  if (!product %in% traffic_product_types)
-    stop(sprintf("'product' must be '%s'.", paste(traffic_product_types, collapse = "', '")))
 }
 
 .check_min_jam_factor <- function(min_jam_factor) {

@@ -24,10 +24,10 @@ url_weather_forecast_astronomy <-
   weather(poi = poi, product = "forecast_astronomy", url_only = TRUE)
 url_weather_alerts <-
   weather(poi = poi, product = "alerts", url_only = TRUE)
-url_traffic_flow <-
-  traffic(aoi = aoi[aoi$code == "LI", ], product = "flow", url_only = TRUE)
-url_traffic_incidents <-
-  traffic(aoi = aoi, product = "incidents", from = Sys.time()-60*60*1.5, url_only = TRUE)
+url_flow <-
+  flow(aoi = aoi[aoi$code == "LI", ], url_only = TRUE)
+url_incident <-
+  incident(aoi = aoi, from = Sys.time() - 60*60*0.1, url_only = TRUE)
 url_connection <-
   connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, url_only = TRUE)
 url_station <-
@@ -46,8 +46,8 @@ mock <- list(
   weather_forecast_hourly_response = hereR:::.get_content(url_weather_forecast_hourly),
   weather_forecast_astronomy_response = hereR:::.get_content(url_weather_forecast_astronomy),
   weather_alerts_response = hereR:::.get_content(url_weather_alerts),
-  traffic_flow_response = hereR:::.get_content(url_traffic_flow),
-  traffic_incidents_response = hereR:::.get_content(url_traffic_incidents),
+  flow_response = hereR:::.get_content(url_flow),
+  incident_response = hereR:::.get_content(url_incident),
   connection_response = hereR:::.get_content(url_connection),
   station_response = hereR:::.get_content(url_station)
 )
@@ -65,8 +65,8 @@ example <- list(
   weather_forecast_hourly = weather(poi = poi, product = "forecast_hourly"),
   weather_forecast_astronomy = weather(poi = poi, product = "forecast_astronomy"),
   weather_alerts = weather(poi = poi, product = "alerts"),
-  traffic_flow = traffic(aoi = aoi[aoi$code == "LI", ], product = "flow"),
-  traffic_incidents = traffic(aoi = aoi, product = "incidents", from = Sys.time()-60*60*1.5),
+  flow = flow(aoi = aoi[aoi$code == "LI", ]),
+  incident = incident(aoi = aoi, from = Sys.time() - 60*60*0.1),
   connection_section = connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = FALSE),
   connection_summary = connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = TRUE),
   station = station(poi)

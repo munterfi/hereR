@@ -1,3 +1,12 @@
+#' @title Deprecated functions in package \pkg{hereR}.
+#' @description The functions listed below are deprecated and will be defunct in
+#'   the near future. When possible, alternative functions with similar
+#'   functionality are also mentioned. Help pages for deprecated functions are
+#'   available at \code{help("-deprecated")}.
+#' @name hereR-deprecated
+#' @keywords internal
+NULL
+
 #' HERE Traffic API: Flow and Incidents
 #'
 #' Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
@@ -19,7 +28,6 @@
 #'
 #' @return
 #' An \code{sf} object containing the requested traffic information.
-#' @export
 #'
 #' @note
 #' Explanation of the returned traffic flow variables:
@@ -35,25 +43,25 @@
 #'   \item\code{"CN"}: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100\%.
 #' }
 #'
-#' @examples
-#' # Provide an API Key for a HERE project
-#' set_key("<YOUR API KEY>")
-#'
-#' # Real-time traffic flow
-#' flow <- traffic(
-#'   aoi = aoi[aoi$code == "LI", ],
+#' @name traffic-deprecated
+#' @usage
+#' traffic(
+#'   aoi,
 #'   product = "flow",
-#'   url_only = TRUE
+#'   from = NULL,
+#'   to = NULL,
+#'   min_jam_factor = 0,
+#'   url_only = FALSE
 #' )
+#' @seealso \code{\link{hereR-deprecated}}
+#' @keywords internal
+NULL
+
+#' @rdname hereR-deprecated
+#' @section \code{traffic}:
+#' For \code{traffic}, use \code{\link{flow}} or \code{\link{incident}}.
 #'
-#' # All traffic incidents from 2018 till end of 2019
-#' incidents <- traffic(
-#'   aoi = aoi[aoi$code == "LI", ],
-#'   product = "incidents",
-#'   from = as.POSIXct("2018-01-01 00:00:00"),
-#'   to = as.POSIXct("2019-12-31 23:59:59"),
-#'   url_only = TRUE
-#' )
+#' @export
 traffic <- function(aoi, product = "flow", from = NULL, to = NULL,
                     min_jam_factor = 0, url_only = FALSE) {
 
@@ -70,6 +78,13 @@ traffic <- function(aoi, product = "flow", from = NULL, to = NULL,
   }
   .check_min_jam_factor(min_jam_factor)
   .check_boolean(url_only)
+
+  # Deprecate function
+  if (product == "flow") {
+    .Deprecated(old = "traffic", new = "flow", package = "hereR")
+  } else if (product == "incidents") {
+    .Deprecated(old = "traffic", new = "incident", package = "hereR")
+  }
 
   # Add API key
   url <- .add_key(
@@ -146,98 +161,13 @@ traffic <- function(aoi, product = "flow", from = NULL, to = NULL,
   return(traffic)
 }
 
-.extract_traffic_flow <- function(data, min_jam_factor) {
-  ids <- .get_ids(data)
-  count <- 0
-  geoms <- list()
-  flow <- suppressWarnings(data.table::rbindlist(lapply(data, function(con) {
-    count <<- count + 1
-    df <- jsonlite::fromJSON(con)
-    if (is.null(df$RWS$RW)) {return(NULL)}
-    data.table::rbindlist(lapply(df$RWS$RW, function(rw) {
-      data.table::rbindlist(lapply(rw$FIS, function(fis) {
-        data.table::rbindlist(lapply(fis$FI, function(fi) {
-          dat <- data.table::data.table(
-            id = ids[count],
-            cbind(
-              fi$TM[, c("PC", "DE", "QD", "LE")],
-              data.table::rbindlist(
-                fi$CF, fill = TRUE
-              )[, c("TY", "SP", "FF", "JF","CN")]
-            )
-          )
-          geoms <<- append(geoms,
-            geometry <- lapply(fi$SHP, function(shp) {
-              lines <- lapply(shp$value, function(pointList) {
-                .line_from_pointList(strsplit(pointList, " ")[[1]])
-              })
-              sf::st_multilinestring(lines)
-            })
-          )
-          return(dat)
-          }), fill = TRUE)
-        }), fill = TRUE)
-      }), fill = TRUE)
-    }), fill = TRUE))
-  flow$geometry <- geoms
-  flow <- flow[flow$JF >= min_jam_factor, ]
-  if (nrow(flow) > 0) {
-    return(
-      sf::st_set_crs(
-        sf::st_as_sf(
-          as.data.frame(flow)), 4326
-      )
-    )
-  } else {
-    return(NULL)
-  }
+.check_traffic_product <- function(product) {
+  traffic_product_types <- c("flow", "incidents")
+  if (!product %in% traffic_product_types)
+    stop(sprintf("'product' must be '%s'.", paste(traffic_product_types, collapse = "', '")))
 }
 
-.extract_traffic_incidents <- function(data) {
-  #geoms_line <- list()
-  ids <- .get_ids(data)
-  count <- 0
-  incidents <- data.table::rbindlist(lapply(data, function(con) {
-    count <<- count + 1
-    df <- jsonlite::fromJSON(con)
-    if (is.null(df$TRAFFIC_ITEMS)) {return(NULL)}
-    info <- data.table::data.table(
-      id = ids[count],
-      incidentId = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_ID,
-      entryTime = .parse_datetime(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$ENTRY_TIME, format = "%m/%d/%Y %H:%M:%OS"),
-      fromTime = .parse_datetime(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$START_TIME, format = "%m/%d/%Y %H:%M:%OS"),
-      toTime = .parse_datetime(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$END_TIME, format = "%m/%d/%Y %H:%M:%OS"),
-      status = tolower(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_STATUS_SHORT_DESC),
-      type = tolower(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_TYPE_DESC),
-      verified = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$VERIFIED,
-      criticality = as.numeric(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$CRITICALITY$ID),
-      roadClosed = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DETAIL$ROAD_CLOSED,
-      locationName = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$POLITICAL_BOUNDARY$COUNTY,
-      lng = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LONGITUDE,
-      lat = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LATITUDE,
-      description = sapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DESCRIPTION, function(x) x$value[2])
-    )
-    # geometry_line <- lapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$GEOMETRY$SHAPES$SHP, function(shp) {
-    #   lines <- lapply(shp$value, function(pointList) {
-    #     .line_from_pointList(strsplit(pointList, " ")[[1]])
-    #   })
-    #   if (length(lines) > 1) {sf::st_multilinestring(lines)}
-    # })
-    # geoms_line <<- append(geoms_line, geometry_line)
-    # return(info)
-  }), fill = TRUE)
-  #incidents$geometry_line <- geoms_line
-
-  # Create sf, data.frame
-  if (nrow(incidents) > 0) {
-    return(
-      sf::st_set_crs(
-        sf::st_as_sf(
-          as.data.frame(incidents),
-          coords = c("lng", "lat")), 4326
-      )
-    )
-  } else {
-    return(NULL)
-  }
+.check_datetime_range <- function(from, to) {
+  if (from > to)
+    stop("Invalid datetime range: 'from' must be smaller than 'to'.")
 }

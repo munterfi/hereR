@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set HERE Application Credentials — set_key • hereR</title>
+<title>Deprecated functions in package <span class="pkg">hereR</span>. — hereR-deprecated • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,11 @@
 
 
 
-<meta property="og:title" content="Set HERE Application Credentials — set_key" />
-<meta property="og:description" content="Provide an API Key for a HERE project of type 'REST'.
-The key is set for the current R session and is used
-to authenticate in the requests to the APIs." />
+<meta property="og:title" content="Deprecated functions in package <span class="pkg">hereR</span>. — hereR-deprecated" />
+<meta property="og:description" content="The functions listed below are deprecated and will be defunct in
+  the near future. When possible, alternative functions with similar
+  functionality are also mentioned. Help pages for deprecated functions are
+  available at help(&quot;-deprecated&quot;)." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,45 +158,39 @@ to authenticate in the requests to the APIs." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set HERE Application Credentials</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/authentication.R'><code>R/authentication.R</code></a></small>
-    <div class="hidden name"><code>set_key.Rd</code></div>
+    <h1>Deprecated functions in package <span class="pkg">hereR</span>.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>hereR-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Provide an API Key for a HERE project of type 'REST'.
-The key is set for the current R session and is used
-to authenticate in the requests to the APIs.</p>
+    <p>The functions listed below are deprecated and will be defunct in
+  the near future. When possible, alternative functions with similar
+  functionality are also mentioned. Help pages for deprecated functions are
+  available at <code><a href='https://rdrr.io/r/utils/help.html'>help("-deprecated")</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_key</span>(<span class='no'>api_key</span>)</pre>
+    <pre class="usage"><span class='fu'>traffic</span>(
+  <span class='no'>aoi</span>,
+  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>api_key</th>
-      <td><p>character, the API key from a HERE project.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="traffic"><a class="anchor" href="#traffic"></a><code>traffic</code></h2>
 
-    <p>None.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    
 
-    <p>No login yet? Get a free login and key here: <a href='https://developer.here.com/'>klick</a></p>
+<p>For <code>traffic</code>, use <code><a href='flow.html'>flow</a></code> or <code><a href='incident.html'>incident</a></code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set_key</span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#traffic"><code>traffic</code></a></li>
     </ul>
 
   </div>
