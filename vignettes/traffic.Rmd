@@ -21,8 +21,8 @@ mapviewOptions(
     c("#FFD700", "#CA0020")
   )
 )
-flow <- hereR:::example$traffic_flow
-incidents <- hereR:::example$traffic_incidents
+flows <- hereR:::example$flow
+incidents <- hereR:::example$incident
 ```
 
 Real-time traffic flow and incident information based on the 'HERE Traffic' API. The traffic flow data contains speed (`"SP"`) and congestion (jam factor: `"JF"`) information. Traffic incidents contain information about location, time, duration, severity, description and other details.
@@ -31,20 +31,17 @@ Real-time traffic flow and incident information based on the 'HERE Traffic' API.
 In order to request the traffic flow, areas of interest (AOIs) have to be provided. The AOIs must be an `sf` object containing a polygon or multiple polygons. The response from the HERE Traffic API will be spatially joined on the AOIs and thereby the traffic flows are mapped to the corresponding polygon.
 
 ```{r flow, eval=FALSE}
-flow <- traffic(
-  aoi = aoi[aoi$code == "LI", ],
-  product = "flow",
-  from = Sys.time() - (60*60*2),
-  to = Sys.time()
+flows <- flow(
+  aoi = aoi[aoi$code == "LI", ]
 )
 ```
 
 Print the (ordered) 'jam factor' of the traffic flow on an interactive leaflet map:
 ```{r map_flow, eval=TRUE, out.width='100%'}
-flow <- flow[order(flow$JF), ]
-mapview(flow,
+flows <- flows[order(flows$JF), ]
+mapview(flows,
         zcol = "JF",
-        lwd = flow$JF*2,
+        lwd = flows$JF*2,
         layer.name = "Jam factor",
         map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE
@@ -52,13 +49,12 @@ mapview(flow,
 ```
 
 ## Incidents
-AOIs also must be provided in order to request information about traffic incidents in specific regions. The optional time interval, which defines the traffic incidents that should be considered, can be specitified by the `from` and `to` parameters. The datetime information passed to the function must be a timestamp of type `POSIXct`.
+AOIs also must be provided in order to request information about traffic incidents in specific regions. The time interval, which defines the traffic incidents that should be considered, can be specitified by the `from` parameter. The datetime information passed to the function must be a timestamp of type `POSIXct`. By default, the time interval is defined as the last week.
 
 ```{r incidents, eval=FALSE}
-incidents <- traffic(
+incidents <- incident(
   aoi = aoi[aoi$code == "LI", ],
-  product = "incidents",
-  from = Sys.time()-60*60*1.5
+  from = Sys.time()-60*60
 )
 ```
 
