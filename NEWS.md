@@ -1,7 +1,9 @@
-# version 0.3.0.9000
+# version 0.3.1
 
 * There are no more missing M:N route combinations in the the edge list returned by `route_matrix()` (see [#30](https://github.com/munterfinger/hereR/issues/30)).
 * All lengths of `origin` and `destination` are now accepted as input in `route_matrix()` (see [#31](https://github.com/munterfinger/hereR/issues/31)).
+* Added two new functions `flow()` and `incident()` to access traffic flow and incidents from the Traffic API. Deprecated the `traffic()` function.
+* Reduced the dependent version of R from 3.5.0 to 3.3.0 as the package is still functional but runs on more systems.
 
 # version 0.3.0
 

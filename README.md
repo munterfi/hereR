@@ -60,9 +60,9 @@ isoline(poi, rangetype = "time", mode = "car")
 
 **Traffic API:** Get real-time traffic flow or incidents in a specific area.
 ``` r
-traffic(aoi[2, ], product = "flow")
+flow(aoi[2, ])
 
-traffic(aoi, product = "incidents")
+incident(aoi, from = as.POSIXct("2018-01-01 00:00:00"))
 ```
 
 **Public Transit API:** Request public transport connections between points or find stations nearby.
