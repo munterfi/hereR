@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -170,11 +170,26 @@
   available at <code><a href='https://rdrr.io/r/utils/help.html'>help("-defunct")</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_auth</span>(<span class='no'>app_id</span>, <span class='no'>app_code</span>)
+    <pre class="usage"><span class='fu'>traffic</span>(
+  <span class='no'>aoi</span>,
+  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
+
+<span class='fu'>set_auth</span>(<span class='no'>app_id</span>, <span class='no'>app_code</span>)
 
 <span class='fu'>unset_auth</span>()</pre>
 
 
+    <h2 class="hasAnchor" id="traffic"><a class="anchor" href="#traffic"></a><code>traffic</code></h2>
+
+    
+
+<p>For <code>traffic(..., product = "flow")</code>, use <code><a href='flow.html'>flow</a></code> and
+for <code>traffic(..., product = "incidents")</code>, use <code><a href='incident.html'>incident</a></code>.</p>
     <h2 class="hasAnchor" id="set-auth"><a class="anchor" href="#set-auth"></a><code>set_auth</code></h2>
 
     
@@ -190,6 +205,7 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#traffic"><code>traffic</code></a></li>
       <li><a href="#set-auth"><code>set_auth</code></a></li>
       <li><a href="#unset-auth"><code>unset_auth</code></a></li>
     </ul>

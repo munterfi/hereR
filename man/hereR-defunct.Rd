@@ -2,10 +2,20 @@
 % Please edit documentation in R/defunct.R
 \name{hereR-defunct}
 \alias{hereR-defunct}
+\alias{traffic}
 \alias{set_auth}
 \alias{unset_auth}
 \title{Defunct functions in package \pkg{hereR}.}
 \usage{
+traffic(
+  aoi,
+  product = "flow",
+  from = NULL,
+  to = NULL,
+  min_jam_factor = 0,
+  url_only = FALSE
+)
+
 set_auth(app_id, app_code)
 
 unset_auth()
@@ -16,6 +26,12 @@ The functions listed below are defunct.
   functionality are also mentioned. Help pages for defunct functions are
   available at \code{help("-defunct")}.
 }
+\section{\code{traffic}}{
+
+For \code{traffic(..., product = "flow")}, use \code{\link{flow}} and
+for \code{traffic(..., product = "incidents")}, use \code{\link{incident}}.
+}
+
 \section{\code{set_auth}}{
 
 For \code{set_auth}, use \code{\link{set_key}}.

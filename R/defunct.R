@@ -7,6 +7,53 @@
 #' @keywords internal
 NULL
 
+#' HERE Traffic API: Flow and Incidents
+#'
+#' Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
+#' The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information.
+#' Traffic incidents contain information about location, time, duration, severity, description and other details.
+#'
+#' @references
+#' \itemize{
+#'   \item\href{https://developer.here.com/api-explorer/rest/traffic}{HERE Traffic API}
+#'   \item\href{https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api}{Flow explanation, stackoverflow}
+#' }
+#'
+#' @param aoi \code{sf} object, Areas of Interest (POIs) of geometry type \code{POLYGON}.
+#' @param product character, traffic product of the 'Traffic API'. Supported products: \code{"flow"} and \code{"incidents"}.
+#' @param from \code{POSIXct} object, datetime of the earliest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
+#' @param to \code{POSIXct} object, datetime of the latest traffic incidents (Note: Only takes effect if \code{product} is set to \code{"incidents"}).
+#' @param min_jam_factor numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if \code{product} is set to \code{"flow"}, \code{default = 0}).
+#' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
+#'
+#' @return
+#' An \code{sf} object containing the requested traffic information.
+#'
+#' @name traffic-defunct
+#' @usage
+#' traffic(aoi,
+#'   product = "flow", from = NULL, to = NULL,
+#'   min_jam_factor = 0, url_only = FALSE
+#' )
+#' @seealso \code{\link{hereR-defunct}}
+#' @keywords internal
+NULL
+
+#' @rdname hereR-defunct
+#' @section \code{traffic}:
+#' For \code{traffic(..., product = "flow")}, use \code{\link{flow}} and
+#' for \code{traffic(..., product = "incidents")}, use \code{\link{incident}}.
+#'
+#' @export
+traffic <- function(aoi, product = "flow", from = NULL, to = NULL,
+                    min_jam_factor = 0, url_only = FALSE) {
+  if (product == "flow") {
+    .Defunct(new = "flow", package = "hereR")
+  } else {
+    .Defunct(new = "incident", package = "hereR")
+  }
+}
+
 #' Defunct: Set Application Credentials
 #'
 #' Provide application credentials (APP ID and APP CODE) for a HERE project
