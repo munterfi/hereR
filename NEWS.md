@@ -1,3 +1,7 @@
+# version 0.3.1.9000
+
+* Defunct the deprecated `traffic()` function, which has been replaced by the functions `flow()` and `incident()`.
+
 # version 0.3.1
 
 * There are no more missing M:N route combinations in the the edge list returned by `route_matrix()` (see [#30](https://github.com/munterfinger/hereR/issues/30)).
