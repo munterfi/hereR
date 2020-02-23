@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Destination Weather API: Observations, Forecasts, Astronomy and Alerts — weather • hereR</title>
+<title>HERE Traffic API: Flow and Incidents — traffic-defunct • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,11 +42,10 @@
 
 
 
-<meta property="og:title" content="HERE Destination Weather API: Observations, Forecasts, Astronomy and Alerts — weather" />
-<meta property="og:description" content="Weather forecasts, reports on current weather conditions,
-astronomical information and alerts at a specific location (coordinates or
-location name) based on the HERE 'Destination Weather' API.
-The information comes from the nearest available weather station and is not interpolated." />
+<meta property="og:title" content="HERE Traffic API: Flow and Incidents — traffic-defunct" />
+<meta property="og:description" content="Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
+The traffic flow data contains speed (&quot;SP&quot;) and congestion (jam factor: &quot;JF&quot;) information.
+Traffic incidents contain information about location, time, duration, severity, description and other details." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -158,30 +157,44 @@ The information comes from the nearest available weather station and is not inte
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Destination Weather API: Observations, Forecasts, Astronomy and Alerts</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/weather.R'><code>R/weather.R</code></a></small>
-    <div class="hidden name"><code>weather.Rd</code></div>
+    <h1>HERE Traffic API: Flow and Incidents</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/defunct.R'><code>R/defunct.R</code></a></small>
+    <div class="hidden name"><code>traffic-defunct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Weather forecasts, reports on current weather conditions,
-astronomical information and alerts at a specific location (coordinates or
-location name) based on the HERE 'Destination Weather' API.
-The information comes from the nearest available weather station and is not interpolated.</p>
+    <p>Real-time traffic flow and incident information based on the HERE 'Traffic' API in areas of interest (AOIs).
+The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information.
+Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>weather</span>(<span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"observation"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='hereR-defunct.html'>traffic</a></span>(<span class='no'>aoi</span>,
+  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"flow"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>min_jam_factor</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>poi</th>
-      <td><p><code>sf</code> object or character, Points of Interest (POIs) of geometry type <code>POINT</code> or location names (e.g. cities or regions).</p></td>
+      <th>aoi</th>
+      <td><p><code>sf</code> object, Areas of Interest (POIs) of geometry type <code>POLYGON</code>.</p></td>
     </tr>
     <tr>
       <th>product</th>
-      <td><p>character, weather product of the 'Destination Weather API'. Supported products: <code>"observation"</code>, <code>"forecast_hourly"</code>, <code>"forecast_astronomy"</code> and <code>"alerts"</code>.</p></td>
+      <td><p>character, traffic product of the 'Traffic API'. Supported products: <code>"flow"</code> and <code>"incidents"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>from</th>
+      <td><p><code>POSIXct</code> object, datetime of the earliest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td><p><code>POSIXct</code> object, datetime of the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
+    </tr>
+    <tr>
+      <th>min_jam_factor</th>
+      <td><p>numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if <code>product</code> is set to <code>"flow"</code>, <code>default = 0</code>).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -191,27 +204,19 @@ The information comes from the nearest available weather station and is not inte
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>sf</code> object containing the requested weather information at the nearest weather station.
-The point geometry in the <code>sf</code> object is the location of the weather station.</p>
+    <p>An <code>sf</code> object containing the requested traffic information.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/weather/topics/example-weather-observation.html'>HERE Destination Weather API: Observation</a></p>
+    
+<ul>
+<li><p><a href='https://developer.here.com/api-explorer/rest/traffic'>HERE Traffic API</a></p></li>
+<li><p><a href='https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api'>Flow explanation, stackoverflow</a></p></li>
+</ul>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-<span class='co'># Observation</span>
-<span class='no'>observation</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"observation"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <div class='dont-index'><p><code><a href='hereR-defunct.html'>hereR-defunct</a></code></p></div>
 
-<span class='co'># Forecast</span>
-<span class='no'>forecast</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"forecast_hourly"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># Astronomy</span>
-<span class='no'>astronomy</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"forecast_astronomy"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># Alerts</span>
-<span class='no'>alerts</span> <span class='kw'>&lt;-</span> <span class='fu'>weather</span>(<span class='kw'>poi</span> <span class='kw'>=</span> <span class='no'>poi</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"alerts"</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -219,7 +224,7 @@ The point geometry in the <code>sf</code> object is the location of the weather 
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>
