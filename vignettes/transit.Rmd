@@ -89,7 +89,7 @@ stations <- station(
 ```
 
 Print the POIs, the radius and stations on an interactive leaflet map:
-```{r stations_map, eval=TRUE, out.width='100%'}
+```{r stations_map, eval=FALSE, out.width='100%'}
 buffer <-
   poi %>%
   st_transform(2056) %>%
