@@ -1,8 +1,6 @@
 # version 0.3.1.9000
 
 * Defunct the deprecated `traffic()` function, which has been replaced by the functions `flow()` and `incident()`.
-* Recreated package test data, api mocks and examples with sf 0.9-0 (see [#36](https://github.com/munterfinger/hereR/issues/36))
-* Temporally deactivated maps with multiple layers until the mapview issue [#271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 
 # version 0.3.1
 
