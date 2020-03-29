@@ -1,7 +1,7 @@
 Package: hereR
 Type: Package
 Title: 'sf'-Based Interface to the 'HERE' REST APIs
-Version: 0.3.1.9000
+Version: 0.3.2
 Authors@R: c(
     person("Merlin", "Unterfinger", email = "info@munterfinger.ch", role = c("aut", "cre")))
 Maintainer: Merlin Unterfinger <info@munterfinger.ch>
@@ -21,7 +21,7 @@ Imports:
     data.table (>= 1.12.6),
     jsonlite (>= 1.6),
     lwgeom (>= 0.1-7),
-    sf (>= 0.8-0),
+    sf (>= 0.9-0),
     stringr (>= 1.4.0)
 Suggests:
     ggplot2 (>= 3.2.1),
