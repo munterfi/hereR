@@ -138,7 +138,8 @@ incident <- function(aoi, from = Sys.time() - 60*60*24*7, url_only = FALSE) {
       sf::st_set_crs(
         sf::st_as_sf(
           as.data.frame(incidents),
-          coords = c("lng", "lat")), 4326
+          coords = c("lng", "lat")
+        ), 4326
       )
     )
   } else {

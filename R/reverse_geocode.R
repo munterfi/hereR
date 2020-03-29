@@ -89,8 +89,9 @@ reverse_geocode <- function(poi, results = 1, landmarks = FALSE, url_only = FALS
       sf::st_set_crs(
         sf::st_as_sf(
           as.data.frame(reverse),
-          coords = c("lng", "lat")),
-        4326)
+          coords = c("lng", "lat")
+        ), 4326
+      )
     )
   } else {
     return(NULL)

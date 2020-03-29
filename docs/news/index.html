@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -43,8 +47,7 @@
 
 
 <meta property="og:title" content="Changelog" />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="/logo.svg" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -90,6 +93,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -117,9 +123,6 @@
       <a href="../articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -154,20 +157,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-0-3-1-9000" class="section level1">
-<h1 class="page-header">
-<a href="#version-0-3-1-9000" class="anchor"></a>version 0.3.1.9000<small> Unreleased </small>
+    <div id="version-0-3-2" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.2">
+<a href="#version-0-3-2" class="anchor"></a>version 0.3.2<small> Unreleased </small>
 </h1>
 <ul>
 <li>Defunct the deprecated <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function, which has been replaced by the functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code>.</li>
+<li>Recreated package test data, api mocks and examples with <code>sf</code> 0.9-0 (see <a href="https://github.com/munterfinger/hereR/issues/36"><a href='https://github.com/munterfinger/hereR/issues/36'>#36</a></a>).</li>
+<li>Increased the dependency on the <code>sf</code> package to version 0.9-0 due to a different CRS handling (for more information about the changes in sf, see <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html">here</a>). <strong>Note: Older versions of the <code>sf</code> package are no longer supported.</strong>
+</li>
+<li>Temporarily deactivated maps with multiple layers until the <code>mapview</code> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
 </ul>
 </div>
     <div id="version-0-3-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.1">
 <a href="#version-0-3-1" class="anchor"></a>version 0.3.1<small> 2020-01-29 </small>
 </h1>
 <ul>
@@ -178,7 +185,7 @@
 </ul>
 </div>
     <div id="version-0-3-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.0">
 <a href="#version-0-3-0" class="anchor"></a>version 0.3.0<small> 2020-01-07 </small>
 </h1>
 <ul>
@@ -196,7 +203,7 @@
 </ul>
 </div>
     <div id="version-0-2-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.1">
 <a href="#version-0-2-1" class="anchor"></a>version 0.2.1<small> 2019-12-16 </small>
 </h1>
 <ul>
@@ -211,7 +218,7 @@
 </ul>
 </div>
     <div id="version-0-2-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.0">
 <a href="#version-0-2-0" class="anchor"></a>version 0.2.0<small> 2019-11-13 </small>
 </h1>
 <ul>
@@ -223,7 +230,7 @@
 </ul>
 </div>
     <div id="version-0-1-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.0">
 <a href="#version-0-1-0" class="anchor"></a>version 0.1.0<small> 2019-11-05 </small>
 </h1>
 <p>First release of the <code>hereR</code> package, an <code>sf</code>-based interface to the <strong>HERE REST APIs</strong>. The packages binds to the following HERE APIs:</p>
@@ -241,18 +248,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#version-0-3-1-9000">0.3.1.9000</a></li>
-        <li><a href="#version-0-3-1">0.3.1</a></li>
-        <li><a href="#version-0-3-0">0.3.0</a></li>
-        <li><a href="#version-0-2-1">0.2.1</a></li>
-        <li><a href="#version-0-2-0">0.2.0</a></li>
-        <li><a href="#version-0-1-0">0.1.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -264,7 +263,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>

@@ -104,8 +104,9 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
     sf::st_set_crs(
       sf::st_as_sf(
         as.data.frame(weather),
-        coords = c("lng", "lat")),
-    4326)
+        coords = c("lng", "lat")
+      ), 4326
+    )
   )
 }
 
