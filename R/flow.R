@@ -141,7 +141,8 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
     return(
       sf::st_set_crs(
         sf::st_as_sf(
-          as.data.frame(flow)), 4326
+          as.data.frame(flow)
+        ), 4326
       )
     )
   } else {

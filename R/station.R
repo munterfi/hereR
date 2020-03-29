@@ -107,8 +107,8 @@ station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
       sf::st_as_sf(
         as.data.frame(stations),
         coords = c("lng", "lat")
-        ),
-    4326)
+      ), 4326
+    )
   )
 }
 

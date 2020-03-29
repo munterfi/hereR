@@ -101,8 +101,9 @@ geocode <- function(addresses, autocomplete = FALSE, url_only = FALSE) {
       sf::st_set_crs(
         sf::st_as_sf(
           as.data.frame(geocoded),
-          coords = c("lng", "lat")),
-        4326)
+          coords = c("lng", "lat")
+        ), 4326
+      )
     )
   } else {
     return(NULL)

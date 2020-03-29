@@ -149,7 +149,8 @@ connection <- function(origin, destination, datetime = Sys.time(),
   # Create sf object
   return(
     sf::st_as_sf(
-      as.data.frame(routes), sf_column_name = "geometry",
+      as.data.frame(routes),
+      sf_column_name = "geometry",
       crs = 4326
     )
   )
