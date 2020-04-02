@@ -48,6 +48,14 @@
 ## Requests
 
 .get_content <- function(url, encoding = "UTF-8") {
+  if (Sys.getenv("HERE_VERBOSE") != "") {
+    message(
+      sprintf(
+        "Sending %s request(s) to: '%s?...'",
+        length(url), strsplit(url, "\\?", )[[1]][1]
+      )
+    )
+  }
   # Code: https://hydroecology.net/asynchronous-web-requests-with-curl/
   # Callback function generator - returns a callback function with ID
   results = list()
@@ -96,6 +104,15 @@
     Encoding(rawChar) <- encoding
     rawChar
   })
+  if (Sys.getenv("HERE_VERBOSE") != "") {
+    message(
+      sprintf(
+        "Received %s response(s) with total size: %s",
+        length(results),
+        format(utils::object.size(results), units = "auto")
+      )
+    )
+  }
   results
 }
 
