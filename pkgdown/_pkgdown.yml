@@ -23,6 +23,7 @@ reference:
     contents:
     - '`set_key`'
     - '`set_proxy`'
+    - '`set_verbose`'
     - '`unset_key`'
     - '`unset_proxy`'
   - title: Example data
