@@ -95,10 +95,7 @@ rev_landmarks <- reverse_geocode(poi = poi, results = 3, landmarks = TRUE)
 
 The function returns an `sf` object, containing the suggested addresses or landmark names of the reverse geocoded POIs. The coordinates are different from the initially provided POIs since they represent the locations of the suggested addresses or landmarks.
 
-```{r map_reverse_geocode, eval=FALSE, echo=TRUE, out.width='100%'}
-# NOTE: This code block is temporarily not evaluated due to an issue of the
-# mapview package when plotting multiple SF layers with the new CRS structure of
-# version 0.9-0 (see: https://github.com/r-spatial/mapview/issues/271).
+```{r map_reverse_geocode, eval=TRUE, echo=TRUE, out.width='100%'}
 m <-
   mapview(poi, alpha.region = 0, col.region = "transparent",
           label = poi$city, cex = 30, layer.name = "POIs",

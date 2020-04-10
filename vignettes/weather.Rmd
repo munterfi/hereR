@@ -50,10 +50,7 @@ knitr::kable(as.data.frame(observation)[, cols], format = "html")
 ```
 
 Print the weather observation information on an interactive leaflet map:
-```{r map_obs, eval=FALSE, out.width='100%'}
-# NOTE: This code block is temporarily not evaluated due to an issue of the
-# mapview package when plotting multiple SF layers with the new CRS structure of
-# version 0.9-0 (see: https://github.com/r-spatial/mapview/issues/271).
+```{r map_obs, eval=TRUE, out.width='100%'}
 m <-
   mapview(observation,
           zcol = "temperature",
@@ -104,10 +101,7 @@ g <- lapply(1:nrow(forecast), function(x) {
 ```
 
 2. Then add list of graphs to the leaflet map using the the `popup` parameter:
-```{r map_forecast, eval=FALSE, out.width='100%'}
-# NOTE: This code block is temporarily not evaluated due to an issue of the
-# mapview package when plotting multiple SF layers with the new CRS structure of
-# version 0.9-0 (see: https://github.com/r-spatial/mapview/issues/271).
+```{r map_forecast, eval=TRUE, out.width='100%'}
 m <-
   mapview(forecast,
           color = "black",

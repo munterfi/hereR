@@ -2,6 +2,7 @@
 
 * Added `set_verbose()` function to define (for the current R session) if the `hereR` package
 should message information about the number of requests sent and data received (default = `FALSE`).
+* Reactivate maps with multiple layers since the `mapview` issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 
 # version 0.3.2
 
