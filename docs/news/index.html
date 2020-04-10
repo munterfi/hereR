@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
       </span>
     </div>
 
@@ -161,13 +161,15 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-0-3-2-9000" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.2.9000">
-<a href="#version-0-3-2-9000" class="anchor"></a>version 0.3.2.9000<small> Unreleased </small>
+    <div id="version-0-3-3" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.3">
+<a href="#version-0-3-3" class="anchor"></a>version 0.3.3<small> Unreleased </small>
 </h1>
 <ul>
 <li>Added <code><a href="../reference/set_verbose.html">set_verbose()</a></code> function to define (for the current R session) if the <code>hereR</code> package should message information about the number of requests sent and data received (default = <code>FALSE</code>).</li>
 <li>Reactivate maps with multiple layers since the <code>mapview</code> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
+<li>
+<code>lwgeom</code> no longer exports <code>st_make_valid()</code>, but <code>sf</code> does. Therefore <code>lwgeom</code> is removed from the package dependencies (see <a href="https://github.com/munterfinger/hereR/issues/38"><a href='https://github.com/munterfinger/hereR/issues/38'>#38</a></a>).</li>
 </ul>
 </div>
     <div id="version-0-3-2" class="section level1">

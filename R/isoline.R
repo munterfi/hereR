@@ -139,11 +139,11 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   if (aggregate) {
     tz <- attr(isolines$departure, "tzone")
     isolines <- sf::st_set_precision(isolines, 1e4)
-    isolines <- lwgeom::st_make_valid(isolines)
+    isolines <- sf::st_make_valid(isolines)
     isolines <- stats::aggregate(isolines, by = list(isolines$range),
                                  FUN = min, do_union = TRUE, simplify = TRUE,
                                  join = sf::st_intersects)
-    isolines <- lwgeom::st_make_valid(isolines)
+    isolines <- sf::st_make_valid(isolines)
     isolines <- sf::st_difference(isolines)
     isolines$Group.1 <- NULL
     isolines$id <- NA
