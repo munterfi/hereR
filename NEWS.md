@@ -1,8 +1,9 @@
-# version 0.3.2.9000
+# version 0.3.3
 
 * Added `set_verbose()` function to define (for the current R session) if the `hereR` package
 should message information about the number of requests sent and data received (default = `FALSE`).
 * Reactivate maps with multiple layers since the `mapview` issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
+* `lwgeom` no longer exports `st_make_valid()`, but `sf` does. Therefore `lwgeom` is removed from the package dependencies (see [#38](https://github.com/munterfinger/hereR/issues/38)).
 
 # version 0.3.2
 
