@@ -26,7 +26,7 @@ Imports:
 Suggests:
     ggplot2 (>= 3.2.1),
     leafpop (>= 0.0.1),
-    mapview (>= 2.7.0),
+    mapview (>= 2.7.8),
     testthat (>= 2.2.1),
     knitr (>= 1.25),
     rmarkdown (>= 1.16),
