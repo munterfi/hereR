@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
       </span>
     </div>
 
@@ -142,11 +142,18 @@
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">hereR</span>)
 <span class="fu"><a href="../reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)</pre></body></html></div>
 </div>
+<div id="information-about-requests" class="section level2">
+<h2 class="hasAnchor">
+<a href="#information-about-requests" class="anchor"></a>Information about requests</h2>
+<p>By default, the <code>hereR</code> package does not print messages with information about the requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span>(<span class="fl">TRUE</span>)</pre></body></html></div>
+<p>Use <code>set_Verbose(FALSE)</code> to set the <code>hereR</code> package to be quiet again.</p>
+</div>
 <div id="proxy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#proxy" class="anchor"></a>Proxy</h2>
 <p>If you are working behind a proxy and you don’t want to change the global proxy settings of RStudio, the proxy information can be passed directly to the <code>hereR</code> package. If a proxy is needed, it can be set as follows:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/set_proxy.html">set_proxy</a></span>(
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/set_proxy.html">set_proxy</a></span>(
   <span class="kw">proxy</span> <span class="kw">=</span> <span class="st">"https://&lt;YOUR-PROXY.NET&gt;:&lt;PORT&gt;/"</span>,
   <span class="kw">proxyuserpwd</span> <span class="kw">=</span> <span class="st">"&lt;USER&gt;:&lt;PASSWORD&gt;"</span>
 )</pre></body></html></div>

@@ -1,3 +1,8 @@
+# version 0.3.2.9000
+
+* Added `set_verbose()` function to define (for the current R session) if the `hereR` package
+should message information about the number of requests sent and data received (default = `FALSE`).
+
 # version 0.3.2
 
 * Defunct the deprecated `traffic()` function, which has been replaced by the functions `flow()` and `incident()`.

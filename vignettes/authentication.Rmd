@@ -32,6 +32,18 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
+
+## Information about requests
+
+By default, the `hereR` package does not print messages with information about the
+requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:
+
+```{r set_verbose}
+set_verbose(TRUE)
+```
+
+Use `set_Verbose(FALSE)` to set the `hereR` package to be quiet again.
+
 ## Proxy
 If you are working behind a proxy and you don't want to change the global proxy settings of RStudio, the proxy information can be passed directly to the `hereR` package.
 If a proxy is needed, it can be set as follows: 
