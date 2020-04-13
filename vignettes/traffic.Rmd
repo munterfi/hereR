@@ -70,5 +70,5 @@ mapview(incidents,
 
 ## API Reference
 
-* [Flow](https://developer.here.com/documentation/traffic/topics_v6.1/resource-parameters-flow.html)
-* [Incidents](https://developer.here.com/documentation/traffic/topics/resource-parameters-incidents.html)
+* [Flow](https://developer.here.com/documentation/traffic/dev_guide/topics_v6.1/resource-parameters-flow.html)
+* [Incidents](https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html)
