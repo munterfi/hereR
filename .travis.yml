@@ -6,10 +6,7 @@ r:
   - oldrel
 
 sudo: required
-cache:
-  - packages
-  - ccache
-
+cache: packages
 latex: false
 
 addons:
