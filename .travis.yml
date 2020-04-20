@@ -1,33 +1,34 @@
-language: R
+language: r
 
 r:
-  - oldrel
   - release
   - devel
-
-cache:
-  - packages
+  - oldrel
 
 sudo: required
+cache: packages
+latex: false
 
-before_install:
-### apt-get
-  - sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
-  - sudo apt-get update -qq
-  - sudo aptitude install -y gdal-bin
-  - sudo aptitude install -y libgdal1-dev
-  - sudo aptitude install -y libproj-dev
-  - sudo apt-get install libudunits2-dev libssh2-1-dev
-### R packages
-  - R -e 'install.packages("devtools")'
-  - R -e 'install.packages("covr")'
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
+    packages:
+      - libudunits2-dev
+      - libproj-dev
+      - libgeos-dev
+      - libgdal-dev
 
-install:
-  - R -e 'devtools::install_deps(dep = T)'
+r_packages:
+  - devtools
+  - testthat
+  - roxygen2
+  - covr
 
-script:
-  - R CMD build .
-  - R CMD check *tar.gz
+r_github_packages:
+  - r-spatial/lwgeom
+
+warnings_are_errors: true
 
 after_success:
   - Rscript -e 'covr::codecov()'
