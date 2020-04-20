@@ -27,7 +27,6 @@ Suggests:
     ggplot2 (>= 3.2.1),
     knitr (>= 1.25),
     leafpop (>= 0.0.1),
-    lwgeom (>= 0.2-3),
     mapview (>= 2.7.8),
     rmarkdown (>= 1.16),
     testthat (>= 2.2.1)
