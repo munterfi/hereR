@@ -28,6 +28,9 @@ r_packages:
   - roxygen2
   - covr
 
+r_github_packages:
+  - r-spatial/lwgeom
+
 warnings_are_errors: true
 
 after_success:
