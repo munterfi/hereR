@@ -1,3 +1,9 @@
+# version 0.3.3.9000
+
+* Changed CI from Travis to GitHub actions.
+* Added automated pkgdown page build after pull requests and commits on master.
+* Extended test coverage on defunct function calls.
+
 # version 0.3.3
 
 * Added `set_verbose()` function to define (for the current R session) if the `hereR` package
