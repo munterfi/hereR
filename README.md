@@ -42,7 +42,7 @@ Once valid application credentials are created and the key is set in the R sessi
 
 **Geocoder API:** Autocomplete and geocode addresses or reverse geocode POIs.
 ``` r
-geocode(c("Schweighofstrasse 190, Zürich, Schweiz", "Hardstrasse 48, Zürich, Schweiz"))
+geocode(c("Schweighofstrasse 190, Zurich, Switzerland", "Hardstrasse 48, Zurich, Switzerland"))
 
 autocomplete(c("Schweighofstrasse", "Hardstrasse"))
 
