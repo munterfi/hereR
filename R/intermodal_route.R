@@ -20,20 +20,24 @@
 #' # Provide an API Key for a HERE project
 #' set_key("<YOUR API KEY>")
 #'
-#' # Get all from - to combinations from POIs
-#' to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
-#' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
-#' idx <- apply(to != from, any, MARGIN = 1)
-#' to <- to[idx, ]
-#' from <- from[idx, ]
+#' Change POIs to Berlin, as service not available in Switzerland
+#' library(sf)
+#' poi <- data.frame(
+#'  name = c("1", "2", "3", "4"),
+#'  lng = c(13.38494483381518, 13.38494483381518, 13.05835136328823, 13.05835136328823),
+#'  lat = c(52.53105637575095, 52.53105637575095, 52.40358749909618, 52.40358749909618)
+#' ) %>%
+#'  st_as_sf(coords = c("lng", "lat")) %>%
+#'  st_set_crs(4326)
 #'
-#' # Routing
+#' # Intermodal routing
 #' routes <- intermodal_route(
-#'   origin = from, destination = to,
+#'   origin = poi[1:2, ],
+#'   destination = poi[3:4, ],
 #'   url_only = TRUE
 #' )
 intermodal_route <- function(origin, destination, datetime = Sys.time(),
-                             results = 1, transfers = -1, url_only = FALSE) {
+                             results = 3, transfers = -1, url_only = FALSE) {
   # Checks
   .check_points(origin)
   .check_points(destination)
@@ -101,6 +105,13 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
     )
   }
 
+  # Request polyline and summary
+  url = paste0(
+    url,
+    "&return=",
+    "polyline,travelSummary"
+  )
+
   # Return urls if chosen
   if (url_only) return(url)
 
@@ -110,47 +121,79 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   )
   if (length(data) == 0) return(NULL)
 
-  # STOP AS NOT YET ADJUSTED ...
-  return(NULL)
+  # Extract information
+  routes <- .extract_intermodal_routes(data)
 
-  # # Extract information
-  # ids <- .get_ids(data)
-  # count <- 0
-  # routes <- sf::st_as_sf(
-  #   as.data.frame(data.table::rbindlist(
-  #     lapply(data, function(con) {
-  #       count <<- count + 1
-  #       df <- jsonlite::fromJSON(con)
-  #
-  #       # Get summary
-  #       summary <- df$response$route$summary
-  #       summary <- summary[, !names(summary) %in% c("flags", "text", "_type"),
-  #                          drop = FALSE]
-  #
-  #       # Build sf object
-  #       sf::st_as_sf(
-  #         data.table::data.table(
-  #           cbind(
-  #             id = ids[count],
-  #             departure = if(arrival) (datetime - summary$travelTime) else datetime,
-  #             origin = utils::head(df$response$route$waypoint, 1)[[1]]$label[1],
-  #             arrival = if(arrival) (datetime) else (datetime + summary$travelTime),
-  #             destination = utils::tail(df$response$route$waypoint, 1)[[1]]$label[2],
-  #             mode = paste(Reduce(c, df$response$route$mode$transportModes),
-  #                          collapse = ", "),
-  #             traffic = df$response$route$mode$trafficMode,
-  #             summary
-  #           )
-  #         ),
-  #         geometry = sf::st_sfc(
-  #           .line_from_pointList(
-  #             Reduce(c, df$response$route$shape)
-  #           ), crs = 4326
-  #         )
-  #       )
-  #     })
-  #   ))
-  # )
-  # rownames(routes) <- NULL
-  # return(routes)
+  # Checks success
+  if (is.null(routes)) {
+    message("No intermodal routes found.")
+    return(NULL)
+  }
+
+  # Postprocess
+  routes <- routes[routes$rank <= results, ]
+  routes$departure <- .parse_datetime(routes$departure, tz = attr(datetime, "tzone"))
+  routes$arrival <- .parse_datetime(routes$arrival, tz = attr(datetime, "tzone"))
+  rownames(routes) <- NULL
+
+  # To Do: Create sf object --> flexpolyline decoder
+  rownames(routes) <- NULL
+  return(routes)
+}
+
+.extract_intermodal_routes <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
+
+  # Routes
+  routes <- data.table::rbindlist(
+    lapply(data, function(con) {
+      count <<- count + 1
+
+      # # O-D: function(data, origin, destination
+      # orig <- rev(as.numeric(strsplit(origin[[count]], ",")[[1]]))
+      # dest <- rev(as.numeric(strsplit(destination[[count]], ",")[[1]]))
+
+      # Parse JSON
+      df <- jsonlite::fromJSON(con)
+      if (is.null(df$routes$sections)) {return(NULL)}
+
+      # Connections
+      rank <- 0
+      routes <- data.table::data.table(
+        id = ids[count],
+
+        # Segments
+        data.table::rbindlist(
+          lapply(df$routes$sections, function(sec) {
+            rank <<- rank + 1
+            data.table::data.table(
+              rank = rank,
+              departure = sec$departure$time,
+              origin = c("ORIG", sec$departure$place$name[2:length(sec$departure$place$name)]),
+              arrival = sec$arrival$time,
+              destination = c(sec$arrival$place$name[1:(length(sec$arrival$place$name)-1)], "DEST"),
+              type = sec$type,
+              mode = sec$transport$mode,
+              vehicle = if (is.null(sec$transport$name)) {NA} else {sec$transport$name},
+              provider = if (is.null(sec$agency$name)) {NA} else {sec$agency$name},
+              direction = if (is.null(sec$transport$headsign)) {NA} else {sec$transport$headsign},
+              distance = sec$travelSummary$length,
+              duration = sec$travelSummary$duration,
+              geometry = sec$polyline
+            )
+          }), fill = TRUE)
+      )
+    }), fill = TRUE)
+
+  # Check success
+  if (nrow(routes) < 1) {return(NULL)}
+
+  # FlexPolyline to LINESTRING (decoder has to be implemented...)
+  # See: https://github.com/heremaps/flexible-polyline
+
+  # Postprocess
+  #routes[is.na(routes$mode), ]$mode <- "Walk"
+
+  return(routes)
 }

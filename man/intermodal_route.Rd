@@ -8,7 +8,7 @@ intermodal_route(
   origin,
   destination,
   datetime = Sys.time(),
-  results = 1,
+  results = 3,
   transfers = -1,
   url_only = FALSE
 )
@@ -36,16 +36,20 @@ Calculates route geometries (\code{LINESTRING}) between given pairs of points us
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
-# Get all from - to combinations from POIs
-to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
-from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
-idx <- apply(to != from, any, MARGIN = 1)
-to <- to[idx, ]
-from <- from[idx, ]
+Change POIs to Berlin, as service not available in Switzerland
+library(sf)
+poi <- data.frame(
+ name = c("1", "2", "3", "4"),
+ lng = c(13.38494483381518, 13.38494483381518, 13.05835136328823, 13.05835136328823),
+ lat = c(52.53105637575095, 52.53105637575095, 52.40358749909618, 52.40358749909618)
+) \%>\%
+ st_as_sf(coords = c("lng", "lat")) \%>\%
+ st_set_crs(4326)
 
-# Routing
+# Intermodal routing
 routes <- intermodal_route(
-  origin = from, destination = to,
+  origin = poi[1:2, ],
+  destination = poi[3:4, ],
   url_only = TRUE
 )
 }
