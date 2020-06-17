@@ -4,17 +4,20 @@
 \alias{geocode}
 \title{HERE Geocoder API: Geocode}
 \usage{
-geocode(addresses, autocomplete = FALSE, url_only = FALSE, sf = TRUE)
+geocode(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE)
 }
 \arguments{
 \item{addresses}{character, addresses to geocode.}
 
-\item{autocomplete}{boolean, use the 'Geocoder Autocomplete' API to autocomplete addresses? Note: This options doubles the amount of requests (\code{default = FALSE}).}
-
-\item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
+\item{autocomplete}{boolean, use the 'Geocoder Autocomplete' API to
+autocomplete addresses? Note: This options doubles the amount of requests
+(\code{default = FALSE}).}
 
 \item{sf}{boolean, return an \code{sf} object (\code{default = TRUE}) or a
 \code{data.frame}?}
+
+\item{url_only}{boolean, only return the generated URLs (\code{default =
+FALSE})?}
 }
 \value{
 If \code{sf = TRUE}, an \code{sf} object, containing the coordinates of the

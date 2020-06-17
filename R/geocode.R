@@ -6,10 +6,13 @@
 #' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
 #'
 #' @param addresses character, addresses to geocode.
-#' @param autocomplete boolean, use the 'Geocoder Autocomplete' API to autocomplete addresses? Note: This options doubles the amount of requests (\code{default = FALSE}).
-#' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
+#' @param autocomplete boolean, use the 'Geocoder Autocomplete' API to
+#'   autocomplete addresses? Note: This options doubles the amount of requests
+#'   (\code{default = FALSE}).
 #' @param sf boolean, return an \code{sf} object (\code{default = TRUE}) or a
 #'   \code{data.frame}?
+#' @param url_only boolean, only return the generated URLs (\code{default =
+#'   FALSE})?
 #'
 #' @return
 #' If \code{sf = TRUE}, an \code{sf} object, containing the coordinates of the
@@ -23,13 +26,13 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' locs <- geocode(addresses = poi$city, url_only = TRUE)
-geocode <- function(addresses, autocomplete = FALSE, url_only = FALSE, sf = TRUE) {
+geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE) {
 
   # Input checks
   .check_addresses(addresses)
   .check_boolean(autocomplete)
-  .check_boolean(url_only)
   .check_boolean(sf)
+  .check_boolean(url_only)
 
   # Add API key
   url <- .add_key(
