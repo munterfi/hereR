@@ -177,15 +177,15 @@ Two modes are provided:</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>connection</span>(
-  <span class='no'>origin</span>,
-  <span class='no'>destination</span>,
-  <span class='kw'>datetime</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
-  <span class='kw'>arrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>results</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>transfers</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hereR/man/connection.html'>connection</a></span>(
+  <span class='kw'>origin</span>,
+  <span class='kw'>destination</span>,
+  datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
+  arrival = <span class='fl'>FALSE</span>,
+  results = <span class='fl'>3</span>,
+  transfers = <span class='op'>-</span><span class='fl'>1</span>,
+  summary = <span class='fl'>FALSE</span>,
+  url_only = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -232,25 +232,25 @@ Two modes are provided:</p><ul>
 
     <p>As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (<code>sec_id</code>),
 the returned geometries of walking sections are straight lines between the station (or origin and destination) points instead of routed lines on the pedestrian network.
-The walking segments can be routed in hindsight using the <a href='route.html'>route</a> function with mode set to <code>"pedestrian"</code>.</p>
+The walking segments can be routed in hindsight using the <a href='https://rdrr.io/pkg/hereR/man/route.html'>route</a> function with mode set to <code>"pedestrian"</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html'>HERE Public Transit API: Transit Route</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/hereR/man/set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Connection sections</span>
-<span class='no'>sections</span> <span class='kw'>&lt;-</span> <span class='fu'>connection</span>(
-  <span class='kw'>origin</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>3</span>:<span class='fl'>4</span>, ], <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>5</span>:<span class='fl'>6</span>, ],
-  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+<span class='kw'>sections</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/connection.html'>connection</a></span>(
+  origin = <span class='kw'>poi</span>[<span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>, ], destination = <span class='kw'>poi</span>[<span class='fl'>5</span><span class='op'>:</span><span class='fl'>6</span>, ],
+  summary = <span class='fl'>FALSE</span>, url_only = <span class='fl'>TRUE</span>
 )
 
 <span class='co'># Connection summary</span>
-<span class='no'>summary</span> <span class='kw'>&lt;-</span> <span class='fu'>connection</span>(
-  <span class='kw'>origin</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>3</span>:<span class='fl'>4</span>, ], <span class='kw'>destination</span> <span class='kw'>=</span> <span class='no'>poi</span>[<span class='fl'>5</span>:<span class='fl'>6</span>, ],
-  <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>url_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+<span class='kw'>summary</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/connection.html'>connection</a></span>(
+  origin = <span class='kw'>poi</span>[<span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>, ], destination = <span class='kw'>poi</span>[<span class='fl'>5</span><span class='op'>:</span><span class='fl'>6</span>, ],
+  summary = <span class='fl'>TRUE</span>, url_only = <span class='fl'>TRUE</span>
 )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

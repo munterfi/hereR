@@ -139,24 +139,30 @@
 <li>Click ‘Create API Key’ and copy the key</li>
 </ol>
 <p>The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). To set the key, please use:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">hereR</span>)
-<span class="fu"><a href="../reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://munterfinger.github.io/hereR">hereR</a></span>)
+<span class="fu"><a href="../reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)
+</pre></div>
 </div>
 <div id="information-about-requests" class="section level2">
 <h2 class="hasAnchor">
 <a href="#information-about-requests" class="anchor"></a>Information about requests</h2>
 <p>By default, the <code>hereR</code> package does not print messages with information about the requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span>(<span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span>(<span class="fl">TRUE</span>)
+</pre></div>
 <p>Use <code>set_Verbose(FALSE)</code> to set the <code>hereR</code> package to be quiet again.</p>
 </div>
 <div id="proxy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#proxy" class="anchor"></a>Proxy</h2>
 <p>If you are working behind a proxy and you don’t want to change the global proxy settings of RStudio, the proxy information can be passed directly to the <code>hereR</code> package. If a proxy is needed, it can be set as follows:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/set_proxy.html">set_proxy</a></span>(
-  <span class="kw">proxy</span> <span class="kw">=</span> <span class="st">"https://&lt;YOUR-PROXY.NET&gt;:&lt;PORT&gt;/"</span>,
-  <span class="kw">proxyuserpwd</span> <span class="kw">=</span> <span class="st">"&lt;USER&gt;:&lt;PASSWORD&gt;"</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/set_proxy.html">set_proxy</a></span>(
+  proxy = <span class="st">"https://&lt;YOUR-PROXY.NET&gt;:&lt;PORT&gt;/"</span>,
+  proxyuserpwd = <span class="st">"&lt;USER&gt;:&lt;PASSWORD&gt;"</span>
+)
+</pre></div>
 <p><strong>Note:</strong> Only functions of the <code>hereR</code> package are now using the proxy. Other functions sending requests to the web continue to encounter timeout errors.</p>
 </div>
 <div id="remove-credentials" class="section level2">
