@@ -17,7 +17,18 @@ test_that("geocode works", {
     geocoded <- geocode(addresses = poi$city),
 
     # Tests
-    expect_equal(any(sf::st_geometry_type(geocoded) != "POINT"), FALSE),
+    expect_s3_class(geocoded, c("sf", "data.frame"), exact = TRUE),
+    expect_true(all(sf::st_geometry_type(geocoded) == "POINT")),
     expect_equal(nrow(geocoded), length(poi$city))
+  )
+  with_mock(
+    "hereR:::.get_content" = function(url) {hereR:::mock$geocode_response},
+    geocoded <- geocode(addresses = poi$city, sf = FALSE),
+
+    # Tests
+    expect_s3_class(geocoded, "data.frame", exact = TRUE),
+    expect_equal(nrow(geocoded), length(poi$city)),
+    expect_type(geocoded[["lat"]], "double"),
+    expect_type(geocoded[["lng"]], "double")
   )
 })
