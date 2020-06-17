@@ -3,6 +3,9 @@
 * Changed CI from Travis to GitHub actions.
 * Added automated pkgdown page build after pull requests and commits on master.
 * Extended test coverage on defunct function calls.
+* Added `sf` argument to `geocode()` function. If `TRUE`, the default, an {sf}
+object is returned, if `FALSE` a data.frame with `lng` and `lat` columns.
+(@dpprdan, [#44](https://github.com/munterfinger/hereR/pull/44))
 
 # version 0.3.3
 
