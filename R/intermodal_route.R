@@ -136,9 +136,14 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   routes$arrival <- .parse_datetime(routes$arrival, tz = attr(datetime, "tzone"))
   rownames(routes) <- NULL
 
-  # To Do: Create sf object --> flexpolyline decoder
-  rownames(routes) <- NULL
-  return(routes)
+  # Create sf object
+  return(
+    sf::st_as_sf(
+      as.data.frame(routes),
+      sf_column_name = "geometry",
+      crs = 4326
+    )
+  )
 }
 
 .extract_intermodal_routes <- function(data) {
@@ -189,11 +194,12 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   # Check success
   if (nrow(routes) < 1) {return(NULL)}
 
-  # FlexPolyline to LINESTRING (decoder has to be implemented...)
-  # See: https://github.com/heremaps/flexible-polyline
-
-  # Postprocess
-  #routes[is.na(routes$mode), ]$mode <- "Walk"
+  # Decode flexible polyline encoding to LINESTRING
+  routes$geometry <- sf::st_geometry(
+    flexpolyline::decode_sf(
+      routes$geometry, 4326
+    )
+  )
 
   return(routes)
 }
