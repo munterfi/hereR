@@ -20,7 +20,7 @@ intermodal_route(
 
 \item{datetime}{\code{POSIXct} object, datetime for the departure (\code{default = Sys.time()}).}
 
-\item{results}{numeric, maximum number of suggested route alternatives (Valid range: 1 and 7, \code{default = 1}).}
+\item{results}{numeric, maximum number of suggested route alternatives (Valid range: 1 and 7, \code{default = 3}).}
 
 \item{transfers}{numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, \code{default = -1}).}
 

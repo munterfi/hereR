@@ -8,7 +8,7 @@
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
 #' @param datetime \code{POSIXct} object, datetime for the departure (\code{default = Sys.time()}).
-#' @param results numeric, maximum number of suggested route alternatives (Valid range: 1 and 7, \code{default = 1}).
+#' @param results numeric, maximum number of suggested route alternatives (Valid range: 1 and 7, \code{default = 3}).
 #' @param transfers numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, \code{default = -1}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
