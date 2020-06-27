@@ -36,7 +36,7 @@ Calculates route geometries (\code{LINESTRING}) between given pairs of points us
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
-Change POIs to Berlin, as service not available in Switzerland
+# Change POIs to Berlin, as service not available in Switzerland
 library(sf)
 poi <- data.frame(
  name = c("1", "2", "3", "4"),
