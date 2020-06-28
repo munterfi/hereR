@@ -6,11 +6,19 @@
 #' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
 #'
 #' @param addresses character, addresses to geocode.
-#' @param autocomplete boolean, use the 'Geocoder Autocomplete' API to autocomplete addresses? Note: This options doubles the amount of requests (\code{default = FALSE}).
-#' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
+#' @param autocomplete boolean, use the 'Geocoder Autocomplete' API to
+#'   autocomplete addresses? Note: This options doubles the amount of requests
+#'   (\code{default = FALSE}).
+#' @param sf boolean, return an \code{sf} object (\code{default = TRUE}) or a
+#'   \code{data.frame}?
+#' @param url_only boolean, only return the generated URLs (\code{default =
+#'   FALSE})?
 #'
 #' @return
-#' An \code{sf} object, containing the coordinates of the geocoded addresses.
+#' If \code{sf = TRUE}, an \code{sf} object, containing the coordinates of the
+#' geocoded addresses as a geometry list column. If \code{sf = FALSE}, a
+#' \code{data.frame} containing the coordinates of the geocoded addresses as
+#' \code{lng}, \code{lat} columns.
 #' @export
 #'
 #' @examples
@@ -18,11 +26,12 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' locs <- geocode(addresses = poi$city, url_only = TRUE)
-geocode <- function(addresses, autocomplete = FALSE, url_only = FALSE) {
+geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE) {
 
   # Input checks
   .check_addresses(addresses)
   .check_boolean(autocomplete)
+  .check_boolean(sf)
   .check_boolean(url_only)
 
   # Add API key
@@ -97,14 +106,19 @@ geocode <- function(addresses, autocomplete = FALSE, url_only = FALSE) {
   # Create sf object
   if (nrow(geocoded) > 0) {
     rownames(geocoded) <- NULL
-    return(
-      sf::st_set_crs(
-        sf::st_as_sf(
-          as.data.frame(geocoded),
-          coords = c("lng", "lat")
-        ), 4326
+    # Return urls if chosen
+    if (sf) {
+      return(
+        sf::st_set_crs(
+          sf::st_as_sf(
+            as.data.frame(geocoded),
+            coords = c("lng", "lat")
+          ), 4326
+        )
       )
-    )
+    } else {
+      return(as.data.frame(geocoded))
+    }
   } else {
     return(NULL)
   }
