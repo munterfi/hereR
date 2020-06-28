@@ -36,12 +36,12 @@ Calculates route geometries (\code{LINESTRING}) between given pairs of points us
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
-# Change POIs to Berlin, as service not available in Switzerland
+# Change POIs to Berlin, as service is not available in Switzerland
 library(sf)
 poi <- data.frame(
- name = c("1", "2", "3", "4"),
- lng = c(13.38494483381518, 13.38494483381518, 13.05835136328823, 13.05835136328823),
- lat = c(52.53105637575095, 52.53105637575095, 52.40358749909618, 52.40358749909618)
+ name = c("HERE Berlin", "Treptow", "Potsdam", "Tiergarten"),
+ lng = c(13.384944, 13.461215, 13.058351, 13.336490),
+ lat = c(52.531056, 52.493908, 52.403587, 52.514557)
 ) \%>\%
  st_as_sf(coords = c("lng", "lat")) \%>\%
  st_set_crs(4326)
