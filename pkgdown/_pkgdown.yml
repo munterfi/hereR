@@ -48,6 +48,9 @@ reference:
     contents:
     - '`connection`'
     - '`station`'
+  - title: Intermodal Routing API
+    contents:
+    - '`intermodal_route`'
   - title: Destination Weather API
     contents:
     - '`weather`'
