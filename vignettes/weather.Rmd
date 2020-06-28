@@ -152,7 +152,4 @@ This returns an `sf` object with the POIs and the attribute `"alerts"`, which is
 
 ## API Reference
 
-* [Observation](https://developer.here.com/documentation/weather/topics/resource-type-observations.html)
-* [Forecast](https://developer.here.com/documentation/weather/topics/resource-type-hourly-forecasts.html)
-* [Astronomy](https://developer.here.com/documentation/weather/topics/resource-type-astronomy-items.html)
-* [Alerts](https://developer.here.com/documentation/weather/topics/resource-type-alert-items.html)
+* [Destination Weather API](https://developer.here.com/documentation/weather)
