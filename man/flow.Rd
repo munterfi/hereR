@@ -29,7 +29,7 @@ Explanation of the traffic flow variables:
 \itemize{
   \item\code{"PC"}: Point TMC location code.
   \item\code{"DE"}: Text description of the road.
-  \item\code{"QD"}: Queuing direction. '+' or '-'. Note this is the opposite of the travel direction in the fully qualified ID, For example for location 107+03021 the QD would be ‚-‚.
+  \item\code{"QD"}: Queuing direction. '+' or '-'. Note this is the opposite of the travel direction in the fully qualified ID, For example for location 107+03021 the QD would be '-'.
   \item\code{"LE"}: Length of the stretch of road.
   \item\code{"TY"}: Type information for the given Location Referencing container. This may be a freely defined string.
   \item\code{"SP"}: Speed (based on UNITS) capped by speed limit.
