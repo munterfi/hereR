@@ -219,11 +219,11 @@
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
 <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
-<span class='co'># Change POIs to Berlin, as service not available in Switzerland</span>
+<span class='co'># Change POIs to Berlin, as service is not available in Switzerland</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://r-spatial.github.io/sf'>sf</a></span>)</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 7.0.0</span></div><div class='input'><span class='kw'>poi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
- name = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"1"</span>, <span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span>),
- lng = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13.38494483381518</span>, <span class='fl'>13.38494483381518</span>, <span class='fl'>13.05835136328823</span>, <span class='fl'>13.05835136328823</span>),
- lat = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>52.53105637575095</span>, <span class='fl'>52.53105637575095</span>, <span class='fl'>52.40358749909618</span>, <span class='fl'>52.40358749909618</span>)
+ name = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"HERE Berlin"</span>, <span class='st'>"Treptow"</span>, <span class='st'>"Potsdam"</span>, <span class='st'>"Tiergarten"</span>),
+ lng = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13.384944</span>, <span class='fl'>13.461215</span>, <span class='fl'>13.058351</span>, <span class='fl'>13.336490</span>),
+ lat = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>52.531056</span>, <span class='fl'>52.493908</span>, <span class='fl'>52.403587</span>, <span class='fl'>52.514557</span>)
 ) <span class='op'>%&gt;%</span>
  <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_as_sf.html'>st_as_sf</a></span>(coords = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lng"</span>, <span class='st'>"lat"</span>)) <span class='op'>%&gt;%</span>
  <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_crs.html'>st_set_crs</a></span>(<span class='fl'>4326</span>)
