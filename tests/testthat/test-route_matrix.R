@@ -6,8 +6,8 @@ test_that("route_matrix works", {
   data(poi)
 
   # Input checks
-  expect_error(route_matrix(origin = c(1, 2, 3), destination = poi), "'points' must be an sf object.")
-  expect_error(route_matrix(origin = c("character", NA), destination = poi), "'points' must be an sf object.")
+  expect_error(route_matrix(origin = c(1, 2, 3), destination = poi), "'origin' must be an sf object.")
+  expect_error(route_matrix(origin = c("character", NA), destination = poi), "'origin' must be an sf object.")
   expect_error(route_matrix(origin = poi, destination = poi, mode = "not_a_mode"))
   expect_error(route_matrix(origin = poi, destination = poi, type = "not_a_type"))
   expect_error(route_matrix(origin = poi, destination = poi, attribute = "not_an_attribute"), "'attribute' must be in 'distance', 'traveltime'.")

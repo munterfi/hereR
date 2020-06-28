@@ -6,7 +6,7 @@ test_that("station works", {
   data(poi)
 
   # Input checks
-  expect_error(station(poi = c(1, 2, 3)), "'points' must be an sf object.")
+  expect_error(station(poi = c(1, 2, 3)), "'poi' must be an sf object.")
   expect_error(station(poi = poi, results = "not_numeric"))
   expect_error(station(poi = poi, results = -1))
   expect_error(station(poi = poi, radius = "not_numeric"))

@@ -12,13 +12,15 @@ Description: Interface to the 'HERE' REST APIs <https://developer.here.com/devel
   (2) route directions, travel distance or time matrices and isolines using the 'Routing' API;
   (3) request real-time traffic flow and incident information from the 'Traffic' API;
   (4) find request public transport connections and nearby stations from the 'Public Transit' API;
-  (5) get weather forecasts, reports on current weather conditions, astronomical
+  (5) request intermodal routes using the 'Intermodal Routing' API;
+  (6) get weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the 'Destination Weather' API.
   Locations, routes and isolines are returned as 'sf' objects.
 Depends: R (>= 3.3.0)
 Imports: 
     curl (>= 4.2),
     data.table (>= 1.12.6),
+    flexpolyline (>= 0.1.0),
     jsonlite (>= 1.6),
     sf (>= 0.9-0),
     stringr (>= 1.4.0)
