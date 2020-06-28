@@ -6,8 +6,8 @@ test_that("incidents works", {
   data(aoi)
 
   # Input checks
-  expect_error(incident(aoi = c(1, 2, 3)), "'polygon' must be an sf object.")
-  expect_error(incident(aoi = NA), "'polygon' must be an sf object.")
+  expect_error(incident(aoi = c(1, 2, 3)), "'aoi' must be an sf object.")
+  expect_error(incident(aoi = NA), "'aoi' must be an sf object.")
 
   # Test URL
   expect_is(incident(aoi = aoi, from = Sys.time()-60*60,
