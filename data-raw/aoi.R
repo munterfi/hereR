@@ -10,6 +10,8 @@ aoi <- countries[countries$ISO_A2 %in% c("CH", "LI"), ]
 aoi$name <- c("Switzerland", "Liechtenstein")
 aoi$code <- c("CH", "LI")
 aoi$ADMIN <- aoi$ISO_A3 <- aoi$ISO_A2 <- NULL
+rownames(aoi) <- NULL
+aoi <- sf::st_as_sf(as.data.frame(aoi))
 
 # Save AOIs
 usethis::use_data(aoi, overwrite = TRUE)

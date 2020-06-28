@@ -12,6 +12,10 @@ poi <- poi[, c("name", "pop_max")]
 colnames(poi) <- c("city", "population", "geometry")
 poi$city <- as.character(poi$city)
 poi$population <- as.numeric(poi$population)
+rownames(poi) <- NULL
+
+# Replace non ASCII
+poi[6,]$city <- "Zurich"
 
 # Save POIs
 usethis::use_data(poi, overwrite = TRUE)
