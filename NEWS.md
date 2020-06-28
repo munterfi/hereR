@@ -6,6 +6,7 @@
 * Added `sf` argument to `geocode()` function. If `TRUE`, the default, an {sf}
 object is returned, if `FALSE` a data.frame with `lng` and `lat` columns.
 (@dpprdan, [#44](https://github.com/munterfinger/hereR/pull/44))
+* **Intermodal Routing API: Routes** The new feature `intermodal_route()` adds support for requesting intermodal routes between given pairs of locations.
 
 # version 0.3.3
 
