@@ -23,7 +23,8 @@
   (2) route directions, travel distance or time matrices and isolines using the Routing API;
   (3) request real-time traffic flow and incident information from the Traffic API;
   (4) find request public transport connections and nearby stations from the Public Transit API;
-  (5) get weather forecasts, reports on current weather conditions, astronomical
+  (5) request intermodal routes using the Intermodal Routing API;
+  (6) get weather forecasts, reports on current weather conditions, astronomical
   information and alerts at a specific location from the Destination Weather API.
   Locations, routes and isolines are returned as sf objects.">
 <meta property="og:image" content="/logo.svg">
@@ -75,6 +76,9 @@
     </li>
     <li>
       <a href="articles/geocoder.html">Geocoder API</a>
+    </li>
+    <li>
+      <a href="articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
       <a href="articles/routing.html">Routing API</a>
@@ -133,7 +137,8 @@
 <p>(2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
 <p>(3) request real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
 <p>(4) find public transport connections and nearby stations using the <strong>Public Transit API</strong>;</p>
-<p>(5) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
+<p>(5) request intermodal routes using the <strong>Intermodal Routing API</strong>;</p>
+<p>(6) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
 <p>Locations, routes and isolines are returned as <code>sf</code> objects.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -185,8 +190,12 @@
 
 <span class="fu"><a href="reference/station.html">station</a></span>(<span class="kw">poi</span>, radius = <span class="fl">500</span>)
 </pre></div>
-<p><strong>Destination Weather API:</strong> Request weather observations, forecasts, astronomical information or alerts at specific locations.</p>
+<p><strong>Intermodal Routing API:</strong> Get routes with various combinations of transport modes.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="reference/intermodal_route.html">intermodal_route</a></span>(<span class="kw">poi</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ], <span class="kw">poi</span>[<span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, ])
+</pre></div>
+<p><strong>Destination Weather API:</strong> Request weather observations, forecasts, astronomical information or alerts at specific locations.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu"><a href="reference/weather.html">weather</a></span>(<span class="kw">poi</span>, product = <span class="st">"observation"</span>)
 
 <span class="fu"><a href="reference/weather.html">weather</a></span>(<span class="kw">poi</span>, product = <span class="st">"forecast_hourly"</span>)
@@ -204,6 +213,7 @@
 <li><a href="https://developer.here.com/documentation/routing">Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/traffic">Traffic API</a></li>
 <li><a href="https://developer.here.com/documentation/transit">Public Transit API</a></li>
+<li><a href="https://developer.here.com/documentation/intermodal-routing">Intermodal Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/weather">Destination Weather API</a></li>
 </ul>
 </div>

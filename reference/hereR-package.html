@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>'sf'-Based Interface to the 'HERE' REST APIs — hereR-package • hereR</title>
+<title>hereR: 'sf'-Based Interface to the 'HERE' REST APIs — hereR-package • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,15 +46,16 @@
 
 
 
-<meta property="og:title" content="'sf'-Based Interface to the 'HERE' REST APIs — hereR-package" />
-<meta property="og:description" content="The hereR package provides an interface to the 'HERE' REST APIs:
-Geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;
-Route directions, travel distance or time matrices and isolines using the 'Routing' API;
-Request real-time traffic flow and incident information from the 'Traffic' API;
-Find request public transport connections and nearby stations from the 'Public Transit' API;
-Get weather forecasts, reports on current weather conditions, astronomical
-information and alerts at a specific location from the 'Destination Weather' API.
-Locations, routes and isolines are returned as sf objects." />
+<meta property="og:title" content="hereR: 'sf'-Based Interface to the 'HERE' REST APIs — hereR-package" />
+<meta property="og:description" content="Interface to the 'HERE' REST APIs &amp;lt;https://developer.here.com/develop/rest-apis&amp;gt;:
+  (1) geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;
+  (2) route directions, travel distance or time matrices and isolines using the 'Routing' API;
+  (3) request real-time traffic flow and incident information from the 'Traffic' API;
+  (4) find request public transport connections and nearby stations from the 'Public Transit' API;
+  (5) request intermodal routes using the 'Intermodal Routing' API;
+  (6) get weather forecasts, reports on current weather conditions, astronomical
+  information and alerts at a specific location from the 'Destination Weather' API.
+  Locations, routes and isolines are returned as 'sf' objects." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -119,6 +120,9 @@ Locations, routes and isolines are returned as sf objects." />
       <a href="../articles/geocoder.html">Geocoder API</a>
     </li>
     <li>
+      <a href="../articles/intermodal.html">Intermodal Routing API</a>
+    </li>
+    <li>
       <a href="../articles/routing.html">Routing API</a>
     </li>
     <li>
@@ -165,62 +169,37 @@ Locations, routes and isolines are returned as sf objects." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>'sf'-Based Interface to the 'HERE' REST APIs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/package.R'><code>R/package.R</code></a></small>
+    <h1>hereR: 'sf'-Based Interface to the 'HERE' REST APIs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/hereR-package.R'><code>R/hereR-package.R</code></a></small>
     <div class="hidden name"><code>hereR-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The hereR package provides an interface to the 'HERE' REST APIs:</p><ul>
-<li><p>Geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;</p></li>
-<li><p>Route directions, travel distance or time matrices and isolines using the 'Routing' API;</p></li>
-<li><p>Request real-time traffic flow and incident information from the 'Traffic' API;</p></li>
-<li><p>Find request public transport connections and nearby stations from the 'Public Transit' API;</p></li>
-<li><p>Get weather forecasts, reports on current weather conditions, astronomical
-information and alerts at a specific location from the 'Destination Weather' API.</p></li>
-</ul><p>Locations, routes and isolines are returned as <code>sf</code> objects.</p>
+    <p>Interface to the 'HERE' REST APIs &lt;https://developer.here.com/develop/rest-apis&gt;:
+  (1) geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;
+  (2) route directions, travel distance or time matrices and isolines using the 'Routing' API;
+  (3) request real-time traffic flow and incident information from the 'Traffic' API;
+  (4) find request public transport connections and nearby stations from the 'Public Transit' API;
+  (5) request intermodal routes using the 'Intermodal Routing' API;
+  (6) get weather forecasts, reports on current weather conditions, astronomical
+  information and alerts at a specific location from the 'Destination Weather' API.
+  Locations, routes and isolines are returned as 'sf' objects.</p>
     </div>
 
 
 
-    <h2 class="hasAnchor" id="application-credentials"><a class="anchor" href="#application-credentials"></a>Application credentials</h2>
-
-    
-
-<p>This package requires an API key for a HERE project.
-The key is set for the current R session and is used to authenticate in the requests to the APIs.
-A free login and project can be created on <a href='https://developer.here.com/'>https://developer.here.com/</a>.
-In order to obtain the API key navigate to a project of your choice in the developer portal, select 'REST: Generate APP' and then 'Create API Key'.
-To set the API key, please use: <code><a href='https://rdrr.io/pkg/hereR/man/set_key.html'>set_key</a>("&lt;YOUR API KEY&gt;")</code></p>
-    <h2 class="hasAnchor" id="functions-to-access-the-apis"><a class="anchor" href="#functions-to-access-the-apis"></a>Functions to access the APIs</h2>
-
-    
-
-<ul>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/autocomplete.html'>autocomplete</a></code> - Get suggestions for address strings.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/geocode.html'>geocode</a></code> - Get coordinates from addresses.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/reverse_geocode.html'>reverse_geocode</a></code> - Get addresses or landmarks from locations.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/route.html'>route</a></code> - Find the fastest routes between places.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/route_matrix.html'>route_matrix</a></code> - Request a matrix of route summaries between places.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/isoline.html'>isoline</a></code> - Create isochrone, isodistance or isoconsumption lines around places.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/hereR-defunct.html'>traffic</a></code> - Get information about traffic jam and incidents in areas.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/connection.html'>connection</a></code> - Request public transport connections between places.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/station.html'>station</a></code> - Find stations nearby places.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/hereR/man/weather.html'>weather</a></code> - Get weather observations, forecasts and alerts at places.</p></li>
-</ul>
-
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'>
-<ul>
-<li><p><a href='https://github.com/munterfinger/hereR'>https://github.com/munterfinger/hereR/</a></p></li>
-<li><p><a href='https://munterfinger.github.io/hereR'>https://munterfinger.github.io/hereR/</a></p></li>
-<li><p><a href='https://developer.here.com/develop/rest-apis/'>https://developer.here.com/develop/rest-apis/</a></p></li>
+    <div class='dont-index'><p>Useful links:</p><ul>
+<li><p><a href='https://munterfinger.github.io/hereR/'>https://munterfinger.github.io/hereR/</a></p></li>
+<li><p><a href='https://github.com/munterfinger/hereR/'>https://github.com/munterfinger/hereR/</a></p></li>
+<li><p>Report bugs at <a href='https://github.com/munterfinger/hereR/issues/'>https://github.com/munterfinger/hereR/issues/</a></p></li>
 </ul>
+
 </div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Merlin Unterfinger - <a href='mailto:info@munterfinger.ch'>info@munterfinger.ch</a></p>
+    <p><strong>Maintainer</strong>: Merlin Unterfinger <a href='mailto:info@munterfinger.ch'>info@munterfinger.ch</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
