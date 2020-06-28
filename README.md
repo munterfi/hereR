@@ -11,7 +11,8 @@ The `hereR` package provides an interface to the **HERE REST APIs** for R:
 (2) route directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) request real-time traffic flow and incident information from the **Traffic API**;
 (4) find public transport connections and nearby stations using the **Public Transit API**;
-(5) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
+(5) request intermodal routes using the **Intermodal Routing API**;
+(6) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the **Destination Weather API**.
 
 Locations, routes and isolines are returned as `sf` objects.
 
@@ -72,6 +73,11 @@ connection(poi[1:2, ], poi[3:4, ])
 station(poi, radius = 500)
 ```
 
+**Intermodal Routing API:** Get routes with various combinations of transport modes.
+``` r
+intermodal_route(poi[1:2, ], poi[3:4, ])
+```
+
 **Destination Weather API:** Request weather observations, forecasts, astronomical information or alerts at specific locations.
 ``` r
 weather(poi, product = "observation")
@@ -89,4 +95,5 @@ weather(poi, product = "alerts")
 * [Routing API](https://developer.here.com/documentation/routing)
 * [Traffic API](https://developer.here.com/documentation/traffic)
 * [Public Transit API](https://developer.here.com/documentation/transit)
+* [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing)
 * [Destination Weather API](https://developer.here.com/documentation/weather)

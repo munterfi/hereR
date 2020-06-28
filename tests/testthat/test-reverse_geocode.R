@@ -11,9 +11,9 @@ test_that("reverse_geocode works", {
     id = 1:nrows,
     geometry = sf::st_sfc(lapply(1:nrows, function(x) sf::st_geometrycollection()))
   ))
-  expect_error(reverse_geocode(poi = x), "'points' has empty entries in the geometry column.")
-  expect_error(reverse_geocode(poi = c(1, 2, 3)), "'points' must be an sf object.")
-  expect_error(reverse_geocode(poi = c("character", NA)), "'points' must be an sf object.")
+  expect_error(reverse_geocode(poi = x), "'poi' has empty entries in the geometry column.")
+  expect_error(reverse_geocode(poi = c(1, 2, 3)), "'poi' must be an sf object.")
+  expect_error(reverse_geocode(poi = c("character", NA)), "'poi' must be an sf object.")
   expect_error(reverse_geocode(poi = poi, results = -100), "'results' must be in the valid range from 1 to 20.")
   expect_error(reverse_geocode(poi = poi, results = "-100"), "'results' must be of type 'numeric'.")
 
