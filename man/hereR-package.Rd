@@ -28,5 +28,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Merlin Unterfinger \email{info@munterfinger.ch}
 
+Other contributors:
+\itemize{
+  \item Daniel Possenriede (\href{https://orcid.org/0000-0002-6738-9845}{ORCID}) (Geocode return options) [contributor]
+}
+
 }
 \keyword{internal}
