@@ -1,4 +1,4 @@
-# version 0.3.3.9000
+# version 0.4.0
 
 * Changed CI from Travis to GitHub actions.
 * Added automated pkgdown page build after pull requests and commits on master.
