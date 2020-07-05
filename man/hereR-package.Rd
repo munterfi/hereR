@@ -26,7 +26,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Merlin Unterfinger \email{info@munterfinger.ch}
+\strong{Maintainer}: Merlin Unterfinger \email{info@munterfinger.ch} (\href{https://orcid.org/0000-0003-2020-2366}{ORCID})
 
 Other contributors:
 \itemize{
