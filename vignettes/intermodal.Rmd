@@ -43,7 +43,7 @@ knitr::kable(head(as.data.frame(intermodal_routes)[, colnames(intermodal_routes)
 ```
 
 Print the intermodal routes on an interactive leaflet map:
-```{r map_int_routes, eval=TRUE, out.width='100%'}
+```{r map_int_routes, eval=FALSE, out.width='100%'}
 mapview(intermodal_routes,
         zcol = "mode",
         layer.name = "Intermodal route",
