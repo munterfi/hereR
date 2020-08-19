@@ -18,6 +18,7 @@ library(hereR)
 library(mapview)
 library(ggplot2)
 mapviewOptions(
+  fgb = FALSE,
   vector.palette = colorRampPalette(
     c("#0571B0", "#92C5DE", "#F7F7F7","#F4A582", "#CA0020")
   )

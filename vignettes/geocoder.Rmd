@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 library(hereR)
 library(data.table)
 library(mapview)
+mapviewOptions(fgb = FALSE)
 addresses <- poi$city
 geocoded <- hereR:::example$geocode
 suggestions <- hereR:::example$autocomplete

@@ -18,6 +18,7 @@ library(hereR)
 library(mapview)
 library(sf)
 mapviewOptions(
+  fgb = FALSE,
   vector.palette = colorRampPalette(
     c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
   )

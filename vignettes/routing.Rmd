@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 library(hereR)
 library(mapview)
 mapviewOptions(
+  fgb = FALSE,
   vector.palette = colorRampPalette(
     c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
   )
