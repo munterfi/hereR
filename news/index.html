@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -164,17 +164,27 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="version-041" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.1">
+<a href="#version-041" class="anchor"></a>version 0.4.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Change example and API mock data for <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> from Berlin to Switzerland, as the service is now also available there.</li>
+<li>Force {mapview} to use ‘classical’ leaflet/htmlwidgets rendering (which embeds data directly in the html) and not the file format ‘flatgeobuf’ in vignette building (see <a href="https://github.com/munterfinger/hereR/issues/54"><a href='https://github.com/munterfinger/hereR/issues/54'>#54</a></a>).</li>
+<li>Temporarily deactivate all maps in the vignettes to solve the issues on CRAN (closes <a href="https://github.com/munterfinger/hereR/issues/54"><a href='https://github.com/munterfinger/hereR/issues/54'>#54</a></a>). With the next release of {mapview} &gt;= v2.9.1 on CRAN the maps will be reactivated.</li>
+</ul>
+</div>
     <div id="version-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
-<a href="#version-040" class="anchor"></a>version 0.4.0<small> Unreleased </small>
+<a href="#version-040" class="anchor"></a>version 0.4.0<small> 2020-07-05 </small>
 </h1>
 <ul>
 <li>Changed CI from Travis to GitHub actions.</li>
 <li>Added automated pkgdown page build after pull requests and commits on master.</li>
 <li>Extended test coverage on defunct function calls.</li>
-<li>Added <code>sf</code> argument to <code><a href="https://rdrr.io/pkg/hereR/man/geocode.html">geocode()</a></code> function. If <code>TRUE</code>, the default, an {sf} object is returned, if <code>FALSE</code> a data.frame with <code>lng</code> and <code>lat</code> columns. (<a href='https://github.com/dpprdan'>@dpprdan</a>, <a href="https://github.com/munterfinger/hereR/pull/44"><a href='https://github.com/munterfinger/hereR/issues/44'>#44</a></a>)</li>
+<li>Added <code>sf</code> argument to <code><a href="../reference/geocode.html">geocode()</a></code> function. If <code>TRUE</code>, the default, an {sf} object is returned, if <code>FALSE</code> a data.frame with <code>lng</code> and <code>lat</code> columns. (<a href='https://github.com/dpprdan'>@dpprdan</a>, <a href="https://github.com/munterfinger/hereR/pull/44"><a href='https://github.com/munterfinger/hereR/issues/44'>#44</a></a>)</li>
 <li>
-<strong>Intermodal Routing API: Routes</strong> The new feature <code><a href="https://rdrr.io/pkg/hereR/man/intermodal_route.html">intermodal_route()</a></code> adds support for requesting intermodal routes between given pairs of locations.</li>
+<strong>Intermodal Routing API: Routes</strong> The new feature <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> adds support for requesting intermodal routes between given pairs of locations.</li>
 </ul>
 </div>
     <div id="version-033" class="section level1">
@@ -182,10 +192,10 @@
 <a href="#version-033" class="anchor"></a>version 0.3.3<small> 2020-04-18 </small>
 </h1>
 <ul>
-<li>Added <code><a href="https://rdrr.io/pkg/hereR/man/set_verbose.html">set_verbose()</a></code> function to define (for the current R session) if the <code>hereR</code> package should message information about the number of requests sent and data received (default = <code>FALSE</code>).</li>
+<li>Added <code><a href="../reference/set_verbose.html">set_verbose()</a></code> function to define (for the current R session) if the <code>hereR</code> package should message information about the number of requests sent and data received (default = <code>FALSE</code>).</li>
 <li>Reactivate maps with multiple layers since the <code>mapview</code> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
 <li>
-<code>lwgeom</code> no longer exports <code><a href="https://rdrr.io/pkg/sf/man/valid.html">st_make_valid()</a></code>, but <code>sf</code> does. Therefore <code>lwgeom</code> is moved from the package dependencies to the suggestions (see <a href="https://github.com/munterfinger/hereR/issues/38"><a href='https://github.com/munterfinger/hereR/issues/38'>#38</a></a>).</li>
+<code>lwgeom</code> no longer exports <code>st_make_valid()</code>, but <code>sf</code> does. Therefore <code>lwgeom</code> is moved from the package dependencies to the suggestions (see <a href="https://github.com/munterfinger/hereR/issues/38"><a href='https://github.com/munterfinger/hereR/issues/38'>#38</a></a>).</li>
 </ul>
 </div>
     <div id="version-032" class="section level1">
@@ -193,7 +203,7 @@
 <a href="#version-032" class="anchor"></a>version 0.3.2<small> 2020-03-29 </small>
 </h1>
 <ul>
-<li>Defunct the deprecated <code><a href="https://rdrr.io/pkg/hereR/man/hereR-defunct.html">traffic()</a></code> function, which has been replaced by the functions <code><a href="https://rdrr.io/pkg/hereR/man/flow.html">flow()</a></code> and <code><a href="https://rdrr.io/pkg/hereR/man/incident.html">incident()</a></code>.</li>
+<li>Defunct the deprecated <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function, which has been replaced by the functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code>.</li>
 <li>Recreated package test data, api mocks and examples with <code>sf</code> 0.9-0 (see <a href="https://github.com/munterfinger/hereR/issues/36"><a href='https://github.com/munterfinger/hereR/issues/36'>#36</a></a>).</li>
 <li>Increased the dependency on the <code>sf</code> package to version 0.9-0 due to a different CRS handling (for more information about the changes in sf, see <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html">here</a>). <strong>Note: Older versions of the <code>sf</code> package are no longer supported.</strong>
 </li>
@@ -205,9 +215,9 @@
 <a href="#version-031" class="anchor"></a>version 0.3.1<small> 2020-01-29 </small>
 </h1>
 <ul>
-<li>There are no more missing M:N route combinations in the the edge list returned by <code><a href="https://rdrr.io/pkg/hereR/man/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/30"><a href='https://github.com/munterfinger/hereR/issues/30'>#30</a></a>).</li>
-<li>All lengths of <code>origin</code> and <code>destination</code> are now accepted as input in <code><a href="https://rdrr.io/pkg/hereR/man/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/31"><a href='https://github.com/munterfinger/hereR/issues/31'>#31</a></a>).</li>
-<li>Added two new functions <code><a href="https://rdrr.io/pkg/hereR/man/flow.html">flow()</a></code> and <code><a href="https://rdrr.io/pkg/hereR/man/incident.html">incident()</a></code> to access traffic flow and incidents from the Traffic API. Deprecated the <code><a href="https://rdrr.io/pkg/hereR/man/hereR-defunct.html">traffic()</a></code> function.</li>
+<li>There are no more missing M:N route combinations in the the edge list returned by <code><a href="../reference/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/30"><a href='https://github.com/munterfinger/hereR/issues/30'>#30</a></a>).</li>
+<li>All lengths of <code>origin</code> and <code>destination</code> are now accepted as input in <code><a href="../reference/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/31"><a href='https://github.com/munterfinger/hereR/issues/31'>#31</a></a>).</li>
+<li>Added two new functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code> to access traffic flow and incidents from the Traffic API. Deprecated the <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function.</li>
 <li>Reduced the dependent version of R from 3.5.0 to 3.3.0 as the package is still functional but runs on more systems.</li>
 </ul>
 </div>
@@ -216,16 +226,16 @@
 <a href="#version-030" class="anchor"></a>version 0.3.0<small> 2020-01-07 </small>
 </h1>
 <ul>
-<li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code><a href="https://rdrr.io/pkg/hereR/man/hereR-defunct.html">set_auth()</a></code> and <code><a href="https://rdrr.io/pkg/hereR/man/hereR-defunct.html">unset_auth()</a></code> are defunct and replaced by <code><a href="https://rdrr.io/pkg/hereR/man/set_key.html">set_key()</a></code> and <code><a href="https://rdrr.io/pkg/hereR/man/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/23"><a href='https://github.com/munterfinger/hereR/issues/23'>#23</a></a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
-<li>Added a minimum jam factor filter to <code><a href="https://rdrr.io/pkg/hereR/man/hereR-defunct.html">traffic(..., product = "flow")</a></code>. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than <code>min_jam_factor</code>, which speeds up requests.</li>
+<li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code><a href="../reference/hereR-defunct.html">set_auth()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_auth()</a></code> are defunct and replaced by <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfinger/hereR/issues/23"><a href='https://github.com/munterfinger/hereR/issues/23'>#23</a></a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
+<li>Added a minimum jam factor filter to <code><a href="../reference/hereR-defunct.html">traffic(..., product = "flow")</a></code>. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than <code>min_jam_factor</code>, which speeds up requests.</li>
 <li>
-<strong>Public Transit API: Transit route</strong> The new feature <code><a href="https://rdrr.io/pkg/hereR/man/connection.html">connection()</a></code> implements requesting the most efficient and relevant transit connections between given pairs of locations.</li>
+<strong>Public Transit API: Transit route</strong> The new feature <code><a href="../reference/connection.html">connection()</a></code> implements requesting the most efficient and relevant transit connections between given pairs of locations.</li>
 <li>
-<strong>Public Transit API: Find stations nearby</strong> The new feature <code><a href="https://rdrr.io/pkg/hereR/man/station.html">station()</a></code> retrieves nearby public transit stations with corresponding line information.</li>
-<li>Package cosmetics: Renamed the <code>start</code> parameter to <code>origin</code> and unified the utilization of the <code>datetime</code> and <code>arrival</code> parameters in <code><a href="https://rdrr.io/pkg/hereR/man/route.html">route()</a></code>, <code><a href="https://rdrr.io/pkg/hereR/man/route_matrix.html">route_matrix()</a></code>, <code><a href="https://rdrr.io/pkg/hereR/man/isoline.html">isoline()</a></code> and <code><a href="https://rdrr.io/pkg/hereR/man/connection.html">connection()</a></code>.</li>
+<strong>Public Transit API: Find stations nearby</strong> The new feature <code><a href="../reference/station.html">station()</a></code> retrieves nearby public transit stations with corresponding line information.</li>
+<li>Package cosmetics: Renamed the <code>start</code> parameter to <code>origin</code> and unified the utilization of the <code>datetime</code> and <code>arrival</code> parameters in <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/route_matrix.html">route_matrix()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code> and <code><a href="../reference/connection.html">connection()</a></code>.</li>
 <li>Adjusted the handling of datetime objects in the requests: All <code><a href="https://rdrr.io/r/base/c.html">c("POSIXct", "POSIXt")</a></code> inputs for the requests (mostly <code>departure</code>) are converted to UTC using <code>.encode_datetime()</code> and the responses are parsed and returned in the input timezone (or if missing: <code><a href="https://rdrr.io/r/base/timezones.html">Sys.timezone()</a></code>) using <code>.parse_datetime()</code> (see <a href="https://github.com/munterfinger/hereR/issues/28"><a href='https://github.com/munterfinger/hereR/issues/28'>#28</a></a>).</li>
 <li>Added <code>@import sf</code> to the package documentation to ensure <code>sf</code> objects are handled correctly.</li>
-<li>Added <code>departure</code> and <code>arrival</code> datetime column to the return value of <code><a href="https://rdrr.io/pkg/hereR/man/route.html">route()</a></code>, <code><a href="https://rdrr.io/pkg/hereR/man/route_matrix.html">route_matrix()</a></code> and <code><a href="https://rdrr.io/pkg/hereR/man/isoline.html">isoline()</a></code>.</li>
+<li>Added <code>departure</code> and <code>arrival</code> datetime column to the return value of <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/route_matrix.html">route_matrix()</a></code> and <code><a href="../reference/isoline.html">isoline()</a></code>.</li>
 <li>Removed <code>data.table</code> object type from function return values. New: Pure <code>data.frame</code> or <code>sf, data.frame</code> because this integrates better with other packages (e.g. the <code>overline2()</code> function from the <code>stplanr</code> package).</li>
 </ul>
 </div>
@@ -234,13 +244,13 @@
 <a href="#version-021" class="anchor"></a>version 0.2.1<small> 2019-12-16 </small>
 </h1>
 <ul>
-<li>Enhanced <code><a href="https://rdrr.io/pkg/hereR/man/hereR-defunct.html">traffic()</a></code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
+<li>Enhanced <code><a href="../reference/hereR-defunct.html">traffic()</a></code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
 <li>Improved coverage of <code>testthat</code>.</li>
-<li>Added an <code>id</code> column to the output of <code><a href="https://rdrr.io/pkg/hereR/man/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>id</code> column the addresses to geocode can be joined to the coordinates after geocoding (see <a href="https://github.com/munterfinger/hereR/issues/9"><a href='https://github.com/munterfinger/hereR/issues/9'>#9</a></a>).</li>
-<li>Added an <code>id</code> column also to <code><a href="https://rdrr.io/pkg/hereR/man/autocomplete.html">autocomplete()</a></code>, <code><a href="https://rdrr.io/pkg/hereR/man/reverse_geocode.html">reverse_geocode()</a></code>, <code><a href="https://rdrr.io/pkg/hereR/man/route.html">route()</a></code>, <code><a href="https://rdrr.io/pkg/hereR/man/isoline.html">isoline()</a></code>, <code><a href="https://rdrr.io/pkg/hereR/man/hereR-defunct.html">traffic()</a></code> and <code><a href="https://rdrr.io/pkg/hereR/man/weather.html">weather()</a></code>. Using the <code>id</code> column the result can be joined to the input.</li>
+<li>Added an <code>id</code> column to the output of <code><a href="../reference/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>id</code> column the addresses to geocode can be joined to the coordinates after geocoding (see <a href="https://github.com/munterfinger/hereR/issues/9"><a href='https://github.com/munterfinger/hereR/issues/9'>#9</a></a>).</li>
+<li>Added an <code>id</code> column also to <code><a href="../reference/autocomplete.html">autocomplete()</a></code>, <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code>, <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code>, <code><a href="../reference/hereR-defunct.html">traffic()</a></code> and <code><a href="../reference/weather.html">weather()</a></code>. Using the <code>id</code> column the result can be joined to the input.</li>
 <li>Fixed the handling of failing requests in <code>.get_content()</code>. The <code>id</code> column is still in correct order, even if there are failing requests in a function call (see <a href="https://github.com/munterfinger/hereR/issues/17"><a href='https://github.com/munterfinger/hereR/issues/17'>#17</a></a>).</li>
 <li>Added <code>rownames() &lt;- NULL</code> to all functions before returning the result.</li>
-<li>Renamed the <code>city</code> column in the returned object of <code><a href="https://rdrr.io/pkg/hereR/man/weather.html">weather()</a></code> to <code>station</code>, as it stands for the name of the nearest meteorological station.</li>
+<li>Renamed the <code>city</code> column in the returned object of <code><a href="../reference/weather.html">weather()</a></code> to <code>station</code>, as it stands for the name of the nearest meteorological station.</li>
 <li>Test for empty geometries in the input POIs and AOIs and throw an error if some are found (see <a href="https://github.com/munterfinger/hereR/issues/16"><a href='https://github.com/munterfinger/hereR/issues/16'>#16</a></a>).</li>
 </ul>
 </div>
@@ -249,11 +259,11 @@
 <a href="#version-020" class="anchor"></a>version 0.2.0<small> 2019-11-13 </small>
 </h1>
 <ul>
-<li>Enhanced <code><a href="https://rdrr.io/pkg/hereR/man/geocode.html">geocode()</a></code>: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting <code>autocomplete = TRUE</code>.</li>
+<li>Enhanced <code><a href="../reference/geocode.html">geocode()</a></code>: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting <code>autocomplete = TRUE</code>.</li>
 <li>
-<strong>Geocoder API: Autocomplete</strong> The new feature <code><a href="https://rdrr.io/pkg/hereR/man/autocomplete.html">autocomplete()</a></code> allows autocompleting addresses.</li>
+<strong>Geocoder API: Autocomplete</strong> The new feature <code><a href="../reference/autocomplete.html">autocomplete()</a></code> allows autocompleting addresses.</li>
 <li>
-<strong>Geocoder API: Reverse geocode</strong> The new feature <code><a href="https://rdrr.io/pkg/hereR/man/reverse_geocode.html">reverse_geocode()</a></code> implements reverse geocoding POIs in order to retrieve suggestions for addresses or landmarks.</li>
+<strong>Geocoder API: Reverse geocode</strong> The new feature <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> implements reverse geocoding POIs in order to retrieve suggestions for addresses or landmarks.</li>
 </ul>
 </div>
     <div id="version-010" class="section level1">

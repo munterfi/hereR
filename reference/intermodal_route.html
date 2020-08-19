@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -170,7 +170,7 @@
     <p>Calculates route geometries (<code>LINESTRING</code>) between given pairs of points using the HERE 'Intermodal Routing' API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hereR/man/intermodal_route.html'>intermodal_route</a></span>(
+    <pre class="usage"><span class='fu'>intermodal_route</span>(
   <span class='kw'>origin</span>,
   <span class='kw'>destination</span>,
   datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
@@ -217,21 +217,12 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='https://rdrr.io/pkg/hereR/man/set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
-
-<span class='co'># Change POIs to Berlin, as service is not available in Switzerland</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://r-spatial.github.io/sf'>sf</a></span>)</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 7.0.0</span></div><div class='input'><span class='kw'>poi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
- name = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"HERE Berlin"</span>, <span class='st'>"Treptow"</span>, <span class='st'>"Potsdam"</span>, <span class='st'>"Tiergarten"</span>),
- lng = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13.384944</span>, <span class='fl'>13.461215</span>, <span class='fl'>13.058351</span>, <span class='fl'>13.336490</span>),
- lat = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>52.531056</span>, <span class='fl'>52.493908</span>, <span class='fl'>52.403587</span>, <span class='fl'>52.514557</span>)
-) <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_as_sf.html'>st_as_sf</a></span>(coords = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lng"</span>, <span class='st'>"lat"</span>)) <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_crs.html'>st_set_crs</a></span>(<span class='fl'>4326</span>)
+<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Intermodal routing</span>
-<span class='kw'>routes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/intermodal_route.html'>intermodal_route</a></span>(
-  origin = <span class='kw'>poi</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, ],
-  destination = <span class='kw'>poi</span>[<span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>, ],
+<span class='kw'>routes</span> <span class='op'>&lt;-</span> <span class='fu'>intermodal_route</span>(
+  origin = <span class='kw'>poi</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, ],
+  destination = <span class='kw'>poi</span>[<span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>, ],
   url_only = <span class='fl'>TRUE</span>
 )</div></pre>
   </div>

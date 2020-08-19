@@ -83,7 +83,7 @@ The information comes from the nearest available weather station and is not inte
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -176,7 +176,7 @@ location name) based on the HERE 'Destination Weather' API.
 The information comes from the nearest available weather station and is not interpolated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hereR/man/weather.html'>weather</a></span>(<span class='kw'>poi</span>, product = <span class='st'>"observation"</span>, url_only = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>weather</span>(<span class='kw'>poi</span>, product = <span class='st'>"observation"</span>, url_only = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,19 +205,19 @@ The point geometry in the <code>sf</code> object is the location of the weather 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='https://rdrr.io/pkg/hereR/man/set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
+<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Observation</span>
-<span class='kw'>observation</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/weather.html'>weather</a></span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"observation"</span>, url_only = <span class='fl'>TRUE</span>)
+<span class='kw'>observation</span> <span class='op'>&lt;-</span> <span class='fu'>weather</span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"observation"</span>, url_only = <span class='fl'>TRUE</span>)
 
 <span class='co'># Forecast</span>
-<span class='kw'>forecast</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/weather.html'>weather</a></span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"forecast_hourly"</span>, url_only = <span class='fl'>TRUE</span>)
+<span class='kw'>forecast</span> <span class='op'>&lt;-</span> <span class='fu'>weather</span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"forecast_hourly"</span>, url_only = <span class='fl'>TRUE</span>)
 
 <span class='co'># Astronomy</span>
-<span class='kw'>astronomy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/weather.html'>weather</a></span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"forecast_astronomy"</span>, url_only = <span class='fl'>TRUE</span>)
+<span class='kw'>astronomy</span> <span class='op'>&lt;-</span> <span class='fu'>weather</span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"forecast_astronomy"</span>, url_only = <span class='fl'>TRUE</span>)
 
 <span class='co'># Alerts</span>
-<span class='kw'>alerts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/weather.html'>weather</a></span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"alerts"</span>, url_only = <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>alerts</span> <span class='op'>&lt;-</span> <span class='fu'>weather</span>(poi = <span class='kw'>poi</span>, product = <span class='st'>"alerts"</span>, url_only = <span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

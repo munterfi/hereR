@@ -84,7 +84,7 @@ to obtain an estimate of the consumption." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -178,7 +178,7 @@ For routes using the transport mode <code>"car"</code> a vehicle type can be spe
 to obtain an estimate of the consumption.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hereR/man/route.html'>route</a></span>(
+    <pre class="usage"><span class='fu'>route</span>(
   <span class='kw'>origin</span>,
   <span class='kw'>destination</span>,
   datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
@@ -236,16 +236,16 @@ to obtain an estimate of the consumption.</p>
     <p>An <code>sf</code> object containing the requested routes.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>The public transport routes (<code>mode = "publicTransport"</code>) provided by <code><a href='https://rdrr.io/pkg/hereR/man/route.html'>route</a></code>
+    <p>The public transport routes (<code>mode = "publicTransport"</code>) provided by <code>route</code>
 are not considering the time tables of the public transport providers.
-Use <code><a href='https://rdrr.io/pkg/hereR/man/connection.html'>connection</a></code> for public transport routes that consider time tables.</p>
+Use <code><a href='connection.html'>connection</a></code> for public transport routes that consider time tables.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://developer.here.com/documentation/routing/topics/resource-calculate-route.html'>HERE Routing API: Calculate Route</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='https://rdrr.io/pkg/hereR/man/set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
+<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Get all from - to combinations from POIs</span>
 <span class='kw'>to</span> <span class='op'>&lt;-</span> <span class='kw'>poi</span>[<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>poi</span>)), <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>poi</span>)), ]
@@ -255,7 +255,7 @@ Use <code><a href='https://rdrr.io/pkg/hereR/man/connection.html'>connection</a>
 <span class='kw'>from</span> <span class='op'>&lt;-</span> <span class='kw'>from</span>[<span class='kw'>idx</span>, ]
 
 <span class='co'># Routing</span>
-<span class='kw'>routes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/hereR/man/route.html'>route</a></span>(
+<span class='kw'>routes</span> <span class='op'>&lt;-</span> <span class='fu'>route</span>(
   origin = <span class='kw'>from</span>, destination = <span class='kw'>to</span>,
   mode = <span class='st'>"car"</span>, type = <span class='st'>"fastest"</span>, traffic = <span class='fl'>TRUE</span>,
   vehicle_type = <span class='st'>"diesel,5.5"</span>,
