@@ -1,3 +1,7 @@
+# version 0.4.0.9000
+
+* Change example and API mock data for `intermodal_route()` from Berlin to Switzerland, as the service is now also available there.
+
 # version 0.4.0
 
 * Changed CI from Travis to GitHub actions.

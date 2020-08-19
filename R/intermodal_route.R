@@ -20,20 +20,10 @@
 #' # Provide an API Key for a HERE project
 #' set_key("<YOUR API KEY>")
 #'
-#' # Change POIs to Berlin, as service is not available in Switzerland
-#' library(sf)
-#' poi <- data.frame(
-#'  name = c("HERE Berlin", "Treptow", "Potsdam", "Tiergarten"),
-#'  lng = c(13.384944, 13.461215, 13.058351, 13.336490),
-#'  lat = c(52.531056, 52.493908, 52.403587, 52.514557)
-#') %>%
-#'  st_as_sf(coords = c("lng", "lat")) %>%
-#'  st_set_crs(4326)
-#'
 #' # Intermodal routing
 #' routes <- intermodal_route(
-#'   origin = poi[1:2, ],
-#'   destination = poi[3:4, ],
+#'   origin = poi[1:3, ],
+#'   destination = poi[4:6, ],
 #'   url_only = TRUE
 #' )
 intermodal_route <- function(origin, destination, datetime = Sys.time(),
