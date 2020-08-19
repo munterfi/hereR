@@ -1,4 +1,4 @@
-# version 0.4.0.9000
+# version 0.4.1
 
 * Change example and API mock data for `intermodal_route()` from Berlin to Switzerland, as the service is now also available there.
 * Force {mapview} to use 'classical' leaflet/htmlwidgets rendering (which embeds data directly in the html) and not the file format 'flatgeobuf' in vignette building (see [#54](https://github.com/munterfinger/hereR/issues/54)).
