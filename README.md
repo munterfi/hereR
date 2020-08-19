@@ -6,7 +6,7 @@
 [![Codecov test coverage](https://codecov.io/gh/munterfinger/hereR/branch/master/graph/badge.svg)](https://codecov.io/gh/munterfinger/hereR?branch=master)
 <!-- badges: end -->
 
-The `hereR` package provides an interface to the **HERE REST APIs** for R:
+The **hereR** package provides an interface to the **HERE REST APIs** for R:
 (1) geocode and autocomplete addresses or reverse geocode POIs using the **Geocoder API**;
 (2) route directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) request real-time traffic flow and incident information from the **Traffic API**;
@@ -18,7 +18,8 @@ Locations, routes and isolines are returned as `sf` objects.
 
 ## Installation
 
-Install the released version from [CRAN](https://CRAN.R-project.org/package=hereR/) with:
+You can install the released version of **hereR** from
+[CRAN](https://CRAN.R-project.org/package=hereR/) with:
 
 ``` r
 install.packages("hereR")
@@ -27,7 +28,7 @@ install.packages("hereR")
 Install the development version from [GitHub](https://github.com/munterfinger/hereR/) with:
 
 ``` r
-devtools::install_github("munterfinger/hereR")
+remotes::install_github("munterfinger/hereR")
 ```
 
 ## Usage

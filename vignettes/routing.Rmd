@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 library(hereR)
 library(mapview)
 mapviewOptions(
+  fgb = FALSE,
   vector.palette = colorRampPalette(
     c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
   )
@@ -45,7 +46,7 @@ knitr::kable(head(as.data.frame(routes)[, colnames(routes) != "geometry"]), form
 ```
 
 Construct a route label and print the routes on an interactive leaflet map:
-```{r map_routes, eval=TRUE, out.width='100%'}
+```{r map_routes, eval=FALSE, out.width='100%'}
 routes$label <- paste(origin$city[routes$id],
                       destination$city[routes$id],
                       sep =  " - ")
@@ -94,7 +95,7 @@ iso <- isoline(
 ```
 
 Convert range from seconds to minutes and print the aggregated isolines on an interactive leaflet map:
-```{r map_isoline, eval=TRUE, out.width='100%'}
+```{r map_isoline, eval=FALSE, out.width='100%'}
 iso$minutes <- iso$range/60
 mapview(iso,
         zcol = "minutes",

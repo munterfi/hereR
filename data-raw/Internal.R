@@ -1,15 +1,6 @@
 ## Create internal `mock` and `example` dataset
 library(sf)
 
-## POIs for intermodal routes (service not available in Switzerland)
-poi_berlin <- data.frame(
-  name = c("HERE Berlin", "Treptow", "Potsdam", "Tiergarten"),
-  lng = c(13.384944, 13.461215, 13.058351, 13.336490),
-  lat = c(52.531056, 52.493908, 52.403587, 52.514557)
-) %>%
-  st_as_sf(coords = c("lng", "lat")) %>%
-  st_set_crs(4326)
-
 ## URLs
 url_geocode <-
   geocode(addresses = poi$city, url_only = TRUE)
@@ -24,7 +15,7 @@ url_route <-
 url_route_matrix <-
   route_matrix(origin = poi, url_only = TRUE)
 url_intermodal_route <-
-  intermodal_route(origin = poi_berlin[1:2, ], destination = poi_berlin[3:4, ], url_only = TRUE)
+  intermodal_route(origin = poi[1:3, ], destination = poi[4:6, ], url_only = TRUE)
 url_isoline <-
   isoline(poi = poi, url_only = TRUE)
 url_weather_observation <-
@@ -72,7 +63,7 @@ example <- list(
   reverse_geocode_landmarks = reverse_geocode(poi = poi, results = 3, landmarks = TRUE),
   route = route(origin = poi[1:2, ], destination = poi[3:4, ]),
   route_matrix = route_matrix(origin = poi),
-  intermodal_route = intermodal_route(origin = poi_berlin[1:2, ], destination = poi_berlin[3:4, ]),
+  intermodal_route = intermodal_route(origin = poi[1:3, ], destination = poi[4:6, ]),
   isoline = isoline(poi = poi),
   weather_observation = weather(poi = poi, product = "observation"),
   weather_forecast_hourly = weather(poi = poi, product = "forecast_hourly"),

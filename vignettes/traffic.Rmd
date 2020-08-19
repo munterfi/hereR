@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 library(hereR)
 library(mapview)
 mapviewOptions(
+  fgb = FALSE,
   vector.palette = colorRampPalette(
     c("#FFD700", "#CA0020")
   )
@@ -37,7 +38,7 @@ flows <- flow(
 ```
 
 Print the (ordered) 'jam factor' of the traffic flow on an interactive leaflet map:
-```{r map_flow, eval=TRUE, out.width='100%'}
+```{r map_flow, eval=FALSE, out.width='100%'}
 flows <- flows[order(flows$JF), ]
 mapview(flows,
         zcol = "JF",
@@ -59,7 +60,7 @@ incidents <- incident(
 ```
 
 Print the traffic incidents on an interactive leaflet map:
-```{r map_incidents, eval=TRUE, out.width='100%'}
+```{r map_incidents, eval=FALSE, out.width='100%'}
 mapview(incidents,
         zcol = "type",
         layer.name = "Incident type",

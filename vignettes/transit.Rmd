@@ -18,6 +18,7 @@ library(hereR)
 library(mapview)
 library(sf)
 mapviewOptions(
+  fgb = FALSE,
   vector.palette = colorRampPalette(
     c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
   )
@@ -52,7 +53,7 @@ knitr::kable(head(as.data.frame(connection_section)[, colnames(connection_sectio
 ```
 
 Print the public transport sections on an interactive leaflet map:
-```{r pt_connection_section_map, eval=TRUE, out.width='100%'}
+```{r pt_connection_section_map, eval=FALSE, out.width='100%'}
 mapview(connection_section,
         zcol = "mode",
         layer.name = "Transport mode",
@@ -89,7 +90,7 @@ stations <- station(
 ```
 
 Print the POIs, the radius and stations on an interactive leaflet map:
-```{r stations_map, eval=TRUE, out.width='100%'}
+```{r stations_map, eval=FALSE, out.width='100%'}
 buffer <-
   poi %>%
   st_transform(2056) %>%
