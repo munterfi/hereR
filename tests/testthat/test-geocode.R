@@ -28,7 +28,9 @@ test_that("geocode works", {
     # Tests
     expect_s3_class(geocoded, "data.frame", exact = TRUE),
     expect_equal(nrow(geocoded), length(poi$city)),
-    expect_type(geocoded[["lat"]], "double"),
-    expect_type(geocoded[["lng"]], "double")
+    expect_type(geocoded[["lat_position"]], "double"),
+    expect_type(geocoded[["lng_position"]], "double"),
+    expect_type(geocoded[["lat_access"]], "list"),
+    expect_type(geocoded[["lng_access"]], "list")
   )
 })
