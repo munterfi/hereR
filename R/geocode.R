@@ -118,13 +118,13 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
       # Parse access coordinates to additional geometry list-column
       geocoded$access <- sf::st_as_sfc(
         lapply(1:nrow(geocoded), function(x) {
-          if (is.numeric(geocoded[x, ]$lng_access) &
-              is.numeric(geocoded[x, ]$lat_access)) {
+          if (is.numeric(geocoded[x, ]$lng_access[[1]]) &
+              is.numeric(geocoded[x, ]$lat_access[[1]])) {
             return(
               sf::st_point(
                 cbind(
-                  geocoded[x, ]$lng_access,
-                  geocoded[x, ]$lat_access
+                  geocoded[x, ]$lng_access[[1]],
+                  geocoded[x, ]$lat_access[[1]]
                 )
               )
             )
