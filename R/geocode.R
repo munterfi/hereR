@@ -3,7 +3,7 @@
 #' Geocodes addresses using the HERE 'Geocoder' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
+#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
 #'
 #' @param addresses character, addresses to geocode.
 #' @param autocomplete boolean, use the 'Geocoder Autocomplete' API to
@@ -15,10 +15,11 @@
 #'   FALSE})?
 #'
 #' @return
-#' If \code{sf = TRUE}, an \code{sf} object, containing the coordinates of the
-#' geocoded addresses as a geometry list column. If \code{sf = FALSE}, a
-#' \code{data.frame} containing the coordinates of the geocoded addresses as
-#' \code{lng}, \code{lat} columns.
+#' If \code{sf = TRUE}, an \code{sf} object, containing the position and the
+#' access coordinates of the geocoded addresses as geometry list columns, where
+#' the position coordinates are set as default geometry column.
+#' If \code{sf = FALSE}, a \code{data.frame} containing the coordinates of the
+#' geocoded addresses as \code{lng}, \code{lat} columns.
 #' @export
 #'
 #' @examples
@@ -36,7 +37,7 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
 
   # Add API key
   url <- .add_key(
-    url = "https://geocoder.ls.hereapi.com/6.2/geocode.json?"
+    url = "https://geocode.search.hereapi.com/v1/geocode?"
   )
 
   # Autocomplete addresses
@@ -53,7 +54,7 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
   # Add addresses
   url = paste0(
     url,
-    "&searchtext=",
+    "&q=",
     addresses
   )
 
@@ -74,24 +75,26 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
     lapply(data, function(con) {
       count <<- count + 1
       df <- jsonlite::fromJSON(con)
-      if (length(df$Response$View) == 0) {
+      if (length(df$items) == 0) {
         geocode_failed <<- c(geocode_failed, addresses[count])
         return(NULL)
       }
       result <- data.table::data.table(
         id = ids[count],
-        address = df$Response$View$Result[[1]]$Location$Address$Label,
-        street = df$Response$View$Result[[1]]$Location$Address$Street,
-        houseNumber = df$Response$View$Result[[1]]$Location$Address$HouseNumber,
-        postalCode = df$Response$View$Result[[1]]$Location$Address$PostalCode,
-        district = df$Response$View$Result[[1]]$Location$Address$District,
-        city = df$Response$View$Result[[1]]$Location$Address$City,
-        county = df$Response$View$Result[[1]]$Location$Address$County,
-        state = df$Response$View$Result[[1]]$Location$Address$State,
-        country = df$Response$View$Result[[1]]$Location$Address$Country,
-        type = df$Response$View$Result[[1]]$Location$LocationType,
-        lng = df$Response$View$Result[[1]]$Location$NavigationPosition[[1]]$Longitude,
-        lat = df$Response$View$Result[[1]]$Location$NavigationPosition[[1]]$Latitude
+        address = df$items$address$label,
+        type = df$items$resultType,
+        street = df$items$address$street,
+        house_number = df$items$address$houseNumber,
+        postal_code = df$items$address$postalCode,
+        district = df$items$address$district,
+        city = df$items$address$city,
+        county = df$items$address$county,
+        state = df$items$address$state,
+        country = df$items$address$countryName,
+        lng_access = sapply(df$items$access, function(x) x$lng)[1],
+        lat_access = sapply(df$items$access, function(x) x$lat)[1],
+        lng_position = df$items$position$lng,
+        lat_position = df$items$position$lat
       )
       result[1, ]
     }), fill = TRUE
@@ -99,21 +102,48 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
 
   # Failed to geocode
   if (length(geocode_failed) > 0) {
-    message(sprintf("Address(es) '%s' not found.",
-                    paste(geocode_failed, collapse = "', '")))
+    message(
+      sprintf(
+        "Address(es) '%s' not found.",
+        paste(geocode_failed, collapse = "', '")
+      )
+    )
   }
 
   # Create sf object
   if (nrow(geocoded) > 0) {
     rownames(geocoded) <- NULL
-    # Return urls if chosen
+    # Return sf object if chosen
     if (sf) {
+      # Parse access coordinates to additional geometry list-column
+      geocoded$access <- sf::st_as_sfc(
+        lapply(1:nrow(geocoded), function(x) {
+          if (is.numeric(geocoded[x, ]$lng_access) &
+              is.numeric(geocoded[x, ]$lat_access)) {
+            return(
+              sf::st_point(
+                cbind(
+                  geocoded[x, ]$lng_access,
+                  geocoded[x, ]$lat_access
+                )
+              )
+            )
+          } else {
+            return(sf::st_point())
+          }
+        }), crs = 4326
+      )
+
+      # Parse position coordinates and set as default geometry
       return(
         sf::st_set_crs(
           sf::st_as_sf(
-            as.data.frame(geocoded),
-            coords = c("lng", "lat")
-          ), 4326
+            as.data.frame(
+              geocoded[!colnames(geocoded) %in% c("lng_access", "lat_access")]
+            ),
+            coords = c("lng_position", "lat_position"),
+            sf_column_name = "geometry"
+          ), value = 4326
         )
       )
     } else {

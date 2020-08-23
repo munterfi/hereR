@@ -20,10 +20,11 @@ autocomplete addresses? Note: This options doubles the amount of requests
 FALSE})?}
 }
 \value{
-If \code{sf = TRUE}, an \code{sf} object, containing the coordinates of the
-geocoded addresses as a geometry list column. If \code{sf = FALSE}, a
-\code{data.frame} containing the coordinates of the geocoded addresses as
-\code{lng}, \code{lat} columns.
+If \code{sf = TRUE}, an \code{sf} object, containing the position and the
+access coordinates of the geocoded addresses as geometry list columns, where
+the position coordinates are set as default geometry column.
+If \code{sf = FALSE}, a \code{data.frame} containing the coordinates of the
+geocoded addresses as \code{lng}, \code{lat} columns.
 }
 \description{
 Geocodes addresses using the HERE 'Geocoder' API.
@@ -35,5 +36,5 @@ set_key("<YOUR API KEY>")
 locs <- geocode(addresses = poi$city, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
+\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
 }
