@@ -7,7 +7,7 @@
 \title{hereR: 'sf'-Based Interface to the 'HERE' REST APIs}
 \description{
 Interface to the 'HERE' REST APIs <https://developer.here.com/develop/rest-apis>:
-  (1) geocode and autocomplete addresses or reverse geocode POIs using the 'Geocoder' API;
+  (1) geocode and autosuggest addresses or reverse geocode POIs using the 'Geocoder' API;
   (2) route directions, travel distance or time matrices and isolines using the 'Routing' API;
   (3) request real-time traffic flow and incident information from the 'Traffic' API;
   (4) find request public transport connections and nearby stations from the 'Public Transit' API;
@@ -30,7 +30,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Daniel Possenriede (\href{https://orcid.org/0000-0002-6738-9845}{ORCID}) (Geocode return options) [contributor]
+  \item Daniel Possenriede (\href{https://orcid.org/0000-0002-6738-9845}{ORCID}) [contributor]
 }
 
 }
