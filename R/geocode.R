@@ -67,37 +67,58 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
   )
   if (length(data) == 0) return(NULL)
 
+  # Table format template
+  template <- data.table::data.table(
+    id = numeric(),
+    address = character(),
+    type = character(),
+    street = character(),
+    house_number = character(),
+    postal_code = character(),
+    district = character(),
+    city = character(),
+    county = character(),
+    state = character(),
+    country = character(),
+    lng_access = numeric(),
+    lat_access = numeric(),
+    lng_position = numeric(),
+    lat_position = numeric()
+  )
+
   # Extract information
   ids <- .get_ids(data)
   count <- 0
   geocode_failed <- character(0)
   geocoded <- data.table::rbindlist(
-    lapply(data, function(con) {
-      count <<- count + 1
-      df <- jsonlite::fromJSON(con)
-      if (length(df$items) == 0) {
-        geocode_failed <<- c(geocode_failed, addresses[count])
-        return(NULL)
-      }
-      result <- data.table::data.table(
-        id = ids[count],
-        address = df$items$address$label,
-        type = df$items$resultType,
-        street = df$items$address$street,
-        house_number = df$items$address$houseNumber,
-        postal_code = df$items$address$postalCode,
-        district = df$items$address$district,
-        city = df$items$address$city,
-        county = df$items$address$county,
-        state = df$items$address$state,
-        country = df$items$address$countryName,
-        lng_access = sapply(df$items$access, function(x) x$lng)[1],
-        lat_access = sapply(df$items$access, function(x) x$lat)[1],
-        lng_position = df$items$position$lng,
-        lat_position = df$items$position$lat
-      )
-      result[1, ]
-    }), fill = TRUE
+    append(list(template),
+      lapply(data, function(con) {
+        count <<- count + 1
+        df <- jsonlite::fromJSON(con)
+        if (length(df$items) == 0) {
+          geocode_failed <<- c(geocode_failed, addresses[count])
+          return(NULL)
+        }
+        result <- data.table::data.table(
+          id = ids[count],
+          address = df$items$address$label,
+          type = df$items$resultType,
+          street = df$items$address$street,
+          house_number = df$items$address$houseNumber,
+          postal_code = df$items$address$postalCode,
+          district = df$items$address$district,
+          city = df$items$address$city,
+          county = df$items$address$county,
+          state = df$items$address$state,
+          country = df$items$address$countryName,
+          lng_access = if (is.null(df$items$access[1]$lng)) NA else df$items$access[1]$lng,
+          lat_access = if (is.null(df$items$access[1]$lat)) NA else df$items$access[1]$lat,
+          lng_position = df$items$position$lng,
+          lat_position = df$items$position$lat
+        )
+        result[1, ]
+      })
+    ), fill = TRUE
   )
 
   # Failed to geocode
