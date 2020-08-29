@@ -1,6 +1,6 @@
 # version 0.4.1.9000
 
-* Upgrade Geocoder API version used in `geocode()` from v6.2 to v7 (closes [52](https://github.com/munterfinger/hereR/issues/52)). **Note:** The argument `autocomplete` is defunct.
+* Upgrade Geocoder API version used in `geocode()` from v6.2 to v7 (closes [52](https://github.com/munterfinger/hereR/issues/52)). **Note:** The argument `autocomplete` is defunct and the argument `addresses` is deprecated, use `address` instead.
 * Change default geometry in the return value of `geocode()` to position coordinates (display position) and return access coordinates (navigation position) as additional column in well-known text format (closes [#53](https://github.com/munterfinger/hereR/issues/53)).
 * Consistent columns in the return value of `geocode()` and `reverse_geocode()` independent of the input address level (closes [#58](https://github.com/munterfinger/hereR/issues/58)).
 * Upgrade Geocoder API version used in `reverse_geocode()` from v6.2 to v7. **Note:** The argument `landmarks` is defunct.

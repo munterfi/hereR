@@ -11,6 +11,6 @@ test_that("defunct works", {
   expect_error(traffic(aoi = aoi, product = "incidents"))
 
   # autocomplete
-  autocomplete("Defunct")
+  expect_error(autocomplete("Defunct"))
 
 })

@@ -5,13 +5,12 @@
 #' @references
 #' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
 #'
-#' @param addresses character, addresses to geocode.
-#'   autocomplete addresses? Note: This options doubles the amount of requests
-#'   (\code{default = FALSE}).
+#' @param address character, addresses to geocode.
 #' @param sf boolean, return an \code{sf} object (\code{default = TRUE}) or a
 #'   \code{data.frame}?
 #' @param url_only boolean, only return the generated URLs (\code{default =
 #'   FALSE})?
+#' @param addresses character, addresses to geocode (deprecated).
 #'
 #' @return
 #' If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates
@@ -25,11 +24,16 @@
 #' # Provide an API Key for a HERE project
 #' set_key("<YOUR API KEY>")
 #'
-#' locs <- geocode(addresses = poi$city, url_only = TRUE)
-geocode <- function(addresses, sf = TRUE, url_only = FALSE) {
+#' locs <- geocode(address = poi$city, url_only = TRUE)
+geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
+
+  if (!missing("addresses")) {
+    warning("'addresses' is deprecated, use 'address' instead.")
+    address <- addresses
+  }
 
   # Input checks
-  .check_addresses(addresses)
+  .check_addresses(address)
   .check_boolean(sf)
   .check_boolean(url_only)
 
@@ -42,7 +46,7 @@ geocode <- function(addresses, sf = TRUE, url_only = FALSE) {
   url = paste0(
     url,
     "&q=",
-    addresses
+    address
   )
 
   # Return urls if chosen
@@ -55,7 +59,7 @@ geocode <- function(addresses, sf = TRUE, url_only = FALSE) {
   if (length(data) == 0) return(NULL)
 
   # Extract information
-  geocoded <- .extract_geocoded(data, addresses)
+  geocoded <- .extract_geocoded(data, address)
 
   # Create sf object
   if (nrow(geocoded) > 0) {
@@ -84,7 +88,7 @@ geocode <- function(addresses, sf = TRUE, url_only = FALSE) {
   }
 }
 
-.extract_geocoded <- function(data, addresses) {
+.extract_geocoded <- function(data, address) {
   template <- data.table::data.table(
     id = numeric(),
     address = character(),
@@ -111,7 +115,7 @@ geocode <- function(addresses, sf = TRUE, url_only = FALSE) {
              count <<- count + 1
              df <- jsonlite::fromJSON(con)
              if (length(df$items) == 0) {
-               geocode_failed <<- c(geocode_failed, addresses[count])
+               geocode_failed <<- c(geocode_failed, address[count])
                return(NULL)
              }
              result <- data.table::data.table(

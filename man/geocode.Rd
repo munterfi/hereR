@@ -4,18 +4,18 @@
 \alias{geocode}
 \title{HERE Geocoder API: Geocode}
 \usage{
-geocode(addresses, sf = TRUE, url_only = FALSE)
+geocode(address, sf = TRUE, url_only = FALSE, addresses)
 }
 \arguments{
-\item{addresses}{character, addresses to geocode.
-autocomplete addresses? Note: This options doubles the amount of requests
-(\code{default = FALSE}).}
+\item{address}{character, addresses to geocode.}
 
 \item{sf}{boolean, return an \code{sf} object (\code{default = TRUE}) or a
 \code{data.frame}?}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default =
 FALSE})?}
+
+\item{addresses}{character, addresses to geocode (deprecated).}
 }
 \value{
 If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates
@@ -31,7 +31,7 @@ Geocodes addresses using the HERE 'Geocoder' API.
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
-locs <- geocode(addresses = poi$city, url_only = TRUE)
+locs <- geocode(address = poi$city, url_only = TRUE)
 }
 \references{
 \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
