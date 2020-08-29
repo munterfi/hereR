@@ -5,6 +5,7 @@
 \alias{traffic}
 \alias{set_auth}
 \alias{unset_auth}
+\alias{autocomplete}
 \title{Defunct functions in package \pkg{hereR}.}
 \usage{
 traffic(
@@ -19,6 +20,8 @@ traffic(
 set_auth(app_id, app_code)
 
 unset_auth()
+
+autocomplete(addresses, results = 5, url_only = FALSE)
 }
 \description{
 The functions listed below are defunct.
@@ -40,6 +43,11 @@ For \code{set_auth}, use \code{\link{set_key}}.
 \section{\code{unset_auth}}{
 
 For \code{unset_auth}, use \code{\link{unset_key}}.
+}
+
+\section{\code{autocomplete}}{
+
+For \code{autocomplete}, use \code{\link{autosuggest}}.
 }
 
 \keyword{internal}

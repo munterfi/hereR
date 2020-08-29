@@ -7,7 +7,7 @@
 <!-- badges: end -->
 
 The **hereR** package provides an interface to the **HERE REST APIs** for R:
-(1) geocode and autocomplete addresses or reverse geocode POIs using the **Geocoder API**;
+(1) geocode and autosuggest addresses or reverse geocode POIs using the **Geocoder API**;
 (2) route directions, travel distance or time matrices and isolines using the **Routing API**;
 (3) request real-time traffic flow and incident information from the **Traffic API**;
 (4) find public transport connections and nearby stations using the **Public Transit API**;
@@ -46,7 +46,7 @@ Once valid application credentials are created and the key is set in the R sessi
 ``` r
 geocode(c("Schweighofstrasse 190, Zurich, Switzerland", "Hardstrasse 48, Zurich, Switzerland"))
 
-autocomplete(c("Schweighofstrasse", "Hardstrasse"))
+autosuggest(c("Schweighofstrasse", "Hardstrasse"))
 
 reverse_geocode(poi)
 ```

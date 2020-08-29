@@ -144,6 +144,7 @@
 }
 
 .wkt_from_point_df <- function(df, lng_col, lat_col) {
+  df <- as.data.frame(df)
   sf::st_as_text(
     sf::st_as_sfc(
       lapply(1:nrow(df), function(x) {

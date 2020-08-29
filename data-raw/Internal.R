@@ -4,8 +4,8 @@ library(sf)
 ## URLs
 url_geocode <-
   geocode(addresses = poi$city, url_only = TRUE)
-url_autocomplete <-
-  autocomplete(addresses = poi$city, results = 3, url_only = TRUE)
+url_autosuggest <-
+  autosuggest(address = poi$city, results = 3, url_only = TRUE)
 url_reverse_geocode <-
   reverse_geocode(poi = poi, results = 3, url_only = TRUE)
 url_route <-
@@ -36,7 +36,7 @@ url_station <-
 ## Get response mocks
 mock <- list(
   geocode_response = hereR:::.get_content(url_geocode),
-  autocomplete_response = hereR:::.get_content(url_autocomplete),
+  autosuggest_response = hereR:::.get_content(url_autosuggest),
   reverse_geocode = hereR:::.get_content(url_reverse_geocode),
   route_response = hereR:::.get_content(url_route),
   route_matrix_response = hereR:::.get_content(url_route_matrix),
@@ -55,7 +55,7 @@ mock <- list(
 ## Get examples
 example <- list(
   geocode = geocode(addresses = poi$city),
-  autocomplete = autocomplete(addresses = poi$city, results = 3),
+  autosuggest = autosuggest(address = poi$city, results = 3),
   reverse_geocode_addresses = reverse_geocode(poi = poi, results = 3),
   route = route(origin = poi[1:2, ], destination = poi[3:4, ]),
   route_matrix = route_matrix(origin = poi),
