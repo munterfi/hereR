@@ -126,6 +126,7 @@ NULL
 #' @section \code{autocomplete}:
 #' For \code{autocomplete}, use \code{\link{autosuggest}}.
 #'
+#' @export
 autocomplete <- function(addresses, results = 5, url_only = FALSE) {
   .Defunct(new = "autosuggest", package = "hereR")
 }
