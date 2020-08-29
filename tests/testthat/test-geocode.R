@@ -10,6 +10,8 @@ test_that("geocode works", {
   expect_error(geocode(c("character", NA)), "'addresses' contains NAs.")
   expect_error(geocode(c("")), "'addresses' contains empty strings.")
   expect_error(geocode(c("  ")), "'addresses' contains empty strings.")
+  expect_error(geocode(c("test"), sf = NA), "'sf' must be a 'boolean' value.")
+  expect_error(geocode(c("test"), url_only = NA), "'url_only' must be a 'boolean' value.")
 
   # Test with API response mock
   with_mock(
