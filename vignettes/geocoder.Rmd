@@ -13,12 +13,11 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(data.table)
 library(mapview)
 mapviewOptions(fgb = FALSE)
 addresses <- poi$city
 geocoded <- hereR:::example$geocode
-suggestions <- hereR:::example$autocomplete
+suggestions <- hereR:::example$autosuggest
 reverse_geocoded <- hereR:::example$reverse_geocode
 ```
 
@@ -63,9 +62,9 @@ mapview(geocoded,
 )
 ```
 
-## Autocomplete addresses
+## Autosuggestions
 
-The Geocoder Autocomplete API can be accessed using the `autocomplete()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each address.
+The Geocoder Autosuggest API can be accessed using the `autosuggest()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each input address.
 ```{r autocomplete, eval=FALSE}
 suggestions <- autocomplete(addresses, results = 3)
 ```
@@ -73,11 +72,11 @@ suggestions <- autocomplete(addresses, results = 3)
 The return value is a `data.frame` containing autocomplete suggestions for the addresses. The variable `id` matches the index of the initial address vector, which was used as input and `order` stores the rank of the suggestion.
 
 ```{r results_autocomplete, eval=TRUE, echo=TRUE, out.width='100%'}
-results <- data.table(
+results <- data.frame(
   input = addresses[suggestions$id],
   id = suggestions$id,
-  rank = suggestions$order,
-  suggestion = suggestions$label
+  rank = suggestions$rank,
+  suggestion = suggestions$suggestion
 )
 ```
 
