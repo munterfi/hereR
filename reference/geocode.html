@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
       </span>
     </div>
 
@@ -170,20 +170,14 @@
     <p>Geocodes addresses using the HERE 'Geocoder' API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geocode</span>(<span class='kw'>addresses</span>, autocomplete = <span class='fl'>FALSE</span>, sf = <span class='fl'>TRUE</span>, url_only = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>geocode</span>(<span class='kw'>address</span>, sf = <span class='fl'>TRUE</span>, url_only = <span class='fl'>FALSE</span>, <span class='kw'>addresses</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>addresses</th>
+      <th>address</th>
       <td><p>character, addresses to geocode.</p></td>
-    </tr>
-    <tr>
-      <th>autocomplete</th>
-      <td><p>boolean, use the 'Geocoder Autocomplete' API to
-autocomplete addresses? Note: This options doubles the amount of requests
-(<code>default = FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>sf</th>
@@ -195,23 +189,29 @@ autocomplete addresses? Note: This options doubles the amount of requests
       <td><p>boolean, only return the generated URLs (<code>default =
 FALSE</code>)?</p></td>
     </tr>
+    <tr>
+      <th>addresses</th>
+      <td><p>character, addresses to geocode (deprecated).</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>If <code>sf = TRUE</code>, an <code>sf</code> object, containing the coordinates of the
-geocoded addresses as a geometry list column. If <code>sf = FALSE</code>, a
-<code>data.frame</code> containing the coordinates of the geocoded addresses as
-<code>lng</code>, <code>lat</code> columns.</p>
+    <p>If <code>sf = TRUE</code>, an <code>sf</code> object, containing the position coordinates
+geocoded addresses as geometry list column and the access coordinates as
+well-known text (WKT).
+If <code>sf = FALSE</code>, a <code>data.frame</code> containing the coordinates of the
+geocoded addresses as <code>lng</code>, <code>lat</code> columns.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/geocoder/topics/resource-geocode.html'>HERE Geocoder API: Geocode</a></p>
+    <p><a href='https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html'>HERE Geocoder API: Geocode</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
-<span class='kw'>locs</span> <span class='op'>&lt;-</span> <span class='fu'>geocode</span>(addresses = <span class='kw'>poi</span><span class='op'>$</span><span class='kw'>city</span>, url_only = <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>locs</span> <span class='op'>&lt;-</span> <span class='fu'>geocode</span>(address = <span class='kw'>poi</span><span class='op'>$</span><span class='kw'>city</span>, url_only = <span class='fl'>TRUE</span>)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Public Transit API: Transit Route — connection • hereR</title>
+<title>HERE Geocoder API: Autosuggest — autosuggest • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,13 +46,8 @@
 
 
 
-<meta property="og:title" content="HERE Public Transit API: Transit Route — connection" />
-<meta property="og:description" content="Route public transport connections with geometries (LINESTRING) between pairs of points using the HERE 'Public Transit' API.
-Two modes are provided:
-summary = FALSE: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.
-summary = TRUE: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
-
-" />
+<meta property="og:title" content="HERE Geocoder API: Autosuggest — autosuggest" />
+<meta property="og:description" content="Completes addresses using the HERE 'Geocoder Autosuggest' API." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -166,61 +161,27 @@ summary = TRUE: A summary of the connections is retrieved, where each connection
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Public Transit API: Transit Route</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/connection.R'><code>R/connection.R</code></a></small>
-    <div class="hidden name"><code>connection.Rd</code></div>
+    <h1>HERE Geocoder API: Autosuggest</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/autosuggest.R'><code>R/autosuggest.R</code></a></small>
+    <div class="hidden name"><code>autosuggest.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Route public transport connections with geometries (<code>LINESTRING</code>) between pairs of points using the HERE 'Public Transit' API.
-Two modes are provided:</p><ul>
-<li><p><code>summary = FALSE</code>: The public transport connections are returned as mulitple sections with the same vehicle and transport mode. Each section has a detailed route geometry.</p></li>
-<li><p><code>summary = TRUE</code>: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.</p></li>
-</ul>
-
+    <p>Completes addresses using the HERE 'Geocoder Autosuggest' API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>connection</span>(
-  <span class='kw'>origin</span>,
-  <span class='kw'>destination</span>,
-  datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
-  arrival = <span class='fl'>FALSE</span>,
-  results = <span class='fl'>3</span>,
-  transfers = <span class='op'>-</span><span class='fl'>1</span>,
-  summary = <span class='fl'>FALSE</span>,
-  url_only = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>autosuggest</span>(<span class='kw'>address</span>, results = <span class='fl'>5</span>, url_only = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>origin</th>
-      <td><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></td>
-    </tr>
-    <tr>
-      <th>destination</th>
-      <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <td><p><code>POSIXct</code> object, datetime for the departure (or arrival if <code>arrival = TRUE</code>).</p></td>
-    </tr>
-    <tr>
-      <th>arrival</th>
-      <td><p>boolean, calculate connections for arrival at the defined time (<code>default = FALSE</code>)?</p></td>
+      <th>address</th>
+      <td><p>character, address text to propose suggestions.</p></td>
     </tr>
     <tr>
       <th>results</th>
-      <td><p>numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).</p></td>
-    </tr>
-    <tr>
-      <th>transfers</th>
-      <td><p>numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, <code>default = -1</code>).</p></td>
-    </tr>
-    <tr>
-      <th>summary</th>
-      <td><p>boolean, return a summary of the public transport connections instead of the sections of the routes (<code>default = FALSE</code>)?</p></td>
+      <td><p>numeric, maximum number of suggestions (Valid range: 1 and 100).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -230,31 +191,16 @@ Two modes are provided:</p><ul>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>sf</code> object containing the requested routes.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (<code>sec_id</code>),
-the returned geometries of walking sections are straight lines between the station (or origin and destination) points instead of routed lines on the pedestrian network.
-The walking segments can be routed in hindsight using the <a href='route.html'>route</a> function with mode set to <code>"pedestrian"</code>.</p>
+    <p>A <code>data.frame</code> object, containing the suggestions for the input addresses.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html'>HERE Public Transit API: Transit Route</a></p>
+    <p><a href='https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html'>HERE Geocoder API: Autosuggest</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
-<span class='co'># Connection sections</span>
-<span class='kw'>sections</span> <span class='op'>&lt;-</span> <span class='fu'>connection</span>(
-  origin = <span class='kw'>poi</span>[<span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>, ], destination = <span class='kw'>poi</span>[<span class='fl'>5</span><span class='op'>:</span><span class='fl'>6</span>, ],
-  summary = <span class='fl'>FALSE</span>, url_only = <span class='fl'>TRUE</span>
-)
-
-<span class='co'># Connection summary</span>
-<span class='kw'>summary</span> <span class='op'>&lt;-</span> <span class='fu'>connection</span>(
-  origin = <span class='kw'>poi</span>[<span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>, ], destination = <span class='kw'>poi</span>[<span class='fl'>5</span><span class='op'>:</span><span class='fl'>6</span>, ],
-  summary = <span class='fl'>TRUE</span>, url_only = <span class='fl'>TRUE</span>
-)
+<span class='kw'>suggestions</span> <span class='op'>&lt;-</span> <span class='fu'>autosuggest</span>(address = <span class='kw'>poi</span><span class='op'>$</span><span class='kw'>city</span>, url_only = <span class='fl'>TRUE</span>)
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

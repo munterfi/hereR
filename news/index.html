@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
       </span>
     </div>
 
@@ -164,9 +164,21 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="version-0419000" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.1.9000">
+<a href="#version-0419000" class="anchor"></a>version 0.4.1.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Upgrade Geocoder API version used in <code><a href="../reference/geocode.html">geocode()</a></code> from v6.2 to v7 (closes <a href="https://github.com/munterfinger/hereR/issues/52">52</a>). <strong>Note:</strong> The argument <code>autocomplete</code> is defunct and the argument <code>addresses</code> is deprecated, use <code>address</code> instead.</li>
+<li>Change default geometry in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> to position coordinates (display position) and return access coordinates (navigation position) as additional column in well-known text format (closes <a href="https://github.com/munterfinger/hereR/issues/53"><a href='https://github.com/munterfinger/hereR/issues/53'>#53</a></a>).</li>
+<li>Consistent columns in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> and <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> independent of the input address level (closes <a href="https://github.com/munterfinger/hereR/issues/58"><a href='https://github.com/munterfinger/hereR/issues/58'>#58</a></a>).</li>
+<li>Upgrade Geocoder API version used in <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> from v6.2 to v7. <strong>Note:</strong> The argument <code>landmarks</code> is defunct.</li>
+<li>Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. <strong>Note:</strong> The function <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code> is defunct, please use <code><a href="../reference/autosuggest.html">autosuggest()</a></code>.</li>
+</ul>
+</div>
     <div id="version-041" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.1">
-<a href="#version-041" class="anchor"></a>version 0.4.1<small> Unreleased </small>
+<a href="#version-041" class="anchor"></a>version 0.4.1<small> 2020-08-24 </small>
 </h1>
 <ul>
 <li>Change example and API mock data for <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> from Berlin to Switzerland, as the service is now also available there.</li>
@@ -247,7 +259,7 @@
 <li>Enhanced <code><a href="../reference/hereR-defunct.html">traffic()</a></code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
 <li>Improved coverage of <code>testthat</code>.</li>
 <li>Added an <code>id</code> column to the output of <code><a href="../reference/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>id</code> column the addresses to geocode can be joined to the coordinates after geocoding (see <a href="https://github.com/munterfinger/hereR/issues/9"><a href='https://github.com/munterfinger/hereR/issues/9'>#9</a></a>).</li>
-<li>Added an <code>id</code> column also to <code><a href="../reference/autocomplete.html">autocomplete()</a></code>, <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code>, <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code>, <code><a href="../reference/hereR-defunct.html">traffic()</a></code> and <code><a href="../reference/weather.html">weather()</a></code>. Using the <code>id</code> column the result can be joined to the input.</li>
+<li>Added an <code>id</code> column also to <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code>, <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code>, <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code>, <code><a href="../reference/hereR-defunct.html">traffic()</a></code> and <code><a href="../reference/weather.html">weather()</a></code>. Using the <code>id</code> column the result can be joined to the input.</li>
 <li>Fixed the handling of failing requests in <code>.get_content()</code>. The <code>id</code> column is still in correct order, even if there are failing requests in a function call (see <a href="https://github.com/munterfinger/hereR/issues/17"><a href='https://github.com/munterfinger/hereR/issues/17'>#17</a></a>).</li>
 <li>Added <code>rownames() &lt;- NULL</code> to all functions before returning the result.</li>
 <li>Renamed the <code>city</code> column in the returned object of <code><a href="../reference/weather.html">weather()</a></code> to <code>station</code>, as it stands for the name of the nearest meteorological station.</li>
@@ -261,7 +273,7 @@
 <ul>
 <li>Enhanced <code><a href="../reference/geocode.html">geocode()</a></code>: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting <code>autocomplete = TRUE</code>.</li>
 <li>
-<strong>Geocoder API: Autocomplete</strong> The new feature <code><a href="../reference/autocomplete.html">autocomplete()</a></code> allows autocompleting addresses.</li>
+<strong>Geocoder API: Autocomplete</strong> The new feature <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code> allows autocompleting addresses.</li>
 <li>
 <strong>Geocoder API: Reverse geocode</strong> The new feature <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> implements reverse geocoding POIs in order to retrieve suggestions for addresses or landmarks.</li>
 </ul>

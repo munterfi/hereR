@@ -47,9 +47,9 @@
 
 
 <meta property="og:title" content="HERE Geocoder API: Reverse Geocode — reverse_geocode" />
-<meta property="og:description" content="Get addresses or landmarks from locations using the HERE 'Geocoder' API.
+<meta property="og:description" content="Get addresses from locations using the HERE 'Geocoder' API.
 The return value is an sf object, containing point geometries
-with suggestions for addresses or landmarks near the provided POIs." />
+with suggestions for addresses near the provided POIs." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -82,7 +82,7 @@ with suggestions for addresses or landmarks near the provided POIs." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
       </span>
     </div>
 
@@ -169,12 +169,12 @@ with suggestions for addresses or landmarks near the provided POIs." />
     </div>
 
     <div class="ref-description">
-    <p>Get addresses or landmarks from locations using the HERE 'Geocoder' API.
+    <p>Get addresses from locations using the HERE 'Geocoder' API.
 The return value is an <code>sf</code> object, containing point geometries
-with suggestions for addresses or landmarks near the provided POIs.</p>
+with suggestions for addresses near the provided POIs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reverse_geocode</span>(<span class='kw'>poi</span>, results = <span class='fl'>1</span>, landmarks = <span class='fl'>FALSE</span>, url_only = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>reverse_geocode</span>(<span class='kw'>poi</span>, results = <span class='fl'>1</span>, sf = <span class='fl'>TRUE</span>, url_only = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,11 +185,12 @@ with suggestions for addresses or landmarks near the provided POIs.</p>
     </tr>
     <tr>
       <th>results</th>
-      <td><p>numeric, maximum number of results (Valid range: 1 and 20).</p></td>
+      <td><p>numeric, maximum number of results (Valid range: 1 and 100).</p></td>
     </tr>
     <tr>
-      <th>landmarks</th>
-      <td><p>boolean, retrieve landmarks instead of addresses (<code>default = FALSE</code>)?.</p></td>
+      <th>sf</th>
+      <td><p>boolean, return an <code>sf</code> object (<code>default = TRUE</code>) or a
+<code>data.frame</code>?</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -199,26 +200,28 @@ with suggestions for addresses or landmarks near the provided POIs.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>sf</code> object, containing the suggested addresses or landmark names of the reverse geocoded POIs.</p>
+    <p>If <code>sf = TRUE</code>, an <code>sf</code> object, containing the position coordinates
+of the reverse geocoded POIs as geometry list column and the access
+coordinates as well-known text (WKT).
+If <code>sf = FALSE</code>, a <code>data.frame</code> containing the
+coordinates of the reverse geocoded POIs as <code>lng</code>, <code>lat</code> columns.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>If no addresses or landmarks are found near a POI, <code>NULL</code> for this POI is returned.
+    <p>If no addresses are found near a POI, <code>NULL</code> for this POI is returned.
 In this case the rows corresponding to this particular POI are missing and merging the POIs by row is not possible.
 However, in the returned <code>sf</code> object, the column <code>"id"</code> matches the rows of the input POIs.
 The <code>"id"</code> column can be used to join the original POIs.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/geocoder/topics/resource-geocode.html'>HERE Geocoder API: Geocode</a></p>
+    <p><a href='https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html'>HERE Geocoder API: Reverse Geocode</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
 <span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
 
 <span class='co'># Get addresses</span>
-<span class='kw'>addresses</span> <span class='op'>&lt;-</span> <span class='fu'>reverse_geocode</span>(poi = <span class='kw'>poi</span>, results = <span class='fl'>3</span>, landmarks = <span class='fl'>FALSE</span>, url_only = <span class='fl'>TRUE</span>)
-
-<span class='co'># Get landmarks</span>
-<span class='kw'>landmarks</span> <span class='op'>&lt;-</span> <span class='fu'>reverse_geocode</span>(poi = <span class='kw'>poi</span>, results = <span class='fl'>3</span>, landmarks = <span class='fl'>TRUE</span>, url_only = <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>addresses</span> <span class='op'>&lt;-</span> <span class='fu'>reverse_geocode</span>(poi = <span class='kw'>poi</span>, results = <span class='fl'>3</span>, url_only = <span class='fl'>TRUE</span>)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="sf-Based Interface to the HERE REST APIs">
 <meta property="og:description" content="Interface to the HERE REST APIs &lt;https://developer.here.com/develop/rest-apis&gt;:
-  (1) geocode and autocomplete addresses or reverse geocode POIs using the Geocoder API;
+  (1) geocode and autosuggest addresses or reverse geocode POIs using the Geocoder API;
   (2) route directions, travel distance or time matrices and isolines using the Routing API;
   (3) request real-time traffic flow and incident information from the Traffic API;
   (4) find request public transport connections and nearby stations from the Public Transit API;
@@ -46,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
 <!-- badges: start -->
 
 <p>The <strong>hereR</strong> package provides an interface to the <strong>HERE REST APIs</strong> for R:</p>
-<p>(1) geocode and autocomplete addresses or reverse geocode POIs using the <strong>Geocoder API</strong>;</p>
+<p>(1) geocode and autosuggest addresses or reverse geocode POIs using the <strong>Geocoder API</strong>;</p>
 <p>(2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
 <p>(3) request real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
 <p>(4) find public transport connections and nearby stations using the <strong>Public Transit API</strong>;</p>
@@ -166,7 +166,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="fu"><a href="reference/geocode.html">geocode</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span>))
 
-<span class="fu"><a href="reference/autocomplete.html">autocomplete</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span>))
+<span class="fu"><a href="reference/autosuggest.html">autosuggest</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span>))
 
 <span class="fu"><a href="reference/reverse_geocode.html">reverse_geocode</a></span>(<span class="kw">poi</span>)
 </pre></div>
