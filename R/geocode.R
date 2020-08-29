@@ -3,58 +3,50 @@
 #' Geocodes addresses using the HERE 'Geocoder' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
+#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
 #'
-#' @param addresses character, addresses to geocode.
-#' @param autocomplete boolean, use the 'Geocoder Autocomplete' API to
-#'   autocomplete addresses? Note: This options doubles the amount of requests
-#'   (\code{default = FALSE}).
+#' @param address character, addresses to geocode.
 #' @param sf boolean, return an \code{sf} object (\code{default = TRUE}) or a
 #'   \code{data.frame}?
 #' @param url_only boolean, only return the generated URLs (\code{default =
 #'   FALSE})?
+#' @param addresses character, addresses to geocode (deprecated).
 #'
 #' @return
-#' If \code{sf = TRUE}, an \code{sf} object, containing the coordinates of the
-#' geocoded addresses as a geometry list column. If \code{sf = FALSE}, a
-#' \code{data.frame} containing the coordinates of the geocoded addresses as
-#' \code{lng}, \code{lat} columns.
+#' If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates
+#' geocoded addresses as geometry list column and the access coordinates as
+#' well-known text (WKT).
+#' If \code{sf = FALSE}, a \code{data.frame} containing the coordinates of the
+#' geocoded addresses as \code{lng}, \code{lat} columns.
 #' @export
 #'
 #' @examples
 #' # Provide an API Key for a HERE project
 #' set_key("<YOUR API KEY>")
 #'
-#' locs <- geocode(addresses = poi$city, url_only = TRUE)
-geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE) {
+#' locs <- geocode(address = poi$city, url_only = TRUE)
+geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
+
+  if (!missing("addresses")) {
+    warning("'addresses' is deprecated, use 'address' instead.")
+    address <- addresses
+  }
 
   # Input checks
-  .check_addresses(addresses)
-  .check_boolean(autocomplete)
+  .check_addresses(address)
   .check_boolean(sf)
   .check_boolean(url_only)
 
   # Add API key
   url <- .add_key(
-    url = "https://geocoder.ls.hereapi.com/6.2/geocode.json?"
+    url = "https://geocode.search.hereapi.com/v1/geocode?"
   )
-
-  # Autocomplete addresses
-  if (autocomplete) {
-    suggestions <- autocomplete(
-      addresses = addresses,
-      results = 1
-    )
-    if (!is.null(suggestions)) {
-      addresses[suggestions$id] <- suggestions$label
-    }
-  }
 
   # Add addresses
   url = paste0(
     url,
-    "&searchtext=",
-    addresses
+    "&q=",
+    address
   )
 
   # Return urls if chosen
@@ -67,53 +59,25 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
   if (length(data) == 0) return(NULL)
 
   # Extract information
-  ids <- .get_ids(data)
-  count <- 0
-  geocode_failed <- character(0)
-  geocoded <- data.table::rbindlist(
-    lapply(data, function(con) {
-      count <<- count + 1
-      df <- jsonlite::fromJSON(con)
-      if (length(df$Response$View) == 0) {
-        geocode_failed <<- c(geocode_failed, addresses[count])
-        return(NULL)
-      }
-      result <- data.table::data.table(
-        id = ids[count],
-        address = df$Response$View$Result[[1]]$Location$Address$Label,
-        street = df$Response$View$Result[[1]]$Location$Address$Street,
-        houseNumber = df$Response$View$Result[[1]]$Location$Address$HouseNumber,
-        postalCode = df$Response$View$Result[[1]]$Location$Address$PostalCode,
-        district = df$Response$View$Result[[1]]$Location$Address$District,
-        city = df$Response$View$Result[[1]]$Location$Address$City,
-        county = df$Response$View$Result[[1]]$Location$Address$County,
-        state = df$Response$View$Result[[1]]$Location$Address$State,
-        country = df$Response$View$Result[[1]]$Location$Address$Country,
-        type = df$Response$View$Result[[1]]$Location$LocationType,
-        lng = df$Response$View$Result[[1]]$Location$NavigationPosition[[1]]$Longitude,
-        lat = df$Response$View$Result[[1]]$Location$NavigationPosition[[1]]$Latitude
-      )
-      result[1, ]
-    }), fill = TRUE
-  )
-
-  # Failed to geocode
-  if (length(geocode_failed) > 0) {
-    message(sprintf("Address(es) '%s' not found.",
-                    paste(geocode_failed, collapse = "', '")))
-  }
+  geocoded <- .extract_geocoded(data, address)
 
   # Create sf object
   if (nrow(geocoded) > 0) {
     rownames(geocoded) <- NULL
-    # Return urls if chosen
+    # Return sf object if chosen
     if (sf) {
+      # Parse access coordinates to WKT
+      geocoded$access <- .wkt_from_point_df(geocoded, "lng_access", "lat_access")
+      # Parse position coordinates and set as default geometry
       return(
         sf::st_set_crs(
           sf::st_as_sf(
-            as.data.frame(geocoded),
-            coords = c("lng", "lat")
-          ), 4326
+            as.data.frame(
+              geocoded[!colnames(geocoded) %in% c("lng_access", "lat_access")]
+            ),
+            coords = c("lng_position", "lat_position"),
+            sf_column_name = "geometry"
+          ), value = 4326
         )
       )
     } else {
@@ -122,4 +86,66 @@ geocode <- function(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE
   } else {
     return(NULL)
   }
+}
+
+.extract_geocoded <- function(data, address) {
+  template <- data.table::data.table(
+    id = numeric(),
+    address = character(),
+    type = character(),
+    street = character(),
+    house_number = character(),
+    postal_code = character(),
+    district = character(),
+    city = character(),
+    county = character(),
+    state = character(),
+    country = character(),
+    lng_access = numeric(),
+    lat_access = numeric(),
+    lng_position = numeric(),
+    lat_position = numeric()
+  )
+  ids <- .get_ids(data)
+  count <- 0
+  geocode_failed <- character(0)
+  geocoded <- data.table::rbindlist(
+    append(list(template),
+           lapply(data, function(con) {
+             count <<- count + 1
+             df <- jsonlite::fromJSON(con)
+             if (length(df$items) == 0) {
+               geocode_failed <<- c(geocode_failed, address[count])
+               return(NULL)
+             }
+             result <- data.table::data.table(
+               id = ids[count],
+               address = df$items$address$label,
+               type = df$items$resultType,
+               street = df$items$address$street,
+               house_number = df$items$address$houseNumber,
+               postal_code = df$items$address$postalCode,
+               district = df$items$address$district,
+               city = df$items$address$city,
+               county = df$items$address$county,
+               state = df$items$address$state,
+               country = df$items$address$countryName,
+               lng_access = if (is.null(df$items$access[[1]]$lng)) NA else df$items$access[[1]]$lng,
+               lat_access = if (is.null(df$items$access[[1]]$lat)) NA else df$items$access[[1]]$lat,
+               lng_position = df$items$position$lng,
+               lat_position = df$items$position$lat
+             )
+             result[1, ]
+           })
+    ), fill = TRUE
+  )
+  if (length(geocode_failed) > 0) {
+    message(
+      sprintf(
+        "Address(es) '%s' not found.",
+        paste(geocode_failed, collapse = "', '")
+      )
+    )
+  }
+  return(geocoded)
 }

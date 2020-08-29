@@ -6,15 +6,20 @@ test_that("geocode works", {
   data(poi)
 
   # Input checks
-  expect_error(geocode(c(1, 2, 3)), "'addresses' must be a 'character' vector.")
-  expect_error(geocode(c("character", NA)), "'addresses' contains NAs.")
-  expect_error(geocode(c("")), "'addresses' contains empty strings.")
-  expect_error(geocode(c("  ")), "'addresses' contains empty strings.")
+  expect_error(geocode(c(1, 2, 3)), "'address' must be a 'character' vector.")
+  expect_error(geocode(c("character", NA)), "'address' contains NAs.")
+  expect_error(geocode(c("")), "'address' contains empty strings.")
+  expect_error(geocode(c("  ")), "'address' contains empty strings.")
+  expect_error(geocode(c("test"), sf = NA), "'sf' must be a 'boolean' value.")
+  expect_error(geocode(c("test"), url_only = NA), "'url_only' must be a 'boolean' value.")
+
+  # Deprecated
+  expect_warning(geocode(addresses = c("test"), url_only = TRUE))
 
   # Test with API response mock
   with_mock(
     "hereR:::.get_content" = function(url) {hereR:::mock$geocode_response},
-    geocoded <- geocode(addresses = poi$city),
+    geocoded <- geocode(address = poi$city),
 
     # Tests
     expect_s3_class(geocoded, c("sf", "data.frame"), exact = TRUE),
@@ -23,12 +28,14 @@ test_that("geocode works", {
   )
   with_mock(
     "hereR:::.get_content" = function(url) {hereR:::mock$geocode_response},
-    geocoded <- geocode(addresses = poi$city, sf = FALSE),
+    geocoded <- geocode(address = poi$city, sf = FALSE),
 
     # Tests
     expect_s3_class(geocoded, "data.frame", exact = TRUE),
     expect_equal(nrow(geocoded), length(poi$city)),
-    expect_type(geocoded[["lat"]], "double"),
-    expect_type(geocoded[["lng"]], "double")
+    expect_type(geocoded[["lat_position"]], "double"),
+    expect_type(geocoded[["lng_position"]], "double"),
+    expect_type(geocoded[["lat_access"]], "double"),
+    expect_type(geocoded[["lng_access"]], "double")
   )
 })

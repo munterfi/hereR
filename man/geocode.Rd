@@ -4,26 +4,25 @@
 \alias{geocode}
 \title{HERE Geocoder API: Geocode}
 \usage{
-geocode(addresses, autocomplete = FALSE, sf = TRUE, url_only = FALSE)
+geocode(address, sf = TRUE, url_only = FALSE, addresses)
 }
 \arguments{
-\item{addresses}{character, addresses to geocode.}
-
-\item{autocomplete}{boolean, use the 'Geocoder Autocomplete' API to
-autocomplete addresses? Note: This options doubles the amount of requests
-(\code{default = FALSE}).}
+\item{address}{character, addresses to geocode.}
 
 \item{sf}{boolean, return an \code{sf} object (\code{default = TRUE}) or a
 \code{data.frame}?}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default =
 FALSE})?}
+
+\item{addresses}{character, addresses to geocode (deprecated).}
 }
 \value{
-If \code{sf = TRUE}, an \code{sf} object, containing the coordinates of the
-geocoded addresses as a geometry list column. If \code{sf = FALSE}, a
-\code{data.frame} containing the coordinates of the geocoded addresses as
-\code{lng}, \code{lat} columns.
+If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates
+geocoded addresses as geometry list column and the access coordinates as
+well-known text (WKT).
+If \code{sf = FALSE}, a \code{data.frame} containing the coordinates of the
+geocoded addresses as \code{lng}, \code{lat} columns.
 }
 \description{
 Geocodes addresses using the HERE 'Geocoder' API.
@@ -32,8 +31,8 @@ Geocodes addresses using the HERE 'Geocoder' API.
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
-locs <- geocode(addresses = poi$city, url_only = TRUE)
+locs <- geocode(address = poi$city, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}{HERE Geocoder API: Geocode}
+\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
 }

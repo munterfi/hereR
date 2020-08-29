@@ -13,28 +13,26 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(data.table)
 library(mapview)
 mapviewOptions(fgb = FALSE)
-addresses <- poi$city
+address <- poi$city
 geocoded <- hereR:::example$geocode
-suggestions <- hereR:::example$autocomplete
-rev_addresses <- hereR:::example$reverse_geocode_addresses
-rev_landmarks <- hereR:::example$reverse_geocode_landmarks
+suggestions <- hereR:::example$autosuggest
+reverse_geocoded <- hereR:::example$reverse_geocode
 ```
 
 Geocode addresses using the 'HERE Geocoder' and 'HERE Geocoder Autocomplete' APIs.
 
 ## Geocode addresses
-In order to geocode addresses, the function `geocode()` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. If the option `autocomplete` is set to `TRUE`, the addresses are sent to the 'Geocoder Autocomplete' API before geocoding, which improves matches but doubles the amount of requests. The addresses have to be of type `character`:
+In order to geocode addresses, the function `geocode()` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type `character`:
 
 ```{r print_addresses, eval=TRUE, echo=TRUE, out.width='100%'}
-head(addresses, 3)
+head(address, 3)
 ```
 
 Geocode the character vector containing the addresses:
 ```{r geocode, eval=FALSE}
-geocoded <- geocode(addresses, autocomplete = FALSE)
+geocoded <- geocode(address)
 ```
 
 The return value is an `sf` object containing `POINT` geometries of the addresses:
@@ -57,28 +55,28 @@ Print the geocoded addresses on an interactive leaflet map:
 ```{r map_geocoded, eval=FALSE, out.width='100%'}
 mapview(geocoded,
         label = geocoded$address,
-        col.regions = "yellow",
+        col.regions = "red",
         map.types = c("Esri.WorldTopoMap"),
         legend = FALSE,
         homebutton = FALSE
 )
 ```
 
-## Autocomplete addresses
+## Autosuggestions
 
-The Geocoder Autocomplete API can be accessed using the `autocomplete()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each address.
+The Geocoder Autosuggest API can be accessed using the `autosuggest()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each input address.
 ```{r autocomplete, eval=FALSE}
-suggestions <- autocomplete(addresses, results = 3)
+suggestions <- autocomplete(address, results = 3)
 ```
 
-The return value is a `data.table` containing autocomplete suggestions for the addresses. The variable `id` matches the index of the initial address vector, which was used as input and `order` stores the rank of the suggestion.
+The return value is a `data.frame` containing autocomplete suggestions for the addresses. The variable `id` matches the index of the initial address vector, which was used as input and `order` stores the rank of the suggestion.
 
 ```{r results_autocomplete, eval=TRUE, echo=TRUE, out.width='100%'}
-results <- data.table(
-  input = addresses[suggestions$id],
+results <- data.frame(
+  input = address[suggestions$id],
   id = suggestions$id,
-  rank = suggestions$order,
-  suggestion = suggestions$label
+  rank = suggestions$rank,
+  suggestion = suggestions$suggestion
 )
 ```
 
@@ -87,11 +85,10 @@ knitr::kable(head(results), format = "html")
 ```
 
 ## Reverse geocode POIs
-The reverse geocoding feature of the Geocoder API can be accessed using the `reverse_geocode()` function. The function allows to retrieve addresses (`landmarks = FALSE`) or landmarks (`landmarks = TRUE`) near POIs. 
+The reverse geocoding feature of the Geocoder API can be accessed using the `reverse_geocode()` function. The function allows to retrieve addresses near POIs. 
 
 ```{r reverse_geocode, eval=FALSE, echo=TRUE, out.width='100%'}
-rev_addresses <- reverse_geocode(poi = poi, results = 3, landmarks = FALSE)
-rev_landmarks <- reverse_geocode(poi = poi, results = 3, landmarks = TRUE)
+reverse_geocoded <- reverse_geocode(poi = poi, results = 3)
 ```
 
 The function returns an `sf` object, containing the suggested addresses or landmark names of the reverse geocoded POIs. The coordinates are different from the initially provided POIs since they represent the locations of the suggested addresses or landmarks.
@@ -101,11 +98,8 @@ m <-
   mapview(poi, alpha.region = 0, col.region = "transparent",
           label = poi$city, cex = 30, layer.name = "POIs",
           map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
-  mapview(rev_addresses, col.region = "yellow", alpha = 0,
-          label = rev_addresses$label, layer.name = "Adresses",
-          homebutton = FALSE) +
-  mapview(rev_landmarks, col.region = "red", alpha = 0,
-          label = rev_landmarks$name, layer.name = "Landmarks",
+  mapview(reverse_geocoded, col.region = "red", alpha = 0,
+          label = reverse_geocoded$label, layer.name = "Adresses",
           homebutton = FALSE)
 m
 ```
@@ -115,5 +109,5 @@ If no addresses or landmarks are found near a POI, `NULL` for this POI is return
 ## API Reference
 
 * [Autocomplete](https://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html)
-* [Geocoder](https://developer.here.com/documentation/geocoder/topics/resource-geocode.html)
-* [Reverse Geocoder](https://developer.here.com/documentation/geocoder/dev_guide/topics/resource-reverse-geocode.html)
+* [Geocoder](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html)
+* [Reverse Geocoder](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html)

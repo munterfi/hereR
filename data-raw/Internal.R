@@ -3,13 +3,11 @@ library(sf)
 
 ## URLs
 url_geocode <-
-  geocode(addresses = poi$city, url_only = TRUE)
-url_autocomplete <-
-  autocomplete(addresses = poi$city, results = 3, url_only = TRUE)
-url_reverse_geocode_addresses <-
-  reverse_geocode(poi = poi, landmarks = FALSE, results = 3, url_only = TRUE)
-url_reverse_geocode_landmarks <-
-  reverse_geocode(poi = poi, landmarks = TRUE, results = 3, url_only = TRUE)
+  geocode(address = poi$city, url_only = TRUE)
+url_autosuggest <-
+  autosuggest(address = poi$city, results = 3, url_only = TRUE)
+url_reverse_geocode <-
+  reverse_geocode(poi = poi, results = 3, url_only = TRUE)
 url_route <-
   route(origin = poi[1:2, ], destination = poi[3:4, ], url_only = TRUE)
 url_route_matrix <-
@@ -38,9 +36,8 @@ url_station <-
 ## Get response mocks
 mock <- list(
   geocode_response = hereR:::.get_content(url_geocode),
-  autocomplete_response = hereR:::.get_content(url_autocomplete),
-  reverse_geocode_addresses = hereR:::.get_content(url_reverse_geocode_addresses),
-  reverse_geocode_landmarks = hereR:::.get_content(url_reverse_geocode_landmarks),
+  autosuggest_response = hereR:::.get_content(url_autosuggest),
+  reverse_geocode_response = hereR:::.get_content(url_reverse_geocode),
   route_response = hereR:::.get_content(url_route),
   route_matrix_response = hereR:::.get_content(url_route_matrix),
   intermodal_route_response = hereR:::.get_content(url_intermodal_route),
@@ -57,10 +54,9 @@ mock <- list(
 
 ## Get examples
 example <- list(
-  geocode = geocode(addresses = poi$city),
-  autocomplete = autocomplete(addresses = poi$city, results = 3),
-  reverse_geocode_addresses = reverse_geocode(poi = poi, results = 3, landmarks = FALSE),
-  reverse_geocode_landmarks = reverse_geocode(poi = poi, results = 3, landmarks = TRUE),
+  geocode = geocode(address = poi$city),
+  autosuggest = autosuggest(address = poi$city, results = 3),
+  reverse_geocode = reverse_geocode(poi = poi, results = 3),
   route = route(origin = poi[1:2, ], destination = poi[3:4, ]),
   route_matrix = route_matrix(origin = poi),
   intermodal_route = intermodal_route(origin = poi[1:3, ], destination = poi[4:6, ]),

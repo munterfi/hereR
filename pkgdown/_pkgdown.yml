@@ -32,7 +32,7 @@ reference:
     - '`aoi`'
   - title: Geocoder API
     contents:
-    - '`autocomplete`'
+    - '`autosuggest`'
     - '`geocode`'
     - '`reverse_geocode`'
   - title: Routing API

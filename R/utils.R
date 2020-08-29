@@ -142,3 +142,22 @@
   lat <- as.numeric(sapply(coords, function(x) x[1]))
   sf::st_polygon(list(cbind(lng, lat)))
 }
+
+.wkt_from_point_df <- function(df, lng_col, lat_col) {
+  df <- as.data.frame(df)
+  sf::st_as_text(
+    sf::st_as_sfc(
+      lapply(1:nrow(df), function(x) {
+        if (is.numeric(df[x, lng_col]) & is.numeric(df[x, lat_col])) {
+          return(
+            sf::st_point(
+              cbind(df[x, lng_col], df[x, lat_col])
+            )
+          )
+        } else {
+          return(sf::st_point())
+        }
+      }), crs = 4326
+    )
+  )
+}
