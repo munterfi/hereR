@@ -43,11 +43,6 @@ Two modes are provided:
   \item\code{summary = TRUE}: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
 }
 }
-\note{
-As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (\code{sec_id}),
-the returned geometries of walking sections are straight lines between the station (or origin and destination) points instead of routed lines on the pedestrian network.
-The walking segments can be routed in hindsight using the \link[hereR]{route} function with mode set to \code{"pedestrian"}.
-}
 \examples{
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
@@ -65,5 +60,5 @@ summary <- connection(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html}{HERE Public Transit API: Transit Route}
+\href{https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html}{HERE Public Transit API: Transit Route}
 }
