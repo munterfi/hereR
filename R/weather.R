@@ -132,8 +132,8 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
         "temperatureDesc", "iconName", "iconLink", "windDesc", "icon",
         "country", "state", "city", "latitude", "longitude", "distance",
         "utcTime", "elevation"), ]
-      obs[, c(4:9, 16, 17, 19, 23, 24)] <-
-        sapply(obs[, c(4:9, 16, 17, 19, 23, 24)], as.numeric)
+      obs[, c(4:9, 16, 17, 23, 24)] <-
+        sapply(obs[, c(4:9, 16, 17, 23, 24)], as.numeric)
       return(
         cbind(station, obs)
       )
