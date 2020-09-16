@@ -8,7 +8,7 @@
 #' }
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html}{HERE Public Transit API: Transit Route}
+#' \href{https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html}{HERE Public Transit API: Transit Route}
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
@@ -22,11 +22,6 @@
 #' @return
 #' An \code{sf} object containing the requested routes.
 #' @export
-#'
-#' @note
-#' As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (\code{sec_id}),
-#' the returned geometries of walking sections are straight lines between the station (or origin and destination) points instead of routed lines on the pedestrian network.
-#' The walking segments can be routed in hindsight using the \link[hereR]{route} function with mode set to \code{"pedestrian"}.
 #'
 #' @examples
 #' # Provide an API Key for a HERE project
@@ -57,65 +52,60 @@ connection <- function(origin, destination, datetime = Sys.time(),
   .check_boolean(url_only)
 
   # CRS transformation and formatting
-  origin <- sf::st_coordinates(
+  coords_orig <- sf::st_coordinates(
     sf::st_transform(origin, 4326)
   )
-  origin <- paste0(
-    origin[, 2], ",", origin[, 1]
+  coords_orig <- paste0(
+    coords_orig[, 2], ",", coords_orig[, 1]
   )
-  destination <- sf::st_coordinates(
+  coords_dest <- sf::st_coordinates(
     sf::st_transform(destination, 4326)
   )
-  destination <- paste0(
-    destination[, 2], ",", destination[, 1]
+  coords_dest <- paste0(
+    coords_dest[, 2], ",", coords_dest[, 1]
   )
 
   # Add API key
   url <- .add_key(
-    url = "https://transit.ls.hereapi.com/v3/route.json?"
+    url = "https://transit.router.hereapi.com/v8/routes?"
   )
 
   # Add departure and arrival
   url = paste0(
     url,
-    "&dep=",
-    origin,
-    "&arr=",
-    destination
+    "&origin=",
+    coords_orig,
+    "&destination=",
+    coords_dest
   )
 
   # Add departure time
   url <- .add_datetime(
     url,
     datetime,
-    "time"
-  )
-
-  # Determine arrival or departure time
-  url <- paste0(
-    url,
-    "&arrival=",
-    as.numeric(arrival)
+    if (arrival) "arrivalTime" else "departureTime"
   )
 
   # Number of results
   url <- paste0(
     url,
-    "&max=",
+    "&alternatives=",
     results
   )
 
-  # Number of transfers
-  url <- paste0(
-    url,
-    "&changes=",
-    transfers
-  )
+  # Number of transfers (unlimited if -1)
+  if (transfers > -1) {
+    url <- paste0(
+      url,
+      "&changes=",
+      transfers
+    )
+  }
 
   # Add route attributes
   url = paste0(
     url,
-    "&routing=tt&graph=1&maneuvers=0"
+    "&return=polyline,travelSummary"
   )
 
   # Return urls if chosen
@@ -128,11 +118,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
   if (length(data) == 0) return(NULL)
 
   # Extract information
-  if (summary) {
-    routes <- .extract_connection_summary(data, origin, destination)
-  } else {
-    routes <- .extract_connection_sections(data, origin, destination)
-  }
+  routes <- .extract_connection_sections(data)
 
   # Checks success
   if (is.null(routes)) {
@@ -146,6 +132,11 @@ connection <- function(origin, destination, datetime = Sys.time(),
   routes$arrival <- .parse_datetime(routes$arrival, tz = attr(datetime, "tzone"))
   rownames(routes) <- NULL
 
+  # Summarize connections
+  if (summary) {
+    routes <- .connection_summary(routes)
+  }
+
   # Create sf object
   return(
     sf::st_as_sf(
@@ -156,130 +147,94 @@ connection <- function(origin, destination, datetime = Sys.time(),
   )
 }
 
-.extract_connection_sections <- function(data, origin, destination) {
+.extract_connection_sections <- function(data) {
   ids <- .get_ids(data)
   count <- 0
 
   # Routes
-  routes <- data.table::rbindlist(
-    lapply(data, function(con) {
-      count <<- count + 1
-
-      # O-D
-      orig <- rev(as.numeric(strsplit(origin[[count]], ",")[[1]]))
-      dest <- rev(as.numeric(strsplit(destination[[count]], ",")[[1]]))
-
-      # Parse JSON
-      df <- jsonlite::fromJSON(con)
-      if (is.null(df$Res$Connections$Connection$Sections$Sec)) {return(NULL)}
-
-      # Connections
-      rank <- 0
-      connections <- data.table::data.table(
-        id = ids[count],
-
-        # Segments
-        data.table::rbindlist(
-          lapply(df$Res$Connections$Connection$Sections$Sec, function(sec) {
-            rank <<- rank + 1
-            data.table::data.table(
-              rank = rank,
-              departure = sec$Dep$time,
-              origin = c("ORIG", sec$Dep$Stn$name[2:length(sec$Dep$Stn$name)]),
-              arrival = sec$Arr$time,
-              destination = c(sec$Arr$Stn$name[1:(length(sec$Arr$Stn$name)-1)], "DEST"),
-              mode = sec$Dep$Transport$At$category,
-              vehicle = sec$Dep$Transport$name,
-              direction = sec$Dep$Transport$dir,
-              distance = sec$Journey$distance,
-              depLng = c(orig[1], sec$Dep$Stn$x[2:length(sec$Dep$Stn$x)]),
-              depLat = c(orig[2], sec$Dep$Stn$y[2:length(sec$Dep$Stn$y)]),
-              arrLng = c(sec$Arr$Stn$x[1:(length(sec$Arr$Stn$x)-1)], dest[1]),
-              arrLat = c(sec$Arr$Stn$y[1:(length(sec$Arr$Stn$y)-1)], dest[2]),
-              graph = sec$graph
-            )
-          }), fill = TRUE)
-      )
-    }), fill = TRUE)
-
-  # Check success
-  if (nrow(routes) < 1) {return(NULL)}
-
-  # Point list to LINESTRINGs
-  routes$geometry <- sf::st_sfc(lapply(1:nrow(routes), function(i) {
-    if (is.na(routes[i, ]$graph)) {
-      NULL
-      sf::st_linestring(
-        rbind(
-          cbind(routes[i, ]$depLng, routes[i, ]$depLat),
-          cbind(routes[i, ]$arrLng, routes[i, ]$arrLat)
-        )
-      )
-    } else {
-      .line_from_pointList(strsplit(routes[i, ]$graph, " ")[[1]])
-    }
-  }), crs = 4326)
-
-  # Postprocess
-  routes[, c("depLng", "depLat",
-             "arrLng", "arrLat",
-             "graph")] <- NULL
-  routes[is.na(routes$mode), ]$mode <- "Walk"
-
-  return(routes)
-}
-
-.extract_connection_summary <- function(data, origin, destination) {
-  ids <- .get_ids(data)
-  count <- 0
-  geoms <- list()
-
-  # Routes
-  routes <- data.table::rbindlist(
-    lapply(data, function(con) {
-      count <<- count + 1
-
-      # O-D
-      orig <- rev(as.numeric(strsplit(origin[[count]], ",")[[1]]))
-      dest <- rev(as.numeric(strsplit(destination[[count]], ",")[[1]]))
-
-      # Parse JSON
-      df <- jsonlite::fromJSON(con)
-      if (is.null(df$Res$Connections$Connection$Sections$Sec)) {return(NULL)}
-
-      # Connections
-      rank <- 0
-      connections <- data.table::rbindlist(
-        lapply(df$Res$Connections$Connection$Sections$Sec, function(sec) {
-          rank <<- rank + 1
-
-          # Create LINESTRINGS
-          geoms <<- append(geoms, list(sf::st_linestring(
-            rbind(orig, stats::na.exclude(cbind(sec$Dep$Stn$x, sec$Dep$Stn$y)), dest)
-          )))
-
-          # Summaries
-          data.table::data.table(
-            id = ids[count],
-            rank = rank,
-            departure = df$Res$Connections$Connection$Dep$time[rank],
-            origin = sec$Dep$Stn$name[2],
-            arrival = df$Res$Connections$Connection$Arr$time[rank],
-            destination = sec$Arr$Stn$name[length(sec$Arr$Stn$name)-1],
-            transfers = df$Res$Connections$Connection$transfers[rank],
-            modes = paste(stats::na.exclude(sec$Dep$Transport$At$category), collapse = ", "),
-            vehicles = paste(stats::na.exclude(sec$Dep$Transport$name), collapse = ", "),
-            distance = sum(sec$Journey$distance)
-          )
-        }), fill = TRUE
-      )
-    }), fill = TRUE
+  template <- data.table::data.table(
+    id = numeric(),
+    rank = numeric(),
+    departure = character(),
+    origin = character(),
+    arrival = character(),
+    destination = character(),
+    mode = character(),
+    category = character(),
+    vehicle = character(),
+    provider = character(),
+    direction = character(),
+    distance = integer(),
+    duration = integer(),
+    geometry = character()
   )
+  routes <- data.table::rbindlist(
+    append(list(template),
+      lapply(data, function(con) {
+        count <<- count + 1
+
+        # Parse JSON
+        df <- jsonlite::fromJSON(con)
+        if (is.null(df$routes$sections)) {return(NULL)}
+
+        # Connections
+        rank <- 0
+        connections <- data.table::data.table(
+          id = ids[count],
+
+          # Segments
+          data.table::rbindlist(
+            lapply(df$routes$sections, function(sec) {
+              rank <<- rank + 1
+              data.table::data.table(
+                rank = rank,
+                departure = sec$departure$time,
+                origin = c("ORIG", sec$departure$place$name[2:length(sec$departure$place$name)]),
+                arrival = sec$arrival$time,
+                destination = c(sec$arrival$place$name[1:(length(sec$arrival$place$name)-1)], "DEST"),
+                mode = sec$transport$mode,
+                category = sec$transport$category,
+                vehicle = sec$transport$name,
+                provider = sec$agency$name,
+                direction = sec$transport$headsign,
+                distance = sec$travelSummary$length,
+                duration = sec$travelSummary$duration,
+                geometry = sec$polyline
+              )
+            }), fill = TRUE)
+        )
+      })), fill = TRUE
+    )
 
   # Check success
   if (nrow(routes) < 1) {return(NULL)}
 
-  # Add geometries
-  routes$geometry <- geoms
+  # Decode flexible polyline encoding to LINESTRING
+  routes$geometry <- sf::st_geometry(
+    flexpolyline::decode_sf(
+      routes$geometry, 4326
+    )
+  )
   return(routes)
 }
+
+.connection_summary <- function(routes) {
+  arrival <- category <- departure <- destination <- distance <- NULL
+  duration <- geometry <- id <- origin <- provider <- vehicle <- NULL
+  summary <- routes[, list(
+    departure = min(departure),
+    origin = origin[2],
+    arrival = max(arrival),
+    destination = destination[length(destination)-1],
+    transfers = length(stats::na.exclude(vehicle)) - 1,
+    modes = paste(stats::na.exclude(mode), collapse = ", "),
+    categories = paste(stats::na.exclude(category), collapse = ", "),
+    vehicles = paste(stats::na.exclude(vehicle), collapse = ", "),
+    providers = paste(stats::na.exclude(provider), collapse = ", "),
+    distance = sum(distance),
+    duration = sum(duration),
+    geometry = sf::st_union(geometry)
+  ), by = list(id, rank)]
+  return(summary)
+}
+

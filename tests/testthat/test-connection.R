@@ -35,7 +35,7 @@ test_that("connection works", {
     connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = TRUE),
 
     # Tests
-    expect_equal(any(sf::st_geometry_type(connections) != "LINESTRING"), FALSE),
+    expect_equal(any(sf::st_geometry_type(connections) != "MULTILINESTRING"), FALSE),
     expect_equal(length(unique(connections$id)), 2)
   )
 })

@@ -5,6 +5,7 @@
 * Consistent columns in the return value of `geocode()` and `reverse_geocode()` independent of the input address level (closes [#58](https://github.com/munterfinger/hereR/issues/58)).
 * Upgrade Geocoder API version used in `reverse_geocode()` from v6.2 to v7. **Note:** The argument `landmarks` is defunct.
 * Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. **Note:** The function `autocomplete()` is defunct, please use `autosuggest()`.
+* Upgrade Public Transit API version used in `connection()` and `station()` from v3 to v8 (closes [62](https://github.com/munterfinger/hereR/issues/62)). **Note:** Now the geometries (LINESTRING) of the pedestrian sections are also included in the public transport routes returned by `connection()`.
 
 # version 0.4.1
 
