@@ -51,6 +51,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   # Checks
   .check_points(origin)
   .check_points(destination)
+  .check_input_rows(origin, destination)
   .check_datetime(datetime)
   .check_boolean(arrival)
   .check_type(type, request = "calculateroute")

@@ -44,6 +44,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
   # Checks
   .check_points(origin)
   .check_points(destination)
+  .check_input_rows(origin, destination)
   .check_numeric_range(results, 1, 6)
   .check_numeric_range(transfers, -1, 6)
   .check_datetime(datetime)

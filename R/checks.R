@@ -64,6 +64,16 @@
   }
 }
 
+.check_input_rows <- function(x, y) {
+  if (nrow(x) != nrow(y))
+    stop(
+      sprintf(
+        "'%s' must have the same number of rows as '%s'.",
+        deparse(substitute(x)), deparse(substitute(y))
+      )
+    )
+}
+
 .check_bbox <- function(bbox) {
   if (any(c(bbox[3, ] - bbox[1, ], bbox[4, ] - bbox[2, ]) >= 10)) {
     stop("The polygons in 'aoi' must fit in a 10 x 10 degree bbox.")
