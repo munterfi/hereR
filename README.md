@@ -5,6 +5,7 @@
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/last-month/hereR?color=brightgreen)](https://CRAN.R-project.org/package=hereR)
 [![R build status](https://github.com/munterfinger/hereR/workflows/R-CMD-check/badge.svg)](https://github.com/munterfinger/hereR/actions)
 [![Codecov test coverage](https://codecov.io/gh/munterfinger/hereR/branch/master/graph/badge.svg)](https://codecov.io/gh/munterfinger/hereR?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/munterfinger/hereR/badge)](https://www.codefactor.io/repository/github/munterfinger/hereR)
 <!-- badges: end -->
 
 The **hereR** package provides an interface to the **HERE REST APIs** for R:
