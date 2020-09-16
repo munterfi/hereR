@@ -62,8 +62,6 @@ mapview(connection_section,
 )
 ```
 
-**Note:** The geometries of walking sections are straight lines between the origin, station or destination points instead of routed paths on the pedestrian network. The reason for this is that it is not possible to match the *"maneuvers"* to the *"connections-sections"* in the API response using the section id (`sec_id`). The walking segments can be routed in hindsight using the `route()` function with transport mode set to `"pedestrian"`.
-
 ### 2. Summary
 Request a summary of the available public transport connections:
 ```{r pt_connection_summary, eval = FALSE}
@@ -111,5 +109,5 @@ m
 
 ## API Reference
 
-* [Transit Route](https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html)
-* [Find Stations Nearby](https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity)
+* [Transit Route](https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html)
+* [Station Search](https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html)

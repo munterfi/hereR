@@ -3,11 +3,11 @@
 #' Retrieve stations with the corresponding line information around given locations using the HERE 'Public Transit' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity}{HERE Public Transit API: Find Stations Nearby}
+#' \href{https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html}{HERE Public Transit API: Station Search}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
 #' @param radius numeric, the search radius in meters (\code{default = 500}).
-#' @param results numeric, maximum number of suggested public transport stations (Valid range: 1 and 50, \code{default = 5}).
+#' @param results numeric, maximum number of suggested public transport stations (Valid range: 1 and 50, \code{default = 50}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -20,7 +20,7 @@
 #'
 #' # Stations
 #' stations <- station(poi = poi, url_only = TRUE)
-station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
+station <- function(poi, radius = 500, results = 50, url_only = FALSE) {
 
   # Checks
   .check_points(poi)
@@ -30,7 +30,7 @@ station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
 
   # Add API key
   url <- .add_key(
-    url = "https://transit.ls.hereapi.com/v3/stations/by_geocoord.json?"
+    url = "https://transit.hereapi.com/v8/stations?"
   )
 
   # CRS transformation and formatting
@@ -39,28 +39,21 @@ station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
   )
   url <- paste0(
     url,
-    "&center=",
-    center[, 2], ",", center[, 1]
-  )
-
-  # Add radius
-  url <- paste0(
-    url,
-    "&radius=",
-    radius
+    "&in=",
+    center[, 2], ",", center[, 1], ";r=", radius
   )
 
   # Number of results
   url <- paste0(
     url,
-    "&max=",
+    "&maxPlaces=",
     results
   )
 
   # Add station attributes
   url = paste0(
     url,
-    "&details=1"
+    "&return=transport"
   )
 
   # Return urls if chosen
@@ -73,34 +66,15 @@ station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
   if (length(data) == 0) return(NULL)
 
   # Extract information
-  ids <- .get_ids(data)
-  count <- 0
-  stations <- data.table::rbindlist(
-    lapply(data, function(con) {
-      count <<- count + 1
-      rank <- 0
-      df <- jsonlite::fromJSON(con)
-      if (is.null(df$Res$Stations$Stn)) {return(NULL)}
-      data.table::data.table(
-        id = ids[count],
-        rank = seq(1, nrow(df$Res$Stations$Stn)),
-        station = df$Res$Stations$Stn$name,
-        distance = df$Res$Stations$Stn$distance,
-        lines = lapply(df$Res$Stations$Stn$Transports$Transport, function(x)
-          unique(as.character(x$name))),
-        lng = df$Res$Stations$Stn$x,
-        lat = df$Res$Stations$Stn$y
-      )
-    }),
-  fill = TRUE)
+  stations <- .extract_stations(data)
 
-  # Check success
-  if (nrow(stations) < 1) {
+  # Checks success
+  if (is.null(stations)) {
     message("No public transport stations found.")
     return(NULL)
   }
 
-  # Create sf, data.table, data.frame
+  # Create sf, data.frame
   rownames(stations) <- NULL
   return(
     sf::st_set_crs(
@@ -112,3 +86,42 @@ station <- function(poi, radius = 500, results = 5, url_only = FALSE) {
   )
 }
 
+.extract_stations <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
+
+  # Stations
+  template <- data.table::data.table(
+    id = numeric(),
+    rank = numeric(),
+    station = character(),
+    modes = list(),
+    lines = list(),
+    lng = numeric(),
+    lat = numeric()
+  )
+  stations <- data.table::rbindlist(
+    append(list(template),
+      lapply(data, function(con) {
+        count <<- count + 1
+        rank <- 0
+        df <- jsonlite::fromJSON(con)
+        if (length(df$stations) < 1) {return(NULL)}
+        data.table::data.table(
+          id = ids[count],
+          rank = seq(1, nrow(df$stations)),
+          station = df$stations$place$name,
+          modes = lapply(df$stations$transports,
+                         function(x) unique(as.character(x$mode))),
+          lines = lapply(df$stations$transports,
+                         function(x) unique(as.character(x$name))),
+          lng = df$station$place$location$lng,
+          lat = df$station$place$location$lat
+        )
+      })), fill = TRUE
+    )
+
+  # Check success and return
+  if (nrow(stations) < 1) {return(NULL)}
+  return(stations)
+}

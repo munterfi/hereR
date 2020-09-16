@@ -4,14 +4,14 @@
 \alias{station}
 \title{HERE Public Transit API: Find Stations Nearby}
 \usage{
-station(poi, radius = 500, results = 5, url_only = FALSE)
+station(poi, radius = 500, results = 50, url_only = FALSE)
 }
 \arguments{
 \item{poi}{\code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.}
 
 \item{radius}{numeric, the search radius in meters (\code{default = 500}).}
 
-\item{results}{numeric, maximum number of suggested public transport stations (Valid range: 1 and 50, \code{default = 5}).}
+\item{results}{numeric, maximum number of suggested public transport stations (Valid range: 1 and 50, \code{default = 50}).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
@@ -29,5 +29,5 @@ set_key("<YOUR API KEY>")
 stations <- station(poi = poi, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity}{HERE Public Transit API: Find Stations Nearby}
+\href{https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html}{HERE Public Transit API: Station Search}
 }

@@ -1,5 +1,7 @@
 ## Create internal `mock` and `example` dataset
 library(sf)
+library(hereR)
+set_verbose(TRUE)
 
 ## URLs
 url_geocode <-

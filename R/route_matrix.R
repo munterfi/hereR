@@ -40,6 +40,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   # Checks
   .check_points(origin)
   .check_points(destination)
+  .check_input_rows(origin, destination)
   .check_datetime(datetime)
   .check_attributes(attribute)
   .check_type(type = type, request = "calculatematrix")

@@ -86,13 +86,12 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
     if (sf) {
       # Parse access coordinates to WKT
       reverse$access <- .wkt_from_point_df(reverse, "lng_access", "lat_access")
+      reverse[, c("lng_access", "lat_access") := NULL]
       # Parse position coordinates and set as default geometry
       return(
         sf::st_set_crs(
           sf::st_as_sf(
-            as.data.frame(
-              reverse[!colnames(reverse) %in% c("lng_access", "lat_access")]
-            ),
+            as.data.frame(reverse),
             coords = c("lng_position", "lat_position"),
             sf_column_name = "geometry"
           ), value = 4326

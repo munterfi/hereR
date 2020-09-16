@@ -1,6 +1,7 @@
 on:
   push:
-    branches: master
+    branches:
+      - refs/tags/*
 
 name: pkgdown
 

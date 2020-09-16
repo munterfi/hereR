@@ -9,6 +9,7 @@ test_that("connection works", {
   expect_error(connection(origin = c(1, 2, 3), destination = poi), "'origin' must be an sf object.")
   expect_error(connection(origin = c("character", NA), destination = poi), "'origin' must be an sf object.")
   expect_error(connection(origin = aoi, destination = poi), "'origin' must be an sf object with geometry type 'POINT'.")
+  expect_error(connection(origin = poi[1, ], destination = poi), "'origin' must have the same number of rows as 'destination'.")
   expect_error(connection(origin = poi, destination = poi, datetime = "not_POSIXct"))
   expect_error(connection(origin = poi, destination = poi, results = "not_numeric"))
   expect_error(connection(origin = poi, destination = poi, results = -1))
@@ -35,7 +36,7 @@ test_that("connection works", {
     connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = TRUE),
 
     # Tests
-    expect_equal(any(sf::st_geometry_type(connections) != "LINESTRING"), FALSE),
+    expect_equal(any(sf::st_geometry_type(connections) != "MULTILINESTRING"), FALSE),
     expect_equal(length(unique(connections$id)), 2)
   )
 })

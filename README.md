@@ -1,9 +1,11 @@
 # hereR <img src="man/figures/logo.svg" align="right" alt="" width="120" />
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/hereR)](https://CRAN.R-project.org/package=hereR)
+[![CRAN checks](https://cranchecks.info/badges/worst/hereR)](https://cran.r-project.org/web/checks/check_results_hereR.html)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/last-month/hereR?color=brightgreen)](https://CRAN.R-project.org/package=hereR)
 [![R build status](https://github.com/munterfinger/hereR/workflows/R-CMD-check/badge.svg)](https://github.com/munterfinger/hereR/actions)
 [![Codecov test coverage](https://codecov.io/gh/munterfinger/hereR/branch/master/graph/badge.svg)](https://codecov.io/gh/munterfinger/hereR?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/munterfinger/hereR/badge)](https://www.codefactor.io/repository/github/munterfinger/hereR)
 <!-- badges: end -->
 
 The **hereR** package provides an interface to the **HERE REST APIs** for R:
