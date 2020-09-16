@@ -68,13 +68,12 @@ geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
     if (sf) {
       # Parse access coordinates to WKT
       geocoded$access <- .wkt_from_point_df(geocoded, "lng_access", "lat_access")
+      geocoded[, c("lng_access", "lat_access") := NULL]
       # Parse position coordinates and set as default geometry
       return(
         sf::st_set_crs(
           sf::st_as_sf(
-            as.data.frame(
-              geocoded[!colnames(geocoded) %in% c("lng_access", "lat_access")]
-            ),
+            as.data.frame(geocoded),
             coords = c("lng_position", "lat_position"),
             sf_column_name = "geometry"
           ), value = 4326
