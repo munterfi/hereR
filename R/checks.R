@@ -179,30 +179,6 @@
   }
 }
 
-.check_proxy <- function(proxy) {
-  if (!is.null(proxy)) {
-    if (!is.character(proxy)) {
-      stop("'proxy' must be of type 'character'.")
-    }
-    if (!strsplit(proxy, "://")[[1]][1] %in% c("http", "https")) {
-      stop(
-        "'proxy' is not in the required format: 'http://your-proxy.com:port/' or 'https://your-proxy.org:port/'."
-      )
-    }
-  }
-}
-
-.check_proxyuserpwd <- function(proxyuserpwd) {
-  if (!is.null(proxyuserpwd)) {
-    if (!is.character(proxyuserpwd)) {
-      stop("'proxyuserpwd' must be of type 'character'.")
-    }
-    if (length(strsplit(proxyuserpwd, ":")[[1]]) != 2) {
-      stop("'proxyuserpwd' is not in the required format: 'user:pwd'.")
-    }
-  }
-}
-
 .check_key <- function(api_key) {
   if (!(is.character(api_key) & api_key != "")) {
     stop(
