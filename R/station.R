@@ -121,7 +121,12 @@ station <- function(poi, radius = 500, results = 50, url_only = FALSE) {
       })), fill = TRUE
     )
 
-  # Check success and return
+  # Check success, postprocess and return
   if (nrow(stations) < 1) {return(NULL)}
+  modes <- lines <- NULL
+  stations[, c("modes", "lines") := list(
+    vapply(modes, paste, collapse = ", ", character(1)),
+    vapply(lines, paste, collapse = ", ", character(1))
+  )]
   return(stations)
 }
