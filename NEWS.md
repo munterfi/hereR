@@ -1,4 +1,4 @@
-# version 0.4.1.9000
+# version 0.5.0
 
 * Upgrade Geocoder API version used in `geocode()` from v6.2 to v7 (closes [52](https://github.com/munterfinger/hereR/issues/52)). **Note:** The argument `autocomplete` is defunct and the argument `addresses` is deprecated, use `address` instead.
 * Change default geometry in the return value of `geocode()` to position coordinates (display position) and return access coordinates (navigation position) as additional column in well-known text format (closes [#53](https://github.com/munterfinger/hereR/issues/53)).
@@ -7,6 +7,7 @@
 * Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. **Note:** The function `autocomplete()` is defunct, please use `autosuggest()`.
 * Upgrade Public Transit API version used in `connection()` and `station()` from v3 to v8 (closes [62](https://github.com/munterfinger/hereR/issues/62)). **Note:** Now the geometries (LINESTRING) of the pedestrian sections are also included in the public transport routes returned by `connection()`.
 * Sign in to CodeFactor.io and add badge to track code quality.
+* Defunct `set_proxy()` and `unset_proxy()`. A global proxy configuration for R in `~/.Renviron` should be used instead.
 
 # version 0.4.1
 
@@ -26,7 +27,7 @@ object is returned, if `FALSE` a data.frame with `lng` and `lat` columns.
 
 # version 0.3.3
 
-* Added `set_verbose()` function to define (for the current R session) if the `hereR` package
+* Added `set_verbose()` function to define (for the current R session) if the **hereR** package
 should message information about the number of requests sent and data received (default = `FALSE`).
 * Reactivate maps with multiple layers since the `mapview` issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 * `lwgeom` no longer exports `st_make_valid()`, but `sf` does. Therefore `lwgeom` is moved from the package dependencies to the suggestions (see [#38](https://github.com/munterfinger/hereR/issues/38)).
@@ -76,7 +77,7 @@ should message information about the number of requests sent and data received (
 
 # version 0.1.0
 
-First release of the `hereR` package, an `sf`-based interface to the **HERE REST APIs**.
+First release of the **hereR** package, an **sf**-based interface to the **HERE REST APIs**.
 The packages binds to the following HERE APIs:
 
 * **Geocoder API:** Get coordinates (lng, lat) from addresses.
