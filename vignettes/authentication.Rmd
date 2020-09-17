@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 Set up a valid authentication to the 'HERE' REST APIs and optionally configure a proxy.
 
 ## Application credentials
-In order to use the functionality of the `hereR` package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:
+In order to use the functionality of the **hereR** package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:
 
 1. Go to [developer.here.com](https://developer.here.com/)
 2. Sign up for a HERE developer account, which automatically creates a new project 
@@ -32,33 +32,30 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-
 ## Information about requests
-
-By default, the `hereR` package does not print messages with information about the
+By default, the **hereR** package does not print messages with information about the
 requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:
 
 ```{r set_verbose}
 set_verbose(TRUE)
 ```
 
-Use `set_Verbose(FALSE)` to set the `hereR` package to be quiet again.
+Use `set_Verbose(FALSE)` to set the **hereR** package to be quiet again.
 
 ## Proxy
-If you are working behind a proxy and you don't want to change the global proxy settings of RStudio, the proxy information can be passed directly to the `hereR` package.
-If a proxy is needed, it can be set as follows: 
+If you are working behind a corporate proxy the requests sent by **hereR** might fail with timeout errors.
+In this case, consider setting a global proxy for R. Open the R environment file `file.edit('~/.Renviron')` and add your proxy configuration:
 
-```{r proxy}
-set_proxy(
-  proxy = "https://<YOUR-PROXY.NET>:<PORT>/",
-  proxyuserpwd = "<USER>:<PASSWORD>"
-)
+```
+http_proxy=http://user:passwd@proxy.dom.com:port/
+https_proxy=https://user:passwd@proxy.dom.com:port/
 ```
 
-**Note:** Only functions of the `hereR` package are now using the proxy. Other functions sending requests to the web continue to encounter timeout errors.
+**Note:** On RStudio Server this file is located at `R_HOME/etc/Renviron.site`.
 
 ## Remove credentials
-To remove previously set credentials from the current R session use `unset_key()`. In order to delete the proxy information use `unset_proxy()`. For overwriting application credentials or proxy settings use again the `set_key()` and `set_proxy()` functions.
+To remove previously set credentials from the current R session use `unset_key()`.
+For overwriting the application credentials use again the `set_key()` function.
 
 ## Reference
 

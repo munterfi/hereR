@@ -132,19 +132,21 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
           geometry = sf::st_as_sfc(geometry, crs = 4326)
         )
       })
-    ))
+    )), check_ring_dir = TRUE
   )
 
   # Aggregate
   if (aggregate) {
     tz <- attr(isolines$departure, "tzone")
-    isolines <- sf::st_set_precision(isolines, 1e4)
+    isolines <- sf::st_set_precision(isolines, 1e5)
     isolines <- sf::st_make_valid(isolines)
     isolines <- stats::aggregate(isolines, by = list(isolines$range),
                                  FUN = min, do_union = TRUE, simplify = TRUE,
                                  join = sf::st_intersects)
     isolines <- sf::st_make_valid(isolines)
-    isolines <- sf::st_difference(isolines)
+    suppressMessages(
+      isolines <- sf::st_difference(isolines)
+    )
     isolines$Group.1 <- NULL
     isolines$id <- NA
     attr(isolines$departure, "tzone") <- tz

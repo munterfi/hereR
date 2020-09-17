@@ -94,9 +94,9 @@ weather(poi, product = "alerts")
 
 ## References
 
-* [Geocoder API](https://developer.here.com/documentation/geocoder)
-* [Routing API](https://developer.here.com/documentation/routing)
-* [Traffic API](https://developer.here.com/documentation/traffic)
-* [Public Transit API](https://developer.here.com/documentation/transit)
-* [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing)
-* [Destination Weather API](https://developer.here.com/documentation/weather)
+* [Geocoder API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
+* [Routing API](https://developer.here.com/documentation/routing/dev_guide/topics/introduction.html)
+* [Traffic API](https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html)
+* [Public Transit API](https://developer.here.com/documentation/public-transit/dev_guide/index.html)
+* [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)
+* [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/overview.html)

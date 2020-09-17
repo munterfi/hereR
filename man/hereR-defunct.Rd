@@ -6,6 +6,7 @@
 \alias{set_auth}
 \alias{unset_auth}
 \alias{autocomplete}
+\alias{set_proxy}
 \title{Defunct functions in package \pkg{hereR}.}
 \usage{
 traffic(
@@ -22,6 +23,8 @@ set_auth(app_id, app_code)
 unset_auth()
 
 autocomplete(addresses, results = 5, url_only = FALSE)
+
+set_proxy(proxy, proxyuserpwd)
 }
 \description{
 The functions listed below are defunct.
@@ -48,6 +51,11 @@ For \code{unset_auth}, use \code{\link{unset_key}}.
 \section{\code{autocomplete}}{
 
 For \code{autocomplete}, use \code{\link{autosuggest}}.
+}
+
+\section{\code{set_proxy}}{
+
+For \code{set_proxy}, configure a global proxy for R in '~/.Renviron' instead.
 }
 
 \keyword{internal}
