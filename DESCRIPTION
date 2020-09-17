@@ -1,7 +1,7 @@
 Package: hereR
 Type: Package
 Title: 'sf'-Based Interface to the 'HERE' REST APIs
-Version: 0.4.1.9000
+Version: 0.5.0
 Authors@R: c(
     person("Merlin", "Unterfinger", role = c("aut", "cre"), email = "info@munterfinger.ch", comment = c(ORCID = "0000-0003-2020-2366")),
     person("Daniel", "Possenriede", role = "ctb", comment = c(ORCID = "0000-0002-6738-9845")))
