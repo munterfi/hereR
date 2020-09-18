@@ -1,19 +1,19 @@
 # version 0.5.0
 
-* Upgrade Geocoder API version used in `geocode()` from v6.2 to v7 (closes [52](https://github.com/munterfinger/hereR/issues/52)). **Note:** The argument `autocomplete` is defunct and the argument `addresses` is deprecated, use `address` instead.
+* Upgrade Geocoder API version used in `geocode()` from v6.2 to v7 (closes [#52](https://github.com/munterfinger/hereR/issues/52)). **Note:** The argument `autocomplete` is defunct and the argument `addresses` is deprecated, use `address` instead.
 * Change default geometry in the return value of `geocode()` to position coordinates (display position) and return access coordinates (navigation position) as additional column in well-known text format (closes [#53](https://github.com/munterfinger/hereR/issues/53)).
 * Consistent columns in the return value of `geocode()` and `reverse_geocode()` independent of the input address level (closes [#58](https://github.com/munterfinger/hereR/issues/58)).
 * Upgrade Geocoder API version used in `reverse_geocode()` from v6.2 to v7. **Note:** The argument `landmarks` is defunct.
 * Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. **Note:** The function `autocomplete()` is defunct, please use `autosuggest()`.
-* Upgrade Public Transit API version used in `connection()` and `station()` from v3 to v8 (closes [62](https://github.com/munterfinger/hereR/issues/62)). **Note:** Now the geometries (LINESTRING) of the pedestrian sections are also included in the public transport routes returned by `connection()`.
+* Upgrade Public Transit API version used in `connection()` and `station()` from v3 to v8 (closes [#62](https://github.com/munterfinger/hereR/issues/62)). **Note:** Now the geometries (LINESTRING) of the pedestrian sections are also included in the public transport routes returned by `connection()`.
 * Sign in to CodeFactor.io and add badge to track code quality.
-* Defunct `set_proxy()` and `unset_proxy()`. A global proxy configuration for R in `~/.Renviron` should be used instead.
+* Defunct `set_proxy()` and `unset_proxy()`. Use a global proxy configuration for R in `~/.Renviron` instead.
 
 # version 0.4.1
 
 * Change example and API mock data for `intermodal_route()` from Berlin to Switzerland, as the service is now also available there.
-* Force {mapview} to use 'classical' leaflet/htmlwidgets rendering (which embeds data directly in the html) and not the file format 'flatgeobuf' in vignette building (see [#54](https://github.com/munterfinger/hereR/issues/54)).
-* Temporarily deactivate all maps in the vignettes to solve the issues on CRAN (closes [#54](https://github.com/munterfinger/hereR/issues/54)). With the next release of {mapview} >= v2.9.1 on CRAN the maps will be reactivated.
+* Force **mapview** to use 'classical' leaflet/htmlwidgets rendering (which embeds data directly in the html) and not the file format 'flatgeobuf' in vignette building (see [#54](https://github.com/munterfinger/hereR/issues/54)).
+* Temporarily deactivate all maps in the vignettes to solve the issues on CRAN (closes [#54](https://github.com/munterfinger/hereR/issues/54)). With the next release of **mapview** >= v2.9.1 on CRAN the maps will be reactivated.
 
 # version 0.4.0
 
@@ -29,15 +29,15 @@ object is returned, if `FALSE` a data.frame with `lng` and `lat` columns.
 
 * Added `set_verbose()` function to define (for the current R session) if the **hereR** package
 should message information about the number of requests sent and data received (default = `FALSE`).
-* Reactivate maps with multiple layers since the `mapview` issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
-* `lwgeom` no longer exports `st_make_valid()`, but `sf` does. Therefore `lwgeom` is moved from the package dependencies to the suggestions (see [#38](https://github.com/munterfinger/hereR/issues/38)).
+* Reactivate maps with multiple layers since the **mapview** issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
+* **lwgeom** no longer exports `st_make_valid()`, but **sf** does. Therefore `lwgeom` is moved from the package dependencies to the suggestions (see [#38](https://github.com/munterfinger/hereR/issues/38)).
 
 # version 0.3.2
 
 * Defunct the deprecated `traffic()` function, which has been replaced by the functions `flow()` and `incident()`.
-* Recreated package test data, api mocks and examples with `sf` 0.9-0 (see [#36](https://github.com/munterfinger/hereR/issues/36)).
-* Increased the dependency on the `sf` package to version 0.9-0 due to a different CRS handling (for more information about the changes in sf, see [here](https://www.r-spatial.org/r/2020/03/17/wkt.html)). **Note: Older versions of the `sf` package are no longer supported.**
-* Temporarily deactivated maps with multiple layers until the `mapview` issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
+* Recreated package test data, api mocks and examples with **sf** 0.9-0 (see [#36](https://github.com/munterfinger/hereR/issues/36)).
+* Increased the dependency on the **sf** package to version 0.9-0 due to a different CRS handling (for more information about the changes in **sf**, see [here](https://www.r-spatial.org/r/2020/03/17/wkt.html)). **Note: Older versions of the sf package are no longer supported.**
+* Temporarily deactivated maps with multiple layers until the **mapview** issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 
 # version 0.3.1
 
