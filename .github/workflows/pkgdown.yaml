@@ -1,7 +1,6 @@
 on:
-  push:
-    branches:
-      - refs/tags/*
+  release:
+    types: [published]
 
 name: pkgdown
 
