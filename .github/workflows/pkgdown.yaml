@@ -1,6 +1,9 @@
+# on:
+#   release:
+#     types: [published, edited]
 on:
-  release:
-    types: [published, edited]
+   push:
+     branches: master
 
 name: pkgdown
 
