@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -164,16 +164,19 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-0419000" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.1.9000">
-<a href="#version-0419000" class="anchor"></a>version 0.4.1.9000<small> Unreleased </small>
+    <div id="version-050" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.0">
+<a href="#version-050" class="anchor"></a>version 0.5.0<small> 2020-09-18 </small>
 </h1>
 <ul>
-<li>Upgrade Geocoder API version used in <code><a href="../reference/geocode.html">geocode()</a></code> from v6.2 to v7 (closes <a href="https://github.com/munterfinger/hereR/issues/52">52</a>). <strong>Note:</strong> The argument <code>autocomplete</code> is defunct and the argument <code>addresses</code> is deprecated, use <code>address</code> instead.</li>
+<li>Upgrade Geocoder API version used in <code><a href="../reference/geocode.html">geocode()</a></code> from v6.2 to v7 (closes <a href="https://github.com/munterfinger/hereR/issues/52"><a href='https://github.com/munterfinger/hereR/issues/52'>#52</a></a>). <strong>Note:</strong> The argument <code>autocomplete</code> is defunct and the argument <code>addresses</code> is deprecated, use <code>address</code> instead.</li>
 <li>Change default geometry in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> to position coordinates (display position) and return access coordinates (navigation position) as additional column in well-known text format (closes <a href="https://github.com/munterfinger/hereR/issues/53"><a href='https://github.com/munterfinger/hereR/issues/53'>#53</a></a>).</li>
 <li>Consistent columns in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> and <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> independent of the input address level (closes <a href="https://github.com/munterfinger/hereR/issues/58"><a href='https://github.com/munterfinger/hereR/issues/58'>#58</a></a>).</li>
 <li>Upgrade Geocoder API version used in <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> from v6.2 to v7. <strong>Note:</strong> The argument <code>landmarks</code> is defunct.</li>
 <li>Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. <strong>Note:</strong> The function <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code> is defunct, please use <code><a href="../reference/autosuggest.html">autosuggest()</a></code>.</li>
+<li>Upgrade Public Transit API version used in <code><a href="../reference/connection.html">connection()</a></code> and <code><a href="../reference/station.html">station()</a></code> from v3 to v8 (closes <a href="https://github.com/munterfinger/hereR/issues/62"><a href='https://github.com/munterfinger/hereR/issues/62'>#62</a></a>). <strong>Note:</strong> Now the geometries (LINESTRING) of the pedestrian sections are also included in the public transport routes returned by <code><a href="../reference/connection.html">connection()</a></code>.</li>
+<li>Sign in to CodeFactor.io and add badge to track code quality.</li>
+<li>Defunct <code><a href="../reference/hereR-defunct.html">set_proxy()</a></code> and <code><a href="../reference/unset_proxy.html">unset_proxy()</a></code>. Use a global proxy configuration for R in <code>~/.Renviron</code> instead.</li>
 </ul>
 </div>
     <div id="version-041" class="section level1">
@@ -182,8 +185,8 @@
 </h1>
 <ul>
 <li>Change example and API mock data for <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> from Berlin to Switzerland, as the service is now also available there.</li>
-<li>Force {mapview} to use ‘classical’ leaflet/htmlwidgets rendering (which embeds data directly in the html) and not the file format ‘flatgeobuf’ in vignette building (see <a href="https://github.com/munterfinger/hereR/issues/54"><a href='https://github.com/munterfinger/hereR/issues/54'>#54</a></a>).</li>
-<li>Temporarily deactivate all maps in the vignettes to solve the issues on CRAN (closes <a href="https://github.com/munterfinger/hereR/issues/54"><a href='https://github.com/munterfinger/hereR/issues/54'>#54</a></a>). With the next release of {mapview} &gt;= v2.9.1 on CRAN the maps will be reactivated.</li>
+<li>Force <strong>mapview</strong> to use ‘classical’ leaflet/htmlwidgets rendering (which embeds data directly in the html) and not the file format ‘flatgeobuf’ in vignette building (see <a href="https://github.com/munterfinger/hereR/issues/54"><a href='https://github.com/munterfinger/hereR/issues/54'>#54</a></a>).</li>
+<li>Temporarily deactivate all maps in the vignettes to solve the issues on CRAN (closes <a href="https://github.com/munterfinger/hereR/issues/54"><a href='https://github.com/munterfinger/hereR/issues/54'>#54</a></a>). With the next release of <strong>mapview</strong> &gt;= v2.9.1 on CRAN the maps will be reactivated.</li>
 </ul>
 </div>
     <div id="version-040" class="section level1">
@@ -204,10 +207,10 @@
 <a href="#version-033" class="anchor"></a>version 0.3.3<small> 2020-04-18 </small>
 </h1>
 <ul>
-<li>Added <code><a href="../reference/set_verbose.html">set_verbose()</a></code> function to define (for the current R session) if the <code>hereR</code> package should message information about the number of requests sent and data received (default = <code>FALSE</code>).</li>
-<li>Reactivate maps with multiple layers since the <code>mapview</code> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
+<li>Added <code><a href="../reference/set_verbose.html">set_verbose()</a></code> function to define (for the current R session) if the <strong>hereR</strong> package should message information about the number of requests sent and data received (default = <code>FALSE</code>).</li>
+<li>Reactivate maps with multiple layers since the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
 <li>
-<code>lwgeom</code> no longer exports <code>st_make_valid()</code>, but <code>sf</code> does. Therefore <code>lwgeom</code> is moved from the package dependencies to the suggestions (see <a href="https://github.com/munterfinger/hereR/issues/38"><a href='https://github.com/munterfinger/hereR/issues/38'>#38</a></a>).</li>
+<strong>lwgeom</strong> no longer exports <code>st_make_valid()</code>, but <strong>sf</strong> does. Therefore <code>lwgeom</code> is moved from the package dependencies to the suggestions (see <a href="https://github.com/munterfinger/hereR/issues/38"><a href='https://github.com/munterfinger/hereR/issues/38'>#38</a></a>).</li>
 </ul>
 </div>
     <div id="version-032" class="section level1">
@@ -216,10 +219,10 @@
 </h1>
 <ul>
 <li>Defunct the deprecated <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function, which has been replaced by the functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code>.</li>
-<li>Recreated package test data, api mocks and examples with <code>sf</code> 0.9-0 (see <a href="https://github.com/munterfinger/hereR/issues/36"><a href='https://github.com/munterfinger/hereR/issues/36'>#36</a></a>).</li>
-<li>Increased the dependency on the <code>sf</code> package to version 0.9-0 due to a different CRS handling (for more information about the changes in sf, see <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html">here</a>). <strong>Note: Older versions of the <code>sf</code> package are no longer supported.</strong>
+<li>Recreated package test data, api mocks and examples with <strong>sf</strong> 0.9-0 (see <a href="https://github.com/munterfinger/hereR/issues/36"><a href='https://github.com/munterfinger/hereR/issues/36'>#36</a></a>).</li>
+<li>Increased the dependency on the <strong>sf</strong> package to version 0.9-0 due to a different CRS handling (for more information about the changes in <strong>sf</strong>, see <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html">here</a>). <strong>Note: Older versions of the sf package are no longer supported.</strong>
 </li>
-<li>Temporarily deactivated maps with multiple layers until the <code>mapview</code> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
+<li>Temporarily deactivated maps with multiple layers until the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
 </ul>
 </div>
     <div id="version-031" class="section level1">
@@ -282,7 +285,7 @@
 <h1 class="page-header" data-toc-text="0.1.0">
 <a href="#version-010" class="anchor"></a>version 0.1.0<small> 2019-11-05 </small>
 </h1>
-<p>First release of the <code>hereR</code> package, an <code>sf</code>-based interface to the <strong>HERE REST APIs</strong>. The packages binds to the following HERE APIs:</p>
+<p>First release of the <strong>hereR</strong> package, an <strong>sf</strong>-based interface to the <strong>HERE REST APIs</strong>. The packages binds to the following HERE APIs:</p>
 <ul>
 <li>
 <strong>Geocoder API:</strong> Get coordinates (lng, lat) from addresses.</li>

@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -170,7 +170,7 @@
     <p>Retrieve stations with the corresponding line information around given locations using the HERE 'Public Transit' API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>station</span>(<span class='kw'>poi</span>, radius = <span class='fl'>500</span>, results = <span class='fl'>5</span>, url_only = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>station</span>(<span class='kw'>poi</span>, radius = <span class='fl'>500</span>, results = <span class='fl'>50</span>, url_only = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,7 +185,7 @@
     </tr>
     <tr>
       <th>results</th>
-      <td><p>numeric, maximum number of suggested public transport stations (Valid range: 1 and 50, <code>default = 5</code>).</p></td>
+      <td><p>numeric, maximum number of suggested public transport stations (Valid range: 1 and 50, <code>default = 50</code>).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -198,7 +198,7 @@
     <p>An <code>sf</code> object containing the requested stations with the corresponding line information.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity'>HERE Public Transit API: Find Stations Nearby</a></p>
+    <p><a href='https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html'>HERE Public Transit API: Station Search</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>

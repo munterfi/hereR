@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Intermodal Routing API: Calculate Route — intermodal_route • hereR</title>
+<title>Proxy Configuration — set_proxy-defunct • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="HERE Intermodal Routing API: Calculate Route — intermodal_route" />
-<meta property="og:description" content="Calculates route geometries (LINESTRING) between given pairs of points using the HERE 'Intermodal Routing' API." />
+<meta property="og:title" content="Proxy Configuration — set_proxy-defunct" />
+<meta property="og:description" content="If a proxy is needed, for example because the computer is behind a corporate proxy,
+it can be set as follows: proxy = &quot;http://your-proxy.net:port/&quot; or &quot;https://your-proxy.net:port/&quot; and &quot;proxyuserpwd&quot; = &quot;user:pwd&quot;." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -161,71 +162,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Intermodal Routing API: Calculate Route</h1>
-    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/intermodal_route.R'><code>R/intermodal_route.R</code></a></small>
-    <div class="hidden name"><code>intermodal_route.Rd</code></div>
+    <h1>Proxy Configuration</h1>
+    <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/defunct.R'><code>R/defunct.R</code></a></small>
+    <div class="hidden name"><code>set_proxy-defunct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculates route geometries (<code>LINESTRING</code>) between given pairs of points using the HERE 'Intermodal Routing' API.</p>
+    <p>If a proxy is needed, for example because the computer is behind a corporate proxy,
+it can be set as follows: <code>proxy = "http://your-proxy.net:port/"</code> or <code>"https://your-proxy.net:port/"</code> and <code>"proxyuserpwd" = "user:pwd"</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>intermodal_route</span>(
-  <span class='kw'>origin</span>,
-  <span class='kw'>destination</span>,
-  datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
-  results = <span class='fl'>3</span>,
-  transfers = <span class='op'>-</span><span class='fl'>1</span>,
-  url_only = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'><a href='hereR-defunct.html'>set_proxy</a></span>(<span class='kw'>proxy</span>, <span class='kw'>proxyuserpwd</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>origin</th>
-      <td><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></td>
+      <th>proxy</th>
+      <td><p>character, the URL of the proxy (<code>"https://your-proxy.net:port/"</code>).</p></td>
     </tr>
     <tr>
-      <th>destination</th>
-      <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <td><p><code>POSIXct</code> object, datetime for the departure (<code>default = Sys.time()</code>).</p></td>
-    </tr>
-    <tr>
-      <th>results</th>
-      <td><p>numeric, maximum number of suggested route alternatives (Valid range: 1 and 7, <code>default = 3</code>).</p></td>
-    </tr>
-    <tr>
-      <th>transfers</th>
-      <td><p>numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, <code>default = -1</code>).</p></td>
-    </tr>
-    <tr>
-      <th>url_only</th>
-      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
+      <th>proxyuserpwd</th>
+      <td><p>character, user and password for the authentication (<code>"user:pwd"</code>).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>sf</code> object containing the requested intermodal routes.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <p>None.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html'>HERE Intermodal Routing API: Routes</a></p>
+    <div class='dont-index'><p><code><a href='hereR-defunct.html'>hereR-defunct</a></code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
-
-<span class='co'># Intermodal routing</span>
-<span class='kw'>routes</span> <span class='op'>&lt;-</span> <span class='fu'>intermodal_route</span>(
-  origin = <span class='kw'>poi</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, ],
-  destination = <span class='kw'>poi</span>[<span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>, ],
-  url_only = <span class='fl'>TRUE</span>
-)
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

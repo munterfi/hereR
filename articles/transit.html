@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -176,13 +176,22 @@ destination
 mode
 </th>
 <th style="text-align:left;">
+category
+</th>
+<th style="text-align:left;">
 vehicle
+</th>
+<th style="text-align:left;">
+provider
 </th>
 <th style="text-align:left;">
 direction
 </th>
 <th style="text-align:right;">
 distance
+</th>
+<th style="text-align:right;">
+duration
 </th>
 </tr></thead>
 <tbody>
@@ -194,19 +203,25 @@ distance
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 17:18:00
+2020-09-17 15:19:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2020-08-29 17:28:00
+2020-09-17 15:29:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-Walk
+pedestrian
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 NA
@@ -217,6 +232,9 @@ NA
 <td style="text-align:right;">
 582
 </td>
+<td style="text-align:right;">
+600
+</td>
 </tr>
 <tr>
 <td style="text-align:right;">
@@ -226,16 +244,19 @@ NA
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 17:28:00
+2020-09-17 15:29:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2020-08-29 17:38:00
+2020-09-17 15:38:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
+</td>
+<td style="text-align:left;">
+subway
 </td>
 <td style="text-align:left;">
 Train
@@ -244,10 +265,16 @@ Train
 m2
 </td>
 <td style="text-align:left;">
+Transport publics de la Région Lausannoise
+</td>
+<td style="text-align:left;">
 Lausanne, Ouchy-Olympique
 </td>
 <td style="text-align:right;">
 2940
+</td>
+<td style="text-align:right;">
+540
 </td>
 </tr>
 <tr>
@@ -258,25 +285,34 @@ Lausanne, Ouchy-Olympique
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 17:38:00
+2020-09-17 15:38:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
 </td>
 <td style="text-align:left;">
-2020-08-29 17:43:00
+2020-09-17 15:43:00
 </td>
 <td style="text-align:left;">
 Lausanne
 </td>
 <td style="text-align:left;">
-Walk
+pedestrian
 </td>
 <td style="text-align:left;">
 NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+300
 </td>
 <td style="text-align:right;">
 300
@@ -290,16 +326,19 @@ NA
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 17:44:00
+2020-09-17 15:44:00
 </td>
 <td style="text-align:left;">
 Lausanne
 </td>
 <td style="text-align:left;">
-2020-08-29 18:56:00
+2020-09-17 16:56:00
 </td>
 <td style="text-align:left;">
 Bern
+</td>
+<td style="text-align:left;">
+intercityTrain
 </td>
 <td style="text-align:left;">
 Intercity Train
@@ -308,10 +347,16 @@ Intercity Train
 IR 15
 </td>
 <td style="text-align:left;">
+Schweizerische Bundesbahnen SBB
+</td>
+<td style="text-align:left;">
 Luzern
 </td>
 <td style="text-align:right;">
 97091
+</td>
+<td style="text-align:right;">
+4320
 </td>
 </tr>
 <tr>
@@ -322,16 +367,19 @@ Luzern
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 19:02:00
+2020-09-17 17:02:00
 </td>
 <td style="text-align:left;">
 Bern
 </td>
 <td style="text-align:left;">
-2020-08-29 19:13:00
+2020-09-17 17:13:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
+</td>
+<td style="text-align:left;">
+cityTrain
 </td>
 <td style="text-align:left;">
 Train
@@ -340,10 +388,16 @@ Train
 S 3
 </td>
 <td style="text-align:left;">
+BLS AG (bls)
+</td>
+<td style="text-align:left;">
 Belp
 </td>
 <td style="text-align:right;">
 8668
+</td>
+<td style="text-align:right;">
+660
 </td>
 </tr>
 <tr>
@@ -354,19 +408,25 @@ Belp
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 19:13:00
+2020-09-17 17:13:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
 </td>
 <td style="text-align:left;">
-2020-08-29 19:14:00
+2020-09-17 17:14:00
 </td>
 <td style="text-align:left;">
 DEST
 </td>
 <td style="text-align:left;">
-Walk
+pedestrian
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 NA
@@ -376,6 +436,9 @@ NA
 </td>
 <td style="text-align:right;">
 76
+</td>
+<td style="text-align:right;">
+60
 </td>
 </tr>
 </tbody>
@@ -389,7 +452,6 @@ NA
         homebutton = <span class="fl">FALSE</span>
 )
 </pre></div>
-<p><strong>Note:</strong> The geometries of walking sections are straight lines between the origin, station or destination points instead of routed paths on the pedestrian network. The reason for this is that it is not possible to match the <em>“maneuvers”</em> to the <em>“connections-sections”</em> in the API response using the section id (<code>sec_id</code>). The walking segments can be routed in hindsight using the <code><a href="../reference/route.html">route()</a></code> function with transport mode set to <code>"pedestrian"</code>.</p>
 </div>
 <div id="summary" class="section level3">
 <h3 class="hasAnchor">
@@ -429,10 +491,19 @@ transfers
 modes
 </th>
 <th style="text-align:left;">
+categories
+</th>
+<th style="text-align:left;">
 vehicles
+</th>
+<th style="text-align:left;">
+providers
 </th>
 <th style="text-align:right;">
 distance
+</th>
+<th style="text-align:right;">
+duration
 </th>
 </tr></thead>
 <tbody>
@@ -444,19 +515,22 @@ distance
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 17:18:00
+2020-09-17 15:19:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2020-08-29 19:14:00
+2020-09-17 17:14:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
 </td>
 <td style="text-align:right;">
 2
+</td>
+<td style="text-align:left;">
+pedestrian, subway, pedestrian, intercityTrain, cityTrain, pedestrian
 </td>
 <td style="text-align:left;">
 Train, Intercity Train, Train
@@ -464,8 +538,14 @@ Train, Intercity Train, Train
 <td style="text-align:left;">
 m2, IR 15, S 3
 </td>
+<td style="text-align:left;">
+Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BLS AG (bls)
+</td>
 <td style="text-align:right;">
 109657
+</td>
+<td style="text-align:right;">
+6480
 </td>
 </tr>
 <tr>
@@ -476,13 +556,13 @@ m2, IR 15, S 3
 2
 </td>
 <td style="text-align:left;">
-2020-08-29 17:55:00
+2020-09-17 15:55:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2020-08-29 19:44:00
+2020-09-17 17:44:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -491,14 +571,23 @@ Kehrsatz Nord
 2
 </td>
 <td style="text-align:left;">
+pedestrian, subway, pedestrian, intercityTrain, cityTrain, pedestrian
+</td>
+<td style="text-align:left;">
 Train, Intercity Train, Train
 </td>
 <td style="text-align:left;">
 m2, IC 1, S 3
 </td>
+<td style="text-align:left;">
+Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BLS AG (bls)
+</td>
 <td style="text-align:right;">
 109657
 </td>
+<td style="text-align:right;">
+6180
+</td>
 </tr>
 <tr>
 <td style="text-align:right;">
@@ -508,60 +597,78 @@ m2, IC 1, S 3
 1
 </td>
 <td style="text-align:left;">
-2020-08-29 16:58:00
+2020-09-17 15:31:00
 </td>
 <td style="text-align:left;">
 Basel, Kleinhüningen
 </td>
 <td style="text-align:left;">
-2020-08-29 18:41:00
-</td>
-<td style="text-align:left;">
-Zürich HB
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-Bus, Train, Intercity Train
-</td>
-<td style="text-align:left;">
-36, S 6, TGV 21
-</td>
-<td style="text-align:right;">
-97061
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-2020-08-29 17:02:00
-</td>
-<td style="text-align:left;">
-Basel, Kleinhüningen
-</td>
-<td style="text-align:left;">
-2020-08-29 19:05:00
+2020-09-17 17:15:00
 </td>
 <td style="text-align:left;">
 Zürich HB
 </td>
 <td style="text-align:right;">
 1
+</td>
+<td style="text-align:left;">
+pedestrian, lightRail, pedestrian, intercityTrain, pedestrian
 </td>
 <td style="text-align:left;">
 Tram, Intercity Train
 </td>
 <td style="text-align:left;">
-8, IR 36
+8, EC 24
+</td>
+<td style="text-align:left;">
+Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:right;">
-94784
+94747
+</td>
+<td style="text-align:right;">
+6180
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+2020-09-17 15:53:00
+</td>
+<td style="text-align:left;">
+Basel, Kleinhüningen
+</td>
+<td style="text-align:left;">
+2020-09-17 17:41:00
+</td>
+<td style="text-align:left;">
+Zürich HB
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+pedestrian, lightRail, pedestrian, intercityTrain, pedestrian
+</td>
+<td style="text-align:left;">
+Tram, Intercity Train
+</td>
+<td style="text-align:left;">
+8, IC 3
+</td>
+<td style="text-align:left;">
+Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
+</td>
+<td style="text-align:right;">
+94747
+</td>
+<td style="text-align:right;">
+6120
 </td>
 </tr>
 </tbody>
@@ -603,8 +710,8 @@ Tram, Intercity Train
 <h2 class="hasAnchor">
 <a href="#api-reference" class="anchor"></a>API Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html">Transit Route</a></li>
-<li><a href="https://developer.here.com/documentation/examples/rest/public_transit/station-search-proximity">Find Stations Nearby</a></li>
+<li><a href="https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html">Transit Route</a></li>
+<li><a href="https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html">Station Search</a></li>
 </ul>
 </div>
   </div>

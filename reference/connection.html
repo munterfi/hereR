@@ -85,7 +85,7 @@ summary = TRUE: A summary of the connections is retrieved, where each connection
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -231,14 +231,9 @@ Two modes are provided:</p><ul>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An <code>sf</code> object containing the requested routes.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>As it is not possible to match the "maneuvers" to the "connections-sections" in the API response using the section id (<code>sec_id</code>),
-the returned geometries of walking sections are straight lines between the station (or origin and destination) points instead of routed lines on the pedestrian network.
-The walking segments can be routed in hindsight using the <a href='route.html'>route</a> function with mode set to <code>"pedestrian"</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/transit/dev_guide/topics/quick-start-routing-1.html'>HERE Public Transit API: Transit Route</a></p>
+    <p><a href='https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html'>HERE Public Transit API: Transit Route</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>

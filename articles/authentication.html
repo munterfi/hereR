@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
 <div id="application-credentials" class="section level2">
 <h2 class="hasAnchor">
 <a href="#application-credentials" class="anchor"></a>Application credentials</h2>
-<p>In order to use the functionality of the <code>hereR</code> package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:</p>
+<p>In order to use the functionality of the <strong>hereR</strong> package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:</p>
 <ol style="list-style-type: decimal">
 <li>Go to <a href="https://developer.here.com/">developer.here.com</a>
 </li>
@@ -150,28 +150,24 @@
 <div id="information-about-requests" class="section level2">
 <h2 class="hasAnchor">
 <a href="#information-about-requests" class="anchor"></a>Information about requests</h2>
-<p>By default, the <code>hereR</code> package does not print messages with information about the requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:</p>
+<p>By default, the <strong>hereR</strong> package does not print messages with information about the requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span>(<span class="fl">TRUE</span>)
 </pre></div>
-<p>Use <code>set_Verbose(FALSE)</code> to set the <code>hereR</code> package to be quiet again.</p>
+<p>Use <code>set_Verbose(FALSE)</code> to set the <strong>hereR</strong> package to be quiet again.</p>
 </div>
 <div id="proxy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#proxy" class="anchor"></a>Proxy</h2>
-<p>If you are working behind a proxy and you don’t want to change the global proxy settings of RStudio, the proxy information can be passed directly to the <code>hereR</code> package. If a proxy is needed, it can be set as follows:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/set_proxy.html">set_proxy</a></span>(
-  proxy = <span class="st">"https://&lt;YOUR-PROXY.NET&gt;:&lt;PORT&gt;/"</span>,
-  proxyuserpwd = <span class="st">"&lt;USER&gt;:&lt;PASSWORD&gt;"</span>
-)
-</pre></div>
-<p><strong>Note:</strong> Only functions of the <code>hereR</code> package are now using the proxy. Other functions sending requests to the web continue to encounter timeout errors.</p>
+<p>If you are working behind a corporate proxy the requests sent by <strong>hereR</strong> might fail with timeout errors. In this case, consider setting a global proxy for R. Open the R environment file <code><a href="https://rdrr.io/r/utils/file.edit.html">file.edit('~/.Renviron')</a></code> and add your proxy configuration:</p>
+<pre><code>http_proxy=http://user:passwd@proxy.dom.com:port/
+https_proxy=https://user:passwd@proxy.dom.com:port/</code></pre>
+<p><strong>Note:</strong> On RStudio Server this file is located at <code>R_HOME/etc/Renviron.site</code>.</p>
 </div>
 <div id="remove-credentials" class="section level2">
 <h2 class="hasAnchor">
 <a href="#remove-credentials" class="anchor"></a>Remove credentials</h2>
-<p>To remove previously set credentials from the current R session use <code><a href="../reference/unset_key.html">unset_key()</a></code>. In order to delete the proxy information use <code><a href="../reference/unset_proxy.html">unset_proxy()</a></code>. For overwriting application credentials or proxy settings use again the <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/set_proxy.html">set_proxy()</a></code> functions.</p>
+<p>To remove previously set credentials from the current R session use <code><a href="../reference/unset_key.html">unset_key()</a></code>. For overwriting the application credentials use again the <code><a href="../reference/set_key.html">set_key()</a></code> function.</p>
 </div>
 <div id="reference" class="section level2">
 <h2 class="hasAnchor">
