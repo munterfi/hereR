@@ -1,3 +1,7 @@
+# version 0.5.1
+
+* Fix of the request generation for the Geocoder API: Removal of the `&` in front of the `apiKey` argument (closes [#73](https://github.com/munterfinger/hereR/issues/73 and [#74](https://github.com/munterfinger/hereR/issues/74).
+
 # version 0.5.0
 
 * Upgrade Geocoder API version used in `geocode()` from v6.2 to v7 (closes [#52](https://github.com/munterfinger/hereR/issues/52)). **Note:** The argument `autocomplete` is defunct and the argument `addresses` is deprecated, use `address` instead.

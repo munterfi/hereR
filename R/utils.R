@@ -5,7 +5,7 @@
   .check_key(api_key)
   paste0(
     url,
-    "&apiKey=",
+    "apiKey=",
     api_key)
 }
 
