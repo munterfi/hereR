@@ -23,7 +23,9 @@ jobs:
             libgdal-dev \
             libgeos-dev \
             libproj-dev \
-            libcurl4-openssl-dev
+            libcurl4-openssl-dev \
+            libharfbuzz-dev \
+            libfribidi-dev
       - name: Query dependencies
         run: |
           install.packages('remotes')
