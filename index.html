@@ -46,18 +46,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -145,12 +139,10 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of <strong>hereR</strong> from <a href="https://CRAN.R-project.org/package=hereR/">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"hereR"</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"hereR"</span><span class="op">)</span></pre></div>
 <p>Install the development version from <a href="https://github.com/munterfinger/hereR/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"munterfinger/hereR"</span>)
-</pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"munterfinger/hereR"</span><span class="op">)</span></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -158,52 +150,45 @@
 <p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A free login and project can be created on <a href="https://developer.here.com/">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
 <p>To set the API key, please use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://munterfinger.github.io/hereR">hereR</a></span>)
-<span class="fu"><a href="reference/set_key.html">set_key</a></span>(<span class="st">"&lt;YOUR API KEY&gt;"</span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfinger.github.io/hereR/">hereR</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></pre></div>
 <p>Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the following examples. A more detailed description can be found in the documentation of the functions and the package vignettes.</p>
 <p><strong>Geocoder API:</strong> Autocomplete and geocode addresses or reverse geocode POIs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="reference/geocode.html">geocode</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span>))
+<span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/autosuggest.html">autosuggest</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span>))
+<span class="fu"><a href="reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/reverse_geocode.html">reverse_geocode</a></span>(<span class="kw">poi</span>)
-</pre></div>
+<span class="fu"><a href="reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span><span class="va">poi</span><span class="op">)</span></pre></div>
 <p><strong>Routing API:</strong> Construct a route, create a route matrix or request an isochrone around points.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="reference/route.html">route</a></span>(<span class="kw">poi</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ], <span class="kw">poi</span>[<span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, ], mode = <span class="st">"car"</span>)
+<span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span>(<span class="kw">poi</span>, mode = <span class="st">"car"</span>)
+<span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span><span class="va">poi</span>, mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/isoline.html">isoline</a></span>(<span class="kw">poi</span>, rangetype = <span class="st">"time"</span>, mode = <span class="st">"car"</span>)
-</pre></div>
+<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, rangetype <span class="op">=</span> <span class="st">"time"</span>, mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span></pre></div>
 <p><strong>Traffic API:</strong> Get real-time traffic flow or incidents in a specific area.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="reference/flow.html">flow</a></span>(<span class="kw">aoi</span>[<span class="fl">2</span>, ])
+<span class="fu"><a href="reference/flow.html">flow</a></span><span class="op">(</span><span class="va">aoi</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/incident.html">incident</a></span>(<span class="kw">aoi</span>, from = <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span>(<span class="st">"2018-01-01 00:00:00"</span>))
-</pre></div>
+<span class="fu"><a href="reference/incident.html">incident</a></span><span class="op">(</span><span class="va">aoi</span>, from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span><span class="st">"2018-01-01 00:00:00"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><strong>Public Transit API:</strong> Request public transport connections between points or find stations nearby.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="reference/connection.html">connection</a></span>(<span class="kw">poi</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ], <span class="kw">poi</span>[<span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, ])
+<span class="fu"><a href="reference/connection.html">connection</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/station.html">station</a></span>(<span class="kw">poi</span>, radius = <span class="fl">500</span>)
-</pre></div>
+<span class="fu"><a href="reference/station.html">station</a></span><span class="op">(</span><span class="va">poi</span>, radius <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></pre></div>
 <p><strong>Intermodal Routing API:</strong> Get routes with various combinations of transport modes.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="reference/intermodal_route.html">intermodal_route</a></span>(<span class="kw">poi</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, ], <span class="kw">poi</span>[<span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, ])
-</pre></div>
+<span class="fu"><a href="reference/intermodal_route.html">intermodal_route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span></pre></div>
 <p><strong>Destination Weather API:</strong> Request weather observations, forecasts, astronomical information or alerts at specific locations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="reference/weather.html">weather</a></span>(<span class="kw">poi</span>, product = <span class="st">"observation"</span>)
+<span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"observation"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/weather.html">weather</a></span>(<span class="kw">poi</span>, product = <span class="st">"forecast_hourly"</span>)
+<span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"forecast_hourly"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/weather.html">weather</a></span>(<span class="kw">poi</span>, product = <span class="st">"forecast_astronomy"</span>)
+<span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"forecast_astronomy"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/weather.html">weather</a></span>(<span class="kw">poi</span>, product = <span class="st">"alerts"</span>)
-</pre></div>
+<span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"alerts"</span><span class="op">)</span></pre></div>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">

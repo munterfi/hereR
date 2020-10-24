@@ -84,19 +84,13 @@ The result is one route summary matrix, that fits the order of the provided POIs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -178,17 +172,17 @@ maximum matrix size per request and thereby minimize the number of overall neede
 The result is one route summary matrix, that fits the order of the provided POIs: <code>origIndex</code>, <code>destIndex</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>route_matrix</span>(
-  <span class='kw'>origin</span>,
-  destination = <span class='kw'>origin</span>,
-  datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(),
-  type = <span class='st'>"fastest"</span>,
-  mode = <span class='st'>"car"</span>,
-  traffic = <span class='fl'>FALSE</span>,
-  search_range = <span class='fl'>99999999</span>,
-  attribute = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"distance"</span>, <span class='st'>"traveltime"</span>),
-  url_only = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>route_matrix</span><span class='op'>(</span>
+  <span class='va'>origin</span>,
+  destination <span class='op'>=</span> <span class='va'>origin</span>,
+  datetime <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='st'>"fastest"</span>,
+  mode <span class='op'>=</span> <span class='st'>"car"</span>,
+  traffic <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  search_range <span class='op'>=</span> <span class='fl'>99999999</span>,
+  attribute <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"distance"</span>, <span class='st'>"traveltime"</span><span class='op'>)</span>,
+  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,14 +234,14 @@ The result is one route summary matrix, that fits the order of the provided POIs
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='set_key.html'>set_key</a></span>(<span class='st'>"&lt;YOUR API KEY&gt;"</span>)
+<span class='fu'><a href='set_key.html'>set_key</a></span><span class='op'>(</span><span class='st'>"&lt;YOUR API KEY&gt;"</span><span class='op'>)</span>
 
 <span class='co'># Create routes summaries between all POIs</span>
-<span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>route_matrix</span>(
-  origin = <span class='kw'>poi</span>,
-  traffic = <span class='fl'>TRUE</span>,
-  url_only = <span class='fl'>TRUE</span>
-)
+<span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>route_matrix</span><span class='op'>(</span>
+  origin <span class='op'>=</span> <span class='va'>poi</span>,
+  traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  url_only <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
