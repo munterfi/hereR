@@ -1,6 +1,6 @@
 on:
-  release:
-    types: [created, edited]
+  push:
+    - master
 
 name: pkgdown
 
