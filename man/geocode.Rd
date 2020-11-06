@@ -4,10 +4,12 @@
 \alias{geocode}
 \title{HERE Geocoder API: Geocode}
 \usage{
-geocode(address, sf = TRUE, url_only = FALSE, addresses)
+geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses)
 }
 \arguments{
 \item{address}{character, addresses to geocode.}
+
+\item{alternatives}{boolean, return also alternative results (\code{default = FALSE})?}
 
 \item{sf}{boolean, return an \code{sf} object (\code{default = TRUE}) or a
 \code{data.frame}?}

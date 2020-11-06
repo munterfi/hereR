@@ -6,6 +6,7 @@
 #' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
 #'
 #' @param address character, addresses to geocode.
+#' @param alternatives boolean, return also alternative results (\code{default = FALSE})?
 #' @param sf boolean, return an \code{sf} object (\code{default = TRUE}) or a
 #'   \code{data.frame}?
 #' @param url_only boolean, only return the generated URLs (\code{default =
@@ -25,7 +26,7 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' locs <- geocode(address = poi$city, url_only = TRUE)
-geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
+geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses) {
 
   if (!missing("addresses")) {
     warning("'addresses' is deprecated, use 'address' instead.")
@@ -34,6 +35,7 @@ geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
 
   # Input checks
   .check_addresses(address)
+  .check_boolean(alternatives)
   .check_boolean(sf)
   .check_boolean(url_only)
 
@@ -59,7 +61,7 @@ geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
   if (length(data) == 0) return(NULL)
 
   # Extract information
-  geocoded <- .extract_geocoded(data, address)
+  geocoded <- .extract_geocoded(data, address, alternatives)
 
   # Create sf object
   if (nrow(geocoded) > 0) {
@@ -87,9 +89,10 @@ geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
   }
 }
 
-.extract_geocoded <- function(data, address) {
+.extract_geocoded <- function(data, address, alternatives) {
   template <- data.table::data.table(
     id = numeric(),
+    rank = numeric(),
     address = character(),
     type = character(),
     street = character(),
@@ -119,6 +122,7 @@ geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
              }
              result <- data.table::data.table(
                id = ids[count],
+               rank = seq_len(nrow(df$items)),
                address = df$items$address$label,
                type = df$items$resultType,
                street = df$items$address$street,
@@ -134,7 +138,11 @@ geocode <- function(address, sf = TRUE, url_only = FALSE, addresses) {
                lng_position = df$items$position$lng,
                lat_position = df$items$position$lat
              )
-             result[1, ]
+             if (alternatives) {
+               return(result)
+             } else {
+               return(result[1, ])
+             }
            })
     ), fill = TRUE
   )

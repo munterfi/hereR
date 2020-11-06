@@ -10,6 +10,7 @@ test_that("geocode works", {
   expect_error(geocode(c("character", NA)), "'address' contains NAs.")
   expect_error(geocode(c("")), "'address' contains empty strings.")
   expect_error(geocode(c("  ")), "'address' contains empty strings.")
+  expect_error(geocode(c("test"), alternatives = NA), "'alternatives' must be a 'boolean' value.")
   expect_error(geocode(c("test"), sf = NA), "'sf' must be a 'boolean' value.")
   expect_error(geocode(c("test"), url_only = NA), "'url_only' must be a 'boolean' value.")
 
@@ -28,7 +29,7 @@ test_that("geocode works", {
   )
   with_mock(
     "hereR:::.get_content" = function(url) {hereR:::mock$geocode_response},
-    geocoded <- geocode(address = poi$city, sf = FALSE),
+    geocoded <- geocode(address = poi$city, alternatives = TRUE, sf = FALSE),
 
     # Tests
     expect_s3_class(geocoded, "data.frame", exact = TRUE),
