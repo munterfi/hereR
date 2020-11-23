@@ -37,10 +37,13 @@
 }
 
 .encode_datetime <- function(datetime) {
+  dt <- format(datetime, "%Y-%m-%dT%H:%M:%S%z")
   stringr::str_replace(
-    as.character(
-      format(datetime, tz = "UTC", usetz = FALSE)
-    ), " ", "T"
+    paste0(
+      stringr::str_sub(dt, 1, -3), ":",
+      stringr::str_sub(dt, -2, nchar(dt))
+    ),
+    "\\+", "%2B"
   )
 }
 

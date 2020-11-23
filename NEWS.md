@@ -1,5 +1,6 @@
 # version 0.5.1.9000
 
+* Send timezone offset in requests to the HERE APIs to avoid conversion to local timezone, closes [#85](https://github.com/munterfinger/hereR/issues/85).
 * Added option to return alternative results in `geocode()`. The alternative locations are ranked according to the order from the Geocoder API (closes [#83](https://github.com/munterfinger/hereR/issues/73 and [#74](https://github.com/munterfinger/hereR/issues/83).
 
 # version 0.5.1
