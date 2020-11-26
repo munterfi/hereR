@@ -1,6 +1,11 @@
+# version 0.5.2
+
+* Send timezone offset in requests to the HERE APIs to avoid conversion to local timezone (closes [#85](https://github.com/munterfinger/hereR/issues/85)).
+* Added option to return alternative results in `geocode()`. The alternative locations are ranked according to the order from the Geocoder API (closes [#83](https://github.com/munterfinger/hereR/issues/83) and [#81](https://github.com/munterfinger/hereR/issues/81)).
+
 # version 0.5.1
 
-* Fix of the request generation for the Geocoder API: Removal of the `&` in front of the `apiKey` argument (closes [#73](https://github.com/munterfinger/hereR/issues/73 and [#74](https://github.com/munterfinger/hereR/issues/74).
+* Fix of the request generation for the Geocoder API: Removal of the `&` in front of the `apiKey` argument (closes [#73](https://github.com/munterfinger/hereR/issues/73) and [#74](https://github.com/munterfinger/hereR/issues/74)).
 
 # version 0.5.0
 
@@ -33,7 +38,7 @@ object is returned, if `FALSE` a data.frame with `lng` and `lat` columns.
 
 * Added `set_verbose()` function to define (for the current R session) if the **hereR** package
 should message information about the number of requests sent and data received (default = `FALSE`).
-* Reactivate maps with multiple layers since the **mapview** issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
+* Reactivate maps with multiple layers since the **mapview** issue [#271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 * **lwgeom** no longer exports `st_make_valid()`, but **sf** does. Therefore `lwgeom` is moved from the package dependencies to the suggestions (see [#38](https://github.com/munterfinger/hereR/issues/38)).
 
 # version 0.3.2
@@ -41,7 +46,7 @@ should message information about the number of requests sent and data received (
 * Defunct the deprecated `traffic()` function, which has been replaced by the functions `flow()` and `incident()`.
 * Recreated package test data, api mocks and examples with **sf** 0.9-0 (see [#36](https://github.com/munterfinger/hereR/issues/36)).
 * Increased the dependency on the **sf** package to version 0.9-0 due to a different CRS handling (for more information about the changes in **sf**, see [here](https://www.r-spatial.org/r/2020/03/17/wkt.html)). **Note: Older versions of the sf package are no longer supported.**
-* Temporarily deactivated maps with multiple layers until the **mapview** issue [271](https://github.com/r-spatial/mapview/issues/271) is fixed.
+* Temporarily deactivated maps with multiple layers until the **mapview** issue [#271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 
 # version 0.3.1
 
