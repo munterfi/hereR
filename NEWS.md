@@ -1,11 +1,11 @@
 # version 0.5.2
 
 * Send timezone offset in requests to the HERE APIs to avoid conversion to local timezone, closes [#85](https://github.com/munterfinger/hereR/issues/85).
-* Added option to return alternative results in `geocode()`. The alternative locations are ranked according to the order from the Geocoder API (closes [#83](https://github.com/munterfinger/hereR/issues/73 and [#74](https://github.com/munterfinger/hereR/issues/83).
+* Added option to return alternative results in `geocode()`. The alternative locations are ranked according to the order from the Geocoder API (closes [#83](https://github.com/munterfinger/hereR/issues/83 and [#81](https://github.com/munterfinger/hereR/issues/81).
 
 # version 0.5.1
 
-* Fix of the request generation for the Geocoder API: Removal of the `&` in front of the `apiKey` argument (closes [#73](https://github.com/munterfinger/hereR/issues/73 and [#74](https://github.com/munterfinger/hereR/issues/74).
+* Fix of the request generation for the Geocoder API: Removal of the `&` in front of the `apiKey` argument (closes [#73](https://github.com/munterfinger/hereR/issues/73) and [#74](https://github.com/munterfinger/hereR/issues/74)).
 
 # version 0.5.0
 
