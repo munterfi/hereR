@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -158,12 +158,21 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="version-052" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.2">
+<a href="#version-052" class="anchor"></a>version 0.5.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>Send timezone offset in requests to the HERE APIs to avoid conversion to local timezone (closes <a href="https://github.com/munterfinger/hereR/issues/85"><a href='https://github.com/munterfinger/hereR/issues/85'>#85</a></a>).</li>
+<li>Added option to return alternative results in <code><a href="../reference/geocode.html">geocode()</a></code>. The alternative locations are ranked according to the order from the Geocoder API (closes <a href="https://github.com/munterfinger/hereR/issues/83"><a href='https://github.com/munterfinger/hereR/issues/83'>#83</a></a> and <a href="https://github.com/munterfinger/hereR/issues/81"><a href='https://github.com/munterfinger/hereR/issues/81'>#81</a></a>).</li>
+</ul>
+</div>
     <div id="version-051" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.1">
 <a href="#version-051" class="anchor"></a>version 0.5.1<small> 2020-10-20 </small>
 </h1>
 <ul>
-<li>Fix of the request generation for the Geocoder API: Removal of the <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code> in front of the <code>apiKey</code> argument (closes [<a href='https://github.com/munterfinger/hereR/issues/73'>#73</a>](<a href="https://github.com/munterfinger/hereR/issues/73" class="uri">https://github.com/munterfinger/hereR/issues/73</a> and <a href="https://github.com/munterfinger/hereR/issues/74"><a href='https://github.com/munterfinger/hereR/issues/74'>#74</a></a>.</li>
+<li>Fix of the request generation for the Geocoder API: Removal of the <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code> in front of the <code>apiKey</code> argument (closes <a href="https://github.com/munterfinger/hereR/issues/73"><a href='https://github.com/munterfinger/hereR/issues/73'>#73</a></a> and <a href="https://github.com/munterfinger/hereR/issues/74"><a href='https://github.com/munterfinger/hereR/issues/74'>#74</a></a>).</li>
 </ul>
 </div>
     <div id="version-050" class="section level1">
@@ -210,7 +219,7 @@
 </h1>
 <ul>
 <li>Added <code><a href="../reference/set_verbose.html">set_verbose()</a></code> function to define (for the current R session) if the <strong>hereR</strong> package should message information about the number of requests sent and data received (default = <code>FALSE</code>).</li>
-<li>Reactivate maps with multiple layers since the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
+<li>Reactivate maps with multiple layers since the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271"><a href='https://github.com/munterfinger/hereR/issues/271'>#271</a></a> is fixed.</li>
 <li>
 <strong>lwgeom</strong> no longer exports <code>st_make_valid()</code>, but <strong>sf</strong> does. Therefore <code>lwgeom</code> is moved from the package dependencies to the suggestions (see <a href="https://github.com/munterfinger/hereR/issues/38"><a href='https://github.com/munterfinger/hereR/issues/38'>#38</a></a>).</li>
 </ul>
@@ -224,7 +233,7 @@
 <li>Recreated package test data, api mocks and examples with <strong>sf</strong> 0.9-0 (see <a href="https://github.com/munterfinger/hereR/issues/36"><a href='https://github.com/munterfinger/hereR/issues/36'>#36</a></a>).</li>
 <li>Increased the dependency on the <strong>sf</strong> package to version 0.9-0 due to a different CRS handling (for more information about the changes in <strong>sf</strong>, see <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html">here</a>). <strong>Note: Older versions of the sf package are no longer supported.</strong>
 </li>
-<li>Temporarily deactivated maps with multiple layers until the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271">271</a> is fixed.</li>
+<li>Temporarily deactivated maps with multiple layers until the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271"><a href='https://github.com/munterfinger/hereR/issues/271'>#271</a></a> is fixed.</li>
 </ul>
 </div>
     <div id="version-031" class="section level1">

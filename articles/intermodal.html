@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -110,8 +110,7 @@
 
       
 
-      </header><script src="intermodal_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="intermodal_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="intermodal_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="intermodal_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Intermodal Routing API</h1>
@@ -129,12 +128,12 @@
 <h2 class="hasAnchor">
 <a href="#intermodal-routes" class="anchor"></a>Intermodal routes</h2>
 <p>In order to calculate route geometries (<code>LINESTRING</code>) between pairs of points using the ‘HERE Intermodal Routing API’ the function <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> is used. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. Routes can be limited to a maximum number of allowed transfers (includes mode changes and public transit transfers), by specifying the <code>transfer</code> parameter.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># Request routes</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Request routes</span>
 <span class="va">intermodal_routes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route.html">route</a></span><span class="op">(</span>
   origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>,
   destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>The <code>id</code> column corresponds to the row of the input locations (<code>origin</code> and <code>destination</code>) and the <code>rank</code> column enumerates the alternative routes. The maximum number of alternatives can be set by the <code>results</code> parameter. Each row in the returned <code>sf</code> object corresponds to a route section with a transport mode in a vehicle without a transfer.</p>
 <table class="table">
 <thead><tr>
@@ -187,16 +186,16 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2020-10-20 04:42:00
+2020-11-26 20:03:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2020-10-20 05:15:00
+2020-11-26 20:04:00
 </td>
 <td style="text-align:left;">
-Lugano Città TPL
+Castagnola, Villa Favorita
 </td>
 <td style="text-align:left;">
 pedestrian
@@ -214,10 +213,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-1971
+46
 </td>
 <td style="text-align:right;">
-1980
+60
 </td>
 </tr>
 <tr>
@@ -228,37 +227,37 @@ NA
 1
 </td>
 <td style="text-align:left;">
-2020-10-20 05:15:00
+2020-11-26 20:04:00
 </td>
 <td style="text-align:left;">
-Lugano Città TPL
+Castagnola, Villa Favorita
 </td>
 <td style="text-align:left;">
-2020-10-20 05:17:00
+2020-11-26 20:20:00
 </td>
 <td style="text-align:left;">
-Lugano Stazione TPL
+Lugano, Stazione
 </td>
 <td style="text-align:left;">
 transit
 </td>
 <td style="text-align:left;">
-inclined
+bus
 </td>
 <td style="text-align:left;">
-256
+2
 </td>
 <td style="text-align:left;">
-Trasporti Pubblici Luganesi SA
+Trasporti Pubblici Luganesi
 </td>
 <td style="text-align:left;">
-Lugano Stazione TPL
+Paradiso, Geretta
 </td>
 <td style="text-align:right;">
-228
+4709
 </td>
 <td style="text-align:right;">
-120
+960
 </td>
 </tr>
 <tr>
@@ -269,13 +268,13 @@ Lugano Stazione TPL
 1
 </td>
 <td style="text-align:left;">
-2020-10-20 05:17:00
+2020-11-26 20:20:00
 </td>
 <td style="text-align:left;">
-Lugano Stazione TPL
+Lugano, Stazione
 </td>
 <td style="text-align:left;">
-2020-10-20 05:20:00
+2020-11-26 20:24:00
 </td>
 <td style="text-align:left;">
 Lugano
@@ -296,10 +295,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-180
+240
 </td>
 <td style="text-align:right;">
-180
+240
 </td>
 </tr>
 <tr>
@@ -310,13 +309,13 @@ NA
 1
 </td>
 <td style="text-align:left;">
-2020-10-20 05:32:00
+2020-11-26 20:34:00
 </td>
 <td style="text-align:left;">
 Lugano
 </td>
 <td style="text-align:left;">
-2020-10-20 07:50:00
+2020-11-26 22:50:00
 </td>
 <td style="text-align:left;">
 Zürich HB
@@ -328,7 +327,7 @@ transit
 intercityTrain
 </td>
 <td style="text-align:left;">
-IC 2
+EC 16
 </td>
 <td style="text-align:left;">
 Schweizerische Bundesbahnen SBB
@@ -340,7 +339,7 @@ Zürich HB
 195050
 </td>
 <td style="text-align:right;">
-8280
+8160
 </td>
 </tr>
 <tr>
@@ -351,13 +350,13 @@ Zürich HB
 1
 </td>
 <td style="text-align:left;">
-2020-10-20 08:02:00
+2020-11-26 23:02:00
 </td>
 <td style="text-align:left;">
 Zürich HB
 </td>
 <td style="text-align:left;">
-2020-10-20 08:58:00
+2020-11-27 00:02:00
 </td>
 <td style="text-align:left;">
 Bern
@@ -375,13 +374,13 @@ IC 8
 Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:left;">
-Brig
+Bern
 </td>
 <td style="text-align:right;">
 121032
 </td>
 <td style="text-align:right;">
-3360
+3600
 </td>
 </tr>
 <tr>
@@ -392,13 +391,13 @@ Brig
 1
 </td>
 <td style="text-align:left;">
-2020-10-20 09:02:00
+2020-11-27 00:12:00
 </td>
 <td style="text-align:left;">
 Bern
 </td>
 <td style="text-align:left;">
-2020-10-20 09:13:00
+2020-11-27 00:23:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -410,13 +409,13 @@ transit
 cityTrain
 </td>
 <td style="text-align:left;">
-S 3
+S 44
 </td>
 <td style="text-align:left;">
 BLS AG (bls)
 </td>
 <td style="text-align:left;">
-Belp
+Thun
 </td>
 <td style="text-align:right;">
 8668
@@ -428,13 +427,13 @@ Belp
 </tbody>
 </table>
 <p>Print the intermodal routes on an interactive leaflet map:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu">mapview</span><span class="op">(</span><span class="va">intermodal_routes</span>,
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">mapview</span><span class="op">(</span><span class="va">intermodal_routes</span>,
         zcol <span class="op">=</span> <span class="st">"mode"</span>,
         layer.name <span class="op">=</span> <span class="st">"Intermodal route"</span>,
         map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
         homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">

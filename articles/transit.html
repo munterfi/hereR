@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -110,8 +110,7 @@
 
       
 
-      </header><script src="transit_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="transit_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="transit_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="transit_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Public Transit API</h1>
@@ -139,12 +138,12 @@
 <h3 class="hasAnchor">
 <a href="#sections" class="anchor"></a>1. Sections</h3>
 <p>Request available public transport connections as detailed sections:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="va">connection_section</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">connection_section</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
   origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>,
   destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,
   summary <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>The <code>id</code> column corresponds to the row of the input locations (<code>origin</code> and <code>destination</code>) and the <code>rank</code> column enumerates the alternative routes. The maximum number of alternatives can be set by the <code>results</code> parameter. Each row in the returned <code>sf</code> object corresponds to a route section with a transport mode in a vehicle without a transfer.</p>
 <table class="table">
 <thead><tr>
@@ -197,13 +196,13 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 21:54:00
+2020-11-26 19:19:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2020-10-19 22:04:00
+2020-11-26 19:29:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
@@ -238,13 +237,13 @@ NA
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 22:04:00
+2020-11-26 19:29:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2020-10-19 22:13:00
+2020-11-26 19:39:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
@@ -262,13 +261,13 @@ m2
 Transport publics de la Région Lausannoise
 </td>
 <td style="text-align:left;">
-Lausanne, Ouchy-Olympique
+Lausanne, gare
 </td>
 <td style="text-align:right;">
 2940
 </td>
 <td style="text-align:right;">
-540
+600
 </td>
 </tr>
 <tr>
@@ -279,13 +278,13 @@ Lausanne, Ouchy-Olympique
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 22:13:00
+2020-11-26 19:39:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
 </td>
 <td style="text-align:left;">
-2020-10-19 22:18:00
+2020-11-26 19:44:00
 </td>
 <td style="text-align:left;">
 Lausanne
@@ -320,13 +319,13 @@ NA
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 22:20:00
+2020-11-26 19:44:00
 </td>
 <td style="text-align:left;">
 Lausanne
 </td>
 <td style="text-align:left;">
-2020-10-19 23:26:00
+2020-11-26 20:56:00
 </td>
 <td style="text-align:left;">
 Bern
@@ -338,19 +337,19 @@ intercityTrain
 Intercity Train
 </td>
 <td style="text-align:left;">
-IC 1
+IR 15
 </td>
 <td style="text-align:left;">
 Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:left;">
-Zürich HB
+Luzern
 </td>
 <td style="text-align:right;">
 97091
 </td>
 <td style="text-align:right;">
-3960
+4320
 </td>
 </tr>
 <tr>
@@ -361,13 +360,13 @@ Zürich HB
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 23:32:00
+2020-11-26 21:02:00
 </td>
 <td style="text-align:left;">
 Bern
 </td>
 <td style="text-align:left;">
-2020-10-19 23:44:00
+2020-11-26 21:13:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -391,7 +390,7 @@ Belp
 8668
 </td>
 <td style="text-align:right;">
-720
+660
 </td>
 </tr>
 <tr>
@@ -402,13 +401,13 @@ Belp
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 23:44:00
+2020-11-26 21:13:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
 </td>
 <td style="text-align:left;">
-2020-10-19 23:45:00
+2020-11-26 21:14:00
 </td>
 <td style="text-align:left;">
 DEST
@@ -429,7 +428,7 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-76
+84
 </td>
 <td style="text-align:right;">
 60
@@ -438,24 +437,24 @@ NA
 </tbody>
 </table>
 <p>Print the public transport sections on an interactive leaflet map:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu">mapview</span><span class="op">(</span><span class="va">connection_section</span>,
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">mapview</span><span class="op">(</span><span class="va">connection_section</span>,
         zcol <span class="op">=</span> <span class="st">"mode"</span>,
         layer.name <span class="op">=</span> <span class="st">"Transport mode"</span>,
         map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
         homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="summary" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summary" class="anchor"></a>2. Summary</h3>
 <p>Request a summary of the available public transport connections:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">connection_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">connection_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
   origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>,
   destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,
   summary <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:right;">
@@ -507,13 +506,54 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 21:54:00
+2020-11-26 19:19:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2020-10-19 23:45:00
+2020-11-26 21:14:00
+</td>
+<td style="text-align:left;">
+Kehrsatz Nord
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+pedestrian, subway, pedestrian, intercityTrain, cityTrain, pedestrian
+</td>
+<td style="text-align:left;">
+Train, Intercity Train, Train
+</td>
+<td style="text-align:left;">
+m2, IR 15, S 3
+</td>
+<td style="text-align:left;">
+Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BLS AG (bls)
+</td>
+<td style="text-align:right;">
+109665
+</td>
+<td style="text-align:right;">
+6540
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+2020-11-26 19:52:00
+</td>
+<td style="text-align:left;">
+Lausanne, Sallaz
+</td>
+<td style="text-align:left;">
+2020-11-26 21:44:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -534,51 +574,10 @@ m2, IC 1, S 3
 Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BLS AG (bls)
 </td>
 <td style="text-align:right;">
-109657
+109665
 </td>
 <td style="text-align:right;">
-6180
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-2020-10-19 22:18:00
-</td>
-<td style="text-align:left;">
-Lausanne, Sallaz
-</td>
-<td style="text-align:left;">
-2020-10-20 00:24:00
-</td>
-<td style="text-align:left;">
-Kehrsatz Nord
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-pedestrian, subway, pedestrian, intercityTrain, cityTrain, pedestrian
-</td>
-<td style="text-align:left;">
-Train, Intercity Train, Train
-</td>
-<td style="text-align:left;">
-m2, IR 15, S 44
-</td>
-<td style="text-align:left;">
-Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BLS AG (bls)
-</td>
-<td style="text-align:right;">
-109657
-</td>
-<td style="text-align:right;">
-6480
+6120
 </td>
 </tr>
 <tr>
@@ -589,13 +588,54 @@ Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BL
 1
 </td>
 <td style="text-align:left;">
-2020-10-19 21:39:00
+2020-11-26 19:25:00
 </td>
 <td style="text-align:left;">
 Basel, Kleinhüningen
 </td>
 <td style="text-align:left;">
-2020-10-19 23:39:00
+2020-11-26 21:21:00
+</td>
+<td style="text-align:left;">
+Zürich HB
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+pedestrian, lightRail, pedestrian, intercityTrain, intercityTrain, pedestrian
+</td>
+<td style="text-align:left;">
+Tram, Intercity Train, Intercity Train
+</td>
+<td style="text-align:left;">
+8, 1, IR 17
+</td>
+<td style="text-align:left;">
+Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB, Schweizerische Bundesbahnen SBB
+</td>
+<td style="text-align:right;">
+100373
+</td>
+<td style="text-align:right;">
+6600
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+2020-11-26 19:39:00
+</td>
+<td style="text-align:left;">
+Basel, Kleinhüningen
+</td>
+<td style="text-align:left;">
+2020-11-26 21:39:00
 </td>
 <td style="text-align:left;">
 Zürich HB
@@ -616,51 +656,10 @@ Tram, Intercity Train
 Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:right;">
-94848
+94841
 </td>
 <td style="text-align:right;">
-7020
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-2020-10-19 21:54:00
-</td>
-<td style="text-align:left;">
-Basel, Kleinhüningen
-</td>
-<td style="text-align:left;">
-2020-10-19 23:47:00
-</td>
-<td style="text-align:left;">
-Zürich HB
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-pedestrian, lightRail, pedestrian, intercityTrain, intercityTrain, pedestrian
-</td>
-<td style="text-align:left;">
-Tram, Intercity Train, Intercity Train
-</td>
-<td style="text-align:left;">
-8, IC 61, IC 1
-</td>
-<td style="text-align:left;">
-Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB, Schweizerische Bundesbahnen SBB
-</td>
-<td style="text-align:right;">
-108350
-</td>
-<td style="text-align:right;">
-6240
+7080
 </td>
 </tr>
 </tbody>
@@ -671,15 +670,15 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB, Schweizerische Bundesb
 <h2 class="hasAnchor">
 <a href="#stations" class="anchor"></a>Stations</h2>
 <p>The function <code><a href="../reference/station.html">station()</a></code> allows to request public transport stations nearby points of interest (POIs). The <code>radius</code> defines the maximum search distance in meters and <code>results</code> specifies the maximum number of returned stations. The returned <code>sf</code> object contains the locations of the stations and the available public transport lines at the station.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/station.html">station</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/station.html">station</a></span><span class="op">(</span>
   poi <span class="op">=</span> <span class="va">poi</span>,
   radius <span class="op">=</span> <span class="fl">500</span>,
   results <span class="op">=</span> <span class="fl">5</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>Print the POIs, the radius and stations on an interactive leaflet map:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">buffer</span> <span class="op">&lt;-</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">buffer</span> <span class="op">&lt;-</span>
   <span class="va">poi</span> <span class="op">%&gt;%</span>
   <span class="fu">st_transform</span><span class="op">(</span><span class="fl">2056</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">st_buffer</span><span class="op">(</span><span class="fl">500</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -694,7 +693,7 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB, Schweizerische Bundesb
           homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">mapview</span><span class="op">(</span><span class="va">buffer</span>, col.region <span class="op">=</span> <span class="st">"transparent"</span>, alpha.region <span class="op">=</span> <span class="fl">0</span>,
           layer.name <span class="op">=</span> <span class="st">"Buffer"</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span>, legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">m</span></pre></div>
+<span class="va">m</span></code></pre></div>
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">

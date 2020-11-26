@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@
     <p>Geocodes addresses using the HERE 'Geocoder' API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geocode</span><span class='op'>(</span><span class='va'>address</span>, sf <span class='op'>=</span> <span class='cn'>TRUE</span>, url_only <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>addresses</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>geocode</span><span class='op'>(</span><span class='va'>address</span>, alternatives <span class='op'>=</span> <span class='cn'>FALSE</span>, sf <span class='op'>=</span> <span class='cn'>TRUE</span>, url_only <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>addresses</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +172,10 @@
     <tr>
       <th>address</th>
       <td><p>character, addresses to geocode.</p></td>
+    </tr>
+    <tr>
+      <th>alternatives</th>
+      <td><p>boolean, return also alternative results (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
       <th>sf</th>
@@ -196,6 +200,13 @@ geocoded addresses as geometry list column and the access coordinates as
 well-known text (WKT).
 If <code>sf = FALSE</code>, a <code>data.frame</code> containing the coordinates of the
 geocoded addresses as <code>lng</code>, <code>lat</code> columns.</p>
+<p>According to the
+<a href='https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html'>Geocoding
+and Search API Reference</a>, the access coordinates are "[c]oordinates of the
+place you are navigating to (for example, driving or walking). This is a
+point on a road or in a parking lot." The position coordinates are "[t]he
+coordinates (latitude, longitude) of a pin on a map corresponding to the
+searched place."</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html'>HERE Geocoder API: Geocode</a></p>

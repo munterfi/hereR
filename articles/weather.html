@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -110,8 +110,7 @@
 
       
 
-      </header><script src="weather_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="weather_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="weather_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="weather_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Destination Weather API</h1>
@@ -129,11 +128,11 @@
 <h2 class="hasAnchor">
 <a href="#observations" class="anchor"></a>Observations</h2>
 <p>In order to request information about the current weather situation points of interest (POIs) have to be provided. The POIs must be an <code>sf</code> object containing geometries of type <code>POINT</code> or a <code>character</code> vector containing place names (e.g. cities). These POIs are passed to the <code><a href="../reference/weather.html">weather()</a></code> function, whereby the <code>product</code> parameter is set to <code>"observation"</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="va">observation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">observation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
   poi <span class="op">=</span> <span class="va">poi</span>,
   product <span class="op">=</span> <span class="st">"observation"</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>The return value is an <code>sf</code> object, which contains the <code>POINT</code> geometries of the provided POIs and the most recent record on the observed weather. The measurements are taken from the nearest weather observation stations with respect to the POIs. The distance of the stations to the provided POIs is an indicator for the reliabilty of the weather information at each POI. A table of the observed weather near the example POIs:</p>
 <table class="table">
 <thead><tr>
@@ -168,19 +167,19 @@ Rönnimoos
 450
 </td>
 <td style="text-align:left;">
-Passing clouds. Quite cool.
+Fog. Chilly.
 </td>
 <td style="text-align:right;">
-5.00
+3
 </td>
 <td style="text-align:right;">
-87
+93
 </td>
 <td style="text-align:right;">
-7.41
+0.00
 </td>
 <td style="text-align:right;">
-250
+0
 </td>
 </tr>
 <tr>
@@ -191,16 +190,16 @@ Lugano
 670
 </td>
 <td style="text-align:left;">
-Fog. Cool.
+Clear. Chilly.
 </td>
 <td style="text-align:right;">
-8.00
+4
 </td>
 <td style="text-align:right;">
-100
+75
 </td>
 <td style="text-align:right;">
-1.85
+3.71
 </td>
 <td style="text-align:right;">
 0
@@ -214,19 +213,19 @@ Chailly
 340
 </td>
 <td style="text-align:left;">
-Cool.
+Fog. Chilly.
 </td>
 <td style="text-align:right;">
-7.61
+3
 </td>
 <td style="text-align:right;">
-80
+93
 </td>
 <td style="text-align:right;">
-7.41
+5.56
 </td>
 <td style="text-align:right;">
-30
+110
 </td>
 </tr>
 <tr>
@@ -240,16 +239,16 @@ Kleinhüningen
 Clear. Chilly.
 </td>
 <td style="text-align:right;">
-4.00
+2
 </td>
 <td style="text-align:right;">
-100
+93
 </td>
 <td style="text-align:right;">
-5.56
+12.97
 </td>
 <td style="text-align:right;">
-190
+140
 </td>
 </tr>
 <tr>
@@ -263,7 +262,7 @@ Kehrsatz
 Fog. Chilly.
 </td>
 <td style="text-align:right;">
-3.00
+2
 </td>
 <td style="text-align:right;">
 100
@@ -286,13 +285,13 @@ Zürich (Kreis 6) / Oberstrass
 Fog. Chilly.
 </td>
 <td style="text-align:right;">
-4.00
+2
 </td>
 <td style="text-align:right;">
-100
+93
 </td>
 <td style="text-align:right;">
-3.71
+5.56
 </td>
 <td style="text-align:right;">
 0
@@ -306,19 +305,19 @@ Geneva
 490
 </td>
 <td style="text-align:left;">
-Fog. Quite cool.
+Low clouds. Chilly.
 </td>
 <td style="text-align:right;">
-4.89
+4
 </td>
 <td style="text-align:right;">
 93
 </td>
 <td style="text-align:right;">
-1.85
+3.71
 </td>
 <td style="text-align:right;">
-260
+350
 </td>
 </tr>
 <tr>
@@ -329,26 +328,26 @@ Vaduz
 940
 </td>
 <td style="text-align:left;">
-Clear. Quite cool.
+Fog. Chilly.
 </td>
 <td style="text-align:right;">
-6.39
+2
 </td>
 <td style="text-align:right;">
-82
+100
 </td>
 <td style="text-align:right;">
-3.71
+9.27
 </td>
 <td style="text-align:right;">
-340
+100
 </td>
 </tr>
 </tbody>
 </table>
 <p>Print the weather observation information on an interactive leaflet map:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">m</span> <span class="op">&lt;-</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m</span> <span class="op">&lt;-</span>
   <span class="fu">mapview</span><span class="op">(</span><span class="va">observation</span>,
           zcol <span class="op">=</span> <span class="st">"temperature"</span>,
           cex <span class="op">=</span> <span class="va">observation</span><span class="op">$</span><span class="va">humidity</span><span class="op">/</span><span class="fl">4</span>,
@@ -363,23 +362,23 @@ Clear. Quite cool.
           legend <span class="op">=</span> <span class="cn">FALSE</span>,
           homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
-<span class="va">m</span></pre></div>
+<span class="va">m</span></code></pre></div>
 </div>
 <div id="forecast" class="section level2">
 <h2 class="hasAnchor">
 <a href="#forecast" class="anchor"></a>Forecast</h2>
 <p>An hourly forecast of the predicted weather for the following seven days can be obtained by setting the <code>product</code> parameter to <code>"forecast_hourly"</code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
   poi <span class="op">=</span> <span class="va">poi</span>,
   product <span class="op">=</span> <span class="st">"forecast_hourly"</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>Print the weather observation information on an interactive leaflet map with popup graphs for temperature and humidity:</p>
 <ol style="list-style-type: decimal">
 <li>Create a list containing the temperature and humidity graphs for every POI:</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">fc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
     dt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">utcTime</span>, format <span class="op">=</span> <span class="st">"%Y-%m-%dT%H:%M:%OS"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,
     te <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">temperature</span><span class="op">)</span>,
@@ -394,12 +393,12 @@ Clear. Quite cool.
     <span class="fu">ggtitle</span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">station</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">theme</span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span>, panel.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></pre></div>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Then add list of graphs to the leaflet map using the the <code>popup</code> parameter:</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">m</span> <span class="op">&lt;-</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m</span> <span class="op">&lt;-</span>
   <span class="fu">mapview</span><span class="op">(</span><span class="va">forecast</span>,
           color <span class="op">=</span> <span class="st">"black"</span>,
           col.region <span class="op">=</span> <span class="st">"yellow"</span>,
@@ -417,17 +416,17 @@ Clear. Quite cool.
           legend <span class="op">=</span> <span class="cn">FALSE</span>,
           homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
-<span class="va">m</span></pre></div>
+<span class="va">m</span></code></pre></div>
 </div>
 <div id="astronomy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#astronomy" class="anchor"></a>Astronomy</h2>
 <p>An astronomical forecast is requested by setting the <code>product</code> parameter to <code>"forecast_astronomy"</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">astronomy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">astronomy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
   poi <span class="op">=</span> <span class="va">poi</span>,
   product <span class="op">=</span> <span class="st">"forecast_astronomy"</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 Print a table for the sun and moon times of the first example POI, where the nearest station is ‘Emmenbrücke’:
 <table class="table">
 <thead><tr>
@@ -453,162 +452,162 @@ phase
 <tbody>
 <tr>
 <td style="text-align:left;">
-2020-10-19
+2020-11-26
+</td>
+<td style="text-align:left;">
+7:46AM
+</td>
+<td style="text-align:left;">
+4:41PM
+</td>
+<td style="text-align:left;">
+3:15PM
+</td>
+<td style="text-align:left;">
+3:27AM
+</td>
+<td style="text-align:left;">
+Waxing gibbous
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-11-27
+</td>
+<td style="text-align:left;">
+7:47AM
+</td>
+<td style="text-align:left;">
+4:41PM
+</td>
+<td style="text-align:left;">
+3:35PM
+</td>
+<td style="text-align:left;">
+4:30AM
+</td>
+<td style="text-align:left;">
+Waxing gibbous
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-11-28
+</td>
+<td style="text-align:left;">
+7:49AM
+</td>
+<td style="text-align:left;">
+4:40PM
+</td>
+<td style="text-align:left;">
+3:55PM
+</td>
+<td style="text-align:left;">
+5:34AM
+</td>
+<td style="text-align:left;">
+Waxing gibbous
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-11-29
+</td>
+<td style="text-align:left;">
+7:50AM
+</td>
+<td style="text-align:left;">
+4:40PM
+</td>
+<td style="text-align:left;">
+4:20PM
+</td>
+<td style="text-align:left;">
+6:39AM
+</td>
+<td style="text-align:left;">
+Full moon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-11-30
 </td>
 <td style="text-align:left;">
 7:51AM
 </td>
 <td style="text-align:left;">
-6:31PM
+4:39PM
 </td>
 <td style="text-align:left;">
-11:06AM
+4:49PM
 </td>
 <td style="text-align:left;">
-8:23PM
+7:45AM
 </td>
 <td style="text-align:left;">
-Waxing crescent
+Full moon
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2020-10-20
+2020-12-01
 </td>
 <td style="text-align:left;">
 7:52AM
 </td>
 <td style="text-align:left;">
-6:29PM
+4:39PM
 </td>
 <td style="text-align:left;">
-12:25PM
+5:27PM
 </td>
 <td style="text-align:left;">
-9:06PM
+8:48AM
 </td>
 <td style="text-align:left;">
-Waxing crescent
+Full moon
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2020-10-21
+2020-12-02
 </td>
 <td style="text-align:left;">
 7:54AM
 </td>
 <td style="text-align:left;">
-6:27PM
+4:38PM
 </td>
 <td style="text-align:left;">
-1:36PM
+6:12PM
 </td>
 <td style="text-align:left;">
-9:58PM
+9:49AM
 </td>
 <td style="text-align:left;">
-Waxing crescent
+Waning gibbous
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2020-10-22
+2020-12-03
 </td>
 <td style="text-align:left;">
 7:55AM
 </td>
 <td style="text-align:left;">
-6:26PM
+4:38PM
 </td>
 <td style="text-align:left;">
-2:35PM
+7:07PM
 </td>
 <td style="text-align:left;">
-10:58PM
+10:43AM
 </td>
 <td style="text-align:left;">
-Waxing crescent
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2020-10-23
-</td>
-<td style="text-align:left;">
-7:57AM
-</td>
-<td style="text-align:left;">
-6:24PM
-</td>
-<td style="text-align:left;">
-3:23PM
-</td>
-<td style="text-align:left;">
-<ul><li></ul>
-</td>
-<td style="text-align:left;">
-First Quarter
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2020-10-24
-</td>
-<td style="text-align:left;">
-7:58AM
-</td>
-<td style="text-align:left;">
-6:22PM
-</td>
-<td style="text-align:left;">
-3:59PM
-</td>
-<td style="text-align:left;">
-12:04AM
-</td>
-<td style="text-align:left;">
-First Quarter
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2020-10-25
-</td>
-<td style="text-align:left;">
-7:00AM
-</td>
-<td style="text-align:left;">
-5:20PM
-</td>
-<td style="text-align:left;">
-4:28PM
-</td>
-<td style="text-align:left;">
-1:12AM
-</td>
-<td style="text-align:left;">
-Waxing gibbous
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2020-10-26
-</td>
-<td style="text-align:left;">
-7:01AM
-</td>
-<td style="text-align:left;">
-5:19PM
-</td>
-<td style="text-align:left;">
-4:53PM
-</td>
-<td style="text-align:left;">
-2:19AM
-</td>
-<td style="text-align:left;">
-Waxing gibbous
+Waning gibbous
 </td>
 </tr>
 </tbody>
@@ -618,11 +617,11 @@ Waxing gibbous
 <h2 class="hasAnchor">
 <a href="#alerts" class="anchor"></a>Alerts</h2>
 <p>Current weather alerts, near provided POIs, are obtain by the product <code>alerts</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">alerts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">alerts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
   poi <span class="op">=</span> <span class="va">poi</span>,
   product <span class="op">=</span> <span class="st">"alerts"</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>This returns an <code>sf</code> object with the POIs and the attribute <code>"alerts"</code>, which is a <code>data.table</code>, which contains the current weather alerts. If no alerts are recorded near a POI the attribute <code>"alerts"</code> is <code>NULL</code>.</p>
 </div>
 <div id="api-reference" class="section level2">
