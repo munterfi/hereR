@@ -1,4 +1,5 @@
 # hereR <img src="man/figures/logo.svg" align="right" alt="" width="120" />
+
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/hereR)](https://CRAN.R-project.org/package=hereR)
 [![CRAN checks](https://cranchecks.info/badges/worst/hereR)](https://cran.r-project.org/web/checks/check_results_hereR.html)
@@ -34,9 +35,11 @@ remotes::install_github("munterfinger/hereR")
 ```
 
 ## Usage
+
 This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A free login and project can be created on [developer.here.com](https://developer.here.com/). In order to obtain the API key navigate to a project of your choice in the developer portal, select '**REST: Generate APP**' and then '**Create API Key**'.
 
 To set the API key, please use:
+
 ``` r
 library(hereR)
 set_key("<YOUR API KEY>")
@@ -45,6 +48,7 @@ set_key("<YOUR API KEY>")
 Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the following examples. A more detailed description can be found in the documentation of the functions and the package vignettes.
 
 **Geocoder API:** Autocomplete and geocode addresses or reverse geocode POIs.
+
 ``` r
 geocode(c("Schweighofstrasse 190, Zurich, Switzerland", "Hardstrasse 48, Zurich, Switzerland"))
 
@@ -54,6 +58,7 @@ reverse_geocode(poi)
 ```
 
 **Routing API:** Construct a route, create a route matrix or request an isochrone around points.
+
 ``` r
 route(poi[1:2, ], poi[3:4, ], mode = "car")
 
@@ -63,6 +68,7 @@ isoline(poi, rangetype = "time", mode = "car")
 ```
 
 **Traffic API:** Get real-time traffic flow or incidents in a specific area.
+
 ``` r
 flow(aoi[2, ])
 
@@ -70,6 +76,7 @@ incident(aoi, from = as.POSIXct("2018-01-01 00:00:00"))
 ```
 
 **Public Transit API:** Request public transport connections between points or find stations nearby.
+
 ``` r
 connection(poi[1:2, ], poi[3:4, ])
 
@@ -77,11 +84,13 @@ station(poi, radius = 500)
 ```
 
 **Intermodal Routing API:** Get routes with various combinations of transport modes.
+
 ``` r
 intermodal_route(poi[1:2, ], poi[3:4, ])
 ```
 
 **Destination Weather API:** Request weather observations, forecasts, astronomical information or alerts at specific locations.
+
 ``` r
 weather(poi, product = "observation")
 

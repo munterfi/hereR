@@ -24,6 +24,7 @@ reverse_geocoded <- hereR:::example$reverse_geocode
 Geocode addresses using the 'HERE Geocoder' and 'HERE Geocoder Autocomplete' APIs.
 
 ## Geocode addresses
+
 In order to geocode addresses, the function `geocode()` is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type `character`:
 
 ```{r print_addresses, eval=TRUE, echo=TRUE, out.width='100%'}
@@ -31,16 +32,19 @@ head(address, 3)
 ```
 
 Geocode the character vector containing the addresses:
+
 ```{r geocode, eval=FALSE}
 geocoded <- geocode(address)
 ```
 
 The return value is an `sf` object containing `POINT` geometries of the addresses:
+
 ```{r head_geocoded, eval=TRUE, echo=TRUE, out.width='100%'}
 head(geocoded, 3)
 ```
 
 Not found addresses are deleted from the result. This means that the `sf` object may contain fewer rows than the original number of addresses. The column `"id"` matches the order of the the input addresses. Using the `"id"` column a corresponding `data.frame` `"df"` with the addresses to geocode could be joined to the coordinates after geocoding.
+
 ```{r join_geocoded, eval=FALSE, echo=TRUE, out.width='100%'}
 df <- data.frame(
   company = c("Schweizerische Bundesbahnen SBB", "Bahnhof AG", "Deutsche Bahn AG"),
@@ -52,6 +56,7 @@ geocoded_sfdf <- st_as_sf(data.frame(locs, df[locs$id, ]))
 ```
 
 Print the geocoded addresses on an interactive leaflet map:
+
 ```{r map_geocoded, eval=FALSE, out.width='100%'}
 mapview(geocoded,
         label = geocoded$address,
@@ -65,8 +70,10 @@ mapview(geocoded,
 ## Autosuggestions
 
 The Geocoder Autosuggest API can be accessed using the `autosuggest()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each input address.
+
 ```{r autocomplete, eval=FALSE}
 suggestions <- autocomplete(address, results = 3)
+
 ```
 
 The return value is a `data.frame` containing autocomplete suggestions for the addresses. The variable `id` matches the index of the initial address vector, which was used as input and `order` stores the rank of the suggestion.
@@ -85,6 +92,7 @@ knitr::kable(head(results), format = "html")
 ```
 
 ## Reverse geocode POIs
+
 The reverse geocoding feature of the Geocoder API can be accessed using the `reverse_geocode()` function. The function allows to retrieve addresses near POIs. 
 
 ```{r reverse_geocode, eval=FALSE, echo=TRUE, out.width='100%'}

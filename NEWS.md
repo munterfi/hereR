@@ -29,15 +29,12 @@
 * Changed CI from Travis to GitHub actions.
 * Added automated pkgdown page build after pull requests and commits on master.
 * Extended test coverage on defunct function calls.
-* Added `sf` argument to `geocode()` function. If `TRUE`, the default, an {sf}
-object is returned, if `FALSE` a data.frame with `lng` and `lat` columns.
-(@dpprdan, [#44](https://github.com/munterfinger/hereR/pull/44))
+* Added `sf` argument to `geocode()` function. If `TRUE`, the default, an {sf} object is returned, if `FALSE` a data.frame with `lng` and `lat` columns. (@dpprdan, [#44](https://github.com/munterfinger/hereR/pull/44))
 * **Intermodal Routing API: Routes** The new feature `intermodal_route()` adds support for requesting intermodal routes between given pairs of locations.
 
 # version 0.3.3
 
-* Added `set_verbose()` function to define (for the current R session) if the **hereR** package
-should message information about the number of requests sent and data received (default = `FALSE`).
+* Added `set_verbose()` function to define (for the current R session) if the **hereR** package should message information about the number of requests sent and data received (default = `FALSE`).
 * Reactivate maps with multiple layers since the **mapview** issue [#271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 * **lwgeom** no longer exports `st_make_valid()`, but **sf** does. Therefore `lwgeom` is moved from the package dependencies to the suggestions (see [#38](https://github.com/munterfinger/hereR/issues/38)).
 
