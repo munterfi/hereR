@@ -64,7 +64,7 @@ route(poi[1:2, ], poi[3:4, ], mode = "car")
 
 route_matrix(poi, mode = "car")
 
-isoline(poi, rangetype = "time", mode = "car")
+isoline(poi, range_type = "time", mode = "car")
 ```
 
 **Traffic API:** Get real-time traffic flow or incidents in a specific area.
