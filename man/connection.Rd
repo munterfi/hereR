@@ -26,7 +26,7 @@ connection(
 
 \item{results}{numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).}
 
-\item{transfers}{numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, \code{default = -1}).}
+\item{transfers}{numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, whereby the \code{default = -1} allows for unlimited transfers).}
 
 \item{summary}{boolean, return a summary of the public transport connections instead of the sections of the routes (\code{default = FALSE})?}
 
