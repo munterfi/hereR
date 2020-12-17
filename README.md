@@ -57,7 +57,7 @@ autosuggest(c("Schweighofstrasse", "Hardstrasse"))
 reverse_geocode(poi)
 ```
 
-**Routing API:** Construct a route, create a route matrix or request an isochrone around points.
+**Routing API:** Construct a route or create a route matrix.
 
 ``` r
 route(poi[1:2, ], poi[3:4, ], mode = "car")
