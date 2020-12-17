@@ -35,7 +35,7 @@ coordinates (latitude, longitude) of a pin on a map corresponding to the
 searched place."
 }
 \description{
-Geocodes addresses using the HERE 'Geocoder' API.
+Geocodes addresses using the HERE 'Geocoding & Search API' API.
 }
 \examples{
 # Provide an API Key for a HERE project
@@ -44,5 +44,5 @@ set_key("<YOUR API KEY>")
 locs <- geocode(address = poi$city, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
+\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
 }
