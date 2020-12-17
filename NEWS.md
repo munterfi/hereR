@@ -1,3 +1,8 @@
+# version 0.5.2.9000
+
+* Update `isoline()` from v7.2 to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
+* Fix parsing of timezones in `connection()` and `intermodal_route()` (closes [#94](https://github.com/munterfinger/hereR/issues/94)).
+
 # version 0.5.2
 
 * Send timezone offset in requests to the HERE APIs to avoid conversion to local timezone (closes [#85](https://github.com/munterfinger/hereR/issues/85)).
