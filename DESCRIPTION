@@ -21,7 +21,7 @@ Depends: R (>= 3.3.0)
 Imports: 
     curl (>= 4.3),
     data.table (>= 1.12.6),
-    flexpolyline (>= 0.1.1),
+    flexpolyline (>= 0.2.0),
     jsonlite (>= 1.7.0),
     sf (>= 0.9-0),
     stringr (>= 1.4.0)
