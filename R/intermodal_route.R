@@ -123,8 +123,8 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
 
   # Postprocess
   routes <- routes[routes$rank <= results, ]
-  routes$departure <- .parse_datetime(routes$departure, tz = attr(datetime, "tzone"))
-  routes$arrival <- .parse_datetime(routes$arrival, tz = attr(datetime, "tzone"))
+  routes$departure <- .parse_datetime_tz(routes$departure, tz = attr(datetime, "tzone"))
+  routes$arrival <- .parse_datetime_tz(routes$arrival, tz = attr(datetime, "tzone"))
   rownames(routes) <- NULL
 
   # Create sf object
