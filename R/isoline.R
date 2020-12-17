@@ -205,6 +205,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
 }
 
 .aggregate_isolines <- function(isolines) {
+  tz <- attr(isolines$departure, "tzone")
   isolines <- sf::st_set_precision(isolines, 1e5)
   isolines <- sf::st_make_valid(isolines)
   isolines <- stats::aggregate(isolines, by = list(isolines$range),
@@ -216,6 +217,8 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   )
   isolines$Group.1 <- NULL
   isolines$id <- NA
+  attr(isolines$departure, "tzone") <- tz
+  attr(isolines$arrival, "tzone") <- tz
 
   # Fix geometry collections
   suppressWarnings(
