@@ -15,6 +15,7 @@
 #' @param routing_mode character, set the routing mode: \code{"fast"} or \code{"short"}.
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
+#' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
 #' @param aggregate boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -35,7 +36,8 @@
 isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
                     range = seq(5, 30, 5) * 60, range_type = "time",
                     routing_mode = "fast", transport_mode = "car",
-                    traffic = TRUE, aggregate = TRUE, url_only = FALSE) {
+                    traffic = TRUE, consumption_model = NULL,
+                    aggregate = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(poi)
@@ -93,9 +95,8 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     range_type
   )
 
-  # Add consumption details
-  # See: https://developer.here.com/documentation/routing-api/8.8.0/dev_guide/topics/use-cases/consumption-model.html
-  if (range_type == "consumption") {
+  # Add consumption model if specified, otherwise set to default electric vehicle
+  if(is.null(consumption_model)) {
     url <- paste0(
       url,
       "&ev[freeFlowSpeedTable]=0,0.239,27,0.239,45,0.259,60,0.196,75,0.207,90,0.238,100,0.26,110,0.296,120,0.337,130,0.351,250,0.351",
@@ -103,6 +104,11 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       "&ev[ascent]=9",
       "&ev[descent]=4.3",
       "&ev[auxiliaryConsumption]=1.8"
+    )
+  } else {
+    url <- paste0(
+      url,
+      consumption_model
     )
   }
 
@@ -226,5 +232,5 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       isolines, type = c("POLYGON")
     )
   )
-  isolines
+  return(isolines)
 }
