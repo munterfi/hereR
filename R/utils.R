@@ -6,9 +6,20 @@
   paste0(
     url,
     "apiKey=",
-    api_key)
+    api_key
+  )
 }
 
+.add_transport_mode <- function(url, transport_mode) {
+  paste0(
+    url,
+    "&transportMode=",
+    paste0(transport_mode, collapse = ",")
+  )
+}
+
+
+# Deprecated ...
 .add_mode <- function(url, type, mode, traffic) {
   mode_str <- sprintf(
     "%s;%s;%s",
@@ -114,12 +125,18 @@
   as.numeric(sapply(strsplit(names(content), "_"), function(x){x[[2]]}))
 }
 
+# Deprecated ...
 .parse_datetime <- function(datetime, format = "%Y-%m-%dT%H:%M:%OS", tz = Sys.timezone()) {
   datetime <- as.POSIXct(datetime, format = format, tz = "UTC")
   attr(datetime, "tzone") <- tz
   datetime
 }
 
+.parse_datetime_tz <- function(datetime, tz = Sys.timezone()) {
+  datetime <- as.POSIXct(sub(":(..)$", "\\1", datetime), format = "%Y-%m-%dT%H:%M:%OS%z")
+  attr(datetime, "tzone") <- tz
+  datetime
+}
 
 ## Geometries
 
@@ -130,6 +147,7 @@
   sf::st_linestring(cbind(lng, lat))
 }
 
+# Deprecated ...
 .polygon_from_pointList <- function(pointList) {
   coords <- strsplit(pointList, ",")
   lng <- as.numeric(sapply(coords, function(x) x[2]))

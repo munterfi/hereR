@@ -1,9 +1,9 @@
 #' HERE Geocoder API: Geocode
 #'
-#' Geocodes addresses using the HERE 'Geocoder' API.
+#' Geocodes addresses using the HERE 'Geocoding & Search API' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
+#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
 #'
 #' @param address character, addresses to geocode.
 #' @param alternatives boolean, return also alternative results (\code{default = FALSE})?

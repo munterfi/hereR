@@ -1,8 +1,8 @@
 ---
-title: "Routing API"
+title: "Routing APIs"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Routing API}
+  %\VignetteIndexEntry{Routing APIs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,7 +28,7 @@ origin <- poi[1:2, ]
 destination <- poi[3:4, ]
 ```
 
-Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the 'HERE Routing' API.
+Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the 'HERE Routing', 'HERE Matrix Routing' and 'HERE Isoline Routing' APIs.
 
 ## Routing directions
 
@@ -94,8 +94,8 @@ iso <- isoline(
   poi,
   range = seq(5, 30, 5) * 60,
   range_type = "time",
-  type = "fastest",
-  mode = "car",
+  routing_mode = "fast",
+  transport_mode = "car",
   aggregate = TRUE,
   traffic = FALSE
 )
@@ -116,6 +116,6 @@ mapview(iso,
 
 ## API Reference
 
-* [Route direction](https://developer.here.com/documentation/routing/topics/resource-calculate-route.html)
-* [Route matrix](https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html)
-* [Isoline](https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html)
+* [Routing](https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html)
+* [Matrix Routing](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
+* [Isoline Routing](https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html)

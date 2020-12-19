@@ -1,8 +1,8 @@
 ---
-title: "Geocoder API"
+title: "Geocoding & Search API"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Geocoder API}
+  %\VignetteIndexEntry{Geocoding & Search API}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -21,7 +21,7 @@ suggestions <- hereR:::example$autosuggest
 reverse_geocoded <- hereR:::example$reverse_geocode
 ```
 
-Geocode addresses using the 'HERE Geocoder' and 'HERE Geocoder Autocomplete' APIs.
+Autosuggest and geocode addresses or reverse geocode POIs using the 'HERE Geocoding & Search' API.
 
 ## Geocode addresses
 
@@ -69,7 +69,7 @@ mapview(geocoded,
 
 ## Autosuggestions
 
-The Geocoder Autosuggest API can be accessed using the `autosuggest()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each input address.
+The autosuggestion endpoint of the Geocoding & Search API can be accessed using the `autosuggest()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each input address.
 
 ```{r autocomplete, eval=FALSE}
 suggestions <- autocomplete(address, results = 3)
@@ -93,7 +93,7 @@ knitr::kable(head(results), format = "html")
 
 ## Reverse geocode POIs
 
-The reverse geocoding feature of the Geocoder API can be accessed using the `reverse_geocode()` function. The function allows to retrieve addresses near POIs. 
+The reverse geocoding feature of the Geocoding & Search API can be accessed using the `reverse_geocode()` function. The function allows to retrieve addresses near POIs. 
 
 ```{r reverse_geocode, eval=FALSE, echo=TRUE, out.width='100%'}
 reverse_geocoded <- reverse_geocode(poi = poi, results = 3)
@@ -116,6 +116,6 @@ If no addresses or landmarks are found near a POI, `NULL` for this POI is return
 
 ## API Reference
 
-* [Autocomplete](https://developer.here.com/documentation/geocoder-autocomplete/dev_guide/topics/resource-suggest.html)
-* [Geocoder](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html)
-* [Reverse Geocoder](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html)
+* [Geocoding & Search: Autosuggest](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html)
+* [Geocoding & Search: Geocode](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html)
+* [Geocoding & Search: Reverse Geocode](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html)

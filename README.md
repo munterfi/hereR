@@ -11,7 +11,7 @@
 
 The **hereR** package provides an interface to the **HERE REST APIs** for R:
 (1) geocode and autosuggest addresses or reverse geocode POIs using the **Geocoder API**;
-(2) route directions, travel distance or time matrices and isolines using the **Routing API**;
+(2) route directions, travel distance or time matrices and isolines using the **Routing API**, **Matrix Routing API** and **Isoline Routing API**;
 (3) request real-time traffic flow and incident information from the **Traffic API**;
 (4) find public transport connections and nearby stations using the **Public Transit API**;
 (5) request intermodal routes using the **Intermodal Routing API**;
@@ -47,7 +47,7 @@ set_key("<YOUR API KEY>")
 
 Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the following examples. A more detailed description can be found in the documentation of the functions and the package vignettes.
 
-**Geocoder API:** Autocomplete and geocode addresses or reverse geocode POIs.
+**Geocoding & Search API:** Autosuggest and geocode addresses or reverse geocode POIs.
 
 ``` r
 geocode(c("Schweighofstrasse 190, Zurich, Switzerland", "Hardstrasse 48, Zurich, Switzerland"))
@@ -57,14 +57,22 @@ autosuggest(c("Schweighofstrasse", "Hardstrasse"))
 reverse_geocode(poi)
 ```
 
-**Routing API:** Construct a route, create a route matrix or request an isochrone around points.
+**Routing API:** Construct a route or create a route matrix.
 
 ``` r
 route(poi[1:2, ], poi[3:4, ], mode = "car")
 
 route_matrix(poi, mode = "car")
+```
 
-isoline(poi, range_type = "time", mode = "car")
+**Isoline Routing API:** Construct isolines around points (time, distance or consumption).
+
+``` r
+isoline(poi, range_type = "time", transport_mode = "pedestrian")
+
+isoline(poi, range_type = "distance", transport_mode = "truck")
+
+isoline(poi, range_type = "consumption", transport_mode = "car")
 ```
 
 **Traffic API:** Get real-time traffic flow or incidents in a specific area.
@@ -103,9 +111,12 @@ weather(poi, product = "alerts")
 
 ## References
 
-* [Geocoder API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
-* [Routing API](https://developer.here.com/documentation/routing/dev_guide/topics/introduction.html)
+* [HERE Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
+* [Routing API](https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html)
+* [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
+* [Isoline Routing API](https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html)
 * [Traffic API](https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html)
 * [Public Transit API](https://developer.here.com/documentation/public-transit/dev_guide/index.html)
 * [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)
 * [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/overview.html)
+
