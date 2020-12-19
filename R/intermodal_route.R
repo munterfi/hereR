@@ -65,14 +65,6 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
     destination
   )
 
-  # # Add mode
-  # url = .add_mode(
-  #   url = url,
-  #   type = type,
-  #   mode = mode,
-  #   traffic = traffic
-  # )
-
   # Add departure time (arrival time is not supported)
   url <- .add_datetime(
     url,
@@ -145,10 +137,6 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   routes <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
-
-      # # O-D: function(data, origin, destination
-      # orig <- rev(as.numeric(strsplit(origin[[count]], ",")[[1]]))
-      # dest <- rev(as.numeric(strsplit(destination[[count]], ",")[[1]]))
 
       # Parse JSON
       df <- jsonlite::fromJSON(con)

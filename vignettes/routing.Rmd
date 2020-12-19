@@ -55,7 +55,7 @@ routes$label <- paste(origin$city[routes$id],
                       sep =  " - ")
 mapview(routes,
         zcol = "label",
-        lwd = routes$travelTime/max(routes$travelTime)*5,
+        lwd = routes$duration/max(routes$duration)*5,
         layer.name = "Route [O-D]",
         map.types = c("Esri.WorldTopoMap"),
         homebutton = FALSE

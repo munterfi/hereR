@@ -1,6 +1,7 @@
 # version 0.5.2.9000
 
-* Update `isoline()` from v7.2 to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
+* Update `route()` from  **Routing API v7.2** (calculateroute) to **Routing API v8**, which brings the elevation to the route geometries. **Note:**At the moment arrival time is not yet supported.
+* Update `isoline()` from **Routing API v7.2** (calculateisoline) to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
 * Fix parsing of timezones in `connection()` and `intermodal_route()` (closes [#94](https://github.com/munterfinger/hereR/issues/94)).
 
 # version 0.5.2

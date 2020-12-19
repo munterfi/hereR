@@ -98,16 +98,10 @@
 
 .check_transport_mode <- function(transport_mode, request) {
   modes <- c(
-    "car",
-    "pedestrian",
-    "carHOV",
-    "publicTransport",
-    "publicTransportTimeTable",
-    "truck",
-    "bicycle"
+    "car", "truck", "pedestrian", "bicycle", "scooter"
   )
   if (request == "isoline") {
-    modes <- modes[c(1, 2, 6)]
+    modes <- modes[c(1, 2, 3)]
     if (!transport_mode %in% modes) {
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
@@ -117,7 +111,6 @@
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
   } else if (request == "route") {
-    modes <- modes[c(1, 2, 3, 4, 6, 7)]
     if (!transport_mode %in% modes) {
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
@@ -243,6 +236,7 @@
   }
 }
 
+# Deprecated ...
 .check_vehicle_type <- function(vehicle_type) {
   vehicle_types <- c("diesel", "gasoline", "electric")
   if (!strsplit(vehicle_type, ",")[[1]][1] %in% vehicle_types) {

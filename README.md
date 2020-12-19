@@ -60,7 +60,11 @@ reverse_geocode(poi)
 **Routing API:** Construct a route or create a route matrix.
 
 ``` r
-route(poi[1:2, ], poi[3:4, ], mode = "car")
+route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = TRUE)
+
+route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = FALSE)
+
+route(poi[1:2, ], poi[3:4, ], transport_mode = "bicycle")
 
 route_matrix(poi, mode = "car")
 ```
