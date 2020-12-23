@@ -8,9 +8,9 @@ test_that("route_matrix works", {
   # Input checks
   expect_error(route_matrix(origin = c(1, 2, 3), destination = poi), "'origin' must be an sf object.")
   expect_error(route_matrix(origin = c("character", NA), destination = poi), "'origin' must be an sf object.")
-  expect_error(route_matrix(origin = poi, destination = poi, mode = "not_a_mode"))
-  expect_error(route_matrix(origin = poi, destination = poi, type = "not_a_type"))
-  expect_error(route_matrix(origin = poi, destination = poi, attribute = "not_an_attribute"), "'attribute' must be in 'distance', 'traveltime'.")
+  expect_error(route_matrix(origin = poi, destination = poi, datetime = "not_POSIXct"))
+  expect_error(route_matrix(origin = poi, destination = poi, transport_mode = "not_a_transport_mode"))
+  expect_error(route_matrix(origin = poi, destination = poi, routing_mode = "not_a_routing_mode"))
   expect_error(route_matrix(origin = poi, destination = poi, traffic = "not_a_bool"), "'traffic' must be a 'boolean' value.")
   expect_error(route_matrix(origin = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
