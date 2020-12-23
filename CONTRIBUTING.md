@@ -10,7 +10,7 @@ Ready to contribute? Here's how to set up **hereR** for local development.
 2. Install the dependencies (check the `DESCRIPTION` file).
 3. Create a feature or bugfix branch as appropriate: `git checkout -b feature/<feature-description> develop` or `git checkout -b bugfix/<bugfix-description> develop`
 4. Work locally on the feature, make sure to add or adjust:
-    - entries in NEWS.md
+    - entries in `NEWS.md`
     - function documentation (run `devtools::document()` before commiting)
     - tests for the feature (run `data-raw/internal.R` to recreate package example data and API mocks)
     - vignettes
@@ -88,7 +88,7 @@ Add a header to CLI scripts according to the following template:
 
 Add your GitHub user name to the fixed bug or added feature entry in the `NEWS.md` to ensure credits are given correctly:
 
-```r
+```
 # version x.x.x.9000
 
 * Added <feature description> (@<github_username>, [#1](https://github.com/munterfinger/hereR/pull/1)).
