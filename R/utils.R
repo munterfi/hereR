@@ -47,33 +47,38 @@
   }
 }
 
-.encode_datetime <- function(datetime) {
+.encode_datetime <- function(datetime, url_encode = TRUE) {
   dt <- format(datetime, "%Y-%m-%dT%H:%M:%S%z")
-  stringr::str_replace(
-    paste0(
-      stringr::str_sub(dt, 1, -3), ":",
-      stringr::str_sub(dt, -2, nchar(dt))
-    ),
-    "\\+", "%2B"
+  dt <- paste0(
+    stringr::str_sub(dt, 1, -3), ":",
+    stringr::str_sub(dt, -2, nchar(dt))
   )
+  if (url_encode) {
+    return(stringr::str_replace(dt, "\\+", "%2B"))
+  } else {
+    return(dt)
+  }
 }
 
 
 ## Requests
-
+# Inspired by: https://hydroecology.net/asynchronous-web-requests-with-curl/
 .get_content <- function(url, encoding = "UTF-8") {
   if (Sys.getenv("HERE_VERBOSE") != "") {
     message(
       sprintf(
         "Sending %s request(s) to: '%s?...'",
-        length(url), strsplit(url, "\\?", )[[1]][1]
+        length(url), strsplit(url[1], "\\?", )[[1]][1]
       )
     )
   }
-  # Code: https://hydroecology.net/asynchronous-web-requests-with-curl/
+
+  # Split url strings into url, headers and request body (if any)
+  url <- strsplit(url, " ")
+
   # Callback function generator - returns a callback function with ID
-  results = list()
-  cb_gen = function(id) {
+  results <- list()
+  cb_gen <- function(id) {
     function(res) {
       if (is.character(res))
         stop("Connection error: Please check connection to the internet and proxy configuration.")
@@ -90,20 +95,24 @@
   }
 
   # Define the IDs and callback functions
-  ids = paste0("request_", seq_along(url))
-  cbs = lapply(ids, cb_gen)
+  ids <- paste0("request_", seq_along(url))
+  cbs <- lapply(ids, cb_gen)
 
-  # Add requests to pool
-  pool = curl::new_pool()
+  # Add requests to pool and check for headers and request body
+  pool <- curl::new_pool()
   lapply(seq_along(url), function(i) {
     handle <- curl::new_handle()
-    curl::curl_fetch_multi(utils::URLencode(url[i]), pool = pool,
+    if (length(url[[i]]) == 3) {
+      curl::handle_setheaders(handle, .list = jsonlite::fromJSON(url[[i]][2]))
+      curl::handle_setopt(handle, copypostfields = url[[i]][3])
+    }
+    curl::curl_fetch_multi(utils::URLencode(url[[i]][1]), pool = pool,
                            done = cbs[[i]], fail = cbs[[i]],
-                           handle = curl::new_handle())
+                           handle = handle)
   })
 
   # Send requests and process the responses in the same order as the input URLs
-  out = curl::multi_run(pool = pool)
+  out <- curl::multi_run(pool = pool)
   results <- lapply(results[ids], function(x) {
     rawChar <- rawToChar(x$content)
     Encoding(rawChar) <- encoding
