@@ -57,7 +57,7 @@ autosuggest(c("Schweighofstrasse", "Hardstrasse"))
 reverse_geocode(poi)
 ```
 
-**Routing API:** Construct a route or create a route matrix.
+**Routing API:** Construct route geometries with elevation (dim = `XYZ`).
 
 ``` r
 route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = TRUE)
@@ -65,8 +65,17 @@ route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = TRUE)
 route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = FALSE)
 
 route(poi[1:2, ], poi[3:4, ], transport_mode = "bicycle")
+```
 
-route_matrix(poi, mode = "car")
+**Matrix Routing API:** Request a matrix of route summaries.
+
+``` r
+route_matrix(poi, transport_mode = "car", traffic = TRUE)
+
+route_matrix(
+  geocode(c("Schweighofstrasse 190, Zurich, Switzerland", "Hardstrasse 48, Zurich, Switzerland")),
+  transport_mode = "bicycle", traffic = FALSE
+)
 ```
 
 **Isoline Routing API:** Construct isolines around points (time, distance or consumption).
