@@ -2,7 +2,7 @@
 % Please edit documentation in R/reverse_geocode.R
 \name{reverse_geocode}
 \alias{reverse_geocode}
-\title{HERE Geocoder API: Reverse Geocode}
+\title{HERE Geocoding & Search API: Reverse Geocode}
 \usage{
 reverse_geocode(poi, results = 1, sf = TRUE, url_only = FALSE)
 }

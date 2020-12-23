@@ -62,9 +62,9 @@ mapview(routes,
 )
 ```
 
-## Routing matrix
+## Matrix routing
 
-The function `route_matrix()` calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as `sf` objects containing geometries of type `POINT` as input. If only one `sf` object is provided as `origin` an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function `route_matrix` is one route summary matrix, that fits the order of the provided POIs: `origIndex`, `destIndex`.
+The function `route_matrix()` calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as `sf` objects containing geometries of type `POINT` as input. If only one `sf` object is provided as `origin` an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function `route_matrix` is one route summary matrix, that fits the order of the provided POIs: `orig_id`, `dest_id`.
 
 ```{r matrix, eval=FALSE}
 # From - to
@@ -85,9 +85,9 @@ Print the first 10 rows of the matrix table, created from the POIs above, where 
 knitr::kable(head(mat, 10), format = "html")
 ```
 
-## Isoline
+## Isoline routing
 
-Isolines are constructed by the function `isoline()`. The calculated polygons (`POLYGON` or `MULTIPOLYGON`) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption as costfactor. By default the `aggregate` parameter is set to `TRUE`, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polyons are aggregated to polygons of geometry type `MULTIPOLYGON`. Thereby overlapping isolines are avoided.
+Isolines are constructed by the function `isoline()`. The calculated polygons (`POLYGON` or `MULTIPOLYGON`) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption. By default the `aggregate` parameter is set to `TRUE`, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polygons are aggregated to polygons of geometry type `MULTIPOLYGON`. Thereby overlapping isolines are avoided.
 
 ```{r isoline, eval=FALSE}
 iso <- isoline(

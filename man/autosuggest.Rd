@@ -2,7 +2,7 @@
 % Please edit documentation in R/autosuggest.R
 \name{autosuggest}
 \alias{autosuggest}
-\title{HERE Geocoder API: Autosuggest}
+\title{HERE Geocoding & Search API: Autosuggest}
 \usage{
 autosuggest(address, results = 5, url_only = FALSE)
 }

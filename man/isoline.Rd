@@ -2,7 +2,7 @@
 % Please edit documentation in R/isoline.R
 \name{isoline}
 \alias{isoline}
-\title{HERE Routing API: Calculate Isoline}
+\title{HERE Isoline Routing API: Calculate Isoline}
 \usage{
 isoline(
   poi,
