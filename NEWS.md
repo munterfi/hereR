@@ -5,6 +5,7 @@
 * Update `isoline()` from **Routing API v7.2** (calculateisoline) to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
 * Also return ISO state and country code in `geocode()` with the updated API v7.2 as it did with the previous API v6 (closes [#98](https://github.com/munterfinger/hereR/issues/98)).
 * Fix parsing of timezones in `connection()` and `intermodal_route()` (closes [#94](https://github.com/munterfinger/hereR/issues/94)).
+* Added contribution guidelines, code of conduct and issue templates.
 
 # version 0.5.2
 

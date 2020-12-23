@@ -12,10 +12,10 @@ Ready to contribute? Here's how to set up **hereR** for local development.
 4. Work locally on the feature, make sure to add or adjust:
     - entries in `NEWS.md`
     - function documentation (run `devtools::document()` before commiting)
-    - tests for the feature (run `data-raw/internal.R` to recreate package example data and API mocks)
+    - tests for the feature (run `export HERE_API_KEY="<YOUR-KEY>" && Rscript data-raw/internal.R && unset HERE_API_KEY` to recreate package example data and API mocks)
     - vignettes
 5. Commit and push changes to the new branch.
-6. If you are done with the new feature or bugfix and CI tests are passing on GitHub, create a pull request on GitHub of your `feature/...` or `bugfix/...` branch into the `develop` branch of the original repository (not your fork).
+6. If CI tests are passing on GitHub, create a pull request on GitHub of your `feature/...` or `bugfix/...` branch into the `develop` branch of the original repository (not your fork).
 
 ## Gitflow workflow
 
@@ -84,7 +84,7 @@ Add a header to CLI scripts according to the following template:
 
 ## Credits
 
-Add your GitHub user name to the fixed bug or added feature entry in the `NEWS.md` to ensure credits are given correctly:
+Add your GitHub username to the bugfix or feature entry in the `NEWS.md` to ensure credits are given correctly:
 
 ```
 # version x.x.x.9000
