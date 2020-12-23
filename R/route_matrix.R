@@ -83,10 +83,10 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   dest_idx <- list()
   url <- as.character(sapply(orig_div, function(i) {
     orig_batch <- orig_coords[
-      (i + 1):(if (i + batch_size_orig > nrow(orig_coords)) nrow(orig_coords) else i + batch_size_orig), ]
+      (i + 1):(if (i + batch_size_orig > nrow(orig_coords)) nrow(orig_coords) else i + batch_size_orig), , drop = FALSE]
     sapply(dest_div, function(j) {
       dest_batch <- dest_coords[
-        (j + 1):(if (j + batch_size_dest > nrow(dest_coords)) nrow(dest_coords) else j + batch_size_dest), ]
+        (j + 1):(if (j + batch_size_dest > nrow(dest_coords)) nrow(dest_coords) else j + batch_size_dest), , drop = FALSE]
       orig_idx <<- append(orig_idx, list(seq(0 + i, nrow(orig_batch) - 1 + i, 1)))
       dest_idx <<- append(dest_idx, list(seq(0 + j, nrow(dest_batch) - 1 + j, 1)))
       request_body <- .create_route_matrix_request_body(
