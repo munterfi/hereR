@@ -19,7 +19,6 @@ Ready to contribute? Here's how to set up **hereR** for local development.
 
 ## Gitflow workflow
 
-
 ### Master and develop
 
 The [gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) uses two branches to
@@ -37,7 +36,6 @@ This packages uses [semantic versions](https://semver.org/). Once `develop` has 
 fork a release (`release/v<major>.<minor>.<patch>)` branch off of `develop`. When CRAN has accepted the package submission,
 the release branch gets merged into `master` and tagged with a version number. In addition, it should be merged back into `develop`,
 which may have progressed since the release was initiated.
-
 
 ## Documentation and coding style
 
