@@ -122,6 +122,12 @@ weather(poi, product = "forecast_astronomy")
 weather(poi, product = "alerts")
 ```
 
+## Contributing
+
+* Contributions to this package are very welcome, Issues and pull requests are the preferred ways to share them.
+* Please see the [contribution guidelines](https://github.com/munterfinger/hereR/blob/develop/.github/CONTRIBUTING.md) and direct pull requests to the `develop` branch.
+* This project is released with a [Contributor Code of Conduct](https://github.com/munterfinger/hereR/blob/develop/.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
 ## References
 
 * [HERE Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)

@@ -93,3 +93,9 @@ Add your GitHub user name to the fixed bug or added feature entry in the `NEWS.m
 * Bugfix: <description> (@<github_username>, closes [#2](https://github.com/munterfinger/hereR/issues/2)).
 
 ```
+
+## Code of conduct
+
+Please note that this project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this
+project you agree to abide by its terms.
