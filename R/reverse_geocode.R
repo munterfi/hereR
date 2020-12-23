@@ -1,4 +1,4 @@
-#' HERE Geocoder API: Reverse Geocode
+#' HERE Geocoding & Search API: Reverse Geocode
 #'
 #' Get addresses from locations using the HERE 'Geocoder' API.
 #' The return value is an \code{sf} object, containing point geometries

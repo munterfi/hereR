@@ -1,4 +1,4 @@
-#' HERE Geocoder API: Autosuggest
+#' HERE Geocoding & Search API: Autosuggest
 #'
 #' Completes addresses using the HERE 'Geocoder Autosuggest' API.
 #'

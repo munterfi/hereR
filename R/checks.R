@@ -106,7 +106,7 @@
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
   } else if (request == "matrix") {
-    modes <- modes[c(1, 2, 3, 6)]
+    modes <- modes[c(1, 2, 3, 4)]
     if (!transport_mode %in% modes) {
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
@@ -207,6 +207,7 @@
   )
 }
 
+# Deprecated ...
 .check_attributes <- function(attribute) {
   attributes <- c("distance", "traveltime")
   if (any(!attribute %in% attributes)) {

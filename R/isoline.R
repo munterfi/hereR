@@ -1,4 +1,4 @@
-#' HERE Routing API: Calculate Isoline
+#' HERE Isoline Routing API: Calculate Isoline
 #'
 #' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Isoline Routing' API
 #' that connect the end points of all routes leaving from defined centers (POIs) with either

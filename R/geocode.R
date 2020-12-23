@@ -1,4 +1,4 @@
-#' HERE Geocoder API: Geocode
+#' HERE Geocoding & Search API: Geocode
 #'
 #' Geocodes addresses using the HERE 'Geocoding & Search API' API.
 #'
