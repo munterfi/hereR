@@ -11,11 +11,11 @@ Ready to contribute? Here's how to set up **hereR** for local development.
 3. Create a feature or bugfix branch as appropriate: `git checkout -b feature/<feature-description> develop` or `git checkout -b bugfix/<bugfix-description> develop`
 4. Work locally on the feature, make sure to add or adjust:
     - entries in `NEWS.md`
-    - function documentation (run `devtools::document()` before commiting)
+    - function documentation (run `devtools::document()` before commit)
     - tests for the feature (run `export HERE_API_KEY="<YOUR-KEY>" && Rscript data-raw/internal.R && unset HERE_API_KEY` to recreate package example data and API mocks)
     - vignettes
-5. Commit and push changes to the new branch.
-6. If CI tests are passing on GitHub, create a pull request on GitHub of your `feature/...` or `bugfix/...` branch into the `develop` branch of the original repository (not your fork).
+5. Push changes to the new branch.
+6. If CI tests are passing, create a pull request on GitHub of your `feature/...` or `bugfix/...` branch into the `develop` branch of the original repository.
 
 ## Gitflow workflow
 
