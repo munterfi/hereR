@@ -2,7 +2,7 @@
 name: Feature request
 about: Suggest an idea for the package
 title: 'Feature: <Title>'
-labels: 'enhancement'
+labels: 'feature'
 assignees: ''
 
 ---
