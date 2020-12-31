@@ -18,23 +18,6 @@
   )
 }
 
-
-# Deprecated ...
-.add_mode <- function(url, type, mode, traffic) {
-  mode_str <- sprintf(
-    "%s;%s;%s",
-    type,
-    mode,
-    if (traffic) {"traffic:enabled"} else {"traffic:disabled"})
-  return(
-    paste0(
-      url,
-      "&mode=",
-      mode_str
-    )
-  )
-}
-
 .add_datetime <- function(url, datetime, field_name) {
   if (is.null(datetime)) {
     return(url)
@@ -134,7 +117,7 @@
   as.numeric(sapply(strsplit(names(content), "_"), function(x){x[[2]]}))
 }
 
-# Deprecated ...
+# Deprecated (still used in incident and weather)...
 .parse_datetime <- function(datetime, format = "%Y-%m-%dT%H:%M:%OS", tz = Sys.timezone()) {
   datetime <- as.POSIXct(datetime, format = format, tz = "UTC")
   attr(datetime, "tzone") <- tz
@@ -154,14 +137,6 @@
   lng <- as.numeric(sapply(coords, function(x) x[2]))
   lat <- as.numeric(sapply(coords, function(x) x[1]))
   sf::st_linestring(cbind(lng, lat))
-}
-
-# Deprecated ...
-.polygon_from_pointList <- function(pointList) {
-  coords <- strsplit(pointList, ",")
-  lng <- as.numeric(sapply(coords, function(x) x[2]))
-  lat <- as.numeric(sapply(coords, function(x) x[1]))
-  sf::st_polygon(list(cbind(lng, lat)))
 }
 
 .wkt_from_point_df <- function(df, lng_col, lat_col) {
