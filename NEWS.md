@@ -1,10 +1,11 @@
 # version 0.5.2.9000
 
-* Update `route()` from  **Routing API v7.2** (calculateroute) to **Routing API v8**, which brings the elevation to the route geometries. **Note:**At the moment arrival time is not yet supported.
+* Update `route()` from  **Routing API v7.2** (calculateroute) to **Routing API v8**, which brings the elevation to the route geometries. **Note:** At the moment arrival time is not yet supported.
 * Update `route_matrix()` from **Routing API v7.2** (calculatematrix) to **Matrix Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
 * Update `isoline()` from **Routing API v7.2** (calculateisoline) to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
 * Also return ISO state and country code in `geocode()` with the updated API v7.2 as it did with the previous API v6 (closes [#98](https://github.com/munterfinger/hereR/issues/98)).
 * Fix parsing of timezones in `connection()` and `intermodal_route()` (closes [#94](https://github.com/munterfinger/hereR/issues/94)).
+* Fix issue with delimiter for POST requests by changing it from a space `" "` to a space pipe combination `" | "` (closes [#102](https://github.com/munterfinger/hereR/issues/102)).
 * Added contribution guidelines, code of conduct and issue templates.
 
 # version 0.5.2

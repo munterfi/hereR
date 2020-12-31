@@ -52,11 +52,11 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, 
     url = "https://geocode.search.hereapi.com/v1/geocode?"
   )
 
-  # Add addresses
+  # Add addresses and remove pipe
   url = paste0(
     url,
     "&q=",
-    address
+    gsub("\\|", "", address)
   )
 
   # Return urls if chosen

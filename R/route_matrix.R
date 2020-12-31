@@ -96,7 +96,8 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
         paste(
           base_url,
           request_headers,
-          request_body
+          request_body,
+          sep = " | "
         )
       )
     })

@@ -74,7 +74,7 @@
   }
 
   # Split url strings into url, headers and request body (if any)
-  url <- strsplit(url, " ")
+  url <- strsplit(url, " | ", fixed = TRUE)
 
   # Callback function generator - returns a callback function with ID
   results <- list()
