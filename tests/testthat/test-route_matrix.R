@@ -20,7 +20,7 @@ test_that("route_matrix works", {
     r_mat <- route_matrix(origin = poi),
 
     # Tests
-    expect_is(r_mat, c("data.frame")),
+    expect_is(r_mat, "data.frame"),
     expect_equal(nrow(r_mat), nrow(poi) ** 2)
   )
 })

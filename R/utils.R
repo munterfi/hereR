@@ -143,7 +143,7 @@
   df <- as.data.frame(df)
   sf::st_as_text(
     sf::st_as_sfc(
-      lapply(1:nrow(df), function(x) {
+      lapply(seq_len(nrow(df)), function(x) {
         if (is.numeric(df[x, lng_col]) & is.numeric(df[x, lat_col])) {
           return(
             sf::st_point(

@@ -229,7 +229,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   # Fix geometry collections
   suppressWarnings(
     isolines <- sf::st_collection_extract(
-      isolines, type = c("POLYGON")
+      isolines, type = "POLYGON"
     )
   )
   return(isolines)

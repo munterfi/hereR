@@ -8,8 +8,8 @@ test_that("autosuggest works", {
   # Input checks
   expect_error(autosuggest(c(1, 2, 3)), "'address' must be a 'character' vector.")
   expect_error(autosuggest(c("character", NA)), "'address' contains NAs.")
-  expect_error(autosuggest(c("")), "'address' contains empty strings.")
-  expect_error(autosuggest(c("  ")), "'address' contains empty strings.")
+  expect_error(autosuggest(""), "'address' contains empty strings.")
+  expect_error(autosuggest("  "), "'address' contains empty strings.")
 
   # Test with API response mock
   with_mock(
