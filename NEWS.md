@@ -4,6 +4,7 @@
 * Update `isoline()` from **Routing API v7.2** (calculateisoline) to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
 * Update `route()` from  **Routing API v7.2** (calculateroute) to **Routing API v8**, which brings the elevation to the route geometries (closes [#87](https://github.com/munterfinger/hereR/issues/87)). **Note:** Currently arrival time is not yet supported.
 * Return ISO state and country code in `geocode()` with the updated API v7.2 as it did with the previous API v6 (closes [#98](https://github.com/munterfinger/hereR/issues/98)).
+* Deprecate parameters `mode` and `type` in `route()`, `route_matrix()` and `isoline()`, use `transport_mode` and `routing_mode` instead.
 * Fix parsing of timezones in `connection()` and `intermodal_route()` (closes [#94](https://github.com/munterfinger/hereR/issues/94)).
 * Fix not conditional use of suggested packages in vignettes (closes [#101](https://github.com/munterfinger/hereR/issues/101)).
 * Fix issue with delimiter for POST requests by changing it from a space `" "` to a space pipe combination `" | "` (closes [#102](https://github.com/munterfinger/hereR/issues/102)).

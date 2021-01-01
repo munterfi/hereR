@@ -15,7 +15,9 @@ isoline(
   traffic = TRUE,
   consumption_model = NULL,
   aggregate = TRUE,
-  url_only = FALSE
+  url_only = FALSE,
+  type,
+  mode
 )
 }
 \arguments{
@@ -40,6 +42,10 @@ isoline(
 \item{aggregate}{boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
+
+\item{type}{character, 'type' is deprecated, use 'routing_mode' instead.}
+
+\item{mode}{character, 'mode' is deprecated, use 'transport_mode' instead.}
 }
 \value{
 An \code{sf} object containing the requested isolines.

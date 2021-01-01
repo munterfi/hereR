@@ -19,6 +19,8 @@
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
+#' @param type character, 'type' is deprecated, use 'routing_mode' instead.
+#' @param mode character, 'mode' is deprecated, use 'transport_mode' instead.
 #'
 #' @return
 #' An \code{sf} object containing the requested routes.
@@ -42,7 +44,19 @@
 #' )
 route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   results = 1, routing_mode = "fast", transport_mode = "car",
-                  traffic = TRUE, consumption_model = NULL, url_only = FALSE) {
+                  traffic = TRUE, consumption_model = NULL, url_only = FALSE,
+                  type, mode) {
+
+  # Deprecated parameters
+  if (!missing("type")) {
+    warning("'type' is deprecated, use 'routing_mode' instead.")
+    routing_mode <- type
+  }
+  if (!missing("mode")) {
+    warning("'mode' is deprecated, use 'transport_mode' instead.")
+    transport_mode <- mode
+  }
+
   # Checks
   .check_points(origin)
   .check_points(destination)

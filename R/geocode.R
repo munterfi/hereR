@@ -11,7 +11,6 @@
 #'   \code{data.frame}?
 #' @param url_only boolean, only return the generated URLs (\code{default =
 #'   FALSE})?
-#' @param addresses character, addresses to geocode (deprecated).
 #'
 #' @return
 #' If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates
@@ -34,12 +33,7 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' locs <- geocode(address = poi$city, url_only = TRUE)
-geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses) {
-
-  if (!missing("addresses")) {
-    warning("'addresses' is deprecated, use 'address' instead.")
-    address <- addresses
-  }
+geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) {
 
   # Input checks
   .check_addresses(address)

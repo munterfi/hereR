@@ -4,7 +4,7 @@
 \alias{geocode}
 \title{HERE Geocoding & Search API: Geocode}
 \usage{
-geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses)
+geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE)
 }
 \arguments{
 \item{address}{character, addresses to geocode.}
@@ -16,8 +16,6 @@ geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses)
 
 \item{url_only}{boolean, only return the generated URLs (\code{default =
 FALSE})?}
-
-\item{addresses}{character, addresses to geocode (deprecated).}
 }
 \value{
 If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates

@@ -14,9 +14,6 @@ test_that("geocode works", {
   expect_error(geocode("test", sf = NA), "'sf' must be a 'boolean' value.")
   expect_error(geocode("test", url_only = NA), "'url_only' must be a 'boolean' value.")
 
-  # Deprecated
-  expect_warning(geocode(addresses = c("test"), url_only = TRUE))
-
   # Test with API response mock
   with_mock(
     "hereR:::.get_content" = function(url) {hereR:::mock$geocode_response},
