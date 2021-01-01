@@ -125,8 +125,8 @@ weather(poi, product = "alerts")
 ## Contributing
 
 * Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them.
-* Please see the [Contribution Guidelines](https://github.com/munterfinger/hereR/blob/develop/.github/CONTRIBUTING.md) and direct pull requests to the `develop` branch.
-* This project is released with a [Contributor Code of Conduct](https://github.com/munterfinger/hereR/blob/develop/.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please see the [Contribution Guidelines](https://github.com/munterfinger/hereR/blob/master/.github/CONTRIBUTING.md) and direct pull requests to the `develop` branch.
+* This project is released with a [Contributor Code of Conduct](https://github.com/munterfinger/hereR/blob/master/.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ## References
 
