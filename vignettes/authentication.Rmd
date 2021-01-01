@@ -33,6 +33,8 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
+Alternatively, the key can be exported directly to the environment: `export HERE_API_KEY="<YOUR-KEY>"`
+
 ## Information about requests
 
 By default, the **hereR** package does not print messages with information about the

@@ -13,8 +13,12 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(mapview)
-mapviewOptions(fgb = FALSE)
+library(sf)
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+ mapview::mapviewOptions(fgb = FALSE)
+}
+
 address <- poi$city
 geocoded <- hereR:::example$geocode
 suggestions <- hereR:::example$autosuggest
@@ -58,22 +62,25 @@ geocoded_sfdf <- st_as_sf(data.frame(locs, df[locs$id, ]))
 Print the geocoded addresses on an interactive leaflet map:
 
 ```{r map_geocoded, eval=FALSE, out.width='100%'}
-mapview(geocoded,
-        label = geocoded$address,
-        col.regions = "red",
-        map.types = c("Esri.WorldTopoMap"),
-        legend = FALSE,
-        homebutton = FALSE
-)
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(geocoded,
+                   label = geocoded$address,
+                   col.regions = "red",
+                   map.types = c("Esri.WorldTopoMap"),
+                   legend = FALSE,
+                   homebutton = FALSE
+  )
+}
 ```
+
+**Note:** Setting `alternatives = TRUE` will also return alternative locations in the same order as received from the API (`rank` column).
 
 ## Autosuggestions
 
 The autosuggestion endpoint of the Geocoding & Search API can be accessed using the `autosuggest()` function. The `results` parameter defines the maximum number of suggestions that should be requested for each input address.
 
 ```{r autocomplete, eval=FALSE}
-suggestions <- autocomplete(address, results = 3)
-
+suggestions <- autosuggest(address, results = 3)
 ```
 
 The return value is a `data.frame` containing autocomplete suggestions for the addresses. The variable `id` matches the index of the initial address vector, which was used as input and `order` stores the rank of the suggestion.
@@ -102,14 +109,16 @@ reverse_geocoded <- reverse_geocode(poi = poi, results = 3)
 The function returns an `sf` object, containing the suggested addresses or landmark names of the reverse geocoded POIs. The coordinates are different from the initially provided POIs since they represent the locations of the suggested addresses or landmarks.
 
 ```{r map_reverse_geocode, eval=FALSE, echo=TRUE, out.width='100%'}
-m <-
-  mapview(poi, alpha.region = 0, col.region = "transparent",
-          label = poi$city, cex = 30, layer.name = "POIs",
-          map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
-  mapview(reverse_geocoded, col.region = "red", alpha = 0,
-          label = reverse_geocoded$label, layer.name = "Adresses",
-          homebutton = FALSE)
-m
+if (requireNamespace("mapview", quietly = TRUE)) {
+  m <-
+    mapview::mapview(poi, alpha.region = 0, col.region = "transparent",
+                     label = poi$city, cex = 30, layer.name = "POIs",
+                     map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
+    mapview::mapview(reverse_geocoded, col.region = "red", alpha = 0,
+                     label = reverse_geocoded$label, layer.name = "Adresses",
+                     homebutton = FALSE)
+  m
+}
 ```
 
 If no addresses or landmarks are found near a POI, `NULL` for this POI is returned. In this case the rows corresponding to this particular POI are missing and merging the POIs by row is not possible. However, in the returned `sf` object, the column `"id"` matches the rows of the input POIs. The `"id"` column can be used to join the original POIs.
