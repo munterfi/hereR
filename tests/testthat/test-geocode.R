@@ -8,14 +8,11 @@ test_that("geocode works", {
   # Input checks
   expect_error(geocode(c(1, 2, 3)), "'address' must be a 'character' vector.")
   expect_error(geocode(c("character", NA)), "'address' contains NAs.")
-  expect_error(geocode(c("")), "'address' contains empty strings.")
-  expect_error(geocode(c("  ")), "'address' contains empty strings.")
-  expect_error(geocode(c("test"), alternatives = NA), "'alternatives' must be a 'boolean' value.")
-  expect_error(geocode(c("test"), sf = NA), "'sf' must be a 'boolean' value.")
-  expect_error(geocode(c("test"), url_only = NA), "'url_only' must be a 'boolean' value.")
-
-  # Deprecated
-  expect_warning(geocode(addresses = c("test"), url_only = TRUE))
+  expect_error(geocode(""), "'address' contains empty strings.")
+  expect_error(geocode("  "), "'address' contains empty strings.")
+  expect_error(geocode("test", alternatives = NA), "'alternatives' must be a 'boolean' value.")
+  expect_error(geocode("test", sf = NA), "'sf' must be a 'boolean' value.")
+  expect_error(geocode("test", url_only = NA), "'url_only' must be a 'boolean' value.")
 
   # Test with API response mock
   with_mock(

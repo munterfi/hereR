@@ -13,19 +13,23 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(mapview)
-mapviewOptions(
-  fgb = FALSE,
-  vector.palette = colorRampPalette(
-    c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapviewOptions(
+    fgb = FALSE,
+    vector.palette = grDevices::colorRampPalette(
+      c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
+    )
   )
-)
+}
+
 intermodal_routes <- hereR:::example$intermodal_route
 ```
 
 Routing intermodal directions between locations based on the 'HERE Intermodal Routing' API.
 
 ## Intermodal routes
+
 In order to calculate route geometries (`LINESTRING`) between pairs of points using the 'HERE Intermodal Routing API' the function `intermodal_route()` is used. The function takes origin and destination locations as `sf` objects containing geometries of type `POINT` as input. Routes can be limited to a maximum number of allowed transfers (includes mode changes and public transit transfers), by specifying the `transfer` parameter.
 
 ```{r int_directions, eval=FALSE}
@@ -43,13 +47,16 @@ knitr::kable(head(as.data.frame(intermodal_routes)[, colnames(intermodal_routes)
 ```
 
 Print the intermodal routes on an interactive leaflet map:
+
 ```{r map_int_routes, eval=FALSE, out.width='100%'}
-mapview(intermodal_routes,
-        zcol = "mode",
-        layer.name = "Intermodal route",
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE
-)
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(intermodal_routes,
+                   zcol = "mode",
+                   layer.name = "Intermodal route",
+                   map.types = c("Esri.WorldTopoMap"),
+                   homebutton = FALSE
+  )
+}
 ```
 
 ## API Reference

@@ -1,4 +1,16 @@
-## Create internal `mock` and `example` dataset
+#!/usr/bin/env Rscript
+# -----------------------------------------------------------------------------
+# Name          :internal.R
+# Description   :Create internal `mock` and `example` dataset.
+# Author        :Merlin Unterfinger <info@munterfinger.ch>
+# Date          :2020-12-23
+# Version       :0.1.0
+# Usage         :export HERE_API_KEY="<KEY>" && ./data-raw/internal.R
+# Notes         :Export API key before executing: export HERE_API_KEY=<KEY>
+#                and unset after recreation of data: unset HERE_API_KEY.
+# R             :4.0.3
+# =============================================================================
+
 library(sf)
 library(hereR)
 set_verbose(TRUE)

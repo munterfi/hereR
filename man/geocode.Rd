@@ -2,9 +2,9 @@
 % Please edit documentation in R/geocode.R
 \name{geocode}
 \alias{geocode}
-\title{HERE Geocoder API: Geocode}
+\title{HERE Geocoding & Search API: Geocode}
 \usage{
-geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses)
+geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE)
 }
 \arguments{
 \item{address}{character, addresses to geocode.}
@@ -16,8 +16,6 @@ geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses)
 
 \item{url_only}{boolean, only return the generated URLs (\code{default =
 FALSE})?}
-
-\item{addresses}{character, addresses to geocode (deprecated).}
 }
 \value{
 If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates
@@ -35,7 +33,7 @@ coordinates (latitude, longitude) of a pin on a map corresponding to the
 searched place."
 }
 \description{
-Geocodes addresses using the HERE 'Geocoder' API.
+Geocodes addresses using the HERE 'Geocoding & Search API' API.
 }
 \examples{
 # Provide an API Key for a HERE project
@@ -44,5 +42,5 @@ set_key("<YOUR API KEY>")
 locs <- geocode(address = poi$city, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
+\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
 }

@@ -1,3 +1,15 @@
+# version 0.5.2.9000
+
+* Update `route_matrix()` from **Routing API v7.2** (calculatematrix) to **Matrix Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
+* Update `isoline()` from **Routing API v7.2** (calculateisoline) to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
+* Update `route()` from  **Routing API v7.2** (calculateroute) to **Routing API v8**, which brings the elevation to the route geometries (closes [#87](https://github.com/munterfinger/hereR/issues/87)). **Note:** Currently arrival time is not yet supported.
+* Return ISO state and country code in `geocode()` with the updated API v7.2 as it did with the previous API v6 (closes [#98](https://github.com/munterfinger/hereR/issues/98)).
+* Deprecate parameters `mode` and `type` in `route()`, `route_matrix()` and `isoline()`, use `transport_mode` and `routing_mode` instead.
+* Fix parsing of timezones in `connection()` and `intermodal_route()` (closes [#94](https://github.com/munterfinger/hereR/issues/94)).
+* Fix not conditional use of suggested packages in vignettes (closes [#101](https://github.com/munterfinger/hereR/issues/101)).
+* Fix issue with delimiter for POST requests by changing it from a space `" "` to a space pipe combination `" | "` (closes [#102](https://github.com/munterfinger/hereR/issues/102)).
+* Added contribution guidelines, code of conduct and issue templates.
+
 # version 0.5.2
 
 * Send timezone offset in requests to the HERE APIs to avoid conversion to local timezone (closes [#85](https://github.com/munterfinger/hereR/issues/85)).
@@ -29,15 +41,12 @@
 * Changed CI from Travis to GitHub actions.
 * Added automated pkgdown page build after pull requests and commits on master.
 * Extended test coverage on defunct function calls.
-* Added `sf` argument to `geocode()` function. If `TRUE`, the default, an {sf}
-object is returned, if `FALSE` a data.frame with `lng` and `lat` columns.
-(@dpprdan, [#44](https://github.com/munterfinger/hereR/pull/44))
+* Added `sf` argument to `geocode()` function. If `TRUE`, the default, an {sf} object is returned, if `FALSE` a data.frame with `lng` and `lat` columns. (@dpprdan, [#44](https://github.com/munterfinger/hereR/pull/44))
 * **Intermodal Routing API: Routes** The new feature `intermodal_route()` adds support for requesting intermodal routes between given pairs of locations.
 
 # version 0.3.3
 
-* Added `set_verbose()` function to define (for the current R session) if the **hereR** package
-should message information about the number of requests sent and data received (default = `FALSE`).
+* Added `set_verbose()` function to define (for the current R session) if the **hereR** package should message information about the number of requests sent and data received (default = `FALSE`).
 * Reactivate maps with multiple layers since the **mapview** issue [#271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 * **lwgeom** no longer exports `st_make_valid()`, but **sf** does. Therefore `lwgeom` is moved from the package dependencies to the suggestions (see [#38](https://github.com/munterfinger/hereR/issues/38)).
 

@@ -15,14 +15,16 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(mapview)
-library(ggplot2)
-mapviewOptions(
-  fgb = FALSE,
-  vector.palette = colorRampPalette(
-    c("#0571B0", "#92C5DE", "#F7F7F7","#F4A582", "#CA0020")
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapviewOptions(
+    fgb = FALSE,
+    vector.palette = colorRampPalette(
+      c("#0571B0", "#92C5DE", "#F7F7F7","#F4A582", "#CA0020")
+    )
   )
-)
+}
+
 observation <- hereR:::example$weather_observation
 forecast <- hereR:::example$weather_forecast_hourly
 astronomy <- hereR:::example$weather_forecast_astronomy
@@ -32,8 +34,10 @@ alerts <- hereR:::example$weather_alerts
 Weather forecasts, reports on current weather conditions, astronomical information and alerts at a specific location based on the 'HERE Destination Weather' API.
 
 ## Observations
+
 In order to request information about the current weather situation points of interest (POIs) have to be provided. The POIs must be an `sf` object containing geometries of type `POINT` or a `character` vector containing place names (e.g. cities).
 These POIs are passed to the `weather()` function, whereby the `product` parameter is set to `"observation"`:
+
 ```{r observations, eval = FALSE}
 observation <- weather(
   poi = poi,
@@ -51,27 +55,32 @@ knitr::kable(as.data.frame(observation)[, cols], format = "html")
 ```
 
 Print the weather observation information on an interactive leaflet map:
+
 ```{r map_obs, eval=FALSE, out.width='100%'}
-m <-
-  mapview(observation,
-          zcol = "temperature",
-          cex = observation$humidity/4,
-          layer.name = "Observation",
-          map.types = c("Esri.WorldTopoMap"),
-          homebutton = FALSE
-  ) + 
-  mapview(poi,
-          zcol = "city",
-          cex = 1,
-          col.region = "black",
-          legend = FALSE,
-          homebutton = FALSE
-  )
-m
+if (requireNamespace("mapview", quietly = TRUE)) {
+  m <-
+    mapview::mapview(observation,
+                     zcol = "temperature",
+                     cex = observation$humidity/4,
+                     layer.name = "Observation",
+                     map.types = c("Esri.WorldTopoMap"),
+                     homebutton = FALSE
+    ) +
+    mapview::mapview(poi,
+                     zcol = "city",
+                     cex = 1,
+                     col.region = "black",
+                     legend = FALSE,
+                     homebutton = FALSE
+    )
+  m
+}
 ```
 
 ## Forecast
-An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecast_hourly"`
+
+An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecast_hourly"`:
+
 ```{r forecast, eval = FALSE}
 forecast <- weather(
   poi = poi,
@@ -82,50 +91,59 @@ forecast <- weather(
 Print the weather observation information on an interactive leaflet map with popup graphs for temperature and humidity:
 
 1. Create a list containing the temperature and humidity graphs for every POI:
+
 ```{r plots_forecast, eval=TRUE, out.width='100%'}
-g <- lapply(1:nrow(forecast), function(x) {
-  fc <- data.frame(
-    dt = as.POSIXct(forecast$forecast[[x]]$utcTime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
-    te = as.numeric(forecast$forecast[[x]]$temperature),
-    rh = as.numeric(forecast$forecast[[x]]$humidity)
-  )
-  ggplot(fc, aes(x = dt)) + 
-    geom_line(aes(y = te, colour = "Temperature")) +
-    geom_line(aes(y = rh/5, colour = "Humidity")) +
-    scale_y_continuous(sec.axis = sec_axis(~.*5, name = "Relative humidity [%]")) + 
-    scale_colour_manual(values = c("blue", "red")) +
-    labs(y = "Air temperature [°C]", x = "", colour = "") +
-    ggtitle(forecast$station[x]) +
-    theme_minimal() +
-    theme(legend.position="bottom", panel.background = element_rect(color = NA))
-})
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+  g <- lapply(seq_len(nrow(forecast)), function(x) {
+    fc <- data.frame(
+      dt = as.POSIXct(forecast$forecast[[x]]$utcTime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
+      te = as.numeric(forecast$forecast[[x]]$temperature),
+      rh = as.numeric(forecast$forecast[[x]]$humidity)
+    )
+    ggplot2::ggplot(fc, ggplot2::aes(x = dt)) +
+      ggplot2::geom_line(ggplot2::aes(y = te, colour = "Temperature")) +
+      ggplot2::geom_line(ggplot2::aes(y = rh/5, colour = "Humidity")) +
+      ggplot2::scale_y_continuous(sec.axis = ggplot2::sec_axis(~.*5, name = "Relative humidity [%]")) +
+      ggplot2::scale_colour_manual(values = c("blue", "red")) +
+      ggplot2::labs(y = "Air temperature [°C]", x = "", colour = "") +
+      ggplot2::ggtitle(forecast$station[x]) +
+      ggplot2::theme_minimal() +
+      ggplot2::theme(legend.position="bottom", panel.background = ggplot2::element_rect(color = NA))
+  })
+}
 ```
 
 2. Then add list of graphs to the leaflet map using the the `popup` parameter:
+
 ```{r map_forecast, eval=FALSE, out.width='100%'}
-m <-
-  mapview(forecast,
-          color = "black",
-          col.region = "yellow",
-          layer.name = "Forecast",
-          zcol = "station",
-          map.types = c("Esri.WorldTopoMap"),
-          homebutton = FALSE,
-          legend = FALSE,
-          popup = leafpop::popupGraph(g)
-  ) + 
-  mapview(poi,
-          zcol = "city",
-          cex = 1,
-          col.region = "black",
-          legend = FALSE,
-          homebutton = FALSE
-  )
-m
+if (requireNamespace(c("ggplot2", "mapview", "leafpop"), quietly = TRUE)) {
+  m <-
+    mapview::mapview(forecast,
+                     color = "black",
+                     col.region = "yellow",
+                     layer.name = "Weather station",
+                     zcol = "station",
+                     map.types = c("Esri.WorldTopoMap"),
+                     homebutton = FALSE,
+                     legend = FALSE,
+                     popup = leafpop::popupGraph(g)
+    ) +
+    mapview::mapview(poi,
+                     zcol = "city",
+                     cex = 1,
+                     col.region = "black",
+                     layer.name = "POI",
+                     legend = FALSE,
+                     homebutton = FALSE
+    )
+  m
+}
 ```
 
 ## Astronomy
+
 An astronomical forecast is requested by setting the `product` parameter to `"forecast_astronomy"`:
+
 ```{r astronomy, eval = FALSE}
 astronomy <- weather(
   poi = poi,
@@ -134,6 +152,7 @@ astronomy <- weather(
 ```
 
 Print a table for the sun and moon times of the first example POI, where the nearest station is 'Emmenbrücke':
+
 ```{r table_ast, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE, screenshot.force=FALSE}
 ast <- astronomy$astronomy[[1]]
 ast$phase <- ast$moonPhaseDesc
@@ -142,13 +161,16 @@ knitr::kable(ast[, cols], format = "html", )
 ```
 
 ## Alerts
+
 Current weather alerts, near provided POIs, are obtain by the product `alerts`:
+
 ```{r alerts, eval = FALSE}
 alerts <- weather(
   poi = poi,
   product = "alerts"
 )
 ```
+
 This returns an `sf` object with the POIs and the attribute `"alerts"`, which is a `data.table`, which contains the current weather alerts. If no alerts are recorded near a POI the attribute `"alerts"` is `NULL`.
 
 ## API Reference

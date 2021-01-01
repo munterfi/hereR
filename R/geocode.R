@@ -1,9 +1,9 @@
-#' HERE Geocoder API: Geocode
+#' HERE Geocoding & Search API: Geocode
 #'
-#' Geocodes addresses using the HERE 'Geocoder' API.
+#' Geocodes addresses using the HERE 'Geocoding & Search API' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html}{HERE Geocoder API: Geocode}
+#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
 #'
 #' @param address character, addresses to geocode.
 #' @param alternatives boolean, return also alternative results (\code{default = FALSE})?
@@ -11,7 +11,6 @@
 #'   \code{data.frame}?
 #' @param url_only boolean, only return the generated URLs (\code{default =
 #'   FALSE})?
-#' @param addresses character, addresses to geocode (deprecated).
 #'
 #' @return
 #' If \code{sf = TRUE}, an \code{sf} object, containing the position coordinates
@@ -34,12 +33,7 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' locs <- geocode(address = poi$city, url_only = TRUE)
-geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, addresses) {
-
-  if (!missing("addresses")) {
-    warning("'addresses' is deprecated, use 'address' instead.")
-    address <- addresses
-  }
+geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) {
 
   # Input checks
   .check_addresses(address)
@@ -52,11 +46,11 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, 
     url = "https://geocode.search.hereapi.com/v1/geocode?"
   )
 
-  # Add addresses
+  # Add addresses and remove pipe
   url = paste0(
     url,
     "&q=",
-    address
+    gsub("\\|", "", address)
   )
 
   # Return urls if chosen
@@ -106,6 +100,8 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, 
     street = character(),
     house_number = character(),
     postal_code = character(),
+    state_code = character(),
+    country_code = character(),
     district = character(),
     city = character(),
     county = character(),
@@ -136,6 +132,8 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, 
                street = df$items$address$street,
                house_number = df$items$address$houseNumber,
                postal_code = df$items$address$postalCode,
+               state_code = df$items$address$stateCode,
+               country_code = df$items$address$countryCode,
                district = df$items$address$district,
                city = df$items$address$city,
                county = df$items$address$county,

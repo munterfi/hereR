@@ -96,35 +96,28 @@
   }
 }
 
-.check_mode <- function(mode, request) {
+.check_transport_mode <- function(transport_mode, request) {
   modes <- c(
-    "car",
-    "pedestrian",
-    "carHOV",
-    "publicTransport",
-    "publicTransportTimeTable",
-    "truck",
-    "bicycle"
+    "car", "truck", "pedestrian", "bicycle", "scooter"
   )
-  if (request == "calculateisoline") {
-    modes <- modes[c(1, 2, 6)]
-    if (!mode %in% modes) {
-      stop(.stop_print_modes(mode = mode, modes = modes, request = request))
+  if (request == "isoline") {
+    modes <- modes[c(1, 2, 3)]
+    if (!transport_mode %in% modes) {
+      stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
-  } else if (request == "calculatematrix") {
-    modes <- modes[c(1, 2, 3, 6)]
-    if (!mode %in% modes) {
-      stop(.stop_print_modes(mode = mode, modes = modes, request = request))
+  } else if (request == "matrix") {
+    modes <- modes[c(1, 2, 3, 4)]
+    if (!transport_mode %in% modes) {
+      stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
-  } else if (request == "calculateroute") {
-    modes <- modes[c(1, 2, 3, 4, 6, 7)]
-    if (!mode %in% modes) {
-      stop(.stop_print_modes(mode = mode, modes = modes, request = request))
+  } else if (request == "route") {
+    if (!transport_mode %in% modes) {
+      stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
   }
 }
 
-.stop_print_modes <- function(mode, modes, request) {
+.stop_print_transport_modes <- function(mode, modes, request) {
   sprintf(
     "Transport mode '%s' not valid. For '%s' requests the mode must be in ('%s').",
     mode,
@@ -133,39 +126,16 @@
   )
 }
 
-.check_type <- function(type, request) {
-  types <- c("fastest", "shortest", "balanced")
-  if (request == "calculateisoline") {
-    types <- types[c(1, 2)]
-    if (!type %in% types) {
-      stop(.stop_print_types(type = type, types = types, request = request))
-    }
-  } else if (request == "calculatematrix" |
-    request == "calculateroute") {
-    if (!type %in% types) {
-      stop(.stop_print_types(type = type, types = types, request = request))
-    }
-  } else {
-    stop(sprintf("'%s' is an invalid request type.", request))
-  }
-}
-
-.stop_print_types <- function(type, types, request) {
-  sprintf(
-    "Routing type '%s' not valid. For '%s' requests the type must be in ('%s').",
-    type,
-    request,
-    paste(types, collapse = "', '")
-  )
-}
-
-.check_attributes <- function(attribute) {
-  attributes <- c("distance", "traveltime")
-  if (any(!attribute %in% attributes)) {
-    stop(sprintf(
-      "'attribute' must be in '%s'.",
-      paste(attributes, collapse = "', '")
-    ))
+.check_routing_mode <- function(routing_mode) {
+  modes <- c("fast", "short")
+  if (!routing_mode %in% modes) {
+    stop(
+        sprintf(
+        "Routing mode '%s' not valid, must be in ('%s').",
+        routing_mode,
+        paste(modes, collapse = "', '")
+      )
+    )
   }
 }
 
@@ -185,16 +155,6 @@
       "Please provide an 'API key' for a HERE project.
          Get your login here: https://developer.here.com/"
     )
-  }
-}
-
-.check_vehicle_type <- function(vehicle_type) {
-  vehicle_types <- c("diesel", "gasoline", "electric")
-  if (!strsplit(vehicle_type, ",")[[1]][1] %in% vehicle_types) {
-    stop(sprintf(
-      "'vehicle_type' must be '%s'.",
-      paste(vehicle_types, collapse = "', '")
-    ))
   }
 }
 

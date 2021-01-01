@@ -1,4 +1,14 @@
-## Create `aoi` dataset
+#!/usr/bin/env Rscript
+# -----------------------------------------------------------------------------
+# Name          :aoi.R
+# Description   :Create `aoi` example dataset.
+# Author        :Merlin Unterfinger <info@munterfinger.ch>
+# Date          :2020-12-23
+# Version       :0.1.0
+# Usage         :./data-raw/aoi.R
+# Notes         :
+# R             :4.0.3
+# =============================================================================
 
 # Country boundaries
 countries <- sf::st_read(

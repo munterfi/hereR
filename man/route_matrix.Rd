@@ -2,18 +2,18 @@
 % Please edit documentation in R/route_matrix.R
 \name{route_matrix}
 \alias{route_matrix}
-\title{HERE Routing API: Calculate Matrix}
+\title{HERE Matrix Routing API: Calculate Matrix}
 \usage{
 route_matrix(
   origin,
   destination = origin,
   datetime = Sys.time(),
-  type = "fastest",
-  mode = "car",
-  traffic = FALSE,
-  search_range = 99999999,
-  attribute = c("distance", "traveltime"),
-  url_only = FALSE
+  routing_mode = "fast",
+  transport_mode = "car",
+  traffic = TRUE,
+  url_only = FALSE,
+  type,
+  mode
 )
 }
 \arguments{
@@ -23,27 +23,27 @@ route_matrix(
 
 \item{datetime}{\code{POSIXct} object, datetime for the departure.}
 
-\item{type}{character, set the routing type: \code{"fastest"}, \code{"shortest"} or \code{"balanced"}.}
+\item{routing_mode}{character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).}
 
-\item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"}, \code{"carHOV"} or \code{"truck"}.}
+\item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"} or \code{"bicycle"} (\code{default = "car"}).}
 
-\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.}
-
-\item{search_range}{numeric, value in meters to limit the search radius in the route generation (\code{default = 99999999}).}
-
-\item{attribute}{character, attributes to be calculated on the routes: \code{"distance"} or \code{"traveltime"} (\code{default = c("distance", "traveltime")}.}
+\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
+
+\item{type}{character, 'type' is deprecated, use 'routing_mode' instead.}
+
+\item{mode}{character, 'mode' is deprecated, use 'transport_mode' instead.}
 }
 \value{
 A \code{data.frame}, which is an edge list containing the requested M:N route combinations.
 }
 \description{
-Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Routing' API.
+Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Matrix Routing' API.
 Various transport modes and traffic information at a provided timestamp are supported.
 The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 maximum matrix size per request and thereby minimize the number of overall needed requests.
-The result is one route summary matrix, that fits the order of the provided POIs: \code{origIndex}, \code{destIndex}.
+The result is one route summary matrix, that fits the order of the provided POIs: \code{orig_id}, \code{dest_id}.
 }
 \examples{
 # Provide an API Key for a HERE project
@@ -52,10 +52,9 @@ set_key("<YOUR API KEY>")
 # Create routes summaries between all POIs
 mat <- route_matrix(
   origin = poi,
-  traffic = TRUE,
   url_only = TRUE
 )
 }
 \references{
-\href{https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html}{HERE Routing API: Calculate Matrix}
+\href{https://developer.here.com/documentation/matrix-routing-api/8.3.0/dev_guide/index.html}{HERE Matrix Routing API}
 }

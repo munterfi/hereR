@@ -2,7 +2,7 @@
 % Please edit documentation in R/isoline.R
 \name{isoline}
 \alias{isoline}
-\title{HERE Routing API: Calculate Isoline}
+\title{HERE Isoline Routing API: Calculate Isoline}
 \usage{
 isoline(
   poi,
@@ -10,11 +10,14 @@ isoline(
   arrival = FALSE,
   range = seq(5, 30, 5) * 60,
   range_type = "time",
-  type = "fastest",
-  mode = "car",
-  traffic = FALSE,
+  routing_mode = "fast",
+  transport_mode = "car",
+  traffic = TRUE,
+  consumption_model = NULL,
   aggregate = TRUE,
-  url_only = FALSE
+  url_only = FALSE,
+  type,
+  mode
 )
 }
 \arguments{
@@ -24,27 +27,33 @@ isoline(
 
 \item{arrival}{boolean, are the provided Points of Interest (POIs) the origin or destination locations (\code{default = FALSE})?}
 
-\item{range}{numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.}
+\item{range}{numeric, a vector of type \code{integer} containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in Wh.}
 
 \item{range_type}{character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.}
 
-\item{type}{character, set the routing type: \code{"fastest"} or \code{"shortest"}.}
+\item{routing_mode}{character, set the routing mode: \code{"fast"} or \code{"short"}.}
 
-\item{mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.}
+\item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.}
 
-\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = FALSE})? If no \code{datetime} is set, the current timestamp at the moment of the request is used for \code{datetime}.}
+\item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
+
+\item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
 
 \item{aggregate}{boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
+
+\item{type}{character, 'type' is deprecated, use 'routing_mode' instead.}
+
+\item{mode}{character, 'mode' is deprecated, use 'transport_mode' instead.}
 }
 \value{
 An \code{sf} object containing the requested isolines.
 }
 \description{
-Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Routing' API
+Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Isoline Routing' API
 that connect the end points of all routes leaving from defined centers (POIs) with either
-a specified length, a specified travel time or consumption.
+a specified length, a specified travel time or consumption (only the default E-car available).
 }
 \examples{
 # Provide an API Key for a HERE project
@@ -58,5 +67,5 @@ isolines <- isoline(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html}{HERE Routing API: Calculate Isoline}
+\href{https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html}{HERE Isoline Routing API}
 }

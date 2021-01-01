@@ -65,14 +65,6 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
     destination
   )
 
-  # # Add mode
-  # url = .add_mode(
-  #   url = url,
-  #   type = type,
-  #   mode = mode,
-  #   traffic = traffic
-  # )
-
   # Add departure time (arrival time is not supported)
   url <- .add_datetime(
     url,
@@ -123,8 +115,8 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
 
   # Postprocess
   routes <- routes[routes$rank <= results, ]
-  routes$departure <- .parse_datetime(routes$departure, tz = attr(datetime, "tzone"))
-  routes$arrival <- .parse_datetime(routes$arrival, tz = attr(datetime, "tzone"))
+  routes$departure <- .parse_datetime_tz(routes$departure, tz = attr(datetime, "tzone"))
+  routes$arrival <- .parse_datetime_tz(routes$arrival, tz = attr(datetime, "tzone"))
   rownames(routes) <- NULL
 
   # Create sf object
@@ -145,10 +137,6 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   routes <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
-
-      # # O-D: function(data, origin, destination
-      # orig <- rev(as.numeric(strsplit(origin[[count]], ",")[[1]]))
-      # dest <- rev(as.numeric(strsplit(destination[[count]], ",")[[1]]))
 
       # Parse JSON
       df <- jsonlite::fromJSON(con)

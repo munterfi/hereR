@@ -51,14 +51,14 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   )
 
   # Check and preprocess location
-  # Character location
+  # Character location (remove pipes)
   if (is.character(poi)) {
     .check_addresses(poi)
     poi[poi == ""] = NA
     url = paste0(
       url,
       "&name=",
-      poi
+      gsub("\\|", "", poi)
     )
   # sf POINTs
   } else if ("sf" %in% class(poi)) {

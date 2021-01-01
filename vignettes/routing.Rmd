@@ -1,8 +1,8 @@
 ---
-title: "Routing API"
+title: "Routing APIs"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Routing API}
+  %\VignetteIndexEntry{Routing APIs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,13 +13,16 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(mapview)
-mapviewOptions(
-  fgb = FALSE,
-  vector.palette = colorRampPalette(
-    c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapviewOptions(
+    fgb = FALSE,
+    vector.palette = colorRampPalette(
+      c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
+    )
   )
-)
+}
+
 routes <- hereR:::example$route
 mat <- hereR:::example$route_matrix
 iso <- hereR:::example$isoline
@@ -28,10 +31,12 @@ origin <- poi[1:2, ]
 destination <- poi[3:4, ]
 ```
 
-Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the 'HERE Routing' API.
+Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the 'HERE Routing', 'HERE Matrix Routing' and 'HERE Isoline Routing' APIs.
 
 ## Routing directions
+
 In order to calculate route geometries (`LINESTRING`) between pairs of points using the 'HERE Routing API' the function `route()` is used. The function takes origin and destination locations as `sf` objects containing geometries of type `POINT` as input. Routes can be created for various transport modes, as for example car or public transport. Optionally the current or predicted traffic information is considered. For routes using the transport mode `"car"` a vehicle type can be specified, to obtain an estimate of the energy consumption on the routes.
+
 ```{r directions, eval=FALSE}
 origin <- poi[1:2, ]
 destination <- poi[3:4, ]
@@ -46,21 +51,26 @@ knitr::kable(head(as.data.frame(routes)[, colnames(routes) != "geometry"]), form
 ```
 
 Construct a route label and print the routes on an interactive leaflet map:
+
 ```{r map_routes, eval=FALSE, out.width='100%'}
 routes$label <- paste(origin$city[routes$id],
                       destination$city[routes$id],
                       sep =  " - ")
-mapview(routes,
-        zcol = "label",
-        lwd = routes$travelTime/max(routes$travelTime)*5,
-        layer.name = "Route [O-D]",
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE
-)
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(routes,
+                   zcol = "label",
+                   layer.name = "Route [O-D]",
+                   map.types = c("Esri.WorldTopoMap"),
+                   homebutton = FALSE
+  )
+}
 ```
 
-## Routing matrix
-The function `route_matrix()` calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as `sf` objects containing geometries of type `POINT` as input. If only one `sf` object is provided as `origin` an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function `route_matrix` is one route summary matrix, that fits the order of the provided POIs: `origIndex`, `destIndex`.
+## Matrix routing
+
+The function `route_matrix()` calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as `sf` objects containing geometries of type `POINT` as input. If only one `sf` object is provided as `origin` an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function `route_matrix` is one route summary matrix, that fits the order of the provided POIs: `orig_id`, `dest_id`.
+
 ```{r matrix, eval=FALSE}
 # From - to
 mat <- route_matrix(
@@ -80,34 +90,40 @@ Print the first 10 rows of the matrix table, created from the POIs above, where 
 knitr::kable(head(mat, 10), format = "html")
 ```
 
-## Isoline
-Isolines are constructed by the function `isoline()`. The calculated polygons (`POLYGON` or `MULTIPOLYGON`) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption as costfactor. By default the `aggregate` parameter is set to `TRUE`, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polyons are aggregated to polygons of geometry type `MULTIPOLYGON`. Thereby overlapping isolines are avoided.
+## Isoline routing
+
+Isolines are constructed by the function `isoline()`. The calculated polygons (`POLYGON` or `MULTIPOLYGON`) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption. By default the `aggregate` parameter is set to `TRUE`, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polygons are aggregated to polygons of geometry type `MULTIPOLYGON`. Thereby overlapping isolines are avoided.
+
 ```{r isoline, eval=FALSE}
 iso <- isoline(
   poi,
   range = seq(5, 30, 5) * 60,
   range_type = "time",
-  type = "fastest",
-  mode = "car",
+  routing_mode = "fast",
+  transport_mode = "car",
   aggregate = TRUE,
   traffic = FALSE
 )
 ```
 
 Convert range from seconds to minutes and print the aggregated isolines on an interactive leaflet map:
+
 ```{r map_isoline, eval=FALSE, out.width='100%'}
 iso$minutes <- iso$range/60
-mapview(iso,
-        zcol = "minutes",
-        layer.name = "Isoline [min]",
-        alpha = 0,
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE
-)
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(iso,
+          zcol = "minutes",
+          layer.name = "Isoline [min]",
+          alpha = 0,
+          map.types = c("Esri.WorldTopoMap"),
+          homebutton = FALSE
+  )
+}
 ```
 
 ## API Reference
 
-* [Route direction](https://developer.here.com/documentation/routing/topics/resource-calculate-route.html)
-* [Route matrix](https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html)
-* [Isoline](https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html)
+* [Routing](https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html)
+* [Matrix Routing](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
+* [Isoline Routing](https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html)

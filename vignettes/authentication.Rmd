@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 Set up a valid authentication to the 'HERE' REST APIs and optionally configure a proxy.
 
 ## Application credentials
+
 In order to use the functionality of the **hereR** package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:
 
 1. Go to [developer.here.com](https://developer.here.com/)
@@ -32,7 +33,10 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
+Alternatively, the key can be exported directly to the environment: `export HERE_API_KEY="<YOUR-KEY>"`
+
 ## Information about requests
+
 By default, the **hereR** package does not print messages with information about the
 requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:
 
@@ -43,10 +47,11 @@ set_verbose(TRUE)
 Use `set_Verbose(FALSE)` to set the **hereR** package to be quiet again.
 
 ## Proxy
+
 If you are working behind a corporate proxy the requests sent by **hereR** might fail with timeout errors.
 In this case, consider setting a global proxy for R. Open the R environment file `file.edit('~/.Renviron')` and add your proxy configuration:
 
-```
+``` sh
 http_proxy=http://user:passwd@proxy.dom.com:port/
 https_proxy=https://user:passwd@proxy.dom.com:port/
 ```
@@ -54,6 +59,7 @@ https_proxy=https://user:passwd@proxy.dom.com:port/
 **Note:** On RStudio Server this file is located at `R_HOME/etc/Renviron.site`.
 
 ## Remove credentials
+
 To remove previously set credentials from the current R session use `unset_key()`.
 For overwriting the application credentials use again the `set_key()` function.
 
@@ -61,4 +67,3 @@ For overwriting the application credentials use again the `set_key()` function.
 
 * [Sign up as developer](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
 * [Pricing and plans](https://developer.here.com/pricing)
-

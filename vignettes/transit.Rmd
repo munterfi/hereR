@@ -15,14 +15,17 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(mapview)
 library(sf)
-mapviewOptions(
-  fgb = FALSE,
-  vector.palette = colorRampPalette(
-    c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapviewOptions(
+    fgb = FALSE,
+    vector.palette = colorRampPalette(
+      c("#000004FF", "#420A68FF", "#932667FF", "#DD513AFF", "#FCA50AFF", "#FCFFA4FF")
+    )
   )
-)
+}
+
 connection_section <- hereR:::example$connection_section
 connection_summary <- hereR:::example$connection_summary
 stations <- hereR:::example$station
@@ -31,13 +34,16 @@ stations <- hereR:::example$station
 Request public transport connections between given points and find stations nearby using the 'HERE Public Transit' API.
 
 ## Connections
+
 The function `connection()` allows to request public transport connections from the API. Two types of requests are provided:
 
 * `connection(..., summary = FALSE)`: The public transport connections are returned as multiple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
 * `connection(..., summary = TRUE)`: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
 
 ### 1. Sections
+
 Request available public transport connections as detailed sections:
+
 ```{r pt_connection_section, eval = FALSE}
 connection_section <- connection(
   origin = poi[3:4, ],
@@ -53,17 +59,22 @@ knitr::kable(head(as.data.frame(connection_section)[, colnames(connection_sectio
 ```
 
 Print the public transport sections on an interactive leaflet map:
+
 ```{r pt_connection_section_map, eval=FALSE, out.width='100%'}
-mapview(connection_section,
-        zcol = "mode",
-        layer.name = "Transport mode",
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE
-)
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(connection_section,
+                   zcol = "mode",
+                   layer.name = "Transport mode",
+                   map.types = c("Esri.WorldTopoMap"),
+                   homebutton = FALSE
+  )
+}
 ```
 
 ### 2. Summary
+
 Request a summary of the available public transport connections:
+
 ```{r pt_connection_summary, eval = FALSE}
 connection_summary <- connection(
   origin = poi[3:4, ],
@@ -77,6 +88,7 @@ knitr::kable(head(as.data.frame(connection_summary)[, colnames(connection_summar
 ```
 
 ## Stations
+
 The function `station()` allows to request public transport stations nearby points of interest (POIs). The `radius` defines the maximum search distance in meters and `results` specifies the maximum number of returned stations. The returned `sf` object contains the locations of the stations and the available public transport lines at the station.
 
 ```{r stations, eval=FALSE}
@@ -88,6 +100,7 @@ stations <- station(
 ```
 
 Print the POIs, the radius and stations on an interactive leaflet map:
+
 ```{r stations_map, eval=FALSE, out.width='100%'}
 buffer <-
   poi %>%
@@ -95,19 +108,21 @@ buffer <-
   st_buffer(500) %>%
   st_transform(4326)
 
-m <-
-  mapview(poi, alpha.region = 1, col.region = "black",
-          label = poi$city, layer.name = "POIs",
-          map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
-  mapview(stations, col.region = "yellow", alpha = 1,
-          label = stations$station, layer.name = "Stations",
-          homebutton = FALSE) +
-  mapview(buffer, col.region = "transparent", alpha.region = 0,
-          layer.name = "Buffer", homebutton = FALSE, legend = FALSE)
-m
+if (requireNamespace("mapview", quietly = TRUE)) {
+  m <-
+    mapview::mapview(poi, alpha.region = 1, col.region = "black",
+                     label = poi$city, layer.name = "POIs",
+                     map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
+    mapview::mapview(stations, col.region = "yellow", alpha = 1,
+                     label = stations$station, layer.name = "Stations",
+                     homebutton = FALSE) +
+    mapview::mapview(buffer, col.region = "transparent", alpha.region = 0,
+                     layer.name = "Buffer", homebutton = FALSE, legend = FALSE)
+  m
+}
 ```
 
 ## API Reference
 
-* [Transit Route](https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html)
-* [Station Search](https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html)
+* [Public Transit Routing: Routing](https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html)
+* [Public Transit Routing: Station Search](https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html)

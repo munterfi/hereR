@@ -1,4 +1,14 @@
-## Create `poi` dataset
+#!/usr/bin/env Rscript
+# -----------------------------------------------------------------------------
+# Name          :poi.R
+# Description   :Create `poi` example dataset.
+# Author        :Merlin Unterfinger <info@munterfinger.ch>
+# Date          :2020-12-23
+# Version       :0.1.0
+# Usage         :./data-raw/poi.R
+# Notes         :
+# R             :4.0.3
+# =============================================================================
 
 # Country boundaries
 cities <- sf::st_read(

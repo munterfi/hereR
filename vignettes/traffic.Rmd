@@ -15,13 +15,14 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(hereR)
-library(mapview)
-mapviewOptions(
-  fgb = FALSE,
-  vector.palette = colorRampPalette(
-    c("#FFD700", "#CA0020")
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapviewOptions(
+    fgb = FALSE,
+    vector.palette = colorRampPalette(c("#FFD700", "#CA0020"))
   )
-)
+}
+
 flows <- hereR:::example$flow
 incidents <- hereR:::example$incident
 ```
@@ -29,6 +30,7 @@ incidents <- hereR:::example$incident
 Real-time traffic flow and incident information based on the 'HERE Traffic' API. The traffic flow data contains speed (`"SP"`) and congestion (jam factor: `"JF"`) information. Traffic incidents contain information about location, time, duration, severity, description and other details.
 
 ## Flow
+
 In order to request the traffic flow, areas of interest (AOIs) have to be provided. The AOIs must be an `sf` object containing a polygon or multiple polygons. The response from the HERE Traffic API will be spatially joined on the AOIs and thereby the traffic flows are mapped to the corresponding polygon.
 
 ```{r flow, eval=FALSE}
@@ -38,18 +40,24 @@ flows <- flow(
 ```
 
 Print the (ordered) 'jam factor' of the traffic flow on an interactive leaflet map:
+
 ```{r map_flow, eval=FALSE, out.width='100%'}
 flows <- flows[order(flows$JF), ]
-mapview(flows,
-        zcol = "JF",
-        lwd = flows$JF*2,
-        layer.name = "Jam factor",
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE
-)
+rownames(flows) <- NULL
+
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(flows,
+                   zcol = "JF",
+                   lwd = round(flows$JF*2),
+                   layer.name = "Jam factor",
+                   map.types = c("Esri.WorldTopoMap"),
+                   homebutton = FALSE
+  )
+}
 ```
 
 ## Incidents
+
 AOIs also must be provided in order to request information about traffic incidents in specific regions. The time interval, which defines the traffic incidents that should be considered, can be specitified by the `from` parameter. The datetime information passed to the function must be a timestamp of type `POSIXct`. By default, the time interval is defined as the last week.
 
 ```{r incidents, eval=FALSE}
@@ -60,13 +68,16 @@ incidents <- incident(
 ```
 
 Print the traffic incidents on an interactive leaflet map:
+
 ```{r map_incidents, eval=FALSE, out.width='100%'}
-mapview(incidents,
-        zcol = "type",
-        layer.name = "Incident type",
-        map.types = c("Esri.WorldTopoMap"),
-        homebutton = FALSE
-)
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(incidents,
+                   zcol = "type",
+                   layer.name = "Incident type",
+                   map.types = c("Esri.WorldTopoMap"),
+                   homebutton = FALSE
+  )
+}
 ```
 
 ## API Reference
