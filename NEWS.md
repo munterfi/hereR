@@ -1,4 +1,4 @@
-# version 0.5.2.9000
+# version 0.6.0
 
 * Update `route_matrix()` from **Routing API v7.2** (calculatematrix) to **Matrix Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
 * Update `isoline()` from **Routing API v7.2** (calculateisoline) to **Isoline Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
