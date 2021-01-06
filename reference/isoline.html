@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Routing API: Calculate Isoline — isoline • hereR</title>
+<title>HERE Isoline Routing API: Calculate Isoline — isoline • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,10 @@
 
 
 
-<meta property="og:title" content="HERE Routing API: Calculate Isoline — isoline" />
-<meta property="og:description" content="Calcuates isolines (POLYGON or MULTIPOLYGON) using the HERE 'Routing' API
+<meta property="og:title" content="HERE Isoline Routing API: Calculate Isoline — isoline" />
+<meta property="og:description" content="Calcuates isolines (POLYGON or MULTIPOLYGON) using the HERE 'Isoline Routing' API
 that connect the end points of all routes leaving from defined centers (POIs) with either
-a specified length, a specified travel time or consumption." />
+a specified length, a specified travel time or consumption (only the default E-car available)." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -82,7 +82,7 @@ a specified length, a specified travel time or consumption." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -105,13 +105,13 @@ a specified length, a specified travel time or consumption." />
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/geocoder.html">Geocoder API</a>
+      <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
     </li>
     <li>
       <a href="../articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing.html">Routing API</a>
+      <a href="../articles/routing.html">Routing APIs</a>
     </li>
     <li>
       <a href="../articles/traffic.html">Traffic API</a>
@@ -128,19 +128,19 @@ a specified length, a specified travel time or consumption." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fa fa-twitter fa-lg"></span>
+    <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fa fa-globe fa-lg"></span>
+    <span class="fas fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -157,15 +157,15 @@ a specified length, a specified travel time or consumption." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Routing API: Calculate Isoline</h1>
+    <h1>HERE Isoline Routing API: Calculate Isoline</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/isoline.R'><code>R/isoline.R</code></a></small>
     <div class="hidden name"><code>isoline.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calcuates isolines (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) using the HERE 'Routing' API
+    <p>Calcuates isolines (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) using the HERE 'Isoline Routing' API
 that connect the end points of all routes leaving from defined centers (POIs) with either
-a specified length, a specified travel time or consumption.</p>
+a specified length, a specified travel time or consumption (only the default E-car available).</p>
     </div>
 
     <pre class="usage"><span class='fu'>isoline</span><span class='op'>(</span>
@@ -174,11 +174,14 @@ a specified length, a specified travel time or consumption.</p>
   arrival <span class='op'>=</span> <span class='cn'>FALSE</span>,
   range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>30</span>, <span class='fl'>5</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>60</span>,
   range_type <span class='op'>=</span> <span class='st'>"time"</span>,
-  type <span class='op'>=</span> <span class='st'>"fastest"</span>,
-  mode <span class='op'>=</span> <span class='st'>"car"</span>,
-  traffic <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  routing_mode <span class='op'>=</span> <span class='st'>"fast"</span>,
+  transport_mode <span class='op'>=</span> <span class='st'>"car"</span>,
+  traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  consumption_model <span class='op'>=</span> <span class='cn'>NULL</span>,
   aggregate <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>
+  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>type</span>,
+  <span class='va'>mode</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,23 +201,27 @@ a specified length, a specified travel time or consumption.</p>
     </tr>
     <tr>
       <th>range</th>
-      <td><p>numeric, a vector of type <code>integer</code> containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in costfactor.</p></td>
+      <td><p>numeric, a vector of type <code>integer</code> containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in Wh.</p></td>
     </tr>
     <tr>
       <th>range_type</th>
       <td><p>character, unit of the isolines: <code>"distance"</code>, <code>"time"</code> or <code>"consumption"</code>.</p></td>
     </tr>
     <tr>
-      <th>type</th>
-      <td><p>character, set the routing type: <code>"fastest"</code> or <code>"shortest"</code>.</p></td>
+      <th>routing_mode</th>
+      <td><p>character, set the routing mode: <code>"fast"</code> or <code>"short"</code>.</p></td>
     </tr>
     <tr>
-      <th>mode</th>
+      <th>transport_mode</th>
       <td><p>character, set the transport mode: <code>"car"</code>, <code>"pedestrian"</code> or <code>"truck"</code>.</p></td>
     </tr>
     <tr>
       <th>traffic</th>
-      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = FALSE</code>)? If no <code>datetime</code> is set, the current timestamp at the moment of the request is used for <code>datetime</code>.</p></td>
+      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = TRUE</code>)? If no traffic is selected, the <code>datetime</code> is set to <code>"any"</code> and the request is processed independently from time.</p></td>
+    </tr>
+    <tr>
+      <th>consumption_model</th>
+      <td><p>character, specify the consumption model of the vehicle, see <a href='https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html'>consumption model</a> for more information (<code>default = NULL</code> a average electric car is set).</p></td>
     </tr>
     <tr>
       <th>aggregate</th>
@@ -224,6 +231,14 @@ a specified length, a specified travel time or consumption.</p>
       <th>url_only</th>
       <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
     </tr>
+    <tr>
+      <th>type</th>
+      <td><p>character, 'type' is deprecated, use 'routing_mode' instead.</p></td>
+    </tr>
+    <tr>
+      <th>mode</th>
+      <td><p>character, 'mode' is deprecated, use 'transport_mode' instead.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -231,7 +246,7 @@ a specified length, a specified travel time or consumption.</p>
     <p>An <code>sf</code> object containing the requested isolines.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html'>HERE Routing API: Calculate Isoline</a></p>
+    <p><a href='https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html'>HERE Isoline Routing API</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Geocoder API: Geocode — geocode • hereR</title>
+<title>HERE Geocoding &amp; Search API: Geocode — geocode • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="HERE Geocoder API: Geocode — geocode" />
-<meta property="og:description" content="Geocodes addresses using the HERE 'Geocoder' API." />
+<meta property="og:title" content="HERE Geocoding &amp; Search API: Geocode — geocode" />
+<meta property="og:description" content="Geocodes addresses using the HERE 'Geocoding &amp;amp; Search API' API." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -103,13 +103,13 @@
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/geocoder.html">Geocoder API</a>
+      <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
     </li>
     <li>
       <a href="../articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing.html">Routing API</a>
+      <a href="../articles/routing.html">Routing APIs</a>
     </li>
     <li>
       <a href="../articles/traffic.html">Traffic API</a>
@@ -126,19 +126,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fa fa-twitter fa-lg"></span>
+    <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fa fa-globe fa-lg"></span>
+    <span class="fas fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -155,16 +155,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Geocoder API: Geocode</h1>
+    <h1>HERE Geocoding &amp; Search API: Geocode</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/geocode.R'><code>R/geocode.R</code></a></small>
     <div class="hidden name"><code>geocode.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Geocodes addresses using the HERE 'Geocoder' API.</p>
+    <p>Geocodes addresses using the HERE 'Geocoding &amp; Search API' API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geocode</span><span class='op'>(</span><span class='va'>address</span>, alternatives <span class='op'>=</span> <span class='cn'>FALSE</span>, sf <span class='op'>=</span> <span class='cn'>TRUE</span>, url_only <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>addresses</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>geocode</span><span class='op'>(</span><span class='va'>address</span>, alternatives <span class='op'>=</span> <span class='cn'>FALSE</span>, sf <span class='op'>=</span> <span class='cn'>TRUE</span>, url_only <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,10 +187,6 @@
       <td><p>boolean, only return the generated URLs (<code>default =
 FALSE</code>)?</p></td>
     </tr>
-    <tr>
-      <th>addresses</th>
-      <td><p>character, addresses to geocode (deprecated).</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -209,7 +205,7 @@ coordinates (latitude, longitude) of a pin on a map corresponding to the
 searched place."</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html'>HERE Geocoder API: Geocode</a></p>
+    <p><a href='https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html'>HERE Geocoding &amp; Search API: Geocode</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>

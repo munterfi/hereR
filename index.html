@@ -20,7 +20,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="sf-Based Interface to the HERE REST APIs">
 <meta property="og:description" content="Interface to the HERE REST APIs &lt;https://developer.here.com/develop/rest-apis&gt;:
   (1) geocode and autosuggest addresses or reverse geocode POIs using the Geocoder API;
-  (2) route directions, travel distance or time matrices and isolines using the Routing API;
+  (2) route directions, travel distance or time matrices and isolines using the Routing, Matrix Routing and Isoline Routing APIs;
   (3) request real-time traffic flow and incident information from the Traffic API;
   (4) find request public transport connections and nearby stations from the Public Transit API;
   (5) request intermodal routes using the Intermodal Routing API;
@@ -46,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -69,13 +69,13 @@
       <a href="articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="articles/geocoder.html">Geocoder API</a>
+      <a href="articles/geocoder.html">Geocoding &amp; Search API</a>
     </li>
     <li>
       <a href="articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
-      <a href="articles/routing.html">Routing API</a>
+      <a href="articles/routing.html">Routing APIs</a>
     </li>
     <li>
       <a href="articles/traffic.html">Traffic API</a>
@@ -92,19 +92,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fa fa-twitter fa-lg"></span>
+    <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fa fa-globe fa-lg"></span>
+    <span class="fas fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@
 
 <p>The <strong>hereR</strong> package provides an interface to the <strong>HERE REST APIs</strong> for R:</p>
 <p>(1) geocode and autosuggest addresses or reverse geocode POIs using the <strong>Geocoder API</strong>;</p>
-<p>(2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>;</p>
+<p>(2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>, <strong>Matrix Routing API</strong> and <strong>Isoline Routing API</strong>;</p>
 <p>(3) request real-time traffic flow and incident information from the <strong>Traffic API</strong>;</p>
 <p>(4) find public transport connections and nearby stations using the <strong>Public Transit API</strong>;</p>
 <p>(5) request intermodal routes using the <strong>Intermodal Routing API</strong>;</p>
@@ -142,7 +142,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"hereR"</span><span class="op">)</span></code></pre></div>
 <p>Install the development version from <a href="https://github.com/munterfinger/hereR/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"munterfinger/hereR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"munterfinger/hereR@develop"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -153,35 +153,50 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfinger.github.io/hereR/">hereR</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></code></pre></div>
 <p>Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the following examples. A more detailed description can be found in the documentation of the functions and the package vignettes.</p>
-<p><strong>Geocoder API:</strong> Autocomplete and geocode addresses or reverse geocode POIs.</p>
+<p><strong>Geocoding &amp; Search API:</strong> Autosuggest and geocode addresses or reverse geocode POIs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span><span class="va">poi</span><span class="op">)</span></code></pre></div>
-<p><strong>Routing API:</strong> Construct a route, create a route matrix or request an isochrone around points.</p>
+<p><strong>Routing API:</strong> Construct route geometries with elevation (dim = <code>XYZ</code>).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span><span class="va">poi</span>, mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span>
+<span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, rangetype <span class="op">=</span> <span class="st">"time"</span>, mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span></code></pre></div>
-<p><strong>Traffic API:</strong> Get real-time traffic flow or incidents in a specific area.</p>
+<span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"bicycle"</span><span class="op">)</span></code></pre></div>
+<p><strong>Matrix Routing API:</strong> Request a matrix of route summaries.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span><span class="va">poi</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span>
+  <span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span>,
+  transport_mode <span class="op">=</span> <span class="st">"bicycle"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<p><strong>Isoline Routing API:</strong> Construct isolines around points (time, distance or consumption).</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"time"</span>, transport_mode <span class="op">=</span> <span class="st">"pedestrian"</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"distance"</span>, transport_mode <span class="op">=</span> <span class="st">"truck"</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"consumption"</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span></code></pre></div>
+<p><strong>Traffic API:</strong> Get real-time traffic flow or incidents in a specific area.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/flow.html">flow</a></span><span class="op">(</span><span class="va">aoi</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/incident.html">incident</a></span><span class="op">(</span><span class="va">aoi</span>, from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span><span class="st">"2018-01-01 00:00:00"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><strong>Public Transit API:</strong> Request public transport connections between points or find stations nearby.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/connection.html">connection</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/station.html">station</a></span><span class="op">(</span><span class="va">poi</span>, radius <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></code></pre></div>
 <p><strong>Intermodal Routing API:</strong> Get routes with various combinations of transport modes.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/intermodal_route.html">intermodal_route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <p><strong>Destination Weather API:</strong> Request weather observations, forecasts, astronomical information or alerts at specific locations.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"observation"</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"forecast_hourly"</span><span class="op">)</span>
@@ -190,12 +205,23 @@
 
 <span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"alerts"</span><span class="op">)</span></code></pre></div>
 </div>
+<div id="contributing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing" class="anchor"></a>Contributing</h2>
+<ul>
+<li>Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them.</li>
+<li>Please see the <a href="https://github.com/munterfinger/hereR/blob/master/.github/CONTRIBUTING.md">Contribution Guidelines</a> and direct pull requests to the <code>develop</code> branch.</li>
+<li>This project is released with a <a href="https://github.com/munterfinger/hereR/blob/master/.github/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</li>
+</ul>
+</div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html">Geocoder API</a></li>
-<li><a href="https://developer.here.com/documentation/routing/dev_guide/topics/introduction.html">Routing API</a></li>
+<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html">HERE Geocoding &amp; Search API</a></li>
+<li><a href="https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html">Routing API</a></li>
+<li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html">Matrix Routing API</a></li>
+<li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html">Isoline Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html">Traffic API</a></li>
 <li><a href="https://developer.here.com/documentation/public-transit/dev_guide/index.html">Public Transit API</a></li>
 <li><a href="https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html">Intermodal Routing API</a></li>
@@ -222,6 +248,13 @@
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+</ul>
+</div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
 <div class="developers">

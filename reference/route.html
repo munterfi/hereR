@@ -48,9 +48,9 @@
 
 <meta property="og:title" content="HERE Routing API: Calculate Route — route" />
 <meta property="og:description" content="Calculates route geometries (LINESTRING) between given pairs of points using the HERE 'Routing' API.
-Routes can be created for various transport modes, as for example 'car' or 'public transport',
+Routes can be created for various transport modes, as for example 'car' or 'bicycle',
 incorporating current traffic information, if available.
-For routes using the transport mode &quot;car&quot; a vehicle type can be specified,
+For routes using the transport mode &quot;car&quot; a vehicle consumption model can be specified,
 to obtain an estimate of the consumption." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -84,7 +84,7 @@ to obtain an estimate of the consumption." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -107,13 +107,13 @@ to obtain an estimate of the consumption." />
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/geocoder.html">Geocoder API</a>
+      <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
     </li>
     <li>
       <a href="../articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing.html">Routing API</a>
+      <a href="../articles/routing.html">Routing APIs</a>
     </li>
     <li>
       <a href="../articles/traffic.html">Traffic API</a>
@@ -130,19 +130,19 @@ to obtain an estimate of the consumption." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fa fa-twitter fa-lg"></span>
+    <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fa fa-globe fa-lg"></span>
+    <span class="fas fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -166,9 +166,9 @@ to obtain an estimate of the consumption." />
 
     <div class="ref-description">
     <p>Calculates route geometries (<code>LINESTRING</code>) between given pairs of points using the HERE 'Routing' API.
-Routes can be created for various transport modes, as for example 'car' or 'public transport',
+Routes can be created for various transport modes, as for example 'car' or 'bicycle',
 incorporating current traffic information, if available.
-For routes using the transport mode <code>"car"</code> a vehicle type can be specified,
+For routes using the transport mode <code>"car"</code> a vehicle consumption model can be specified,
 to obtain an estimate of the consumption.</p>
     </div>
 
@@ -177,11 +177,14 @@ to obtain an estimate of the consumption.</p>
   <span class='va'>destination</span>,
   datetime <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>,
   arrival <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  type <span class='op'>=</span> <span class='st'>"fastest"</span>,
-  mode <span class='op'>=</span> <span class='st'>"car"</span>,
-  traffic <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  vehicle_type <span class='op'>=</span> <span class='st'>"diesel,5.5"</span>,
-  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>
+  results <span class='op'>=</span> <span class='fl'>1</span>,
+  routing_mode <span class='op'>=</span> <span class='st'>"fast"</span>,
+  transport_mode <span class='op'>=</span> <span class='st'>"car"</span>,
+  traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  consumption_model <span class='op'>=</span> <span class='cn'>NULL</span>,
+  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>type</span>,
+  <span class='va'>mode</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -204,38 +207,45 @@ to obtain an estimate of the consumption.</p>
       <td><p>boolean, calculate routes for arrival at the defined time (<code>default = FALSE</code>)?</p></td>
     </tr>
     <tr>
-      <th>type</th>
-      <td><p>character, set the routing type: <code>"fastest"</code>, <code>"shortest"</code> or <code>"balanced"</code>.</p></td>
+      <th>results</th>
+      <td><p>numeric, maximum number of suggested routes (Valid range: 1 and 7).</p></td>
     </tr>
     <tr>
-      <th>mode</th>
-      <td><p>character, set the transport mode: <code>"car"</code>, <code>"pedestrian"</code>, <code>"carHOV"</code>, <code>"publicTransport"</code>, <code>"truck"</code> or <code>"bicycle"</code>.</p></td>
+      <th>routing_mode</th>
+      <td><p>character, set the routing type: <code>"fast"</code> or <code>"short"</code> (<code>default = "fast"</code>).</p></td>
+    </tr>
+    <tr>
+      <th>transport_mode</th>
+      <td><p>character, set the transport mode: <code>"car"</code>, <code>"truck"</code>, <code>"pedestrian"</code>, <code>"bicycle"</code> or <code>scooter</code> (<code>default = "car"</code>).</p></td>
     </tr>
     <tr>
       <th>traffic</th>
-      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = FALSE</code>)? If no <code>datetime</code> is set, the current timestamp at the moment of the request is used for <code>datetime</code>.</p></td>
+      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = TRUE</code>)? If no traffic is selected, the <code>datetime</code> is set to <code>"any"</code> and the request is processed independently from time.</p></td>
     </tr>
     <tr>
-      <th>vehicle_type</th>
-      <td><p>character, specify the motor type of the vehicle: <code>"diesel"</code>, <code>"gasoline"</code> or <code>"electric"</code>. And set the consumption per 100km im liters (<code>default = "diesel,5.5"</code>).</p></td>
+      <th>consumption_model</th>
+      <td><p>character, specify the consumption model of the vehicle, see <a href='https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html'>consumption model</a> for more information (<code>default = NULL</code> a average electric car is set).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
       <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>character, 'type' is deprecated, use 'routing_mode' instead.</p></td>
+    </tr>
+    <tr>
+      <th>mode</th>
+      <td><p>character, 'mode' is deprecated, use 'transport_mode' instead.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An <code>sf</code> object containing the requested routes.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>The public transport routes (<code>mode = "publicTransport"</code>) provided by <code>route</code>
-are not considering the time tables of the public transport providers.
-Use <code><a href='connection.html'>connection</a></code> for public transport routes that consider time tables.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/routing/topics/resource-calculate-route.html'>HERE Routing API: Calculate Route</a></p>
+    <p><a href='https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html'>HERE Routing API: Calculate Route</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
@@ -250,10 +260,8 @@ Use <code><a href='connection.html'>connection</a></code> for public transport r
 
 <span class='co'># Routing</span>
 <span class='va'>routes</span> <span class='op'>&lt;-</span> <span class='fu'>route</span><span class='op'>(</span>
-  origin <span class='op'>=</span> <span class='va'>from</span>, destination <span class='op'>=</span> <span class='va'>to</span>,
-  mode <span class='op'>=</span> <span class='st'>"car"</span>, type <span class='op'>=</span> <span class='st'>"fastest"</span>, traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  vehicle_type <span class='op'>=</span> <span class='st'>"diesel,5.5"</span>,
-  url_only <span class='op'>=</span> <span class='cn'>TRUE</span>
+  origin <span class='op'>=</span> <span class='va'>from</span>, destination <span class='op'>=</span> <span class='va'>to</span>, results <span class='op'>=</span> <span class='fl'>3</span>,
+  transport_mode <span class='op'>=</span> <span class='st'>"car"</span>, url_only <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 </div></pre>
   </div>

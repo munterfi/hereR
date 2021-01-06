@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Routing API • hereR</title>
+<title>Routing APIs • hereR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Routing API">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Routing APIs">
 <meta property="og:description" content="hereR">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -61,13 +61,13 @@
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/geocoder.html">Geocoder API</a>
+      <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
     </li>
     <li>
       <a href="../articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing.html">Routing API</a>
+      <a href="../articles/routing.html">Routing APIs</a>
     </li>
     <li>
       <a href="../articles/traffic.html">Traffic API</a>
@@ -84,19 +84,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fa fa-twitter fa-lg"></span>
+    <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fa fa-globe fa-lg"></span>
+    <span class="fas fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -113,7 +113,7 @@
       </header><script src="routing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Routing API</h1>
+      <h1 data-toc-skip>Routing APIs</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/routing.Rmd"><code>vignettes/routing.Rmd</code></a></small>
@@ -123,7 +123,7 @@
 
     
     
-<p>Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the ‘HERE Routing’ API.</p>
+<p>Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the ‘HERE Routing’, ‘HERE Matrix Routing’ and ‘HERE Isoline Routing’ APIs.</p>
 <div id="routing-directions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#routing-directions" class="anchor"></a>Routing directions</h2>
@@ -140,38 +140,32 @@
 <th style="text-align:right;">
 id
 </th>
-<th style="text-align:left;">
-departure
+<th style="text-align:right;">
+rank
 </th>
 <th style="text-align:left;">
-origin
+departure
 </th>
 <th style="text-align:left;">
 arrival
 </th>
 <th style="text-align:left;">
-destination
+type
 </th>
 <th style="text-align:left;">
 mode
-</th>
-<th style="text-align:left;">
-traffic
 </th>
 <th style="text-align:right;">
 distance
 </th>
 <th style="text-align:right;">
-trafficTime
+duration
 </th>
 <th style="text-align:right;">
-baseTime
+duration_base
 </th>
 <th style="text-align:right;">
-travelTime
-</th>
-<th style="text-align:right;">
-co2Emission
+consumption
 </th>
 </tr></thead>
 <tbody>
@@ -179,76 +173,64 @@ co2Emission
 <td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
-2020-11-26 18:15:41
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:left;">
-Unterwilrain
+2020-12-31 15:22:54
 </td>
 <td style="text-align:left;">
-2020-11-26 20:22:22
+2020-12-31 17:35:37
 </td>
 <td style="text-align:left;">
-Avenue du Temple
+vehicle
 </td>
 <td style="text-align:left;">
 car
 </td>
-<td style="text-align:left;">
-disabled
+<td style="text-align:right;">
+211727
 </td>
 <td style="text-align:right;">
-211457
+7963
 </td>
 <td style="text-align:right;">
-7655
+7657
 </td>
 <td style="text-align:right;">
-7601
-</td>
-<td style="text-align:right;">
-7601
-</td>
-<td style="text-align:right;">
-30.704
+84.9578
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
-2020-11-26 18:15:41
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:left;">
-Via Riviera
+2020-12-31 15:22:54
 </td>
 <td style="text-align:left;">
-2020-11-26 21:05:34
+2020-12-31 18:21:30
 </td>
 <td style="text-align:left;">
-Giessliweg
+vehicle
 </td>
 <td style="text-align:left;">
 car
 </td>
-<td style="text-align:left;">
-disabled
+<td style="text-align:right;">
+266847
 </td>
 <td style="text-align:right;">
-265272
+10716
 </td>
 <td style="text-align:right;">
-10630
+10239
 </td>
 <td style="text-align:right;">
-10193
-</td>
-<td style="text-align:right;">
-10193
-</td>
-<td style="text-align:right;">
-38.517
+102.5187
 </td>
 </tr>
 </tbody>
@@ -258,18 +240,20 @@ disabled
 <code class="sourceCode R"><span class="va">routes</span><span class="op">$</span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">origin</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
                       <span class="va">destination</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
                       sep <span class="op">=</span>  <span class="st">" - "</span><span class="op">)</span>
-<span class="fu">mapview</span><span class="op">(</span><span class="va">routes</span>,
-        zcol <span class="op">=</span> <span class="st">"label"</span>,
-        lwd <span class="op">=</span> <span class="va">routes</span><span class="op">$</span><span class="va">travelTime</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">routes</span><span class="op">$</span><span class="va">travelTime</span><span class="op">)</span><span class="op">*</span><span class="fl">5</span>,
-        layer.name <span class="op">=</span> <span class="st">"Route [O-D]"</span>,
-        map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-        homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">routes</span>,
+                   zcol <span class="op">=</span> <span class="st">"label"</span>,
+                   layer.name <span class="op">=</span> <span class="st">"Route [O-D]"</span>,
+                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+                   homebutton <span class="op">=</span> <span class="cn">FALSE</span>
+  <span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 </div>
-<div id="routing-matrix" class="section level2">
+<div id="matrix-routing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#routing-matrix" class="anchor"></a>Routing matrix</h2>
-<p>The function <code><a href="../reference/route_matrix.html">route_matrix()</a></code> calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. If only one <code>sf</code> object is provided as <code>origin</code> an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function <code>route_matrix</code> is one route summary matrix, that fits the order of the provided POIs: <code>origIndex</code>, <code>destIndex</code>.</p>
+<a href="#matrix-routing" class="anchor"></a>Matrix routing</h2>
+<p>The function <code><a href="../reference/route_matrix.html">route_matrix()</a></code> calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. If only one <code>sf</code> object is provided as <code>origin</code> an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function <code>route_matrix</code> is one route summary matrix, that fits the order of the provided POIs: <code>orig_id</code>, <code>dest_id</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># From - to</span>
 <span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route_matrix.html">route_matrix</a></span><span class="op">(</span>
@@ -285,10 +269,13 @@ disabled
 <table class="table">
 <thead><tr>
 <th style="text-align:right;">
-origIndex
+orig_id
 </th>
 <th style="text-align:right;">
-destIndex
+dest_id
+</th>
+<th style="text-align:right;">
+request_id
 </th>
 <th style="text-align:left;">
 departure
@@ -296,14 +283,20 @@ departure
 <th style="text-align:left;">
 arrival
 </th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:left;">
+mode
+</th>
 <th style="text-align:right;">
 distance
 </th>
 <th style="text-align:right;">
-travelTime
+duration
 </th>
 <th style="text-align:right;">
-costFactor
+error_code
 </th>
 </tr></thead>
 <tbody>
@@ -314,20 +307,29 @@ costFactor
 <td style="text-align:right;">
 1
 </td>
-<td style="text-align:left;">
-2020-11-26 18:15:41
-</td>
-<td style="text-align:left;">
-2020-11-26 18:15:41
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
 <td style="text-align:right;">
 1
+</td>
+<td style="text-align:left;">
+2020-12-31 15:22:55
+</td>
+<td style="text-align:left;">
+2020-12-31 15:22:55
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
@@ -337,20 +339,29 @@ costFactor
 <td style="text-align:right;">
 2
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 20:14:30
+2020-12-31 17:24:47
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-172685
+173040
 </td>
 <td style="text-align:right;">
-7129
+7312
 </td>
 <td style="text-align:right;">
-7194
+0
 </td>
 </tr>
 <tr>
@@ -360,20 +371,29 @@ costFactor
 <td style="text-align:right;">
 3
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 20:22:24
+2020-12-31 17:41:19
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-211455
+212086
 </td>
 <td style="text-align:right;">
-7603
+8304
 </td>
 <td style="text-align:right;">
-7668
+0
 </td>
 </tr>
 <tr>
@@ -383,20 +403,29 @@ costFactor
 <td style="text-align:right;">
 4
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 19:21:50
+2020-12-31 16:28:27
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-99141
+99502
 </td>
 <td style="text-align:right;">
-3969
+3932
 </td>
 <td style="text-align:right;">
-4065
+0
 </td>
 </tr>
 <tr>
@@ -406,20 +435,29 @@ costFactor
 <td style="text-align:right;">
 5
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 19:35:41
+2020-12-31 16:43:46
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-117374
+117879
 </td>
 <td style="text-align:right;">
-4800
+4851
 </td>
 <td style="text-align:right;">
-4865
+0
 </td>
 </tr>
 <tr>
@@ -429,20 +467,29 @@ costFactor
 <td style="text-align:right;">
 6
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 19:00:01
+2020-12-31 16:08:35
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-55301
+55356
 </td>
 <td style="text-align:right;">
-2660
+2740
 </td>
 <td style="text-align:right;">
-2705
+0
 </td>
 </tr>
 <tr>
@@ -452,20 +499,29 @@ costFactor
 <td style="text-align:right;">
 7
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 20:53:20
+2020-12-31 18:08:48
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-265764
+268789
 </td>
 <td style="text-align:right;">
-9459
+9953
 </td>
 <td style="text-align:right;">
-9526
+0
 </td>
 </tr>
 <tr>
@@ -475,20 +531,29 @@ costFactor
 <td style="text-align:right;">
 8
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 19:42:13
+2020-12-31 17:00:41
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-132417
+132153
 </td>
 <td style="text-align:right;">
-5192
+5866
 </td>
 <td style="text-align:right;">
-5315
+0
 </td>
 </tr>
 <tr>
@@ -498,20 +563,29 @@ costFactor
 <td style="text-align:right;">
 1
 </td>
+<td style="text-align:right;">
+1
+</td>
 <td style="text-align:left;">
-2020-11-26 18:15:41
+2020-12-31 15:22:55
 </td>
 <td style="text-align:left;">
-2020-11-26 20:14:09
+2020-12-31 17:25:29
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
 </td>
 <td style="text-align:right;">
-171589
+172978
 </td>
 <td style="text-align:right;">
-7108
+7354
 </td>
 <td style="text-align:right;">
-7173
+0
 </td>
 </tr>
 <tr>
@@ -521,57 +595,69 @@ costFactor
 <td style="text-align:right;">
 2
 </td>
-<td style="text-align:left;">
-2020-11-26 18:15:41
-</td>
-<td style="text-align:left;">
-2020-11-26 18:15:41
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
 <td style="text-align:right;">
 1
+</td>
+<td style="text-align:left;">
+2020-12-31 15:22:55
+</td>
+<td style="text-align:left;">
+2020-12-31 15:22:55
+</td>
+<td style="text-align:left;">
+fast
+</td>
+<td style="text-align:left;">
+car
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="isoline" class="section level2">
+<div id="isoline-routing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#isoline" class="anchor"></a>Isoline</h2>
-<p>Isolines are constructed by the function <code><a href="../reference/isoline.html">isoline()</a></code>. The calculated polygons (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption as costfactor. By default the <code>aggregate</code> parameter is set to <code>TRUE</code>, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polyons are aggregated to polygons of geometry type <code>MULTIPOLYGON</code>. Thereby overlapping isolines are avoided.</p>
+<a href="#isoline-routing" class="anchor"></a>Isoline routing</h2>
+<p>Isolines are constructed by the function <code><a href="../reference/isoline.html">isoline()</a></code>. The calculated polygons (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption. By default the <code>aggregate</code> parameter is set to <code>TRUE</code>, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polygons are aggregated to polygons of geometry type <code>MULTIPOLYGON</code>. Thereby overlapping isolines are avoided.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iso</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/isoline.html">isoline</a></span><span class="op">(</span>
   <span class="va">poi</span>,
   range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,
   range_type <span class="op">=</span> <span class="st">"time"</span>,
-  type <span class="op">=</span> <span class="st">"fastest"</span>,
-  mode <span class="op">=</span> <span class="st">"car"</span>,
+  routing_mode <span class="op">=</span> <span class="st">"fast"</span>,
+  transport_mode <span class="op">=</span> <span class="st">"car"</span>,
   aggregate <span class="op">=</span> <span class="cn">TRUE</span>,
   traffic <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 <p>Convert range from seconds to minutes and print the aggregated isolines on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iso</span><span class="op">$</span><span class="va">minutes</span> <span class="op">&lt;-</span> <span class="va">iso</span><span class="op">$</span><span class="va">range</span><span class="op">/</span><span class="fl">60</span>
-<span class="fu">mapview</span><span class="op">(</span><span class="va">iso</span>,
-        zcol <span class="op">=</span> <span class="st">"minutes"</span>,
-        layer.name <span class="op">=</span> <span class="st">"Isoline [min]"</span>,
-        alpha <span class="op">=</span> <span class="fl">0</span>,
-        map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-        homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">iso</span>,
+          zcol <span class="op">=</span> <span class="st">"minutes"</span>,
+          layer.name <span class="op">=</span> <span class="st">"Isoline [min]"</span>,
+          alpha <span class="op">=</span> <span class="fl">0</span>,
+          map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+          homebutton <span class="op">=</span> <span class="cn">FALSE</span>
+  <span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">
 <a href="#api-reference" class="anchor"></a>API Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/routing/topics/resource-calculate-route.html">Route direction</a></li>
-<li><a href="https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html">Route matrix</a></li>
-<li><a href="https://developer.here.com/documentation/routing/topics/resource-calculate-isoline.html">Isoline</a></li>
+<li><a href="https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html">Routing</a></li>
+<li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html">Matrix Routing</a></li>
+<li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html">Isoline Routing</a></li>
 </ul>
 </div>
   </div>

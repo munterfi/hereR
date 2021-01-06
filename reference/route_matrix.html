@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HERE Routing API: Calculate Matrix — route_matrix • hereR</title>
+<title>HERE Matrix Routing API: Calculate Matrix — route_matrix • hereR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,12 +46,12 @@
 
 
 
-<meta property="og:title" content="HERE Routing API: Calculate Matrix — route_matrix" />
-<meta property="og:description" content="Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Routing' API.
+<meta property="og:title" content="HERE Matrix Routing API: Calculate Matrix — route_matrix" />
+<meta property="og:description" content="Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Matrix Routing' API.
 Various transport modes and traffic information at a provided timestamp are supported.
 The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 maximum matrix size per request and thereby minimize the number of overall needed requests.
-The result is one route summary matrix, that fits the order of the provided POIs: origIndex, destIndex." />
+The result is one route summary matrix, that fits the order of the provided POIs: orig_id, dest_id." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -84,7 +84,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -107,13 +107,13 @@ The result is one route summary matrix, that fits the order of the provided POIs
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/geocoder.html">Geocoder API</a>
+      <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
     </li>
     <li>
       <a href="../articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing.html">Routing API</a>
+      <a href="../articles/routing.html">Routing APIs</a>
     </li>
     <li>
       <a href="../articles/traffic.html">Traffic API</a>
@@ -130,19 +130,19 @@ The result is one route summary matrix, that fits the order of the provided POIs
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fa fa-twitter fa-lg"></span>
+    <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fa fa-globe fa-lg"></span>
+    <span class="fas fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -159,29 +159,29 @@ The result is one route summary matrix, that fits the order of the provided POIs
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>HERE Routing API: Calculate Matrix</h1>
+    <h1>HERE Matrix Routing API: Calculate Matrix</h1>
     <small class="dont-index">Source: <a href='https://github.com/munterfinger/hereR/blob/master/R/route_matrix.R'><code>R/route_matrix.R</code></a></small>
     <div class="hidden name"><code>route_matrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Routing' API.
+    <p>Calculates a matrix of M:N, M:1 or 1:N route summaries between given points of interest (POIs) using the HERE 'Matrix Routing' API.
 Various transport modes and traffic information at a provided timestamp are supported.
 The requested matrix is split into (sub-)matrices of dimension 15x100 to use the
 maximum matrix size per request and thereby minimize the number of overall needed requests.
-The result is one route summary matrix, that fits the order of the provided POIs: <code>origIndex</code>, <code>destIndex</code>.</p>
+The result is one route summary matrix, that fits the order of the provided POIs: <code>orig_id</code>, <code>dest_id</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>route_matrix</span><span class='op'>(</span>
   <span class='va'>origin</span>,
   destination <span class='op'>=</span> <span class='va'>origin</span>,
   datetime <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>,
-  type <span class='op'>=</span> <span class='st'>"fastest"</span>,
-  mode <span class='op'>=</span> <span class='st'>"car"</span>,
-  traffic <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  search_range <span class='op'>=</span> <span class='fl'>99999999</span>,
-  attribute <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"distance"</span>, <span class='st'>"traveltime"</span><span class='op'>)</span>,
-  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>
+  routing_mode <span class='op'>=</span> <span class='st'>"fast"</span>,
+  transport_mode <span class='op'>=</span> <span class='st'>"car"</span>,
+  traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>type</span>,
+  <span class='va'>mode</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -200,28 +200,28 @@ The result is one route summary matrix, that fits the order of the provided POIs
       <td><p><code>POSIXct</code> object, datetime for the departure.</p></td>
     </tr>
     <tr>
-      <th>type</th>
-      <td><p>character, set the routing type: <code>"fastest"</code>, <code>"shortest"</code> or <code>"balanced"</code>.</p></td>
+      <th>routing_mode</th>
+      <td><p>character, set the routing type: <code>"fast"</code> or <code>"short"</code> (<code>default = "fast"</code>).</p></td>
     </tr>
     <tr>
-      <th>mode</th>
-      <td><p>character, set the transport mode: <code>"car"</code>, <code>"pedestrian"</code>, <code>"carHOV"</code> or <code>"truck"</code>.</p></td>
+      <th>transport_mode</th>
+      <td><p>character, set the transport mode: <code>"car"</code>, <code>"truck"</code>, <code>"pedestrian"</code> or <code>"bicycle"</code> (<code>default = "car"</code>).</p></td>
     </tr>
     <tr>
       <th>traffic</th>
-      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = FALSE</code>)? If no <code>datetime</code> is set, the current timestamp at the moment of the request is used for <code>datetime</code>.</p></td>
-    </tr>
-    <tr>
-      <th>search_range</th>
-      <td><p>numeric, value in meters to limit the search radius in the route generation (<code>default = 99999999</code>).</p></td>
-    </tr>
-    <tr>
-      <th>attribute</th>
-      <td><p>character, attributes to be calculated on the routes: <code>"distance"</code> or <code>"traveltime"</code> (<code>default = c("distance", "traveltime")</code>.</p></td>
+      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = TRUE</code>)? If no traffic is selected, the <code>datetime</code> is set to <code>"any"</code> and the request is processed independently from time.</p></td>
     </tr>
     <tr>
       <th>url_only</th>
       <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>character, 'type' is deprecated, use 'routing_mode' instead.</p></td>
+    </tr>
+    <tr>
+      <th>mode</th>
+      <td><p>character, 'mode' is deprecated, use 'transport_mode' instead.</p></td>
     </tr>
     </table>
 
@@ -230,7 +230,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
     <p>A <code>data.frame</code>, which is an edge list containing the requested M:N route combinations.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/routing/topics/resource-calculate-matrix.html'>HERE Routing API: Calculate Matrix</a></p>
+    <p><a href='https://developer.here.com/documentation/matrix-routing-api/8.3.0/dev_guide/index.html'>HERE Matrix Routing API</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
@@ -239,7 +239,6 @@ The result is one route summary matrix, that fits the order of the provided POIs
 <span class='co'># Create routes summaries between all POIs</span>
 <span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'>route_matrix</span><span class='op'>(</span>
   origin <span class='op'>=</span> <span class='va'>poi</span>,
-  traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
   url_only <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 </div></pre>

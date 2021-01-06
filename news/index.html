@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -102,13 +102,13 @@
       <a href="../articles/authentication.html">Authentication</a>
     </li>
     <li>
-      <a href="../articles/geocoder.html">Geocoder API</a>
+      <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
     </li>
     <li>
       <a href="../articles/intermodal.html">Intermodal Routing API</a>
     </li>
     <li>
-      <a href="../articles/routing.html">Routing API</a>
+      <a href="../articles/routing.html">Routing APIs</a>
     </li>
     <li>
       <a href="../articles/traffic.html">Traffic API</a>
@@ -125,19 +125,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fa fa-twitter fa-lg"></span>
+    <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fa fa-globe fa-lg"></span>
+    <span class="fas fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -158,6 +158,22 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="version-060" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#version-060" class="anchor"></a>version 0.6.0<small> 2021-01-04 </small>
+</h1>
+<ul>
+<li>Update <code><a href="../reference/route_matrix.html">route_matrix()</a></code> from <strong>Routing API v7.2</strong> (calculatematrix) to <strong>Matrix Routing API v8</strong> (see <a href="https://github.com/munterfinger/hereR/issues/87"><a href='https://github.com/munterfinger/hereR/issues/87'>#87</a></a>).</li>
+<li>Update <code><a href="../reference/isoline.html">isoline()</a></code> from <strong>Routing API v7.2</strong> (calculateisoline) to <strong>Isoline Routing API v8</strong> (see <a href="https://github.com/munterfinger/hereR/issues/87"><a href='https://github.com/munterfinger/hereR/issues/87'>#87</a></a>).</li>
+<li>Update <code><a href="../reference/route.html">route()</a></code> from <strong>Routing API v7.2</strong> (calculateroute) to <strong>Routing API v8</strong>, which brings the elevation to the route geometries (closes <a href="https://github.com/munterfinger/hereR/issues/87"><a href='https://github.com/munterfinger/hereR/issues/87'>#87</a></a>). <strong>Note:</strong> Currently arrival time is not yet supported.</li>
+<li>Return ISO state and country code in <code><a href="../reference/geocode.html">geocode()</a></code> with the updated API v7.2 as it did with the previous API v6 (closes <a href="https://github.com/munterfinger/hereR/issues/98"><a href='https://github.com/munterfinger/hereR/issues/98'>#98</a></a>).</li>
+<li>Deprecate parameters <code>mode</code> and <code>type</code> in <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/route_matrix.html">route_matrix()</a></code> and <code><a href="../reference/isoline.html">isoline()</a></code>, use <code>transport_mode</code> and <code>routing_mode</code> instead.</li>
+<li>Fix parsing of timezones in <code><a href="../reference/connection.html">connection()</a></code> and <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> (closes <a href="https://github.com/munterfinger/hereR/issues/94"><a href='https://github.com/munterfinger/hereR/issues/94'>#94</a></a>).</li>
+<li>Fix not conditional use of suggested packages in vignettes (closes <a href="https://github.com/munterfinger/hereR/issues/101"><a href='https://github.com/munterfinger/hereR/issues/101'>#101</a></a>).</li>
+<li>Fix issue with delimiter for POST requests by changing it from a space <code>" "</code> to a space pipe combination <code>" | "</code> (closes <a href="https://github.com/munterfinger/hereR/issues/102"><a href='https://github.com/munterfinger/hereR/issues/102'>#102</a></a>).</li>
+<li>Added contribution guidelines, code of conduct and issue templates.</li>
+</ul>
+</div>
     <div id="version-052" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.2">
 <a href="#version-052" class="anchor"></a>version 0.5.2<small> 2020-11-26 </small>
