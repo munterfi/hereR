@@ -45,7 +45,7 @@
 route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   results = 1, routing_mode = "fast", transport_mode = "car",
                   traffic = TRUE, consumption_model = NULL, url_only = FALSE,
-                  type, mode) {
+                  type, mode, waypoints = NULL) {
 
   # Deprecated parameters
   if (!missing("type")) {
@@ -94,6 +94,20 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
     "&destination=",
     dest_coords[, 2], ",", dest_coords[, 1]
   )
+
+  if (!is.null(waypoints)){
+    if (any(class(waypoints)=="sf")){
+      for (i in c(1:nrow(waypoints))){
+        url = paste0(
+          url,
+          "&via=",
+          sf::st_coordinates(waypoints[i,])[,2],
+          ",",
+          sf::st_coordinates(waypoints[i,])[,1]
+        )
+      }
+    }
+  }
 
   # Add departure or arrival time depending on traffic option
   if (traffic) {
