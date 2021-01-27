@@ -60,7 +60,7 @@ set_key("<YOUR API KEY>")
 
 # Get all from - to combinations from POIs
 to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
-from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
+from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)), ]
 idx <- apply(to != from, any, MARGIN = 1)
 to <- to[idx, ]
 from <- from[idx, ]

@@ -13,7 +13,9 @@ test_that("autosuggest works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$autosuggest_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$autosuggest_response
+    },
     suggestion <- autosuggest(address = poi$city),
 
     # Tests

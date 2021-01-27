@@ -22,7 +22,9 @@ test_that("isoline works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$isoline_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$isoline_response
+    },
 
     # With and without aggregation
     isolines_aggr <- isoline(poi = poi, aggregate = TRUE),

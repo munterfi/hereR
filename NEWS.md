@@ -1,3 +1,8 @@
+# version 0.6.0.9000
+
+* Use *styler* package and use `tyler::tidyverse_style()`to format the package.
+* All *lintr* issues are solved, except from line length issues (limit of 80 characters).
+
 # version 0.6.0
 
 * Update `route_matrix()` from **Routing API v7.2** (calculatematrix) to **Matrix Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).

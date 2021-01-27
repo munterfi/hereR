@@ -72,7 +72,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
   )
 
   # Add departure and arrival
-  url = paste0(
+  url <- paste0(
     url,
     "&origin=",
     coords_orig,
@@ -104,19 +104,23 @@ connection <- function(origin, destination, datetime = Sys.time(),
   }
 
   # Add route attributes
-  url = paste0(
+  url <- paste0(
     url,
     "&return=polyline,travelSummary"
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   routes <- .extract_connection_sections(data)
@@ -170,13 +174,16 @@ connection <- function(origin, destination, datetime = Sys.time(),
     geometry = character()
   )
   routes <- data.table::rbindlist(
-    append(list(template),
+    append(
+      list(template),
       lapply(data, function(con) {
         count <<- count + 1
 
         # Parse JSON
         df <- jsonlite::fromJSON(con)
-        if (is.null(df$routes$sections)) {return(NULL)}
+        if (is.null(df$routes$sections)) {
+          return(NULL)
+        }
 
         # Connections
         rank <- 0
@@ -190,13 +197,17 @@ connection <- function(origin, destination, datetime = Sys.time(),
               data.table::data.table(
                 rank = rank,
                 departure = sec$departure$time,
-                origin = vapply(sec$departure$place$name,
-                                function(x) if (is.na(x)) "ORIG" else x,
-                                character(1)),
+                origin = vapply(
+                  sec$departure$place$name,
+                  function(x) if (is.na(x)) "ORIG" else x,
+                  character(1)
+                ),
                 arrival = sec$arrival$time,
-                destination = vapply(sec$arrival$place$name,
-                                     function(x) if (is.na(x)) "DEST" else x,
-                                     character(1)),
+                destination = vapply(
+                  sec$arrival$place$name,
+                  function(x) if (is.na(x)) "DEST" else x,
+                  character(1)
+                ),
                 mode = sec$transport$mode,
                 category = sec$transport$category,
                 vehicle = sec$transport$name,
@@ -206,13 +217,19 @@ connection <- function(origin, destination, datetime = Sys.time(),
                 duration = sec$travelSummary$duration,
                 geometry = sec$polyline
               )
-            }), fill = TRUE)
+            }),
+            fill = TRUE
+          )
         )
-      })), fill = TRUE
-    )
+      })
+    ),
+    fill = TRUE
+  )
 
   # Check success
-  if (nrow(routes) < 1) {return(NULL)}
+  if (nrow(routes) < 1) {
+    return(NULL)
+  }
 
   # Decode flexible polyline encoding to LINESTRING
   routes$geometry <- sf::st_geometry(
@@ -230,7 +247,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
     departure = min(departure),
     origin = origin[2],
     arrival = max(arrival),
-    destination = destination[length(destination)-1],
+    destination = destination[length(destination) - 1],
     transfers = length(stats::na.exclude(vehicle)) - 1,
     modes = paste(stats::na.exclude(mode), collapse = ", "),
     categories = paste(stats::na.exclude(category), collapse = ", "),
@@ -242,4 +259,3 @@ connection <- function(origin, destination, datetime = Sys.time(),
   ), by = list(id, rank)]
   return(summary)
 }
-

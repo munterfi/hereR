@@ -74,26 +74,32 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
   )
 
   # Add min jam factor
-    url <- paste0(
+  url <- paste0(
     url,
     "&minjamfactor=",
     min_jam_factor
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   flow <- .extract_traffic_flow(data, min_jam_factor)
 
   # Check for empty response
-  if (is.null(flow)) {return(NULL)}
+  if (is.null(flow)) {
+    return(NULL)
+  }
 
   # Spatial contains
   flow <-
@@ -109,7 +115,9 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
   flow <- suppressWarnings(data.table::rbindlist(lapply(data, function(con) {
     count <<- count + 1
     df <- jsonlite::fromJSON(con)
-    if (is.null(df$RWS$RW)) {return(NULL)}
+    if (is.null(df$RWS$RW)) {
+      return(NULL)
+    }
     data.table::rbindlist(lapply(df$RWS$RW, function(rw) {
       data.table::rbindlist(lapply(rw$FIS, function(fis) {
         data.table::rbindlist(lapply(fis$FI, function(fi) {
@@ -118,23 +126,25 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
             cbind(
               fi$TM[, c("PC", "DE", "QD", "LE")],
               data.table::rbindlist(
-                fi$CF, fill = TRUE
-              )[, c("TY", "SP", "FF", "JF","CN")]
+                fi$CF,
+                fill = TRUE
+              )[, c("TY", "SP", "FF", "JF", "CN")]
             )
           )
-          geoms <<- append(geoms,
+          geoms <<- append(
+            geoms,
             geometry <- lapply(fi$SHP, function(shp) {
-              lines <- lapply(shp$value, function(pointList) {
-                .line_from_pointList(strsplit(pointList, " ")[[1]])
+              lines <- lapply(shp$value, function(point_list) {
+                .line_from_point_list(strsplit(point_list, " ")[[1]])
               })
               sf::st_multilinestring(lines)
             })
           )
           return(dat)
-          }), fill = TRUE)
         }), fill = TRUE)
       }), fill = TRUE)
-    }), fill = TRUE))
+    }), fill = TRUE)
+  }), fill = TRUE))
   flow$geometry <- geoms
   flow <- flow[flow$JF >= min_jam_factor, ]
   if (nrow(flow) > 0) {
