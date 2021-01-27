@@ -109,7 +109,6 @@ station <- function(poi, radius = 500, results = 50, url_only = FALSE) {
       list(template),
       lapply(data, function(con) {
         count <<- count + 1
-        rank <- 0
         df <- jsonlite::fromJSON(con)
         if (length(df$stations) < 1) {
           return(NULL)

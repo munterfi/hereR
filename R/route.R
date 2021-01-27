@@ -166,7 +166,6 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   }
 
   # Postprocess
-  # routes <- routes[routes$rank <= results, ]
   departure <- NULL
   routes[, c("departure", "arrival") := list(
     .parse_datetime_tz(departure, tz = attr(datetime, "tzone")),

@@ -102,9 +102,9 @@
   # Send requests and process the responses in the same order as the input URLs
   out <- curl::multi_run(pool = pool)
   results <- lapply(results[ids], function(x) {
-    rawChar <- rawToChar(x$content)
-    Encoding(rawChar) <- encoding
-    rawChar
+    raw_char <- rawToChar(x$content)
+    Encoding(raw_char) <- encoding
+    raw_char
   })
   if (Sys.getenv("HERE_VERBOSE") != "") {
     message(
@@ -139,8 +139,8 @@
 
 ## Geometries
 
-.line_from_pointList <- function(pointList) {
-  coords <- strsplit(pointList, ",")
+.line_from_point_list <- function(point_list) {
+  coords <- strsplit(point_list, ",")
   lng <- as.numeric(sapply(coords, function(x) x[2]))
   lat <- as.numeric(sapply(coords, function(x) x[1]))
   sf::st_linestring(cbind(lng, lat))

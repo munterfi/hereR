@@ -134,8 +134,8 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
           geoms <<- append(
             geoms,
             geometry <- lapply(fi$SHP, function(shp) {
-              lines <- lapply(shp$value, function(pointList) {
-                .line_from_pointList(strsplit(pointList, " ")[[1]])
+              lines <- lapply(shp$value, function(point_list) {
+                .line_from_point_list(strsplit(point_list, " ")[[1]])
               })
               sf::st_multilinestring(lines)
             })

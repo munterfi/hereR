@@ -75,7 +75,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   )
 
   # Setup request headers
-  request_headers <- .create_route_matrix_request_headers()
+  request_headers <- .create_request_headers()
 
   # Switch coordinates to use max request size of 15x100
   if (nrow(orig_coords) > nrow(dest_coords)) {
@@ -106,7 +106,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
       ]
       orig_idx <<- append(orig_idx, list(seq(0 + i, nrow(orig_batch) - 1 + i, 1)))
       dest_idx <<- append(dest_idx, list(seq(0 + j, nrow(dest_batch) - 1 + j, 1)))
-      request_body <- .create_route_matrix_request_body(
+      request_body <- .create_request_body(
         orig_batch, dest_batch, datetime, routing_mode, transport_mode, traffic
       )
       return(
@@ -174,7 +174,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   return(as.data.frame(route_mat))
 }
 
-.create_route_matrix_request_headers <- function() {
+.create_request_headers <- function() {
   request_headers <- list(
     "accept" = "application/json",
     "Content-Type" = "application/json",
@@ -183,9 +183,9 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   return(jsonlite::toJSON(request_headers, auto_unbox = TRUE, pretty = FALSE))
 }
 
-.create_route_matrix_request_body <- function(orig_coords, dest_coords,
-                                              datetime, routing_mode,
-                                              transport_mode, traffic) {
+.create_request_body <- function(orig_coords, dest_coords,
+                                 datetime, routing_mode,
+                                 transport_mode, traffic) {
   request_body <- list(
     origins = lapply(seq_len(nrow(orig_coords)), function(x) {
       list(lat = orig_coords[x, 2], lng = orig_coords[x, 1])
