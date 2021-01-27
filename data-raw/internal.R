@@ -41,7 +41,7 @@ url_weather_alerts <-
 url_flow <-
   flow(aoi = aoi[aoi$code == "LI", ], url_only = TRUE)
 url_incident <-
-  incident(aoi = aoi, from = Sys.time() - 60*60*0.1, url_only = TRUE)
+  incident(aoi = aoi, from = Sys.time() - 60 * 60 * 0.1, url_only = TRUE)
 url_connection <-
   connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, url_only = TRUE)
 url_station <-
@@ -80,7 +80,7 @@ example <- list(
   weather_forecast_astronomy = weather(poi = poi, product = "forecast_astronomy"),
   weather_alerts = weather(poi = poi, product = "alerts"),
   flow = flow(aoi = aoi[aoi$code == "LI", ]),
-  incident = incident(aoi = aoi, from = Sys.time() - 60*60*0.5),
+  incident = incident(aoi = aoi, from = Sys.time() - 60 * 60 * 0.5),
   connection_section = connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = FALSE),
   connection_summary = connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = TRUE),
   station = station(poi)

@@ -65,13 +65,14 @@
 }
 
 .check_input_rows <- function(x, y) {
-  if (nrow(x) != nrow(y))
+  if (nrow(x) != nrow(y)) {
     stop(
       sprintf(
         "'%s' must have the same number of rows as '%s'.",
         deparse(substitute(x)), deparse(substitute(y))
       )
     )
+  }
 }
 
 .check_bbox <- function(bbox) {
@@ -130,7 +131,7 @@
   modes <- c("fast", "short")
   if (!routing_mode %in% modes) {
     stop(
-        sprintf(
+      sprintf(
         "Routing mode '%s' not valid, must be in ('%s').",
         routing_mode,
         paste(modes, collapse = "', '")

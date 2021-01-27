@@ -49,32 +49,36 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
   coords <- sf::st_coordinates(
     sf::st_transform(poi, 4326)
   )
-  url = paste0(
+  url <- paste0(
     url,
     "&at=", coords[, 2], ",", coords[, 1]
   )
 
   # Add language
-  url = paste0(
+  url <- paste0(
     url,
     "&lang=en-US"
   )
 
   # Add max results
-  url = paste0(
+  url <- paste0(
     url,
     "&limit=",
     results
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   reverse <- .extract_addresses(data)
@@ -94,7 +98,8 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
             as.data.frame(reverse),
             coords = c("lng_position", "lat_position"),
             sf_column_name = "geometry"
-          ), value = 4326
+          ),
+          value = 4326
         )
       )
     } else {
@@ -106,7 +111,7 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
 }
 
 .extract_addresses <- function(data) {
-    template <- data.table::data.table(
+  template <- data.table::data.table(
     id = numeric(),
     rank = numeric(),
     address = character(),
@@ -128,11 +133,14 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
   ids <- .get_ids(data)
   count <- 0
   result <- data.table::rbindlist(
-    append(list(template),
+    append(
+      list(template),
       lapply(data, function(con) {
         count <<- count + 1
         df <- jsonlite::fromJSON(con)
-        if (length(nrow(df$items)) == 0) return(NULL)
+        if (length(nrow(df$items)) == 0) {
+          return(NULL)
+        }
         data.table::data.table(
           id = ids[count],
           rank = seq(1, nrow(df$items)),
@@ -153,6 +161,8 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
           lat_position = df$items$position$lat
         )
       })
-    ), fill = TRUE)
+    ),
+    fill = TRUE
+  )
   result
 }

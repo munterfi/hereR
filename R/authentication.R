@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' set_key("<YOUR API KEY>")
-set_key <- function(api_key){
+set_key <- function(api_key) {
   .check_key(api_key)
   Sys.setenv(
     "HERE_API_KEY" = api_key

@@ -15,7 +15,9 @@ test_that("station works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$station_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$station_response
+    },
     stations <- station(poi = poi),
 
     # Tests

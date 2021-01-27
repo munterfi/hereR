@@ -13,7 +13,9 @@ test_that("weather alerts works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$weather_alerts_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$weather_alerts_response
+    },
     weather_alerts <- weather(poi = poi, product = "alerts"),
 
     # Tests

@@ -79,7 +79,7 @@ NULL
 #' For \code{set_auth}, use \code{\link{set_key}}.
 #'
 #' @export
-set_auth <- function(app_id, app_code){
+set_auth <- function(app_id, app_code) {
   .Defunct(new = "set_key", package = "hereR")
 }
 

@@ -20,8 +20,10 @@ test_that("reverse_geocode works", {
 
   # Test with API response mock: sf
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$reverse_geocode_response},
-    reverse <- reverse_geocode(poi = poi,  results = 3, sf = TRUE),
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$reverse_geocode_response
+    },
+    reverse <- reverse_geocode(poi = poi, results = 3, sf = TRUE),
 
     # Tests
     expect_s3_class(reverse, c("sf", "data.frame"), exact = TRUE),
@@ -30,8 +32,10 @@ test_that("reverse_geocode works", {
 
   # Test with API response mock: data.frame
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$reverse_geocode},
-    reverse <- reverse_geocode(poi = poi,  results = 3, sf = FALSE),
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$reverse_geocode
+    },
+    reverse <- reverse_geocode(poi = poi, results = 3, sf = FALSE),
 
     # Tests
     expect_s3_class(reverse, "data.frame", exact = TRUE),

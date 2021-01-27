@@ -1,7 +1,7 @@
 ## API URLs
 
 .add_key <- function(url) {
-  api_key = Sys.getenv("HERE_API_KEY")
+  api_key <- Sys.getenv("HERE_API_KEY")
   .check_key(api_key)
   paste0(
     url,
@@ -63,12 +63,15 @@
   results <- list()
   cb_gen <- function(id) {
     function(res) {
-      if (is.character(res))
+      if (is.character(res)) {
         stop("Connection error: Please check connection to the internet and proxy configuration.")
+      }
       if (res$status != 200) {
         warning(
-          sprintf("Request 'id = %s' failed: Status %s. ",
-                  strsplit(id, "_")[[1]][2], res$status)
+          sprintf(
+            "Request 'id = %s' failed: Status %s. ",
+            strsplit(id, "_")[[1]][2], res$status
+          )
         )
         ids <<- ids[ids != id]
       } else {
@@ -89,9 +92,11 @@
       curl::handle_setheaders(handle, .list = jsonlite::fromJSON(url[[i]][2]))
       curl::handle_setopt(handle, copypostfields = url[[i]][3])
     }
-    curl::curl_fetch_multi(utils::URLencode(url[[i]][1]), pool = pool,
-                           done = cbs[[i]], fail = cbs[[i]],
-                           handle = handle)
+    curl::curl_fetch_multi(utils::URLencode(url[[i]][1]),
+      pool = pool,
+      done = cbs[[i]], fail = cbs[[i]],
+      handle = handle
+    )
   })
 
   # Send requests and process the responses in the same order as the input URLs
@@ -114,7 +119,9 @@
 }
 
 .get_ids <- function(content) {
-  as.numeric(sapply(strsplit(names(content), "_"), function(x){x[[2]]}))
+  as.numeric(sapply(strsplit(names(content), "_"), function(x) {
+    x[[2]]
+  }))
 }
 
 # Deprecated (still used in incident and weather)...
@@ -153,7 +160,8 @@
         } else {
           return(sf::st_point())
         }
-      }), crs = 4326
+      }),
+      crs = 4326
     )
   )
 }

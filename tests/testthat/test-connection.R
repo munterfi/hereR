@@ -22,7 +22,9 @@ test_that("connection works", {
   ## Test with API response mock
   # Route segments: "summary = FALSE"
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$connection_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$connection_response
+    },
     connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = FALSE),
 
     # Tests
@@ -32,7 +34,9 @@ test_that("connection works", {
 
   # Route summary: "summary = FALSE"
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$connection_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$connection_response
+    },
     connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = TRUE),
 
     # Tests
