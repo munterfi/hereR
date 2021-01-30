@@ -4,7 +4,7 @@
 #' The key is set for the current R session and is used
 #' to authenticate in the requests to the APIs.
 #'
-#' No login yet? Get a free login and key here: \href{https://developer.here.com/}{klick}
+#' No login yet? Get a login and key here: \href{https://developer.here.com/}{klick}
 #'
 #' @param api_key character, the API key from a HERE project.
 #'

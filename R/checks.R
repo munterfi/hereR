@@ -154,7 +154,7 @@
   if (!(is.character(api_key) & api_key != "")) {
     stop(
       "Please provide an 'API key' for a HERE project.
-         Get your login here: https://developer.here.com/"
+      Get your login here: https://developer.here.com/"
     )
   }
 }
