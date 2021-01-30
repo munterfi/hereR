@@ -170,11 +170,15 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       isolines[, arrival := departure + range]
     }
   }
+  rownames(isolines) <- NULL
+
+  # Bug of data.table and sf combination? Drops sfc class, when only one row...
+  isolines <- as.data.frame(isolines)
+  isolines$geometry <- sf::st_sfc(isolines$geometry, crs = 4326)
 
   # Create sf data.frame
-  rownames(isolines) <- NULL
   isolines <- sf::st_as_sf(
-    as.data.frame(isolines),
+    isolines,
     sf_column_name = "geometry",
     crs = 4326,
     check_ring_dir = TRUE
