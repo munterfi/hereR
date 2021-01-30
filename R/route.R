@@ -173,10 +173,14 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   )]
   rownames(routes) <- NULL
 
+  # Bug of data.table and sf combination? Drops sfc class, when only one row...
+  routes <- as.data.frame(routes)
+  routes$geometry <- sf::st_sfc(routes$geometry, crs = 4326)
+
   # Create sf object
   return(
     sf::st_as_sf(
-      as.data.frame(routes),
+      routes,
       sf_column_name = "geometry",
       crs = 4326
     )
