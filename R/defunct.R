@@ -172,7 +172,7 @@ set_proxy <- function(proxy, proxyuserpwd) {
 #' @keywords internal
 NULL
 
-#' #' @rdname hereR-defunct
+#' @rdname hereR-defunct
 #' @section \code{unset_proxy}:
 #' For \code{unset_proxy}, configure a global proxy for R in '~/.Renviron' instead.
 #'

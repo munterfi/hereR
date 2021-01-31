@@ -51,23 +51,12 @@ incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE
     bbox[2, ], ",", bbox[3, ]
   )
 
-  # Response attributes
-  # url <- paste0(
-  #   url,
-  #   "&responseattributes=shape"
-  # )
-
   # Add datetime range
   url <- .add_datetime(
     url = url,
     datetime = from,
     field_name = "startTime"
   )
-  # url <- .add_datetime(
-  #   url = url,
-  #   datetime = to,
-  #   field_name = "endTime"
-  # )
 
   # Add utc time zone
   url <- paste0(
@@ -129,16 +118,7 @@ incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE
       lat = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LATITUDE,
       description = sapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DESCRIPTION, function(x) x$value[2])
     )
-    # geometry_line <- lapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$GEOMETRY$SHAPES$SHP, function(shp) {
-    #   lines <- lapply(shp$value, function(pointList) {
-    #     .line_from_pointList(strsplit(pointList, " ")[[1]])
-    #   })
-    #   if (length(lines) > 1) {sf::st_multilinestring(lines)}
-    # })
-    # geoms_line <<- append(geoms_line, geometry_line)
-    # return(info)
   }), fill = TRUE)
-  # incidents$geometry_line <- geoms_line
 
   # Create sf, data.frame
   if (nrow(incidents) > 0) {
