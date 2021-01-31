@@ -259,7 +259,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
     providers = paste(stats::na.exclude(provider), collapse = ", "),
     distance = sum(distance),
     duration = sum(duration),
-    geometry = sf::st_union(geometry)
+    geometry = suppressMessages(sf::st_union(geometry))
   ), by = list(id, rank)]
   return(summary)
 }
