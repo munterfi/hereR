@@ -194,6 +194,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   template <- data.table::data.table(
     id = numeric(),
     rank = numeric(),
+    section = numeric(),
     departure = character(),
     arrival = character(),
     type = character(),
@@ -229,6 +230,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
               rank <<- rank + 1
               data.table::data.table(
                 rank = rank,
+                section = seq_len(nrow(sec)),
                 departure = sec$departure$time,
                 arrival = sec$arrival$time,
                 type = sec$type,
