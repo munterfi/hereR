@@ -3,6 +3,7 @@
 * Use *styler* package and use `tyler::tidyverse_style()`to format the package.
 * All *lintr* issues are solved, except from line length issues (limit of 80 characters).
 * Avoid drop of the `sfc` class of the geometry column when there is only one geometry/row in a `data.table` (closes [#111](https://github.com/munterfinger/hereR/issues/111)).
+* Return `queryScore` in `geocode()` results as `score` column (closes [#109](https://github.com/munterfinger/hereR/issues/109)).
 
 # version 0.6.0
 
