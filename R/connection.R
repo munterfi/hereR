@@ -164,6 +164,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
   template <- data.table::data.table(
     id = numeric(),
     rank = numeric(),
+    section = numeric(),
     departure = character(),
     origin = character(),
     arrival = character(),
@@ -200,6 +201,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
               rank <<- rank + 1
               data.table::data.table(
                 rank = rank,
+                section = seq_len(nrow(sec)),
                 departure = sec$departure$time,
                 origin = vapply(
                   sec$departure$place$name,
