@@ -1,4 +1,4 @@
-# version 0.6.0.9000
+# version 0.6.1
 
 * Use **styler** package and use `tyler::tidyverse_style()`to format the package.
 * All **lintr** issues are solved, except from line length issues (limit of 80 characters).

@@ -131,7 +131,7 @@ weather(poi, product = "alerts")
 
 ## References
 
-* [HERE Developer Terms and Conditions](https://developer.here.com/terms-and-conditions)
+* [Developer Terms and Conditions](https://developer.here.com/terms-and-conditions)
 * [Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
 * [Routing API](https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html)
 * [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
