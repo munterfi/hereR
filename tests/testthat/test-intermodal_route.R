@@ -17,7 +17,9 @@ test_that("intermodal_route works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$intermodal_route_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$intermodal_route_response
+    },
     intermodal_routes <- intermodal_route(origin = poi[1:2, ], destination = poi[3:4, ]),
 
     # Tests

@@ -51,19 +51,23 @@ station <- function(poi, radius = 500, results = 50, url_only = FALSE) {
   )
 
   # Add station attributes
-  url = paste0(
+  url <- paste0(
     url,
     "&return=transport"
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   stations <- .extract_stations(data)
@@ -101,28 +105,38 @@ station <- function(poi, radius = 500, results = 50, url_only = FALSE) {
     lat = numeric()
   )
   stations <- data.table::rbindlist(
-    append(list(template),
+    append(
+      list(template),
       lapply(data, function(con) {
         count <<- count + 1
-        rank <- 0
         df <- jsonlite::fromJSON(con)
-        if (length(df$stations) < 1) {return(NULL)}
+        if (length(df$stations) < 1) {
+          return(NULL)
+        }
         data.table::data.table(
           id = ids[count],
           rank = seq(1, nrow(df$stations)),
           station = df$stations$place$name,
-          modes = lapply(df$stations$transports,
-                         function(x) unique(as.character(x$mode))),
-          lines = lapply(df$stations$transports,
-                         function(x) unique(as.character(x$name))),
+          modes = lapply(
+            df$stations$transports,
+            function(x) unique(as.character(x$mode))
+          ),
+          lines = lapply(
+            df$stations$transports,
+            function(x) unique(as.character(x$name))
+          ),
           lng = df$station$place$location$lng,
           lat = df$station$place$location$lat
         )
-      })), fill = TRUE
-    )
+      })
+    ),
+    fill = TRUE
+  )
 
   # Check success, postprocess and return
-  if (nrow(stations) < 1) {return(NULL)}
+  if (nrow(stations) < 1) {
+    return(NULL)
+  }
   modes <- lines <- NULL
   stations[, c("modes", "lines") := list(
     vapply(modes, paste, collapse = ", ", character(1)),

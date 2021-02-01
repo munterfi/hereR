@@ -25,7 +25,7 @@ poi$population <- as.numeric(poi$population)
 rownames(poi) <- NULL
 
 # Replace non ASCII
-poi[6,]$city <- "Zurich"
+poi[6, ]$city <- "Zurich"
 
 # Save POIs
 usethis::use_data(poi, overwrite = TRUE)

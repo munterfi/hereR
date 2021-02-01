@@ -6,7 +6,7 @@
 #' The information comes from the nearest available weather station and is not interpolated.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/weather/topics/example-weather-observation.html}{HERE Destination Weather API: Observation}
+#' \href{https://developer.here.com/documentation/destination-weather/dev_guide/topics/overview.html}{HERE Destination Weather API: Observation}
 #'
 #' @param poi \code{sf} object or character, Points of Interest (POIs) of geometry type \code{POINT} or location names (e.g. cities or regions).
 #' @param product character, weather product of the 'Destination Weather API'. Supported products: \code{"observation"}, \code{"forecast_hourly"}, \code{"forecast_astronomy"} and \code{"alerts"}.
@@ -44,7 +44,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   )
 
   # Add product
-  url = paste0(
+  url <- paste0(
     url,
     "&product=",
     product
@@ -54,13 +54,13 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   # Character location (remove pipes)
   if (is.character(poi)) {
     .check_addresses(poi)
-    poi[poi == ""] = NA
-    url = paste0(
+    poi[poi == ""] <- NA
+    url <- paste0(
       url,
       "&name=",
       gsub("\\|", "", poi)
     )
-  # sf POINTs
+    # sf POINTs
   } else if ("sf" %in% class(poi)) {
     .check_points(poi)
     poi <- sf::st_coordinates(
@@ -69,23 +69,27 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
     poi <- paste0(
       "&longitude=", poi[, 1], "&latitude=", poi[, 2]
     )
-    url = paste0(
+    url <- paste0(
       url,
       poi
     )
-  # Not valid
+    # Not valid
   } else {
     stop("Invalid input for 'poi'.")
   }
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   if (product == "observation") {
@@ -125,13 +129,15 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
         distance = df$observations$location$distance[1] * 1000,
         timestamp = .parse_datetime(df$observations$location$observation[[1]]$utcTime),
         state = df$observations$location$state[1],
-        country = df$observations$location$country[1])
+        country = df$observations$location$country[1]
+      )
       obs <- df$observations$location$observation[[1]]
       obs <- obs[, !names(obs) %in% c(
         "skyDescription", "airDescription", "precipitationDesc",
         "temperatureDesc", "iconName", "iconLink", "windDesc", "icon",
         "country", "state", "city", "latitude", "longitude", "distance",
-        "utcTime", "elevation"), ]
+        "utcTime", "elevation"
+      ), ]
       obs[, c(4:9, 16, 17, 23, 24)] <-
         sapply(obs[, c(4:9, 16, 17, 23, 24)], as.numeric)
       return(
@@ -145,7 +151,9 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
 .extract_weather_forecast_hourly <- function(data) {
   ids <- .get_ids(data)
   count <- 0
-  dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
+  dfs <- lapply(data, function(con) {
+    jsonlite::fromJSON(con)
+  })
   forecast <- data.table::rbindlist(
     lapply(dfs, function(df) {
       count <<- count + 1
@@ -160,15 +168,18 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
       )
     })
   )
-  forecast$forecast <- lapply(dfs, function(df)
-    {df$hourlyForecasts$forecastLocation$forecast})
+  forecast$forecast <- lapply(dfs, function(df) {
+    df$hourlyForecasts$forecastLocation$forecast
+  })
   return(forecast)
 }
 
 .extract_weather_forecast_astronomy <- function(data) {
   ids <- .get_ids(data)
   count <- 0
-  dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
+  dfs <- lapply(data, function(con) {
+    jsonlite::fromJSON(con)
+  })
   astronomy <- data.table::rbindlist(
     lapply(dfs, function(df) {
       count <<- count + 1
@@ -188,15 +199,16 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
     ast$date <- as.Date(.parse_datetime(ast$utcTime))
     ast$utcTime <- NULL
     ast
-    }
-  )
+  })
   return(astronomy)
 }
 
 .extract_weather_alerts <- function(data) {
   ids <- .get_ids(data)
   count <- 0
-  dfs <- lapply(data, function(con) {jsonlite::fromJSON(con)})
+  dfs <- lapply(data, function(con) {
+    jsonlite::fromJSON(con)
+  })
   alerts <- data.table::rbindlist(
     lapply(dfs, function(df) {
       count <<- count + 1
@@ -210,7 +222,8 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
       )
     })
   )
-  alerts$alerts <- lapply(dfs, function(df)
-    {df$alerts$alerts})
+  alerts$alerts <- lapply(dfs, function(df) {
+    df$alerts$alerts
+  })
   return(alerts)
 }

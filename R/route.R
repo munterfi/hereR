@@ -32,7 +32,7 @@
 #'
 #' # Get all from - to combinations from POIs
 #' to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
-#' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
+#' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)), ]
 #' idx <- apply(to != from, any, MARGIN = 1)
 #' to <- to[idx, ]
 #' from <- from[idx, ]
@@ -87,7 +87,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   dest_coords <- sf::st_coordinates(
     sf::st_transform(destination, 4326)
   )
-  url = paste0(
+  url <- paste0(
     url,
     "&origin=",
     orig_coords[, 2], ",", orig_coords[, 1],
@@ -120,7 +120,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   )
 
   # Add consumption model if specified, otherwise set to default electric vehicle
-  if(is.null(consumption_model)) {
+  if (is.null(consumption_model)) {
     url <- paste0(
       url,
       "&ev[freeFlowSpeedTable]=0,0.239,27,0.239,45,0.259,60,0.196,75,0.207,90,0.238,100,0.26,110,0.296,120,0.337,130,0.351,250,0.351",
@@ -137,20 +137,24 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   }
 
   # Request polyline and summary
-  url = paste0(
+  url <- paste0(
     url,
     "&return=",
     "polyline,elevation,travelSummary"
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   routes <- .extract_routes(data)
@@ -162,17 +166,21 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   }
 
   # Postprocess
-  #routes <- routes[routes$rank <= results, ]
   departure <- NULL
   routes[, c("departure", "arrival") := list(
     .parse_datetime_tz(departure, tz = attr(datetime, "tzone")),
-    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone")))]
+    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone"))
+  )]
   rownames(routes) <- NULL
+
+  # Bug of data.table and sf combination? Drops sfc class, when only one row...
+  routes <- as.data.frame(routes)
+  routes$geometry <- sf::st_sfc(routes$geometry, crs = 4326)
 
   # Create sf object
   return(
     sf::st_as_sf(
-      as.data.frame(routes),
+      routes,
       sf_column_name = "geometry",
       crs = 4326
     )
@@ -186,6 +194,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   template <- data.table::data.table(
     id = numeric(),
     rank = numeric(),
+    section = numeric(),
     departure = character(),
     arrival = character(),
     type = character(),
@@ -199,13 +208,16 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
 
   # Routes
   routes <- data.table::rbindlist(
-    append(list(template),
+    append(
+      list(template),
       lapply(data, function(con) {
         count <<- count + 1
 
         # Parse JSON
         df <- jsonlite::fromJSON(con)
-        if (is.null(df$routes$sections)) {return(NULL)}
+        if (is.null(df$routes$sections)) {
+          return(NULL)
+        }
 
         # Routes
         rank <- 0
@@ -218,6 +230,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
               rank <<- rank + 1
               data.table::data.table(
                 rank = rank,
+                section = seq_len(nrow(sec)),
                 departure = sec$departure$time,
                 arrival = sec$arrival$time,
                 type = sec$type,
@@ -225,23 +238,31 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                 distance = sec$travelSummary$length,
                 duration = sec$travelSummary$duration,
                 duration_base = sec$travelSummary$baseDuration,
-                consumption = if (is.null(sec$travelSummary$consumption)) {NA} else {sec$travelSummary$consumption},
+                consumption = if (is.null(sec$travelSummary$consumption)) {
+                  NA
+                } else {
+                  sec$travelSummary$consumption
+                },
                 geometry = sec$polyline
               )
-            }), fill = TRUE
+            }),
+            fill = TRUE
           )
         )
       })
-    ), fill = TRUE
+    ),
+    fill = TRUE
   )
 
   # Check success
-  if (nrow(routes) < 1) {return(NULL)}
+  if (nrow(routes) < 1) {
+    return(NULL)
+  }
 
   # Decode flexible polyline encoding to LINESTRING
   geometry <- NULL
   routes[, "geometry" := sf::st_geometry(
-    flexpolyline::decode_sf(geometry, 4326))
-  ]
+    flexpolyline::decode_sf(geometry, 4326)
+  )]
   return(routes)
 }

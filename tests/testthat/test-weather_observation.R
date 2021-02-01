@@ -7,7 +7,9 @@ test_that("weather observation works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$weather_observation_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$weather_observation_response
+    },
     weather_observation <- weather(poi = poi, product = "observation"),
 
     # Tests

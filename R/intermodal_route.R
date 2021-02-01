@@ -57,7 +57,7 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   )
 
   # Add origin and destination
-  url = paste0(
+  url <- paste0(
     url,
     "&origin=",
     origin,
@@ -73,7 +73,7 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   )
 
   # Add alternatives (results minus 1)
-  url = paste0(
+  url <- paste0(
     url,
     "&alternatives=",
     results - 1
@@ -89,20 +89,24 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   }
 
   # Request polyline and summary
-  url = paste0(
+  url <- paste0(
     url,
     "&return=",
     "polyline,travelSummary"
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   routes <- .extract_intermodal_routes(data)
@@ -119,10 +123,14 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   routes$arrival <- .parse_datetime_tz(routes$arrival, tz = attr(datetime, "tzone"))
   rownames(routes) <- NULL
 
+  # Bug of data.table and sf combination? Drops sfc class, when only one row...
+  routes <- as.data.frame(routes)
+  routes$geometry <- sf::st_sfc(routes$geometry, crs = 4326)
+
   # Create sf object
   return(
     sf::st_as_sf(
-      as.data.frame(routes),
+      routes,
       sf_column_name = "geometry",
       crs = 4326
     )
@@ -134,44 +142,85 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
   count <- 0
 
   # Routes
+  template <- data.table::data.table(
+    id = numeric(),
+    rank = numeric(),
+    section = numeric(),
+    departure = character(),
+    origin = character(),
+    arrival = character(),
+    destination = character(),
+    type = character(),
+    mode = character(),
+    vehicle = character(),
+    provider = character(),
+    direction = character(),
+    distance = integer(),
+    duration = integer(),
+    geometry = character()
+  )
   routes <- data.table::rbindlist(
-    lapply(data, function(con) {
-      count <<- count + 1
+    append(
+      list(template),
+      lapply(data, function(con) {
+        count <<- count + 1
 
-      # Parse JSON
-      df <- jsonlite::fromJSON(con)
-      if (is.null(df$routes$sections)) {return(NULL)}
+        # Parse JSON
+        df <- jsonlite::fromJSON(con)
+        if (is.null(df$routes$sections)) {
+          return(NULL)
+        }
 
-      # Connections
-      rank <- 0
-      routes <- data.table::data.table(
-        id = ids[count],
+        # Connections
+        rank <- 0
+        routes <- data.table::data.table(
+          id = ids[count],
 
-        # Segments
-        data.table::rbindlist(
-          lapply(df$routes$sections, function(sec) {
-            rank <<- rank + 1
-            data.table::data.table(
-              rank = rank,
-              departure = sec$departure$time,
-              origin = c("ORIG", sec$departure$place$name[2:length(sec$departure$place$name)]),
-              arrival = sec$arrival$time,
-              destination = c(sec$arrival$place$name[1:(length(sec$arrival$place$name)-1)], "DEST"),
-              type = sec$type,
-              mode = sec$transport$mode,
-              vehicle = if (is.null(sec$transport$name)) {NA} else {sec$transport$name},
-              provider = if (is.null(sec$agency$name)) {NA} else {sec$agency$name},
-              direction = if (is.null(sec$transport$headsign)) {NA} else {sec$transport$headsign},
-              distance = sec$travelSummary$length,
-              duration = sec$travelSummary$duration,
-              geometry = sec$polyline
-            )
-          }), fill = TRUE)
-      )
-    }), fill = TRUE)
+          # Segments
+          data.table::rbindlist(
+            lapply(df$routes$sections, function(sec) {
+              rank <<- rank + 1
+              data.table::data.table(
+                rank = rank,
+                section = seq_len(nrow(sec)),
+                departure = sec$departure$time,
+                origin = c("ORIG", sec$departure$place$name[2:length(sec$departure$place$name)]),
+                arrival = sec$arrival$time,
+                destination = c(sec$arrival$place$name[1:(length(sec$arrival$place$name) - 1)], "DEST"),
+                type = sec$type,
+                mode = sec$transport$mode,
+                vehicle = if (is.null(sec$transport$name)) {
+                  NA
+                } else {
+                  sec$transport$name
+                },
+                provider = if (is.null(sec$agency$name)) {
+                  NA
+                } else {
+                  sec$agency$name
+                },
+                direction = if (is.null(sec$transport$headsign)) {
+                  NA
+                } else {
+                  sec$transport$headsign
+                },
+                distance = sec$travelSummary$length,
+                duration = sec$travelSummary$duration,
+                geometry = sec$polyline
+              )
+            }),
+            fill = TRUE
+          )
+        )
+      })
+    ),
+    fill = TRUE
+  )
 
   # Check success
-  if (nrow(routes) < 1) {return(NULL)}
+  if (nrow(routes) < 1) {
+    return(NULL)
+  }
 
   # Decode flexible polyline encoding to LINESTRING
   routes$geometry <- sf::st_geometry(

@@ -20,11 +20,13 @@ test_that("route_matrix works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$route_matrix_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$route_matrix_response
+    },
     r_mat <- route_matrix(origin = poi),
 
     # Tests
     expect_is(r_mat, "data.frame"),
-    expect_equal(nrow(r_mat), nrow(poi) ** 2)
+    expect_equal(nrow(r_mat), nrow(poi)**2)
   )
 })

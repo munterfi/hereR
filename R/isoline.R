@@ -74,9 +74,13 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   coords <- paste0(
     coords[, 2], ",", coords[, 1]
   )
-  url = paste0(
+  url <- paste0(
     url,
-    if (arrival) {"&destination="} else {"&origin="},
+    if (arrival) {
+      "&destination="
+    } else {
+      "&origin="
+    },
     coords
   )
 
@@ -99,7 +103,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   url <- .add_transport_mode(url, transport_mode)
 
   # Add range and range type
-  url = paste0(
+  url <- paste0(
     url,
     "&range[values]=",
     paste0(range, collapse = ","),
@@ -108,7 +112,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   )
 
   # Add consumption model if specified, otherwise set to default electric vehicle
-  if(is.null(consumption_model)) {
+  if (is.null(consumption_model)) {
     url <- paste0(
       url,
       "&ev[freeFlowSpeedTable]=0,0.239,27,0.239,45,0.259,60,0.196,75,0.207,90,0.238,100,0.26,110,0.296,120,0.337,130,0.351,250,0.351",
@@ -132,13 +136,17 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   isolines <- .extract_isolines(data, arrival)
@@ -153,7 +161,8 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   departure <- NULL
   isolines[, c("departure", "arrival") := list(
     .parse_datetime_tz(departure, tz = attr(datetime, "tzone")),
-    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone")))]
+    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone"))
+  )]
   if (range_type == "time") {
     if (arrival) {
       isolines[, departure := arrival - range]
@@ -161,11 +170,15 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       isolines[, arrival := departure + range]
     }
   }
+  rownames(isolines) <- NULL
+
+  # Bug of data.table and sf combination? Drops sfc class, when only one row...
+  isolines <- as.data.frame(isolines)
+  isolines$geometry <- sf::st_sfc(isolines$geometry, crs = 4326)
 
   # Create sf data.frame
-  rownames(isolines) <- NULL
   isolines <- sf::st_as_sf(
-    as.data.frame(isolines),
+    isolines,
     sf_column_name = "geometry",
     crs = 4326,
     check_ring_dir = TRUE
@@ -198,27 +211,32 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       lapply(data, function(con) {
         count <<- count + 1
         df <- jsonlite::fromJSON(con)
-        if (is.null(df$isolines)) {return(NULL)}
+        if (is.null(df$isolines)) {
+          return(NULL)
+        }
         data.table::data.table(
           id = ids[count],
           rank = seq_len(nrow(df$isolines)),
-          departure = if(arrival) NA else df$departure$time,
-          arrival = if(arrival) df$arrival$time else NA,
+          departure = if (arrival) NA else df$departure$time,
+          arrival = if (arrival) df$arrival$time else NA,
           range = df$isolines$range$value,
           geometry = sapply(df$isolines$polygons, function(x) x$outer)
         )
       })
-    ), fill = TRUE
+    ),
+    fill = TRUE
   )
 
   # Check success
-  if (nrow(isolines) < 1) {return(NULL)}
+  if (nrow(isolines) < 1) {
+    return(NULL)
+  }
 
   # Decode flexible polyline encoding to POLYGON
   geometry <- NULL
   isolines[, "geometry" := sf::st_geometry(
-    flexpolyline::decode_sf(geometry, 4326))
-  ]
+    flexpolyline::decode_sf(geometry, 4326)
+  )]
   return(isolines)
 }
 
@@ -226,9 +244,11 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   tz <- attr(isolines$departure, "tzone")
   isolines <- sf::st_set_precision(isolines, 1e5)
   isolines <- sf::st_make_valid(isolines)
-  isolines <- stats::aggregate(isolines, by = list(isolines$range),
-                               FUN = min, do_union = TRUE, simplify = TRUE,
-                               join = sf::st_intersects)
+  isolines <- stats::aggregate(isolines,
+    by = list(isolines$range),
+    FUN = min, do_union = TRUE, simplify = TRUE,
+    join = sf::st_intersects
+  )
   isolines <- sf::st_make_valid(isolines)
   suppressMessages(
     isolines <- sf::st_difference(isolines)
@@ -241,7 +261,8 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   # Fix geometry collections
   suppressWarnings(
     isolines <- sf::st_collection_extract(
-      isolines, type = "POLYGON"
+      isolines,
+      type = "POLYGON"
     )
   )
   return(isolines)

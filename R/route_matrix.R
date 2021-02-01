@@ -75,7 +75,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   )
 
   # Setup request headers
-  request_headers <- .create_route_matrix_request_headers()
+  request_headers <- .create_request_headers()
 
   # Switch coordinates to use max request size of 15x100
   if (nrow(orig_coords) > nrow(dest_coords)) {
@@ -96,13 +96,17 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   dest_idx <- list()
   url <- as.character(sapply(orig_div, function(i) {
     orig_batch <- orig_coords[
-      (i + 1):(if (i + batch_size_orig > nrow(orig_coords)) nrow(orig_coords) else i + batch_size_orig), , drop = FALSE]
+      (i + 1):(if (i + batch_size_orig > nrow(orig_coords)) nrow(orig_coords) else i + batch_size_orig), ,
+      drop = FALSE
+    ]
     sapply(dest_div, function(j) {
       dest_batch <- dest_coords[
-        (j + 1):(if (j + batch_size_dest > nrow(dest_coords)) nrow(dest_coords) else j + batch_size_dest), , drop = FALSE]
+        (j + 1):(if (j + batch_size_dest > nrow(dest_coords)) nrow(dest_coords) else j + batch_size_dest), ,
+        drop = FALSE
+      ]
       orig_idx <<- append(orig_idx, list(seq(0 + i, nrow(orig_batch) - 1 + i, 1)))
       dest_idx <<- append(dest_idx, list(seq(0 + j, nrow(dest_batch) - 1 + j, 1)))
-      request_body <- .create_route_matrix_request_body(
+      request_body <- .create_request_body(
         orig_batch, dest_batch, datetime, routing_mode, transport_mode, traffic
       )
       return(
@@ -117,13 +121,17 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   }))
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   route_mat <- .extract_route_matrix(data, orig_idx, dest_idx)
@@ -141,11 +149,13 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
     as.POSIXct(arrival),
     routing_mode,
     transport_mode,
-    data.table::fifelse(is.na(error_code), 0, error_code))]
+    data.table::fifelse(is.na(error_code), 0, error_code)
+  )]
   if (traffic) {
     route_mat[, c("departure", "arrival") := list(
       datetime,
-      datetime + duration)]
+      datetime + duration
+    )]
   }
 
   # Switch back indices
@@ -156,13 +166,15 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   }
 
   # Reorder
-  route_mat <- route_mat[order(route_mat$orig_id,
-                               route_mat$dest_id), ]
+  route_mat <- route_mat[order(
+    route_mat$orig_id,
+    route_mat$dest_id
+  ), ]
   rownames(route_mat) <- NULL
   return(as.data.frame(route_mat))
 }
 
-.create_route_matrix_request_headers <- function() {
+.create_request_headers <- function() {
   request_headers <- list(
     "accept" = "application/json",
     "Content-Type" = "application/json",
@@ -171,9 +183,9 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   return(jsonlite::toJSON(request_headers, auto_unbox = TRUE, pretty = FALSE))
 }
 
-.create_route_matrix_request_body <- function(orig_coords, dest_coords,
-                                              datetime, routing_mode,
-                                              transport_mode, traffic) {
+.create_request_body <- function(orig_coords, dest_coords,
+                                 datetime, routing_mode,
+                                 transport_mode, traffic) {
   request_body <- list(
     origins = lapply(seq_len(nrow(orig_coords)), function(x) {
       list(lat = orig_coords[x, 2], lng = orig_coords[x, 1])
@@ -184,7 +196,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
     regionDefinition = list(
       type = "world"
     ),
-    departureTime = if(traffic) .encode_datetime(datetime, url_encode = FALSE) else "any",
+    departureTime = if (traffic) .encode_datetime(datetime, url_encode = FALSE) else "any",
     routingMode = routing_mode,
     transportMode = transport_mode,
     matrixAttributes = c("travelTimes", "distances")
@@ -211,31 +223,35 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
 
   # Route_matrix
   route_mat <- data.table::rbindlist(
-    append(list(template),
-           lapply(data, function(con) {
-             count <<- count + 1
+    append(
+      list(template),
+      lapply(data, function(con) {
+        count <<- count + 1
 
-             # Parse JSON
-             df <- jsonlite::fromJSON(con)
-             if (is.null(df$matrix)) {return(NULL)}
+        # Parse JSON
+        df <- jsonlite::fromJSON(con)
+        if (is.null(df$matrix)) {
+          return(NULL)
+        }
 
-             # Matrix
-             routes <- data.table::data.table(
-               data.table::CJ(
-                 dest_id = dest_idx[[count]][1:df$matrix$numDestinations] + 1,
-                 orig_id = orig_idx[[count]][1:df$matrix$numOrigins] + 1
-               ),
-               request_id = ids[count],
-               departure = NA,
-               arrival = NA,
-               type = NA,
-               mode = NA,
-               distance = df$matrix$distances,
-               duration = df$matrix$travelTimes,
-               error_code = df$matrix$errorCodes
-             )
-           })
-    ), fill = TRUE
+        # Matrix
+        routes <- data.table::data.table(
+          data.table::CJ(
+            dest_id = dest_idx[[count]][1:df$matrix$numDestinations] + 1,
+            orig_id = orig_idx[[count]][1:df$matrix$numOrigins] + 1
+          ),
+          request_id = ids[count],
+          departure = NA,
+          arrival = NA,
+          type = NA,
+          mode = NA,
+          distance = df$matrix$distances,
+          duration = df$matrix$travelTimes,
+          error_code = df$matrix$errorCodes
+        )
+      })
+    ),
+    fill = TRUE
   )
 
   return(route_mat)

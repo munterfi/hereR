@@ -10,12 +10,16 @@ test_that("incidents works", {
   expect_error(incident(aoi = NA), "'aoi' must be an sf object.")
 
   # Test URL
-  expect_is(incident(aoi = aoi, from = Sys.time()-60*60,
-                     url_only = TRUE), "character")
+  expect_is(incident(
+    aoi = aoi, from = Sys.time() - 60 * 60,
+    url_only = TRUE
+  ), "character")
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$incident_response},
+    "hereR:::.get_content" = function(url) {
+      hereR:::mock$incident_response
+    },
     incidents <- incident(aoi = aoi),
 
     # Tests

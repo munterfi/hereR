@@ -28,7 +28,7 @@
 #'   from = as.POSIXct("2018-01-01 00:00:00"),
 #'   url_only = TRUE
 #' )
-incident <- function(aoi, from = Sys.time() - 60*60*24*7, url_only = FALSE) {
+incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE) {
 
   # Checks
   .check_polygon(aoi)
@@ -51,23 +51,12 @@ incident <- function(aoi, from = Sys.time() - 60*60*24*7, url_only = FALSE) {
     bbox[2, ], ",", bbox[3, ]
   )
 
-  # Response attributes
-  # url <- paste0(
-  #   url,
-  #   "&responseattributes=shape"
-  # )
-
   # Add datetime range
   url <- .add_datetime(
     url = url,
     datetime = from,
     field_name = "startTime"
   )
-  # url <- .add_datetime(
-  #   url = url,
-  #   datetime = to,
-  #   field_name = "endTime"
-  # )
 
   # Add utc time zone
   url <- paste0(
@@ -76,19 +65,25 @@ incident <- function(aoi, from = Sys.time() - 60*60*24*7, url_only = FALSE) {
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   incident <- .extract_traffic_incidents(data)
 
   # Check for empty response
-  if (is.null(incident)) {return(NULL)}
+  if (is.null(incident)) {
+    return(NULL)
+  }
 
   # Spatial contains
   incident <-
@@ -98,13 +93,15 @@ incident <- function(aoi, from = Sys.time() - 60*60*24*7, url_only = FALSE) {
 }
 
 .extract_traffic_incidents <- function(data) {
-  #geoms_line <- list()
+  # geoms_line <- list()
   ids <- .get_ids(data)
   count <- 0
   incidents <- data.table::rbindlist(lapply(data, function(con) {
     count <<- count + 1
     df <- jsonlite::fromJSON(con)
-    if (is.null(df$TRAFFIC_ITEMS)) {return(NULL)}
+    if (is.null(df$TRAFFIC_ITEMS)) {
+      return(NULL)
+    }
     info <- data.table::data.table(
       id = ids[count],
       incidentId = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_ID,
@@ -121,16 +118,7 @@ incident <- function(aoi, from = Sys.time() - 60*60*24*7, url_only = FALSE) {
       lat = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LATITUDE,
       description = sapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DESCRIPTION, function(x) x$value[2])
     )
-    # geometry_line <- lapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$GEOMETRY$SHAPES$SHP, function(shp) {
-    #   lines <- lapply(shp$value, function(pointList) {
-    #     .line_from_pointList(strsplit(pointList, " ")[[1]])
-    #   })
-    #   if (length(lines) > 1) {sf::st_multilinestring(lines)}
-    # })
-    # geoms_line <<- append(geoms_line, geometry_line)
-    # return(info)
   }), fill = TRUE)
-  #incidents$geometry_line <- geoms_line
 
   # Create sf, data.frame
   if (nrow(incidents) > 0) {

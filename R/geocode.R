@@ -47,20 +47,24 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) 
   )
 
   # Add addresses and remove pipe
-  url = paste0(
+  url <- paste0(
     url,
     "&q=",
     gsub("\\|", "", address)
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   geocoded <- .extract_geocoded(data, address, alternatives)
@@ -80,7 +84,8 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) 
             as.data.frame(geocoded),
             coords = c("lng_position", "lat_position"),
             sf_column_name = "geometry"
-          ), value = 4326
+          ),
+          value = 4326
         )
       )
     } else {
@@ -107,6 +112,7 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) 
     county = character(),
     state = character(),
     country = character(),
+    score = numeric(),
     lng_access = numeric(),
     lat_access = numeric(),
     lng_position = numeric(),
@@ -116,41 +122,44 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) 
   count <- 0
   geocode_failed <- character(0)
   geocoded <- data.table::rbindlist(
-    append(list(template),
-           lapply(data, function(con) {
-             count <<- count + 1
-             df <- jsonlite::fromJSON(con)
-             if (length(df$items) == 0) {
-               geocode_failed <<- c(geocode_failed, address[count])
-               return(NULL)
-             }
-             result <- data.table::data.table(
-               id = ids[count],
-               rank = seq_len(nrow(df$items)),
-               address = df$items$address$label,
-               type = df$items$resultType,
-               street = df$items$address$street,
-               house_number = df$items$address$houseNumber,
-               postal_code = df$items$address$postalCode,
-               state_code = df$items$address$stateCode,
-               country_code = df$items$address$countryCode,
-               district = df$items$address$district,
-               city = df$items$address$city,
-               county = df$items$address$county,
-               state = df$items$address$state,
-               country = df$items$address$countryName,
-               lng_access = if (is.null(df$items$access[[1]]$lng)) NA else df$items$access[[1]]$lng,
-               lat_access = if (is.null(df$items$access[[1]]$lat)) NA else df$items$access[[1]]$lat,
-               lng_position = df$items$position$lng,
-               lat_position = df$items$position$lat
-             )
-             if (alternatives) {
-               return(result)
-             } else {
-               return(result[1, ])
-             }
-           })
-    ), fill = TRUE
+    append(
+      list(template),
+      lapply(data, function(con) {
+        count <<- count + 1
+        df <- jsonlite::fromJSON(con)
+        if (length(df$items) == 0) {
+          geocode_failed <<- c(geocode_failed, address[count])
+          return(NULL)
+        }
+        result <- data.table::data.table(
+          id = ids[count],
+          rank = seq_len(nrow(df$items)),
+          address = df$items$address$label,
+          type = df$items$resultType,
+          street = df$items$address$street,
+          house_number = df$items$address$houseNumber,
+          postal_code = df$items$address$postalCode,
+          state_code = df$items$address$stateCode,
+          country_code = df$items$address$countryCode,
+          district = df$items$address$district,
+          city = df$items$address$city,
+          county = df$items$address$county,
+          state = df$items$address$state,
+          country = df$items$address$countryName,
+          score = df$items$scoring$queryScore,
+          lng_access = if (is.null(df$items$access[[1]]$lng)) NA else df$items$access[[1]]$lng,
+          lat_access = if (is.null(df$items$access[[1]]$lat)) NA else df$items$access[[1]]$lat,
+          lng_position = df$items$position$lng,
+          lat_position = df$items$position$lat
+        )
+        if (alternatives) {
+          return(result)
+        } else {
+          return(result[1, ])
+        }
+      })
+    ),
+    fill = TRUE
   )
   if (length(geocode_failed) > 0) {
     message(

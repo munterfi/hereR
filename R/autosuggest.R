@@ -31,33 +31,37 @@ autosuggest <- function(address, results = 5, url_only = FALSE) {
   )
 
   # Add address
-  url = paste0(
+  url <- paste0(
     url,
     "&q=",
     address
   )
 
   # Add bbox containing the world
-  url = paste0(
+  url <- paste0(
     url,
     "&in=bbox:-180,-90,180,90"
   )
 
   # Add max results
-  url = paste0(
+  url <- paste0(
     url,
     "&limit=",
     results
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
   data <- .get_content(
     url = url
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   suggestion <- .extract_suggestions(data)
@@ -81,18 +85,23 @@ autosuggest <- function(address, results = 5, url_only = FALSE) {
   ids <- .get_ids(data)
   count <- 0
   result <- data.table::rbindlist(
-    append(list(template),
-           lapply(data, function(con) {
-             count <<- count + 1
-             df <- jsonlite::fromJSON(con)
-             if (length(nrow(df$items)) == 0) return(NULL)
-             data.table::data.table(
-               id = ids[count],
-               rank = seq(1, nrow(df$items)),
-               suggestion = df$items$title,
-               type = df$items$resultType
-             )
-           })
-    ), fill = TRUE)
+    append(
+      list(template),
+      lapply(data, function(con) {
+        count <<- count + 1
+        df <- jsonlite::fromJSON(con)
+        if (length(nrow(df$items)) == 0) {
+          return(NULL)
+        }
+        data.table::data.table(
+          id = ids[count],
+          rank = seq(1, nrow(df$items)),
+          suggestion = df$items$title,
+          type = df$items$resultType
+        )
+      })
+    ),
+    fill = TRUE
+  )
   result
 }
