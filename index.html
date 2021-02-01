@@ -46,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -147,12 +147,13 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A free login and project can be created on <a href="https://developer.here.com/">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
-<p>To set the API key, please use:</p>
+<p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A login can be created on <a href="https://developer.here.com/">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
+<p>To set the API key, use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfinger.github.io/hereR/">hereR</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></code></pre></div>
-<p>Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the following examples. A more detailed description can be found in the documentation of the functions and the package vignettes.</p>
+<p><strong>Note:</strong> Your use of the HERE APIs with this package is subject to the <a href="https://developer.here.com/terms-and-conditions">HERE Developer Terms and Conditions</a>.</p>
+<p>Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the examples below. A more detailed description can be found in the documentation of the functions and the package vignettes.</p>
 <p><strong>Geocoding &amp; Search API:</strong> Autosuggest and geocode addresses or reverse geocode POIs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span>
@@ -218,7 +219,8 @@
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html">HERE Geocoding &amp; Search API</a></li>
+<li><a href="https://developer.here.com/terms-and-conditions">Developer Terms and Conditions</a></li>
+<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html">Geocoding &amp; Search API</a></li>
 <li><a href="https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html">Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html">Matrix Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html">Isoline Routing API</a></li>

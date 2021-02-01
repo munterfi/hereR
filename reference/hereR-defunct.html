@@ -56,6 +56,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -83,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -185,7 +187,9 @@
 
 <span class='fu'>autocomplete</span><span class='op'>(</span><span class='va'>addresses</span>, results <span class='op'>=</span> <span class='fl'>5</span>, url_only <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>set_proxy</span><span class='op'>(</span><span class='va'>proxy</span>, <span class='va'>proxyuserpwd</span><span class='op'>)</span></pre>
+<span class='fu'>set_proxy</span><span class='op'>(</span><span class='va'>proxy</span>, <span class='va'>proxyuserpwd</span><span class='op'>)</span>
+
+<span class='fu'>unset_proxy</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="traffic"><a class="anchor" href="#traffic"></a><code>traffic</code></h2>
@@ -214,6 +218,11 @@ for <code>traffic(..., product = "incidents")</code>, use <code><a href='inciden
     
 
 <p>For <code>set_proxy</code>, configure a global proxy for R in '~/.Renviron' instead.</p>
+    <h2 class="hasAnchor" id="unset-proxy"><a class="anchor" href="#unset-proxy"></a><code>unset_proxy</code></h2>
+
+    
+
+<p>For <code>unset_proxy</code>, configure a global proxy for R in '~/.Renviron' instead.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -52,6 +52,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -79,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -158,6 +160,19 @@
       <small>Source: <a href='https://github.com/munterfinger/hereR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="version-061" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.1">
+<a href="#version-061" class="anchor"></a>version 0.6.1<small> 2021-02-01 </small>
+</h1>
+<ul>
+<li>Use <strong>styler</strong> package and use <code>tyler::tidyverse_style()</code>to format the package.</li>
+<li>All <strong>lintr</strong> issues are solved, except from line length issues (limit of 80 characters).</li>
+<li>Avoid drop of the <code>sfc</code> class of the geometry column when there is only one geometry/row in a <code>data.table</code> (closes <a href="https://github.com/munterfinger/hereR/issues/111"><a href='https://github.com/munterfinger/hereR/issues/111'>#111</a></a>).</li>
+<li>Return <code>queryScore</code> in <code><a href="../reference/geocode.html">geocode()</a></code> results as <code>score</code> column (closes <a href="https://github.com/munterfinger/hereR/issues/109"><a href='https://github.com/munterfinger/hereR/issues/109'>#109</a></a>).</li>
+<li>Silence <strong>sf</strong> messages of <code><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">sf::st_union</a></code> call in <code><a href="../reference/connection.html">connection(..., summary = TRUE)</a></code>.</li>
+<li>Added section id to <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> and <code><a href="../reference/connection.html">connection()</a></code>.</li>
+</ul>
+</div>
     <div id="version-060" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
 <a href="#version-060" class="anchor"></a>version 0.6.0<small> 2021-01-04 </small>
@@ -203,7 +218,7 @@
 <li>Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. <strong>Note:</strong> The function <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code> is defunct, please use <code><a href="../reference/autosuggest.html">autosuggest()</a></code>.</li>
 <li>Upgrade Public Transit API version used in <code><a href="../reference/connection.html">connection()</a></code> and <code><a href="../reference/station.html">station()</a></code> from v3 to v8 (closes <a href="https://github.com/munterfinger/hereR/issues/62"><a href='https://github.com/munterfinger/hereR/issues/62'>#62</a></a>). <strong>Note:</strong> Now the geometries (LINESTRING) of the pedestrian sections are also included in the public transport routes returned by <code><a href="../reference/connection.html">connection()</a></code>.</li>
 <li>Sign in to CodeFactor.io and add badge to track code quality.</li>
-<li>Defunct <code><a href="../reference/hereR-defunct.html">set_proxy()</a></code> and <code><a href="../reference/unset_proxy.html">unset_proxy()</a></code>. Use a global proxy configuration for R in <code>~/.Renviron</code> instead.</li>
+<li>Defunct <code><a href="../reference/hereR-defunct.html">set_proxy()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_proxy()</a></code>. Use a global proxy configuration for R in <code>~/.Renviron</code> instead.</li>
 </ul>
 </div>
     <div id="version-041" class="section level1">

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@
 <p>The return value is an <code>sf</code> object containing <code>POINT</code> geometries of the addresses:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">geocoded</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 3 features and 15 fields</span>
+<span class="co">#&gt; Simple feature collection with 3 features and 16 fields</span>
 <span class="co">#&gt; geometry type:  POINT</span>
 <span class="co">#&gt; dimension:      XY</span>
 <span class="co">#&gt; bbox:           xmin: 6.63222 ymin: 46.00297 xmax: 8.9512 ymax: 47.04954</span>
@@ -146,10 +146,10 @@
 <span class="co">#&gt; 1  1    1          Luzern, Schweiz locality   &lt;NA&gt;         &lt;NA&gt;        6003</span>
 <span class="co">#&gt; 2  2    1 Lugano, Ticino, Svizzera locality   &lt;NA&gt;         &lt;NA&gt;        6900</span>
 <span class="co">#&gt; 3  3    1   Lausanne, Vaud, Suisse locality   &lt;NA&gt;         &lt;NA&gt;        1003</span>
-<span class="co">#&gt;   state_code country_code district     city       county  state  country</span>
-<span class="co">#&gt; 1         LU          CHE     &lt;NA&gt;   Luzern Luzern-Stadt Luzern  Schweiz</span>
-<span class="co">#&gt; 2         TI          CHE     &lt;NA&gt;   Lugano       Lugano Ticino Svizzera</span>
-<span class="co">#&gt; 3         VD          CHE     &lt;NA&gt; Lausanne     Lausanne   Vaud   Suisse</span>
+<span class="co">#&gt;   state_code country_code district     city       county  state  country score</span>
+<span class="co">#&gt; 1         LU          CHE     &lt;NA&gt;   Luzern Luzern-Stadt Luzern  Schweiz     1</span>
+<span class="co">#&gt; 2         TI          CHE     &lt;NA&gt;   Lugano       Lugano Ticino Svizzera     1</span>
+<span class="co">#&gt; 3         VD          CHE     &lt;NA&gt; Lausanne     Lausanne   Vaud   Suisse     1</span>
 <span class="co">#&gt;        access                 geometry</span>
 <span class="co">#&gt; 1 POINT EMPTY POINT (8.30437 47.04954)</span>
 <span class="co">#&gt; 2 POINT EMPTY  POINT (8.9512 46.00297)</span>
@@ -287,7 +287,7 @@ Lugano
 3
 </td>
 <td style="text-align:left;">
-Lugano Airport
+Луганськ, Україна
 </td>
 </tr>
 </tbody>

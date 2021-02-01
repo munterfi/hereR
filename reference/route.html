@@ -57,6 +57,8 @@ to obtain an estimate of the consumption." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -84,7 +86,7 @@ to obtain an estimate of the consumption." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -253,7 +255,7 @@ to obtain an estimate of the consumption.</p>
 
 <span class='co'># Get all from - to combinations from POIs</span>
 <span class='va'>to</span> <span class='op'>&lt;-</span> <span class='va'>poi</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='op'>]</span>
-<span class='va'>from</span> <span class='op'>&lt;-</span> <span class='va'>poi</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>]</span>
+<span class='va'>from</span> <span class='op'>&lt;-</span> <span class='va'>poi</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='op'>]</span>
 <span class='va'>idx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>to</span> <span class='op'>!=</span> <span class='va'>from</span>, <span class='va'>any</span>, MARGIN <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 <span class='va'>to</span> <span class='op'>&lt;-</span> <span class='va'>to</span><span class='op'>[</span><span class='va'>idx</span>, <span class='op'>]</span>
 <span class='va'>from</span> <span class='op'>&lt;-</span> <span class='va'>from</span><span class='op'>[</span><span class='va'>idx</span>, <span class='op'>]</span>
