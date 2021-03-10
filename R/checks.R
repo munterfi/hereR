@@ -140,6 +140,19 @@
   }
 }
 
+.check_optimize <- function(optimize) {
+  optimizations <- c("balanced", "quality", "performance")
+  if (!optimize %in% optimizations) {
+    stop(
+      sprintf(
+        "Optimization method '%s' not valid, must be in ('%s').",
+        optimize,
+        paste(optimizations, collapse = "', '")
+      )
+    )
+  }
+}
+
 .check_range_type <- function(range_type) {
   range_types <- c("distance", "time", "consumption")
   if (!range_type %in% range_types) {
