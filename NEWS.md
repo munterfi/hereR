@@ -1,3 +1,7 @@
+# version 0.6.1.9000
+
+* Enable `optimize` parameter to chose from "balanced", "quality" and "performance" in `isoline()` (closes [#119](https://github.com/munterfinger/hereR/issues/119)).
+
 # version 0.6.1
 
 * Use **styler** package and use `tyler::tidyverse_style()`to format the package.
