@@ -190,8 +190,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   isolines <- sf::st_as_sf(
     isolines,
     sf_column_name = "geometry",
-    crs = 4326,
-    check_ring_dir = TRUE
+    crs = 4326
   )
 
   # Spatially aggregate
@@ -230,7 +229,18 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
           departure = if (arrival) NA else df$departure$time,
           arrival = if (arrival) df$arrival$time else NA,
           range = df$isolines$range$value,
-          geometry = sapply(df$isolines$polygons, function(x) x$outer)
+          geometry = lapply(df$isolines$polygons, function(x) {
+            # Decode flexible polyline encoding to ...
+            if(length(x$outer) > 1) {
+              # MULTIPOLYGON
+              sf::st_multipolygon(
+                sf::st_geometry(flexpolyline::decode_sf(x$outer, 4326))
+              )
+            } else {
+              # POLYGON
+              sf::st_geometry(flexpolyline::decode_sf(x$outer, 4326))[[1]]
+            }
+          })
         )
       })
     ),
@@ -242,11 +252,6 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     return(NULL)
   }
 
-  # Decode flexible polyline encoding to POLYGON
-  geometry <- NULL
-  isolines[, "geometry" := sf::st_geometry(
-    flexpolyline::decode_sf(geometry, 4326)
-  )]
   return(isolines)
 }
 
