@@ -231,7 +231,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
           range = df$isolines$range$value,
           geometry = lapply(df$isolines$polygons, function(x) {
             # Decode flexible polyline encoding to ...
-            if(length(x$outer) > 1) {
+            if (length(x$outer) > 1) {
               # MULTIPOLYGON
               sf::st_multipolygon(
                 sf::st_geometry(flexpolyline::decode_sf(x$outer, 4326))
