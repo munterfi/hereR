@@ -1,6 +1,7 @@
 # version 0.6.1.9000
 
 * Enable `optimize` parameter to chose from "balanced", "quality" and "performance" in `isoline()` (closes [#119](https://github.com/munterfinger/hereR/issues/119)).
+* Bugfix: `isoline()` now handles MULTIPOLYGONs if received by the API (closes [#121](https://github.com/munterfinger/hereR/issues/121)).
 
 # version 0.6.1
 
