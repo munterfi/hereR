@@ -59,8 +59,9 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) 
   }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = 5
   )
   if (length(data) == 0) {
     return(NULL)

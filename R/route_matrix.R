@@ -126,8 +126,9 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = 1
   )
   if (length(data) == 0) {
     return(NULL)
