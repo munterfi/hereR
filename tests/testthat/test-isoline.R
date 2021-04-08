@@ -23,7 +23,7 @@ test_that("isoline works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url) {
       hereR:::mock$isoline_response
     },
 

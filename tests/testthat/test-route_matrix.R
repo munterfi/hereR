@@ -20,7 +20,7 @@ test_that("route_matrix works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url) {
       hereR:::mock$route_matrix_response
     },
     r_mat <- route_matrix(origin = poi),

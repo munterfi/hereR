@@ -19,7 +19,7 @@ test_that("route works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url) {
       hereR:::mock$route_response
     },
     routes <- route(origin = poi[1:2, ], destination = poi[3:4, ]),

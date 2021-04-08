@@ -49,21 +49,21 @@ url_station <-
 
 ## Get response mocks
 mock <- list(
-  geocode_response = hereR:::.get_content(url_geocode),
-  autosuggest_response = hereR:::.get_content(url_autosuggest),
-  reverse_geocode_response = hereR:::.get_content(url_reverse_geocode),
-  route_response = hereR:::.get_content(url_route),
-  route_matrix_response = hereR:::.get_content(url_route_matrix),
-  intermodal_route_response = hereR:::.get_content(url_intermodal_route),
-  isoline_response = hereR:::.get_content(url_isoline),
-  weather_observation_response = hereR:::.get_content(url_weather_observation),
-  weather_forecast_hourly_response = hereR:::.get_content(url_weather_forecast_hourly),
-  weather_forecast_astronomy_response = hereR:::.get_content(url_weather_forecast_astronomy),
-  weather_alerts_response = hereR:::.get_content(url_weather_alerts),
-  flow_response = hereR:::.get_content(url_flow),
-  incident_response = hereR:::.get_content(url_incident),
-  connection_response = hereR:::.get_content(url_connection),
-  station_response = hereR:::.get_content(url_station)
+  geocode_response = hereR:::.async_request(url_geocode),
+  autosuggest_response = hereR:::.async_request(url_autosuggest),
+  reverse_geocode_response = hereR:::.async_request(url_reverse_geocode),
+  route_response = hereR:::.async_request(url_route),
+  route_matrix_response = hereR:::.async_request(url_route_matrix),
+  intermodal_route_response = hereR:::.async_request(url_intermodal_route),
+  isoline_response = hereR:::.async_request(url_isoline),
+  weather_observation_response = hereR:::.async_request(url_weather_observation),
+  weather_forecast_hourly_response = hereR:::.async_request(url_weather_forecast_hourly),
+  weather_forecast_astronomy_response = hereR:::.async_request(url_weather_forecast_astronomy),
+  weather_alerts_response = hereR:::.async_request(url_weather_alerts),
+  flow_response = hereR:::.async_request(url_flow),
+  incident_response = hereR:::.async_request(url_incident),
+  connection_response = hereR:::.async_request(url_connection),
+  station_response = hereR:::.async_request(url_station)
 )
 
 ## Get examples
