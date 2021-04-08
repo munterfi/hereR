@@ -24,7 +24,7 @@ Imports:
     flexpolyline (>= 0.2.0),
     jsonlite (>= 1.7.0),
     sf (>= 0.9-0),
-    stringr (>= 1.4.0),
+    stringr (>= 1.4.0)
 Suggests:
     covr (>= 3.5.0),
     ggplot2 (>= 3.3.2),
