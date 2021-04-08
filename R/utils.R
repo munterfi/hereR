@@ -45,77 +45,93 @@
 
 
 ## Requests
-# Inspired by: https://hydroecology.net/asynchronous-web-requests-with-curl/
-.get_content <- function(url, encoding = "UTF-8") {
+
+.async_request <- function(urls, rps = Inf, ...) {
+  .verbose_request(urls)
+
+  # Split url strings into url, headers and request body (if any)
+  urls <- strsplit(urls, " | ", fixed = TRUE)
+
+  # Options
+  opt_list <- append(
+    list(
+      useragent = sprintf(
+        "hereR/%s R/%s (%s; %s)",
+        packageVersion("hereR"),
+        getRversion(),
+        sessionInfo()$running,
+        R.Version()$platform
+      )
+    ),
+    list(...)
+  )
+
+  # Construct requests: GET or POST
+  reqs <- lapply(urls, function(url) {
+    req <- crul::HttpRequest$new(url = utils::URLencode(url[[1]]), opts = opt_list)
+    if (length(url) == 3) {
+      req$post(
+        headers = jsonlite::fromJSON(url[[2]]),
+        body = url[[3]]
+      )
+    } else {
+      req$get()
+    }
+  })
+
+  # Process queue
+  out <- crul::AsyncQueue$new(.list = reqs, bucket_size = rps, sleep = 1)
+  out$request()
+
+  # Parse result
+  res_list <- lapply(seq_along(out$responses()), function(i) {
+    .parse_response(i, out$responses()[[i]])
+  })
+  names(res_list) <- paste0("request_", seq_along(urls))
+  Filter(Negate(is.null), res_list)
+  .verbose_response(res_list)
+
+  return(res_list)
+}
+
+.get_verbose <- function() {
   if (Sys.getenv("HERE_VERBOSE") != "") {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+.verbose_request <- function(urls) {
+  if (.get_verbose()) {
     message(
       sprintf(
         "Sending %s request(s) to: '%s?...'",
-        length(url), strsplit(url[1], "\\?", )[[1]][1]
+        length(urls), strsplit(urls, "\\?", )[[1]][1]
       )
     )
   }
+}
 
-  # Split url strings into url, headers and request body (if any)
-  url <- strsplit(url, " | ", fixed = TRUE)
-
-  # Callback function generator - returns a callback function with ID
-  results <- list()
-  cb_gen <- function(id) {
-    function(res) {
-      if (is.character(res)) {
-        stop("Connection error: Please check connection to the internet and proxy configuration.")
-      }
-      if (res$status != 200) {
-        warning(
-          sprintf(
-            "Request 'id = %s' failed: Status %s. ",
-            strsplit(id, "_")[[1]][2], res$status
-          )
-        )
-        ids <<- ids[ids != id]
-      } else {
-        results[[id]] <<- res
-      }
-    }
-  }
-
-  # Define the IDs and callback functions
-  ids <- paste0("request_", seq_along(url))
-  cbs <- lapply(ids, cb_gen)
-
-  # Add requests to pool and check for headers and request body
-  pool <- curl::new_pool()
-  lapply(seq_along(url), function(i) {
-    handle <- curl::new_handle()
-    if (length(url[[i]]) == 3) {
-      curl::handle_setheaders(handle, .list = jsonlite::fromJSON(url[[i]][2]))
-      curl::handle_setopt(handle, copypostfields = url[[i]][3])
-    }
-    curl::curl_fetch_multi(utils::URLencode(url[[i]][1]),
-      pool = pool,
-      done = cbs[[i]], fail = cbs[[i]],
-      handle = handle
-    )
-  })
-
-  # Send requests and process the responses in the same order as the input URLs
-  out <- curl::multi_run(pool = pool)
-  results <- lapply(results[ids], function(x) {
-    raw_char <- rawToChar(x$content)
-    Encoding(raw_char) <- encoding
-    raw_char
-  })
-  if (Sys.getenv("HERE_VERBOSE") != "") {
+.verbose_response <- function(res_list) {
+  if (.get_verbose()) {
     message(
       sprintf(
         "Received %s response(s) with total size: %s",
-        length(results),
-        format(utils::object.size(results), units = "auto")
+        length(res_list),
+        format(utils::object.size(res_list), units = "auto")
       )
     )
   }
-  results
+}
+
+.parse_response <- function(i, res) {
+  if (res$status_code != 200) {
+    warning(sprintf("Request 'id = %s' failed: Status %s. ", i, res$status))
+    return(NULL)
+  } else {
+    return(res$parse("UTF-8"))
+  }
 }
 
 .get_ids <- function(content) {
