@@ -17,7 +17,7 @@ test_that("incidents works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$incident_response
     },
     incidents <- incident(aoi = aoi),

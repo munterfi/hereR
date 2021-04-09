@@ -13,13 +13,9 @@ test_that("route works", {
   expect_error(route(origin = poi, destination = poi, traffic = "not_a_bool"), "'traffic' must be a 'boolean' value.")
   expect_error(route(origin = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
-  # Deprecated
-  expect_warning(route(origin = poi, destination = poi, type = "fast", url_only = TRUE))
-  expect_warning(route(origin = poi, destination = poi, mode = "car", url_only = TRUE))
-
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$route_response
     },
     routes <- route(origin = poi[1:2, ], destination = poi[3:4, ]),

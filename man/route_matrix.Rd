@@ -11,9 +11,7 @@ route_matrix(
   routing_mode = "fast",
   transport_mode = "car",
   traffic = TRUE,
-  url_only = FALSE,
-  type,
-  mode
+  url_only = FALSE
 )
 }
 \arguments{
@@ -30,10 +28,6 @@ route_matrix(
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
-
-\item{type}{character, 'type' is deprecated, use 'routing_mode' instead.}
-
-\item{mode}{character, 'mode' is deprecated, use 'transport_mode' instead.}
 }
 \value{
 A \code{data.frame}, which is an edge list containing the requested M:N route combinations.

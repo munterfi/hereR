@@ -14,9 +14,7 @@ route(
   transport_mode = "car",
   traffic = TRUE,
   consumption_model = NULL,
-  url_only = FALSE,
-  type,
-  mode
+  url_only = FALSE
 )
 }
 \arguments{
@@ -39,10 +37,6 @@ route(
 \item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
-
-\item{type}{character, 'type' is deprecated, use 'routing_mode' instead.}
-
-\item{mode}{character, 'mode' is deprecated, use 'transport_mode' instead.}
 }
 \value{
 An \code{sf} object containing the requested routes.

@@ -115,8 +115,9 @@ connection <- function(origin, destination, datetime = Sys.time(),
   }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = 10
   )
   if (length(data) == 0) {
     return(NULL)

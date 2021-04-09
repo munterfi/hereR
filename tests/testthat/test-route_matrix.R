@@ -14,13 +14,9 @@ test_that("route_matrix works", {
   expect_error(route_matrix(origin = poi, destination = poi, traffic = "not_a_bool"), "'traffic' must be a 'boolean' value.")
   expect_error(route_matrix(origin = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
-  # Deprecated
-  expect_warning(route_matrix(origin = poi, destination = poi, type = "fast", url_only = TRUE))
-  expect_warning(route_matrix(origin = poi, destination = poi, mode = "car", url_only = TRUE))
-
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$route_matrix_response
     },
     r_mat <- route_matrix(origin = poi),
