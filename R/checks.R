@@ -211,3 +211,18 @@
     ))
   }
 }
+
+.check_internet <- function() {
+  access <- tryCatch(
+    {
+      curl::has_internet()
+    },
+    error = function(cond) {
+      warning(cond)
+      return(FALSE)
+    }
+  )
+  if (!access) {
+    stop("Connection error: Please check internet access and proxy configuration.")
+  }
+}
