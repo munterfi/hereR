@@ -50,7 +50,7 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) 
   url <- paste0(
     url,
     "&q=",
-    gsub("\\|", "", address)
+    curl::curl_escape(address)
   )
 
   # Return urls if chosen

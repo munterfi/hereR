@@ -34,7 +34,7 @@ autosuggest <- function(address, results = 5, url_only = FALSE) {
   url <- paste0(
     url,
     "&q=",
-    address
+    curl::curl_escape(address)
   )
 
   # Add bbox containing the world

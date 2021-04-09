@@ -75,7 +75,7 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
   # Request and get content
   data <- .async_request(
     url = url,
-    rps = 1
+    rps = 5
   )
   if (length(data) == 0) {
     return(NULL)

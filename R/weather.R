@@ -58,7 +58,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
     url <- paste0(
       url,
       "&name=",
-      gsub("\\|", "", poi)
+      curl::curl_escape(poi)
     )
     # sf POINTs
   } else if ("sf" %in% class(poi)) {
