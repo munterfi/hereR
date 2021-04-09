@@ -20,7 +20,8 @@ Description: Interface to the 'HERE' REST APIs <https://developer.here.com/devel
 Depends: R (>= 3.3.0)
 Imports: 
     crul (>= 1.1.0),
-    data.table (>= 1.12.6),
+    curl (>= 4.3),
+    data.table (>= 1.13.0),
     flexpolyline (>= 0.2.0),
     jsonlite (>= 1.7.0),
     sf (>= 0.9-0),
