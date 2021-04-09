@@ -44,7 +44,7 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-**Note:** Your use of the HERE APIs with this package is subject to the [HERE Developer Terms and Conditions](https://developer.here.com/terms-and-conditions).
+**Note:** Your use of the HERE APIs with this package is subject to the [HERE Developer Terms and Conditions](https://developer.here.com/terms-and-conditions). For freemium licenses the number of requests per second (RPS) is limited, use `set_rate_limit(FALSE)` to turn off limits for accounts with paid plans.
 
 Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the examples below. A more detailed description can be found in the documentation of the functions and the package vignettes.
 

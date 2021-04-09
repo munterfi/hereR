@@ -1,7 +1,11 @@
 # version 0.6.1.9000
 
 * Enable `optimize` parameter to chose from "balanced", "quality" and "performance" in `isoline()` (closes [#119](https://github.com/munterfinger/hereR/issues/119)).
-* Bugfix: `isoline()` now handles MULTIPOLYGONs if received by the API (closes [#121](https://github.com/munterfinger/hereR/issues/121)).
+* Remove deprecated parameters in `route()`, `route_matrix()` and `isoline()`.
+* Add specific user-agent to the requests: `hereR/<version> R/<version> (<platform>)`.
+* Add option to deactivate rate limits `set_rate_limit(FALSE)`.
+* Bugfix: Add rate limits in RPS (requests per seconds) to async requests to the APIs; move dependency from **curl** to **crul** package (closes [#122](https://github.com/munterfinger/hereR/issues/122)).
+* Bugfix: `isoline()` now handles multipart polygons (MULTIPOLYGON) if received by the API (closes [#121](https://github.com/munterfinger/hereR/issues/121)).
 
 # version 0.6.1
 
