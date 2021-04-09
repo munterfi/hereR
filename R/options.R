@@ -59,3 +59,30 @@ set_verbose <- function(ans = FALSE) {
     Sys.unsetenv("HERE_VERBOSE")
   }
 }
+
+#' Limit requests to the APIs
+#'
+#' If set to \code{TRUE} the hereR package limits the requests per second (RPS)
+#' sent to the APIs. This option is necessary for freemium licenses to avoid
+#' hitting the rate limit of the APIs with status code 429. Deactivate this
+#' option to increase speed of requests for paid plans.
+#'
+#' @param ans boolean, use limits or not (default = \code{TRUE})?
+#'
+#' @return
+#' None.
+#'
+#' @export
+#'
+#' @examples
+#' set_rate_limit(FALSE)
+set_rate_limit <- function(ans = TRUE) {
+  .check_boolean(ans)
+  if (!ans) {
+    Sys.setenv(
+      "HERE_RPS" = "FALSE"
+    )
+  } else {
+    Sys.unsetenv("HERE_RPS")
+  }
+}
