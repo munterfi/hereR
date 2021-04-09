@@ -46,20 +46,26 @@
 
 ## Requests
 
-.async_request <- function(urls, rps = Inf, ...) {
-  .verbose_request(urls)
+.async_request <- function(url, rps = Inf, ...) {
+
+  .check_internet()
+
+  # Check if rate limits are enabled
+  if (!.get_rate_limits()) {
+    rps <- Inf
+  }
+  .verbose_request(url, rps)
 
   # Split url strings into url, headers and request body (if any)
-  urls <- strsplit(urls, " | ", fixed = TRUE)
+  url <- strsplit(url, " | ", fixed = TRUE)
 
   # Options
   opt_list <- append(
     list(
       useragent = sprintf(
-        "hereR/%s R/%s (%s; %s)",
-        packageVersion("hereR"),
+        "hereR/%s R/%s (%s)",
+        utils::packageVersion("hereR"),
         getRversion(),
-        sessionInfo()$running,
         R.Version()$platform
       )
     ),
@@ -67,12 +73,16 @@
   )
 
   # Construct requests: GET or POST
-  reqs <- lapply(urls, function(url) {
-    req <- crul::HttpRequest$new(url = utils::URLencode(url[[1]]), opts = opt_list)
-    if (length(url) == 3) {
+  reqs <- lapply(url, function(u) {
+    req <- crul::HttpRequest$new(
+      url = u[[1]],
+      headers = list(Accept = "application/json", `Accept-Charset` = "utf-8"),
+      opts = opt_list
+    )
+    if (length(u) == 3) {
       req$post(
-        headers = jsonlite::fromJSON(url[[2]]),
-        body = url[[3]]
+        headers = jsonlite::fromJSON(u[[2]]),
+        body = u[[3]]
       )
     } else {
       req$get()
@@ -87,9 +97,11 @@
   res_list <- lapply(seq_along(out$responses()), function(i) {
     .parse_response(i, out$responses()[[i]])
   })
-  names(res_list) <- paste0("request_", seq_along(urls))
-  Filter(Negate(is.null), res_list)
+  names(res_list) <- paste0("request_", seq_along(url))
   .verbose_response(res_list)
+
+  # Filter on successful responses
+  res_list <- Filter(Negate(is.null), res_list)
 
   return(res_list)
 }
@@ -102,12 +114,21 @@
   }
 }
 
-.verbose_request <- function(urls) {
+.get_rate_limits <- function() {
+  if (Sys.getenv("HERE_RPS") != "") {
+    return(FALSE)
+  } else {
+    return(TRUE)
+  }
+}
+
+.verbose_request <- function(url, rps) {
   if (.get_verbose()) {
     message(
       sprintf(
-        "Sending %s request(s) to: '%s?...'",
-        length(urls), strsplit(urls, "\\?", )[[1]][1]
+        "Sending %s request(s) with %s RPS to: '%s?...'",
+        length(url), ifelse(is.infinite(rps), "unlimited", rps),
+        strsplit(url, "\\?", )[[1]][1]
       )
     )
   }
@@ -127,7 +148,7 @@
 
 .parse_response <- function(i, res) {
   if (res$status_code != 200) {
-    warning(sprintf("Request 'id = %s' failed: Status %s. ", i, res$status))
+    warning(sprintf("Request 'id = %s' failed: Status %s. ", i, res$status_code))
     return(NULL)
   } else {
     return(res$parse("UTF-8"))
