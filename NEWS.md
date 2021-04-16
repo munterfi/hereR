@@ -6,6 +6,7 @@
 * Add option to deactivate rate limits `set_rate_limit(FALSE)`.
 * Bugfix: Add rate limits in RPS (requests per seconds) to async requests to the APIs; move dependency for requests from **curl** to **crul** package (closes [#122](https://github.com/munterfinger/hereR/issues/122)).
 * Bugfix: `isoline()` now handles multipart polygons (MULTIPOLYGON) if received by the API (closes [#121](https://github.com/munterfinger/hereR/issues/121)).
+* Add area and feature avoidance in `route()` (closes [#117](https://github.com/munterfinger/hereR/issues/117)).
 
 # version 0.6.1
 
