@@ -36,7 +36,7 @@
 geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) {
 
   # Input checks
-  .check_addresses(address)
+  .check_character(address)
   .check_boolean(alternatives)
   .check_boolean(sf)
   .check_boolean(url_only)

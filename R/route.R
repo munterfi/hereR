@@ -17,6 +17,8 @@
 #' @param routing_mode character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"} or \code{scooter} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
+#' @param avoid_area, \code{sf} object, area (only bounding box is taken) to avoid in routes (\code{default = NULL}).
+#' @param avoid_feature character, transport network features to avoid, e.g. \code{"tollRoad"} or \code{"ferry"} (\code{default = NULL}).
 #' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -42,7 +44,8 @@
 #' )
 route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   results = 1, routing_mode = "fast", transport_mode = "car",
-                  traffic = TRUE, consumption_model = NULL, url_only = FALSE) {
+                  traffic = TRUE, avoid_area = NULL, avoid_feature = NULL,
+                  consumption_model = NULL, url_only = FALSE) {
 
   # Checks
   .check_points(origin)
@@ -54,6 +57,8 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   .check_routing_mode(routing_mode)
   .check_transport_mode(transport_mode, request = "route")
   .check_boolean(traffic)
+  .check_polygon(avoid_area)
+  .check_character(avoid_feature)
   .check_boolean(url_only)
 
   # Arrival time is not yet supported by the API
@@ -105,6 +110,27 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
     "&alternatives=",
     results - 1
   )
+
+  # Add avoidance of a bound box
+  if (!is.null(avoid_area)) {
+    url <- paste0(
+      url,
+      "&avoid[areas]=bbox:",
+      paste(
+        sf::st_bbox(sf::st_transform(avoid_area, 4326)),
+        collapse = ","
+      )
+    )
+  }
+
+  # Add avoidance of features
+  if (!is.null(avoid_feature)) {
+    url <- paste0(
+      url,
+      "&avoid[features]=",
+      paste(avoid_feature, collapse = ",")
+    )
+  }
 
   # Add consumption model if specified, otherwise set to default electric vehicle
   if (is.null(consumption_model)) {

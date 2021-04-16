@@ -21,7 +21,7 @@
 autosuggest <- function(address, results = 5, url_only = FALSE) {
 
   # Check addresses
-  .check_addresses(address)
+  .check_character(address)
   .check_numeric_range(results, 1, 100)
   .check_boolean(url_only)
 
