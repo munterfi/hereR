@@ -13,6 +13,8 @@ route(
   routing_mode = "fast",
   transport_mode = "car",
   traffic = TRUE,
+  avoid_area = NULL,
+  avoid_feature = NULL,
   consumption_model = NULL,
   url_only = FALSE
 )
@@ -33,6 +35,10 @@ route(
 \item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"} or \code{scooter} (\code{default = "car"}).}
 
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
+
+\item{avoid_area, }{\code{sf} object, area (only bounding box is taken) to avoid in routes (\code{default = NULL}).}
+
+\item{avoid_feature}{character, transport network features to avoid, e.g. \code{"tollRoad"} or \code{"ferry"} (\code{default = NULL}).}
 
 \item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
 

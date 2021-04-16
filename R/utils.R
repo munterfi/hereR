@@ -47,7 +47,6 @@
 ## Requests
 
 .async_request <- function(url, rps = Inf, ...) {
-
   .check_internet()
 
   # Check if rate limits are enabled
