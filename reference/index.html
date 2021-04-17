@@ -65,9 +65,16 @@
 
 
 
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -81,7 +88,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -89,9 +96,6 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -101,7 +105,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/authentication.html">Authentication</a>
+      <a href="../articles/authentication.html">Authentication &amp; Options</a>
     </li>
     <li>
       <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
@@ -122,6 +126,9 @@
       <a href="../articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -170,7 +177,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
+          <h2 id="section-authentication-options" class="hasAnchor"><a href="#section-authentication-options" class="anchor"></a>Authentication &amp; Options</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -188,15 +195,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="hereR-defunct.html">traffic()</a></code> <code><a href="hereR-defunct.html">set_auth()</a></code> <code><a href="hereR-defunct.html">unset_auth()</a></code> <code><a href="hereR-defunct.html">autocomplete()</a></code> <code><a href="hereR-defunct.html">set_proxy()</a></code> <code><a href="hereR-defunct.html">unset_proxy()</a></code> </p>
-        </td>
-        <td><p>Defunct functions in package <span class="pkg">hereR</span>.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="set_verbose.html">set_verbose()</a></code> </p>
         </td>
         <td><p>Verbose API usage of hereR</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_rate_limit.html">set_rate_limit()</a></code> </p>
+        </td>
+        <td><p>Limit requests to the APIs</p></td>
       </tr><tr>
         
         <td>
@@ -232,7 +239,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-geocoder-api" class="hasAnchor"><a href="#section-geocoder-api" class="anchor"></a>Geocoder API</h2>
+          <h2 id="section-geocoding-search-api" class="hasAnchor"><a href="#section-geocoding-search-api" class="anchor"></a>Geocoding &amp; Search API</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -263,7 +270,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-routing-api" class="hasAnchor"><a href="#section-routing-api" class="anchor"></a>Routing API</h2>
+          <h2 id="section-routing-apis" class="hasAnchor"><a href="#section-routing-apis" class="anchor"></a>Routing APIs</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -393,11 +400,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.munterfinger.ch'>Merlin Unterfinger</a>.</p>
+  <p><p>Developed by <a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -405,6 +412,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -70,9 +70,18 @@ to obtain an estimate of the consumption." />
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -86,7 +95,7 @@ to obtain an estimate of the consumption." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -94,9 +103,6 @@ to obtain an estimate of the consumption." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -106,7 +112,7 @@ to obtain an estimate of the consumption." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/authentication.html">Authentication</a>
+      <a href="../articles/authentication.html">Authentication &amp; Options</a>
     </li>
     <li>
       <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
@@ -127,6 +133,9 @@ to obtain an estimate of the consumption." />
       <a href="../articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -183,10 +192,10 @@ to obtain an estimate of the consumption.</p>
   routing_mode <span class='op'>=</span> <span class='st'>"fast"</span>,
   transport_mode <span class='op'>=</span> <span class='st'>"car"</span>,
   traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  avoid_area <span class='op'>=</span> <span class='cn'>NULL</span>,
+  avoid_feature <span class='op'>=</span> <span class='cn'>NULL</span>,
   consumption_model <span class='op'>=</span> <span class='cn'>NULL</span>,
-  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>type</span>,
-  <span class='va'>mode</span>
+  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -225,20 +234,20 @@ to obtain an estimate of the consumption.</p>
       <td><p>boolean, use real-time traffic or prediction in routing (<code>default = TRUE</code>)? If no traffic is selected, the <code>datetime</code> is set to <code>"any"</code> and the request is processed independently from time.</p></td>
     </tr>
     <tr>
+      <th>avoid_area, </th>
+      <td><p><code>sf</code> object, area (only bounding box is taken) to avoid in routes (<code>default = NULL</code>).</p></td>
+    </tr>
+    <tr>
+      <th>avoid_feature</th>
+      <td><p>character, transport network features to avoid, e.g. <code>"tollRoad"</code> or <code>"ferry"</code> (<code>default = NULL</code>).</p></td>
+    </tr>
+    <tr>
       <th>consumption_model</th>
       <td><p>character, specify the consumption model of the vehicle, see <a href='https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html'>consumption model</a> for more information (<code>default = NULL</code> a average electric car is set).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
       <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>character, 'type' is deprecated, use 'routing_mode' instead.</p></td>
-    </tr>
-    <tr>
-      <th>mode</th>
-      <td><p>character, 'mode' is deprecated, use 'transport_mode' instead.</p></td>
     </tr>
     </table>
 
@@ -277,11 +286,11 @@ to obtain an estimate of the consumption.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.munterfinger.ch'>Merlin Unterfinger</a>.</p>
+  <p><p>Developed by <a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -289,6 +298,8 @@ to obtain an estimate of the consumption.</p>
 
   
 
+
+  
 
   </body>
 </html>

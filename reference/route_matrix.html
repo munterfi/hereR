@@ -70,9 +70,18 @@ The result is one route summary matrix, that fits the order of the provided POIs
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -86,7 +95,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -94,9 +103,6 @@ The result is one route summary matrix, that fits the order of the provided POIs
       <ul class="nav navbar-nav">
         <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -106,7 +112,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/authentication.html">Authentication</a>
+      <a href="../articles/authentication.html">Authentication &amp; Options</a>
     </li>
     <li>
       <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
@@ -127,6 +133,9 @@ The result is one route summary matrix, that fits the order of the provided POIs
       <a href="../articles/weather.html">Destination Weather API</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -181,9 +190,7 @@ The result is one route summary matrix, that fits the order of the provided POIs
   routing_mode <span class='op'>=</span> <span class='st'>"fast"</span>,
   transport_mode <span class='op'>=</span> <span class='st'>"car"</span>,
   traffic <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>type</span>,
-  <span class='va'>mode</span>
+  url_only <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -217,14 +224,6 @@ The result is one route summary matrix, that fits the order of the provided POIs
       <th>url_only</th>
       <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
     </tr>
-    <tr>
-      <th>type</th>
-      <td><p>character, 'type' is deprecated, use 'routing_mode' instead.</p></td>
-    </tr>
-    <tr>
-      <th>mode</th>
-      <td><p>character, 'mode' is deprecated, use 'transport_mode' instead.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -255,11 +254,11 @@ The result is one route summary matrix, that fits the order of the provided POIs
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.munterfinger.ch'>Merlin Unterfinger</a>.</p>
+  <p><p>Developed by <a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -267,6 +266,8 @@ The result is one route summary matrix, that fits the order of the provided POIs
 
   
 
+
+  
 
   </body>
 </html>

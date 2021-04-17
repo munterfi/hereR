@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -46,9 +48,6 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -58,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/authentication.html">Authentication</a>
+      <a href="../articles/authentication.html">Authentication &amp; Options</a>
     </li>
     <li>
       <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
@@ -80,22 +79,25 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/munterfinger/hereR">
+  <a href="https://github.com/munterfinger/hereR" class="external-link">
     <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fas fa-globe fa-lg"></span>
      
   </a>
@@ -116,7 +118,7 @@
       <h1 data-toc-skip>Geocoding &amp; Search API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/geocoder.Rmd"><code>vignettes/geocoder.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/geocoder.Rmd" class="external-link"><code>vignettes/geocoder.Rmd</code></a></small>
       <div class="hidden name"><code>geocoder.Rmd</code></div>
 
     </div>
@@ -129,19 +131,19 @@
 <a href="#geocode-addresses" class="anchor"></a>Geocode addresses</h2>
 <p>In order to geocode addresses, the function <code><a href="../reference/geocode.html">geocode()</a></code> is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type <code>character</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">address</span>, <span class="fl">3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">address</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Luzern"   "Lugano"   "Lausanne"</span></code></pre></div>
 <p>Geocode the character vector containing the addresses:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">geocoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/geocode.html">geocode</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span></code></pre></div>
 <p>The return value is an <code>sf</code> object containing <code>POINT</code> geometries of the addresses:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">geocoded</span>, <span class="fl">3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">geocoded</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; Simple feature collection with 3 features and 16 fields</span>
-<span class="co">#&gt; geometry type:  POINT</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 6.63222 ymin: 46.00297 xmax: 8.9512 ymax: 47.04954</span>
-<span class="co">#&gt; geographic CRS: WGS 84</span>
+<span class="co">#&gt; Geometry type: POINT</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 6.63222 ymin: 46.00297 xmax: 8.9512 ymax: 47.04954</span>
+<span class="co">#&gt; Geodetic CRS:  WGS 84</span>
 <span class="co">#&gt;   id rank                  address     type street house_number postal_code</span>
 <span class="co">#&gt; 1  1    1          Luzern, Schweiz locality   &lt;NA&gt;         &lt;NA&gt;        6003</span>
 <span class="co">#&gt; 2  2    1 Lugano, Ticino, Svizzera locality   &lt;NA&gt;         &lt;NA&gt;        6900</span>
@@ -156,20 +158,20 @@
 <span class="co">#&gt; 3 POINT EMPTY  POINT (6.63222 46.5196)</span></code></pre></div>
 <p>Not found addresses are deleted from the result. This means that the <code>sf</code> object may contain fewer rows than the original number of addresses. The column <code>"id"</code> matches the order of the the input addresses. Using the <code>"id"</code> column a corresponding <code>data.frame</code> <code>"df"</code> with the addresses to geocode could be joined to the coordinates after geocoding.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  company <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Schweizerische Bundesbahnen SBB"</span>, <span class="st">"Bahnhof AG"</span>, <span class="st">"Deutsche Bahn AG"</span><span class="op">)</span>,
-  address <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Wylerstrasse 123, 3000 Bern 65"</span>, <span class="st">"not_an_address"</span>, <span class="st">"Potsdamer Platz 2, 10785 Berlin"</span><span class="op">)</span>,
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  company <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schweizerische Bundesbahnen SBB"</span>, <span class="st">"Bahnhof AG"</span>, <span class="st">"Deutsche Bahn AG"</span><span class="op">)</span>,
+  address <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Wylerstrasse 123, 3000 Bern 65"</span>, <span class="st">"not_an_address"</span>, <span class="st">"Potsdamer Platz 2, 10785 Berlin"</span><span class="op">)</span>,
   stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 <span class="va">locs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/geocode.html">geocode</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">address</span><span class="op">)</span>
-<span class="va">geocoded_sfdf</span> <span class="op">&lt;-</span> <span class="fu">st_as_sf</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">locs</span>, <span class="va">df</span><span class="op">[</span><span class="va">locs</span><span class="op">$</span><span class="va">id</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">geocoded_sfdf</span> <span class="op">&lt;-</span> <span class="fu">st_as_sf</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">locs</span>, <span class="va">df</span><span class="op">[</span><span class="va">locs</span><span class="op">$</span><span class="va">id</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Print the geocoded addresses on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">geocoded</span>,
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">geocoded</span>,
                    label <span class="op">=</span> <span class="va">geocoded</span><span class="op">$</span><span class="va">address</span>,
                    col.regions <span class="op">=</span> <span class="st">"red"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
                    legend <span class="op">=</span> <span class="cn">FALSE</span>,
                    homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
@@ -184,7 +186,7 @@
 <code class="sourceCode R"><span class="va">suggestions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="va">address</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p>The return value is a <code>data.frame</code> containing autocomplete suggestions for the addresses. The variable <code>id</code> matches the index of the initial address vector, which was used as input and <code>order</code> stores the rank of the suggestion.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   input <span class="op">=</span> <span class="va">address</span><span class="op">[</span><span class="va">suggestions</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
   id <span class="op">=</span> <span class="va">suggestions</span><span class="op">$</span><span class="va">id</span>,
   rank <span class="op">=</span> <span class="va">suggestions</span><span class="op">$</span><span class="va">rank</span>,
@@ -287,7 +289,7 @@ Lugano
 3
 </td>
 <td style="text-align:left;">
-Луганськ, Україна
+Stazione Lugano FFS (Lugano)
 </td>
 </tr>
 </tbody>
@@ -301,12 +303,12 @@ Lugano
 <code class="sourceCode R"><span class="va">reverse_geocoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span>poi <span class="op">=</span> <span class="va">poi</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p>The function returns an <code>sf</code> object, containing the suggested addresses or landmark names of the reverse geocoded POIs. The coordinates are different from the initially provided POIs since they represent the locations of the suggested addresses or landmarks.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">m</span> <span class="op">&lt;-</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">poi</span>, alpha.region <span class="op">=</span> <span class="fl">0</span>, col.region <span class="op">=</span> <span class="st">"transparent"</span>,
+    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>, alpha.region <span class="op">=</span> <span class="fl">0</span>, col.region <span class="op">=</span> <span class="st">"transparent"</span>,
                      label <span class="op">=</span> <span class="va">poi</span><span class="op">$</span><span class="va">city</span>, cex <span class="op">=</span> <span class="fl">30</span>, layer.name <span class="op">=</span> <span class="st">"POIs"</span>,
-                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">reverse_geocoded</span>, col.region <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0</span>,
+                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">reverse_geocoded</span>, col.region <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0</span>,
                      label <span class="op">=</span> <span class="va">reverse_geocoded</span><span class="op">$</span><span class="va">label</span>, layer.name <span class="op">=</span> <span class="st">"Adresses"</span>,
                      homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
   <span class="va">m</span>
@@ -317,9 +319,9 @@ Lugano
 <h2 class="hasAnchor">
 <a href="#api-reference" class="anchor"></a>API Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html">Geocoding &amp; Search: Autosuggest</a></li>
-<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html">Geocoding &amp; Search: Geocode</a></li>
-<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html">Geocoding &amp; Search: Reverse Geocode</a></li>
+<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html" class="external-link">Geocoding &amp; Search: Autosuggest</a></li>
+<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html" class="external-link">Geocoding &amp; Search: Geocode</a></li>
+<li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html" class="external-link">Geocoding &amp; Search: Reverse Geocode</a></li>
 </ul>
 </div>
   </div>
@@ -335,11 +337,13 @@ Lugano
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.munterfinger.ch">Merlin Unterfinger</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -347,6 +351,8 @@ Lugano
 
   
 
+
+  
 
   </body>
 </html>

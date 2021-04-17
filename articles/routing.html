@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -46,9 +48,6 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -58,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/authentication.html">Authentication</a>
+      <a href="../articles/authentication.html">Authentication &amp; Options</a>
     </li>
     <li>
       <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
@@ -80,22 +79,25 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/munterfinger/hereR">
+  <a href="https://github.com/munterfinger/hereR" class="external-link">
     <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fas fa-globe fa-lg"></span>
      
   </a>
@@ -116,7 +118,7 @@
       <h1 data-toc-skip>Routing APIs</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/routing.Rmd"><code>vignettes/routing.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/routing.Rmd" class="external-link"><code>vignettes/routing.Rmd</code></a></small>
       <div class="hidden name"><code>routing.Rmd</code></div>
 
     </div>
@@ -183,10 +185,10 @@ consumption
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:13
+2021-04-09 12:52:34
 </td>
 <td style="text-align:left;">
-2021-01-31 14:01:24
+2021-04-09 15:08:07
 </td>
 <td style="text-align:left;">
 vehicle
@@ -195,16 +197,16 @@ vehicle
 car
 </td>
 <td style="text-align:right;">
-211726
+217191
 </td>
 <td style="text-align:right;">
-7451
+8133
 </td>
 <td style="text-align:right;">
-7351
+7494
 </td>
 <td style="text-align:right;">
-84.7454
+86.5027
 </td>
 </tr>
 <tr>
@@ -218,10 +220,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:13
+2021-04-09 12:52:34
 </td>
 <td style="text-align:left;">
-2021-01-31 14:45:34
+2021-04-09 15:56:00
 </td>
 <td style="text-align:left;">
 vehicle
@@ -230,31 +232,31 @@ vehicle
 car
 </td>
 <td style="text-align:right;">
-265680
+265681
 </td>
 <td style="text-align:right;">
-10101
+11006
 </td>
 <td style="text-align:right;">
-9830
+9979
 </td>
 <td style="text-align:right;">
-102.4385
+102.2320
 </td>
 </tr>
 </tbody>
 </table>
 <p>Construct a route label and print the routes on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">routes</span><span class="op">$</span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">origin</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
+<code class="sourceCode R"><span class="va">routes</span><span class="op">$</span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">origin</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
                       <span class="va">destination</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
                       sep <span class="op">=</span>  <span class="st">" - "</span><span class="op">)</span>
 
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">routes</span>,
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">routes</span>,
                    zcol <span class="op">=</span> <span class="st">"label"</span>,
                    layer.name <span class="op">=</span> <span class="st">"Route [O-D]"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
                    homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
@@ -320,10 +322,10 @@ error_code
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
 fast
@@ -352,10 +354,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 13:56:46
+2021-04-09 15:01:29
 </td>
 <td style="text-align:left;">
 fast
@@ -364,10 +366,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-173040
+171874
 </td>
 <td style="text-align:right;">
-7172
+7733
 </td>
 <td style="text-align:right;">
 0
@@ -384,10 +386,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 14:02:03
+2021-04-09 15:16:31
 </td>
 <td style="text-align:left;">
 fast
@@ -396,10 +398,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-211946
+212085
 </td>
 <td style="text-align:right;">
-7489
+8635
 </td>
 <td style="text-align:right;">
 0
@@ -416,10 +418,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 13:01:10
+2021-04-09 14:01:24
 </td>
 <td style="text-align:left;">
 fast
@@ -428,10 +430,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-99502
+99501
 </td>
 <td style="text-align:right;">
-3836
+4128
 </td>
 <td style="text-align:right;">
 0
@@ -448,10 +450,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 13:14:39
+2021-04-09 14:23:12
 </td>
 <td style="text-align:left;">
 fast
@@ -460,10 +462,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-119953
+118445
 </td>
 <td style="text-align:right;">
-4645
+5436
 </td>
 <td style="text-align:right;">
 0
@@ -480,10 +482,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 12:40:15
+2021-04-09 13:41:07
 </td>
 <td style="text-align:left;">
 fast
@@ -492,10 +494,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-54860
+54925
 </td>
 <td style="text-align:right;">
-2581
+2911
 </td>
 <td style="text-align:right;">
 0
@@ -512,10 +514,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 14:34:43
+2021-04-09 15:48:58
 </td>
 <td style="text-align:left;">
 fast
@@ -524,10 +526,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-268219
+268261
 </td>
 <td style="text-align:right;">
-9449
+10582
 </td>
 <td style="text-align:right;">
 0
@@ -544,10 +546,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 13:24:07
+2021-04-09 14:25:40
 </td>
 <td style="text-align:left;">
 fast
@@ -556,10 +558,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-132153
+132215
 </td>
 <td style="text-align:right;">
-5213
+5584
 </td>
 <td style="text-align:right;">
 0
@@ -576,10 +578,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 13:54:44
+2021-04-09 14:59:25
 </td>
 <td style="text-align:left;">
 fast
@@ -588,10 +590,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-172978
+176018
 </td>
 <td style="text-align:right;">
-7050
+7609
 </td>
 <td style="text-align:right;">
 0
@@ -608,10 +610,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
-2021-01-31 11:57:14
+2021-04-09 12:52:36
 </td>
 <td style="text-align:left;">
 fast
@@ -639,7 +641,7 @@ car
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iso</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/isoline.html">isoline</a></span><span class="op">(</span>
   <span class="va">poi</span>,
-  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,
+  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,
   range_type <span class="op">=</span> <span class="st">"time"</span>,
   routing_mode <span class="op">=</span> <span class="st">"fast"</span>,
   transport_mode <span class="op">=</span> <span class="st">"car"</span>,
@@ -650,12 +652,12 @@ car
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iso</span><span class="op">$</span><span class="va">minutes</span> <span class="op">&lt;-</span> <span class="va">iso</span><span class="op">$</span><span class="va">range</span><span class="op">/</span><span class="fl">60</span>
 
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">iso</span>,
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">iso</span>,
           zcol <span class="op">=</span> <span class="st">"minutes"</span>,
           layer.name <span class="op">=</span> <span class="st">"Isoline [min]"</span>,
           alpha <span class="op">=</span> <span class="fl">0</span>,
-          map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+          map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
           homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
@@ -664,9 +666,9 @@ car
 <h2 class="hasAnchor">
 <a href="#api-reference" class="anchor"></a>API Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html">Routing</a></li>
-<li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html">Matrix Routing</a></li>
-<li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html">Isoline Routing</a></li>
+<li><a href="https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html" class="external-link">Routing</a></li>
+<li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html" class="external-link">Matrix Routing</a></li>
+<li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html" class="external-link">Isoline Routing</a></li>
 </ul>
 </div>
   </div>
@@ -682,11 +684,13 @@ car
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.munterfinger.ch">Merlin Unterfinger</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -694,6 +698,8 @@ car
 
   
 
+
+  
 
   </body>
 </html>

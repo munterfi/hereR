@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Authentication • hereR</title>
+<title>Authentication &amp; Options • hereR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Authentication">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Authentication &amp; Options">
 <meta property="og:description" content="hereR">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -46,9 +48,6 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -58,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/authentication.html">Authentication</a>
+      <a href="../articles/authentication.html">Authentication &amp; Options</a>
     </li>
     <li>
       <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
@@ -80,22 +79,25 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/munterfinger/hereR">
+  <a href="https://github.com/munterfinger/hereR" class="external-link">
     <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fas fa-globe fa-lg"></span>
      
   </a>
@@ -113,10 +115,10 @@
       </header><script src="authentication_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Authentication</h1>
+      <h1 data-toc-skip>Authentication &amp; Options</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/authentication.Rmd"><code>vignettes/authentication.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/authentication.Rmd" class="external-link"><code>vignettes/authentication.Rmd</code></a></small>
       <div class="hidden name"><code>authentication.Rmd</code></div>
 
     </div>
@@ -129,7 +131,7 @@
 <a href="#application-credentials" class="anchor"></a>Application credentials</h2>
 <p>In order to use the functionality of the <strong>hereR</strong> package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:</p>
 <ol style="list-style-type: decimal">
-<li>Go to <a href="https://developer.here.com/">developer.here.com</a>
+<li>Go to <a href="https://developer.here.com/" class="external-link">developer.here.com</a>
 </li>
 <li>Sign up for a HERE developer account, which automatically creates a new project</li>
 <li>Click ‘REST: Generate APP’</li>
@@ -137,7 +139,7 @@
 </ol>
 <p>The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). To set the key, please use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfinger.github.io/hereR/">hereR</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfinger.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></code></pre></div>
 <p>Alternatively, the key can be exported directly to the environment: <code>export HERE_API_KEY="&lt;YOUR-KEY&gt;"</code></p>
 </div>
@@ -149,10 +151,76 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Use <code>set_Verbose(FALSE)</code> to set the <strong>hereR</strong> package to be quiet again.</p>
 </div>
+<div id="rate-limits" class="section level2">
+<h2 class="hasAnchor">
+<a href="#rate-limits" class="anchor"></a>Rate limits</h2>
+<p>For freemium licenses the number of requests per second (RPS) is limited, use <code><a href="../reference/set_rate_limit.html">set_rate_limit(FALSE)</a></code> to turn off rate limits for accounts with paid plans.</p>
+<p>The limits are:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Service</th>
+<th>Max RPS</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Geocoding &amp; Search</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Multi Reverse Geocoding</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Vector Tile</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Map Tile</td>
+<td>30</td>
+</tr>
+<tr class="odd">
+<td>Map Image</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Routing</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Matrix Routing</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Isoline Routing</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Route Matching</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Advanced Datasets</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Waypoints Sequence</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Transit</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Intermodal</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="proxy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#proxy" class="anchor"></a>Proxy</h2>
-<p>If you are working behind a corporate proxy the requests sent by <strong>hereR</strong> might fail with timeout errors. In this case, consider setting a global proxy for R. Open the R environment file <code><a href="https://rdrr.io/r/utils/file.edit.html">file.edit('~/.Renviron')</a></code> and add your proxy configuration:</p>
+<p>If you are working behind a corporate proxy the requests sent by <strong>hereR</strong> might fail with timeout errors. In this case, consider setting a global proxy for R. Open the R environment file <code><a href="https://rdrr.io/r/utils/file.edit.html" class="external-link">file.edit('~/.Renviron')</a></code> and add your proxy configuration:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="va">http_proxy=</span>http://user:passwd<span class="ex">@proxy.dom.com</span>:port/</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="va">https_proxy=</span>https://user:passwd<span class="ex">@proxy.dom.com</span>:port/</span></code></pre></div>
 <p><strong>Note:</strong> On RStudio Server this file is located at <code>R_HOME/etc/Renviron.site</code>.</p>
@@ -166,8 +234,8 @@
 <h2 class="hasAnchor">
 <a href="#reference" class="anchor"></a>Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/sign-up?create=Freemium-Basic&amp;keepState=true&amp;step=account">Sign up as developer</a></li>
-<li><a href="https://developer.here.com/pricing">Pricing and plans</a></li>
+<li><a href="https://developer.here.com/sign-up?create=Freemium-Basic&amp;keepState=true&amp;step=account" class="external-link">Sign up as developer</a></li>
+<li><a href="https://developer.here.com/pricing" class="external-link">Pricing and plans</a></li>
 </ul>
 </div>
   </div>
@@ -183,11 +251,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.munterfinger.ch">Merlin Unterfinger</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -195,6 +265,8 @@
 
   
 
+
+  
 
   </body>
 </html>

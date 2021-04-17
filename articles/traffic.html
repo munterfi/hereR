@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -46,9 +48,6 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -58,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/authentication.html">Authentication</a>
+      <a href="../articles/authentication.html">Authentication &amp; Options</a>
     </li>
     <li>
       <a href="../articles/geocoder.html">Geocoding &amp; Search API</a>
@@ -80,22 +79,25 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/munterfinger/hereR">
+  <a href="https://github.com/munterfinger/hereR" class="external-link">
     <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fas fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fas fa-globe fa-lg"></span>
      
   </a>
@@ -116,7 +118,7 @@
       <h1 data-toc-skip>Traffic API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/traffic.Rmd"><code>vignettes/traffic.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/traffic.Rmd" class="external-link"><code>vignettes/traffic.Rmd</code></a></small>
       <div class="hidden name"><code>traffic.Rmd</code></div>
 
     </div>
@@ -134,15 +136,15 @@
 <span class="op">)</span></code></pre></div>
 <p>Print the (ordered) ‘jam factor’ of the traffic flow on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">flows</span> <span class="op">&lt;-</span> <span class="va">flows</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">flows</span><span class="op">$</span><span class="va">JF</span><span class="op">)</span>, <span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">flows</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+<code class="sourceCode R"><span class="va">flows</span> <span class="op">&lt;-</span> <span class="va">flows</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">flows</span><span class="op">$</span><span class="va">JF</span><span class="op">)</span>, <span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">flows</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">flows</span>,
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">flows</span>,
                    zcol <span class="op">=</span> <span class="st">"JF"</span>,
-                   lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">flows</span><span class="op">$</span><span class="va">JF</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,
+                   lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">flows</span><span class="op">$</span><span class="va">JF</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,
                    layer.name <span class="op">=</span> <span class="st">"Jam factor"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
                    homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
@@ -154,15 +156,15 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">incidents</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/incident.html">incident</a></span><span class="op">(</span>
   aoi <span class="op">=</span> <span class="va">aoi</span><span class="op">[</span><span class="va">aoi</span><span class="op">$</span><span class="va">code</span> <span class="op">==</span> <span class="st">"LI"</span>, <span class="op">]</span>,
-  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">60</span><span class="op">*</span><span class="fl">60</span>
+  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">60</span><span class="op">*</span><span class="fl">60</span>
 <span class="op">)</span></code></pre></div>
 <p>Print the traffic incidents on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">incidents</span>,
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">incidents</span>,
                    zcol <span class="op">=</span> <span class="st">"type"</span>,
                    layer.name <span class="op">=</span> <span class="st">"Incident type"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
                    homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
@@ -171,8 +173,8 @@
 <h2 class="hasAnchor">
 <a href="#api-reference" class="anchor"></a>API Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics_v6.1/resource-parameters-flow.html">Flow</a></li>
-<li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html">Incidents</a></li>
+<li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics_v6.1/resource-parameters-flow.html" class="external-link">Flow</a></li>
+<li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html" class="external-link">Incidents</a></li>
 </ul>
 </div>
   </div>
@@ -188,11 +190,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.munterfinger.ch">Merlin Unterfinger</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -200,6 +204,8 @@
 
   
 
+
+  
 
   </body>
 </html>
