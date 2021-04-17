@@ -19,23 +19,22 @@ navbar:
 
 reference:
   - text: Reference
-  - title: Authentication
+  - title: Authentication & Options
     contents:
     - '`set_key`'
-    - '`set_proxy`'
     - '`set_verbose`'
+    - '`set_rate_limit`'
     - '`unset_key`'
-    - '`unset_proxy`'
   - title: Example data
     contents:
     - '`poi`'
     - '`aoi`'
-  - title: Geocoder API
+  - title: Geocoding & Search API
     contents:
     - '`autosuggest`'
     - '`geocode`'
     - '`reverse_geocode`'
-  - title: Routing API
+  - title: Routing APIs
     contents:
     - '`route`'
     - '`route_matrix`'

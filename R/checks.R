@@ -1,20 +1,20 @@
-.check_addresses <- function(addresses) {
-  if (!is.character(addresses)) {
+.check_character <- function(text) {
+  if (!is.character(text) & !is.null(text)) {
     stop(sprintf(
       "'%s' must be a 'character' vector.",
-      deparse(substitute(addresses))
+      deparse(substitute(text))
     ))
   }
-  if (any(is.na(addresses))) {
+  if (any(is.na(text))) {
     stop(sprintf(
       "'%s' contains NAs.",
-      deparse(substitute(addresses))
+      deparse(substitute(text))
     ))
   }
-  if ("" %in% gsub(" ", "", addresses)) {
+  if ("" %in% gsub(" ", "", text)) {
     stop(sprintf(
       "'%s' contains empty strings.",
-      deparse(substitute(addresses))
+      deparse(substitute(text))
     ))
   }
 }
@@ -41,26 +41,28 @@
 }
 
 .check_polygon <- function(polygon) {
-  if (!"sf" %in% class(polygon)) {
-    stop(sprintf(
-      "'%s' must be an sf object.",
-      deparse(substitute(polygon))
-    ))
-  }
-  if (any(sf::st_is_empty(polygon))) {
-    stop(sprintf(
-      "'%s' has empty entries in the geometry column.",
-      deparse(substitute(polygon))
-    ))
-  }
-  if (!"sf" %in% class(polygon) |
-    any(!(
-      sf::st_geometry_type(polygon) %in% c("POLYGON", "MULTIPOLYGON")
-    ))) {
-    stop(sprintf(
-      "'%s' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.",
-      deparse(substitute(polygon))
-    ))
+  if (!is.null(polygon)) {
+    if (!"sf" %in% class(polygon)) {
+      stop(sprintf(
+        "'%s' must be an sf object.",
+        deparse(substitute(polygon))
+      ))
+    }
+    if (any(sf::st_is_empty(polygon))) {
+      stop(sprintf(
+        "'%s' has empty entries in the geometry column.",
+        deparse(substitute(polygon))
+      ))
+    }
+    if (!"sf" %in% class(polygon) |
+      any(!(
+        sf::st_geometry_type(polygon) %in% c("POLYGON", "MULTIPOLYGON")
+      ))) {
+      stop(sprintf(
+        "'%s' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.",
+        deparse(substitute(polygon))
+      ))
+    }
   }
 }
 
@@ -140,6 +142,19 @@
   }
 }
 
+.check_optimize <- function(optimize) {
+  optimizations <- c("balanced", "quality", "performance")
+  if (!optimize %in% optimizations) {
+    stop(
+      sprintf(
+        "Optimization method '%s' not valid, must be in ('%s').",
+        optimize,
+        paste(optimizations, collapse = "', '")
+      )
+    )
+  }
+}
+
 .check_range_type <- function(range_type) {
   range_types <- c("distance", "time", "consumption")
   if (!range_type %in% range_types) {
@@ -196,5 +211,20 @@
       lower,
       upper
     ))
+  }
+}
+
+.check_internet <- function() {
+  access <- tryCatch(
+    {
+      curl::has_internet()
+    },
+    error = function(cond) {
+      warning(cond)
+      return(FALSE)
+    }
+  )
+  if (!access) {
+    stop("Connection error: Please check internet access and proxy configuration.")
   }
 }

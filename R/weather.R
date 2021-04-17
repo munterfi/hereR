@@ -53,12 +53,12 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   # Check and preprocess location
   # Character location (remove pipes)
   if (is.character(poi)) {
-    .check_addresses(poi)
+    .check_character(poi)
     poi[poi == ""] <- NA
     url <- paste0(
       url,
       "&name=",
-      gsub("\\|", "", poi)
+      curl::curl_escape(poi)
     )
     # sf POINTs
   } else if ("sf" %in% class(poi)) {
@@ -84,8 +84,9 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = Inf
   )
   if (length(data) == 0) {
     return(NULL)

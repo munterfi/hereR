@@ -11,18 +11,15 @@ test_that("isoline works", {
   expect_error(isoline(poi = poi, transport_mode = "not_a_transport_mode"))
   expect_error(isoline(poi = poi, routing_mode = "not_a_routing_mode"))
   expect_error(isoline(poi = poi, range_type = "not_a_range_type"))
+  expect_error(isoline(poi = poi, optimize = "not_a_optimize_option"))
   expect_error(isoline(poi = poi, traffic = "not_a_bool"), "'traffic' must be a 'boolean' value.")
   expect_error(isoline(poi = poi, arrival = "not_a_bool"), "'arrival' must be a 'boolean' value.")
   expect_error(isoline(poi = poi, aggregate = "not_a_bool"), "'aggregate' must be a 'boolean' value.")
   expect_error(isoline(poi = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
-  # Deprecated
-  expect_warning(isoline(poi = poi, type = "fast", url_only = TRUE))
-  expect_warning(isoline(poi = poi, mode = "car", url_only = TRUE))
-
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$isoline_response
     },
 

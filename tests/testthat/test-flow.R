@@ -23,7 +23,7 @@ test_that("flow works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$flow_response
     },
     flows <- flow(aoi = aoi[aoi$code == "LI", ]),

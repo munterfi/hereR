@@ -16,7 +16,7 @@ test_that("geocode works", {
 
   # Test with API response mock
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$geocode_response
     },
     geocoded <- geocode(address = poi$city),
@@ -27,7 +27,7 @@ test_that("geocode works", {
     expect_equal(nrow(geocoded), length(poi$city))
   )
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$geocode_response
     },
     geocoded <- geocode(address = poi$city, alternatives = TRUE, sf = FALSE),

@@ -62,8 +62,9 @@ station <- function(poi, radius = 500, results = 50, url_only = FALSE) {
   }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = 10
   )
   if (length(data) == 0) {
     return(NULL)

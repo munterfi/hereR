@@ -20,7 +20,7 @@ test_that("reverse_geocode works", {
 
   # Test with API response mock: sf
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$reverse_geocode_response
     },
     reverse <- reverse_geocode(poi = poi, results = 3, sf = TRUE),
@@ -32,7 +32,7 @@ test_that("reverse_geocode works", {
 
   # Test with API response mock: data.frame
   with_mock(
-    "hereR:::.get_content" = function(url) {
+    "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$reverse_geocode
     },
     reverse <- reverse_geocode(poi = poi, results = 3, sf = FALSE),

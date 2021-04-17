@@ -16,8 +16,6 @@
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"} or \code{"bicycle"} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
-#' @param type character, 'type' is deprecated, use 'routing_mode' instead.
-#' @param mode character, 'mode' is deprecated, use 'transport_mode' instead.
 #'
 #' @return
 #' A \code{data.frame}, which is an edge list containing the requested M:N route combinations.
@@ -34,17 +32,7 @@
 #' )
 route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
                          routing_mode = "fast", transport_mode = "car",
-                         traffic = TRUE, url_only = FALSE, type, mode) {
-
-  # Deprecated parameters
-  if (!missing("type")) {
-    warning("'type' is deprecated, use 'routing_mode' instead.")
-    routing_mode <- type
-  }
-  if (!missing("mode")) {
-    warning("'mode' is deprecated, use 'transport_mode' instead.")
-    transport_mode <- mode
-  }
+                         traffic = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(origin)
@@ -126,8 +114,9 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = 1
   )
   if (length(data) == 0) {
     return(NULL)
