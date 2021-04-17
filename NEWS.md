@@ -1,3 +1,5 @@
+# version 0.7.0.9000
+
 # version 0.7.0
 
 * Enable `optimize` parameter to chose from "balanced", "quality" and "performance" in `isoline()` (closes [#119](https://github.com/munterfinger/hereR/issues/119)).
