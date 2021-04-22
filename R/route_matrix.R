@@ -226,8 +226,8 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
         # Matrix
         routes <- data.table::data.table(
           data.table::CJ(
-            dest_id = dest_idx[[count]][1:df$matrix$numDestinations] + 1,
-            orig_id = orig_idx[[count]][1:df$matrix$numOrigins] + 1
+            orig_id = orig_idx[[count]][1:df$matrix$numOrigins] + 1,
+            dest_id = dest_idx[[count]][1:df$matrix$numDestinations] + 1
           ),
           request_id = ids[count],
           departure = NA,
