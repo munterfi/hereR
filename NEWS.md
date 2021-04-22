@@ -1,5 +1,7 @@
 # version 0.7.0.9000
 
+* Bugfix: Swapped the origin and destination IDs in `route_matrix()`. Removed query optimization because switching the IDs results in reversed route information (closes [#129](https://github.com/munterfinger/hereR/issues/129)).
+
 # version 0.7.0
 
 * Enable `optimize` parameter to chose from "balanced", "quality" and "performance" in `isoline()` (closes [#119](https://github.com/munterfinger/hereR/issues/119)).
