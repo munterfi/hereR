@@ -16,6 +16,7 @@
 #' @param arrival boolean, calculate connections for arrival at the defined time (\code{default = FALSE})?
 #' @param results numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).
 #' @param transfers numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, whereby the \code{default = -1} allows for unlimited transfers).
+#' @param transport_mode character, enable or disable (\code{"-"} prefix) transport modes. Note: Do not enable and disable modes at the same time (\code{default = NULL}).
 #' @param summary boolean, return a summary of the public transport connections instead of the sections of the routes (\code{default = FALSE})?
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
@@ -40,7 +41,8 @@
 #' )
 connection <- function(origin, destination, datetime = Sys.time(),
                        arrival = FALSE, results = 3, transfers = -1,
-                       summary = FALSE, url_only = FALSE) {
+                       transport_mode = NULL, summary = FALSE,
+                       url_only = FALSE) {
   # Checks
   .check_points(origin)
   .check_points(destination)
@@ -49,6 +51,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
   .check_numeric_range(transfers, -1, 6)
   .check_datetime(datetime)
   .check_boolean(arrival)
+  .check_transport_mode(transport_mode, request = "connection")
   .check_boolean(summary)
   .check_boolean(url_only)
 
@@ -100,6 +103,15 @@ connection <- function(origin, destination, datetime = Sys.time(),
       url,
       "&changes=",
       transfers
+    )
+  }
+
+  # Add transport modes
+  if (!is.null(transport_mode)) {
+    url <- paste0(
+      url,
+      "&modes=",
+      paste(transport_mode, collapse = ",")
     )
   }
 
