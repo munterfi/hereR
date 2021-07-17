@@ -1,4 +1,4 @@
-# version 0.7.0.9000
+# version 0.7.1
 
 * Add parameter to allow filtering transport modes in `connection()` (closes [#130](https://github.com/munterfinger/hereR/issues/130)).
 * Bugfix: Swapped the origin and destination IDs in `route_matrix()`. Removed query optimization because switching the IDs results in reversed route information (closes [#129](https://github.com/munterfinger/hereR/issues/129)).
