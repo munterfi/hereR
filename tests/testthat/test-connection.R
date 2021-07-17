@@ -16,6 +16,7 @@ test_that("connection works", {
   expect_error(connection(origin = poi, destination = poi, transfers = "not_numeric"))
   expect_error(connection(origin = poi, destination = poi, transfers = -10))
   expect_error(connection(origin = poi, destination = poi, arrival = "not_a_bool"))
+  expect_error(connection(origin = poi, destination = poi, transport_mode = c("highSpeedTrain", "-highSpeedTrain")))
   expect_error(connection(origin = poi, destination = poi, summary = "not_a_bool"))
   expect_error(connection(origin = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
