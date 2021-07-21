@@ -117,6 +117,31 @@
     if (!transport_mode %in% modes) {
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
+  } else if (request == "connection") {
+    if (!is.null(transport_mode)) {
+      modes_enable <- c(
+        "highSpeedTrain",
+        "intercityTrain",
+        "interRegionalTrain",
+        "regionalTrain",
+        "cityTrain",
+        "bus",
+        "ferry",
+        "subway",
+        "lightRail",
+        "privateBus",
+        "inclined",
+        "aerial",
+        "busRapid",
+        "monorail",
+        "flight",
+        "walk"
+      )
+      modes_disable <- paste0("-", modes_enable)
+      if (!xor(all(transport_mode %in% modes_enable), all(transport_mode %in% modes_disable))) {
+        stop("Invaid value(s) for 'transport_mode'.")
+      }
+    }
   }
 }
 

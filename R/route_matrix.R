@@ -65,16 +65,6 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   # Setup request headers
   request_headers <- .create_request_headers()
 
-  # Switch coordinates to use max request size of 15x100
-  if (nrow(orig_coords) > nrow(dest_coords)) {
-    switch <- TRUE
-    orig_coords_tmp <- orig_coords
-    orig_coords <- dest_coords
-    dest_coords <- orig_coords_tmp
-  } else {
-    switch <- FALSE
-  }
-
   # Create URLs for batches, store original ids and format coordinates
   batch_size_orig <- 15
   batch_size_dest <- 100
@@ -145,13 +135,6 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
       datetime,
       datetime + duration
     )]
-  }
-
-  # Switch back indices
-  if (switch) {
-    tmp <- route_mat$orig_id
-    route_mat$orig_id <- route_mat$dest_id
-    route_mat$dest_id <- tmp
   }
 
   # Reorder
@@ -226,8 +209,8 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
         # Matrix
         routes <- data.table::data.table(
           data.table::CJ(
-            dest_id = dest_idx[[count]][1:df$matrix$numDestinations] + 1,
-            orig_id = orig_idx[[count]][1:df$matrix$numOrigins] + 1
+            orig_id = orig_idx[[count]][1:df$matrix$numOrigins] + 1,
+            dest_id = dest_idx[[count]][1:df$matrix$numDestinations] + 1
           ),
           request_id = ids[count],
           departure = NA,

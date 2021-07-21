@@ -7,7 +7,7 @@
 #' to obtain an estimate of the consumption.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html}{HERE Routing API: Calculate Route}
+#' \href{https://developer.here.com/documentation/routing-api/dev_guide/index.html}{HERE Routing API: Calculate Route}
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
@@ -19,7 +19,7 @@
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param avoid_area, \code{sf} object, area (only bounding box is taken) to avoid in routes (\code{default = NULL}).
 #' @param avoid_feature character, transport network features to avoid, e.g. \code{"tollRoad"} or \code{"ferry"} (\code{default = NULL}).
-#' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
+#' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
