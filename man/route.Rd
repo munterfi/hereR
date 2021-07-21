@@ -72,5 +72,5 @@ routes <- route(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html}{HERE Routing API: Calculate Route}
+\href{https://developer.here.com/documentation/routing-api/dev_guide/index.html}{HERE Routing API: Calculate Route}
 }

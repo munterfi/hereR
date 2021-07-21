@@ -7,7 +7,7 @@
 #' to obtain an estimate of the consumption.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html}{HERE Routing API: Calculate Route}
+#' \href{https://developer.here.com/documentation/routing-api/dev_guide/index.html}{HERE Routing API: Calculate Route}
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
