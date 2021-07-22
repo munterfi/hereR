@@ -1,6 +1,6 @@
 pandoc: 2.7.3
 pkgdown: 1.6.1.9001
-pkgdown_sha: 8e0838e273462cec420dfa20f240c684a33425d9
+pkgdown_sha: ce9781a15c7ea07df9fb17a11295ba4abec0b54b
 articles:
   authentication: authentication.html
   geocoder: geocoder.html
@@ -9,5 +9,5 @@ articles:
   traffic: traffic.html
   transit: transit.html
   weather: weather.html
-last_built: 2021-04-17T09:38Z
+last_built: 2021-07-22T16:06Z
 

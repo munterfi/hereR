@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -86,19 +86,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1" class="external-link">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch" class="external-link">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@
 <p>Routing directions between locations, travel distance or time origin-destination matrices and isolines for points of interest (POIs) based on the ‘HERE Routing’, ‘HERE Matrix Routing’ and ‘HERE Isoline Routing’ APIs.</p>
 <div id="routing-directions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#routing-directions" class="anchor"></a>Routing directions</h2>
+<a href="#routing-directions" class="anchor" aria-hidden="true"></a>Routing directions</h2>
 <p>In order to calculate route geometries (<code>LINESTRING</code>) between pairs of points using the ‘HERE Routing API’ the function <code><a href="../reference/route.html">route()</a></code> is used. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. Routes can be created for various transport modes, as for example car or public transport. Optionally the current or predicted traffic information is considered. For routes using the transport mode <code>"car"</code> a vehicle type can be specified, to obtain an estimate of the energy consumption on the routes.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">origin</span> <span class="op">&lt;-</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>
@@ -185,10 +185,10 @@ consumption
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:34
+2021-07-17 12:21:35
 </td>
 <td style="text-align:left;">
-2021-04-09 15:08:07
+2021-07-17 14:43:19
 </td>
 <td style="text-align:left;">
 vehicle
@@ -197,16 +197,16 @@ vehicle
 car
 </td>
 <td style="text-align:right;">
-217191
+211728
 </td>
 <td style="text-align:right;">
-8133
+8504
 </td>
 <td style="text-align:right;">
-7494
+7487
 </td>
 <td style="text-align:right;">
-86.5027
+85.5214
 </td>
 </tr>
 <tr>
@@ -220,10 +220,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:34
+2021-07-17 12:21:35
 </td>
 <td style="text-align:left;">
-2021-04-09 15:56:00
+2021-07-17 15:18:49
 </td>
 <td style="text-align:left;">
 vehicle
@@ -232,16 +232,16 @@ vehicle
 car
 </td>
 <td style="text-align:right;">
-265681
+266180
 </td>
 <td style="text-align:right;">
-11006
+10634
 </td>
 <td style="text-align:right;">
-9979
+10007
 </td>
 <td style="text-align:right;">
-102.2320
+102.5123
 </td>
 </tr>
 </tbody>
@@ -263,7 +263,7 @@ car
 </div>
 <div id="matrix-routing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#matrix-routing" class="anchor"></a>Matrix routing</h2>
+<a href="#matrix-routing" class="anchor" aria-hidden="true"></a>Matrix routing</h2>
 <p>The function <code><a href="../reference/route_matrix.html">route_matrix()</a></code> calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. If only one <code>sf</code> object is provided as <code>origin</code> an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function <code>route_matrix</code> is one route summary matrix, that fits the order of the provided POIs: <code>orig_id</code>, <code>dest_id</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># From - to</span>
@@ -322,10 +322,10 @@ error_code
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
 fast
@@ -354,10 +354,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 15:01:29
+2021-07-17 14:38:53
 </td>
 <td style="text-align:left;">
 fast
@@ -366,10 +366,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-171874
+173937
 </td>
 <td style="text-align:right;">
-7733
+8237
 </td>
 <td style="text-align:right;">
 0
@@ -386,10 +386,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 15:16:31
+2021-07-17 14:43:43
 </td>
 <td style="text-align:left;">
 fast
@@ -398,10 +398,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-212085
+211737
 </td>
 <td style="text-align:right;">
-8635
+8527
 </td>
 <td style="text-align:right;">
 0
@@ -418,10 +418,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 14:01:24
+2021-07-17 13:30:06
 </td>
 <td style="text-align:left;">
 fast
@@ -430,10 +430,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-99501
+99312
 </td>
 <td style="text-align:right;">
-4128
+4110
 </td>
 <td style="text-align:right;">
 0
@@ -450,10 +450,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 14:23:12
+2021-07-17 13:56:18
 </td>
 <td style="text-align:left;">
 fast
@@ -462,10 +462,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-118445
+117548
 </td>
 <td style="text-align:right;">
-5436
+5682
 </td>
 <td style="text-align:right;">
 0
@@ -482,10 +482,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 13:41:07
+2021-07-17 13:08:40
 </td>
 <td style="text-align:left;">
 fast
@@ -494,10 +494,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-54925
+54363
 </td>
 <td style="text-align:right;">
-2911
+2824
 </td>
 <td style="text-align:right;">
 0
@@ -514,10 +514,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 15:48:58
+2021-07-17 15:14:56
 </td>
 <td style="text-align:left;">
 fast
@@ -526,10 +526,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-268261
+266260
 </td>
 <td style="text-align:right;">
-10582
+10400
 </td>
 <td style="text-align:right;">
 0
@@ -546,10 +546,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 14:25:40
+2021-07-17 13:50:42
 </td>
 <td style="text-align:left;">
 fast
@@ -558,10 +558,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-132215
+131844
 </td>
 <td style="text-align:right;">
-5584
+5346
 </td>
 <td style="text-align:right;">
 0
@@ -578,10 +578,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 14:59:25
+2021-07-17 14:29:16
 </td>
 <td style="text-align:left;">
 fast
@@ -590,10 +590,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-176018
+171873
 </td>
 <td style="text-align:right;">
-7609
+7660
 </td>
 <td style="text-align:right;">
 0
@@ -610,10 +610,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
-2021-04-09 12:52:36
+2021-07-17 12:21:36
 </td>
 <td style="text-align:left;">
 fast
@@ -636,7 +636,7 @@ car
 </div>
 <div id="isoline-routing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#isoline-routing" class="anchor"></a>Isoline routing</h2>
+<a href="#isoline-routing" class="anchor" aria-hidden="true"></a>Isoline routing</h2>
 <p>Isolines are constructed by the function <code><a href="../reference/isoline.html">isoline()</a></code>. The calculated polygons (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption. By default the <code>aggregate</code> parameter is set to <code>TRUE</code>, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polygons are aggregated to polygons of geometry type <code>MULTIPOLYGON</code>. Thereby overlapping isolines are avoided.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iso</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/isoline.html">isoline</a></span><span class="op">(</span>
@@ -664,9 +664,9 @@ car
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api-reference" class="anchor"></a>API Reference</h2>
+<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html" class="external-link">Routing</a></li>
+<li><a href="https://developer.here.com/documentation/routing-api/dev_guide/index.html" class="external-link">Routing</a></li>
 <li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html" class="external-link">Matrix Routing</a></li>
 <li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html" class="external-link">Isoline Routing</a></li>
 </ul>

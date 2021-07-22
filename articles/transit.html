@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -86,19 +86,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1" class="external-link">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch" class="external-link">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -128,17 +128,17 @@
 <p>Request public transport connections between given points and find stations nearby using the ‘HERE Public Transit’ API.</p>
 <div id="connections" class="section level2">
 <h2 class="hasAnchor">
-<a href="#connections" class="anchor"></a>Connections</h2>
+<a href="#connections" class="anchor" aria-hidden="true"></a>Connections</h2>
 <p>The function <code><a href="../reference/connection.html">connection()</a></code> allows to request public transport connections from the API. Two types of requests are provided:</p>
 <ul>
 <li>
-<code><a href="../reference/connection.html">connection(..., summary = FALSE)</a></code>: The public transport connections are returned as multiple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.</li>
+<code>connection(..., summary = FALSE)</code>: The public transport connections are returned as multiple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.</li>
 <li>
-<code><a href="../reference/connection.html">connection(..., summary = TRUE)</a></code>: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.</li>
+<code>connection(..., summary = TRUE)</code>: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.</li>
 </ul>
 <div id="sections" class="section level3">
 <h3 class="hasAnchor">
-<a href="#sections" class="anchor"></a>1. Sections</h3>
+<a href="#sections" class="anchor" aria-hidden="true"></a>1. Sections</h3>
 <p>Request available public transport connections as detailed sections:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">connection_section</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
@@ -204,13 +204,13 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:53:00
+2021-07-17 12:55:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2021-04-09 13:03:00
+2021-07-17 13:05:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
@@ -248,13 +248,13 @@ NA
 2
 </td>
 <td style="text-align:left;">
-2021-04-09 13:03:00
+2021-07-17 13:05:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2021-04-09 13:12:00
+2021-07-17 13:15:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
@@ -278,7 +278,7 @@ Lausanne, Ouchy-Olympique
 2940
 </td>
 <td style="text-align:right;">
-540
+600
 </td>
 </tr>
 <tr>
@@ -292,13 +292,13 @@ Lausanne, Ouchy-Olympique
 3
 </td>
 <td style="text-align:left;">
-2021-04-09 13:12:00
+2021-07-17 13:15:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
 </td>
 <td style="text-align:left;">
-2021-04-09 13:17:00
+2021-07-17 13:20:00
 </td>
 <td style="text-align:left;">
 Lausanne
@@ -336,13 +336,13 @@ NA
 4
 </td>
 <td style="text-align:left;">
-2021-04-09 13:20:00
+2021-07-17 13:20:00
 </td>
 <td style="text-align:left;">
 Lausanne
 </td>
 <td style="text-align:left;">
-2021-04-09 14:26:00
+2021-07-17 14:27:00
 </td>
 <td style="text-align:left;">
 Bern
@@ -363,10 +363,10 @@ Schweizerische Bundesbahnen SBB
 St. Gallen
 </td>
 <td style="text-align:right;">
-93249
+97078
 </td>
 <td style="text-align:right;">
-3960
+4020
 </td>
 </tr>
 <tr>
@@ -380,13 +380,13 @@ St. Gallen
 5
 </td>
 <td style="text-align:left;">
-2021-04-09 14:32:00
+2021-07-17 14:47:00
 </td>
 <td style="text-align:left;">
 Bern
 </td>
 <td style="text-align:left;">
-2021-04-09 14:44:00
+2021-07-17 14:58:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -407,10 +407,10 @@ BLS AG (bls)
 Belp
 </td>
 <td style="text-align:right;">
-8528
+8625
 </td>
 <td style="text-align:right;">
-720
+660
 </td>
 </tr>
 <tr>
@@ -424,13 +424,13 @@ Belp
 6
 </td>
 <td style="text-align:left;">
-2021-04-09 14:44:00
+2021-07-17 14:58:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
 </td>
 <td style="text-align:left;">
-2021-04-09 14:46:00
+2021-07-17 15:01:00
 </td>
 <td style="text-align:left;">
 DEST
@@ -451,10 +451,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-103
+202
 </td>
 <td style="text-align:right;">
-120
+180
 </td>
 </tr>
 </tbody>
@@ -472,7 +472,7 @@ NA
 </div>
 <div id="summary" class="section level3">
 <h3 class="hasAnchor">
-<a href="#summary" class="anchor"></a>2. Summary</h3>
+<a href="#summary" class="anchor" aria-hidden="true"></a>2. Summary</h3>
 <p>Request a summary of the available public transport connections:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">connection_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
@@ -531,13 +531,13 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 12:53:00
+2021-07-17 12:55:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2021-04-09 14:46:00
+2021-07-17 15:01:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -558,10 +558,10 @@ m2, IC1, S S3
 Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BLS AG (bls)
 </td>
 <td style="text-align:right;">
-105672
+109697
 </td>
 <td style="text-align:right;">
-6240
+6360
 </td>
 </tr>
 <tr>
@@ -572,13 +572,13 @@ Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BL
 2
 </td>
 <td style="text-align:left;">
-2021-04-09 13:19:00
+2021-07-17 13:17:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2021-04-09 15:16:00
+2021-07-17 15:31:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -599,10 +599,10 @@ m2, IR IR15, S S3
 Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BLS AG (bls)
 </td>
 <td style="text-align:right;">
-105672
+105341
 </td>
 <td style="text-align:right;">
-6600
+6720
 </td>
 </tr>
 <tr>
@@ -613,13 +613,54 @@ Transport publics de la Région Lausannoise, Schweizerische Bundesbahnen SBB, BL
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 13:01:00
+2021-07-17 12:32:00
 </td>
 <td style="text-align:left;">
 Basel, Kleinhüningen
 </td>
 <td style="text-align:left;">
-2021-04-09 14:40:00
+2021-07-17 14:14:00
+</td>
+<td style="text-align:left;">
+Zürich HB
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+pedestrian, lightRail, pedestrian, intercityTrain, pedestrian
+</td>
+<td style="text-align:left;">
+Tram Service, Long Distance Trains
+</td>
+<td style="text-align:left;">
+8, ICE
+</td>
+<td style="text-align:left;">
+Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
+</td>
+<td style="text-align:right;">
+97055
+</td>
+<td style="text-align:right;">
+5880
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+2021-07-17 13:02:00
+</td>
+<td style="text-align:left;">
+Basel, Kleinhüningen
+</td>
+<td style="text-align:left;">
+2021-07-17 14:40:00
 </td>
 <td style="text-align:left;">
 Zürich HB
@@ -646,54 +687,13 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 5820
 </td>
 </tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-2021-04-09 13:09:00
-</td>
-<td style="text-align:left;">
-Basel, Kleinhüningen
-</td>
-<td style="text-align:left;">
-2021-04-09 15:05:00
-</td>
-<td style="text-align:left;">
-Zürich HB
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-pedestrian, lightRail, pedestrian, intercityTrain, pedestrian
-</td>
-<td style="text-align:left;">
-Tram Service, Inter Regional Rail Service
-</td>
-<td style="text-align:left;">
-8, IR IR37
-</td>
-<td style="text-align:left;">
-Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
-</td>
-<td style="text-align:right;">
-84148
-</td>
-<td style="text-align:right;">
-6720
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 <div id="stations" class="section level2">
 <h2 class="hasAnchor">
-<a href="#stations" class="anchor"></a>Stations</h2>
+<a href="#stations" class="anchor" aria-hidden="true"></a>Stations</h2>
 <p>The function <code><a href="../reference/station.html">station()</a></code> allows to request public transport stations nearby points of interest (POIs). The <code>radius</code> defines the maximum search distance in meters and <code>results</code> specifies the maximum number of returned stations. The returned <code>sf</code> object contains the locations of the stations and the available public transport lines at the station.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/station.html">station</a></span><span class="op">(</span>
@@ -724,7 +724,7 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api-reference" class="anchor"></a>API Reference</h2>
+<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html" class="external-link">Public Transit Routing: Routing</a></li>
 <li><a href="https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html" class="external-link">Public Transit Routing: Station Search</a></li>

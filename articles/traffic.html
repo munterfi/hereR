@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -86,19 +86,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1" class="external-link">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch" class="external-link">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@
 <p>Real-time traffic flow and incident information based on the ‘HERE Traffic’ API. The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information. Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
 <div id="flow" class="section level2">
 <h2 class="hasAnchor">
-<a href="#flow" class="anchor"></a>Flow</h2>
+<a href="#flow" class="anchor" aria-hidden="true"></a>Flow</h2>
 <p>In order to request the traffic flow, areas of interest (AOIs) have to be provided. The AOIs must be an <code>sf</code> object containing a polygon or multiple polygons. The response from the HERE Traffic API will be spatially joined on the AOIs and thereby the traffic flows are mapped to the corresponding polygon.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">flows</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flow.html">flow</a></span><span class="op">(</span>
@@ -151,7 +151,7 @@
 </div>
 <div id="incidents" class="section level2">
 <h2 class="hasAnchor">
-<a href="#incidents" class="anchor"></a>Incidents</h2>
+<a href="#incidents" class="anchor" aria-hidden="true"></a>Incidents</h2>
 <p>AOIs also must be provided in order to request information about traffic incidents in specific regions. The time interval, which defines the traffic incidents that should be considered, can be specitified by the <code>from</code> parameter. The datetime information passed to the function must be a timestamp of type <code>POSIXct</code>. By default, the time interval is defined as the last week.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">incidents</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/incident.html">incident</a></span><span class="op">(</span>
@@ -171,7 +171,7 @@
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api-reference" class="anchor"></a>API Reference</h2>
+<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics_v6.1/resource-parameters-flow.html" class="external-link">Flow</a></li>
 <li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html" class="external-link">Incidents</a></li>

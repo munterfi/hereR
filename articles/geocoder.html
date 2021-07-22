@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -86,19 +86,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1" class="external-link">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch" class="external-link">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@
 <p>Autosuggest and geocode addresses or reverse geocode POIs using the ‘HERE Geocoding &amp; Search’ API.</p>
 <div id="geocode-addresses" class="section level2">
 <h2 class="hasAnchor">
-<a href="#geocode-addresses" class="anchor"></a>Geocode addresses</h2>
+<a href="#geocode-addresses" class="anchor" aria-hidden="true"></a>Geocode addresses</h2>
 <p>In order to geocode addresses, the function <code><a href="../reference/geocode.html">geocode()</a></code> is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type <code>character</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">address</span>, <span class="fl">3</span><span class="op">)</span>
@@ -180,7 +180,7 @@
 </div>
 <div id="autosuggestions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#autosuggestions" class="anchor"></a>Autosuggestions</h2>
+<a href="#autosuggestions" class="anchor" aria-hidden="true"></a>Autosuggestions</h2>
 <p>The autosuggestion endpoint of the Geocoding &amp; Search API can be accessed using the <code><a href="../reference/autosuggest.html">autosuggest()</a></code> function. The <code>results</code> parameter defines the maximum number of suggestions that should be requested for each input address.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">suggestions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="va">address</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -219,20 +219,6 @@ Luzern
 1
 </td>
 <td style="text-align:left;">
-Luzerner Kantonalbank
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Luzern
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
 Luzern, Schweiz
 </td>
 </tr>
@@ -244,10 +230,24 @@ Luzern
 1
 </td>
 <td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Luzern-Land, Luzern, Schweiz
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Luzern
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-Luzern-Stadt, Luzern, Schweiz
+Hauptbahnhof SBB Luzern
 </td>
 </tr>
 <tr>
@@ -275,7 +275,7 @@ Lugano
 2
 </td>
 <td style="text-align:left;">
-Lugano, Ticino, Svizzera
+Stazione Lugano FFS (Lugano)
 </td>
 </tr>
 <tr>
@@ -289,7 +289,7 @@ Lugano
 3
 </td>
 <td style="text-align:left;">
-Stazione Lugano FFS (Lugano)
+Lugano Airport (Aeroporto di Lugano)
 </td>
 </tr>
 </tbody>
@@ -297,7 +297,7 @@ Stazione Lugano FFS (Lugano)
 </div>
 <div id="reverse-geocode-pois" class="section level2">
 <h2 class="hasAnchor">
-<a href="#reverse-geocode-pois" class="anchor"></a>Reverse geocode POIs</h2>
+<a href="#reverse-geocode-pois" class="anchor" aria-hidden="true"></a>Reverse geocode POIs</h2>
 <p>The reverse geocoding feature of the Geocoding &amp; Search API can be accessed using the <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> function. The function allows to retrieve addresses near POIs.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reverse_geocoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span>poi <span class="op">=</span> <span class="va">poi</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -317,7 +317,7 @@ Stazione Lugano FFS (Lugano)
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api-reference" class="anchor"></a>API Reference</h2>
+<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html" class="external-link">Geocoding &amp; Search: Autosuggest</a></li>
 <li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html" class="external-link">Geocoding &amp; Search: Geocode</a></li>

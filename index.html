@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -94,19 +94,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@
   <div class="contents col-md-9">
 <div id="herer-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#herer-" class="anchor"></a>hereR <img src="reference/figures/logo.svg" align="right" alt="" width="120">
+<a href="#herer-" class="anchor" aria-hidden="true"></a>hereR <img src="reference/figures/logo.svg" align="right" alt="" width="120">
 </h1></div>
 <!-- badges: start -->
 
@@ -132,7 +132,7 @@
 <p>Locations, routes and isolines are returned as <code>sf</code> objects.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p>You can install the released version of <strong>hereR</strong> from <a href="https://CRAN.R-project.org/package=hereR/" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"hereR"</span><span class="op">)</span></code></pre></div>
@@ -142,13 +142,13 @@
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<a href="#usage" class="anchor" aria-hidden="true"></a>Usage</h2>
 <p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A login can be created on <a href="https://developer.here.com/" class="external-link">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
 <p>To set the API key, use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfinger.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></code></pre></div>
-<p><strong>Note:</strong> Your use of the HERE APIs with this package is subject to the <a href="https://developer.here.com/terms-and-conditions" class="external-link">HERE Developer Terms and Conditions</a>. For freemium licenses the number of requests per second (RPS) is limited, use <code><a href="reference/set_rate_limit.html">set_rate_limit(FALSE)</a></code> to turn off limits for accounts with paid plans.</p>
+<p><strong>Note:</strong> Your use of the HERE APIs with this package is subject to the <a href="https://developer.here.com/terms-and-conditions" class="external-link">HERE Developer Terms and Conditions</a>. For freemium licenses the number of requests per second (RPS) is limited, use <code>set_rate_limit(FALSE)</code> to turn off limits for accounts with paid plans.</p>
 <p>Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the examples below. A more detailed description can be found in the documentation of the functions and the package vignettes.</p>
 <p><strong>Geocoding &amp; Search API:</strong> Autosuggest and geocode addresses or reverse geocode POIs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -204,7 +204,7 @@
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
+<a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h2>
 <ul>
 <li>Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them.</li>
 <li>Please see the <a href="https://github.com/munterfinger/hereR/blob/master/.github/CONTRIBUTING.md" class="external-link">Contribution Guidelines</a> and direct pull requests to the <code>develop</code> branch.</li>
@@ -213,11 +213,11 @@
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
 <ul>
 <li><a href="https://developer.here.com/terms-and-conditions" class="external-link">Developer Terms and Conditions</a></li>
 <li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html" class="external-link">Geocoding &amp; Search API</a></li>
-<li><a href="https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html" class="external-link">Routing API</a></li>
+<li><a href="https://developer.here.com/documentation/routing-api/dev_guide/index.html" class="external-link">Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html" class="external-link">Matrix Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html" class="external-link">Isoline Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html" class="external-link">Traffic API</a></li>

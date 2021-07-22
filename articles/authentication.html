@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -86,19 +86,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1" class="external-link">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch" class="external-link">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@
 <p>Set up a valid authentication to the ‘HERE’ REST APIs and optionally configure a proxy.</p>
 <div id="application-credentials" class="section level2">
 <h2 class="hasAnchor">
-<a href="#application-credentials" class="anchor"></a>Application credentials</h2>
+<a href="#application-credentials" class="anchor" aria-hidden="true"></a>Application credentials</h2>
 <p>In order to use the functionality of the <strong>hereR</strong> package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:</p>
 <ol style="list-style-type: decimal">
 <li>Go to <a href="https://developer.here.com/" class="external-link">developer.here.com</a>
@@ -145,7 +145,7 @@
 </div>
 <div id="information-about-requests" class="section level2">
 <h2 class="hasAnchor">
-<a href="#information-about-requests" class="anchor"></a>Information about requests</h2>
+<a href="#information-about-requests" class="anchor" aria-hidden="true"></a>Information about requests</h2>
 <p>By default, the <strong>hereR</strong> package does not print messages with information about the requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -153,8 +153,8 @@
 </div>
 <div id="rate-limits" class="section level2">
 <h2 class="hasAnchor">
-<a href="#rate-limits" class="anchor"></a>Rate limits</h2>
-<p>For freemium licenses the number of requests per second (RPS) is limited, use <code><a href="../reference/set_rate_limit.html">set_rate_limit(FALSE)</a></code> to turn off rate limits for accounts with paid plans.</p>
+<a href="#rate-limits" class="anchor" aria-hidden="true"></a>Rate limits</h2>
+<p>For freemium licenses the number of requests per second (RPS) is limited, use <code>set_rate_limit(FALSE)</code> to turn off rate limits for accounts with paid plans.</p>
 <p>The limits are:</p>
 <table class="table">
 <thead><tr class="header">
@@ -219,20 +219,20 @@
 </div>
 <div id="proxy" class="section level2">
 <h2 class="hasAnchor">
-<a href="#proxy" class="anchor"></a>Proxy</h2>
-<p>If you are working behind a corporate proxy the requests sent by <strong>hereR</strong> might fail with timeout errors. In this case, consider setting a global proxy for R. Open the R environment file <code><a href="https://rdrr.io/r/utils/file.edit.html" class="external-link">file.edit('~/.Renviron')</a></code> and add your proxy configuration:</p>
+<a href="#proxy" class="anchor" aria-hidden="true"></a>Proxy</h2>
+<p>If you are working behind a corporate proxy the requests sent by <strong>hereR</strong> might fail with timeout errors. In this case, consider setting a global proxy for R. Open the R environment file <code>file.edit('~/.Renviron')</code> and add your proxy configuration:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="va">http_proxy=</span>http://user:passwd<span class="ex">@proxy.dom.com</span>:port/</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="va">https_proxy=</span>https://user:passwd<span class="ex">@proxy.dom.com</span>:port/</span></code></pre></div>
 <p><strong>Note:</strong> On RStudio Server this file is located at <code>R_HOME/etc/Renviron.site</code>.</p>
 </div>
 <div id="remove-credentials" class="section level2">
 <h2 class="hasAnchor">
-<a href="#remove-credentials" class="anchor"></a>Remove credentials</h2>
+<a href="#remove-credentials" class="anchor" aria-hidden="true"></a>Remove credentials</h2>
 <p>To remove previously set credentials from the current R session use <code><a href="../reference/unset_key.html">unset_key()</a></code>. For overwriting the application credentials use again the <code><a href="../reference/set_key.html">set_key()</a></code> function.</p>
 </div>
 <div id="reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#reference" class="anchor"></a>Reference</h2>
+<a href="#reference" class="anchor" aria-hidden="true"></a>Reference</h2>
 <ul>
 <li><a href="https://developer.here.com/sign-up?create=Freemium-Basic&amp;keepState=true&amp;step=account" class="external-link">Sign up as developer</a></li>
 <li><a href="https://developer.here.com/pricing" class="external-link">Pricing and plans</a></li>

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -86,19 +86,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/munterfinger/hereR" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1" class="external-link">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch" class="external-link">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@
 <p>Routing intermodal directions between locations based on the ‘HERE Intermodal Routing’ API.</p>
 <div id="intermodal-routes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#intermodal-routes" class="anchor"></a>Intermodal routes</h2>
+<a href="#intermodal-routes" class="anchor" aria-hidden="true"></a>Intermodal routes</h2>
 <p>In order to calculate route geometries (<code>LINESTRING</code>) between pairs of points using the ‘HERE Intermodal Routing API’ the function <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> is used. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. Routes can be limited to a maximum number of allowed transfers (includes mode changes and public transit transfers), by specifying the <code>transfer</code> parameter.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Request routes</span>
@@ -185,7 +185,7 @@ duration
 <tbody>
 <tr>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
 1
@@ -194,16 +194,16 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2021-04-09 13:39:00
+2021-07-17 12:27:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2021-04-09 13:40:00
+2021-07-17 12:35:00
 </td>
 <td style="text-align:left;">
-Castagnola, Villa Favorita
+Littau, Längweiher
 </td>
 <td style="text-align:left;">
 pedestrian
@@ -221,15 +221,15 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-46
+473
 </td>
 <td style="text-align:right;">
-60
+480
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
 1
@@ -238,16 +238,16 @@ NA
 2
 </td>
 <td style="text-align:left;">
-2021-04-09 13:40:00
+2021-07-17 12:35:00
 </td>
 <td style="text-align:left;">
-Castagnola, Villa Favorita
+Littau, Längweiher
 </td>
 <td style="text-align:left;">
-2021-04-09 13:54:00
+2021-07-17 12:47:00
 </td>
 <td style="text-align:left;">
-Lugano, Stazione
+Bahnhof
 </td>
 <td style="text-align:left;">
 transit
@@ -256,24 +256,24 @@ transit
 bus
 </td>
 <td style="text-align:left;">
-2
+12
 </td>
 <td style="text-align:left;">
-Trasporti Pubblici Luganesi
+vbl verkehrsbetriebe luzern ag
 </td>
 <td style="text-align:left;">
-Paradiso, Carzo
+Luzern, Bahnhof
 </td>
 <td style="text-align:right;">
-4708
+3457
 </td>
 <td style="text-align:right;">
-840
+720
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
 1
@@ -282,16 +282,16 @@ Paradiso, Carzo
 3
 </td>
 <td style="text-align:left;">
-2021-04-09 13:54:00
+2021-07-17 12:47:00
 </td>
 <td style="text-align:left;">
-Lugano, Stazione
+Bahnhof
 </td>
 <td style="text-align:left;">
-2021-04-09 13:57:00
+2021-07-17 12:52:00
 </td>
 <td style="text-align:left;">
-Lugano
+Luzern
 </td>
 <td style="text-align:left;">
 pedestrian
@@ -309,15 +309,15 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-150
+270
 </td>
 <td style="text-align:right;">
-180
+300
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
 1
@@ -326,16 +326,16 @@ NA
 4
 </td>
 <td style="text-align:left;">
-2021-04-09 14:02:00
-</td>
-<td style="text-align:left;">
-Lugano
-</td>
-<td style="text-align:left;">
-2021-04-09 15:41:00
+2021-07-17 12:54:00
 </td>
 <td style="text-align:left;">
 Luzern
+</td>
+<td style="text-align:left;">
+2021-07-17 13:56:00
+</td>
+<td style="text-align:left;">
+Basel SBB
 </td>
 <td style="text-align:left;">
 transit
@@ -344,24 +344,24 @@ transit
 intercityTrain
 </td>
 <td style="text-align:left;">
-IC21
+IR IR26
 </td>
 <td style="text-align:left;">
-Schweizerische Bundesbahnen SBB
+Schweizerische Südostbahn (sob)
 </td>
 <td style="text-align:left;">
 Basel SBB
 </td>
 <td style="text-align:right;">
-167844
+94781
 </td>
 <td style="text-align:right;">
-5940
+3720
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
 1
@@ -370,42 +370,42 @@ Basel SBB
 5
 </td>
 <td style="text-align:left;">
-2021-04-09 16:00:00
+2021-07-17 13:56:00
 </td>
 <td style="text-align:left;">
-Luzern
+Basel SBB
 </td>
 <td style="text-align:left;">
-2021-04-09 17:00:00
+2021-07-17 13:57:00
 </td>
 <td style="text-align:left;">
-Bern
+NA
 </td>
 <td style="text-align:left;">
-transit
+pedestrian
 </td>
 <td style="text-align:left;">
-intercityTrain
+pedestrian
 </td>
 <td style="text-align:left;">
-IR IR15
+NA
 </td>
 <td style="text-align:left;">
-Schweizerische Bundesbahnen SBB
+NA
 </td>
 <td style="text-align:left;">
-Genève-Aéroport
+NA
 </td>
 <td style="text-align:right;">
-110149
+66
 </td>
 <td style="text-align:right;">
-3600
+60
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
 1
@@ -414,37 +414,37 @@ Genève-Aéroport
 6
 </td>
 <td style="text-align:left;">
-2021-04-09 17:17:00
+2021-07-17 13:57:00
 </td>
 <td style="text-align:left;">
-Bern
+NA
 </td>
 <td style="text-align:left;">
-2021-04-09 17:28:00
+2021-07-17 14:15:00
 </td>
 <td style="text-align:left;">
-Kehrsatz Nord
+DEST
 </td>
 <td style="text-align:left;">
-transit
+rented
 </td>
 <td style="text-align:left;">
-cityTrain
+bicycle
 </td>
 <td style="text-align:left;">
-S S31
+NA
 </td>
 <td style="text-align:left;">
-BLS AG (bls)
+Swiss Federal Office of Energy
 </td>
 <td style="text-align:left;">
-Belp
+NA
 </td>
 <td style="text-align:right;">
-8528
+4253
 </td>
 <td style="text-align:right;">
-660
+1080
 </td>
 </tr>
 </tbody>
@@ -462,7 +462,7 @@ Belp
 </div>
 <div id="api-reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api-reference" class="anchor"></a>API Reference</h2>
+<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html" class="external-link">Intermodal Routing API</a></li>
 </ul>

@@ -70,9 +70,6 @@ to obtain an estimate of the consumption." />
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -95,7 +92,7 @@ to obtain an estimate of the consumption." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -141,19 +138,19 @@ to obtain an estimate of the consumption." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/munterfinger/hereR">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/munterfi1">
-    <span class="fas fa-twitter fa-lg"></span>
+    <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://munterfinger.ch">
-    <span class="fas fa-globe fa-lg"></span>
+    <span class="fa fa-globe fa-lg"></span>
      
   </a>
 </li>
@@ -183,7 +180,7 @@ For routes using the transport mode <code>"car"</code> a vehicle consumption mod
 to obtain an estimate of the consumption.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>route</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>route</span><span class='op'>(</span>
   <span class='va'>origin</span>,
   <span class='va'>destination</span>,
   datetime <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>,
@@ -196,7 +193,7 @@ to obtain an estimate of the consumption.</p>
   avoid_feature <span class='op'>=</span> <span class='cn'>NULL</span>,
   consumption_model <span class='op'>=</span> <span class='cn'>NULL</span>,
   url_only <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,7 +240,7 @@ to obtain an estimate of the consumption.</p>
     </tr>
     <tr>
       <th>consumption_model</th>
-      <td><p>character, specify the consumption model of the vehicle, see <a href='https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html'>consumption model</a> for more information (<code>default = NULL</code> a average electric car is set).</p></td>
+      <td><p>character, specify the consumption model of the vehicle, see <a href='https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html'>consumption model</a> for more information (<code>default = NULL</code> a average electric car is set).</p></td>
     </tr>
     <tr>
       <th>url_only</th>
@@ -256,25 +253,25 @@ to obtain an estimate of the consumption.</p>
     <p>An <code>sf</code> object containing the requested routes.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html'>HERE Routing API: Calculate Route</a></p>
+    <p><a href='https://developer.here.com/documentation/routing-api/dev_guide/index.html'>HERE Routing API: Calculate Route</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Provide an API Key for a HERE project</span>
-<span class='fu'><a href='set_key.html'>set_key</a></span><span class='op'>(</span><span class='st'>"&lt;YOUR API KEY&gt;"</span><span class='op'>)</span>
-
-<span class='co'># Get all from - to combinations from POIs</span>
-<span class='va'>to</span> <span class='op'>&lt;-</span> <span class='va'>poi</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='op'>]</span>
-<span class='va'>from</span> <span class='op'>&lt;-</span> <span class='va'>poi</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='op'>]</span>
-<span class='va'>idx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>to</span> <span class='op'>!=</span> <span class='va'>from</span>, <span class='va'>any</span>, MARGIN <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>to</span> <span class='op'>&lt;-</span> <span class='va'>to</span><span class='op'>[</span><span class='va'>idx</span>, <span class='op'>]</span>
-<span class='va'>from</span> <span class='op'>&lt;-</span> <span class='va'>from</span><span class='op'>[</span><span class='va'>idx</span>, <span class='op'>]</span>
-
-<span class='co'># Routing</span>
-<span class='va'>routes</span> <span class='op'>&lt;-</span> <span class='fu'>route</span><span class='op'>(</span>
-  origin <span class='op'>=</span> <span class='va'>from</span>, destination <span class='op'>=</span> <span class='va'>to</span>, results <span class='op'>=</span> <span class='fl'>3</span>,
-  transport_mode <span class='op'>=</span> <span class='st'>"car"</span>, url_only <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># Provide an API Key for a HERE project</span></span>
+<span class='r-in'><span class='fu'><a href='set_key.html'>set_key</a></span><span class='op'>(</span><span class='st'>"&lt;YOUR API KEY&gt;"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Get all from - to combinations from POIs</span></span>
+<span class='r-in'><span class='va'>to</span> <span class='op'>&lt;-</span> <span class='va'>poi</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='op'>]</span></span>
+<span class='r-in'><span class='va'>from</span> <span class='op'>&lt;-</span> <span class='va'>poi</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>poi</span><span class='op'>)</span><span class='op'>)</span>, <span class='op'>]</span></span>
+<span class='r-in'><span class='va'>idx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>to</span> <span class='op'>!=</span> <span class='va'>from</span>, <span class='va'>any</span>, MARGIN <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>to</span> <span class='op'>&lt;-</span> <span class='va'>to</span><span class='op'>[</span><span class='va'>idx</span>, <span class='op'>]</span></span>
+<span class='r-in'><span class='va'>from</span> <span class='op'>&lt;-</span> <span class='va'>from</span><span class='op'>[</span><span class='va'>idx</span>, <span class='op'>]</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Routing</span></span>
+<span class='r-in'><span class='va'>routes</span> <span class='op'>&lt;-</span> <span class='fu'>route</span><span class='op'>(</span></span>
+<span class='r-in'>  origin <span class='op'>=</span> <span class='va'>from</span>, destination <span class='op'>=</span> <span class='va'>to</span>, results <span class='op'>=</span> <span class='fl'>3</span>,</span>
+<span class='r-in'>  transport_mode <span class='op'>=</span> <span class='st'>"car"</span>, url_only <span class='op'>=</span> <span class='cn'>TRUE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
