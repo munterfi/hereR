@@ -133,7 +133,7 @@ weather(poi, product = "alerts")
 
 * [Developer Terms and Conditions](https://developer.here.com/terms-and-conditions)
 * [Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
-* [Routing API](https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html)
+* [Routing API](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
 * [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
 * [Isoline Routing API](https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html)
 * [Traffic API](https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html)

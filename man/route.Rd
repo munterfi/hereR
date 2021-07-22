@@ -40,7 +40,7 @@ route(
 
 \item{avoid_feature}{character, transport network features to avoid, e.g. \code{"tollRoad"} or \code{"ferry"} (\code{default = NULL}).}
 
-\item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
+\item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
@@ -72,5 +72,5 @@ routes <- route(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html}{HERE Routing API: Calculate Route}
+\href{https://developer.here.com/documentation/routing-api/dev_guide/index.html}{HERE Routing API: Calculate Route}
 }
