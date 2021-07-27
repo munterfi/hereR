@@ -7,7 +7,7 @@
 #' to obtain an estimate of the consumption.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html}{HERE Routing API: Calculate Route}
+#' \href{https://developer.here.com/documentation/routing-api/dev_guide/index.html}{HERE Routing API: Calculate Route}
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.
@@ -17,10 +17,10 @@
 #' @param routing_mode character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"} or \code{scooter} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
-#' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
+#' @param avoid_area, \code{sf} object, area (only bounding box is taken) to avoid in routes (\code{default = NULL}).
+#' @param avoid_feature character, transport network features to avoid, e.g. \code{"tollRoad"} or \code{"ferry"} (\code{default = NULL}).
+#' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
-#' @param type character, 'type' is deprecated, use 'routing_mode' instead.
-#' @param mode character, 'mode' is deprecated, use 'transport_mode' instead.
 #'
 #' @return
 #' An \code{sf} object containing the requested routes.
@@ -32,7 +32,7 @@
 #'
 #' # Get all from - to combinations from POIs
 #' to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
-#' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
+#' from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)), ]
 #' idx <- apply(to != from, any, MARGIN = 1)
 #' to <- to[idx, ]
 #' from <- from[idx, ]
@@ -44,18 +44,8 @@
 #' )
 route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   results = 1, routing_mode = "fast", transport_mode = "car",
-                  traffic = TRUE, consumption_model = NULL, url_only = FALSE,
-                  type, mode, waypoints = NULL) {
-
-  # Deprecated parameters
-  if (!missing("type")) {
-    warning("'type' is deprecated, use 'routing_mode' instead.")
-    routing_mode <- type
-  }
-  if (!missing("mode")) {
-    warning("'mode' is deprecated, use 'transport_mode' instead.")
-    transport_mode <- mode
-  }
+                  traffic = TRUE, avoid_area = NULL, avoid_feature = NULL,
+                  consumption_model = NULL, url_only = FALSE, waypoints = NULL) {
 
   # Checks
   .check_points(origin)
@@ -67,6 +57,8 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   .check_routing_mode(routing_mode)
   .check_transport_mode(transport_mode, request = "route")
   .check_boolean(traffic)
+  .check_polygon(avoid_area)
+  .check_character(avoid_feature)
   .check_boolean(url_only)
 
   # Arrival time is not yet supported by the API
@@ -87,7 +79,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   dest_coords <- sf::st_coordinates(
     sf::st_transform(destination, 4326)
   )
-  url = paste0(
+  url <- paste0(
     url,
     "&origin=",
     orig_coords[, 2], ",", orig_coords[, 1],
@@ -133,8 +125,29 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
     results - 1
   )
 
+  # Add avoidance of a bound box
+  if (!is.null(avoid_area)) {
+    url <- paste0(
+      url,
+      "&avoid[areas]=bbox:",
+      paste(
+        sf::st_bbox(sf::st_transform(avoid_area, 4326)),
+        collapse = ","
+      )
+    )
+  }
+
+  # Add avoidance of features
+  if (!is.null(avoid_feature)) {
+    url <- paste0(
+      url,
+      "&avoid[features]=",
+      paste(avoid_feature, collapse = ",")
+    )
+  }
+
   # Add consumption model if specified, otherwise set to default electric vehicle
-  if(is.null(consumption_model)) {
+  if (is.null(consumption_model)) {
     url <- paste0(
       url,
       "&ev[freeFlowSpeedTable]=0,0.239,27,0.239,45,0.259,60,0.196,75,0.207,90,0.238,100,0.26,110,0.296,120,0.337,130,0.351,250,0.351",
@@ -151,20 +164,25 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   }
 
   # Request polyline and summary
-  url = paste0(
+  url <- paste0(
     url,
     "&return=",
     "polyline,elevation,travelSummary"
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = 10
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   routes <- .extract_routes(data)
@@ -176,17 +194,21 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   }
 
   # Postprocess
-  #routes <- routes[routes$rank <= results, ]
   departure <- NULL
   routes[, c("departure", "arrival") := list(
     .parse_datetime_tz(departure, tz = attr(datetime, "tzone")),
-    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone")))]
+    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone"))
+  )]
   rownames(routes) <- NULL
+
+  # Bug of data.table and sf combination? Drops sfc class, when only one row...
+  routes <- as.data.frame(routes)
+  routes$geometry <- sf::st_sfc(routes$geometry, crs = 4326)
 
   # Create sf object
   return(
     sf::st_as_sf(
-      as.data.frame(routes),
+      routes,
       sf_column_name = "geometry",
       crs = 4326
     )
@@ -200,6 +222,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   template <- data.table::data.table(
     id = numeric(),
     rank = numeric(),
+    section = numeric(),
     departure = character(),
     arrival = character(),
     type = character(),
@@ -213,13 +236,16 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
 
   # Routes
   routes <- data.table::rbindlist(
-    append(list(template),
+    append(
+      list(template),
       lapply(data, function(con) {
         count <<- count + 1
 
         # Parse JSON
         df <- jsonlite::fromJSON(con)
-        if (is.null(df$routes$sections)) {return(NULL)}
+        if (is.null(df$routes$sections)) {
+          return(NULL)
+        }
 
         # Routes
         rank <- 0
@@ -232,6 +258,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
               rank <<- rank + 1
               data.table::data.table(
                 rank = rank,
+                section = seq_len(nrow(sec)),
                 departure = sec$departure$time,
                 arrival = sec$arrival$time,
                 type = sec$type,
@@ -239,23 +266,31 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                 distance = sec$travelSummary$length,
                 duration = sec$travelSummary$duration,
                 duration_base = sec$travelSummary$baseDuration,
-                consumption = if (is.null(sec$travelSummary$consumption)) {NA} else {sec$travelSummary$consumption},
+                consumption = if (is.null(sec$travelSummary$consumption)) {
+                  NA
+                } else {
+                  sec$travelSummary$consumption
+                },
                 geometry = sec$polyline
               )
-            }), fill = TRUE
+            }),
+            fill = TRUE
           )
         )
       })
-    ), fill = TRUE
+    ),
+    fill = TRUE
   )
 
   # Check success
-  if (nrow(routes) < 1) {return(NULL)}
+  if (nrow(routes) < 1) {
+    return(NULL)
+  }
 
   # Decode flexible polyline encoding to LINESTRING
   geometry <- NULL
   routes[, "geometry" := sf::st_geometry(
-    flexpolyline::decode_sf(geometry, 4326))
-  ]
+    flexpolyline::decode_sf(geometry, 4326)
+  )]
   return(routes)
 }

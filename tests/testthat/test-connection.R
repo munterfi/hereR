@@ -16,13 +16,16 @@ test_that("connection works", {
   expect_error(connection(origin = poi, destination = poi, transfers = "not_numeric"))
   expect_error(connection(origin = poi, destination = poi, transfers = -10))
   expect_error(connection(origin = poi, destination = poi, arrival = "not_a_bool"))
+  expect_error(connection(origin = poi, destination = poi, transport_mode = c("highSpeedTrain", "-highSpeedTrain")))
   expect_error(connection(origin = poi, destination = poi, summary = "not_a_bool"))
   expect_error(connection(origin = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
   ## Test with API response mock
   # Route segments: "summary = FALSE"
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$connection_response},
+    "hereR:::.async_request" = function(url, rps) {
+      hereR:::mock$connection_response
+    },
     connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = FALSE),
 
     # Tests
@@ -32,7 +35,9 @@ test_that("connection works", {
 
   # Route summary: "summary = FALSE"
   with_mock(
-    "hereR:::.get_content" = function(url) {hereR:::mock$connection_response},
+    "hereR:::.async_request" = function(url, rps) {
+      hereR:::mock$connection_response
+    },
     connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = TRUE),
 
     # Tests

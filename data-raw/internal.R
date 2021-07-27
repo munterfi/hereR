@@ -41,7 +41,7 @@ url_weather_alerts <-
 url_flow <-
   flow(aoi = aoi[aoi$code == "LI", ], url_only = TRUE)
 url_incident <-
-  incident(aoi = aoi, from = Sys.time() - 60*60*0.1, url_only = TRUE)
+  incident(aoi = aoi, from = Sys.time() - 60 * 60 * 0.1, url_only = TRUE)
 url_connection <-
   connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, url_only = TRUE)
 url_station <-
@@ -49,21 +49,21 @@ url_station <-
 
 ## Get response mocks
 mock <- list(
-  geocode_response = hereR:::.get_content(url_geocode),
-  autosuggest_response = hereR:::.get_content(url_autosuggest),
-  reverse_geocode_response = hereR:::.get_content(url_reverse_geocode),
-  route_response = hereR:::.get_content(url_route),
-  route_matrix_response = hereR:::.get_content(url_route_matrix),
-  intermodal_route_response = hereR:::.get_content(url_intermodal_route),
-  isoline_response = hereR:::.get_content(url_isoline),
-  weather_observation_response = hereR:::.get_content(url_weather_observation),
-  weather_forecast_hourly_response = hereR:::.get_content(url_weather_forecast_hourly),
-  weather_forecast_astronomy_response = hereR:::.get_content(url_weather_forecast_astronomy),
-  weather_alerts_response = hereR:::.get_content(url_weather_alerts),
-  flow_response = hereR:::.get_content(url_flow),
-  incident_response = hereR:::.get_content(url_incident),
-  connection_response = hereR:::.get_content(url_connection),
-  station_response = hereR:::.get_content(url_station)
+  geocode_response = hereR:::.async_request(url_geocode, 5),
+  autosuggest_response = hereR:::.async_request(url_autosuggest, 5),
+  reverse_geocode_response = hereR:::.async_request(url_reverse_geocode, 5),
+  route_response = hereR:::.async_request(url_route, 10),
+  route_matrix_response = hereR:::.async_request(url_route_matrix, 1),
+  intermodal_route_response = hereR:::.async_request(url_intermodal_route, 5),
+  isoline_response = hereR:::.async_request(url_isoline, 1),
+  weather_observation_response = hereR:::.async_request(url_weather_observation, Inf),
+  weather_forecast_hourly_response = hereR:::.async_request(url_weather_forecast_hourly, Inf),
+  weather_forecast_astronomy_response = hereR:::.async_request(url_weather_forecast_astronomy, Inf),
+  weather_alerts_response = hereR:::.async_request(url_weather_alerts, Inf),
+  flow_response = hereR:::.async_request(url_flow, Inf),
+  incident_response = hereR:::.async_request(url_incident, Inf),
+  connection_response = hereR:::.async_request(url_connection, 10),
+  station_response = hereR:::.async_request(url_station, 10)
 )
 
 ## Get examples
@@ -80,7 +80,7 @@ example <- list(
   weather_forecast_astronomy = weather(poi = poi, product = "forecast_astronomy"),
   weather_alerts = weather(poi = poi, product = "alerts"),
   flow = flow(aoi = aoi[aoi$code == "LI", ]),
-  incident = incident(aoi = aoi, from = Sys.time() - 60*60*0.5),
+  incident = incident(aoi = aoi, from = Sys.time() - 60 * 60 * 0.5),
   connection_section = connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = FALSE),
   connection_summary = connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = TRUE),
   station = station(poi)

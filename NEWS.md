@@ -1,3 +1,28 @@
+# version 0.7.1
+
+* Add parameter to allow filtering transport modes in `connection()` (closes [#130](https://github.com/munterfinger/hereR/issues/130)).
+* Bugfix: Swapped the origin and destination IDs in `route_matrix()`. Removed query optimization because switching the IDs results in reversed route information (closes [#129](https://github.com/munterfinger/hereR/issues/129)).
+* Update outdated URLs in package documentation. 
+
+# version 0.7.0
+
+* Enable `optimize` parameter to chose from "balanced", "quality" and "performance" in `isoline()` (closes [#119](https://github.com/munterfinger/hereR/issues/119)).
+* Remove deprecated parameters in `route()`, `route_matrix()` and `isoline()`.
+* Add specific user-agent to the requests: `hereR/<version> R/<version> (<platform>)`.
+* Add option to deactivate rate limits `set_rate_limit(FALSE)`.
+* Bugfix: Add rate limits in RPS (requests per seconds) to async requests to the APIs; move dependency for requests from **curl** to **crul** package (closes [#122](https://github.com/munterfinger/hereR/issues/122)).
+* Bugfix: `isoline()` now handles multipart polygons (MULTIPOLYGON) if received by the API (closes [#121](https://github.com/munterfinger/hereR/issues/121)).
+* Add area and feature avoidance in `route()` (closes [#117](https://github.com/munterfinger/hereR/issues/117)).
+
+# version 0.6.1
+
+* Use **styler** package and use `tyler::tidyverse_style()`to format the package.
+* All **lintr** issues are solved, except from line length issues (limit of 80 characters).
+* Avoid drop of the `sfc` class of the geometry column when there is only one geometry/row in a `data.table` (closes [#111](https://github.com/munterfinger/hereR/issues/111)).
+* Return `queryScore` in `geocode()` results as `score` column (closes [#109](https://github.com/munterfinger/hereR/issues/109)).
+* Silence **sf** messages of `sf::st_union` call in `connection(..., summary = TRUE)`.
+* Added section id to `route()`, `intermodal_route()` and `connection()`.
+
 # version 0.6.0
 
 * Update `route_matrix()` from **Routing API v7.2** (calculatematrix) to **Matrix Routing API v8** (see [#87](https://github.com/munterfinger/hereR/issues/87)).
@@ -54,7 +79,7 @@
 
 * Defunct the deprecated `traffic()` function, which has been replaced by the functions `flow()` and `incident()`.
 * Recreated package test data, api mocks and examples with **sf** 0.9-0 (see [#36](https://github.com/munterfinger/hereR/issues/36)).
-* Increased the dependency on the **sf** package to version 0.9-0 due to a different CRS handling (for more information about the changes in **sf**, see [here](https://www.r-spatial.org/r/2020/03/17/wkt.html)). **Note: Older versions of the sf package are no longer supported.**
+* Increased the dependency on the **sf** package to version 0.9-0 due to a different CRS handling (for more information about the changes in **sf**, see [here](https://r-spatial.org/r/2020/03/17/wkt.html)). **Note: Older versions of the sf package are no longer supported.**
 * Temporarily deactivated maps with multiple layers until the **mapview** issue [#271](https://github.com/r-spatial/mapview/issues/271) is fixed.
 
 # version 0.3.1

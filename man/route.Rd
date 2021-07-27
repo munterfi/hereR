@@ -13,10 +13,10 @@ route(
   routing_mode = "fast",
   transport_mode = "car",
   traffic = TRUE,
+  avoid_area = NULL,
+  avoid_feature = NULL,
   consumption_model = NULL,
-  url_only = FALSE,
-  type,
-  mode
+  url_only = FALSE
 )
 }
 \arguments{
@@ -36,13 +36,13 @@ route(
 
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
 
-\item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
+\item{avoid_area, }{\code{sf} object, area (only bounding box is taken) to avoid in routes (\code{default = NULL}).}
+
+\item{avoid_feature}{character, transport network features to avoid, e.g. \code{"tollRoad"} or \code{"ferry"} (\code{default = NULL}).}
+
+\item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
-
-\item{type}{character, 'type' is deprecated, use 'routing_mode' instead.}
-
-\item{mode}{character, 'mode' is deprecated, use 'transport_mode' instead.}
 }
 \value{
 An \code{sf} object containing the requested routes.
@@ -60,7 +60,7 @@ set_key("<YOUR API KEY>")
 
 # Get all from - to combinations from POIs
 to <- poi[rep(seq_len(nrow(poi)), nrow(poi)), ]
-from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)),]
+from <- poi[rep(seq_len(nrow(poi)), each = nrow(poi)), ]
 idx <- apply(to != from, any, MARGIN = 1)
 to <- to[idx, ]
 from <- from[idx, ]
@@ -72,5 +72,5 @@ routes <- route(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html}{HERE Routing API: Calculate Route}
+\href{https://developer.here.com/documentation/routing-api/dev_guide/index.html}{HERE Routing API: Calculate Route}
 }

@@ -4,7 +4,7 @@
 #' The key is set for the current R session and is used
 #' to authenticate in the requests to the APIs.
 #'
-#' No login yet? Get a free login and key here: \href{https://developer.here.com/}{klick}
+#' No login yet? Get a login and key here: \href{https://developer.here.com/}{klick}
 #'
 #' @param api_key character, the API key from a HERE project.
 #'
@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' set_key("<YOUR API KEY>")
-set_key <- function(api_key){
+set_key <- function(api_key) {
   .check_key(api_key)
   Sys.setenv(
     "HERE_API_KEY" = api_key
@@ -57,5 +57,32 @@ set_verbose <- function(ans = FALSE) {
     )
   } else {
     Sys.unsetenv("HERE_VERBOSE")
+  }
+}
+
+#' Limit requests to the APIs
+#'
+#' If set to \code{TRUE} the hereR package limits the requests per second (RPS)
+#' sent to the APIs. This option is necessary for freemium licenses to avoid
+#' hitting the rate limit of the APIs with status code 429. Deactivate this
+#' option to increase speed of requests for paid plans.
+#'
+#' @param ans boolean, use limits or not (default = \code{TRUE})?
+#'
+#' @return
+#' None.
+#'
+#' @export
+#'
+#' @examples
+#' set_rate_limit(FALSE)
+set_rate_limit <- function(ans = TRUE) {
+  .check_boolean(ans)
+  if (!ans) {
+    Sys.setenv(
+      "HERE_RPS" = "FALSE"
+    )
+  } else {
+    Sys.unsetenv("HERE_RPS")
   }
 }
