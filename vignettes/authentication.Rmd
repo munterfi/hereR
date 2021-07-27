@@ -1,8 +1,8 @@
 ---
-title: "Authentication"
+title: "Authentication & Options"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Authentication}
+  %\VignetteIndexEntry{Authentication & Options}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -45,6 +45,28 @@ set_verbose(TRUE)
 ```
 
 Use `set_Verbose(FALSE)` to set the **hereR** package to be quiet again.
+
+## Rate limits
+
+For freemium licenses the number of requests per second (RPS) is limited, use `set_rate_limit(FALSE)` to turn off rate limits for accounts with paid plans.
+
+The limits are: 
+
+Service | Max RPS
+-- | --
+Geocoding & Search | 5
+Multi Reverse Geocoding | 1
+Vector Tile | 10
+Map Tile | 30
+Map Image | 2
+Routing | 10
+Matrix Routing | 1
+Isoline Routing | 1
+Route Matching | 1
+Advanced Datasets | 10
+Waypoints Sequence | 1
+Transit | 10
+Intermodal | 5
 
 ## Proxy
 

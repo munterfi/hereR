@@ -21,8 +21,7 @@ Locations, routes and isolines are returned as `sf` objects.
 
 ## Installation
 
-You can install the released version of **hereR** from
-[CRAN](https://CRAN.R-project.org/package=hereR/) with:
+You can install the released version of **hereR** from [CRAN](https://CRAN.R-project.org/package=hereR/) with:
 
 ``` r
 install.packages("hereR")
@@ -36,16 +35,18 @@ remotes::install_github("munterfinger/hereR@develop")
 
 ## Usage
 
-This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A free login and project can be created on [developer.here.com](https://developer.here.com/). In order to obtain the API key navigate to a project of your choice in the developer portal, select '**REST: Generate APP**' and then '**Create API Key**'.
+This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A login can be created on [developer.here.com](https://developer.here.com/). In order to obtain the API key navigate to a project of your choice in the developer portal, select '**REST: Generate APP**' and then '**Create API Key**'.
 
-To set the API key, please use:
+To set the API key, use:
 
 ``` r
 library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the following examples. A more detailed description can be found in the documentation of the functions and the package vignettes.
+**Note:** Your use of the HERE APIs with this package is subject to the [HERE Developer Terms and Conditions](https://developer.here.com/terms-and-conditions). For freemium licenses the number of requests per second (RPS) is limited, use `set_rate_limit(FALSE)` to turn off limits for accounts with paid plans.
+
+Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the examples below. A more detailed description can be found in the documentation of the functions and the package vignettes.
 
 **Geocoding & Search API:** Autosuggest and geocode addresses or reverse geocode POIs.
 
@@ -130,8 +131,9 @@ weather(poi, product = "alerts")
 
 ## References
 
-* [HERE Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
-* [Routing API](https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/index.html)
+* [Developer Terms and Conditions](https://developer.here.com/terms-and-conditions)
+* [Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
+* [Routing API](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
 * [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
 * [Isoline Routing API](https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html)
 * [Traffic API](https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html)

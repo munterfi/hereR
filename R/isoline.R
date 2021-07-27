@@ -15,11 +15,10 @@
 #' @param routing_mode character, set the routing mode: \code{"fast"} or \code{"short"}.
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
-#' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/8.16.0/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
+#' @param optimize, character, specifies how isoline calculation is optimized: \code{"balanced"}, \code{"quality"} or \code{"performance"} (\code{default = "balanced"}).
+#' @param consumption_model character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).
 #' @param aggregate boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
-#' @param type character, 'type' is deprecated, use 'routing_mode' instead.
-#' @param mode character, 'mode' is deprecated, use 'transport_mode' instead.
 #'
 #' @return
 #' An \code{sf} object containing the requested isolines.
@@ -38,18 +37,9 @@
 isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
                     range = seq(5, 30, 5) * 60, range_type = "time",
                     routing_mode = "fast", transport_mode = "car",
-                    traffic = TRUE, consumption_model = NULL,
-                    aggregate = TRUE, url_only = FALSE, type, mode) {
-
-  # Deprecated parameters
-  if (!missing("type")) {
-    warning("'type' is deprecated, use 'routing_mode' instead.")
-    routing_mode <- type
-  }
-  if (!missing("mode")) {
-    warning("'mode' is deprecated, use 'transport_mode' instead.")
-    transport_mode <- mode
-  }
+                    traffic = TRUE, optimize = "balanced",
+                    consumption_model = NULL, aggregate = TRUE,
+                    url_only = FALSE) {
 
   # Checks
   .check_points(poi)
@@ -57,6 +47,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   .check_range_type(range_type)
   .check_routing_mode(routing_mode)
   .check_transport_mode(transport_mode, request = "isoline")
+  .check_optimize(optimize)
   .check_boolean(traffic)
   .check_boolean(arrival)
   .check_boolean(aggregate)
@@ -74,9 +65,13 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   coords <- paste0(
     coords[, 2], ",", coords[, 1]
   )
-  url = paste0(
+  url <- paste0(
     url,
-    if (arrival) {"&destination="} else {"&origin="},
+    if (arrival) {
+      "&destination="
+    } else {
+      "&origin="
+    },
     coords
   )
 
@@ -99,7 +94,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   url <- .add_transport_mode(url, transport_mode)
 
   # Add range and range type
-  url = paste0(
+  url <- paste0(
     url,
     "&range[values]=",
     paste0(range, collapse = ","),
@@ -107,8 +102,15 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     range_type
   )
 
+  # Add optimization method
+  url <- paste0(
+    url,
+    "&optimizeFor=",
+    optimize
+  )
+
   # Add consumption model if specified, otherwise set to default electric vehicle
-  if(is.null(consumption_model)) {
+  if (is.null(consumption_model)) {
     url <- paste0(
       url,
       "&ev[freeFlowSpeedTable]=0,0.239,27,0.239,45,0.259,60,0.196,75,0.207,90,0.238,100,0.26,110,0.296,120,0.337,130,0.351,250,0.351",
@@ -132,13 +134,18 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   )
 
   # Return urls if chosen
-  if (url_only) return(url)
+  if (url_only) {
+    return(url)
+  }
 
   # Request and get content
-  data <- .get_content(
-    url = url
+  data <- .async_request(
+    url = url,
+    rps = 1
   )
-  if (length(data) == 0) return(NULL)
+  if (length(data) == 0) {
+    return(NULL)
+  }
 
   # Extract information
   isolines <- .extract_isolines(data, arrival)
@@ -153,7 +160,8 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   departure <- NULL
   isolines[, c("departure", "arrival") := list(
     .parse_datetime_tz(departure, tz = attr(datetime, "tzone")),
-    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone")))]
+    .parse_datetime_tz(arrival, tz = attr(datetime, "tzone"))
+  )]
   if (range_type == "time") {
     if (arrival) {
       isolines[, departure := arrival - range]
@@ -161,14 +169,17 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       isolines[, arrival := departure + range]
     }
   }
+  rownames(isolines) <- NULL
+
+  # Bug of data.table and sf combination? Drops sfc class, when only one row...
+  isolines <- as.data.frame(isolines)
+  isolines$geometry <- sf::st_sfc(isolines$geometry, crs = 4326)
 
   # Create sf data.frame
-  rownames(isolines) <- NULL
   isolines <- sf::st_as_sf(
-    as.data.frame(isolines),
+    isolines,
     sf_column_name = "geometry",
-    crs = 4326,
-    check_ring_dir = TRUE
+    crs = 4326
   )
 
   # Spatially aggregate
@@ -198,27 +209,38 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
       lapply(data, function(con) {
         count <<- count + 1
         df <- jsonlite::fromJSON(con)
-        if (is.null(df$isolines)) {return(NULL)}
+        if (is.null(df$isolines)) {
+          return(NULL)
+        }
         data.table::data.table(
           id = ids[count],
           rank = seq_len(nrow(df$isolines)),
-          departure = if(arrival) NA else df$departure$time,
-          arrival = if(arrival) df$arrival$time else NA,
+          departure = if (arrival) NA else df$departure$time,
+          arrival = if (arrival) df$arrival$time else NA,
           range = df$isolines$range$value,
-          geometry = sapply(df$isolines$polygons, function(x) x$outer)
+          geometry = lapply(df$isolines$polygons, function(x) {
+            # Decode flexible polyline encoding to ...
+            if (length(x$outer) > 1) {
+              # MULTIPOLYGON
+              sf::st_multipolygon(
+                sf::st_geometry(flexpolyline::decode_sf(x$outer, 4326))
+              )
+            } else {
+              # POLYGON
+              sf::st_geometry(flexpolyline::decode_sf(x$outer, 4326))[[1]]
+            }
+          })
         )
       })
-    ), fill = TRUE
+    ),
+    fill = TRUE
   )
 
   # Check success
-  if (nrow(isolines) < 1) {return(NULL)}
+  if (nrow(isolines) < 1) {
+    return(NULL)
+  }
 
-  # Decode flexible polyline encoding to POLYGON
-  geometry <- NULL
-  isolines[, "geometry" := sf::st_geometry(
-    flexpolyline::decode_sf(geometry, 4326))
-  ]
   return(isolines)
 }
 
@@ -226,9 +248,11 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   tz <- attr(isolines$departure, "tzone")
   isolines <- sf::st_set_precision(isolines, 1e5)
   isolines <- sf::st_make_valid(isolines)
-  isolines <- stats::aggregate(isolines, by = list(isolines$range),
-                               FUN = min, do_union = TRUE, simplify = TRUE,
-                               join = sf::st_intersects)
+  isolines <- stats::aggregate(isolines,
+    by = list(isolines$range),
+    FUN = min, do_union = TRUE, simplify = TRUE,
+    join = sf::st_intersects
+  )
   isolines <- sf::st_make_valid(isolines)
   suppressMessages(
     isolines <- sf::st_difference(isolines)
@@ -241,7 +265,8 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   # Fix geometry collections
   suppressWarnings(
     isolines <- sf::st_collection_extract(
-      isolines, type = "POLYGON"
+      isolines,
+      type = "POLYGON"
     )
   )
   return(isolines)

@@ -11,6 +11,7 @@ connection(
   arrival = FALSE,
   results = 3,
   transfers = -1,
+  transport_mode = NULL,
   summary = FALSE,
   url_only = FALSE
 )
@@ -27,6 +28,8 @@ connection(
 \item{results}{numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).}
 
 \item{transfers}{numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, whereby the \code{default = -1} allows for unlimited transfers).}
+
+\item{transport_mode}{character, enable or disable (\code{"-"} prefix) transport modes. Note: Do not enable and disable modes at the same time (\code{default = NULL}).}
 
 \item{summary}{boolean, return a summary of the public transport connections instead of the sections of the routes (\code{default = FALSE})?}
 

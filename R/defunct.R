@@ -79,7 +79,7 @@ NULL
 #' For \code{set_auth}, use \code{\link{set_key}}.
 #'
 #' @export
-set_auth <- function(app_id, app_code){
+set_auth <- function(app_id, app_code) {
   .Defunct(new = "set_key", package = "hereR")
 }
 
@@ -172,7 +172,7 @@ set_proxy <- function(proxy, proxyuserpwd) {
 #' @keywords internal
 NULL
 
-#' #' @rdname hereR-defunct
+#' @rdname hereR-defunct
 #' @section \code{unset_proxy}:
 #' For \code{unset_proxy}, configure a global proxy for R in '~/.Renviron' instead.
 #'
