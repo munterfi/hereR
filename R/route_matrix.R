@@ -16,6 +16,7 @@
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"} or \code{"bicycle"} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
+#' @param freemium boolean, should the matrix be chopped up into 15x100 sub-matrices, the freemium limit (\code{default = TRUE})?
 #'
 #' @return
 #' A \code{data.frame}, which is an edge list containing the requested M:N route combinations.
@@ -32,7 +33,7 @@
 #' )
 route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
                          routing_mode = "fast", transport_mode = "car",
-                         traffic = TRUE, url_only = FALSE) {
+                         traffic = TRUE, freemium = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(origin)
@@ -42,6 +43,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   .check_transport_mode(transport_mode, request = "matrix")
   .check_boolean(traffic)
   .check_boolean(url_only)
+  .check_boolean(freemium)
 
   # CRS transformation and formatting
   orig_coords <- sf::st_coordinates(
@@ -66,8 +68,14 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   request_headers <- .create_request_headers()
 
   # Create URLs for batches, store original ids and format coordinates
-  batch_size_orig <- 15
-  batch_size_dest <- 100
+  if (freemium) {
+    batch_size_orig <- 15
+    batch_size_dest <- 100
+  } else {
+    batch_size_orig <- 10000
+    batch_size_dest <- 10000
+  }
+
   orig_div <- seq(0, nrow(orig_coords) - 1, batch_size_orig)
   dest_div <- seq(0, nrow(dest_coords) - 1, batch_size_dest)
   orig_idx <- list()
