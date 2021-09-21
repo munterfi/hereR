@@ -33,7 +33,7 @@
 #' )
 route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
                          routing_mode = "fast", transport_mode = "car",
-                         traffic = TRUE, freemium = TRUE, url_only = FALSE) {
+                         traffic = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(origin)
@@ -43,7 +43,6 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   .check_transport_mode(transport_mode, request = "matrix")
   .check_boolean(traffic)
   .check_boolean(url_only)
-  .check_boolean(freemium)
 
   # CRS transformation and formatting
   orig_coords <- sf::st_coordinates(
@@ -68,7 +67,7 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   request_headers <- .create_request_headers()
 
   # Create URLs for batches, store original ids and format coordinates
-  if (freemium) {
+  if (.get_freemium()) {
     batch_size_orig <- 15
     batch_size_dest <- 100
   } else {
