@@ -60,10 +60,11 @@ set_verbose <- function(ans = FALSE) {
   }
 }
 
-#' Limit requests to the APIs
+#' Set whether plan is freemium or not
 #'
 #' If set to \code{TRUE} the hereR package limits the requests per second (RPS)
-#' sent to the APIs. This option is necessary for freemium licenses to avoid
+#' sent to the APIs and routing matrices will be chopped up into submatrices
+#' of size 15x100. This option is necessary for freemium licenses to avoid
 #' hitting the rate limit of the APIs with status code 429. Deactivate this
 #' option to increase speed of requests for paid plans.
 #'
@@ -75,14 +76,14 @@ set_verbose <- function(ans = FALSE) {
 #' @export
 #'
 #' @examples
-#' set_rate_limit(FALSE)
-set_rate_limit <- function(ans = TRUE) {
+#' set_freemium(FALSE)
+set_freemium <- function(ans = TRUE) {
   .check_boolean(ans)
   if (!ans) {
     Sys.setenv(
-      "HERE_RPS" = "FALSE"
+      "HERE_FREEMIUM" = "FALSE"
     )
   } else {
-    Sys.unsetenv("HERE_RPS")
+    Sys.unsetenv("HERE_FREEMIUM")
   }
 }
