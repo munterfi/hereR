@@ -16,7 +16,6 @@
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"} or \code{"bicycle"} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
-#' @param freemium boolean, should the matrix be chopped up into 15x100 sub-matrices, the freemium limit (\code{default = TRUE})?
 #'
 #' @return
 #' A \code{data.frame}, which is an edge list containing the requested M:N route combinations.
