@@ -66,8 +66,14 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   request_headers <- .create_request_headers()
 
   # Create URLs for batches, store original ids and format coordinates
-  batch_size_orig <- 15
-  batch_size_dest <- 100
+  if (.get_freemium()) {
+    batch_size_orig <- 15
+    batch_size_dest <- 100
+  } else {
+    batch_size_orig <- 10000
+    batch_size_dest <- 10000
+  }
+
   orig_div <- seq(0, nrow(orig_coords) - 1, batch_size_orig)
   dest_div <- seq(0, nrow(dest_coords) - 1, batch_size_dest)
   orig_idx <- list()

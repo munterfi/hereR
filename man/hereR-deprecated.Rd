@@ -2,11 +2,20 @@
 % Please edit documentation in R/deprecated.R
 \name{hereR-deprecated}
 \alias{hereR-deprecated}
+\alias{set_rate_limit}
 \title{Deprecated functions in package \pkg{hereR}.}
+\usage{
+set_rate_limit(ans = TRUE)
+}
 \description{
 The functions listed below are deprecated and will be defunct in
   the near future. When possible, alternative functions with similar
   functionality are also mentioned. Help pages for deprecated functions are
   available at \code{help("-deprecated")}.
 }
+\section{\code{set_rate_limit}}{
+
+For \code{set_rate_limit} use \code{\link{set_freemium}}.
+}
+
 \keyword{internal}

@@ -50,7 +50,7 @@
   .check_internet()
 
   # Check if rate limits are enabled
-  if (!.get_rate_limits()) {
+  if (!.get_freemium()) {
     rps <- Inf
   }
   .verbose_request(url, rps)
@@ -113,8 +113,8 @@
   }
 }
 
-.get_rate_limits <- function() {
-  if (Sys.getenv("HERE_RPS") != "") {
+.get_freemium <- function() {
+  if (Sys.getenv("HERE_FREEMIUM") != "") {
     return(FALSE)
   } else {
     return(TRUE)
