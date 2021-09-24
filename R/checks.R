@@ -19,6 +19,18 @@
   }
 }
 
+qualified_keys <- c(
+  "country", "state", "county", "city", "district", "street", "houseNumber", "postalCode"
+)
+
+.check_qualified_query_list <- function(query) {
+  if (any(names(query) %in% qualified_keys) | length(query) == 0) stop("Invalid format, needs to be 'list(query, ...)'.")
+}
+
+.check_qualified_query <- function(query) {
+  if (!all(names(query) %in% qualified_keys)) stop("Qualified query contains invalid keys.")
+}
+
 .check_points <- function(points) {
   if (!"sf" %in% class(points)) {
     stop(sprintf(
