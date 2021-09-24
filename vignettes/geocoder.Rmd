@@ -84,7 +84,7 @@ qq <- list(
   list(
     country = "Germany",
     city = "Berlin",
-    street = "Friedrichstr",
+    street = "Friedrichstr"
   ),
   list(
     country = "Switzerland",
