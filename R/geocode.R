@@ -5,7 +5,7 @@
 #' @references
 #' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
 #'
-#' @param address character, addresses to geocode or a list containing qualified queries with the keys "country","state", "county", "city", "district", "street", "houseNumber" or "postalCode".
+#' @param address character, addresses to geocode or a list containing qualified queries with the keys "country", "state", "county", "city", "district", "street", "houseNumber" or "postalCode".
 #' @param alternatives boolean, return also alternative results (\code{default = FALSE})?
 #' @param sf boolean, return an \code{sf} object (\code{default = TRUE}) or a
 #'   \code{data.frame}?
