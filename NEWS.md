@@ -1,6 +1,7 @@
 # version 0.7.1.9000
 
 * Rename the rate-limit-related variable `HERE_RPS` to `HERE_FREEMIUM`, and the function `hereR::set_rate_limit()` to `hereR::set_freemium()`. Use the `HERE_FREEMIUM` environment variable to determine a plan-specific size of sub-matrices in the `hereR::route_matrix()` function (@szaboildi, [138](https://github.com/munterfinger/hereR/pull/138)).
+* Add option to use qualified queries in `geocode()` (closes [#136](https://github.com/munterfinger/hereR/issues/136)).
 
 # version 0.7.1
 

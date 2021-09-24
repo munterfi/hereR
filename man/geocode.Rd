@@ -7,7 +7,7 @@
 geocode(address, alternatives = FALSE, sf = TRUE, url_only = FALSE)
 }
 \arguments{
-\item{address}{character, addresses to geocode.}
+\item{address}{character, addresses to geocode or a list containing qualified queries with the keys "country", "state", "county", "city", "district", "street", "houseNumber" or "postalCode".}
 
 \item{alternatives}{boolean, return also alternative results (\code{default = FALSE})?}
 

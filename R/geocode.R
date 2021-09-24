@@ -5,7 +5,7 @@
 #' @references
 #' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
 #'
-#' @param address character, addresses to geocode.
+#' @param address character, addresses to geocode or a list containing qualified queries with the keys "country", "state", "county", "city", "district", "street", "houseNumber" or "postalCode".
 #' @param alternatives boolean, return also alternative results (\code{default = FALSE})?
 #' @param sf boolean, return an \code{sf} object (\code{default = TRUE}) or a
 #'   \code{data.frame}?
@@ -34,9 +34,35 @@
 #'
 #' locs <- geocode(address = poi$city, url_only = TRUE)
 geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) {
+  UseMethod("geocode", address)
+}
+
+#' @export
+geocode.list <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) {
+  .check_qualified_query_list(address)
+  address <- vapply(address, function(x) {
+    .check_qualified_query(x)
+    x <- x[!(x == "" | is.na(x))]
+    x <- paste(names(x), x, sep = "=", collapse = ";")
+  }, character(1))
+  .geocode.default(
+    address,
+    alternatives = alternatives, sf = sf, url_only = url_only, qq = TRUE
+  )
+}
+
+#' @export
+geocode.character <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) {
+  .check_character(address)
+  .geocode.default(
+    address,
+    alternatives = alternatives, sf = sf, url_only = url_only, qq = FALSE
+  )
+}
+
+.geocode.default <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, qq = FALSE) {
 
   # Input checks
-  .check_character(address)
   .check_boolean(alternatives)
   .check_boolean(sf)
   .check_boolean(url_only)
@@ -49,7 +75,7 @@ geocode <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE) 
   # Add addresses and remove pipe
   url <- paste0(
     url,
-    "&q=",
+    ifelse(qq, "&qq=", "&q="),
     curl::curl_escape(address)
   )
 
