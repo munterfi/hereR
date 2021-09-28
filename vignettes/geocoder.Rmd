@@ -16,7 +16,7 @@ library(hereR)
 library(sf)
 
 if (requireNamespace("mapview", quietly = TRUE)) {
- mapview::mapviewOptions(fgb = FALSE)
+  mapview::mapviewOptions(fgb = FALSE)
 }
 
 address <- poi$city
@@ -64,16 +64,36 @@ Print the geocoded addresses on an interactive leaflet map:
 ```{r map_geocoded, eval=FALSE, out.width='100%'}
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(geocoded,
-                   label = geocoded$address,
-                   col.regions = "red",
-                   map.types = c("Esri.WorldTopoMap"),
-                   legend = FALSE,
-                   homebutton = FALSE
+    label = geocoded$address,
+    col.regions = "red",
+    map.types = c("Esri.WorldTopoMap"),
+    legend = FALSE,
+    homebutton = FALSE
   )
 }
 ```
 
 **Note:** Setting `alternatives = TRUE` will also return alternative locations in the same order as received from the API (`rank` column).
+
+Instead of free-text address searches, there is also an option to specify qualified
+queries using the keys `"country"`, `"state"`, `"county"`, `"city"`, `"district"`, `"street"`,
+`"houseNumber"` or `"postalCode"`:
+
+```{r qq_geocoded, eval=FALSE, out.width='100%'}
+qq <- list(
+  list(
+    country = "Germany",
+    city = "Berlin",
+    street = "Friedrichstr"
+  ),
+  list(
+    country = "Switzerland",
+    city = "Zurich",
+    street = "Hardstrasse"
+  )
+)
+geocoded_qq <- geocode(qq)
+```
 
 ## Autosuggestions
 
@@ -111,12 +131,16 @@ The function returns an `sf` object, containing the suggested addresses or landm
 ```{r map_reverse_geocode, eval=FALSE, echo=TRUE, out.width='100%'}
 if (requireNamespace("mapview", quietly = TRUE)) {
   m <-
-    mapview::mapview(poi, alpha.region = 0, col.region = "transparent",
-                     label = poi$city, cex = 30, layer.name = "POIs",
-                     map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
-    mapview::mapview(reverse_geocoded, col.region = "red", alpha = 0,
-                     label = reverse_geocoded$label, layer.name = "Adresses",
-                     homebutton = FALSE)
+    mapview::mapview(poi,
+      alpha.region = 0, col.region = "transparent",
+      label = poi$city, cex = 30, layer.name = "POIs",
+      map.types = c("Esri.WorldTopoMap"), homebutton = FALSE
+    ) +
+    mapview::mapview(reverse_geocoded,
+      col.region = "red", alpha = 0,
+      label = reverse_geocoded$label, layer.name = "Adresses",
+      homebutton = FALSE
+    )
   m
 }
 ```

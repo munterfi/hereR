@@ -5,7 +5,7 @@
 #' a specified length, a specified travel time or consumption (only the default E-car available).
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html}{HERE Isoline Routing API}
+#' \href{https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html}{HERE Isoline Routing API}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
 #' @param datetime \code{POSIXct} object, datetime for the departure (or arrival if \code{arrival = TRUE}).

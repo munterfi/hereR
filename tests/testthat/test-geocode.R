@@ -6,13 +6,38 @@ test_that("geocode works", {
   data(poi)
 
   # Input checks
-  expect_error(geocode(c(1, 2, 3)), "'address' must be a 'character' vector.")
+  expect_error(geocode(c(1, 2, 3)))
   expect_error(geocode(c("character", NA)), "'address' contains NAs.")
   expect_error(geocode(""), "'address' contains empty strings.")
   expect_error(geocode("  "), "'address' contains empty strings.")
   expect_error(geocode("test", alternatives = NA), "'alternatives' must be a 'boolean' value.")
   expect_error(geocode("test", sf = NA), "'sf' must be a 'boolean' value.")
   expect_error(geocode("test", url_only = NA), "'url_only' must be a 'boolean' value.")
+
+  # Check qualified query inputs
+  qq <- list(
+    list(
+      country = "Germany",
+      state = "",
+      county = "",
+      city = "Berlin",
+      district = "",
+      street = "Friedrichstr",
+      houseNumber = "",
+      postalCode = NA
+    ),
+    list(
+      country = "Switzerland",
+      city = "Zurich",
+      street = "Hardstrasse"
+    )
+  )
+  expect_error(geocode(list(), url_only = TRUE))
+  expect_error(geocode(qq[[1]], url_only = TRUE))
+  expect_error(geocode(list(list(nor = "a", valid = "query")), url_only = TRUE))
+  expect_type(geocode(qq[1], url_only = TRUE), "character")
+  expect_type(geocode(qq, url_only = TRUE), "character")
+
 
   # Test with API response mock
   with_mock(

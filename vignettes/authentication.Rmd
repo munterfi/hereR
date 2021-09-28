@@ -48,7 +48,7 @@ Use `set_Verbose(FALSE)` to set the **hereR** package to be quiet again.
 
 ## Rate limits
 
-For freemium licenses the number of requests per second (RPS) is limited, use `set_rate_limit(FALSE)` to turn off rate limits for accounts with paid plans.
+For freemium licenses the number of requests per second (RPS) is limited, use `set_freemium(FALSE)` to turn off rate limits for accounts with paid plans.
 
 The limits are: 
 

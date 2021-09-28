@@ -44,7 +44,7 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-**Note:** Your use of the HERE APIs with this package is subject to the [HERE Developer Terms and Conditions](https://developer.here.com/terms-and-conditions). For freemium licenses the number of requests per second (RPS) is limited, use `set_rate_limit(FALSE)` to turn off limits for accounts with paid plans.
+**Note:** Your use of the HERE APIs with this package is subject to the [HERE Developer Terms and Conditions](https://developer.here.com/terms-and-conditions). For freemium licenses the number of requests per second (RPS) is limited, use `set_freemium(FALSE)` to turn off limits for accounts with paid plans.
 
 Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the examples below. A more detailed description can be found in the documentation of the functions and the package vignettes.
 
@@ -134,8 +134,8 @@ weather(poi, product = "alerts")
 * [Developer Terms and Conditions](https://developer.here.com/terms-and-conditions)
 * [Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
 * [Routing API](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
-* [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
-* [Isoline Routing API](https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html)
+* [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html)
+* [Isoline Routing API](https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html)
 * [Traffic API](https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html)
 * [Public Transit API](https://developer.here.com/documentation/public-transit/dev_guide/index.html)
 * [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)

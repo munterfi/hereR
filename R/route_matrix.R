@@ -7,7 +7,7 @@
 #' The result is one route summary matrix, that fits the order of the provided POIs: \code{orig_id}, \code{dest_id}.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/matrix-routing-api/8.3.0/dev_guide/index.html}{HERE Matrix Routing API}
+#' \href{https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html}{HERE Matrix Routing API}
 #'
 #' @param origin \code{sf} object, the origin locations (M) of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations (N) of geometry type \code{POINT}.
@@ -66,8 +66,14 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   request_headers <- .create_request_headers()
 
   # Create URLs for batches, store original ids and format coordinates
-  batch_size_orig <- 15
-  batch_size_dest <- 100
+  if (.get_freemium()) {
+    batch_size_orig <- 15
+    batch_size_dest <- 100
+  } else {
+    batch_size_orig <- 10000
+    batch_size_dest <- 10000
+  }
+
   orig_div <- seq(0, nrow(orig_coords) - 1, batch_size_orig)
   dest_div <- seq(0, nrow(dest_coords) - 1, batch_size_dest)
   orig_idx <- list()
