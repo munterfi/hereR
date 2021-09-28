@@ -64,5 +64,5 @@ isolines <- isoline(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html}{HERE Isoline Routing API}
+\href{https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html}{HERE Isoline Routing API}
 }

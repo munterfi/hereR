@@ -125,5 +125,5 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 ## API Reference
 
 * [Routing](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
-* [Matrix Routing](https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html)
-* [Isoline Routing](https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html)
+* [Matrix Routing](https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html)
+* [Isoline Routing](https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html)
