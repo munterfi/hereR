@@ -7,7 +7,7 @@
 #' The result is one route summary matrix, that fits the order of the provided POIs: \code{orig_id}, \code{dest_id}.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/matrix-routing-api/8.3.0/dev_guide/index.html}{HERE Matrix Routing API}
+#' \href{https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html}{HERE Matrix Routing API}
 #'
 #' @param origin \code{sf} object, the origin locations (M) of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations (N) of geometry type \code{POINT}.
