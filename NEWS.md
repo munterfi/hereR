@@ -1,4 +1,4 @@
-# version 0.8.0.9000
+# version 0.8.1
 
 * Adjust URLs to GitHub account due to renaming munterfinger to @munterfi.
 * Bugfix: Add `set_freemium` topic to index in pkgdown.
