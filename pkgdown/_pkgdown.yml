@@ -9,7 +9,7 @@ navbar:
   components:
     github:
       icon: fa-github fa-lg
-      href: https://github.com/munterfinger/hereR
+      href: https://github.com/munterfi/hereR
     twitter:
       icon: fa-twitter fa-lg
       href: https://twitter.com/munterfi1
@@ -23,7 +23,7 @@ reference:
     contents:
     - '`set_key`'
     - '`set_verbose`'
-    - '`set_rate_limit`'
+    - '`set_freemium`'
     - '`unset_key`'
   - title: Example data
     contents:
