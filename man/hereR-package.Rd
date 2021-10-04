@@ -19,9 +19,9 @@ Interface to the 'HERE' REST APIs <https://developer.here.com/develop/rest-apis>
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://munterfinger.github.io/hereR/}
-  \item \url{https://github.com/munterfinger/hereR/}
-  \item Report bugs at \url{https://github.com/munterfinger/hereR/issues/}
+  \item \url{https://munterfi.github.io/hereR/}
+  \item \url{https://github.com/munterfi/hereR/}
+  \item Report bugs at \url{https://github.com/munterfi/hereR/issues/}
 }
 
 }
