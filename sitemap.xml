@@ -100,13 +100,16 @@
     <loc>/reference/set_auth-defunct.html</loc>
   </url>
   <url>
+    <loc>/reference/set_freemium.html</loc>
+  </url>
+  <url>
     <loc>/reference/set_key.html</loc>
   </url>
   <url>
     <loc>/reference/set_proxy-defunct.html</loc>
   </url>
   <url>
-    <loc>/reference/set_rate_limit.html</loc>
+    <loc>/reference/set_rate_limit-deprecated.html</loc>
   </url>
   <url>
     <loc>/reference/set_verbose.html</loc>

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/munterfinger/hereR" class="external-link">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -118,7 +118,7 @@
       <h1 data-toc-skip>Geocoding &amp; Search API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfinger/hereR/blob/master/vignettes/geocoder.Rmd" class="external-link"><code>vignettes/geocoder.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/vignettes/geocoder.Rmd" class="external-link"><code>vignettes/geocoder.Rmd</code></a></small>
       <div class="hidden name"><code>geocoder.Rmd</code></div>
 
     </div>
@@ -169,23 +169,38 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">geocoded</span>,
-                   label <span class="op">=</span> <span class="va">geocoded</span><span class="op">$</span><span class="va">address</span>,
-                   col.regions <span class="op">=</span> <span class="st">"red"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-                   legend <span class="op">=</span> <span class="cn">FALSE</span>,
-                   homebutton <span class="op">=</span> <span class="cn">FALSE</span>
+    label <span class="op">=</span> <span class="va">geocoded</span><span class="op">$</span><span class="va">address</span>,
+    col.regions <span class="op">=</span> <span class="st">"red"</span>,
+    map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
+    legend <span class="op">=</span> <span class="cn">FALSE</span>,
+    homebutton <span class="op">=</span> <span class="cn">FALSE</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p><strong>Note:</strong> Setting <code>alternatives = TRUE</code> will also return alternative locations in the same order as received from the API (<code>rank</code> column).</p>
+<p>Instead of free-text address searches, there is also an option to specify qualified queries using the keys <code>"country"</code>, <code>"state"</code>, <code>"county"</code>, <code>"city"</code>, <code>"district"</code>, <code>"street"</code>, <code>"houseNumber"</code> or <code>"postalCode"</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">qq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
+    country <span class="op">=</span> <span class="st">"Germany"</span>,
+    city <span class="op">=</span> <span class="st">"Berlin"</span>,
+    street <span class="op">=</span> <span class="st">"Friedrichstr"</span>
+  <span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
+    country <span class="op">=</span> <span class="st">"Switzerland"</span>,
+    city <span class="op">=</span> <span class="st">"Zurich"</span>,
+    street <span class="op">=</span> <span class="st">"Hardstrasse"</span>
+  <span class="op">)</span>
+<span class="op">)</span>
+<span class="va">geocoded_qq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/geocode.html">geocode</a></span><span class="op">(</span><span class="va">qq</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="autosuggestions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#autosuggestions" class="anchor" aria-hidden="true"></a>Autosuggestions</h2>
 <p>The autosuggestion endpoint of the Geocoding &amp; Search API can be accessed using the <code><a href="../reference/autosuggest.html">autosuggest()</a></code> function. The <code>results</code> parameter defines the maximum number of suggestions that should be requested for each input address.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">suggestions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="va">address</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p>The return value is a <code>data.frame</code> containing autocomplete suggestions for the addresses. The variable <code>id</code> matches the index of the initial address vector, which was used as input and <code>order</code> stores the rank of the suggestion.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   input <span class="op">=</span> <span class="va">address</span><span class="op">[</span><span class="va">suggestions</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
   id <span class="op">=</span> <span class="va">suggestions</span><span class="op">$</span><span class="va">id</span>,
@@ -233,7 +248,7 @@ Luzern
 2
 </td>
 <td style="text-align:left;">
-Luzern-Land, Luzern, Schweiz
+Hauptbahnhof SBB Luzern
 </td>
 </tr>
 <tr>
@@ -247,7 +262,7 @@ Luzern
 3
 </td>
 <td style="text-align:left;">
-Hauptbahnhof SBB Luzern
+Luzern-Stadt, Luzern, Schweiz
 </td>
 </tr>
 <tr>
@@ -299,18 +314,22 @@ Lugano Airport (Aeroporto di Lugano)
 <h2 class="hasAnchor">
 <a href="#reverse-geocode-pois" class="anchor" aria-hidden="true"></a>Reverse geocode POIs</h2>
 <p>The reverse geocoding feature of the Geocoding &amp; Search API can be accessed using the <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> function. The function allows to retrieve addresses near POIs.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reverse_geocoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span>poi <span class="op">=</span> <span class="va">poi</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p>The function returns an <code>sf</code> object, containing the suggested addresses or landmark names of the reverse geocoded POIs. The coordinates are different from the initially provided POIs since they represent the locations of the suggested addresses or landmarks.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">m</span> <span class="op">&lt;-</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>, alpha.region <span class="op">=</span> <span class="fl">0</span>, col.region <span class="op">=</span> <span class="st">"transparent"</span>,
-                     label <span class="op">=</span> <span class="va">poi</span><span class="op">$</span><span class="va">city</span>, cex <span class="op">=</span> <span class="fl">30</span>, layer.name <span class="op">=</span> <span class="st">"POIs"</span>,
-                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">reverse_geocoded</span>, col.region <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0</span>,
-                     label <span class="op">=</span> <span class="va">reverse_geocoded</span><span class="op">$</span><span class="va">label</span>, layer.name <span class="op">=</span> <span class="st">"Adresses"</span>,
-                     homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>,
+      alpha.region <span class="op">=</span> <span class="fl">0</span>, col.region <span class="op">=</span> <span class="st">"transparent"</span>,
+      label <span class="op">=</span> <span class="va">poi</span><span class="op">$</span><span class="va">city</span>, cex <span class="op">=</span> <span class="fl">30</span>, layer.name <span class="op">=</span> <span class="st">"POIs"</span>,
+      map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span>
+    <span class="op">)</span> <span class="op">+</span>
+    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">reverse_geocoded</span>,
+      col.region <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0</span>,
+      label <span class="op">=</span> <span class="va">reverse_geocoded</span><span class="op">$</span><span class="va">label</span>, layer.name <span class="op">=</span> <span class="st">"Adresses"</span>,
+      homebutton <span class="op">=</span> <span class="cn">FALSE</span>
+    <span class="op">)</span>
   <span class="va">m</span>
 <span class="op">}</span></code></pre></div>
 <p>If no addresses or landmarks are found near a POI, <code>NULL</code> for this POI is returned. In this case the rows corresponding to this particular POI are missing and merging the POIs by row is not possible. However, in the returned <code>sf</code> object, the column <code>"id"</code> matches the rows of the input POIs. The <code>"id"</code> column can be used to join the original POIs.</p>
@@ -343,7 +362,7 @@ Lugano Airport (Aeroporto di Lugano)
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

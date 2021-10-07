@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/munterfinger/hereR">
+  <a href="https://github.com/munterfi/hereR">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -136,9 +136,9 @@
 <p>You can install the released version of <strong>hereR</strong> from <a href="https://CRAN.R-project.org/package=hereR/" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"hereR"</span><span class="op">)</span></code></pre></div>
-<p>Install the development version from <a href="https://github.com/munterfinger/hereR/" class="external-link">GitHub</a> with:</p>
+<p>Install the development version from <a href="https://github.com/munterfi/hereR/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"munterfinger/hereR@develop"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"munterfi/hereR@develop"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -146,9 +146,9 @@
 <p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A login can be created on <a href="https://developer.here.com/" class="external-link">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
 <p>To set the API key, use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfinger.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfi.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></code></pre></div>
-<p><strong>Note:</strong> Your use of the HERE APIs with this package is subject to the <a href="https://developer.here.com/terms-and-conditions" class="external-link">HERE Developer Terms and Conditions</a>. For freemium licenses the number of requests per second (RPS) is limited, use <code>set_rate_limit(FALSE)</code> to turn off limits for accounts with paid plans.</p>
+<p><strong>Note:</strong> Your use of the HERE APIs with this package is subject to the <a href="https://developer.here.com/terms-and-conditions" class="external-link">HERE Developer Terms and Conditions</a>. For freemium licenses the number of requests per second (RPS) is limited, use <code>set_freemium(FALSE)</code> to turn off limits for accounts with paid plans.</p>
 <p>Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the examples below. A more detailed description can be found in the documentation of the functions and the package vignettes.</p>
 <p><strong>Geocoding &amp; Search API:</strong> Autosuggest and geocode addresses or reverse geocode POIs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -207,8 +207,8 @@
 <a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h2>
 <ul>
 <li>Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them.</li>
-<li>Please see the <a href="https://github.com/munterfinger/hereR/blob/master/.github/CONTRIBUTING.md" class="external-link">Contribution Guidelines</a> and direct pull requests to the <code>develop</code> branch.</li>
-<li>This project is released with a <a href="https://github.com/munterfinger/hereR/blob/master/.github/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</li>
+<li>Please see the <a href="https://github.com/munterfi/hereR/blob/master/.github/CONTRIBUTING.md" class="external-link">Contribution Guidelines</a> and direct pull requests to the <code>develop</code> branch.</li>
+<li>This project is released with a <a href="https://github.com/munterfi/hereR/blob/master/.github/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</li>
 </ul>
 </div>
 <div id="references" class="section level2">
@@ -218,8 +218,8 @@
 <li><a href="https://developer.here.com/terms-and-conditions" class="external-link">Developer Terms and Conditions</a></li>
 <li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html" class="external-link">Geocoding &amp; Search API</a></li>
 <li><a href="https://developer.here.com/documentation/routing-api/dev_guide/index.html" class="external-link">Routing API</a></li>
-<li><a href="https://developer.here.com/documentation/matrix-routing-api/8.2.0/dev_guide/index.html" class="external-link">Matrix Routing API</a></li>
-<li><a href="https://developer.here.com/documentation/isoline-routing-api/8.4.0/dev_guide/index.html" class="external-link">Isoline Routing API</a></li>
+<li><a href="https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html" class="external-link">Matrix Routing API</a></li>
+<li><a href="https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html" class="external-link">Isoline Routing API</a></li>
 <li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html" class="external-link">Traffic API</a></li>
 <li><a href="https://developer.here.com/documentation/public-transit/dev_guide/index.html" class="external-link">Public Transit API</a></li>
 <li><a href="https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html" class="external-link">Intermodal Routing API</a></li>
@@ -235,9 +235,9 @@
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=hereR">https://​cloud.r-project.org/​package=hereR</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/munterfinger/hereR/">https://​github.com/​munterfinger/​hereR/​</a>
+<li>Browse source code at <br><a href="https://github.com/munterfi/hereR/">https://​github.com/​munterfi/​hereR/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/munterfinger/hereR/issues/">https://​github.com/​munterfinger/​hereR/​issues/​</a>
+<li>Report a bug at <br><a href="https://github.com/munterfi/hereR/issues/">https://​github.com/​munterfi/​hereR/​issues/​</a>
 </li>
 </ul>
 </div>
@@ -273,9 +273,9 @@
 <li><a href="https://CRAN.R-project.org/package=hereR" class="external-link"><img src="https://www.r-pkg.org/badges/version/hereR" alt="CRAN status"></a></li>
 <li><a href="https://cran.r-project.org/web/checks/check_results_hereR.html" class="external-link"><img src="https://cranchecks.info/badges/worst/hereR" alt="CRAN checks"></a></li>
 <li><a href="https://CRAN.R-project.org/package=hereR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/hereR?color=brightgreen" alt="CRAN downloads"></a></li>
-<li><a href="https://github.com/munterfinger/hereR/actions" class="external-link"><img src="https://github.com/munterfinger/hereR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/munterfinger/hereR?branch=master" class="external-link"><img src="https://codecov.io/gh/munterfinger/hereR/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.codefactor.io/repository/github/munterfinger/hereR" class="external-link"><img src="https://www.codefactor.io/repository/github/munterfinger/hereR/badge" alt="CodeFactor"></a></li>
+<li><a href="https://github.com/munterfi/hereR/actions" class="external-link"><img src="https://github.com/munterfi/hereR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/munterfi/hereR?branch=master" class="external-link"><img src="https://codecov.io/gh/munterfi/hereR/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://www.codefactor.io/repository/github/munterfi/hereR" class="external-link"><img src="https://www.codefactor.io/repository/github/munterfi/hereR/badge" alt="CodeFactor"></a></li>
 </ul>
 </div>
 
@@ -290,7 +290,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>
