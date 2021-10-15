@@ -274,7 +274,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
     providers = paste(stats::na.exclude(provider), collapse = ", "),
     distance = sum(distance),
     duration = sum(duration),
-    geometry = suppressMessages(sf::st_union(geometry))
+    geometry = suppressMessages(sf::st_union(sf::st_cast(geometry, "LINESTRING")))
   ), by = list(id, rank)]
   return(summary)
 }

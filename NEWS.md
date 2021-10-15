@@ -1,3 +1,7 @@
+# version 0.8.1.9000
+
+* Bugfix: Explicitly cast linestring in function `.connection_summary` to avoid error in `CPL_geos_union` (@panhypersebastos).
+
 # version 0.8.1
 
 * Adjust URLs to GitHub account due to renaming munterfinger to @munterfi.
