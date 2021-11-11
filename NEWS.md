@@ -1,5 +1,6 @@
 # version 0.8.1.9000
 
+* Bugfix: Fix time / traffic independent requests in `isoline(..., traffic=FALSE)` (closes [#147](https://github.com/munterfi/hereR/issues/147)).
 * Bugfix: Explicitly cast linestring in function `.connection_summary` to avoid error in `CPL_geos_union` (@panhypersebastos).
 
 # version 0.8.1
