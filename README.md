@@ -30,7 +30,7 @@ install.packages("hereR")
 Install the development version from [GitHub](https://github.com/munterfi/hereR/) with:
 
 ``` r
-remotes::install_github("munterfi/hereR@develop")
+remotes::install_github("munterfi/hereR")
 ```
 
 ## Usage
