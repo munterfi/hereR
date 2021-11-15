@@ -19,7 +19,7 @@ Ready to contribute? Here's how to set up **hereR** for local development.
 
 ## Trunk-based Development Workflow
 
-The [trunk-based development workflow](https://trunkbaseddevelopment.com) uses one branch `master` to record the history of the project. In addition to the mainline short-lived feature or bugfix branches are used to develop new features or provide bugfixes.
+The [trunk-based development workflow](https://trunkbaseddevelopment.com) uses one branch `master` to record the history of the project. In addition to the mainline short-lived feature or bugfix branches are used to develop new features or fix bugs.
 
 ### Features
 
@@ -27,7 +27,7 @@ Each new feature should reside in its own short-lived branch. Branch off of a `f
 
 ### Bugfix
 
-Each new bugfix should reside in its own short-lived branch. Branch off of a `bugfix/<bugfix-description>` branch from `master`. When the fix is complete, it gets merged back into `master` and the bugfix branch is deleted.
+Each bugfix should reside in its own short-lived branch. Branch off of a `bugfix/<bugfix-description>` branch from `master`. When the fix is complete, it gets merged back into `master` and the bugfix branch is deleted.
 
 ### Release
 
