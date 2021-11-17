@@ -38,7 +38,7 @@ isoline(
 
 \item{optimize, }{character, specifies how isoline calculation is optimized: \code{"balanced"}, \code{"quality"} or \code{"performance"} (\code{default = "balanced"}).}
 
-\item{consumption_model}{character, specify the consumption model of the vehicle, see \href{https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html}{consumption model} for more information (\code{default = NULL} a average electric car is set).}
+\item{consumption_model}{character, specify the consumption model of the vehicle (\code{default = NULL} an average electric car is set).}
 
 \item{aggregate}{boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?}
 
