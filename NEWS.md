@@ -1,4 +1,4 @@
-# version 0.8.1.9000
+# version 0.8.2
 
 * Changed workflow from git flow to trunc-based development. Removed develop branch. New features are merged directly into `master` and releases are tagged after CRAN has accepted the package submission, which triggers the documentation build.
 * Bugfix: Fix time / traffic independent requests in `isoline(..., traffic=FALSE)` (closes [#147](https://github.com/munterfi/hereR/issues/147)).
