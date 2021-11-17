@@ -8,34 +8,30 @@ Ready to contribute? Here's how to set up **hereR** for local development.
 
 1. Fork the repository to your GitHub account and clone the forked repository locally.
 2. Install the dependencies (check the `DESCRIPTION` file).
-3. Create a feature or bugfix branch as appropriate: `git checkout -b feature/<feature-description> develop` or `git checkout -b bugfix/<bugfix-description> develop`
+3. Create a feature or bugfix branch as appropriate: `git checkout -b feature/<feature-description> master` or `git checkout -b bugfix/<bugfix-description> master`
 4. Work locally on the feature, make sure to add or adjust:
     - entries in `NEWS.md`
     - function documentation (run `devtools::document()` before commit)
     - tests for the feature (run `export HERE_API_KEY="<YOUR-KEY>" && Rscript data-raw/internal.R && unset HERE_API_KEY` to recreate package example data and API mocks)
     - vignettes
 5. Push changes to the new branch.
-6. If CI tests are passing, create a pull request on GitHub of your `feature/...` or `bugfix/...` branch into the `develop` branch of the original repository.
+6. If CI tests are passing, create a pull request on GitHub of your `feature/...` or `bugfix/...` branch into the `master` branch of the original repository.
 
-## Gitflow workflow
+## Trunk-based Development Workflow
 
-### Master and develop
-
-The [gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) uses two branches to
-record the history of the project. The `master` branch stores the official release history, and the `develop` branch serves
-as an integration branch for features. It's also convenient to tag all commits in the `master` branch with a version number.
+The [trunk-based development workflow](https://trunkbaseddevelopment.com) uses one branch `master` to record the history of the project. In addition to the mainline short-lived feature or bugfix branches are used to develop new features or fix bugs.
 
 ### Features
 
-Each new feature should reside in its own branch. But, instead of branching off of `master`, feature branches use
-`develop` as their parent branch. When a feature is complete, it gets merged back into `develop`. Features should never interact directly with `master`.
+Each new feature should reside in its own short-lived branch. Branch off of a `feature/<feature-description>` branch from `master`. When a feature is complete, it gets merged back into `master` and the feature branch is deleted.
+
+### Bugfix
+
+Each bugfix should reside in its own short-lived branch. Branch off of a `bugfix/<bugfix-description>` branch from `master`. When the fix is complete, it gets merged back into `master` and the bugfix branch is deleted.
 
 ### Release
 
-This packages uses [semantic versions](https://semver.org/). Once `develop` has aquired enough features for a release,
-fork a release (`release/v<major>.<minor>.<patch>)` branch off of `develop`. When CRAN has accepted the package submission,
-the release branch gets merged into `master` and tagged with a version number. In addition, it should be merged back into `develop`,
-which may have progressed since the release was initiated.
+This packages uses [semantic versions](https://semver.org/). Once `master` has aquired enough features for a release, set the new version number in the `DESCRIPTION` and `NEWS.md` files and submit the package to CRAN. When CRAN has accepted the package submission, the `master` branch is tagged with the version number, which triggers the build of the documentation site using `pkgdown`.
 
 ## Documentation and coding style
 

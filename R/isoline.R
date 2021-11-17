@@ -85,8 +85,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   } else {
     url <- paste0(
       url,
-      "&arrivalTime=any",
-      "&departureTime=any"
+      ifelse(arrival, "&arrivalTime=any", "&departureTime=any")
     )
   }
 
