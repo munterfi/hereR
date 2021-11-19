@@ -86,7 +86,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   # Request and get content
   data <- .async_request(
     url = url,
-    rps = Inf
+    rps = 5
   )
   if (length(data) == 0) {
     return(NULL)

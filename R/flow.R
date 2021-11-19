@@ -88,7 +88,7 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
   # Request and get content
   data <- .async_request(
     url = url,
-    rps = Inf
+    rps = 10
   )
   if (length(data) == 0) {
     return(NULL)

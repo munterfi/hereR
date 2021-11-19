@@ -72,7 +72,7 @@ incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE
   # Request and get content
   data <- .async_request(
     url = url,
-    rps = Inf
+    rps = 10
   )
   if (length(data) == 0) {
     return(NULL)
