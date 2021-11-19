@@ -15,7 +15,7 @@ test_that("route works", {
 
   # Avoid area and features
   expect_true(all(grepl("&avoid[areas]=bbox:", route(origin = poi, destination = poi, avoid_area = aoi, url_only = TRUE), fixed = TRUE)))
-  expect_true(all(grepl("&avoid[features]=Luzern", route(origin = poi, destination = poi, avoid_feature = "Luzern", url_only = TRUE), fixed = TRUE)))
+  expect_true(all(grepl("&avoid[features]=tollRoad,ferry", route(origin = poi, destination = poi, avoid_feature = c("tollRoad", "ferry"), url_only = TRUE), fixed = TRUE)))
 
   # Test with API response mock
   with_mock(
