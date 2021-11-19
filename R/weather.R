@@ -140,7 +140,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
         "utcTime", "elevation"
       ), ]
       obs[, c(4:9, 16, 17, 23, 24)] <-
-        sapply(obs[, c(4:9, 16, 17, 23, 24)], as.numeric)
+        vapply(obs[, c(4:9, 16, 17, 23, 24)], as.numeric, numeric(1))
       return(
         cbind(station, obs)
       )

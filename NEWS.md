@@ -1,5 +1,7 @@
 # version 0.8.2
 
+* Setting the arrival time is now supported by the Routing API, therefore `route(..., arrival = TRUE)` works.
+* Since `sapply` is not type safe, replace its use with `vapply(..., FUN.VALUE = type)`.
 * Add endpoint URL (without parameters) of failing requests to the warning message and print error message of the response.
 * RPS limit for weather and traffic endpoints.
 * Changed workflow from git flow to trunc-based development. Removed develop branch. New features are merged directly into `master` and releases are tagged after CRAN has accepted the package submission, which triggers the documentation build.
