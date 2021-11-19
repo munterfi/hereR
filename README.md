@@ -65,7 +65,7 @@ route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = TRUE)
 
 route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = FALSE)
 
-route(poi[1:2, ], poi[3:4, ], transport_mode = "bicycle")
+route(poi[4, ], poi[5, ], transport_mode = "bicycle")
 ```
 
 **Matrix Routing API:** Request a matrix of route summaries.
@@ -86,7 +86,7 @@ isoline(poi, range_type = "time", transport_mode = "pedestrian")
 
 isoline(poi, range_type = "distance", transport_mode = "truck")
 
-isoline(poi, range_type = "consumption", transport_mode = "car")
+isoline(poi, range_type = "consumption", transport_mode = "car", traffic = FALSE)
 ```
 
 **Traffic API:** Get real-time traffic flow or incidents in a specific area.
