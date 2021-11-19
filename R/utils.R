@@ -147,7 +147,13 @@
 
 .parse_response <- function(i, res) {
   if (res$status_code != 200) {
-    warning(sprintf("Request 'id = %s' failed: Status %s. ", i, res$status_code))
+    warning(
+      sprintf(
+        "%s: Request 'id = %s' failed. \n  Status %s.",
+        strsplit(res$url, "\\?", )[[1]][1], i,
+        paste(as.character(res$status_http()), collapse = "; ")
+      )
+    )
     return(NULL)
   } else {
     return(res$parse("UTF-8"))
