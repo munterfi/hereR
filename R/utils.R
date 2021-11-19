@@ -161,9 +161,9 @@
 }
 
 .get_ids <- function(content) {
-  as.numeric(sapply(strsplit(names(content), "_"), function(x) {
+  as.numeric(vapply(strsplit(names(content), "_"), function(x) {
     x[[2]]
-  }))
+  }, character(1)))
 }
 
 # Deprecated (still used in incident and weather)...
@@ -183,8 +183,8 @@
 
 .line_from_point_list <- function(point_list) {
   coords <- strsplit(point_list, ",")
-  lng <- as.numeric(sapply(coords, function(x) x[2]))
-  lat <- as.numeric(sapply(coords, function(x) x[1]))
+  lng <- as.numeric(vapply(coords, function(x) x[2], character(1)))
+  lat <- as.numeric(vapply(coords, function(x) x[1], character(1)))
   sf::st_linestring(cbind(lng, lat))
 }
 

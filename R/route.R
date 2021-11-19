@@ -61,12 +61,6 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   .check_character(avoid_feature)
   .check_boolean(url_only)
 
-  # Arrival time is not yet supported by the API
-  if (arrival) {
-    message("Arrival time is not supported at the moment on this endpoint (v8.16.0), please set 'arrival = FALSE'.")
-    return(NULL)
-  }
-
   # Add API key
   url <- .add_key(
     url = "https://router.hereapi.com/v8/routes?"

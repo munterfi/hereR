@@ -2,19 +2,19 @@
   if (!is.character(text) & !is.null(text)) {
     stop(sprintf(
       "'%s' must be a 'character' vector.",
-      deparse(substitute(text))
+      deparse(substitute(text, environment()))
     ))
   }
   if (any(is.na(text))) {
     stop(sprintf(
       "'%s' contains NAs.",
-      deparse(substitute(text))
+      deparse(substitute(text, environment()))
     ))
   }
   if ("" %in% gsub(" ", "", text)) {
     stop(sprintf(
       "'%s' contains empty strings.",
-      deparse(substitute(text))
+      deparse(substitute(text, environment()))
     ))
   }
 }
@@ -35,19 +35,19 @@ qualified_keys <- c(
   if (!"sf" %in% class(points)) {
     stop(sprintf(
       "'%s' must be an sf object.",
-      deparse(substitute(points))
+      deparse(substitute(points, environment()))
     ))
   }
   if (any(sf::st_is_empty(points))) {
     stop(sprintf(
       "'%s' has empty entries in the geometry column.",
-      deparse(substitute(points))
+      deparse(substitute(points, environment()))
     ))
   }
   if (any(sf::st_geometry_type(points) != "POINT")) {
     stop(sprintf(
       "'%s' must be an sf object with geometry type 'POINT'.",
-      deparse(substitute(points))
+      deparse(substitute(points, environment()))
     ))
   }
 }
@@ -57,13 +57,13 @@ qualified_keys <- c(
     if (!"sf" %in% class(polygon)) {
       stop(sprintf(
         "'%s' must be an sf object.",
-        deparse(substitute(polygon))
+        deparse(substitute(polygon, environment()))
       ))
     }
     if (any(sf::st_is_empty(polygon))) {
       stop(sprintf(
         "'%s' has empty entries in the geometry column.",
-        deparse(substitute(polygon))
+        deparse(substitute(polygon, environment()))
       ))
     }
     if (!"sf" %in% class(polygon) |
@@ -72,7 +72,7 @@ qualified_keys <- c(
       ))) {
       stop(sprintf(
         "'%s' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.",
-        deparse(substitute(polygon))
+        deparse(substitute(polygon, environment()))
       ))
     }
   }
@@ -83,7 +83,7 @@ qualified_keys <- c(
     stop(
       sprintf(
         "'%s' must have the same number of rows as '%s'.",
-        deparse(substitute(x)), deparse(substitute(y))
+        deparse(substitute(x, environment())), deparse(substitute(y, environment()))
       )
     )
   }
@@ -97,7 +97,7 @@ qualified_keys <- c(
 
 .check_boolean <- function(bool) {
   if (!bool %in% c(TRUE, FALSE)) {
-    stop(sprintf("'%s' must be a 'boolean' value.", deparse(substitute(bool))))
+    stop(sprintf("'%s' must be a 'boolean' value.", deparse(substitute(bool, environment()))))
   }
 }
 
@@ -106,7 +106,7 @@ qualified_keys <- c(
     !is.null(datetime)) {
     stop(sprintf(
       "'%s' must be of type 'POSIXct', 'POSIXt'.",
-      deparse(substitute(datetime))
+      deparse(substitute(datetime, environment()))
     ))
   }
 }
@@ -237,7 +237,7 @@ qualified_keys <- c(
 }
 
 .check_numeric_range <- function(num, lower, upper) {
-  var_name <- deparse(substitute(num))
+  var_name <- deparse(substitute(num, environment()))
   if (!is.numeric(num)) {
     stop(sprintf("'%s' must be of type 'numeric'.", var_name))
   }

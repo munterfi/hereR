@@ -42,7 +42,7 @@ incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE
 
   # Add bbox
   aoi <- sf::st_transform(aoi, 4326)
-  bbox <- sapply(sf::st_geometry(aoi), sf::st_bbox)
+  bbox <- vapply(sf::st_geometry(aoi), sf::st_bbox, numeric(4))
   .check_bbox(bbox)
   url <- paste0(
     url,
@@ -94,7 +94,6 @@ incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE
 }
 
 .extract_traffic_incidents <- function(data) {
-  # geoms_line <- list()
   ids <- .get_ids(data)
   count <- 0
   incidents <- data.table::rbindlist(lapply(data, function(con) {
@@ -117,7 +116,7 @@ incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE
       locationName = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$POLITICAL_BOUNDARY$COUNTY,
       lng = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LONGITUDE,
       lat = df$TRAFFIC_ITEMS$TRAFFIC_ITEM$LOCATION$GEOLOC$ORIGIN$LATITUDE,
-      description = sapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DESCRIPTION, function(x) x$value[2])
+      description = vapply(df$TRAFFIC_ITEMS$TRAFFIC_ITEM$TRAFFIC_ITEM_DESCRIPTION, function(x) x$value[2], character(1))
     )
   }), fill = TRUE)
 

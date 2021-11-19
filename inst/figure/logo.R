@@ -25,5 +25,6 @@ sticker(p,
   s_x = 1, s_y = 1, s_width = 1.9, s_height = 1.9,
   h_fill = grey, h_color = green,
   filename = outfile, white_around_sticker = FALSE,
-  url = "hereR", u_color = white, u_x = 0.95, u_y = 0.2, u_size = 8, u_angle = 30
+  url = "hereR", u_color = white,
+  u_x = 0.95, u_y = 0.2, u_size = 8, u_angle = 30
 )
