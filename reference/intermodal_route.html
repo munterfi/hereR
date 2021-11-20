@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -57,19 +57,19 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/munterfi/hereR">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fa fa-globe fa-lg"></span>
      
   </a>
@@ -84,7 +84,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>HERE Intermodal Routing API: Calculate Route</h1>
-    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/R/intermodal_route.R"><code>R/intermodal_route.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/R/intermodal_route.R" class="external-link"><code>R/intermodal_route.R</code></a></small>
     <div class="hidden name"><code>intermodal_route.Rd</code></div>
     </div>
 
@@ -95,33 +95,40 @@
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">intermodal_route</span><span class="op">(</span>
   <span class="va">origin</span>,
   <span class="va">destination</span>,
-  datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,
+  datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,
   results <span class="op">=</span> <span class="fl">3</span>,
   transfers <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,
   url_only <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>origin</th>
-      <td><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></td>
-    </tr><tr><th>destination</th>
-      <td><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></td>
-    </tr><tr><th>datetime</th>
-      <td><p><code>POSIXct</code> object, datetime for the departure (<code>default = Sys.time()</code>).</p></td>
-    </tr><tr><th>results</th>
-      <td><p>numeric, maximum number of suggested route alternatives (Valid range: 1 and 7, <code>default = 3</code>).</p></td>
-    </tr><tr><th>transfers</th>
-      <td><p>numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, <code>default = -1</code>).</p></td>
-    </tr><tr><th>url_only</th>
-      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="ref-sections">
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>origin</dt>
+<dd><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></dd>
+<dt>destination</dt>
+<dd><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></dd>
+<dt>datetime</dt>
+<dd><p><code>POSIXct</code> object, datetime for the departure (<code>default = Sys.time()</code>).</p></dd>
+<dt>results</dt>
+<dd><p>numeric, maximum number of suggested route alternatives (Valid range: 1 and 7, <code>default = 3</code>).</p></dd>
+<dt>transfers</dt>
+<dd><p>numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, <code>default = -1</code>).</p></dd>
+<dt>url_only</dt>
+<dd><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>An <code>sf</code> object containing the requested intermodal routes.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    </div>
+    <div id="references">
+    <h2>References</h2>
+    <p><a href="https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html" class="external-link">HERE Intermodal Routing API: Routes</a></p>
+    </div>
+    </div>
 
-    <p><a href="https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html">HERE Intermodal Routing API: Routes</a></p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Provide an API Key for a HERE project</span></span>
 <span class="r-in"><span class="fu"><a href="set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -132,6 +139,7 @@
 <span class="r-in">  url_only <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span class="r-in"><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

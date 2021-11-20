@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
       <h1 data-toc-skip>Geocoding &amp; Search API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/vignettes/geocoder.Rmd" class="external-link"><code>vignettes/geocoder.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/vignettes/geocoder.Rmd" class="external-link"><code>vignettes/geocoder.Rmd</code></a></small>
       <div class="hidden name"><code>geocoder.Rmd</code></div>
 
     </div>
@@ -126,9 +126,9 @@
     
     
 <p>Autosuggest and geocode addresses or reverse geocode POIs using the ‘HERE Geocoding &amp; Search’ API.</p>
-<div id="geocode-addresses" class="section level2">
-<h2 class="hasAnchor">
-<a href="#geocode-addresses" class="anchor" aria-hidden="true"></a>Geocode addresses</h2>
+<div class="section level2">
+<h2 id="geocode-addresses">Geocode addresses<a class="anchor" aria-label="anchor" href="#geocode-addresses"></a>
+</h2>
 <p>In order to geocode addresses, the function <code><a href="../reference/geocode.html">geocode()</a></code> is used. The requests are sent asynchronously, which means that every geocoded address is counting as one request. The addresses have to be of type <code>character</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">address</span>, <span class="fl">3</span><span class="op">)</span>
@@ -193,9 +193,9 @@
 <span class="op">)</span>
 <span class="va">geocoded_qq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/geocode.html">geocode</a></span><span class="op">(</span><span class="va">qq</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="autosuggestions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#autosuggestions" class="anchor" aria-hidden="true"></a>Autosuggestions</h2>
+<div class="section level2">
+<h2 id="autosuggestions">Autosuggestions<a class="anchor" aria-label="anchor" href="#autosuggestions"></a>
+</h2>
 <p>The autosuggestion endpoint of the Geocoding &amp; Search API can be accessed using the <code><a href="../reference/autosuggest.html">autosuggest()</a></code> function. The <code>results</code> parameter defines the maximum number of suggestions that should be requested for each input address.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">suggestions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="va">address</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -248,7 +248,7 @@ Luzern
 2
 </td>
 <td style="text-align:left;">
-Hauptbahnhof SBB Luzern
+Luzern-Stadt, Luzern, Schweiz
 </td>
 </tr>
 <tr>
@@ -262,7 +262,7 @@ Luzern
 3
 </td>
 <td style="text-align:left;">
-Luzern-Stadt, Luzern, Schweiz
+Luzern-Land, Luzern, Schweiz
 </td>
 </tr>
 <tr>
@@ -310,9 +310,9 @@ Lugano Airport (Aeroporto di Lugano)
 </tbody>
 </table>
 </div>
-<div id="reverse-geocode-pois" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reverse-geocode-pois" class="anchor" aria-hidden="true"></a>Reverse geocode POIs</h2>
+<div class="section level2">
+<h2 id="reverse-geocode-pois">Reverse geocode POIs<a class="anchor" aria-label="anchor" href="#reverse-geocode-pois"></a>
+</h2>
 <p>The reverse geocoding feature of the Geocoding &amp; Search API can be accessed using the <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> function. The function allows to retrieve addresses near POIs.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reverse_geocoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span>poi <span class="op">=</span> <span class="va">poi</span>, results <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -334,9 +334,9 @@ Lugano Airport (Aeroporto di Lugano)
 <span class="op">}</span></code></pre></div>
 <p>If no addresses or landmarks are found near a POI, <code>NULL</code> for this POI is returned. In this case the rows corresponding to this particular POI are missing and merging the POIs by row is not possible. However, in the returned <code>sf</code> object, the column <code>"id"</code> matches the rows of the input POIs. The <code>"id"</code> column can be used to join the original POIs.</p>
 </div>
-<div id="api-reference" class="section level2">
-<h2 class="hasAnchor">
-<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
+<div class="section level2">
+<h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
+</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html" class="external-link">Geocoding &amp; Search: Autosuggest</a></li>
 <li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html" class="external-link">Geocoding &amp; Search: Geocode</a></li>
@@ -357,12 +357,12 @@ Lugano Airport (Aeroporto di Lugano)
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

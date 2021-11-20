@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
       <h1 data-toc-skip>Destination Weather API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/vignettes/weather.Rmd" class="external-link"><code>vignettes/weather.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/vignettes/weather.Rmd" class="external-link"><code>vignettes/weather.Rmd</code></a></small>
       <div class="hidden name"><code>weather.Rmd</code></div>
 
     </div>
@@ -126,9 +126,9 @@
     
     
 <p>Weather forecasts, reports on current weather conditions, astronomical information and alerts at a specific location based on the ‘HERE Destination Weather’ API.</p>
-<div id="observations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#observations" class="anchor" aria-hidden="true"></a>Observations</h2>
+<div class="section level2">
+<h2 id="observations">Observations<a class="anchor" aria-label="anchor" href="#observations"></a>
+</h2>
 <p>In order to request information about the current weather situation points of interest (POIs) have to be provided. The POIs must be an <code>sf</code> object containing geometries of type <code>POINT</code> or a <code>character</code> vector containing place names (e.g. cities). These POIs are passed to the <code><a href="../reference/weather.html">weather()</a></code> function, whereby the <code>product</code> parameter is set to <code>"observation"</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">observation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
@@ -169,16 +169,16 @@ Rönnimoos
 450
 </td>
 <td style="text-align:left;">
-Partly sunny. Mild.
+Passing clouds. Chilly.
 </td>
 <td style="text-align:right;">
-19.00
+4.00
 </td>
 <td style="text-align:right;">
-88
+93
 </td>
 <td style="text-align:right;">
-0.00
+3.71
 </td>
 <td style="text-align:right;">
 0
@@ -192,13 +192,13 @@ Lugano
 670
 </td>
 <td style="text-align:left;">
-Thunderstorms. Low clouds. Mild.
+Clear. Cool.
 </td>
 <td style="text-align:right;">
-17.61
+10.00
 </td>
 <td style="text-align:right;">
-98
+88
 </td>
 <td style="text-align:right;">
 1.85
@@ -215,19 +215,19 @@ Chailly
 340
 </td>
 <td style="text-align:left;">
-Mild.
+Quite cool.
 </td>
 <td style="text-align:right;">
-19.39
+6.78
 </td>
 <td style="text-align:right;">
-66
+86
 </td>
 <td style="text-align:right;">
-5.56
+1.85
 </td>
 <td style="text-align:right;">
-220
+120
 </td>
 </tr>
 <tr>
@@ -238,19 +238,19 @@ Kleinhüningen
 430
 </td>
 <td style="text-align:left;">
-Partly sunny. Mild.
+Low clouds. Chilly.
 </td>
 <td style="text-align:right;">
-22.00
+3.50
 </td>
 <td style="text-align:right;">
-65
+97
 </td>
 <td style="text-align:right;">
 9.27
 </td>
 <td style="text-align:right;">
-300
+350
 </td>
 </tr>
 <tr>
@@ -261,42 +261,42 @@ Kehrsatz
 620
 </td>
 <td style="text-align:left;">
-Sunny. Mild.
+Fog. Chilly.
 </td>
 <td style="text-align:right;">
-21.00
+3.00
 </td>
 <td style="text-align:right;">
-69
+93
 </td>
 <td style="text-align:right;">
-5.56
+7.41
 </td>
 <td style="text-align:right;">
-0
+320
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Zürich (Kreis 6) / Oberstrass
+Zürich (Kreis 7) / Fluntern
 </td>
 <td style="text-align:right;">
-820
+850
 </td>
 <td style="text-align:left;">
-Partly sunny. Mild.
+Fog. Chilly.
 </td>
 <td style="text-align:right;">
-20.00
+3.00
 </td>
 <td style="text-align:right;">
-69
+100
 </td>
 <td style="text-align:right;">
 3.71
 </td>
 <td style="text-align:right;">
-80
+0
 </td>
 </tr>
 <tr>
@@ -307,19 +307,19 @@ Geneva
 490
 </td>
 <td style="text-align:left;">
-Partly sunny. Mild.
+Clear. Quite cool.
 </td>
 <td style="text-align:right;">
-20.78
+6.00
 </td>
 <td style="text-align:right;">
-56
+87
 </td>
 <td style="text-align:right;">
-11.12
+3.71
 </td>
 <td style="text-align:right;">
-230
+20
 </td>
 </tr>
 <tr>
@@ -330,19 +330,19 @@ Vaduz
 940
 </td>
 <td style="text-align:left;">
-Overcast. Mild.
+Quite cool.
 </td>
 <td style="text-align:right;">
-18.61
+4.89
 </td>
 <td style="text-align:right;">
-84
+88
 </td>
 <td style="text-align:right;">
-0.00
+1.85
 </td>
 <td style="text-align:right;">
-190
+10
 </td>
 </tr>
 </tbody>
@@ -368,9 +368,9 @@ Overcast. Mild.
   <span class="va">m</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="forecast" class="section level2">
-<h2 class="hasAnchor">
-<a href="#forecast" class="anchor" aria-hidden="true"></a>Forecast</h2>
+<div class="section level2">
+<h2 id="forecast">Forecast<a class="anchor" aria-label="anchor" href="#forecast"></a>
+</h2>
 <p>An hourly forecast of the predicted weather for the following seven days can be obtained by setting the <code>product</code> parameter to <code>"forecast_hourly"</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
@@ -427,9 +427,9 @@ Overcast. Mild.
   <span class="va">m</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="astronomy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#astronomy" class="anchor" aria-hidden="true"></a>Astronomy</h2>
+<div class="section level2">
+<h2 id="astronomy">Astronomy<a class="anchor" aria-label="anchor" href="#astronomy"></a>
+</h2>
 <p>An astronomical forecast is requested by setting the <code>product</code> parameter to <code>"forecast_astronomy"</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">astronomy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
@@ -461,19 +461,59 @@ phase
 <tbody>
 <tr>
 <td style="text-align:left;">
-2021-09-26
+2021-11-19
 </td>
 <td style="text-align:left;">
-7:18AM
+7:35AM
 </td>
 <td style="text-align:left;">
-7:17PM
+4:48PM
 </td>
 <td style="text-align:left;">
-9:50PM
+4:53PM
 </td>
 <td style="text-align:left;">
-12:56PM
+7:33AM
+</td>
+<td style="text-align:left;">
+Full moon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-20
+</td>
+<td style="text-align:left;">
+7:37AM
+</td>
+<td style="text-align:left;">
+4:47PM
+</td>
+<td style="text-align:left;">
+5:22PM
+</td>
+<td style="text-align:left;">
+8:39AM
+</td>
+<td style="text-align:left;">
+Full moon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-21
+</td>
+<td style="text-align:left;">
+7:38AM
+</td>
+<td style="text-align:left;">
+4:46PM
+</td>
+<td style="text-align:left;">
+5:58PM
+</td>
+<td style="text-align:left;">
+9:42AM
 </td>
 <td style="text-align:left;">
 Waning gibbous
@@ -481,39 +521,19 @@ Waning gibbous
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-09-27
+2021-11-22
 </td>
 <td style="text-align:left;">
-7:19AM
+7:39AM
 </td>
 <td style="text-align:left;">
-7:15PM
+4:45PM
 </td>
 <td style="text-align:left;">
-10:24PM
+6:43PM
 </td>
 <td style="text-align:left;">
-1:59PM
-</td>
-<td style="text-align:left;">
-Waning gibbous
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2021-09-28
-</td>
-<td style="text-align:left;">
-7:21AM
-</td>
-<td style="text-align:left;">
-7:13PM
-</td>
-<td style="text-align:left;">
-11:07PM
-</td>
-<td style="text-align:left;">
-2:59PM
+10:40AM
 </td>
 <td style="text-align:left;">
 Waning gibbous
@@ -521,110 +541,90 @@ Waning gibbous
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-09-29
+2021-11-23
 </td>
 <td style="text-align:left;">
-7:22AM
+7:41AM
 </td>
 <td style="text-align:left;">
-7:11PM
+4:44PM
 </td>
 <td style="text-align:left;">
-11:59PM
+7:36PM
 </td>
 <td style="text-align:left;">
-3:53PM
+11:32AM
 </td>
 <td style="text-align:left;">
-Last Quarter
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2021-09-30
-</td>
-<td style="text-align:left;">
-7:23AM
-</td>
-<td style="text-align:left;">
-7:09PM
-</td>
-<td style="text-align:left;">
-<ul><li></ul>
-</td>
-<td style="text-align:left;">
-4:38PM
-</td>
-<td style="text-align:left;">
-Last Quarter
+Waning gibbous
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-10-01
+2021-11-24
 </td>
 <td style="text-align:left;">
-7:25AM
+7:42AM
 </td>
 <td style="text-align:left;">
-7:07PM
+4:44PM
 </td>
 <td style="text-align:left;">
-12:59AM
+8:37PM
 </td>
 <td style="text-align:left;">
-5:16PM
+12:14PM
 </td>
 <td style="text-align:left;">
-Waning crescent
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2021-10-02
-</td>
-<td style="text-align:left;">
-7:26AM
-</td>
-<td style="text-align:left;">
-7:05PM
-</td>
-<td style="text-align:left;">
-2:07AM
-</td>
-<td style="text-align:left;">
-5:48PM
-</td>
-<td style="text-align:left;">
-Waning crescent
+Waning gibbous
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-10-03
+2021-11-25
 </td>
 <td style="text-align:left;">
-7:27AM
+7:43AM
 </td>
 <td style="text-align:left;">
-7:03PM
+4:43PM
 </td>
 <td style="text-align:left;">
-3:20AM
+9:44PM
 </td>
 <td style="text-align:left;">
-6:13PM
+12:49PM
 </td>
 <td style="text-align:left;">
-Waning crescent
+Waning gibbous
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-26
+</td>
+<td style="text-align:left;">
+7:45AM
+</td>
+<td style="text-align:left;">
+4:42PM
+</td>
+<td style="text-align:left;">
+10:53PM
+</td>
+<td style="text-align:left;">
+1:17PM
+</td>
+<td style="text-align:left;">
+Waning gibbous
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="alerts" class="section level2">
-<h2 class="hasAnchor">
-<a href="#alerts" class="anchor" aria-hidden="true"></a>Alerts</h2>
+<div class="section level2">
+<h2 id="alerts">Alerts<a class="anchor" aria-label="anchor" href="#alerts"></a>
+</h2>
 <p>Current weather alerts, near provided POIs, are obtain by the product <code>alerts</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">alerts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
@@ -633,9 +633,9 @@ Waning crescent
 <span class="op">)</span></code></pre></div>
 <p>This returns an <code>sf</code> object with the POIs and the attribute <code>"alerts"</code>, which is a <code>data.table</code>, which contains the current weather alerts. If no alerts are recorded near a POI the attribute <code>"alerts"</code> is <code>NULL</code>.</p>
 </div>
-<div id="api-reference" class="section level2">
-<h2 class="hasAnchor">
-<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
+<div class="section level2">
+<h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
+</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/destination-weather/dev_guide/topics/overview.html" class="external-link">Destination Weather API</a></li>
 </ul>
@@ -654,12 +654,12 @@ Waning crescent
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

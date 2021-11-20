@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
       <h1 data-toc-skip>Traffic API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/vignettes/traffic.Rmd" class="external-link"><code>vignettes/traffic.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/vignettes/traffic.Rmd" class="external-link"><code>vignettes/traffic.Rmd</code></a></small>
       <div class="hidden name"><code>traffic.Rmd</code></div>
 
     </div>
@@ -126,9 +126,9 @@
     
     
 <p>Real-time traffic flow and incident information based on the ‘HERE Traffic’ API. The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information. Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
-<div id="flow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#flow" class="anchor" aria-hidden="true"></a>Flow</h2>
+<div class="section level2">
+<h2 id="flow">Flow<a class="anchor" aria-label="anchor" href="#flow"></a>
+</h2>
 <p>In order to request the traffic flow, areas of interest (AOIs) have to be provided. The AOIs must be an <code>sf</code> object containing a polygon or multiple polygons. The response from the HERE Traffic API will be spatially joined on the AOIs and thereby the traffic flows are mapped to the corresponding polygon.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">flows</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flow.html">flow</a></span><span class="op">(</span>
@@ -149,9 +149,9 @@
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="incidents" class="section level2">
-<h2 class="hasAnchor">
-<a href="#incidents" class="anchor" aria-hidden="true"></a>Incidents</h2>
+<div class="section level2">
+<h2 id="incidents">Incidents<a class="anchor" aria-label="anchor" href="#incidents"></a>
+</h2>
 <p>AOIs also must be provided in order to request information about traffic incidents in specific regions. The time interval, which defines the traffic incidents that should be considered, can be specitified by the <code>from</code> parameter. The datetime information passed to the function must be a timestamp of type <code>POSIXct</code>. By default, the time interval is defined as the last week.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">incidents</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/incident.html">incident</a></span><span class="op">(</span>
@@ -169,9 +169,9 @@
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="api-reference" class="section level2">
-<h2 class="hasAnchor">
-<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
+<div class="section level2">
+<h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
+</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics_v6.1/resource-parameters-flow.html" class="external-link">Flow</a></li>
 <li><a href="https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html" class="external-link">Incidents</a></li>
@@ -191,12 +191,12 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

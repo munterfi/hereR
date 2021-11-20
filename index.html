@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -93,19 +93,19 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/munterfi/hereR">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fa fa-globe fa-lg"></span>
      
   </a>
@@ -122,27 +122,26 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="herer-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#herer-" class="anchor" aria-hidden="true"></a>hereR <img src="reference/figures/logo.svg" align="right" alt="" width="120">
+<div class="section level1">
+<div class="page-header"><h1 id="herer-">hereR <img src="reference/figures/logo.svg" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#herer-"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p>The <strong>hereR</strong> package provides an interface to the <strong>HERE REST APIs</strong> for R: (1) geocode and autosuggest addresses or reverse geocode POIs using the <strong>Geocoder API</strong>; (2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>, <strong>Matrix Routing API</strong> and <strong>Isoline Routing API</strong>; (3) request real-time traffic flow and incident information from the <strong>Traffic API</strong>; (4) find public transport connections and nearby stations using the <strong>Public Transit API</strong>; (5) request intermodal routes using the <strong>Intermodal Routing API</strong>; (6) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
 <p>Locations, routes and isolines are returned as <code>sf</code> objects.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install the released version of <strong>hereR</strong> from <a href="https://CRAN.R-project.org/package=hereR/" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"hereR"</span><span class="op">)</span></code></pre></div>
 <p>Install the development version from <a href="https://github.com/munterfi/hereR/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"munterfi/hereR@develop"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"munterfi/hereR"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor" aria-hidden="true"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A login can be created on <a href="https://developer.here.com/" class="external-link">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
 <p>To set the API key, use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -163,7 +162,7 @@
 
 <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"bicycle"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">4</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"bicycle"</span><span class="op">)</span></code></pre></div>
 <p><strong>Matrix Routing API:</strong> Request a matrix of route summaries.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span><span class="va">poi</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -178,7 +177,7 @@
 
 <span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"distance"</span>, transport_mode <span class="op">=</span> <span class="st">"truck"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"consumption"</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"consumption"</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><strong>Traffic API:</strong> Get real-time traffic flow or incidents in a specific area.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/flow.html">flow</a></span><span class="op">(</span><span class="va">aoi</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span>
@@ -202,18 +201,17 @@
 
 <span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"alerts"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="contributing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h2>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
 <ul>
-<li>Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them.</li>
-<li>Please see the <a href="https://github.com/munterfi/hereR/blob/master/.github/CONTRIBUTING.md" class="external-link">Contribution Guidelines</a> and direct pull requests to the <code>develop</code> branch.</li>
+<li>Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them. Please see the <a href="https://github.com/munterfi/hereR/blob/master/.github/CONTRIBUTING.md" class="external-link">Contribution Guidelines</a>.</li>
 <li>This project is released with a <a href="https://github.com/munterfi/hereR/blob/master/.github/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</li>
 </ul>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <ul>
 <li><a href="https://developer.here.com/terms-and-conditions" class="external-link">Developer Terms and Conditions</a></li>
 <li><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html" class="external-link">Geocoding &amp; Search API</a></li>
@@ -233,12 +231,9 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=hereR">https://​cloud.r-project.org/​package=hereR</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/munterfi/hereR/">https://​github.com/​munterfi/​hereR/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/munterfi/hereR/issues/">https://​github.com/​munterfi/​hereR/​issues/​</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=hereR" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/munterfi/hereR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/munterfi/hereR/issues/" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -246,7 +241,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></small></li>
 </ul>
 </div>
 
@@ -262,8 +257,8 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://www.munterfinger.ch">Merlin Unterfinger</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2020-2366" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More on authors...</a></li>
+<a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2020-2366" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -274,7 +269,7 @@
 <li><a href="https://cran.r-project.org/web/checks/check_results_hereR.html" class="external-link"><img src="https://cranchecks.info/badges/worst/hereR" alt="CRAN checks"></a></li>
 <li><a href="https://CRAN.R-project.org/package=hereR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/hereR?color=brightgreen" alt="CRAN downloads"></a></li>
 <li><a href="https://github.com/munterfi/hereR/actions" class="external-link"><img src="https://github.com/munterfi/hereR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/munterfi/hereR?branch=master" class="external-link"><img src="https://codecov.io/gh/munterfi/hereR/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://app.codecov.io/gh/munterfi/hereR?branch=master" class="external-link"><img src="https://codecov.io/gh/munterfi/hereR/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://www.codefactor.io/repository/github/munterfi/hereR" class="external-link"><img src="https://www.codefactor.io/repository/github/munterfi/hereR/badge" alt="CodeFactor"></a></li>
 </ul>
 </div>

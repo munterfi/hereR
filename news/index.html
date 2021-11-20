@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -57,19 +57,19 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/munterfi/hereR">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fa fa-globe fa-lg"></span>
      
   </a>
@@ -84,32 +84,38 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/munterfi/hereR/blob/master/NEWS.md"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-081" class="section level1">
-<h1 class="page-header" data-toc-text="0.8.1">
-<a href="#version-081" class="anchor" aria-hidden="true"></a>version 0.8.1<small> 2021-10-04 </small></h1>
-<ul><li>Adjust URLs to GitHub account due to renaming munterfinger to <a href="https://github.com/munterfi">@munterfi</a>.</li>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.2" id="version-082">version 0.8.2<small>2021-11-19</small><a class="anchor" aria-label="anchor" href="#version-082"></a></h2>
+<ul><li>Setting the arrival time is now supported by the Routing API, therefore <code>route(..., arrival = TRUE)</code> works.</li>
+<li>Since <code>sapply</code> is not type safe, replace its use with <code>vapply(..., FUN.VALUE = type)</code>.</li>
+<li>Add endpoint URL (without parameters) of failing requests to the warning message and print error message of the response.</li>
+<li>RPS limit for weather and traffic endpoints.</li>
+<li>Changed workflow from git flow to trunc-based development. Removed develop branch. New features are merged directly into <code>master</code> and releases are tagged after CRAN has accepted the package submission, which triggers the documentation build.</li>
+<li>Bugfix: Fix time / traffic independent requests in <code>isoline(..., traffic=FALSE)</code> (closes <a href="https://github.com/munterfi/hereR/issues/147" class="external-link">#147</a>).</li>
+<li>Bugfix: Explicitly cast linestring in function <code>.connection_summary</code> to avoid error in <code>CPL_geos_union</code> (<a href="https://github.com/panhypersebastos" class="external-link">@panhypersebastos</a>).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.1" id="version-081">version 0.8.1<small>2021-10-04</small><a class="anchor" aria-label="anchor" href="#version-081"></a></h2>
+<ul><li>Adjust URLs to GitHub account due to renaming munterfinger to <a href="https://github.com/munterfi" class="external-link">@munterfi</a>.</li>
 <li>Bugfix: Add <code>set_freemium</code> topic to index in pkgdown.</li>
 </ul></div>
-    <div id="version-080" class="section level1">
-<h1 class="page-header" data-toc-text="0.8.0">
-<a href="#version-080" class="anchor" aria-hidden="true"></a>version 0.8.0<small> 2021-09-28 </small></h1>
-<ul><li>Rename the rate-limit-related variable <code>HERE_RPS</code> to <code>HERE_FREEMIUM</code>, and the function <code><a href="../reference/hereR-deprecated.html">hereR::set_rate_limit()</a></code> to <code><a href="../reference/set_freemium.html">hereR::set_freemium()</a></code>. Use the <code>HERE_FREEMIUM</code> environment variable to determine a plan-specific size of sub-matrices in the <code><a href="../reference/route_matrix.html">hereR::route_matrix()</a></code> function (<a href="https://github.com/szaboildi">@szaboildi</a>, <a href="https://github.com/munterfi/hereR/pull/138" class="external-link">#138</a>).</li>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.0" id="version-080">version 0.8.0<small>2021-09-28</small><a class="anchor" aria-label="anchor" href="#version-080"></a></h2>
+<ul><li>Rename the rate-limit-related variable <code>HERE_RPS</code> to <code>HERE_FREEMIUM</code>, and the function <code><a href="../reference/hereR-deprecated.html">hereR::set_rate_limit()</a></code> to <code><a href="../reference/set_freemium.html">hereR::set_freemium()</a></code>. Use the <code>HERE_FREEMIUM</code> environment variable to determine a plan-specific size of sub-matrices in the <code><a href="../reference/route_matrix.html">hereR::route_matrix()</a></code> function (<a href="https://github.com/szaboildi" class="external-link">@szaboildi</a>, <a href="https://github.com/munterfi/hereR/pull/138" class="external-link">#138</a>).</li>
 <li>Deprecate <code><a href="../reference/hereR-deprecated.html">hereR::set_rate_limit()</a></code> (closes <a href="https://github.com/munterfi/hereR/issues/137" class="external-link">#137</a>).</li>
 <li>Add option to use qualified queries in <code><a href="../reference/geocode.html">geocode()</a></code> (closes <a href="https://github.com/munterfi/hereR/issues/136" class="external-link">#136</a>).</li>
 </ul></div>
-    <div id="version-071" class="section level1">
-<h1 class="page-header" data-toc-text="0.7.1">
-<a href="#version-071" class="anchor" aria-hidden="true"></a>version 0.7.1<small> 2021-07-21 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.1" id="version-071">version 0.7.1<small>2021-07-21</small><a class="anchor" aria-label="anchor" href="#version-071"></a></h2>
 <ul><li>Add parameter to allow filtering transport modes in <code><a href="../reference/connection.html">connection()</a></code> (closes <a href="https://github.com/munterfi/hereR/issues/130" class="external-link">#130</a>).</li>
 <li>Bugfix: Swapped the origin and destination IDs in <code><a href="../reference/route_matrix.html">route_matrix()</a></code>. Removed query optimization because switching the IDs results in reversed route information (closes <a href="https://github.com/munterfi/hereR/issues/129" class="external-link">#129</a>).</li>
 <li>Update outdated URLs in package documentation.</li>
 </ul></div>
-    <div id="version-070" class="section level1">
-<h1 class="page-header" data-toc-text="0.7.0">
-<a href="#version-070" class="anchor" aria-hidden="true"></a>version 0.7.0<small> 2021-04-16 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.0" id="version-070">version 0.7.0<small>2021-04-16</small><a class="anchor" aria-label="anchor" href="#version-070"></a></h2>
 <ul><li>Enable <code>optimize</code> parameter to chose from “balanced”, “quality” and “performance” in <code><a href="../reference/isoline.html">isoline()</a></code> (closes <a href="https://github.com/munterfi/hereR/issues/119" class="external-link">#119</a>).</li>
 <li>Remove deprecated parameters in <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/route_matrix.html">route_matrix()</a></code> and <code><a href="../reference/isoline.html">isoline()</a></code>.</li>
 <li>Add specific user-agent to the requests: <code>hereR/&lt;version&gt; R/&lt;version&gt; (&lt;platform&gt;)</code>.</li>
@@ -118,9 +124,8 @@
 <li>Bugfix: <code><a href="../reference/isoline.html">isoline()</a></code> now handles multipart polygons (MULTIPOLYGON) if received by the API (closes <a href="https://github.com/munterfi/hereR/issues/121" class="external-link">#121</a>).</li>
 <li>Add area and feature avoidance in <code><a href="../reference/route.html">route()</a></code> (closes <a href="https://github.com/munterfi/hereR/issues/117" class="external-link">#117</a>).</li>
 </ul></div>
-    <div id="version-061" class="section level1">
-<h1 class="page-header" data-toc-text="0.6.1">
-<a href="#version-061" class="anchor" aria-hidden="true"></a>version 0.6.1<small> 2021-02-01 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.6.1" id="version-061">version 0.6.1<small>2021-02-01</small><a class="anchor" aria-label="anchor" href="#version-061"></a></h2>
 <ul><li>Use <strong>styler</strong> package and use <code>tyler::tidyverse_style()</code>to format the package.</li>
 <li>All <strong>lintr</strong> issues are solved, except from line length issues (limit of 80 characters).</li>
 <li>Avoid drop of the <code>sfc</code> class of the geometry column when there is only one geometry/row in a <code>data.table</code> (closes <a href="https://github.com/munterfi/hereR/issues/111" class="external-link">#111</a>).</li>
@@ -128,9 +133,8 @@
 <li>Silence <strong>sf</strong> messages of <code><a href="https://r-spatial.github.io/sf/reference/geos_combine.html" class="external-link">sf::st_union</a></code> call in <code>connection(..., summary = TRUE)</code>.</li>
 <li>Added section id to <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> and <code><a href="../reference/connection.html">connection()</a></code>.</li>
 </ul></div>
-    <div id="version-060" class="section level1">
-<h1 class="page-header" data-toc-text="0.6.0">
-<a href="#version-060" class="anchor" aria-hidden="true"></a>version 0.6.0<small> 2021-01-04 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.6.0" id="version-060">version 0.6.0<small>2021-01-04</small><a class="anchor" aria-label="anchor" href="#version-060"></a></h2>
 <ul><li>Update <code><a href="../reference/route_matrix.html">route_matrix()</a></code> from <strong>Routing API v7.2</strong> (calculatematrix) to <strong>Matrix Routing API v8</strong> (see <a href="https://github.com/munterfi/hereR/issues/87" class="external-link">#87</a>).</li>
 <li>Update <code><a href="../reference/isoline.html">isoline()</a></code> from <strong>Routing API v7.2</strong> (calculateisoline) to <strong>Isoline Routing API v8</strong> (see <a href="https://github.com/munterfi/hereR/issues/87" class="external-link">#87</a>).</li>
 <li>Update <code><a href="../reference/route.html">route()</a></code> from <strong>Routing API v7.2</strong> (calculateroute) to <strong>Routing API v8</strong>, which brings the elevation to the route geometries (closes <a href="https://github.com/munterfi/hereR/issues/87" class="external-link">#87</a>). <strong>Note:</strong> Currently arrival time is not yet supported.</li>
@@ -141,20 +145,17 @@
 <li>Fix issue with delimiter for POST requests by changing it from a space <code>" "</code> to a space pipe combination <code>" | "</code> (closes <a href="https://github.com/munterfi/hereR/issues/102" class="external-link">#102</a>).</li>
 <li>Added contribution guidelines, code of conduct and issue templates.</li>
 </ul></div>
-    <div id="version-052" class="section level1">
-<h1 class="page-header" data-toc-text="0.5.2">
-<a href="#version-052" class="anchor" aria-hidden="true"></a>version 0.5.2<small> 2020-11-26 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.5.2" id="version-052">version 0.5.2<small>2020-11-26</small><a class="anchor" aria-label="anchor" href="#version-052"></a></h2>
 <ul><li>Send timezone offset in requests to the HERE APIs to avoid conversion to local timezone (closes <a href="https://github.com/munterfi/hereR/issues/85" class="external-link">#85</a>).</li>
 <li>Added option to return alternative results in <code><a href="../reference/geocode.html">geocode()</a></code>. The alternative locations are ranked according to the order from the Geocoder API (closes <a href="https://github.com/munterfi/hereR/issues/83" class="external-link">#83</a> and <a href="https://github.com/munterfi/hereR/issues/81" class="external-link">#81</a>).</li>
 </ul></div>
-    <div id="version-051" class="section level1">
-<h1 class="page-header" data-toc-text="0.5.1">
-<a href="#version-051" class="anchor" aria-hidden="true"></a>version 0.5.1<small> 2020-10-20 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.5.1" id="version-051">version 0.5.1<small>2020-10-20</small><a class="anchor" aria-label="anchor" href="#version-051"></a></h2>
 <ul><li>Fix of the request generation for the Geocoder API: Removal of the <code>&amp;</code> in front of the <code>apiKey</code> argument (closes <a href="https://github.com/munterfi/hereR/issues/73" class="external-link">#73</a> and <a href="https://github.com/munterfi/hereR/issues/74" class="external-link">#74</a>).</li>
 </ul></div>
-    <div id="version-050" class="section level1">
-<h1 class="page-header" data-toc-text="0.5.0">
-<a href="#version-050" class="anchor" aria-hidden="true"></a>version 0.5.0<small> 2020-09-18 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.5.0" id="version-050">version 0.5.0<small>2020-09-18</small><a class="anchor" aria-label="anchor" href="#version-050"></a></h2>
 <ul><li>Upgrade Geocoder API version used in <code><a href="../reference/geocode.html">geocode()</a></code> from v6.2 to v7 (closes <a href="https://github.com/munterfi/hereR/issues/52" class="external-link">#52</a>). <strong>Note:</strong> The argument <code>autocomplete</code> is defunct and the argument <code>addresses</code> is deprecated, use <code>address</code> instead.</li>
 <li>Change default geometry in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> to position coordinates (display position) and return access coordinates (navigation position) as additional column in well-known text format (closes <a href="https://github.com/munterfi/hereR/issues/53" class="external-link">#53</a>).</li>
 <li>Consistent columns in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> and <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> independent of the input address level (closes <a href="https://github.com/munterfi/hereR/issues/58" class="external-link">#58</a>).</li>
@@ -164,51 +165,45 @@
 <li>Sign in to CodeFactor.io and add badge to track code quality.</li>
 <li>Defunct <code><a href="../reference/hereR-defunct.html">set_proxy()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_proxy()</a></code>. Use a global proxy configuration for R in <code>~/.Renviron</code> instead.</li>
 </ul></div>
-    <div id="version-041" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.1">
-<a href="#version-041" class="anchor" aria-hidden="true"></a>version 0.4.1<small> 2020-08-24 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.4.1" id="version-041">version 0.4.1<small>2020-08-24</small><a class="anchor" aria-label="anchor" href="#version-041"></a></h2>
 <ul><li>Change example and API mock data for <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> from Berlin to Switzerland, as the service is now also available there.</li>
 <li>Force <strong>mapview</strong> to use ‘classical’ leaflet/htmlwidgets rendering (which embeds data directly in the html) and not the file format ‘flatgeobuf’ in vignette building (see <a href="https://github.com/munterfi/hereR/issues/54" class="external-link">#54</a>).</li>
 <li>Temporarily deactivate all maps in the vignettes to solve the issues on CRAN (closes <a href="https://github.com/munterfi/hereR/issues/54" class="external-link">#54</a>). With the next release of <strong>mapview</strong> &gt;= v2.9.1 on CRAN the maps will be reactivated.</li>
 </ul></div>
-    <div id="version-040" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.0">
-<a href="#version-040" class="anchor" aria-hidden="true"></a>version 0.4.0<small> 2020-07-05 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.4.0" id="version-040">version 0.4.0<small>2020-07-05</small><a class="anchor" aria-label="anchor" href="#version-040"></a></h2>
 <ul><li>Changed CI from Travis to GitHub actions.</li>
 <li>Added automated pkgdown page build after pull requests and commits on master.</li>
 <li>Extended test coverage on defunct function calls.</li>
-<li>Added <code>sf</code> argument to <code><a href="../reference/geocode.html">geocode()</a></code> function. If <code>TRUE</code>, the default, an {sf} object is returned, if <code>FALSE</code> a data.frame with <code>lng</code> and <code>lat</code> columns. (<a href="https://github.com/dpprdan">@dpprdan</a>, <a href="https://github.com/munterfi/hereR/pull/44" class="external-link">#44</a>)</li>
+<li>Added <code>sf</code> argument to <code><a href="../reference/geocode.html">geocode()</a></code> function. If <code>TRUE</code>, the default, an {sf} object is returned, if <code>FALSE</code> a data.frame with <code>lng</code> and <code>lat</code> columns. (<a href="https://github.com/dpprdan" class="external-link">@dpprdan</a>, <a href="https://github.com/munterfi/hereR/pull/44" class="external-link">#44</a>)</li>
 <li>
 <strong>Intermodal Routing API: Routes</strong> The new feature <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> adds support for requesting intermodal routes between given pairs of locations.</li>
 </ul></div>
-    <div id="version-033" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.3">
-<a href="#version-033" class="anchor" aria-hidden="true"></a>version 0.3.3<small> 2020-04-18 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.3" id="version-033">version 0.3.3<small>2020-04-18</small><a class="anchor" aria-label="anchor" href="#version-033"></a></h2>
 <ul><li>Added <code><a href="../reference/set_verbose.html">set_verbose()</a></code> function to define (for the current R session) if the <strong>hereR</strong> package should message information about the number of requests sent and data received (default = <code>FALSE</code>).</li>
 <li>Reactivate maps with multiple layers since the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271" class="external-link">#271</a> is fixed.</li>
 <li>
 <strong>lwgeom</strong> no longer exports <code>st_make_valid()</code>, but <strong>sf</strong> does. Therefore <code>lwgeom</code> is moved from the package dependencies to the suggestions (see <a href="https://github.com/munterfi/hereR/issues/38" class="external-link">#38</a>).</li>
 </ul></div>
-    <div id="version-032" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.2">
-<a href="#version-032" class="anchor" aria-hidden="true"></a>version 0.3.2<small> 2020-03-29 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.2" id="version-032">version 0.3.2<small>2020-03-29</small><a class="anchor" aria-label="anchor" href="#version-032"></a></h2>
 <ul><li>Defunct the deprecated <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function, which has been replaced by the functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code>.</li>
 <li>Recreated package test data, api mocks and examples with <strong>sf</strong> 0.9-0 (see <a href="https://github.com/munterfi/hereR/issues/36" class="external-link">#36</a>).</li>
 <li>Increased the dependency on the <strong>sf</strong> package to version 0.9-0 due to a different CRS handling (for more information about the changes in <strong>sf</strong>, see <a href="https://r-spatial.org/r/2020/03/17/wkt.html" class="external-link">here</a>). <strong>Note: Older versions of the sf package are no longer supported.</strong>
 </li>
 <li>Temporarily deactivated maps with multiple layers until the <strong>mapview</strong> issue <a href="https://github.com/r-spatial/mapview/issues/271" class="external-link">#271</a> is fixed.</li>
 </ul></div>
-    <div id="version-031" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.1">
-<a href="#version-031" class="anchor" aria-hidden="true"></a>version 0.3.1<small> 2020-01-29 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.1" id="version-031">version 0.3.1<small>2020-01-29</small><a class="anchor" aria-label="anchor" href="#version-031"></a></h2>
 <ul><li>There are no more missing M:N route combinations in the the edge list returned by <code><a href="../reference/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfi/hereR/issues/30" class="external-link">#30</a>).</li>
 <li>All lengths of <code>origin</code> and <code>destination</code> are now accepted as input in <code><a href="../reference/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfi/hereR/issues/31" class="external-link">#31</a>).</li>
 <li>Added two new functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code> to access traffic flow and incidents from the Traffic API. Deprecated the <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function.</li>
 <li>Reduced the dependent version of R from 3.5.0 to 3.3.0 as the package is still functional but runs on more systems.</li>
 </ul></div>
-    <div id="version-030" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.0">
-<a href="#version-030" class="anchor" aria-hidden="true"></a>version 0.3.0<small> 2020-01-07 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.0" id="version-030">version 0.3.0<small>2020-01-07</small><a class="anchor" aria-label="anchor" href="#version-030"></a></h2>
 <ul><li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code><a href="../reference/hereR-defunct.html">set_auth()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_auth()</a></code> are defunct and replaced by <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfi/hereR/issues/23" class="external-link">#23</a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
 <li>Added a minimum jam factor filter to <code>traffic(..., product = "flow")</code>. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than <code>min_jam_factor</code>, which speeds up requests.</li>
 <li>
@@ -221,9 +216,8 @@
 <li>Added <code>departure</code> and <code>arrival</code> datetime column to the return value of <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/route_matrix.html">route_matrix()</a></code> and <code><a href="../reference/isoline.html">isoline()</a></code>.</li>
 <li>Removed <code>data.table</code> object type from function return values. New: Pure <code>data.frame</code> or <code>sf, data.frame</code> because this integrates better with other packages (e.g. the <code>overline2()</code> function from the <code>stplanr</code> package).</li>
 </ul></div>
-    <div id="version-021" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.1">
-<a href="#version-021" class="anchor" aria-hidden="true"></a>version 0.2.1<small> 2019-12-16 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.1" id="version-021">version 0.2.1<small>2019-12-16</small><a class="anchor" aria-label="anchor" href="#version-021"></a></h2>
 <ul><li>Enhanced <code><a href="../reference/hereR-defunct.html">traffic()</a></code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
 <li>Improved coverage of <code>testthat</code>.</li>
 <li>Added an <code>id</code> column to the output of <code><a href="../reference/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>id</code> column the addresses to geocode can be joined to the coordinates after geocoding (see <a href="https://github.com/munterfi/hereR/issues/9" class="external-link">#9</a>).</li>
@@ -233,18 +227,16 @@
 <li>Renamed the <code>city</code> column in the returned object of <code><a href="../reference/weather.html">weather()</a></code> to <code>station</code>, as it stands for the name of the nearest meteorological station.</li>
 <li>Test for empty geometries in the input POIs and AOIs and throw an error if some are found (see <a href="https://github.com/munterfi/hereR/issues/16" class="external-link">#16</a>).</li>
 </ul></div>
-    <div id="version-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#version-020" class="anchor" aria-hidden="true"></a>version 0.2.0<small> 2019-11-13 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.0" id="version-020">version 0.2.0<small>2019-11-13</small><a class="anchor" aria-label="anchor" href="#version-020"></a></h2>
 <ul><li>Enhanced <code><a href="../reference/geocode.html">geocode()</a></code>: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting <code>autocomplete = TRUE</code>.</li>
 <li>
 <strong>Geocoder API: Autocomplete</strong> The new feature <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code> allows autocompleting addresses.</li>
 <li>
 <strong>Geocoder API: Reverse geocode</strong> The new feature <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> implements reverse geocoding POIs in order to retrieve suggestions for addresses or landmarks.</li>
 </ul></div>
-    <div id="version-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#version-010" class="anchor" aria-hidden="true"></a>version 0.1.0<small> 2019-11-05 </small></h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.1.0" id="version-010">version 0.1.0<small>2019-11-05</small><a class="anchor" aria-label="anchor" href="#version-010"></a></h2>
 <p>First release of the <strong>hereR</strong> package, an <strong>sf</strong>-based interface to the <strong>HERE REST APIs</strong>. The packages binds to the following HERE APIs:</p>
 <ul><li>
 <strong>Geocoder API:</strong> Get coordinates (lng, lat) from addresses.</li>

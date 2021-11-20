@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -57,19 +57,19 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/munterfi/hereR">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fa fa-globe fa-lg"></span>
      
   </a>
@@ -89,13 +89,12 @@
 <div id="how-to-contribute" class="section level1">
 
 <p>This document contains guidelines for the collaboration in the <strong>hereR</strong> R package.</p>
-<div id="getting-started" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-started" class="anchor" aria-hidden="true"></a>Getting started</h2>
+<div class="section level2">
+<h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a></h2>
 <p>Ready to contribute? Here’s how to set up <strong>hereR</strong> for local development.</p>
 <ol style="list-style-type: decimal"><li>Fork the repository to your GitHub account and clone the forked repository locally.</li>
 <li>Install the dependencies (check the <code>DESCRIPTION</code> file).</li>
-<li>Create a feature or bugfix branch as appropriate: <code>git checkout -b feature/&lt;feature-description&gt; develop</code> or <code>git checkout -b bugfix/&lt;bugfix-description&gt; develop</code>
+<li>Create a feature or bugfix branch as appropriate: <code>git checkout -b feature/&lt;feature-description&gt; master</code> or <code>git checkout -b bugfix/&lt;bugfix-description&gt; master</code>
 </li>
 <li>Work locally on the feature, make sure to add or adjust:
 <ul><li>entries in <code>NEWS.md</code>
@@ -105,38 +104,32 @@
 <li>vignettes</li>
 </ul></li>
 <li>Push changes to the new branch.</li>
-<li>If CI tests are passing, create a pull request on GitHub of your <code>feature/...</code> or <code>bugfix/...</code> branch into the <code>develop</code> branch of the original repository.</li>
+<li>If CI tests are passing, create a pull request on GitHub of your <code>feature/...</code> or <code>bugfix/...</code> branch into the <code>master</code> branch of the original repository.</li>
 </ol></div>
-<div id="gitflow-workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#gitflow-workflow" class="anchor" aria-hidden="true"></a>Gitflow workflow</h2>
-<div id="master-and-develop" class="section level3">
-<h3 class="hasAnchor">
-<a href="#master-and-develop" class="anchor" aria-hidden="true"></a>Master and develop</h3>
-<p>The <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" class="external-link">gitflow workflow</a> uses two branches to record the history of the project. The <code>master</code> branch stores the official release history, and the <code>develop</code> branch serves as an integration branch for features. It’s also convenient to tag all commits in the <code>master</code> branch with a version number.</p>
+<div class="section level2">
+<h2 id="trunk-based-development-workflow">Trunk-based Development Workflow<a class="anchor" aria-label="anchor" href="#trunk-based-development-workflow"></a></h2>
+<p>The <a href="https://trunkbaseddevelopment.com" class="external-link">trunk-based development workflow</a> uses one branch <code>master</code> to record the history of the project. In addition to the mainline short-lived feature or bugfix branches are used to develop new features or fix bugs.</p>
+<div class="section level3">
+<h3 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a></h3>
+<p>Each new feature should reside in its own short-lived branch. Branch off of a <code>feature/&lt;feature-description&gt;</code> branch from <code>master</code>. When a feature is complete, it gets merged back into <code>master</code> and the feature branch is deleted.</p>
 </div>
-<div id="features" class="section level3">
-<h3 class="hasAnchor">
-<a href="#features" class="anchor" aria-hidden="true"></a>Features</h3>
-<p>Each new feature should reside in its own branch. But, instead of branching off of <code>master</code>, feature branches use <code>develop</code> as their parent branch. When a feature is complete, it gets merged back into <code>develop</code>. Features should never interact directly with <code>master</code>.</p>
+<div class="section level3">
+<h3 id="bugfix">Bugfix<a class="anchor" aria-label="anchor" href="#bugfix"></a></h3>
+<p>Each bugfix should reside in its own short-lived branch. Branch off of a <code>bugfix/&lt;bugfix-description&gt;</code> branch from <code>master</code>. When the fix is complete, it gets merged back into <code>master</code> and the bugfix branch is deleted.</p>
 </div>
-<div id="release" class="section level3">
-<h3 class="hasAnchor">
-<a href="#release" class="anchor" aria-hidden="true"></a>Release</h3>
-<p>This packages uses <a href="https://semver.org/" class="external-link">semantic versions</a>. Once <code>develop</code> has aquired enough features for a release, fork a release (<code>release/v&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;)</code> branch off of <code>develop</code>. When CRAN has accepted the package submission, the release branch gets merged into <code>master</code> and tagged with a version number. In addition, it should be merged back into <code>develop</code>, which may have progressed since the release was initiated.</p>
+<div class="section level3">
+<h3 id="release">Release<a class="anchor" aria-label="anchor" href="#release"></a></h3>
+<p>This packages uses <a href="https://semver.org/" class="external-link">semantic versions</a>. Once <code>master</code> has aquired enough features for a release, set the new version number in the <code>DESCRIPTION</code> and <code>NEWS.md</code> files and submit the package to CRAN. When CRAN has accepted the package submission, the <code>master</code> branch is tagged with the version number, which triggers the build of the documentation site using <code>pkgdown</code>.</p>
 </div>
 </div>
-<div id="documentation-and-coding-style" class="section level2">
-<h2 class="hasAnchor">
-<a href="#documentation-and-coding-style" class="anchor" aria-hidden="true"></a>Documentation and coding style</h2>
-<div id="naming-convention" class="section level3">
-<h3 class="hasAnchor">
-<a href="#naming-convention" class="anchor" aria-hidden="true"></a>Naming convention</h3>
+<div class="section level2">
+<h2 id="documentation-and-coding-style">Documentation and coding style<a class="anchor" aria-label="anchor" href="#documentation-and-coding-style"></a></h2>
+<div class="section level3">
+<h3 id="naming-convention">Naming convention<a class="anchor" aria-label="anchor" href="#naming-convention"></a></h3>
 <p>Use <code>snake_case</code> for variable, argument and function name definitions and avoid capital letters. Dots (<code>.</code>) in function definitions are reserved for the functions and method dispatch in the S3 object system (e.g. <code>print.my_class</code>) or as prefix to hide functions (e.g. <code>.my_hidden_function</code>).</p>
 </div>
-<div id="package-documentation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#package-documentation" class="anchor" aria-hidden="true"></a>Package documentation</h3>
+<div class="section level3">
+<h3 id="package-documentation">Package documentation<a class="anchor" aria-label="anchor" href="#package-documentation"></a></h3>
 <p>This packages uses <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html" class="external-link">roxygen2</a> for the package documentation.</p>
 <p>Example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -152,9 +145,8 @@
   <span class="va">x</span> <span class="op">+</span> <span class="va">y</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="script-header-template" class="section level3">
-<h3 class="hasAnchor">
-<a href="#script-header-template" class="anchor" aria-hidden="true"></a>Script header template</h3>
+<div class="section level3">
+<h3 id="script-header-template">Script header template<a class="anchor" aria-label="anchor" href="#script-header-template"></a></h3>
 <p>Add a header to CLI scripts according to the following template:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#!/usr/bin/env Rscript</span>
@@ -170,18 +162,16 @@
 <span class="co"># =============================================================================</span></code></pre></div>
 </div>
 </div>
-<div id="credits" class="section level2">
-<h2 class="hasAnchor">
-<a href="#credits" class="anchor" aria-hidden="true"></a>Credits</h2>
+<div class="section level2">
+<h2 id="credits">Credits<a class="anchor" aria-label="anchor" href="#credits"></a></h2>
 <p>Add your GitHub username to the bugfix or feature entry in the <code>NEWS.md</code> to ensure credits are given correctly:</p>
 <pre><code># version x.x.x.9000
 
 * Added &lt;feature description&gt; (@&lt;github_username&gt;, [#1](https://github.com/munterfi/hereR/pull/1)).
 * Bugfix: &lt;description&gt; (@&lt;github_username&gt;, closes [#2](https://github.com/munterfi/hereR/issues/2)).</code></pre>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a></h2>
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project you agree to abide by its terms.</p>
 </div>
 </div>

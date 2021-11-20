@@ -19,7 +19,7 @@ Traffic incidents contain information about location, time, duration, severity, 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -59,19 +59,19 @@ Traffic incidents contain information about location, time, duration, severity, 
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/munterfi/hereR">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fa fa-globe fa-lg"></span>
      
   </a>
@@ -86,7 +86,7 @@ Traffic incidents contain information about location, time, duration, severity, 
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>HERE Traffic API: Flow and Incidents</h1>
-    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/R/defunct.R"><code>R/defunct.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/R/defunct.R" class="external-link"><code>R/defunct.R</code></a></small>
     <div class="hidden name"><code>traffic-defunct.Rd</code></div>
     </div>
 
@@ -101,30 +101,37 @@ Traffic incidents contain information about location, time, duration, severity, 
   min_jam_factor <span class="op">=</span> <span class="fl">0</span>, url_only <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>aoi</th>
-      <td><p><code>sf</code> object, Areas of Interest (POIs) of geometry type <code>POLYGON</code>.</p></td>
-    </tr><tr><th>product</th>
-      <td><p>character, traffic product of the 'Traffic API'. Supported products: <code>"flow"</code> and <code>"incidents"</code>.</p></td>
-    </tr><tr><th>from</th>
-      <td><p><code>POSIXct</code> object, datetime of the earliest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
-    </tr><tr><th>to</th>
-      <td><p><code>POSIXct</code> object, datetime of the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></td>
-    </tr><tr><th>min_jam_factor</th>
-      <td><p>numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if <code>product</code> is set to <code>"flow"</code>, <code>default = 0</code>).</p></td>
-    </tr><tr><th>url_only</th>
-      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="ref-sections">
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>aoi</dt>
+<dd><p><code>sf</code> object, Areas of Interest (POIs) of geometry type <code>POLYGON</code>.</p></dd>
+<dt>product</dt>
+<dd><p>character, traffic product of the 'Traffic API'. Supported products: <code>"flow"</code> and <code>"incidents"</code>.</p></dd>
+<dt>from</dt>
+<dd><p><code>POSIXct</code> object, datetime of the earliest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></dd>
+<dt>to</dt>
+<dd><p><code>POSIXct</code> object, datetime of the latest traffic incidents (Note: Only takes effect if <code>product</code> is set to <code>"incidents"</code>).</p></dd>
+<dt>min_jam_factor</dt>
+<dd><p>numeric, only retrieve flow information with a jam factor greater than the value provided (Note: Only takes effect if <code>product</code> is set to <code>"flow"</code>, <code>default = 0</code>).</p></dd>
+<dt>url_only</dt>
+<dd><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>An <code>sf</code> object containing the requested traffic information.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
+    </div>
+    <div id="references">
+    <h2>References</h2>
     
-<ul><li><p><a href="https://developer.here.com/api-explorer/rest/traffic">HERE Traffic API</a></p></li>
-<li><p><a href="https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api">Flow explanation, stackoverflow</a></p></li>
-</ul><h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+<ul><li><p><a href="https://developer.here.com/api-explorer/rest/traffic" class="external-link">HERE Traffic API</a></p></li>
+<li><p><a href="https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api" class="external-link">Flow explanation, stackoverflow</a></p></li>
+</ul></div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code><a href="hereR-defunct.html">hereR-defunct</a></code></p></div>
+    </div>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

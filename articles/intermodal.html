@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
       <h1 data-toc-skip>Intermodal Routing API</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/vignettes/intermodal.Rmd" class="external-link"><code>vignettes/intermodal.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/vignettes/intermodal.Rmd" class="external-link"><code>vignettes/intermodal.Rmd</code></a></small>
       <div class="hidden name"><code>intermodal.Rmd</code></div>
 
     </div>
@@ -126,9 +126,9 @@
     
     
 <p>Routing intermodal directions between locations based on the ‘HERE Intermodal Routing’ API.</p>
-<div id="intermodal-routes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#intermodal-routes" class="anchor" aria-hidden="true"></a>Intermodal routes</h2>
+<div class="section level2">
+<h2 id="intermodal-routes">Intermodal routes<a class="anchor" aria-label="anchor" href="#intermodal-routes"></a>
+</h2>
 <p>In order to calculate route geometries (<code>LINESTRING</code>) between pairs of points using the ‘HERE Intermodal Routing API’ the function <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> is used. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. Routes can be limited to a maximum number of allowed transfers (includes mode changes and public transit transfers), by specifying the <code>transfer</code> parameter.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Request routes</span>
@@ -194,13 +194,13 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2021-09-26 16:20:00
+2021-11-19 17:22:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2021-09-26 16:28:00
+2021-11-19 17:30:00
 </td>
 <td style="text-align:left;">
 Littau, Längweiher
@@ -238,13 +238,13 @@ NA
 2
 </td>
 <td style="text-align:left;">
-2021-09-26 16:28:00
+2021-11-19 17:30:00
 </td>
 <td style="text-align:left;">
 Littau, Längweiher
 </td>
 <td style="text-align:left;">
-2021-09-26 16:39:00
+2021-11-19 17:43:00
 </td>
 <td style="text-align:left;">
 Bahnhof
@@ -265,10 +265,10 @@ Verkehrsbetriebe Luzern AG
 Luzern, Bahnhof
 </td>
 <td style="text-align:right;">
-3457
+3443
 </td>
 <td style="text-align:right;">
-660
+780
 </td>
 </tr>
 <tr>
@@ -282,13 +282,13 @@ Luzern, Bahnhof
 3
 </td>
 <td style="text-align:left;">
-2021-09-26 16:39:00
+2021-11-19 17:43:00
 </td>
 <td style="text-align:left;">
 Bahnhof
 </td>
 <td style="text-align:left;">
-2021-09-26 16:44:00
+2021-11-19 17:48:00
 </td>
 <td style="text-align:left;">
 Luzern
@@ -326,13 +326,13 @@ NA
 4
 </td>
 <td style="text-align:left;">
-2021-09-26 16:54:00
+2021-11-19 17:54:00
 </td>
 <td style="text-align:left;">
 Luzern
 </td>
 <td style="text-align:left;">
-2021-09-26 17:56:00
+2021-11-19 18:56:00
 </td>
 <td style="text-align:left;">
 Basel SBB
@@ -370,13 +370,13 @@ Basel SBB
 5
 </td>
 <td style="text-align:left;">
-2021-09-26 17:56:00
+2021-11-19 18:56:00
 </td>
 <td style="text-align:left;">
 Basel SBB
 </td>
 <td style="text-align:left;">
-2021-09-26 17:57:00
+2021-11-19 18:57:00
 </td>
 <td style="text-align:left;">
 NA
@@ -414,13 +414,13 @@ NA
 6
 </td>
 <td style="text-align:left;">
-2021-09-26 17:57:00
+2021-11-19 18:57:00
 </td>
 <td style="text-align:left;">
 NA
 </td>
 <td style="text-align:left;">
-2021-09-26 18:15:00
+2021-11-19 19:15:00
 </td>
 <td style="text-align:left;">
 DEST
@@ -460,9 +460,9 @@ NA
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="api-reference" class="section level2">
-<h2 class="hasAnchor">
-<a href="#api-reference" class="anchor" aria-hidden="true"></a>API Reference</h2>
+<div class="section level2">
+<h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
+</h2>
 <ul>
 <li><a href="https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html" class="external-link">Intermodal Routing API</a></li>
 </ul>
@@ -481,12 +481,12 @@ NA
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.munterfinger.ch" class="external-link external-link">Merlin Unterfinger</a>.</p>
+<p>Developed by <a href="https://www.munterfinger.ch" class="external-link">Merlin Unterfinger</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

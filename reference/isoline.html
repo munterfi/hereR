@@ -19,7 +19,7 @@ a specified length, a specified travel time or consumption (only the default E-c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -59,19 +59,19 @@ a specified length, a specified travel time or consumption (only the default E-c
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/munterfi/hereR">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fa fa-globe fa-lg"></span>
      
   </a>
@@ -86,7 +86,7 @@ a specified length, a specified travel time or consumption (only the default E-c
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>HERE Isoline Routing API: Calculate Isoline</h1>
-    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/R/isoline.R"><code>R/isoline.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/R/isoline.R" class="external-link"><code>R/isoline.R</code></a></small>
     <div class="hidden name"><code>isoline.Rd</code></div>
     </div>
 
@@ -98,9 +98,9 @@ a specified length, a specified travel time or consumption (only the default E-c
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">isoline</span><span class="op">(</span>
   <span class="va">poi</span>,
-  datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,
+  datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,
   arrival <span class="op">=</span> <span class="cn">FALSE</span>,
-  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,
+  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,
   range_type <span class="op">=</span> <span class="st">"time"</span>,
   routing_mode <span class="op">=</span> <span class="st">"fast"</span>,
   transport_mode <span class="op">=</span> <span class="st">"car"</span>,
@@ -111,49 +111,57 @@ a specified length, a specified travel time or consumption (only the default E-c
   url_only <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>poi</th>
-      <td><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code>.</p></td>
-    </tr><tr><th>datetime</th>
-      <td><p><code>POSIXct</code> object, datetime for the departure (or arrival if <code>arrival = TRUE</code>).</p></td>
-    </tr><tr><th>arrival</th>
-      <td><p>boolean, are the provided Points of Interest (POIs) the origin or destination locations (<code>default = FALSE</code>)?</p></td>
-    </tr><tr><th>range</th>
-      <td><p>numeric, a vector of type <code>integer</code> containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in Wh.</p></td>
-    </tr><tr><th>range_type</th>
-      <td><p>character, unit of the isolines: <code>"distance"</code>, <code>"time"</code> or <code>"consumption"</code>.</p></td>
-    </tr><tr><th>routing_mode</th>
-      <td><p>character, set the routing mode: <code>"fast"</code> or <code>"short"</code>.</p></td>
-    </tr><tr><th>transport_mode</th>
-      <td><p>character, set the transport mode: <code>"car"</code>, <code>"pedestrian"</code> or <code>"truck"</code>.</p></td>
-    </tr><tr><th>traffic</th>
-      <td><p>boolean, use real-time traffic or prediction in routing (<code>default = TRUE</code>)? If no traffic is selected, the <code>datetime</code> is set to <code>"any"</code> and the request is processed independently from time.</p></td>
-    </tr><tr><th>optimize, </th>
-      <td><p>character, specifies how isoline calculation is optimized: <code>"balanced"</code>, <code>"quality"</code> or <code>"performance"</code> (<code>default = "balanced"</code>).</p></td>
-    </tr><tr><th>consumption_model</th>
-      <td><p>character, specify the consumption model of the vehicle, see <a href="https://developer.here.com/documentation/routing-api/dev_guide/topics/use-cases/consumption-model.html">consumption model</a> for more information (<code>default = NULL</code> a average electric car is set).</p></td>
-    </tr><tr><th>aggregate</th>
-      <td><p>boolean, aggregate (with function <code>min</code>) and intersect the isolines from geometry type <code>POLYGON</code> to geometry type <code>MULTIPOLYGON</code> (<code>default = TRUE</code>)?</p></td>
-    </tr><tr><th>url_only</th>
-      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="ref-sections">
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>poi</dt>
+<dd><p><code>sf</code> object, Points of Interest (POIs) of geometry type <code>POINT</code>.</p></dd>
+<dt>datetime</dt>
+<dd><p><code>POSIXct</code> object, datetime for the departure (or arrival if <code>arrival = TRUE</code>).</p></dd>
+<dt>arrival</dt>
+<dd><p>boolean, are the provided Points of Interest (POIs) the origin or destination locations (<code>default = FALSE</code>)?</p></dd>
+<dt>range</dt>
+<dd><p>numeric, a vector of type <code>integer</code> containing the breaks for the generation of the isolines: (1) time in seconds; (2) distance in meters; (3) consumption in Wh.</p></dd>
+<dt>range_type</dt>
+<dd><p>character, unit of the isolines: <code>"distance"</code>, <code>"time"</code> or <code>"consumption"</code>.</p></dd>
+<dt>routing_mode</dt>
+<dd><p>character, set the routing mode: <code>"fast"</code> or <code>"short"</code>.</p></dd>
+<dt>transport_mode</dt>
+<dd><p>character, set the transport mode: <code>"car"</code>, <code>"pedestrian"</code> or <code>"truck"</code>.</p></dd>
+<dt>traffic</dt>
+<dd><p>boolean, use real-time traffic or prediction in routing (<code>default = TRUE</code>)? If no traffic is selected, the <code>datetime</code> is set to <code>"any"</code> and the request is processed independently from time.</p></dd>
+<dt>optimize, </dt>
+<dd><p>character, specifies how isoline calculation is optimized: <code>"balanced"</code>, <code>"quality"</code> or <code>"performance"</code> (<code>default = "balanced"</code>).</p></dd>
+<dt>consumption_model</dt>
+<dd><p>character, specify the consumption model of the vehicle (<code>default = NULL</code> an average electric car is set).</p></dd>
+<dt>aggregate</dt>
+<dd><p>boolean, aggregate (with function <code>min</code>) and intersect the isolines from geometry type <code>POLYGON</code> to geometry type <code>MULTIPOLYGON</code> (<code>default = TRUE</code>)?</p></dd>
+<dt>url_only</dt>
+<dd><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>An <code>sf</code> object containing the requested isolines.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    </div>
+    <div id="references">
+    <h2>References</h2>
+    <p><a href="https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html" class="external-link">HERE Isoline Routing API</a></p>
+    </div>
+    </div>
 
-    <p><a href="https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html">HERE Isoline Routing API</a></p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Provide an API Key for a HERE project</span></span>
 <span class="r-in"><span class="fu"><a href="set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Isochrone for 5, 10, 15, 20, 25 and 30 minutes driving time</span></span>
 <span class="r-in"><span class="va">isolines</span> <span class="op">&lt;-</span> <span class="fu">isoline</span><span class="op">(</span></span>
 <span class="r-in">  poi <span class="op">=</span> <span class="va">poi</span>,</span>
-<span class="r-in">  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,</span>
+<span class="r-in">  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,</span>
 <span class="r-in">  url_only <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span class="r-in"><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

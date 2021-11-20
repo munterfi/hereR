@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
       </span>
     </div>
 
@@ -57,19 +57,19 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/munterfi/hereR">
+  <a href="https://github.com/munterfi/hereR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/munterfi1">
+  <a href="https://twitter.com/munterfi1" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://munterfinger.ch">
+  <a href="https://munterfinger.ch" class="external-link">
     <span class="fa fa-globe fa-lg"></span>
      
   </a>
@@ -84,7 +84,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>HERE Geocoding &amp; Search API: Autosuggest</h1>
-    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/master/R/autosuggest.R"><code>R/autosuggest.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/HEAD/R/autosuggest.R" class="external-link"><code>R/autosuggest.R</code></a></small>
     <div class="hidden name"><code>autosuggest.Rd</code></div>
     </div>
 
@@ -94,26 +94,34 @@
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">autosuggest</span><span class="op">(</span><span class="va">address</span>, results <span class="op">=</span> <span class="fl">5</span>, url_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>address</th>
-      <td><p>character, address text to propose suggestions.</p></td>
-    </tr><tr><th>results</th>
-      <td><p>numeric, maximum number of suggestions (Valid range: 1 and 100).</p></td>
-    </tr><tr><th>url_only</th>
-      <td><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="ref-sections">
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>address</dt>
+<dd><p>character, address text to propose suggestions.</p></dd>
+<dt>results</dt>
+<dd><p>numeric, maximum number of suggestions (Valid range: 1 and 100).</p></dd>
+<dt>url_only</dt>
+<dd><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>A <code>data.frame</code> object, containing the suggestions for the input addresses.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    </div>
+    <div id="references">
+    <h2>References</h2>
+    <p><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html" class="external-link">HERE Geocoder API: Autosuggest</a></p>
+    </div>
+    </div>
 
-    <p><a href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html">HERE Geocoder API: Autosuggest</a></p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Provide an API Key for a HERE project</span></span>
 <span class="r-in"><span class="fu"><a href="set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">suggestions</span> <span class="op">&lt;-</span> <span class="fu">autosuggest</span><span class="op">(</span>address <span class="op">=</span> <span class="va">poi</span><span class="op">$</span><span class="va">city</span>, url_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
