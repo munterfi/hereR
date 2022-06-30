@@ -128,7 +128,7 @@
   }
   currency <- Sys.localeconv()[["int_curr_symbol"]]
   if (currency != "") {
-    return(currency)
+    return(gsub(" ", "", currency, fixed = TRUE))
   }
   return("USD")
 }

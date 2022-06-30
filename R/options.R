@@ -110,7 +110,7 @@ set_currency <- function(currency = NULL) {
   .check_character(currency)
   if (!is.null(currency)) {
     Sys.setenv(
-      "HERE_CURRENCY" = currency
+      "HERE_CURRENCY" = gsub(" ", "", currency, fixed = TRUE)
     )
   } else {
     Sys.unsetenv("HERE_CURRENCY")
