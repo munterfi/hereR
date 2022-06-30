@@ -6,7 +6,7 @@
 \alias{hereR-package}
 \title{hereR: 'sf'-Based Interface to the 'HERE' REST APIs}
 \description{
-Interface to the 'HERE' REST APIs <https://developer.here.com/develop/rest-apis>: (1) geocode and autosuggest addresses or reverse geocode POIs using the 'Geocoder' API; (2) route directions, travel distance or time matrices and isolines using the 'Routing', 'Matrix Routing' and 'Isoline Routing' APIs; (3) request real-time traffic flow and incident information from the 'Traffic' API; (4) find request public transport connections and nearby stations from the 'Public Transit' API; (5) request intermodal routes using the 'Intermodal Routing' API; (6) get weather forecasts, reports on current weather conditions, astronomical information and alerts at a specific location from the 'Destination Weather' API. Locations, routes and isolines are returned as 'sf' objects.
+Interface to the 'HERE' REST APIs \url{https://developer.here.com/develop/rest-apis}: (1) geocode and autosuggest addresses or reverse geocode POIs using the 'Geocoder' API; (2) route directions, travel distance or time matrices and isolines using the 'Routing', 'Matrix Routing' and 'Isoline Routing' APIs; (3) request real-time traffic flow and incident information from the 'Traffic' API; (4) find request public transport connections and nearby stations from the 'Public Transit' API; (5) request intermodal routes using the 'Intermodal Routing' API; (6) get weather forecasts, reports on current weather conditions, astronomical information and alerts at a specific location from the 'Destination Weather' API. Locations, routes and isolines are returned as 'sf' objects.
 }
 \seealso{
 Useful links:
