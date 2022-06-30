@@ -16,6 +16,7 @@ route(
   avoid_area = NULL,
   avoid_feature = NULL,
   consumption_model = NULL,
+  vignettes = TRUE,
   url_only = FALSE
 )
 }
@@ -32,7 +33,7 @@ route(
 
 \item{routing_mode}{character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).}
 
-\item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"} or \code{scooter} (\code{default = "car"}).}
+\item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"}, \code{"scooter"}, \code{"taxi"}, \code{"bus"} or \code{"privateBus"} (\code{default = "car"}).}
 
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
 
@@ -42,10 +43,17 @@ route(
 
 \item{consumption_model}{character, specify the consumption model of the vehicle (\code{default = NULL} an average electric car is set).}
 
+\item{vignettes}{boolean, include vignettes in the total toll cost of routes (\code{default = TRUE}).}
+
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
 \value{
 An \code{sf} object containing the requested routes.
+
+Tolls are requested for routes with transport mode \code{"car"},
+\code{"truck"} \code{"taxi"} or \code{"bus"}. The currency defaults to the
+current system locale settings. A different currency can be set using
+\link[hereR]{set_currency} and a currency code compliant to ISO 4217.
 }
 \description{
 Calculates route geometries (\code{LINESTRING}) between given pairs of points using the HERE 'Routing' API.
