@@ -13,7 +13,7 @@
 #' @param destination \code{sf} object, the destination locations (N) of geometry type \code{POINT}.
 #' @param datetime \code{POSIXct} object, datetime for the departure.
 #' @param routing_mode character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).
-#' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"} or \code{"bicycle"} (\code{default = "car"}).
+#' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"}, \code{"scooter"}, \code{"taxi"}, \code{"bus"} or \code{"privateBus"} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'

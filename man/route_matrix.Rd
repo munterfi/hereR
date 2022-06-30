@@ -23,7 +23,7 @@ route_matrix(
 
 \item{routing_mode}{character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).}
 
-\item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"} or \code{"bicycle"} (\code{default = "car"}).}
+\item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"}, \code{"scooter"}, \code{"taxi"}, \code{"bus"} or \code{"privateBus"} (\code{default = "car"}).}
 
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
 
