@@ -15,15 +15,21 @@
 #' @param arrival boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?
 #' @param results numeric, maximum number of suggested routes (Valid range: 1 and 7).
 #' @param routing_mode character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).
-#' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"} or \code{scooter} (\code{default = "car"}).
+#' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"}, \code{"scooter"}, \code{"taxi"}, \code{"bus"} or \code{"privateBus"} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param avoid_area, \code{sf} object, area (only bounding box is taken) to avoid in routes (\code{default = NULL}).
 #' @param avoid_feature character, transport network features to avoid, e.g. \code{"tollRoad"} or \code{"ferry"} (\code{default = NULL}).
 #' @param consumption_model character, specify the consumption model of the vehicle (\code{default = NULL} an average electric car is set).
+#' @param vignettes boolean, include vignettes in the total toll cost of routes (\code{default = TRUE}).
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
 #' An \code{sf} object containing the requested routes.
+#'
+#' Tolls are requested for routes with transport mode \code{"car"},
+#' \code{"truck"} \code{"taxi"} or \code{"bus"}. The currency defaults to the
+#' current system locale settings. A different currency can be set using
+#' \link[hereR]{set_currency} and a currency code compliant to ISO 4217.
 #' @export
 #'
 #' @examples
@@ -45,7 +51,7 @@
 route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   results = 1, routing_mode = "fast", transport_mode = "car",
                   traffic = TRUE, avoid_area = NULL, avoid_feature = NULL,
-                  consumption_model = NULL, url_only = FALSE) {
+                  consumption_model = NULL, vignettes = TRUE, url_only = FALSE) {
 
   # Checks
   .check_points(origin)
@@ -59,6 +65,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   .check_boolean(traffic)
   .check_polygon(avoid_area)
   .check_character(avoid_feature)
+  .check_boolean(vignettes)
   .check_boolean(url_only)
 
   # Add API key
@@ -150,6 +157,19 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
     "polyline,elevation,travelSummary"
   )
 
+  # Add tolls (note: has to be added after &return=...)
+  if (transport_mode %in% c("car", "truck", "taxi", "bus")) {
+    url <- paste0(
+      url,
+      ifelse(
+        vignettes,
+        ",tolls&tolls[summaries]=total&currency=",
+        ",tolls&tolls[summaries]=total&tolls[vignettes]=all&currency="
+      ),
+      .get_currency()
+    )
+  }
+
   # Return urls if chosen
   if (url_only) {
     return(url)
@@ -211,6 +231,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
     duration = integer(),
     duration_base = integer(),
     consumption = numeric(),
+    tolls = numeric(),
     geometry = character()
   )
 
@@ -250,6 +271,11 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   NA
                 } else {
                   sec$travelSummary$consumption
+                },
+                tolls = if (is.null(sec$travelSummary$tolls)) {
+                  0.0
+                } else {
+                  sec$travelSummary$tolls$total$value
                 },
                 geometry = sec$polyline
               )

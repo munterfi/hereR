@@ -121,6 +121,18 @@
   }
 }
 
+.get_currency <- function() {
+  currency <- Sys.getenv("HERE_CURRENCY")
+  if (currency != "") {
+    return(currency)
+  }
+  currency <- Sys.localeconv()[["int_curr_symbol"]]
+  if (currency != "") {
+    return(gsub(" ", "", currency, fixed = TRUE))
+  }
+  return("USD")
+}
+
 .verbose_request <- function(url, rps) {
   if (.get_verbose()) {
     message(

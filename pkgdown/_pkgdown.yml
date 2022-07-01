@@ -24,6 +24,7 @@ reference:
     - '`set_key`'
     - '`set_verbose`'
     - '`set_freemium`'
+    - '`set_currency`'
     - '`unset_key`'
   - title: Example data
     contents:

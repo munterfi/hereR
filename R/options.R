@@ -87,3 +87,32 @@ set_freemium <- function(ans = TRUE) {
     Sys.unsetenv("HERE_FREEMIUM")
   }
 }
+
+#' Set the currency for HERE API requests
+#'
+#' If the currency is not set using this function call, the currency defined in
+#' the monetary representations in the current locale is used. If the monetary
+#' formatting category \code{"LC_MONETARY"} of the C locale is not set,
+#' \code{"USD"} is set as default.
+#'
+#' @param currency character, the currency code compliant to ISO 4217 to use in
+#' the requests (default = \code{NULL}, which defaults to the current system
+#' locale settings).
+#'
+#' @return
+#' None.
+#'
+#' @export
+#'
+#' @examples
+#' set_currency("CHF")
+set_currency <- function(currency = NULL) {
+  .check_character(currency)
+  if (!is.null(currency)) {
+    Sys.setenv(
+      "HERE_CURRENCY" = gsub(" ", "", currency, fixed = TRUE)
+    )
+  } else {
+    Sys.unsetenv("HERE_CURRENCY")
+  }
+}

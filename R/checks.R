@@ -113,19 +113,14 @@ qualified_keys <- c(
 
 .check_transport_mode <- function(transport_mode, request) {
   modes <- c(
-    "car", "truck", "pedestrian", "bicycle", "scooter"
+    "car", "truck", "pedestrian", "bicycle", "scooter", "taxi", "bus", "privateBus"
   )
   if (request == "isoline") {
     modes <- modes[c(1, 2, 3)]
     if (!transport_mode %in% modes) {
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
-  } else if (request == "matrix") {
-    modes <- modes[c(1, 2, 3, 4)]
-    if (!transport_mode %in% modes) {
-      stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
-    }
-  } else if (request == "route") {
+  } else if (request == "route" || request == "matrix") {
     if (!transport_mode %in% modes) {
       stop(.stop_print_transport_modes(mode = transport_mode, modes = modes, request = request))
     }
