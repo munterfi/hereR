@@ -17,7 +17,7 @@
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param optimize, character, specifies how isoline calculation is optimized: \code{"balanced"}, \code{"quality"} or \code{"performance"} (\code{default = "balanced"}).
 #' @param consumption_model character, specify the consumption model of the vehicle (\code{default = NULL} an average electric car is set).
-#' @param aggregate boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?
+#' @param aggregate boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = FALSE})?
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -38,7 +38,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
                     range = seq(5, 30, 5) * 60, range_type = "time",
                     routing_mode = "fast", transport_mode = "car",
                     traffic = TRUE, optimize = "balanced",
-                    consumption_model = NULL, aggregate = TRUE,
+                    consumption_model = NULL, aggregate = FALSE,
                     url_only = FALSE) {
 
   # Checks

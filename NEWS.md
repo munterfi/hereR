@@ -5,6 +5,7 @@
 * Add `set_currency()` to allow changing the currency used in toll requests to a currency code compliant to ISO 4217. The default currency is the current system locale setting. If the monetary formatting category `"LC_MONETARY"` of the C locale is not set, `"USD"` is set as default.
 * Bugfix: Reduced RPS from 5 to 4 in calls to the Weather API in `weather()`, due to `Status 429; Too Many Requests;`.
 * Bugfix: Do not convert columns `"visibility"` and `"snowCover"` to numeric in `weather(..., product = "observation")`, as they contain non numeric character values (`NAs introduced by coercion`).
+* Set `aggregate = FALSE` as default in `isoline()` (closes [#153](https://github.com/munterfi/hereR/issues/153)).
 
 # version 0.8.2
 
