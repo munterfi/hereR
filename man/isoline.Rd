@@ -15,7 +15,7 @@ isoline(
   traffic = TRUE,
   optimize = "balanced",
   consumption_model = NULL,
-  aggregate = TRUE,
+  aggregate = FALSE,
   url_only = FALSE
 )
 }
@@ -40,7 +40,7 @@ isoline(
 
 \item{consumption_model}{character, specify the consumption model of the vehicle (\code{default = NULL} an average electric car is set).}
 
-\item{aggregate}{boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = TRUE})?}
+\item{aggregate}{boolean, aggregate (with function \code{min}) and intersect the isolines from geometry type \code{POLYGON} to geometry type \code{MULTIPOLYGON} (\code{default = FALSE})?}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }

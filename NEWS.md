@@ -1,8 +1,9 @@
-# version 0.8.2.9000
+# version 0.9.0
 
 * Allow transport modes `"scooter"`, `"taxi"`, `"bus"`, `"privateBus"` in `route()` and `route_matrix()`.
 * Request tolls for routes with transport modes `"car"`, `"truck"`, `"taxi"` and `"bus"` in `route()`. The new boolean parameter `vignettes` defines if vignettes should be in inlcuded in the total toll cost of routes (closes [#151](https://github.com/munterfi/hereR/issues/151)).
 * Add `set_currency()` to allow changing the currency used in toll requests to a currency code compliant to ISO 4217. The default currency is the current system locale setting. If the monetary formatting category `"LC_MONETARY"` of the C locale is not set, `"USD"` is set as default.
+* Set `aggregate = FALSE` as default in `isoline()` (closes [#153](https://github.com/munterfi/hereR/issues/153)).
 * Bugfix: Reduced RPS from 5 to 4 in calls to the Weather API in `weather()`, due to `Status 429; Too Many Requests;`.
 * Bugfix: Do not convert columns `"visibility"` and `"snowCover"` to numeric in `weather(..., product = "observation")`, as they contain non numeric character values (`NAs introduced by coercion`).
 
