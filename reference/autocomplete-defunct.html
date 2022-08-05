@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -92,21 +92,29 @@
     <p>Completes addresses using the HERE 'Geocoder Autocomplete' API.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="hereR-defunct.html">autocomplete</a></span><span class="op">(</span><span class="va">addresses</span>, <span class="va">results</span>, <span class="va">url_only</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu"><a href="hereR-defunct.html">autocomplete</a></span><span class="op">(</span><span class="va">addresses</span>, <span class="va">results</span>, <span class="va">url_only</span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>addresses</dt>
 <dd><p>character, addresses to autocomplete.</p></dd>
+
+
 <dt>results</dt>
 <dd><p>numeric, maximum number of suggestions (Valid range: 1 and 20).</p></dd>
+
+
 <dt>url_only</dt>
 <dd><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>data.frame</code> object, containing the autocomplete suggestions for the addresses.</p>
+    
+
+<p>A <code>data.frame</code> object, containing the autocomplete suggestions for the addresses.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -115,7 +123,6 @@
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="hereR-defunct.html">hereR-defunct</a></code></p></div>
-    </div>
     </div>
 
   </div>
@@ -130,7 +137,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

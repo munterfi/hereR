@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -131,12 +131,12 @@
 </h2>
 <p>In order to calculate route geometries (<code>LINESTRING</code>) between pairs of points using the ‘HERE Routing API’ the function <code><a href="../reference/route.html">route()</a></code> is used. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. Routes can be created for various transport modes, as for example car or public transport. Optionally the current or predicted traffic information is considered. For routes using the transport mode <code>"car"</code> a vehicle type can be specified, to obtain an estimate of the energy consumption on the routes.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">origin</span> <span class="op">&lt;-</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>
-<span class="va">destination</span> <span class="op">&lt;-</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>
-<span class="va">routes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route.html">route</a></span><span class="op">(</span>
-  origin <span class="op">=</span> <span class="va">origin</span>,
-  destination <span class="op">=</span> <span class="va">destination</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">origin</span> <span class="op">&lt;-</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span>
+<span><span class="va">destination</span> <span class="op">&lt;-</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span></span>
+<span><span class="va">routes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route.html">route</a></span><span class="op">(</span></span>
+<span>  origin <span class="op">=</span> <span class="va">origin</span>,</span>
+<span>  destination <span class="op">=</span> <span class="va">destination</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:right;">
@@ -172,6 +172,9 @@ duration_base
 <th style="text-align:right;">
 consumption
 </th>
+<th style="text-align:right;">
+tolls
+</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -185,10 +188,10 @@ consumption
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 19:12:00
+2022-07-24 15:38:26
 </td>
 <td style="text-align:left;">
 vehicle
@@ -197,16 +200,19 @@ vehicle
 car
 </td>
 <td style="text-align:right;">
-211728
+211765
 </td>
 <td style="text-align:right;">
-7901
+7781
 </td>
 <td style="text-align:right;">
-7540
+7581
 </td>
 <td style="text-align:right;">
-84.9338
+83.1847
+</td>
+<td style="text-align:right;">
+40.91
 </td>
 </tr>
 <tr>
@@ -220,10 +226,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 19:54:38
+2022-07-24 16:31:36
 </td>
 <td style="text-align:left;">
 vehicle
@@ -232,50 +238,53 @@ vehicle
 car
 </td>
 <td style="text-align:right;">
-265722
+265717
 </td>
 <td style="text-align:right;">
-10459
+10971
 </td>
 <td style="text-align:right;">
-9979
+10015
 </td>
 <td style="text-align:right;">
-102.4972
+102.8417
+</td>
+<td style="text-align:right;">
+40.91
 </td>
 </tr>
 </tbody>
 </table>
 <p>Construct a route label and print the routes on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">routes</span><span class="op">$</span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">origin</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
-                      <span class="va">destination</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,
-                      sep <span class="op">=</span>  <span class="st">" - "</span><span class="op">)</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">routes</span>,
-                   zcol <span class="op">=</span> <span class="st">"label"</span>,
-                   layer.name <span class="op">=</span> <span class="st">"Route [O-D]"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-                   homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">routes</span><span class="op">$</span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">origin</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,</span>
+<span>                      <span class="va">destination</span><span class="op">$</span><span class="va">city</span><span class="op">[</span><span class="va">routes</span><span class="op">$</span><span class="va">id</span><span class="op">]</span>,</span>
+<span>                      sep <span class="op">=</span>  <span class="st">" - "</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">routes</span>,</span>
+<span>                   zcol <span class="op">=</span> <span class="st">"label"</span>,</span>
+<span>                   layer.name <span class="op">=</span> <span class="st">"Route [O-D]"</span>,</span>
+<span>                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,</span>
+<span>                   homebutton <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="matrix-routing">Matrix routing<a class="anchor" aria-label="anchor" href="#matrix-routing"></a>
 </h2>
 <p>The function <code><a href="../reference/route_matrix.html">route_matrix()</a></code> calculates a matrix of route summaries between given POIs. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. If only one <code>sf</code> object is provided as <code>origin</code> an origin-destination matrix, which covers all route combinations, is constructed. Various transport modes and current or predicted traffic information are supported. The requested matrix is split into (sub-)matrices of dimension 15x100 in order to use the maximum allowed matrix size per request. Thereby the number of overall needed requests is minimized. The return value of the function <code>route_matrix</code> is one route summary matrix, that fits the order of the provided POIs: <code>orig_id</code>, <code>dest_id</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># From - to</span>
-<span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route_matrix.html">route_matrix</a></span><span class="op">(</span>
-  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>,
-  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>
-<span class="op">)</span>
-
-<span class="co"># Construct O-D matrix (all routes between the POIs)</span>
-<span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route_matrix.html">route_matrix</a></span><span class="op">(</span>
-  origin <span class="op">=</span> <span class="va">poi</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># From - to</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route_matrix.html">route_matrix</a></span><span class="op">(</span></span>
+<span>  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>,</span>
+<span>  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Construct O-D matrix (all routes between the POIs)</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route_matrix.html">route_matrix</a></span><span class="op">(</span></span>
+<span>  origin <span class="op">=</span> <span class="va">poi</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Print the first 10 rows of the matrix table, created from the POIs above, where the distance is in meters, the travel time in seconds and the consumption in cost factor units:</p>
 <table class="table">
 <thead><tr>
@@ -322,10 +331,10 @@ error_code
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
 fast
@@ -354,10 +363,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 19:03:06
+2022-07-24 15:42:15
 </td>
 <td style="text-align:left;">
 fast
@@ -366,10 +375,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-172895
+173394
 </td>
 <td style="text-align:right;">
-7367
+8010
 </td>
 <td style="text-align:right;">
 0
@@ -386,10 +395,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 19:10:18
+2022-07-24 15:38:14
 </td>
 <td style="text-align:left;">
 fast
@@ -398,10 +407,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-211737
+211774
 </td>
 <td style="text-align:right;">
-7799
+7769
 </td>
 <td style="text-align:right;">
 0
@@ -418,10 +427,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 18:10:09
+2022-07-24 14:33:28
 </td>
 <td style="text-align:left;">
 fast
@@ -430,10 +439,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-99314
+99336
 </td>
 <td style="text-align:right;">
-4190
+3883
 </td>
 <td style="text-align:right;">
 0
@@ -450,10 +459,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 18:22:48
+2022-07-24 14:48:53
 </td>
 <td style="text-align:left;">
 fast
@@ -462,10 +471,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-117548
+117576
 </td>
 <td style="text-align:right;">
-4949
+4808
 </td>
 <td style="text-align:right;">
 0
@@ -482,10 +491,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 17:57:58
+2022-07-24 14:15:09
 </td>
 <td style="text-align:left;">
 fast
@@ -494,10 +503,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-54644
+55400
 </td>
 <td style="text-align:right;">
-3459
+2784
 </td>
 <td style="text-align:right;">
 0
@@ -514,10 +523,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 19:43:56
+2022-07-24 16:20:27
 </td>
 <td style="text-align:left;">
 fast
@@ -526,10 +535,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-266763
+266526
 </td>
 <td style="text-align:right;">
-9817
+10302
 </td>
 <td style="text-align:right;">
 0
@@ -546,10 +555,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 18:37:33
+2022-07-24 14:56:48
 </td>
 <td style="text-align:left;">
 fast
@@ -558,10 +567,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-151717
+131879
 </td>
 <td style="text-align:right;">
-5834
+5283
 </td>
 <td style="text-align:right;">
 0
@@ -578,10 +587,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 19:03:59
+2022-07-24 15:40:58
 </td>
 <td style="text-align:left;">
 fast
@@ -590,10 +599,10 @@ fast
 car
 </td>
 <td style="text-align:right;">
-171911
+171885
 </td>
 <td style="text-align:right;">
-7420
+7933
 </td>
 <td style="text-align:right;">
 0
@@ -610,10 +619,10 @@ car
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
-2021-11-19 17:00:19
+2022-07-24 13:28:45
 </td>
 <td style="text-align:left;">
 fast
@@ -639,28 +648,28 @@ car
 </h2>
 <p>Isolines are constructed by the function <code><a href="../reference/isoline.html">isoline()</a></code>. The calculated polygons (<code>POLYGON</code> or <code>MULTIPOLYGON</code>) connect the end points of all routes leaving from defined centers (POIs) with either a specified length (isodistance), a specified travel time (isochrone) or consumption (isoconsumption), whereby time is measured in seconds, distance in meters and consumption. By default the <code>aggregate</code> parameter is set to <code>TRUE</code>, which means that the isoline polygons are intersected and the minimum range value (time, distance or consumption) is taken in all intersecting areas, then the polygons are aggregated to polygons of geometry type <code>MULTIPOLYGON</code>. Thereby overlapping isolines are avoided.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iso</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/isoline.html">isoline</a></span><span class="op">(</span>
-  <span class="va">poi</span>,
-  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,
-  range_type <span class="op">=</span> <span class="st">"time"</span>,
-  routing_mode <span class="op">=</span> <span class="st">"fast"</span>,
-  transport_mode <span class="op">=</span> <span class="st">"car"</span>,
-  aggregate <span class="op">=</span> <span class="cn">TRUE</span>,
-  traffic <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">iso</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/isoline.html">isoline</a></span><span class="op">(</span></span>
+<span>  <span class="va">poi</span>,</span>
+<span>  range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">60</span>,</span>
+<span>  range_type <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>  routing_mode <span class="op">=</span> <span class="st">"fast"</span>,</span>
+<span>  transport_mode <span class="op">=</span> <span class="st">"car"</span>,</span>
+<span>  aggregate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  traffic <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Convert range from seconds to minutes and print the aggregated isolines on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iso</span><span class="op">$</span><span class="va">minutes</span> <span class="op">&lt;-</span> <span class="va">iso</span><span class="op">$</span><span class="va">range</span><span class="op">/</span><span class="fl">60</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">iso</span>,
-          zcol <span class="op">=</span> <span class="st">"minutes"</span>,
-          layer.name <span class="op">=</span> <span class="st">"Isoline [min]"</span>,
-          alpha <span class="op">=</span> <span class="fl">0</span>,
-          map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-          homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">iso</span><span class="op">$</span><span class="va">minutes</span> <span class="op">&lt;-</span> <span class="va">iso</span><span class="op">$</span><span class="va">range</span><span class="op">/</span><span class="fl">60</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">iso</span>,</span>
+<span>          zcol <span class="op">=</span> <span class="st">"minutes"</span>,</span>
+<span>          layer.name <span class="op">=</span> <span class="st">"Isoline [min]"</span>,</span>
+<span>          alpha <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>          map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,</span>
+<span>          homebutton <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
@@ -690,7 +699,7 @@ car
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -131,11 +131,11 @@
 </h2>
 <p>In order to calculate route geometries (<code>LINESTRING</code>) between pairs of points using the ‘HERE Intermodal Routing API’ the function <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code> is used. The function takes origin and destination locations as <code>sf</code> objects containing geometries of type <code>POINT</code> as input. Routes can be limited to a maximum number of allowed transfers (includes mode changes and public transit transfers), by specifying the <code>transfer</code> parameter.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Request routes</span>
-<span class="va">intermodal_routes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route.html">route</a></span><span class="op">(</span>
-  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>,
-  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Request routes</span></span>
+<span><span class="va">intermodal_routes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/route.html">route</a></span><span class="op">(</span></span>
+<span>  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>,</span>
+<span>  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The <code>id</code> column corresponds to the row of the input locations (<code>origin</code> and <code>destination</code>) and the <code>rank</code> column enumerates the alternative routes. The maximum number of alternatives can be set by the <code>results</code> parameter. Each row in the returned <code>sf</code> object corresponds to a route section with a transport mode in a vehicle without a transfer.</p>
 <table class="table">
 <thead><tr>
@@ -194,13 +194,13 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:22:00
+2022-07-24 14:05:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2021-11-19 17:30:00
+2022-07-24 14:13:00
 </td>
 <td style="text-align:left;">
 Littau, Längweiher
@@ -221,7 +221,7 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-473
+466
 </td>
 <td style="text-align:right;">
 480
@@ -238,13 +238,13 @@ NA
 2
 </td>
 <td style="text-align:left;">
-2021-11-19 17:30:00
+2022-07-24 14:13:00
 </td>
 <td style="text-align:left;">
 Littau, Längweiher
 </td>
 <td style="text-align:left;">
-2021-11-19 17:43:00
+2022-07-24 14:24:00
 </td>
 <td style="text-align:left;">
 Bahnhof
@@ -265,10 +265,10 @@ Verkehrsbetriebe Luzern AG
 Luzern, Bahnhof
 </td>
 <td style="text-align:right;">
-3443
+3415
 </td>
 <td style="text-align:right;">
-780
+660
 </td>
 </tr>
 <tr>
@@ -282,13 +282,13 @@ Luzern, Bahnhof
 3
 </td>
 <td style="text-align:left;">
-2021-11-19 17:43:00
+2022-07-24 14:24:00
 </td>
 <td style="text-align:left;">
 Bahnhof
 </td>
 <td style="text-align:left;">
-2021-11-19 17:48:00
+2022-07-24 14:29:00
 </td>
 <td style="text-align:left;">
 Luzern
@@ -326,13 +326,13 @@ NA
 4
 </td>
 <td style="text-align:left;">
-2021-11-19 17:54:00
+2022-07-24 14:30:00
 </td>
 <td style="text-align:left;">
 Luzern
 </td>
 <td style="text-align:left;">
-2021-11-19 18:56:00
+2022-07-24 15:47:00
 </td>
 <td style="text-align:left;">
 Basel SBB
@@ -344,19 +344,19 @@ transit
 intercityTrain
 </td>
 <td style="text-align:left;">
-IR26
+IR27
 </td>
 <td style="text-align:left;">
-Schweizerische Südostbahn (sob)
+Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:left;">
 Basel SBB
 </td>
 <td style="text-align:right;">
-94763
+94766
 </td>
 <td style="text-align:right;">
-3720
+4620
 </td>
 </tr>
 <tr>
@@ -370,16 +370,16 @@ Basel SBB
 5
 </td>
 <td style="text-align:left;">
-2021-11-19 18:56:00
+2022-07-24 15:47:00
 </td>
 <td style="text-align:left;">
 Basel SBB
 </td>
 <td style="text-align:left;">
-2021-11-19 18:57:00
+2022-07-24 15:51:00
 </td>
 <td style="text-align:left;">
-NA
+Bahnhof SBB
 </td>
 <td style="text-align:left;">
 pedestrian
@@ -397,10 +397,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-66
+228
 </td>
 <td style="text-align:right;">
-60
+240
 </td>
 </tr>
 <tr>
@@ -414,51 +414,51 @@ NA
 6
 </td>
 <td style="text-align:left;">
-2021-11-19 18:57:00
+2022-07-24 15:53:00
 </td>
 <td style="text-align:left;">
-NA
+Bahnhof SBB
 </td>
 <td style="text-align:left;">
-2021-11-19 19:15:00
+2022-07-24 16:13:00
 </td>
 <td style="text-align:left;">
-DEST
+Basel, Kleinhüningen
 </td>
 <td style="text-align:left;">
-rented
+transit
 </td>
 <td style="text-align:left;">
-bicycle
+lightRail
 </td>
 <td style="text-align:left;">
-NA
+8
 </td>
 <td style="text-align:left;">
-Swiss Federal Office of Energy
+Basler Verkehrsbetriebe
 </td>
 <td style="text-align:left;">
-NA
+Basel, Kleinhüningen
 </td>
 <td style="text-align:right;">
-4253
+4516
 </td>
 <td style="text-align:right;">
-1080
+1200
 </td>
 </tr>
 </tbody>
 </table>
 <p>Print the intermodal routes on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">intermodal_routes</span>,
-                   zcol <span class="op">=</span> <span class="st">"mode"</span>,
-                   layer.name <span class="op">=</span> <span class="st">"Intermodal route"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-                   homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">intermodal_routes</span>,</span>
+<span>                   zcol <span class="op">=</span> <span class="st">"mode"</span>,</span>
+<span>                   layer.name <span class="op">=</span> <span class="st">"Intermodal route"</span>,</span>
+<span>                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,</span>
+<span>                   homebutton <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
@@ -486,7 +486,7 @@ NA
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

@@ -20,7 +20,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -98,26 +98,27 @@
   available at <code>help("-defunct")</code>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">traffic</span><span class="op">(</span>
-  <span class="va">aoi</span>,
-  product <span class="op">=</span> <span class="st">"flow"</span>,
-  from <span class="op">=</span> <span class="cn">NULL</span>,
-  to <span class="op">=</span> <span class="cn">NULL</span>,
-  min_jam_factor <span class="op">=</span> <span class="fl">0</span>,
-  url_only <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">traffic</span><span class="op">(</span></span>
+<span>  <span class="va">aoi</span>,</span>
+<span>  product <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  from <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  to <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_jam_factor <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  url_only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_auth</span><span class="op">(</span><span class="va">app_id</span>, <span class="va">app_code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">unset_auth</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">autocomplete</span><span class="op">(</span><span class="va">addresses</span>, results <span class="op">=</span> <span class="fl">5</span>, url_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_proxy</span><span class="op">(</span><span class="va">proxy</span>, <span class="va">proxyuserpwd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">unset_proxy</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-<span class="fu">set_auth</span><span class="op">(</span><span class="va">app_id</span>, <span class="va">app_code</span><span class="op">)</span>
-
-<span class="fu">unset_auth</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">autocomplete</span><span class="op">(</span><span class="va">addresses</span>, results <span class="op">=</span> <span class="fl">5</span>, url_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">set_proxy</span><span class="op">(</span><span class="va">proxy</span>, <span class="va">proxyuserpwd</span><span class="op">)</span>
-
-<span class="fu">unset_proxy</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-
-    <div id="ref-sections">
     <div id="traffic">
     <h2><code>traffic</code></h2>
     
@@ -155,7 +156,6 @@ for <code>traffic(..., product = "incidents")</code>, use <code><a href="inciden
 
 <p>For <code>unset_proxy</code>, configure a global proxy for R in '~/.Renviron' instead.</p>
     </div>
-    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -169,7 +169,7 @@ for <code>traffic(..., product = "incidents")</code>, use <code><a href="inciden
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

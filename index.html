@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -58,7 +58,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -126,7 +126,6 @@
 <div class="page-header"><h1 id="herer-">hereR <img src="reference/figures/logo.svg" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#herer-"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p>The <strong>hereR</strong> package provides an interface to the <strong>HERE REST APIs</strong> for R: (1) geocode and autosuggest addresses or reverse geocode POIs using the <strong>Geocoder API</strong>; (2) route directions, travel distance or time matrices and isolines using the <strong>Routing API</strong>, <strong>Matrix Routing API</strong> and <strong>Isoline Routing API</strong>; (3) request real-time traffic flow and incident information from the <strong>Traffic API</strong>; (4) find public transport connections and nearby stations using the <strong>Public Transit API</strong>; (5) request intermodal routes using the <strong>Intermodal Routing API</strong>; (6) get weather forecasts, reports on current weather conditions and astronomical information at a specific location from the <strong>Destination Weather API</strong>.</p>
 <p>Locations, routes and isolines are returned as <code>sf</code> objects.</p>
 <div class="section level2">
@@ -134,10 +133,10 @@
 </h2>
 <p>You can install the released version of <strong>hereR</strong> from <a href="https://CRAN.R-project.org/package=hereR/" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"hereR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"hereR"</span><span class="op">)</span></span></code></pre></div>
 <p>Install the development version from <a href="https://github.com/munterfi/hereR/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"munterfi/hereR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"munterfi/hereR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -145,61 +144,61 @@
 <p>This package requires an API key for a HERE project. The key is set for the current R session and is used to authenticate in the requests to the APIs. A login can be created on <a href="https://developer.here.com/" class="external-link">developer.here.com</a>. In order to obtain the API key navigate to a project of your choice in the developer portal, select ‘<strong>REST: Generate APP</strong>’ and then ‘<strong>Create API Key</strong>’.</p>
 <p>To set the API key, use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfi.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfi.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Note:</strong> Your use of the HERE APIs with this package is subject to the <a href="https://developer.here.com/terms-and-conditions" class="external-link">HERE Developer Terms and Conditions</a>. For freemium licenses the number of requests per second (RPS) is limited, use <code>set_freemium(FALSE)</code> to turn off limits for accounts with paid plans.</p>
 <p>Once valid application credentials are created and the key is set in the R session, the APIs can be addressed using the functions shown in the examples below. A more detailed description can be found in the documentation of the functions and the package vignettes.</p>
 <p><strong>Geocoding &amp; Search API:</strong> Autosuggest and geocode addresses or reverse geocode POIs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span><span class="va">poi</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/autosuggest.html">autosuggest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse"</span>, <span class="st">"Hardstrasse"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/reverse_geocode.html">reverse_geocode</a></span><span class="op">(</span><span class="va">poi</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Routing API:</strong> Construct route geometries with elevation (dim = <code>XYZ</code>).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">4</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"bicycle"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">4</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span>, transport_mode <span class="op">=</span> <span class="st">"bicycle"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Matrix Routing API:</strong> Request a matrix of route summaries.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span><span class="va">poi</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span>
-  <span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span>,
-  transport_mode <span class="op">=</span> <span class="st">"bicycle"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span><span class="va">poi</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/route_matrix.html">route_matrix</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schweighofstrasse 190, Zurich, Switzerland"</span>, <span class="st">"Hardstrasse 48, Zurich, Switzerland"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  transport_mode <span class="op">=</span> <span class="st">"bicycle"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><strong>Isoline Routing API:</strong> Construct isolines around points (time, distance or consumption).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"time"</span>, transport_mode <span class="op">=</span> <span class="st">"pedestrian"</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"distance"</span>, transport_mode <span class="op">=</span> <span class="st">"truck"</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"consumption"</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"time"</span>, transport_mode <span class="op">=</span> <span class="st">"pedestrian"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"distance"</span>, transport_mode <span class="op">=</span> <span class="st">"truck"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/isoline.html">isoline</a></span><span class="op">(</span><span class="va">poi</span>, range_type <span class="op">=</span> <span class="st">"consumption"</span>, transport_mode <span class="op">=</span> <span class="st">"car"</span>, traffic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Traffic API:</strong> Get real-time traffic flow or incidents in a specific area.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/flow.html">flow</a></span><span class="op">(</span><span class="va">aoi</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/incident.html">incident</a></span><span class="op">(</span><span class="va">aoi</span>, from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2018-01-01 00:00:00"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/flow.html">flow</a></span><span class="op">(</span><span class="va">aoi</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/incident.html">incident</a></span><span class="op">(</span><span class="va">aoi</span>, from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2018-01-01 00:00:00"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Public Transit API:</strong> Request public transport connections between points or find stations nearby.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/connection.html">connection</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/station.html">station</a></span><span class="op">(</span><span class="va">poi</span>, radius <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/connection.html">connection</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/station.html">station</a></span><span class="op">(</span><span class="va">poi</span>, radius <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Intermodal Routing API:</strong> Get routes with various combinations of transport modes.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/intermodal_route.html">intermodal_route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/intermodal_route.html">intermodal_route</a></span><span class="op">(</span><span class="va">poi</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>, <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Destination Weather API:</strong> Request weather observations, forecasts, astronomical information or alerts at specific locations.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"observation"</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"forecast_hourly"</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"forecast_astronomy"</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"alerts"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"observation"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"forecast_hourly"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"forecast_astronomy"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/weather.html">weather</a></span><span class="op">(</span><span class="va">poi</span>, product <span class="op">=</span> <span class="st">"alerts"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
@@ -253,6 +252,13 @@
 </ul>
 </div>
 
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing hereR</a></li>
+</ul>
+</div>
+
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
@@ -285,7 +291,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

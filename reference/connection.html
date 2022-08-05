@@ -22,7 +22,7 @@ summary = TRUE: A summary of the connections is retrieved, where each connection
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -31,7 +31,7 @@ summary = TRUE: A summary of the connections is retrieved, where each connection
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -99,66 +99,85 @@ Two modes are provided:</p><ul><li><p><code>summary = FALSE</code>: The public t
 <li><p><code>summary = TRUE</code>: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.</p></li>
 </ul></div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">connection</span><span class="op">(</span>
-  <span class="va">origin</span>,
-  <span class="va">destination</span>,
-  datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,
-  arrival <span class="op">=</span> <span class="cn">FALSE</span>,
-  results <span class="op">=</span> <span class="fl">3</span>,
-  transfers <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,
-  transport_mode <span class="op">=</span> <span class="cn">NULL</span>,
-  summary <span class="op">=</span> <span class="cn">FALSE</span>,
-  url_only <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">connection</span><span class="op">(</span></span>
+<span>  <span class="va">origin</span>,</span>
+<span>  <span class="va">destination</span>,</span>
+<span>  datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  arrival <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  results <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  transfers <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
+<span>  transport_mode <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  summary <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  url_only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>origin</dt>
 <dd><p><code>sf</code> object, the origin locations of geometry type <code>POINT</code>.</p></dd>
+
+
 <dt>destination</dt>
 <dd><p><code>sf</code> object, the destination locations of geometry type <code>POINT</code>.</p></dd>
+
+
 <dt>datetime</dt>
 <dd><p><code>POSIXct</code> object, datetime for the departure (or arrival if <code>arrival = TRUE</code>).</p></dd>
+
+
 <dt>arrival</dt>
 <dd><p>boolean, calculate connections for arrival at the defined time (<code>default = FALSE</code>)?</p></dd>
+
+
 <dt>results</dt>
 <dd><p>numeric, maximum number of suggested public transport routes (Valid range: 1 and 6).</p></dd>
+
+
 <dt>transfers</dt>
 <dd><p>numeric, maximum number of transfers allowed per route (Valid range: -1 and 6, whereby the <code>default = -1</code> allows for unlimited transfers).</p></dd>
+
+
 <dt>transport_mode</dt>
 <dd><p>character, enable or disable (<code>"-"</code> prefix) transport modes. Note: Do not enable and disable modes at the same time (<code>default = NULL</code>).</p></dd>
+
+
 <dt>summary</dt>
 <dd><p>boolean, return a summary of the public transport connections instead of the sections of the routes (<code>default = FALSE</code>)?</p></dd>
+
+
 <dt>url_only</dt>
 <dd><p>boolean, only return the generated URLs (<code>default = FALSE</code>)?</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>sf</code> object containing the requested routes.</p>
+    
+
+<p>An <code>sf</code> object containing the requested routes.</p>
     </div>
     <div id="references">
     <h2>References</h2>
     <p><a href="https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html" class="external-link">HERE Public Transit API: Transit Route</a></p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Provide an API Key for a HERE project</span></span>
-<span class="r-in"><span class="fu"><a href="set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Connection sections</span></span>
-<span class="r-in"><span class="va">sections</span> <span class="op">&lt;-</span> <span class="fu">connection</span><span class="op">(</span></span>
-<span class="r-in">  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,</span>
-<span class="r-in">  summary <span class="op">=</span> <span class="cn">FALSE</span>, url_only <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Connection summary</span></span>
-<span class="r-in"><span class="va">summary</span> <span class="op">&lt;-</span> <span class="fu">connection</span><span class="op">(</span></span>
-<span class="r-in">  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,</span>
-<span class="r-in">  summary <span class="op">=</span> <span class="cn">TRUE</span>, url_only <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Provide an API Key for a HERE project</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Connection sections</span></span></span>
+<span class="r-in"><span><span class="va">sections</span> <span class="op">&lt;-</span> <span class="fu">connection</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,</span></span>
+<span class="r-in"><span>  summary <span class="op">=</span> <span class="cn">FALSE</span>, url_only <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Connection summary</span></span></span>
+<span class="r-in"><span><span class="va">summary</span> <span class="op">&lt;-</span> <span class="fu">connection</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>, destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,</span></span>
+<span class="r-in"><span>  summary <span class="op">=</span> <span class="cn">TRUE</span>, url_only <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -173,7 +192,7 @@ Two modes are provided:</p><ul><li><p><code>summary = FALSE</code>: The public t
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

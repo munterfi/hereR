@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -141,11 +141,11 @@
 </h3>
 <p>Request available public transport connections as detailed sections:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">connection_section</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
-  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>,
-  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,
-  summary <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">connection_section</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span></span>
+<span>  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>,</span>
+<span>  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,</span>
+<span>  summary <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The <code>id</code> column corresponds to the row of the input locations (<code>origin</code> and <code>destination</code>) and the <code>rank</code> column enumerates the alternative routes. The maximum number of alternatives can be set by the <code>results</code> parameter. Each row in the returned <code>sf</code> object corresponds to a route section with a transport mode in a vehicle without a transfer.</p>
 <table class="table">
 <thead><tr>
@@ -204,13 +204,13 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:18:00
+2022-07-24 13:57:00
 </td>
 <td style="text-align:left;">
 ORIG
 </td>
 <td style="text-align:left;">
-2021-11-19 17:28:00
+2022-07-24 14:07:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
@@ -231,7 +231,7 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-582
+577
 </td>
 <td style="text-align:right;">
 600
@@ -248,13 +248,13 @@ NA
 2
 </td>
 <td style="text-align:left;">
-2021-11-19 17:28:00
+2022-07-24 14:07:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2021-11-19 17:38:00
+2022-07-24 14:17:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
@@ -272,10 +272,10 @@ m2
 Transports Publics de la Région Lausannoise sa
 </td>
 <td style="text-align:left;">
-Lausanne, gare
+Lausanne, Ouchy-Olympique
 </td>
 <td style="text-align:right;">
-2941
+2940
 </td>
 <td style="text-align:right;">
 600
@@ -292,13 +292,13 @@ Lausanne, gare
 3
 </td>
 <td style="text-align:left;">
-2021-11-19 17:38:00
+2022-07-24 14:17:00
 </td>
 <td style="text-align:left;">
 Lausanne, gare
 </td>
 <td style="text-align:left;">
-2021-11-19 17:43:00
+2022-07-24 14:20:00
 </td>
 <td style="text-align:left;">
 Lausanne
@@ -319,10 +319,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-270
+180
 </td>
 <td style="text-align:right;">
-300
+180
 </td>
 </tr>
 <tr>
@@ -336,13 +336,13 @@ NA
 4
 </td>
 <td style="text-align:left;">
-2021-11-19 17:44:00
+2022-07-24 14:20:00
 </td>
 <td style="text-align:left;">
 Lausanne
 </td>
 <td style="text-align:left;">
-2021-11-19 18:56:00
+2022-07-24 15:26:00
 </td>
 <td style="text-align:left;">
 Bern
@@ -351,22 +351,22 @@ Bern
 intercityTrain
 </td>
 <td style="text-align:left;">
-Inter Regional Rail Service
+Long Distance Trains
 </td>
 <td style="text-align:left;">
-IR15
+IC1
 </td>
 <td style="text-align:left;">
 Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:left;">
-Luzern
+St. Gallen
 </td>
 <td style="text-align:right;">
-97078
+82104
 </td>
 <td style="text-align:right;">
-4320
+3960
 </td>
 </tr>
 <tr>
@@ -380,13 +380,13 @@ Luzern
 5
 </td>
 <td style="text-align:left;">
-2021-11-19 19:02:00
+2022-07-24 15:32:00
 </td>
 <td style="text-align:left;">
 Bern
 </td>
 <td style="text-align:left;">
-2021-11-19 19:13:00
+2022-07-24 15:43:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -407,7 +407,7 @@ BLS AG (bls)
 Belp
 </td>
 <td style="text-align:right;">
-8679
+8663
 </td>
 <td style="text-align:right;">
 660
@@ -424,13 +424,13 @@ Belp
 6
 </td>
 <td style="text-align:left;">
-2021-11-19 19:13:00
+2022-07-24 15:43:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
 </td>
 <td style="text-align:left;">
-2021-11-19 19:16:00
+2022-07-24 15:46:00
 </td>
 <td style="text-align:left;">
 DEST
@@ -451,7 +451,7 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-202
+203
 </td>
 <td style="text-align:right;">
 180
@@ -461,25 +461,25 @@ NA
 </table>
 <p>Print the public transport sections on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">connection_section</span>,
-                   zcol <span class="op">=</span> <span class="st">"mode"</span>,
-                   layer.name <span class="op">=</span> <span class="st">"Transport mode"</span>,
-                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-                   homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">connection_section</span>,</span>
+<span>                   zcol <span class="op">=</span> <span class="st">"mode"</span>,</span>
+<span>                   layer.name <span class="op">=</span> <span class="st">"Transport mode"</span>,</span>
+<span>                   map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,</span>
+<span>                   homebutton <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="summary">2. Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h3>
 <p>Request a summary of the available public transport connections:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">connection_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span>
-  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>,
-  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,
-  summary <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">connection_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span></span>
+<span>  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>,</span>
+<span>  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,</span>
+<span>  summary <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:right;">
@@ -531,54 +531,13 @@ duration
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:18:00
+2022-07-24 13:57:00
 </td>
 <td style="text-align:left;">
 Lausanne, Sallaz
 </td>
 <td style="text-align:left;">
-2021-11-19 19:16:00
-</td>
-<td style="text-align:left;">
-Kehrsatz Nord
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-pedestrian, subway, pedestrian, intercityTrain, cityTrain, pedestrian
-</td>
-<td style="text-align:left;">
-Metro Service, Inter Regional Rail Service, Suburban Railway
-</td>
-<td style="text-align:left;">
-m2, IR15, S3
-</td>
-<td style="text-align:left;">
-Transports Publics de la Région Lausannoise sa, Schweizerische Bundesbahnen SBB, BLS AG (bls)
-</td>
-<td style="text-align:right;">
-109752
-</td>
-<td style="text-align:right;">
-6660
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-2021-11-19 17:55:00
-</td>
-<td style="text-align:left;">
-Lausanne, Sallaz
-</td>
-<td style="text-align:left;">
-2021-11-19 19:46:00
+2022-07-24 15:46:00
 </td>
 <td style="text-align:left;">
 Kehrsatz Nord
@@ -599,10 +558,51 @@ m2, IC1, S3
 Transports Publics de la Région Lausannoise sa, Schweizerische Bundesbahnen SBB, BLS AG (bls)
 </td>
 <td style="text-align:right;">
-109759
+94667
 </td>
 <td style="text-align:right;">
-6300
+6180
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+2022-07-24 13:58:00
+</td>
+<td style="text-align:left;">
+Lausanne, Champ-Rond
+</td>
+<td style="text-align:left;">
+2022-07-24 15:46:00
+</td>
+<td style="text-align:left;">
+Kehrsatz Nord
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+pedestrian, bus, subway, pedestrian, intercityTrain, cityTrain, pedestrian
+</td>
+<td style="text-align:left;">
+Bus Service, Metro Service, Long Distance Trains, Suburban Railway
+</td>
+<td style="text-align:left;">
+42, m2, IC1, S3
+</td>
+<td style="text-align:left;">
+Transports Publics de la Région Lausannoise sa, Transports Publics de la Région Lausannoise sa, Schweizerische Bundesbahnen SBB, BLS AG (bls)
+</td>
+<td style="text-align:right;">
+94602
+</td>
+<td style="text-align:right;">
+5820
 </td>
 </tr>
 <tr>
@@ -613,13 +613,13 @@ Transports Publics de la Région Lausannoise sa, Schweizerische Bundesbahnen SBB
 1
 </td>
 <td style="text-align:left;">
-2021-11-19 17:01:00
+2022-07-24 13:37:00
 </td>
 <td style="text-align:left;">
 Basel, Kleinhüningen
 </td>
 <td style="text-align:left;">
-2021-11-19 18:39:00
+2022-07-24 15:17:00
 </td>
 <td style="text-align:left;">
 Zürich HB
@@ -634,16 +634,16 @@ pedestrian, lightRail, pedestrian, intercityTrain, pedestrian
 Tram Service, Long Distance Trains
 </td>
 <td style="text-align:left;">
-8, IC3
+8, EC
 </td>
 <td style="text-align:left;">
 Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:right;">
-97020
+96895
 </td>
 <td style="text-align:right;">
-5760
+5640
 </td>
 </tr>
 <tr>
@@ -654,13 +654,13 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 2
 </td>
 <td style="text-align:left;">
-2021-11-19 17:09:00
+2022-07-24 14:07:00
 </td>
 <td style="text-align:left;">
 Basel, Kleinhüningen
 </td>
 <td style="text-align:left;">
-2021-11-19 19:06:00
+2022-07-24 16:03:00
 </td>
 <td style="text-align:left;">
 Zürich HB
@@ -675,16 +675,16 @@ pedestrian, lightRail, pedestrian, intercityTrain, pedestrian
 Tram Service, Inter Regional Rail Service
 </td>
 <td style="text-align:left;">
-8, IR37
+8, IR36
 </td>
 <td style="text-align:left;">
 Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 </td>
 <td style="text-align:right;">
-84145
+93407
 </td>
 <td style="text-align:right;">
-6780
+6900
 </td>
 </tr>
 </tbody>
@@ -696,31 +696,31 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 </h2>
 <p>The function <code><a href="../reference/station.html">station()</a></code> allows to request public transport stations nearby points of interest (POIs). The <code>radius</code> defines the maximum search distance in meters and <code>results</code> specifies the maximum number of returned stations. The returned <code>sf</code> object contains the locations of the stations and the available public transport lines at the station.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/station.html">station</a></span><span class="op">(</span>
-  poi <span class="op">=</span> <span class="va">poi</span>,
-  radius <span class="op">=</span> <span class="fl">500</span>,
-  results <span class="op">=</span> <span class="fl">5</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/station.html">station</a></span><span class="op">(</span></span>
+<span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
+<span>  radius <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  results <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Print the POIs, the radius and stations on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">buffer</span> <span class="op">&lt;-</span>
-  <span class="va">poi</span> <span class="op">%&gt;%</span>
-  <span class="fu">st_transform</span><span class="op">(</span><span class="fl">2056</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">st_buffer</span><span class="op">(</span><span class="fl">500</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">st_transform</span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">m</span> <span class="op">&lt;-</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>, alpha.region <span class="op">=</span> <span class="fl">1</span>, col.region <span class="op">=</span> <span class="st">"black"</span>,
-                     label <span class="op">=</span> <span class="va">poi</span><span class="op">$</span><span class="va">city</span>, layer.name <span class="op">=</span> <span class="st">"POIs"</span>,
-                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">stations</span>, col.region <span class="op">=</span> <span class="st">"yellow"</span>, alpha <span class="op">=</span> <span class="fl">1</span>,
-                     label <span class="op">=</span> <span class="va">stations</span><span class="op">$</span><span class="va">station</span>, layer.name <span class="op">=</span> <span class="st">"Stations"</span>,
-                     homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">buffer</span>, col.region <span class="op">=</span> <span class="st">"transparent"</span>, alpha.region <span class="op">=</span> <span class="fl">0</span>,
-                     layer.name <span class="op">=</span> <span class="st">"Buffer"</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span>, legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-  <span class="va">m</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">buffer</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">poi</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">st_transform</span><span class="op">(</span><span class="fl">2056</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">st_buffer</span><span class="op">(</span><span class="fl">500</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">st_transform</span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">m</span> <span class="op">&lt;-</span></span>
+<span>    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>, alpha.region <span class="op">=</span> <span class="fl">1</span>, col.region <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>                     label <span class="op">=</span> <span class="va">poi</span><span class="op">$</span><span class="va">city</span>, layer.name <span class="op">=</span> <span class="st">"POIs"</span>,</span>
+<span>                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">stations</span>, col.region <span class="op">=</span> <span class="st">"yellow"</span>, alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                     label <span class="op">=</span> <span class="va">stations</span><span class="op">$</span><span class="va">station</span>, layer.name <span class="op">=</span> <span class="st">"Stations"</span>,</span>
+<span>                     homebutton <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">buffer</span>, col.region <span class="op">=</span> <span class="st">"transparent"</span>, alpha.region <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                     layer.name <span class="op">=</span> <span class="st">"Buffer"</span>, homebutton <span class="op">=</span> <span class="cn">FALSE</span>, legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="va">m</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
@@ -749,7 +749,7 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

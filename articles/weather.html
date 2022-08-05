@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -131,10 +131,10 @@
 </h2>
 <p>In order to request information about the current weather situation points of interest (POIs) have to be provided. The POIs must be an <code>sf</code> object containing geometries of type <code>POINT</code> or a <code>character</code> vector containing place names (e.g. cities). These POIs are passed to the <code><a href="../reference/weather.html">weather()</a></code> function, whereby the <code>product</code> parameter is set to <code>"observation"</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">observation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
-  poi <span class="op">=</span> <span class="va">poi</span>,
-  product <span class="op">=</span> <span class="st">"observation"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">observation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
+<span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
+<span>  product <span class="op">=</span> <span class="st">"observation"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The return value is an <code>sf</code> object, which contains the <code>POINT</code> geometries of the provided POIs and the most recent record on the observed weather. The measurements are taken from the nearest weather observation stations with respect to the POIs. The distance of the stations to the provided POIs is an indicator for the reliabilty of the weather information at each POI. A table of the observed weather near the example POIs:</p>
 <table class="table">
 <thead><tr>
@@ -169,16 +169,16 @@ Rönnimoos
 450
 </td>
 <td style="text-align:left;">
-Passing clouds. Chilly.
+Passing clouds. Warm.
 </td>
 <td style="text-align:right;">
-4.00
+29.00
 </td>
 <td style="text-align:right;">
-93
+51
 </td>
 <td style="text-align:right;">
-3.71
+5.56
 </td>
 <td style="text-align:right;">
 0
@@ -192,19 +192,19 @@ Lugano
 670
 </td>
 <td style="text-align:left;">
-Clear. Cool.
+Scattered clouds. Warm.
 </td>
 <td style="text-align:right;">
-10.00
+30.50
 </td>
 <td style="text-align:right;">
-88
+65
 </td>
 <td style="text-align:right;">
-1.85
+7.41
 </td>
 <td style="text-align:right;">
-0
+190
 </td>
 </tr>
 <tr>
@@ -215,19 +215,19 @@ Chailly
 340
 </td>
 <td style="text-align:left;">
-Quite cool.
+Passing clouds. Warm.
 </td>
 <td style="text-align:right;">
-6.78
+29.89
 </td>
 <td style="text-align:right;">
-86
+46
 </td>
 <td style="text-align:right;">
-1.85
+20.39
 </td>
 <td style="text-align:right;">
-120
+350
 </td>
 </tr>
 <tr>
@@ -238,19 +238,19 @@ Kleinhüningen
 430
 </td>
 <td style="text-align:left;">
-Low clouds. Chilly.
+Passing clouds. Pleasantly warm.
 </td>
 <td style="text-align:right;">
-3.50
+29.11
 </td>
 <td style="text-align:right;">
-97
+39
 </td>
 <td style="text-align:right;">
-9.27
+5.56
 </td>
 <td style="text-align:right;">
-350
+310
 </td>
 </tr>
 <tr>
@@ -261,16 +261,16 @@ Kehrsatz
 620
 </td>
 <td style="text-align:left;">
-Fog. Chilly.
+Passing clouds. Warm.
 </td>
 <td style="text-align:right;">
-3.00
+29.00
 </td>
 <td style="text-align:right;">
-93
+48
 </td>
 <td style="text-align:right;">
-7.41
+14.83
 </td>
 <td style="text-align:right;">
 320
@@ -278,22 +278,22 @@ Fog. Chilly.
 </tr>
 <tr>
 <td style="text-align:left;">
-Zürich (Kreis 7) / Fluntern
+Zürich (Kreis 6) / Oberstrass
 </td>
 <td style="text-align:right;">
-850
+820
 </td>
 <td style="text-align:left;">
-Fog. Chilly.
+Partly sunny. Warm.
 </td>
 <td style="text-align:right;">
-3.00
+28.00
 </td>
 <td style="text-align:right;">
-100
+45
 </td>
 <td style="text-align:right;">
-3.71
+9.27
 </td>
 <td style="text-align:right;">
 0
@@ -307,19 +307,19 @@ Geneva
 490
 </td>
 <td style="text-align:left;">
-Clear. Quite cool.
+Passing clouds. Pleasantly warm.
 </td>
 <td style="text-align:right;">
-6.00
+30.28
 </td>
 <td style="text-align:right;">
-87
+31
 </td>
 <td style="text-align:right;">
-3.71
+12.97
 </td>
 <td style="text-align:right;">
-20
+60
 </td>
 </tr>
 <tr>
@@ -330,112 +330,112 @@ Vaduz
 940
 </td>
 <td style="text-align:left;">
-Quite cool.
+Passing clouds. Warm.
 </td>
 <td style="text-align:right;">
-4.89
+28.89
 </td>
 <td style="text-align:right;">
-88
+53
 </td>
 <td style="text-align:right;">
-1.85
+11.12
 </td>
 <td style="text-align:right;">
-10
+330
 </td>
 </tr>
 </tbody>
 </table>
 <p>Print the weather observation information on an interactive leaflet map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">m</span> <span class="op">&lt;-</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">observation</span>,
-                     zcol <span class="op">=</span> <span class="st">"temperature"</span>,
-                     cex <span class="op">=</span> <span class="va">observation</span><span class="op">$</span><span class="va">humidity</span><span class="op">/</span><span class="fl">4</span>,
-                     layer.name <span class="op">=</span> <span class="st">"Observation"</span>,
-                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-                     homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-    <span class="op">)</span> <span class="op">+</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>,
-                     zcol <span class="op">=</span> <span class="st">"city"</span>,
-                     cex <span class="op">=</span> <span class="fl">1</span>,
-                     col.region <span class="op">=</span> <span class="st">"black"</span>,
-                     legend <span class="op">=</span> <span class="cn">FALSE</span>,
-                     homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-    <span class="op">)</span>
-  <span class="va">m</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">m</span> <span class="op">&lt;-</span></span>
+<span>    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">observation</span>,</span>
+<span>                     zcol <span class="op">=</span> <span class="st">"temperature"</span>,</span>
+<span>                     cex <span class="op">=</span> <span class="va">observation</span><span class="op">$</span><span class="va">humidity</span><span class="op">/</span><span class="fl">4</span>,</span>
+<span>                     layer.name <span class="op">=</span> <span class="st">"Observation"</span>,</span>
+<span>                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,</span>
+<span>                     homebutton <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>,</span>
+<span>                     zcol <span class="op">=</span> <span class="st">"city"</span>,</span>
+<span>                     cex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                     col.region <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>                     legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     homebutton <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="va">m</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="forecast">Forecast<a class="anchor" aria-label="anchor" href="#forecast"></a>
 </h2>
 <p>An hourly forecast of the predicted weather for the following seven days can be obtained by setting the <code>product</code> parameter to <code>"forecast_hourly"</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
-  poi <span class="op">=</span> <span class="va">poi</span>,
-  product <span class="op">=</span> <span class="st">"forecast_hourly"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
+<span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
+<span>  product <span class="op">=</span> <span class="st">"forecast_hourly"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Print the weather observation information on an interactive leaflet map with popup graphs for temperature and humidity:</p>
 <ol style="list-style-type: decimal">
 <li>Create a list containing the temperature and humidity graphs for every POI:</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">fc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-      dt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">utcTime</span>, format <span class="op">=</span> <span class="st">"%Y-%m-%dT%H:%M:%OS"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,
-      te <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">temperature</span><span class="op">)</span>,
-      rh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">humidity</span><span class="op">)</span>
-    <span class="op">)</span>
-    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">fc</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">te</span>, colour <span class="op">=</span> <span class="st">"Temperature"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">rh</span><span class="op">/</span><span class="fl">5</span>, colour <span class="op">=</span> <span class="st">"Humidity"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>sec.axis <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/sec_axis.html" class="external-link">sec_axis</a></span><span class="op">(</span><span class="op">~</span><span class="va">.</span><span class="op">*</span><span class="fl">5</span>, name <span class="op">=</span> <span class="st">"Relative humidity [%]"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Air temperature [°C]"</span>, x <span class="op">=</span> <span class="st">""</span>, colour <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">station</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span>, panel.background <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">fc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>      dt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">utcTime</span>, format <span class="op">=</span> <span class="st">"%Y-%m-%dT%H:%M:%OS"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
+<span>      te <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">temperature</span><span class="op">)</span>,</span>
+<span>      rh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">forecast</span><span class="op">[[</span><span class="va">x</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">humidity</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">fc</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">te</span>, colour <span class="op">=</span> <span class="st">"Temperature"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">rh</span><span class="op">/</span><span class="fl">5</span>, colour <span class="op">=</span> <span class="st">"Humidity"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>sec.axis <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/sec_axis.html" class="external-link">sec_axis</a></span><span class="op">(</span><span class="op">~</span><span class="va">.</span><span class="op">*</span><span class="fl">5</span>, name <span class="op">=</span> <span class="st">"Relative humidity [%]"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Air temperature [°C]"</span>, x <span class="op">=</span> <span class="st">""</span>, colour <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">$</span><span class="va">station</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span>, panel.background <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Then add list of graphs to the leaflet map using the the <code>popup</code> parameter:</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"mapview"</span>, <span class="st">"leafpop"</span><span class="op">)</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">m</span> <span class="op">&lt;-</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">forecast</span>,
-                     color <span class="op">=</span> <span class="st">"black"</span>,
-                     col.region <span class="op">=</span> <span class="st">"yellow"</span>,
-                     layer.name <span class="op">=</span> <span class="st">"Weather station"</span>,
-                     zcol <span class="op">=</span> <span class="st">"station"</span>,
-                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,
-                     homebutton <span class="op">=</span> <span class="cn">FALSE</span>,
-                     legend <span class="op">=</span> <span class="cn">FALSE</span>,
-                     popup <span class="op">=</span> <span class="fu">leafpop</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leafpop/man/popup.html" class="external-link">popupGraph</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
-    <span class="op">)</span> <span class="op">+</span>
-    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>,
-                     zcol <span class="op">=</span> <span class="st">"city"</span>,
-                     cex <span class="op">=</span> <span class="fl">1</span>,
-                     col.region <span class="op">=</span> <span class="st">"black"</span>,
-                     layer.name <span class="op">=</span> <span class="st">"POI"</span>,
-                     legend <span class="op">=</span> <span class="cn">FALSE</span>,
-                     homebutton <span class="op">=</span> <span class="cn">FALSE</span>
-    <span class="op">)</span>
-  <span class="va">m</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"mapview"</span>, <span class="st">"leafpop"</span><span class="op">)</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">m</span> <span class="op">&lt;-</span></span>
+<span>    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">forecast</span>,</span>
+<span>                     color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>                     col.region <span class="op">=</span> <span class="st">"yellow"</span>,</span>
+<span>                     layer.name <span class="op">=</span> <span class="st">"Weather station"</span>,</span>
+<span>                     zcol <span class="op">=</span> <span class="st">"station"</span>,</span>
+<span>                     map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Esri.WorldTopoMap"</span><span class="op">)</span>,</span>
+<span>                     homebutton <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     popup <span class="op">=</span> <span class="fu">leafpop</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leafpop/man/popup.html" class="external-link">popupGraph</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">poi</span>,</span>
+<span>                     zcol <span class="op">=</span> <span class="st">"city"</span>,</span>
+<span>                     cex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                     col.region <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>                     layer.name <span class="op">=</span> <span class="st">"POI"</span>,</span>
+<span>                     legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     homebutton <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="va">m</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="astronomy">Astronomy<a class="anchor" aria-label="anchor" href="#astronomy"></a>
 </h2>
 <p>An astronomical forecast is requested by setting the <code>product</code> parameter to <code>"forecast_astronomy"</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">astronomy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
-  poi <span class="op">=</span> <span class="va">poi</span>,
-  product <span class="op">=</span> <span class="st">"forecast_astronomy"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">astronomy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
+<span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
+<span>  product <span class="op">=</span> <span class="st">"forecast_astronomy"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Print a table for the sun and moon times of the first example POI, where the nearest station is ‘Emmenbrücke’:</p>
 <table class="table">
 <thead><tr>
@@ -461,162 +461,162 @@ phase
 <tbody>
 <tr>
 <td style="text-align:left;">
-2021-11-19
+2022-07-24
 </td>
 <td style="text-align:left;">
-7:35AM
+5:55AM
 </td>
 <td style="text-align:left;">
-4:48PM
+9:10PM
 </td>
 <td style="text-align:left;">
-4:53PM
+1:59AM
 </td>
 <td style="text-align:left;">
-7:33AM
+6:22PM
 </td>
 <td style="text-align:left;">
-Full moon
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2021-11-20
-</td>
-<td style="text-align:left;">
-7:37AM
-</td>
-<td style="text-align:left;">
-4:47PM
-</td>
-<td style="text-align:left;">
-5:22PM
-</td>
-<td style="text-align:left;">
-8:39AM
-</td>
-<td style="text-align:left;">
-Full moon
+Waning crescent
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-11-21
+2022-07-25
 </td>
 <td style="text-align:left;">
-7:38AM
+5:57AM
 </td>
 <td style="text-align:left;">
-4:46PM
+9:09PM
 </td>
 <td style="text-align:left;">
-5:58PM
+2:34AM
 </td>
 <td style="text-align:left;">
-9:42AM
+7:22PM
 </td>
 <td style="text-align:left;">
-Waning gibbous
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2021-11-22
-</td>
-<td style="text-align:left;">
-7:39AM
-</td>
-<td style="text-align:left;">
-4:45PM
-</td>
-<td style="text-align:left;">
-6:43PM
-</td>
-<td style="text-align:left;">
-10:40AM
-</td>
-<td style="text-align:left;">
-Waning gibbous
+Waning crescent
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-11-23
+2022-07-26
 </td>
 <td style="text-align:left;">
-7:41AM
+5:58AM
 </td>
 <td style="text-align:left;">
-4:44PM
+9:07PM
 </td>
 <td style="text-align:left;">
-7:36PM
+3:17AM
 </td>
 <td style="text-align:left;">
-11:32AM
+8:14PM
 </td>
 <td style="text-align:left;">
-Waning gibbous
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2021-11-24
-</td>
-<td style="text-align:left;">
-7:42AM
-</td>
-<td style="text-align:left;">
-4:44PM
-</td>
-<td style="text-align:left;">
-8:37PM
-</td>
-<td style="text-align:left;">
-12:14PM
-</td>
-<td style="text-align:left;">
-Waning gibbous
+Waning crescent
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-11-25
+2022-07-27
 </td>
 <td style="text-align:left;">
-7:43AM
+5:59AM
 </td>
 <td style="text-align:left;">
-4:43PM
+9:06PM
 </td>
 <td style="text-align:left;">
-9:44PM
+4:09AM
 </td>
 <td style="text-align:left;">
-12:49PM
+8:57PM
 </td>
 <td style="text-align:left;">
-Waning gibbous
+Waning crescent
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2021-11-26
+2022-07-28
 </td>
 <td style="text-align:left;">
-7:45AM
+6:00AM
 </td>
 <td style="text-align:left;">
-4:42PM
+9:05PM
 </td>
 <td style="text-align:left;">
-10:53PM
+5:10AM
 </td>
 <td style="text-align:left;">
-1:17PM
+9:32PM
 </td>
 <td style="text-align:left;">
-Waning gibbous
+New moon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2022-07-29
+</td>
+<td style="text-align:left;">
+6:01AM
+</td>
+<td style="text-align:left;">
+9:04PM
+</td>
+<td style="text-align:left;">
+6:15AM
+</td>
+<td style="text-align:left;">
+9:59PM
+</td>
+<td style="text-align:left;">
+New moon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2022-07-30
+</td>
+<td style="text-align:left;">
+6:02AM
+</td>
+<td style="text-align:left;">
+9:03PM
+</td>
+<td style="text-align:left;">
+7:23AM
+</td>
+<td style="text-align:left;">
+10:22PM
+</td>
+<td style="text-align:left;">
+New moon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2022-07-31
+</td>
+<td style="text-align:left;">
+6:04AM
+</td>
+<td style="text-align:left;">
+9:01PM
+</td>
+<td style="text-align:left;">
+8:31AM
+</td>
+<td style="text-align:left;">
+10:41PM
+</td>
+<td style="text-align:left;">
+Waxing crescent
 </td>
 </tr>
 </tbody>
@@ -627,10 +627,10 @@ Waning gibbous
 </h2>
 <p>Current weather alerts, near provided POIs, are obtain by the product <code>alerts</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">alerts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span>
-  poi <span class="op">=</span> <span class="va">poi</span>,
-  product <span class="op">=</span> <span class="st">"alerts"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">alerts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
+<span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
+<span>  product <span class="op">=</span> <span class="st">"alerts"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>This returns an <code>sf</code> object with the POIs and the attribute <code>"alerts"</code>, which is a <code>data.table</code>, which contains the current weather alerts. If no alerts are recorded near a POI the attribute <code>"alerts"</code> is <code>NULL</code>.</p>
 </div>
 <div class="section level2">
@@ -659,7 +659,7 @@ Waning gibbous
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

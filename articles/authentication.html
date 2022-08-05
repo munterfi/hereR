@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -139,8 +139,8 @@
 </ol>
 <p>The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). To set the key, please use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfi.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfi.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, the key can be exported directly to the environment: <code>export HERE_API_KEY="&lt;YOUR-KEY&gt;"</code></p>
 </div>
 <div class="section level2">
@@ -148,7 +148,7 @@
 </h2>
 <p>By default, the <strong>hereR</strong> package does not print messages with information about the requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Use <code>set_Verbose(FALSE)</code> to set the <strong>hereR</strong> package to be quiet again.</p>
 </div>
 <div class="section level2">
@@ -257,7 +257,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>
