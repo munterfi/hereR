@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
 
       
 
-      </header><script src="authentication_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Authentication &amp; Options</h1>
@@ -125,36 +125,50 @@
 
     
     
-<p>Set up a valid authentication to the ‘HERE’ REST APIs and optionally configure a proxy.</p>
+<p>Set up a valid authentication to the ‘HERE’ REST APIs and optionally
+configure a proxy.</p>
 <div class="section level2">
 <h2 id="application-credentials">Application credentials<a class="anchor" aria-label="anchor" href="#application-credentials"></a>
 </h2>
-<p>In order to use the functionality of the <strong>hereR</strong> package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:</p>
+<p>In order to use the functionality of the <strong>hereR</strong>
+package, application credentials for a HERE project must be provided.
+The HERE application credentials (API Key) can be obtained for free as
+follows:</p>
 <ol style="list-style-type: decimal">
 <li>Go to <a href="https://developer.here.com/" class="external-link">developer.here.com</a>
 </li>
-<li>Sign up for a HERE developer account, which automatically creates a new project</li>
+<li>Sign up for a HERE developer account, which automatically creates a
+new project</li>
 <li>Click ‘REST: Generate APP’</li>
 <li>Click ‘Create API Key’ and copy the key</li>
 </ol>
-<p>The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). To set the key, please use:</p>
+<p>The API key is set for the current R session and will be used to
+authenticate in the requests to the HERE REST APIs (250K free
+transactions per month). To set the key, please use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://munterfi.github.io/hereR/" class="external-link">hereR</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/set_key.html">set_key</a></span><span class="op">(</span><span class="st">"&lt;YOUR API KEY&gt;"</span><span class="op">)</span></span></code></pre></div>
-<p>Alternatively, the key can be exported directly to the environment: <code>export HERE_API_KEY="&lt;YOUR-KEY&gt;"</code></p>
+<p>Alternatively, the key can be exported directly to the environment:
+<code>export HERE_API_KEY="&lt;YOUR-KEY&gt;"</code></p>
 </div>
 <div class="section level2">
 <h2 id="information-about-requests">Information about requests<a class="anchor" aria-label="anchor" href="#information-about-requests"></a>
 </h2>
-<p>By default, the <strong>hereR</strong> package does not print messages with information about the requests sent and the data received from to the HERE APIs. If this information should be printed for the current R session, use:</p>
+<p>By default, the <strong>hereR</strong> package does not print
+messages with information about the requests sent and the data received
+from to the HERE APIs. If this information should be printed for the
+current R session, use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/set_verbose.html">set_verbose</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>Use <code>set_Verbose(FALSE)</code> to set the <strong>hereR</strong> package to be quiet again.</p>
+<p>Use <code>set_Verbose(FALSE)</code> to set the <strong>hereR</strong>
+package to be quiet again.</p>
 </div>
 <div class="section level2">
 <h2 id="rate-limits">Rate limits<a class="anchor" aria-label="anchor" href="#rate-limits"></a>
 </h2>
-<p>For freemium licenses the number of requests per second (RPS) is limited, use <code>set_freemium(FALSE)</code> to turn off rate limits for accounts with paid plans.</p>
+<p>For freemium licenses the number of requests per second (RPS) is
+limited, use <code>set_freemium(FALSE)</code> to turn off rate limits
+for accounts with paid plans.</p>
 <p>The limits are:</p>
 <table class="table">
 <thead><tr class="header">
@@ -220,22 +234,31 @@
 <div class="section level2">
 <h2 id="proxy">Proxy<a class="anchor" aria-label="anchor" href="#proxy"></a>
 </h2>
-<p>If you are working behind a corporate proxy the requests sent by <strong>hereR</strong> might fail with timeout errors. In this case, consider setting a global proxy for R. Open the R environment file <code>file.edit('~/.Renviron')</code> and add your proxy configuration:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="va">http_proxy=</span>http://user:passwd<span class="ex">@proxy.dom.com</span>:port/</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="va">https_proxy=</span>https://user:passwd<span class="ex">@proxy.dom.com</span>:port/</span></code></pre></div>
-<p><strong>Note:</strong> On RStudio Server this file is located at <code>R_HOME/etc/Renviron.site</code>.</p>
+<p>If you are working behind a corporate proxy the requests sent by
+<strong>hereR</strong> might fail with timeout errors. In this case,
+consider setting a global proxy for R. Open the R environment file
+<code>file.edit('~/.Renviron')</code> and add your proxy
+configuration:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">http_proxy</span><span class="op">=</span>http://user:passwd@proxy.dom.com:port/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">https_proxy</span><span class="op">=</span>https://user:passwd@proxy.dom.com:port/</span></code></pre></div>
+<p><strong>Note:</strong> On RStudio Server this file is located at
+<code>R_HOME/etc/Renviron.site</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="remove-credentials">Remove credentials<a class="anchor" aria-label="anchor" href="#remove-credentials"></a>
 </h2>
-<p>To remove previously set credentials from the current R session use <code><a href="../reference/unset_key.html">unset_key()</a></code>. For overwriting the application credentials use again the <code><a href="../reference/set_key.html">set_key()</a></code> function.</p>
+<p>To remove previously set credentials from the current R session use
+<code><a href="../reference/unset_key.html">unset_key()</a></code>. For overwriting the application credentials
+use again the <code><a href="../reference/set_key.html">set_key()</a></code> function.</p>
 </div>
 <div class="section level2">
 <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
 </h2>
 <ul>
-<li><a href="https://developer.here.com/sign-up?create=Freemium-Basic&amp;keepState=true&amp;step=account" class="external-link">Sign up as developer</a></li>
-<li><a href="https://developer.here.com/pricing" class="external-link">Pricing and plans</a></li>
+<li><a href="https://developer.here.com/sign-up?create=Freemium-Basic&amp;keepState=true&amp;step=account" class="external-link">Sign
+up as developer</a></li>
+<li><a href="https://developer.here.com/pricing" class="external-link">Pricing and
+plans</a></li>
 </ul>
 </div>
   </div>
@@ -257,7 +280,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
       </footer>

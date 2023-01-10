@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
 
       
 
-      </header><script src="traffic_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Traffic API</h1>
@@ -125,16 +125,25 @@
 
     
     
-<p>Real-time traffic flow and incident information based on the ‘HERE Traffic’ API. The traffic flow data contains speed (<code>"SP"</code>) and congestion (jam factor: <code>"JF"</code>) information. Traffic incidents contain information about location, time, duration, severity, description and other details.</p>
+<p>Real-time traffic flow and incident information based on the ‘HERE
+Traffic’ API. The traffic flow data contains speed (<code>"SP"</code>)
+and congestion (jam factor: <code>"JF"</code>) information. Traffic
+incidents contain information about location, time, duration, severity,
+description and other details.</p>
 <div class="section level2">
 <h2 id="flow">Flow<a class="anchor" aria-label="anchor" href="#flow"></a>
 </h2>
-<p>In order to request the traffic flow, areas of interest (AOIs) have to be provided. The AOIs must be an <code>sf</code> object containing a polygon or multiple polygons. The response from the HERE Traffic API will be spatially joined on the AOIs and thereby the traffic flows are mapped to the corresponding polygon.</p>
+<p>In order to request the traffic flow, areas of interest (AOIs) have
+to be provided. The AOIs must be an <code>sf</code> object containing a
+polygon or multiple polygons. The response from the HERE Traffic API
+will be spatially joined on the AOIs and thereby the traffic flows are
+mapped to the corresponding polygon.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flows</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flow.html">flow</a></span><span class="op">(</span></span>
 <span>  aoi <span class="op">=</span> <span class="va">aoi</span><span class="op">[</span><span class="va">aoi</span><span class="op">$</span><span class="va">code</span> <span class="op">==</span> <span class="st">"LI"</span>, <span class="op">]</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Print the (ordered) ‘jam factor’ of the traffic flow on an interactive leaflet map:</p>
+<p>Print the (ordered) ‘jam factor’ of the traffic flow on an
+interactive leaflet map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flows</span> <span class="op">&lt;-</span> <span class="va">flows</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">flows</span><span class="op">$</span><span class="va">JF</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">flows</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
@@ -152,7 +161,12 @@
 <div class="section level2">
 <h2 id="incidents">Incidents<a class="anchor" aria-label="anchor" href="#incidents"></a>
 </h2>
-<p>AOIs also must be provided in order to request information about traffic incidents in specific regions. The time interval, which defines the traffic incidents that should be considered, can be specitified by the <code>from</code> parameter. The datetime information passed to the function must be a timestamp of type <code>POSIXct</code>. By default, the time interval is defined as the last week.</p>
+<p>AOIs also must be provided in order to request information about
+traffic incidents in specific regions. The time interval, which defines
+the traffic incidents that should be considered, can be specitified by
+the <code>from</code> parameter. The datetime information passed to the
+function must be a timestamp of type <code>POSIXct</code>. By default,
+the time interval is defined as the last week.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">incidents</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/incident.html">incident</a></span><span class="op">(</span></span>
 <span>  aoi <span class="op">=</span> <span class="va">aoi</span><span class="op">[</span><span class="va">aoi</span><span class="op">$</span><span class="va">code</span> <span class="op">==</span> <span class="st">"LI"</span>, <span class="op">]</span>,</span>
@@ -196,7 +210,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
       </footer>

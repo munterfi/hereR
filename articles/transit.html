@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
 
       
 
-      </header><script src="transit_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Public Transit API</h1>
@@ -125,28 +125,42 @@
 
     
     
-<p>Request public transport connections between given points and find stations nearby using the ‘HERE Public Transit’ API.</p>
+<p>Request public transport connections between given points and find
+stations nearby using the ‘HERE Public Transit’ API.</p>
 <div class="section level2">
 <h2 id="connections">Connections<a class="anchor" aria-label="anchor" href="#connections"></a>
 </h2>
-<p>The function <code><a href="../reference/connection.html">connection()</a></code> allows to request public transport connections from the API. Two types of requests are provided:</p>
+<p>The function <code><a href="../reference/connection.html">connection()</a></code> allows to request public
+transport connections from the API. Two types of requests are
+provided:</p>
 <ul>
 <li>
-<code>connection(..., summary = FALSE)</code>: The public transport connections are returned as multiple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.</li>
+<code>connection(..., summary = FALSE)</code>: The public transport
+connections are returned as multiple sections with the same vehicle and
+transport mode. Each row represents a section with a detailed route
+geometry.</li>
 <li>
-<code>connection(..., summary = TRUE)</code>: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.</li>
+<code>connection(..., summary = TRUE)</code>: A summary of the
+connections is retrieved, where each connection is represented as one
+row with a unified and simplified geometry.</li>
 </ul>
 <div class="section level3">
 <h3 id="sections">1. Sections<a class="anchor" aria-label="anchor" href="#sections"></a>
 </h3>
-<p>Request available public transport connections as detailed sections:</p>
+<p>Request available public transport connections as detailed
+sections:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">connection_section</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connection.html">connection</a></span><span class="op">(</span></span>
 <span>  origin <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span>,</span>
 <span>  destination <span class="op">=</span> <span class="va">poi</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span>,</span>
 <span>  summary <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The <code>id</code> column corresponds to the row of the input locations (<code>origin</code> and <code>destination</code>) and the <code>rank</code> column enumerates the alternative routes. The maximum number of alternatives can be set by the <code>results</code> parameter. Each row in the returned <code>sf</code> object corresponds to a route section with a transport mode in a vehicle without a transfer.</p>
+<p>The <code>id</code> column corresponds to the row of the input
+locations (<code>origin</code> and <code>destination</code>) and the
+<code>rank</code> column enumerates the alternative routes. The maximum
+number of alternatives can be set by the <code>results</code> parameter.
+Each row in the returned <code>sf</code> object corresponds to a route
+section with a transport mode in a vehicle without a transfer.</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:right;">
@@ -459,7 +473,8 @@ NA
 </tr>
 </tbody>
 </table>
-<p>Print the public transport sections on an interactive leaflet map:</p>
+<p>Print the public transport sections on an interactive leaflet
+map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">connection_section</span>,</span>
@@ -555,7 +570,8 @@ Metro Service, Long Distance Trains, Suburban Railway
 m2, IC1, S3
 </td>
 <td style="text-align:left;">
-Transports Publics de la Région Lausannoise sa, Schweizerische Bundesbahnen SBB, BLS AG (bls)
+Transports Publics de la Région Lausannoise sa, Schweizerische
+Bundesbahnen SBB, BLS AG (bls)
 </td>
 <td style="text-align:right;">
 94667
@@ -587,7 +603,8 @@ Kehrsatz Nord
 3
 </td>
 <td style="text-align:left;">
-pedestrian, bus, subway, pedestrian, intercityTrain, cityTrain, pedestrian
+pedestrian, bus, subway, pedestrian, intercityTrain, cityTrain,
+pedestrian
 </td>
 <td style="text-align:left;">
 Bus Service, Metro Service, Long Distance Trains, Suburban Railway
@@ -596,7 +613,8 @@ Bus Service, Metro Service, Long Distance Trains, Suburban Railway
 42, m2, IC1, S3
 </td>
 <td style="text-align:left;">
-Transports Publics de la Région Lausannoise sa, Transports Publics de la Région Lausannoise sa, Schweizerische Bundesbahnen SBB, BLS AG (bls)
+Transports Publics de la Région Lausannoise sa, Transports Publics de la
+Région Lausannoise sa, Schweizerische Bundesbahnen SBB, BLS AG (bls)
 </td>
 <td style="text-align:right;">
 94602
@@ -694,14 +712,20 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 <div class="section level2">
 <h2 id="stations">Stations<a class="anchor" aria-label="anchor" href="#stations"></a>
 </h2>
-<p>The function <code><a href="../reference/station.html">station()</a></code> allows to request public transport stations nearby points of interest (POIs). The <code>radius</code> defines the maximum search distance in meters and <code>results</code> specifies the maximum number of returned stations. The returned <code>sf</code> object contains the locations of the stations and the available public transport lines at the station.</p>
+<p>The function <code><a href="../reference/station.html">station()</a></code> allows to request public
+transport stations nearby points of interest (POIs). The
+<code>radius</code> defines the maximum search distance in meters and
+<code>results</code> specifies the maximum number of returned stations.
+The returned <code>sf</code> object contains the locations of the
+stations and the available public transport lines at the station.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/station.html">station</a></span><span class="op">(</span></span>
 <span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
 <span>  radius <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>  results <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Print the POIs, the radius and stations on an interactive leaflet map:</p>
+<p>Print the POIs, the radius and stations on an interactive leaflet
+map:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">buffer</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">poi</span> <span class="op">%&gt;%</span></span>
@@ -726,8 +750,10 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 <h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
 </h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html" class="external-link">Public Transit Routing: Routing</a></li>
-<li><a href="https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html" class="external-link">Public Transit Routing: Station Search</a></li>
+<li><a href="https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html" class="external-link">Public
+Transit Routing: Routing</a></li>
+<li><a href="https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html" class="external-link">Public
+Transit Routing: Station Search</a></li>
 </ul>
 </div>
   </div>
@@ -749,7 +775,7 @@ Basler Verkehrsbetriebe, Schweizerische Bundesbahnen SBB
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
       </footer>

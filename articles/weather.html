@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
 
       
 
-      </header><script src="weather_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Destination Weather API</h1>
@@ -125,17 +125,31 @@
 
     
     
-<p>Weather forecasts, reports on current weather conditions, astronomical information and alerts at a specific location based on the ‘HERE Destination Weather’ API.</p>
+<p>Weather forecasts, reports on current weather conditions,
+astronomical information and alerts at a specific location based on the
+‘HERE Destination Weather’ API.</p>
 <div class="section level2">
 <h2 id="observations">Observations<a class="anchor" aria-label="anchor" href="#observations"></a>
 </h2>
-<p>In order to request information about the current weather situation points of interest (POIs) have to be provided. The POIs must be an <code>sf</code> object containing geometries of type <code>POINT</code> or a <code>character</code> vector containing place names (e.g. cities). These POIs are passed to the <code><a href="../reference/weather.html">weather()</a></code> function, whereby the <code>product</code> parameter is set to <code>"observation"</code>:</p>
+<p>In order to request information about the current weather situation
+points of interest (POIs) have to be provided. The POIs must be an
+<code>sf</code> object containing geometries of type <code>POINT</code>
+or a <code>character</code> vector containing place names (e.g. cities).
+These POIs are passed to the <code><a href="../reference/weather.html">weather()</a></code> function, whereby
+the <code>product</code> parameter is set to
+<code>"observation"</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
 <span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
 <span>  product <span class="op">=</span> <span class="st">"observation"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The return value is an <code>sf</code> object, which contains the <code>POINT</code> geometries of the provided POIs and the most recent record on the observed weather. The measurements are taken from the nearest weather observation stations with respect to the POIs. The distance of the stations to the provided POIs is an indicator for the reliabilty of the weather information at each POI. A table of the observed weather near the example POIs:</p>
+<p>The return value is an <code>sf</code> object, which contains the
+<code>POINT</code> geometries of the provided POIs and the most recent
+record on the observed weather. The measurements are taken from the
+nearest weather observation stations with respect to the POIs. The
+distance of the stations to the provided POIs is an indicator for the
+reliabilty of the weather information at each POI. A table of the
+observed weather near the example POIs:</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -347,7 +361,8 @@ Passing clouds. Warm.
 </tr>
 </tbody>
 </table>
-<p>Print the weather observation information on an interactive leaflet map:</p>
+<p>Print the weather observation information on an interactive leaflet
+map:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"mapview"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">m</span> <span class="op">&lt;-</span></span>
@@ -371,15 +386,19 @@ Passing clouds. Warm.
 <div class="section level2">
 <h2 id="forecast">Forecast<a class="anchor" aria-label="anchor" href="#forecast"></a>
 </h2>
-<p>An hourly forecast of the predicted weather for the following seven days can be obtained by setting the <code>product</code> parameter to <code>"forecast_hourly"</code>:</p>
+<p>An hourly forecast of the predicted weather for the following seven
+days can be obtained by setting the <code>product</code> parameter to
+<code>"forecast_hourly"</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
 <span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
 <span>  product <span class="op">=</span> <span class="st">"forecast_hourly"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Print the weather observation information on an interactive leaflet map with popup graphs for temperature and humidity:</p>
+<p>Print the weather observation information on an interactive leaflet
+map with popup graphs for temperature and humidity:</p>
 <ol style="list-style-type: decimal">
-<li>Create a list containing the temperature and humidity graphs for every POI:</li>
+<li>Create a list containing the temperature and humidity graphs for
+every POI:</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -401,7 +420,8 @@ Passing clouds. Warm.
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li>Then add list of graphs to the leaflet map using the the <code>popup</code> parameter:</li>
+<li>Then add list of graphs to the leaflet map using the the
+<code>popup</code> parameter:</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"mapview"</span>, <span class="st">"leafpop"</span><span class="op">)</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -430,13 +450,15 @@ Passing clouds. Warm.
 <div class="section level2">
 <h2 id="astronomy">Astronomy<a class="anchor" aria-label="anchor" href="#astronomy"></a>
 </h2>
-<p>An astronomical forecast is requested by setting the <code>product</code> parameter to <code>"forecast_astronomy"</code>:</p>
+<p>An astronomical forecast is requested by setting the
+<code>product</code> parameter to <code>"forecast_astronomy"</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">astronomy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
 <span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
 <span>  product <span class="op">=</span> <span class="st">"forecast_astronomy"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Print a table for the sun and moon times of the first example POI, where the nearest station is ‘Emmenbrücke’:</p>
+<p>Print a table for the sun and moon times of the first example POI,
+where the nearest station is ‘Emmenbrücke’:</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -625,19 +647,24 @@ Waxing crescent
 <div class="section level2">
 <h2 id="alerts">Alerts<a class="anchor" aria-label="anchor" href="#alerts"></a>
 </h2>
-<p>Current weather alerts, near provided POIs, are obtain by the product <code>alerts</code>:</p>
+<p>Current weather alerts, near provided POIs, are obtain by the product
+<code>alerts</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alerts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/weather.html">weather</a></span><span class="op">(</span></span>
 <span>  poi <span class="op">=</span> <span class="va">poi</span>,</span>
 <span>  product <span class="op">=</span> <span class="st">"alerts"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>This returns an <code>sf</code> object with the POIs and the attribute <code>"alerts"</code>, which is a <code>data.table</code>, which contains the current weather alerts. If no alerts are recorded near a POI the attribute <code>"alerts"</code> is <code>NULL</code>.</p>
+<p>This returns an <code>sf</code> object with the POIs and the
+attribute <code>"alerts"</code>, which is a <code>data.table</code>,
+which contains the current weather alerts. If no alerts are recorded
+near a POI the attribute <code>"alerts"</code> is <code>NULL</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
 </h2>
 <ul>
-<li><a href="https://developer.here.com/documentation/destination-weather/dev_guide/topics/overview.html" class="external-link">Destination Weather API</a></li>
+<li><a href="https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html" class="external-link">Destination
+Weather API</a></li>
 </ul>
 </div>
   </div>
@@ -659,7 +686,7 @@ Waxing crescent
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
       </footer>
