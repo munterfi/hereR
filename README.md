@@ -138,5 +138,5 @@ weather(poi, product = "alerts")
 * [Traffic API](https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html)
 * [Public Transit API](https://developer.here.com/documentation/public-transit/dev_guide/index.html)
 * [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)
-* [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/overview.html)
+* [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)
 

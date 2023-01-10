@@ -1,3 +1,8 @@
+# version 0.9.1
+
+* Resubmit to CRAN due to since the package was archived on 2022-12-27 as email to the maintainer was temporarily not deliverable.
+* Updated r-lib/actions in github action `R-CMD-check.yaml` and `pkgdown.yaml`.
+
 # version 0.9.0
 
 * Allow transport modes `"scooter"`, `"taxi"`, `"bus"`, `"privateBus"` in `route()` and `route_matrix()`.
