@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/hereR)](https://CRAN.R-project.org/package=hereR)
-[![CRAN checks](https://cranchecks.info/badges/worst/hereR)](https://cran.r-project.org/web/checks/check_results_hereR.html)
+[![CRAN checks](https://badges.cranchecks.info/worst/hereR.svg)](https://cran.r-project.org/web/checks/check_results_hereR.html)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/last-month/hereR?color=brightgreen)](https://CRAN.R-project.org/package=hereR)
 [![R build status](https://github.com/munterfi/hereR/workflows/R-CMD-check/badge.svg)](https://github.com/munterfi/hereR/actions)
 [![Codecov test coverage](https://codecov.io/gh/munterfi/hereR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/munterfi/hereR?branch=master)
