@@ -48,13 +48,15 @@ url_station <-
   station(poi = poi, url_only = TRUE)
 
 ## Get response mocks
+# TODO: Update flexpolyline to new format version, temporal workaround:
+tmp_intermodal_route_response <- hereR:::mock$intermodal_route_response
 mock <- list(
   geocode_response = hereR:::.async_request(url_geocode, 5),
   autosuggest_response = hereR:::.async_request(url_autosuggest, 5),
   reverse_geocode_response = hereR:::.async_request(url_reverse_geocode, 5),
   route_response = hereR:::.async_request(url_route, 10),
   route_matrix_response = hereR:::.async_request(url_route_matrix, 1),
-  intermodal_route_response = hereR:::.async_request(url_intermodal_route, 5),
+  # intermodal_route_response = hereR:::.async_request(url_intermodal_route, 1),
   isoline_response = hereR:::.async_request(url_isoline, 1),
   weather_observation_response = hereR:::.async_request(url_weather_observation, 4),
   weather_forecast_hourly_response = hereR:::.async_request(url_weather_forecast_hourly, 4),
@@ -65,15 +67,18 @@ mock <- list(
   connection_response = hereR:::.async_request(url_connection, 10),
   station_response = hereR:::.async_request(url_station, 10)
 )
+mock$intermodal_route_response <- tmp_intermodal_route_response
 
 ## Get examples
+# TODO: Update flexpolyline to new format version, temporal workaround:
+tmp_intermodal_route <- hereR:::example$intermodal_route
 example <- list(
   geocode = geocode(address = poi$city),
   autosuggest = autosuggest(address = poi$city, results = 3),
   reverse_geocode = reverse_geocode(poi = poi, results = 3),
   route = route(origin = poi[1:2, ], destination = poi[3:4, ]),
   route_matrix = route_matrix(origin = poi),
-  intermodal_route = intermodal_route(origin = poi[1:3, ], destination = poi[4:6, ]),
+  # intermodal_route = intermodal_route(origin = poi[1:3, ], destination = poi[4:6, ]),
   isoline = isoline(poi = poi),
   weather_observation = weather(poi = poi, product = "observation"),
   weather_forecast_hourly = weather(poi = poi, product = "forecast_hourly"),
@@ -85,6 +90,7 @@ example <- list(
   connection_summary = connection(origin = poi[3:4, ], destination = poi[5:6, ], results = 2, summary = TRUE),
   station = station(poi)
 )
+example$intermodal_route <- tmp_intermodal_route
 
 ## Save as internal package data
 usethis::use_data(mock, example, overwrite = TRUE, internal = TRUE)

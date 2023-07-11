@@ -42,16 +42,15 @@ flows <- flow(
 Print the (ordered) 'jam factor' of the traffic flow on an interactive leaflet map:
 
 ```{r map_flow, eval=FALSE, out.width='100%'}
-flows <- flows[order(flows$JF), ]
+flows <- flows[order(flows$jam_factor), ]
 rownames(flows) <- NULL
 
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(flows,
-                   zcol = "JF",
-                   lwd = round(flows$JF*2),
-                   layer.name = "Jam factor",
-                   map.types = c("Esri.WorldTopoMap"),
-                   homebutton = FALSE
+    zcol = "jam_factor",
+    layer.name = "Jam factor",
+    map.types = c("Esri.WorldTopoMap"),
+    homebutton = FALSE
   )
 }
 ```
@@ -63,7 +62,7 @@ AOIs also must be provided in order to request information about traffic inciden
 ```{r incidents, eval=FALSE}
 incidents <- incident(
   aoi = aoi[aoi$code == "LI", ],
-  from = Sys.time()-60*60
+  from = Sys.time() - 60 * 60
 )
 ```
 
@@ -72,15 +71,15 @@ Print the traffic incidents on an interactive leaflet map:
 ```{r map_incidents, eval=FALSE, out.width='100%'}
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(incidents,
-                   zcol = "type",
-                   layer.name = "Incident type",
-                   map.types = c("Esri.WorldTopoMap"),
-                   homebutton = FALSE
+    zcol = "type",
+    layer.name = "Incident type",
+    map.types = c("Esri.WorldTopoMap"),
+    homebutton = FALSE
   )
 }
 ```
 
 ## API Reference
 
-* [Flow](https://developer.here.com/documentation/traffic/dev_guide/topics_v6.1/resource-parameters-flow.html)
+* [Flow](https://developer.here.com/documentation/traffic-api/api-reference.html)
 * [Incidents](https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html)

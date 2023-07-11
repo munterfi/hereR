@@ -1,3 +1,8 @@
+# version 0.9.1.9000
+
+* Bugfix: NAs introduced by coercion, do not convert `snowFall` column to numeric in weather observation request.
+* Upgrade HERE Traffic API to v7 for `flow()` request (closes [#158](https://github.com/munterfi/hereR/issues/158))
+
 # version 0.9.1
 
 * Resubmit to CRAN due to since the package was archived on 2022-12-27 as email to the maintainer was temporarily not deliverable.
