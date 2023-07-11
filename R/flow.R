@@ -24,7 +24,7 @@
 #' set_key("<YOUR API KEY>")
 #'
 #' # Real-time traffic flow
-#' flow <- flow(
+#' flow_data <- flow(
 #'   aoi = aoi[aoi$code == "LI", ],
 #'   url_only = TRUE
 #' )
@@ -85,8 +85,8 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
     return(NULL)
   }
 
-  # Spatial contains
-  flow_data <- flow_data[sf::st_contains(aoi, flow_data, sparse = FALSE), ]
+  # Spatially intersecting flow
+  flow_data <- flow_data[sf::st_intersects(aoi, flow_data, sparse = FALSE), ]
 
   rownames(flow_data) <- NULL
   return(flow_data)

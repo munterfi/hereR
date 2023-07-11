@@ -30,7 +30,7 @@ This means that each polygon (= one row) in the AOI \code{sf} object should fit 
 set_key("<YOUR API KEY>")
 
 # Real-time traffic flow
-flow <- flow(
+flow_data <- flow(
   aoi = aoi[aoi$code == "LI", ],
   url_only = TRUE
 )
