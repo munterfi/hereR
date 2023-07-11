@@ -1,3 +1,7 @@
+# version 0.9.1.9000
+
+* Update description to create a new API key to the HERE Platform (closes [#157](https://github.com/munterfi/hereR/issues/157)).
+
 # version 0.9.1
 
 * Resubmit to CRAN due to since the package was archived on 2022-12-27 as email to the maintainer was temporarily not deliverable.
