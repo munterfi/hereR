@@ -20,12 +20,11 @@ Set up a valid authentication to the 'HERE' REST APIs and optionally configure a
 
 In order to use the functionality of the **hereR** package, application credentials for a HERE project must be provided. The HERE application credentials (API Key) can be obtained for free as follows:
 
-1. Go to [developer.here.com](https://developer.here.com/)
-2. Sign up for a HERE developer account, which automatically creates a new project 
-3. Click 'REST: Generate APP'
-4. Click 'Create API Key' and copy the key
+1. Signup for the [HERE Platform](https://platform.here.com)
+2. Create new App using the [Credentials Manager](https://platform.here.com/admin/apps?action=new-registration)
+3. Select the Credentials tab, then go to "API Keys" and click "Create API key"
+4. Copy the API key
 
-The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month).
 To set the key, please use:
 
 ```{r set}
@@ -33,7 +32,7 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-Alternatively, the key can be exported directly to the environment: `export HERE_API_KEY="<YOUR-KEY>"`
+The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). Alternatively, the key can be exported directly to the environment: `export HERE_API_KEY="<YOUR-KEY>"`
 
 ## Information about requests
 
