@@ -33,7 +33,6 @@
 route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
                          routing_mode = "fast", transport_mode = "car",
                          traffic = TRUE, url_only = FALSE) {
-
   # Checks
   .check_points(origin)
   .check_points(destination)

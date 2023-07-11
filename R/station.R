@@ -21,7 +21,6 @@
 #' # Stations
 #' stations <- station(poi = poi, url_only = TRUE)
 station <- function(poi, radius = 500, results = 50, url_only = FALSE) {
-
   # Checks
   .check_points(poi)
   .check_numeric_range(radius, 1, Inf)

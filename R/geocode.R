@@ -61,7 +61,6 @@ geocode.character <- function(address, alternatives = FALSE, sf = TRUE, url_only
 }
 
 .geocode.default <- function(address, alternatives = FALSE, sf = TRUE, url_only = FALSE, qq = FALSE) {
-
   # Input checks
   .check_boolean(alternatives)
   .check_boolean(sf)

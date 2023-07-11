@@ -63,10 +63,10 @@ Print the public transport sections on an interactive leaflet map:
 ```{r pt_connection_section_map, eval=FALSE, out.width='100%'}
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(connection_section,
-                   zcol = "mode",
-                   layer.name = "Transport mode",
-                   map.types = c("Esri.WorldTopoMap"),
-                   homebutton = FALSE
+    zcol = "mode",
+    layer.name = "Transport mode",
+    map.types = c("Esri.WorldTopoMap"),
+    homebutton = FALSE
   )
 }
 ```
@@ -110,14 +110,20 @@ buffer <-
 
 if (requireNamespace("mapview", quietly = TRUE)) {
   m <-
-    mapview::mapview(poi, alpha.region = 1, col.region = "black",
-                     label = poi$city, layer.name = "POIs",
-                     map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
-    mapview::mapview(stations, col.region = "yellow", alpha = 1,
-                     label = stations$station, layer.name = "Stations",
-                     homebutton = FALSE) +
-    mapview::mapview(buffer, col.region = "transparent", alpha.region = 0,
-                     layer.name = "Buffer", homebutton = FALSE, legend = FALSE)
+    mapview::mapview(poi,
+      alpha.region = 1, col.region = "black",
+      label = poi$city, layer.name = "POIs",
+      map.types = c("Esri.WorldTopoMap"), homebutton = FALSE
+    ) +
+    mapview::mapview(stations,
+      col.region = "yellow", alpha = 1,
+      label = stations$station, layer.name = "Stations",
+      homebutton = FALSE
+    ) +
+    mapview::mapview(buffer,
+      col.region = "transparent", alpha.region = 0,
+      layer.name = "Buffer", homebutton = FALSE, legend = FALSE
+    )
   m
 }
 ```

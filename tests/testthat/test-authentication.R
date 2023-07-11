@@ -1,5 +1,4 @@
 test_that("authentication works", {
-
   # Input checks
   expect_error(set_key(1))
 

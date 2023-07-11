@@ -29,7 +29,6 @@
 #'   url_only = TRUE
 #' )
 incident <- function(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE) {
-
   # Checks
   .check_polygon(aoi)
   .check_datetime(from)

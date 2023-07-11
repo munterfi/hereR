@@ -52,7 +52,6 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   results = 1, routing_mode = "fast", transport_mode = "car",
                   traffic = TRUE, avoid_area = NULL, avoid_feature = NULL,
                   consumption_model = NULL, vignettes = TRUE, url_only = FALSE) {
-
   # Checks
   .check_points(origin)
   .check_points(destination)

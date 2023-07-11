@@ -1,5 +1,4 @@
 test_that("defunct works", {
-
   # set_auth
   expect_error(set_auth(app_id = "DE", app_code = "FUNCT"))
 
