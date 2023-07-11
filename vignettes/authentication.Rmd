@@ -22,7 +22,7 @@ In order to use the functionality of the **hereR** package, application credenti
 
 1. Signup for the [HERE Platform](https://platform.here.com)
 2. Create new App using the [Credentials Manager](https://platform.here.com/admin/apps?action=new-registration)
-3. Select the Credentials tab, then go to "API Keys" and click "Create API key"
+3. Select the Credentials tab, then go to "API Keys" and click "Create API Key"
 4. Copy the API key
 
 To set the key, please use:
@@ -32,7 +32,7 @@ library(hereR)
 set_key("<YOUR API KEY>")
 ```
 
-The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). Alternatively, the key can be exported directly to the environment: `export HERE_API_KEY="<YOUR-KEY>"`
+The API key is set for the current R session and will be used to authenticate in the requests to the HERE REST APIs (250K free transactions per month). Alternatively, the key can be exported directly to the environment: `export HERE_API_KEY="<YOUR-KEY>"`.
 
 ## Information about requests
 
