@@ -1,6 +1,6 @@
 # version 0.9.1.9000
 
-* Update description to create new API key to the new HERE Platform (closes [#157](https://github.com/munterfi/hereR/issues/157)).
+* Update description to create a new API key to the HERE Platform (closes [#157](https://github.com/munterfi/hereR/issues/157)).
 
 # version 0.9.1
 
