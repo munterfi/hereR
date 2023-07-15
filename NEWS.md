@@ -3,6 +3,7 @@
 * Upgrade HERE Traffic API to v7 for `flow()` request (closes [#158](https://github.com/munterfi/hereR/issues/158))
 * Bugfix: NAs introduced by coercion, do not convert `snowFall` column to numeric in weather observation request.
 * Update description to create a new API key to the HERE Platform (closes [#157](https://github.com/munterfi/hereR/issues/157)).
+* Fix decoding of NA polylines in `intermodal_route()`.
 
 # version 0.9.1
 

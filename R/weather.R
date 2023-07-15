@@ -85,7 +85,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   # Request and get content
   data <- .async_request(
     url = url,
-    rps = 4
+    rps = 3
   )
   if (length(data) == 0) {
     return(NULL)
@@ -138,7 +138,7 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
         "country", "state", "city", "latitude", "longitude", "distance",
         "utcTime", "elevation"
       ), ]
-      obs[, c(4:9, 16)] <- vapply(obs[, c(4:9, 16)], as.numeric, numeric(1))
+      obs[, c(4:9)] <- vapply(obs[, c(4:9)], as.numeric, numeric(1))
       return(
         cbind(station, obs)
       )
