@@ -223,10 +223,16 @@ intermodal_route <- function(origin, destination, datetime = Sys.time(),
     return(NULL)
   }
 
+  # Filter on valid geometries
+  valid_geom_mask <- !is.na(routes$geometry)
+  geometries <- routes$geometry
+  routes$geometry <- NULL
+  routes$geometry <- sf::st_sfc()
+
   # Decode flexible polyline encoding to LINESTRING
-  routes$geometry <- sf::st_geometry(
+  routes[valid_geom_mask, ]$geometry <- sf::st_geometry(
     flexpolyline::decode_sf(
-      routes$geometry, 4326
+      geometries[valid_geom_mask], 4326
     )
   )
 

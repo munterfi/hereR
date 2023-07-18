@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Destination Weather API}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -20,7 +20,7 @@ if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapviewOptions(
     fgb = FALSE,
     vector.palette = colorRampPalette(
-      c("#0571B0", "#92C5DE", "#F7F7F7","#F4A582", "#CA0020")
+      c("#0571B0", "#92C5DE", "#F7F7F7", "#F4A582", "#CA0020")
     )
   )
 }
@@ -48,9 +48,11 @@ observation <- weather(
 The return value is an `sf` object, which contains the `POINT` geometries of the provided POIs and the most recent record on the observed weather. The measurements are taken from the nearest weather observation stations with respect to the POIs. The distance of the stations to the provided POIs is an indicator for the reliabilty of the weather information at each POI. A table of the observed weather near the example POIs:
 
 ```{r table_obs, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE, screenshot.force=FALSE}
-cols <- c("station", "distance", "description",
-          "temperature", "humidity",
-          "windSpeed", "windDirection")
+cols <- c(
+  "station", "distance", "description",
+  "temperature", "humidity",
+  "windSpeed", "windDirection"
+)
 knitr::kable(as.data.frame(observation)[, cols], format = "html")
 ```
 
@@ -60,18 +62,18 @@ Print the weather observation information on an interactive leaflet map:
 if (requireNamespace("mapview", quietly = TRUE)) {
   m <-
     mapview::mapview(observation,
-                     zcol = "temperature",
-                     cex = observation$humidity/4,
-                     layer.name = "Observation",
-                     map.types = c("Esri.WorldTopoMap"),
-                     homebutton = FALSE
+      zcol = "temperature",
+      cex = observation$humidity / 4,
+      layer.name = "Observation",
+      map.types = c("Esri.WorldTopoMap"),
+      homebutton = FALSE
     ) +
     mapview::mapview(poi,
-                     zcol = "city",
-                     cex = 1,
-                     col.region = "black",
-                     legend = FALSE,
-                     homebutton = FALSE
+      zcol = "city",
+      cex = 1,
+      col.region = "black",
+      legend = FALSE,
+      homebutton = FALSE
     )
   m
 }
@@ -102,13 +104,13 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
     )
     ggplot2::ggplot(fc, ggplot2::aes(x = dt)) +
       ggplot2::geom_line(ggplot2::aes(y = te, colour = "Temperature")) +
-      ggplot2::geom_line(ggplot2::aes(y = rh/5, colour = "Humidity")) +
-      ggplot2::scale_y_continuous(sec.axis = ggplot2::sec_axis(~.*5, name = "Relative humidity [%]")) +
+      ggplot2::geom_line(ggplot2::aes(y = rh / 5, colour = "Humidity")) +
+      ggplot2::scale_y_continuous(sec.axis = ggplot2::sec_axis(~ . * 5, name = "Relative humidity [%]")) +
       ggplot2::scale_colour_manual(values = c("blue", "red")) +
       ggplot2::labs(y = "Air temperature [°C]", x = "", colour = "") +
       ggplot2::ggtitle(forecast$station[x]) +
       ggplot2::theme_minimal() +
-      ggplot2::theme(legend.position="bottom", panel.background = ggplot2::element_rect(color = NA))
+      ggplot2::theme(legend.position = "bottom", panel.background = ggplot2::element_rect(color = NA))
   })
 }
 ```
@@ -119,22 +121,22 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
 if (requireNamespace(c("ggplot2", "mapview", "leafpop"), quietly = TRUE)) {
   m <-
     mapview::mapview(forecast,
-                     color = "black",
-                     col.region = "yellow",
-                     layer.name = "Weather station",
-                     zcol = "station",
-                     map.types = c("Esri.WorldTopoMap"),
-                     homebutton = FALSE,
-                     legend = FALSE,
-                     popup = leafpop::popupGraph(g)
+      color = "black",
+      col.region = "yellow",
+      layer.name = "Weather station",
+      zcol = "station",
+      map.types = c("Esri.WorldTopoMap"),
+      homebutton = FALSE,
+      legend = FALSE,
+      popup = leafpop::popupGraph(g)
     ) +
     mapview::mapview(poi,
-                     zcol = "city",
-                     cex = 1,
-                     col.region = "black",
-                     layer.name = "POI",
-                     legend = FALSE,
-                     homebutton = FALSE
+      zcol = "city",
+      cex = 1,
+      col.region = "black",
+      layer.name = "POI",
+      legend = FALSE,
+      homebutton = FALSE
     )
   m
 }
@@ -175,4 +177,4 @@ This returns an `sf` object with the POIs and the attribute `"alerts"`, which is
 
 ## API Reference
 
-* [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)
+- [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)

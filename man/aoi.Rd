@@ -8,14 +8,15 @@
 An object of class \code{"sf", "data.frame"}.
 }
 \source{
-Made with Natural Earth. Free vector and raster map data \href{https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson}{@naturalearthdata.com}
+City of Zurich - Department of Civil Engineering and Waste Management - Geomatics + Surveying \href{https://www.geocat.ch/geonetwork/srv/api/records/64091dfe-2785-4b8d-ab01-4ae291c1054a}{@geocat.ch}
 }
 \usage{
 data(aoi)
 }
 \description{
 Some example Areas of Interest (AOIs):
-The boundary polygons of Switzerland and Liechtenstein.
+The boundary polygons of the districts of Zurich. The districts serve as the
+basis for administrative tasks within the City of Zurich.
 }
 \examples{
 data(aoi)

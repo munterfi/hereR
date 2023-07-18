@@ -1,12 +1,14 @@
 # hereR <img src="man/figures/logo.svg" align="right" alt="" width="120" />
 
 <!-- badges: start -->
+
 [![CRAN status](https://www.r-pkg.org/badges/version/hereR)](https://CRAN.R-project.org/package=hereR)
 [![CRAN checks](https://badges.cranchecks.info/worst/hereR.svg)](https://cran.r-project.org/web/checks/check_results_hereR.html)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/last-month/hereR?color=brightgreen)](https://CRAN.R-project.org/package=hereR)
-[![R build status](https://github.com/munterfi/hereR/workflows/R-CMD-check/badge.svg)](https://github.com/munterfi/hereR/actions)
+[![R-CMD-check](https://github.com/munterfi/hereR/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/munterfi/hereR/actions/workflows/check-standard.yaml)
 [![Codecov test coverage](https://codecov.io/gh/munterfi/hereR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/munterfi/hereR?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/munterfi/hereR/badge)](https://www.codefactor.io/repository/github/munterfi/hereR)
+
 <!-- badges: end -->
 
 The **hereR** package provides an interface to the **HERE REST APIs** for R:
@@ -23,13 +25,13 @@ Locations, routes and isolines are returned as `sf` objects.
 
 You can install the released version of **hereR** from [CRAN](https://CRAN.R-project.org/package=hereR/) with:
 
-``` r
+```r
 install.packages("hereR")
 ```
 
 Install the development version from [GitHub](https://github.com/munterfi/hereR/) with:
 
-``` r
+```r
 remotes::install_github("munterfi/hereR")
 ```
 
@@ -39,7 +41,7 @@ This package requires an API key for a HERE project. The key is set for the curr
 
 To set the API key, use:
 
-``` r
+```r
 library(hereR)
 set_key("<YOUR API KEY>")
 ```
@@ -50,7 +52,7 @@ Once valid application credentials are created and the key is set in the R sessi
 
 **Geocoding & Search API:** Autosuggest and geocode addresses or reverse geocode POIs.
 
-``` r
+```r
 geocode(c("Schweighofstrasse 190, Zurich, Switzerland", "Hardstrasse 48, Zurich, Switzerland"))
 
 autosuggest(c("Schweighofstrasse", "Hardstrasse"))
@@ -60,7 +62,7 @@ reverse_geocode(poi)
 
 **Routing API:** Construct route geometries with elevation (dim = `XYZ`).
 
-``` r
+```r
 route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = TRUE)
 
 route(poi[1:2, ], poi[3:4, ], transport_mode = "car", traffic = FALSE)
@@ -70,7 +72,7 @@ route(poi[4, ], poi[5, ], transport_mode = "bicycle")
 
 **Matrix Routing API:** Request a matrix of route summaries.
 
-``` r
+```r
 route_matrix(poi, transport_mode = "car", traffic = TRUE)
 
 route_matrix(
@@ -81,7 +83,7 @@ route_matrix(
 
 **Isoline Routing API:** Construct isolines around points (time, distance or consumption).
 
-``` r
+```r
 isoline(poi, range_type = "time", transport_mode = "pedestrian")
 
 isoline(poi, range_type = "distance", transport_mode = "truck")
@@ -91,15 +93,15 @@ isoline(poi, range_type = "consumption", transport_mode = "car", traffic = FALSE
 
 **Traffic API:** Get real-time traffic flow or incidents in a specific area.
 
-``` r
-flow(aoi[2, ])
+```r
+flow(aoi)
 
-incident(aoi, from = as.POSIXct("2018-01-01 00:00:00"))
+incident(aoi)
 ```
 
 **Public Transit API:** Request public transport connections between points or find stations nearby.
 
-``` r
+```r
 connection(poi[1:2, ], poi[3:4, ])
 
 station(poi, radius = 500)
@@ -107,13 +109,13 @@ station(poi, radius = 500)
 
 **Intermodal Routing API:** Get routes with various combinations of transport modes.
 
-``` r
+```r
 intermodal_route(poi[1:2, ], poi[3:4, ])
 ```
 
 **Destination Weather API:** Request weather observations, forecasts, astronomical information or alerts at specific locations.
 
-``` r
+```r
 weather(poi, product = "observation")
 
 weather(poi, product = "forecast_hourly")
@@ -125,18 +127,17 @@ weather(poi, product = "alerts")
 
 ## Contributing
 
-* Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them. Please see the [Contribution Guidelines](https://github.com/munterfi/hereR/blob/master/.github/CONTRIBUTING.md).
-* This project is released with a [Contributor Code of Conduct](https://github.com/munterfi/hereR/blob/master/.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+- Contributions to this package are very welcome, issues and pull requests are the preferred ways to share them. Please see the [Contribution Guidelines](https://github.com/munterfi/hereR/blob/master/.github/CONTRIBUTING.md).
+- This project is released with a [Contributor Code of Conduct](https://github.com/munterfi/hereR/blob/master/.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ## References
 
-* [Developer Terms and Conditions](https://developer.here.com/terms-and-conditions)
-* [Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
-* [Routing API](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
-* [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html)
-* [Isoline Routing API](https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html)
-* [Traffic API](https://developer.here.com/documentation/traffic/dev_guide/topics/incident-data.html)
-* [Public Transit API](https://developer.here.com/documentation/public-transit/dev_guide/index.html)
-* [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)
-* [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)
-
+- [Developer Terms and Conditions](https://developer.here.com/terms-and-conditions)
+- [Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html)
+- [Routing API](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
+- [Matrix Routing API](https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html)
+- [Isoline Routing API](https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html)
+- [Traffic API](https://developer.here.com/documentation/traffic-api/api-reference.html)
+- [Public Transit API](https://developer.here.com/documentation/public-transit/dev_guide/index.html)
+- [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)
+- [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)

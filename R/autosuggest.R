@@ -19,7 +19,6 @@
 #'
 #' suggestions <- autosuggest(address = poi$city, url_only = TRUE)
 autosuggest <- function(address, results = 5, url_only = FALSE) {
-
   # Check addresses
   .check_character(address)
   .check_numeric_range(results, 1, 100)

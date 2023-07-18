@@ -6,8 +6,8 @@ test_that("incidents works", {
   data(aoi)
 
   # Input checks
-  expect_error(incident(aoi = c(1, 2, 3)), "'aoi' must be an sf object.")
-  expect_error(incident(aoi = NA), "'aoi' must be an sf object.")
+  expect_error(incident(aoi = c(1, 2, 3)), "'aoi' must be an sf or sfc object.")
+  expect_error(incident(aoi = NA), "'aoi' must be an sf or sfc object.")
 
   # Test URL
   expect_is(incident(
@@ -24,6 +24,6 @@ test_that("incidents works", {
 
     # Tests
     expect_equal(class(incidents), c("sf", "data.frame")),
-    expect_equal(any(sf::st_geometry_type(incidents) != "POINT"), FALSE)
+    expect_equal(any(sf::st_geometry_type(incidents) != "MULTILINESTRING"), FALSE)
   )
 })

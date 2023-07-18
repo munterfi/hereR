@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Public Transit API}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -37,8 +37,8 @@ Request public transport connections between given points and find stations near
 
 The function `connection()` allows to request public transport connections from the API. Two types of requests are provided:
 
-* `connection(..., summary = FALSE)`: The public transport connections are returned as multiple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
-* `connection(..., summary = TRUE)`: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
+- `connection(..., summary = FALSE)`: The public transport connections are returned as multiple sections with the same vehicle and transport mode. Each row represents a section with a detailed route geometry.
+- `connection(..., summary = TRUE)`: A summary of the connections is retrieved, where each connection is represented as one row with a unified and simplified geometry.
 
 ### 1. Sections
 
@@ -63,10 +63,10 @@ Print the public transport sections on an interactive leaflet map:
 ```{r pt_connection_section_map, eval=FALSE, out.width='100%'}
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(connection_section,
-                   zcol = "mode",
-                   layer.name = "Transport mode",
-                   map.types = c("Esri.WorldTopoMap"),
-                   homebutton = FALSE
+    zcol = "mode",
+    layer.name = "Transport mode",
+    map.types = c("Esri.WorldTopoMap"),
+    homebutton = FALSE
   )
 }
 ```
@@ -110,19 +110,25 @@ buffer <-
 
 if (requireNamespace("mapview", quietly = TRUE)) {
   m <-
-    mapview::mapview(poi, alpha.region = 1, col.region = "black",
-                     label = poi$city, layer.name = "POIs",
-                     map.types = c("Esri.WorldTopoMap"), homebutton = FALSE) +
-    mapview::mapview(stations, col.region = "yellow", alpha = 1,
-                     label = stations$station, layer.name = "Stations",
-                     homebutton = FALSE) +
-    mapview::mapview(buffer, col.region = "transparent", alpha.region = 0,
-                     layer.name = "Buffer", homebutton = FALSE, legend = FALSE)
+    mapview::mapview(poi,
+      alpha.region = 1, col.region = "black",
+      label = poi$city, layer.name = "POIs",
+      map.types = c("Esri.WorldTopoMap"), homebutton = FALSE
+    ) +
+    mapview::mapview(stations,
+      col.region = "yellow", alpha = 1,
+      label = stations$station, layer.name = "Stations",
+      homebutton = FALSE
+    ) +
+    mapview::mapview(buffer,
+      col.region = "transparent", alpha.region = 0,
+      layer.name = "Buffer", homebutton = FALSE, legend = FALSE
+    )
   m
 }
 ```
 
 ## API Reference
 
-* [Public Transit Routing: Routing](https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html)
-* [Public Transit Routing: Station Search](https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html)
+- [Public Transit Routing: Routing](https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html)
+- [Public Transit Routing: Station Search](https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html)

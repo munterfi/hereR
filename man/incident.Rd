@@ -4,12 +4,14 @@
 \alias{incident}
 \title{HERE Traffic API: Incidents}
 \usage{
-incident(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE)
+incident(aoi, from = NULL, to = NULL, url_only = FALSE)
 }
 \arguments{
 \item{aoi}{\code{sf} object, Areas of Interest (POIs) of geometry type \code{POLYGON}.}
 
-\item{from}{\code{POSIXct} object, datetime of the earliest traffic incidents (\code{default = FALSE}).}
+\item{from}{\code{POSIXct} object, start time of the earliest traffic incidents (\code{default = NULL}).}
+
+\item{to}{\code{POSIXct} object, end time of the latest traffic incidents (\code{default = NULL}).}
 
 \item{url_only}{boolean, only return the generated URLs (\code{default = FALSE})?}
 }
@@ -17,24 +19,24 @@ incident(aoi, from = Sys.time() - 60 * 60 * 24 * 7, url_only = FALSE)
 An \code{sf} object containing the traffic incidents.
 }
 \description{
-Traffic incident information from the HERE 'Traffic' API in areas of interest (AOIs).
-The incidents contain information about location, duration, severity, type, description and further details.
+Traffic incident information from the HERE 'Traffic' API in areas of
+interest (AOIs). The incidents contain information about location, duration,
+severity, type, description and further details.
 }
 \note{
-The maximum width and height of the bounding box of the input AOIs is 10 degrees.
-This means that each polygon (= one row) in the AOI \code{sf} object should fit in a 10 x 10 degree bbox.
+The maximum width and height of the bounding box of the input AOIs is 1 degree.
+This means that each polygon (= one row) in the AOI \code{sf} object should fit in a 1 x 1 degree bbox.
 }
 \examples{
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
-# All traffic incidents from the beginning of 2018
+# Traffic incidents
 incidents <- incident(
   aoi = aoi,
-  from = as.POSIXct("2018-01-01 00:00:00"),
   url_only = TRUE
 )
 }
 \references{
-\href{https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html}{HERE Traffic API: Incidents}
+\href{https://developer.here.com/documentation/traffic-api/api-reference.html}{HERE Traffic API: Incidents}
 }

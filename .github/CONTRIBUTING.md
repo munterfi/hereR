@@ -10,10 +10,10 @@ Ready to contribute? Here's how to set up **hereR** for local development.
 2. Install the dependencies (check the `DESCRIPTION` file).
 3. Create a feature or bugfix branch as appropriate: `git checkout -b feature/<feature-description> master` or `git checkout -b bugfix/<bugfix-description> master`
 4. Work locally on the feature, make sure to add or adjust:
-    - entries in `NEWS.md`
-    - function documentation (run `devtools::document()` before commit)
-    - tests for the feature (run `export HERE_API_KEY="<YOUR-KEY>" && Rscript data-raw/internal.R && unset HERE_API_KEY` to recreate package example data and API mocks)
-    - vignettes
+   - entries in `NEWS.md`
+   - function documentation (run `devtools::document()` before commit)
+   - tests for the feature (run `export HERE_API_KEY="<YOUR-KEY>" && Rscript data-raw/internal.R && unset HERE_API_KEY` to recreate package example data and API mocks)
+   - vignettes
 5. Push changes to the new branch.
 6. If CI tests are passing, create a pull request on GitHub of your `feature/...` or `bugfix/...` branch into the `master` branch of the original repository.
 
@@ -42,11 +42,11 @@ Dots (`.`) in function definitions are reserved for the functions and method dis
 
 ### Package documentation
 
-This packages uses [roxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) for the package documentation. 
+This packages uses [roxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) for the package documentation.
 
 Example:
 
-``` r
+```r
 #' Add together two numbers
 #'
 #' @param x A number
@@ -64,7 +64,7 @@ add <- function(x, y) {
 
 Add a header to CLI scripts according to the following template:
 
-``` r
+```r
 #!/usr/bin/env Rscript
 # -----------------------------------------------------------------------------
 # Name          :example_script.R

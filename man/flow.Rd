@@ -18,39 +18,23 @@ An \code{sf} object containing the requested traffic flow information.
 }
 \description{
 Real-time traffic flow from the HERE 'Traffic' API in areas of interest (AOIs).
-The traffic flow data contains speed (\code{"SP"}) and congestion (jam factor: \code{"JF"}) information,
-which corresponds to the status of the traffic at the time of the query.
+The traffic flow data contains speed and congestion information, which
+corresponds to the status of the traffic at the time of the query.
 }
 \note{
-The maximum width and height of the bounding box of the input AOIs is 10 degrees.
-This means that each polygon (= one row) in the AOI \code{sf} object should fit in a 10 x 10 degree bbox.
-
-Explanation of the traffic flow variables:
-\itemize{
-  \item\code{"PC"}: Point TMC location code.
-  \item\code{"DE"}: Text description of the road.
-  \item\code{"QD"}: Queuing direction. '+' or '-'. Note this is the opposite of the travel direction in the fully qualified ID, For example for location 107+03021 the QD would be '-'.
-  \item\code{"LE"}: Length of the stretch of road.
-  \item\code{"TY"}: Type information for the given Location Referencing container. This may be a freely defined string.
-  \item\code{"SP"}: Speed (based on UNITS) capped by speed limit.
-  \item\code{"FF"}: The free flow speed on this stretch of the road.
-  \item\code{"JF"}: The number between 0.0 and 10.0 indicating the expected quality of travel. When there is a road closure, the Jam Factor will be 10. As the number approaches 10.0 the quality of travel is getting worse. -1.0 indicates that a Jam Factor could not be calculated.
-  \item\code{"CN"}: Confidence, an indication of how the speed was determined. -1.0 road closed. 1.0=100\%.
-}
+The maximum width and height of the bounding box of the input AOIs is 1 degree.
+This means that each polygon (= one row) in the AOI \code{sf} object should fit in a 1 x 1 degree bbox.
 }
 \examples{
 # Provide an API Key for a HERE project
 set_key("<YOUR API KEY>")
 
 # Real-time traffic flow
-flow <- flow(
-  aoi = aoi[aoi$code == "LI", ],
+flow_data <- flow(
+  aoi = aoi,
   url_only = TRUE
 )
 }
 \references{
-\itemize{
-  \item\href{https://developer.here.com/documentation/traffic/dev_guide/topics_v6.1/resource-parameters-flow.html}{HERE Traffic API: Flow}
-  \item\href{https://stackoverflow.com/questions/28476762/reading-traffic-flow-data-from-here-maps-rest-api}{Flow explanation, stackoverflow}
-}
+\href{https://developer.here.com/documentation/traffic-api/api-reference.html}{HERE Traffic API: Flow}
 }

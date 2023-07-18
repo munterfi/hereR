@@ -40,7 +40,6 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
                     traffic = TRUE, optimize = "balanced",
                     consumption_model = NULL, aggregate = FALSE,
                     url_only = FALSE) {
-
   # Checks
   .check_points(poi)
   .check_datetime(datetime)

@@ -51,14 +51,14 @@ Print the intermodal routes on an interactive leaflet map:
 ```{r map_int_routes, eval=FALSE, out.width='100%'}
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(intermodal_routes,
-                   zcol = "mode",
-                   layer.name = "Intermodal route",
-                   map.types = c("Esri.WorldTopoMap"),
-                   homebutton = FALSE
+    zcol = "mode",
+    layer.name = "Intermodal route",
+    map.types = c("Esri.WorldTopoMap"),
+    homebutton = FALSE
   )
 }
 ```
 
 ## API Reference
 
-* [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)
+- [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)

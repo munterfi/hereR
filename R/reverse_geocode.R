@@ -33,7 +33,6 @@
 #' # Get addresses
 #' addresses <- reverse_geocode(poi = poi, results = 3, url_only = TRUE)
 reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
-
   # Input checks
   .check_points(poi)
   .check_numeric_range(results, 1, 100)

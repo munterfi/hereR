@@ -54,15 +54,16 @@ Construct a route label and print the routes on an interactive leaflet map:
 
 ```{r map_routes, eval=FALSE, out.width='100%'}
 routes$label <- paste(origin$city[routes$id],
-                      destination$city[routes$id],
-                      sep =  " - ")
+  destination$city[routes$id],
+  sep = " - "
+)
 
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(routes,
-                   zcol = "label",
-                   layer.name = "Route [O-D]",
-                   map.types = c("Esri.WorldTopoMap"),
-                   homebutton = FALSE
+    zcol = "label",
+    layer.name = "Route [O-D]",
+    map.types = c("Esri.WorldTopoMap"),
+    homebutton = FALSE
   )
 }
 ```
@@ -109,21 +110,21 @@ iso <- isoline(
 Convert range from seconds to minutes and print the aggregated isolines on an interactive leaflet map:
 
 ```{r map_isoline, eval=FALSE, out.width='100%'}
-iso$minutes <- iso$range/60
+iso$minutes <- iso$range / 60
 
 if (requireNamespace("mapview", quietly = TRUE)) {
   mapview::mapview(iso,
-          zcol = "minutes",
-          layer.name = "Isoline [min]",
-          alpha = 0,
-          map.types = c("Esri.WorldTopoMap"),
-          homebutton = FALSE
+    zcol = "minutes",
+    layer.name = "Isoline [min]",
+    alpha = 0,
+    map.types = c("Esri.WorldTopoMap"),
+    homebutton = FALSE
   )
 }
 ```
 
 ## API Reference
 
-* [Routing](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
-* [Matrix Routing](https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html)
-* [Isoline Routing](https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html)
+- [Routing](https://developer.here.com/documentation/routing-api/dev_guide/index.html)
+- [Matrix Routing](https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html)
+- [Isoline Routing](https://developer.here.com/documentation/isoline-routing-api/dev_guide/index.html)
