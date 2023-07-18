@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Destination Weather API}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -177,4 +177,4 @@ This returns an `sf` object with the POIs and the attribute `"alerts"`, which is
 
 ## API Reference
 
-* [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)
+- [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)

@@ -49,30 +49,30 @@ Use `set_Verbose(FALSE)` to set the **hereR** package to be quiet again.
 
 For freemium licenses the number of requests per second (RPS) is limited, use `set_freemium(FALSE)` to turn off rate limits for accounts with paid plans.
 
-The limits are: 
+The limits are:
 
-Service | Max RPS
--- | --
-Geocoding & Search | 5
-Multi Reverse Geocoding | 1
-Vector Tile | 10
-Map Tile | 30
-Map Image | 2
-Routing | 10
-Matrix Routing | 1
-Isoline Routing | 1
-Route Matching | 1
-Advanced Datasets | 10
-Waypoints Sequence | 1
-Transit | 10
-Intermodal | 5
+| Service                 | Max RPS |
+| ----------------------- | ------- |
+| Geocoding & Search      | 5       |
+| Multi Reverse Geocoding | 1       |
+| Vector Tile             | 10      |
+| Map Tile                | 30      |
+| Map Image               | 2       |
+| Routing                 | 10      |
+| Matrix Routing          | 1       |
+| Isoline Routing         | 1       |
+| Route Matching          | 1       |
+| Advanced Datasets       | 10      |
+| Waypoints Sequence      | 1       |
+| Transit                 | 10      |
+| Intermodal              | 5       |
 
 ## Proxy
 
 If you are working behind a corporate proxy the requests sent by **hereR** might fail with timeout errors.
 In this case, consider setting a global proxy for R. Open the R environment file `file.edit('~/.Renviron')` and add your proxy configuration:
 
-``` sh
+```sh
 http_proxy=http://user:passwd@proxy.dom.com:port/
 https_proxy=https://user:passwd@proxy.dom.com:port/
 ```
@@ -86,5 +86,5 @@ For overwriting the application credentials use again the `set_key()` function.
 
 ## Reference
 
-* [Sign up as developer](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
-* [Pricing and plans](https://developer.here.com/pricing)
+- [Sign up as developer](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
+- [Pricing and plans](https://developer.here.com/pricing)
