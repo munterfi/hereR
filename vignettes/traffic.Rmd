@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Traffic API}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -35,7 +35,7 @@ In order to request the traffic flow, areas of interest (AOIs) have to be provid
 
 ```{r flow, eval=FALSE}
 flows <- flow(
-  aoi = aoi[aoi$code == "LI", ]
+  aoi = aoi[1, ]
 )
 ```
 
@@ -57,12 +57,11 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 
 ## Incidents
 
-AOIs also must be provided in order to request information about traffic incidents in specific regions. The time interval, which defines the traffic incidents that should be considered, can be specitified by the `from` parameter. The datetime information passed to the function must be a timestamp of type `POSIXct`. By default, the time interval is defined as the last week.
+AOIs also must be provided in order to request information about traffic incidents in specific regions. The time interval, which defines the traffic incidents that should be considered, can be specitified by the `from` and `to` parameter. The datetime information passed to the function must be a timestamp of type `POSIXct`. By default, no time interval filter is set.
 
 ```{r incidents, eval=FALSE}
 incidents <- incident(
-  aoi = aoi[aoi$code == "LI", ],
-  from = Sys.time() - 60 * 60
+  aoi = aoi[1, ]
 )
 ```
 
@@ -81,5 +80,5 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 
 ## API Reference
 
-* [Flow](https://developer.here.com/documentation/traffic-api/api-reference.html)
-* [Incidents](https://developer.here.com/documentation/traffic/dev_guide/topics/resource-parameters-incidents.html)
+- [Flow](https://developer.here.com/documentation/traffic-api/api-reference.html)
+- [Incidents](https://developer.here.com/documentation/traffic-api/api-reference.html)

@@ -31,7 +31,7 @@ set_key("<YOUR API KEY>")
 
 # Real-time traffic flow
 flow_data <- flow(
-  aoi = aoi[aoi$code == "LI", ],
+  aoi = aoi,
   url_only = TRUE
 )
 }

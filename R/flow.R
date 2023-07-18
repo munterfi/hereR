@@ -25,7 +25,7 @@
 #'
 #' # Real-time traffic flow
 #' flow_data <- flow(
-#'   aoi = aoi[aoi$code == "LI", ],
+#'   aoi = aoi,
 #'   url_only = TRUE
 #' )
 flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
@@ -34,20 +34,18 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
   .check_min_jam_factor(min_jam_factor)
   .check_boolean(url_only)
 
+  # Ensure EPSG: 4326
+  aoi <- sf::st_transform(aoi, 4326)
+
   # Add API key
   url <- .add_key(
     url = "https://data.traffic.hereapi.com/v7/flow?"
   )
 
   # Add bbox
-  aoi <- sf::st_transform(aoi, 4326)
-  bbox <- vapply(sf::st_geometry(aoi), sf::st_bbox, numeric(4))
-  .check_bbox(bbox)
-  url <- paste0(
-    url,
-    "&in=bbox:",
-    bbox[1, ], ",", bbox[2, ], ",",
-    bbox[3, ], ",", bbox[4, ]
+  url <- .add_bbox(
+    url = url,
+    aoi = aoi
   )
 
   # Shape information
@@ -82,11 +80,15 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
 
   # Check for empty response
   if (is.null(flow_data)) {
+    message("No traffic flow found in area of interest.")
     return(NULL)
   }
 
-  # Spatially intersecting flow
-  flow_data <- flow_data[sf::st_intersects(aoi, flow_data, sparse = FALSE), ]
+  # Spatially intersect flow
+  flow_data <- flow_data[sf::st_intersects(
+    sf::st_union(sf::st_geometry(aoi)), flow_data,
+    sparse = FALSE
+  ), ]
 
   rownames(flow_data) <- NULL
   return(flow_data)

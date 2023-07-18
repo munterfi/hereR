@@ -32,9 +32,9 @@ qualified_keys <- c(
 }
 
 .check_points <- function(points) {
-  if (!"sf" %in% class(points)) {
+  if (!("sf" %in% class(points) || "sfc" %in% class(points))) {
     stop(sprintf(
-      "'%s' must be an sf object.",
+      "'%s' must be an sf or sfc object.",
       deparse(substitute(points, environment()))
     ))
   }
@@ -54,9 +54,9 @@ qualified_keys <- c(
 
 .check_polygon <- function(polygon) {
   if (!is.null(polygon)) {
-    if (!"sf" %in% class(polygon)) {
+    if (!("sf" %in% class(polygon) || "sfc" %in% class(polygon))) {
       stop(sprintf(
-        "'%s' must be an sf object.",
+        "'%s' must be an sf or sfc object.",
         deparse(substitute(polygon, environment()))
       ))
     }
@@ -66,10 +66,7 @@ qualified_keys <- c(
         deparse(substitute(polygon, environment()))
       ))
     }
-    if (!"sf" %in% class(polygon) |
-      any(!(
-        sf::st_geometry_type(polygon) %in% c("POLYGON", "MULTIPOLYGON")
-      ))) {
+    if (any(!(sf::st_geometry_type(polygon) %in% c("POLYGON", "MULTIPOLYGON")))) {
       stop(sprintf(
         "'%s' must be an sf object with geometry type 'POLYGON' or 'MULTIPOLYGON'.",
         deparse(substitute(polygon, environment()))
