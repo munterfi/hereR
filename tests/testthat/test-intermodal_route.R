@@ -6,8 +6,8 @@ test_that("intermodal_route works", {
   data(poi)
 
   # Input checks
-  expect_error(intermodal_route(origin = c(1, 2, 3), destination = poi), "'origin' must be an sf object.")
-  expect_error(intermodal_route(origin = c("character", NA), destination = poi), "'origin' must be an sf object.")
+  expect_error(intermodal_route(origin = c(1, 2, 3), destination = poi), "'origin' must be an sf or sfc object.")
+  expect_error(intermodal_route(origin = c("character", NA), destination = poi), "'origin' must be an sf or sfc object.")
   expect_error(intermodal_route(origin = poi, destination = poi, datetime = "not_POSIXct"), "'datetime' must be of type 'POSIXct', 'POSIXt'.")
   expect_error(intermodal_route(origin = poi, destination = poi, results = "not_numeric"), "'results' must be of type 'numeric'.")
   expect_error(intermodal_route(origin = poi, destination = poi, results = -1), "'results' must be in the valid range from 1 to 7.")

@@ -6,8 +6,8 @@ test_that("connection works", {
   data(poi)
 
   # Input checks
-  expect_error(connection(origin = c(1, 2, 3), destination = poi), "'origin' must be an sf object.")
-  expect_error(connection(origin = c("character", NA), destination = poi), "'origin' must be an sf object.")
+  expect_error(connection(origin = c(1, 2, 3), destination = poi), "'origin' must be an sf or sfc object.")
+  expect_error(connection(origin = c("character", NA), destination = poi), "'origin' must be an sf or sfc object.")
   expect_error(connection(origin = aoi, destination = poi), "'origin' must be an sf object with geometry type 'POINT'.")
   expect_error(connection(origin = poi[1, ], destination = poi), "'origin' must have the same number of rows as 'destination'.")
   expect_error(connection(origin = poi, destination = poi, datetime = "not_POSIXct"))

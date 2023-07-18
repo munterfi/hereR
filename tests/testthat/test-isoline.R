@@ -6,8 +6,8 @@ test_that("isoline works", {
   data(poi)
 
   # Input checks
-  expect_error(isoline(poi = c(1, 2, 3)), "'poi' must be an sf object.")
-  expect_error(isoline(poi = c("character", NA)), "'poi' must be an sf object.")
+  expect_error(isoline(poi = c(1, 2, 3)), "'poi' must be an sf or sfc object.")
+  expect_error(isoline(poi = c("character", NA)), "'poi' must be an sf or sfc object.")
   expect_error(isoline(poi = poi, transport_mode = "not_a_transport_mode"))
   expect_error(isoline(poi = poi, routing_mode = "not_a_routing_mode"))
   expect_error(isoline(poi = poi, range_type = "not_a_range_type"))

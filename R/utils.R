@@ -18,6 +18,16 @@
   )
 }
 
+.add_bbox <- function(url, aoi) {
+  bbox <- vapply(sf::st_geometry(aoi), sf::st_bbox, numeric(4))
+  .check_bbox(bbox)
+  paste0(
+    url,
+    "&in=bbox:",
+    bbox[1, ], ",", bbox[2, ], ",", bbox[3, ], ",", bbox[4, ]
+  )
+}
+
 .add_datetime <- function(url, datetime, field_name) {
   if (is.null(datetime)) {
     return(url)
@@ -192,13 +202,6 @@
 }
 
 ## Geometries
-
-.line_from_point_list <- function(point_list) {
-  coords <- strsplit(point_list, ",")
-  lng <- as.numeric(vapply(coords, function(x) x[2], character(1)))
-  lat <- as.numeric(vapply(coords, function(x) x[1], character(1)))
-  sf::st_linestring(cbind(lng, lat))
-}
 
 .wkt_from_point_df <- function(df, lng_col, lat_col) {
   df <- as.data.frame(df)
