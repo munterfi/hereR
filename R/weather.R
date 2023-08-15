@@ -6,7 +6,7 @@
 #' The information comes from the nearest available weather station and is not interpolated.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html}{HERE Destination Weather API: Observation}
+#' \href{https://developer.here.com/documentation/destination-weather/api-reference-v3.html}{HERE Destination Weather API}
 #'
 #' @param poi \code{sf} object or character, Points of Interest (POIs) of geometry type \code{POINT} or location names (e.g. cities or regions).
 #' @param product character, weather product of the 'Destination Weather API'. Supported products: \code{"observation"}, \code{"forecast_hourly"}, \code{"forecast_astronomy"} and \code{"alerts"}.
@@ -33,49 +33,58 @@
 #' # Alerts
 #' alerts <- weather(poi = poi, product = "alerts", url_only = TRUE)
 weather <- function(poi, product = "observation", url_only = FALSE) {
+  UseMethod("weather", poi)
+}
+
+#' @export
+weather.character <- function(poi, product = "observation", url_only = FALSE) {
+  .check_character(poi)
+  query <- paste0(
+    "&q=",
+    curl::curl_escape(poi)
+  )
+  .weather.default(query, product, url_only)
+}
+
+#' @export
+weather.sf <- function(poi, product = "observation", url_only = FALSE) {
+  weather.sfc(sf::st_geometry(poi), product, url_only)
+}
+
+#' @export
+weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
+  .check_points(poi)
+  poi <- sf::st_coordinates(
+    sf::st_transform(poi, 4326)
+  )
+  location <- paste0(
+    "&location=", poi[, 2], ",", poi[, 1]
+  )
+  .weather.default(location, product, url_only)
+}
+
+.weather.default <- function(poi, product = "observation", url_only = FALSE) {
   # Checks
   .check_weather_product(product)
   .check_boolean(url_only)
 
   # Add API key
   url <- .add_key(
-    url = "https://weather.ls.hereapi.com/weather/1.0/report.json?"
+    url = "https://weather.hereapi.com/v3/report?"
+  )
+
+  # Add formatted location or query parameter
+  url <- paste0(
+    url,
+    poi
   )
 
   # Add product
   url <- paste0(
     url,
-    "&product=",
+    "&products=",
     product
   )
-
-  # Check and preprocess location
-  # Character location (remove pipes)
-  if (is.character(poi)) {
-    .check_character(poi)
-    poi[poi == ""] <- NA
-    url <- paste0(
-      url,
-      "&name=",
-      curl::curl_escape(poi)
-    )
-    # sf POINTs
-  } else if ("sf" %in% class(poi)) {
-    .check_points(poi)
-    poi <- sf::st_coordinates(
-      sf::st_transform(poi, 4326)
-    )
-    poi <- paste0(
-      "&longitude=", poi[, 1], "&latitude=", poi[, 2]
-    )
-    url <- paste0(
-      url,
-      poi
-    )
-    # Not valid
-  } else {
-    stop("Invalid input for 'poi'.")
-  }
 
   # Return urls if chosen
   if (url_only) {
@@ -92,15 +101,12 @@ weather <- function(poi, product = "observation", url_only = FALSE) {
   }
 
   # Extract information
-  if (product == "observation") {
-    weather <- .extract_weather_observation(data)
-  } else if (product == "forecast_hourly") {
-    weather <- .extract_weather_forecast_hourly(data)
-  } else if (product == "forecast_astronomy") {
-    weather <- .extract_weather_forecast_astronomy(data)
-  } else if (product == "alerts") {
-    weather <- .extract_weather_alerts(data)
-  }
+  weather <- switch(product,
+    "observation" = .extract_weather_observation(data),
+    "forecast_hourly" = .extract_weather_forecast_hourly(data),
+    "forecast_astronomy" = .extract_weather_forecast_astronomy(data),
+    "alerts" = .extract_weather_alerts(data)
+  )
 
   # Create sf, data.table, data.frame
   rownames(weather) <- NULL
