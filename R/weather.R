@@ -9,7 +9,7 @@
 #' \href{https://developer.here.com/documentation/destination-weather/api-reference-v3.html}{HERE Destination Weather API}
 #'
 #' @param poi \code{sf} object or character, Points of Interest (POIs) of geometry type \code{POINT} or location names (e.g. cities or regions).
-#' @param product character, weather product of the 'Destination Weather API'. Supported products: \code{"observation"}, \code{"forecast_hourly"}, \code{"forecast_astronomy"} and \code{"alerts"}.
+#' @param product character, weather product of the 'Destination Weather API'. Supported products: \code{"observation"}, \code{"forecastHourly"}, \code{"forecastAstronomy"} and \code{"alerts"}.
 #' @param url_only boolean, only return the generated URLs (\code{default = FALSE})?
 #'
 #' @return
@@ -25,10 +25,10 @@
 #' observation <- weather(poi = poi, product = "observation", url_only = TRUE)
 #'
 #' # Forecast
-#' forecast <- weather(poi = poi, product = "forecast_hourly", url_only = TRUE)
+#' forecast <- weather(poi = poi, product = "forecastHourly", url_only = TRUE)
 #'
 #' # Astronomy
-#' astronomy <- weather(poi = poi, product = "forecast_astronomy", url_only = TRUE)
+#' astronomy <- weather(poi = poi, product = "forecastAstronomy", url_only = TRUE)
 #'
 #' # Alerts
 #' alerts <- weather(poi = poi, product = "alerts", url_only = TRUE)
@@ -101,19 +101,19 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   }
 
   # Extract information
-  weather <- switch(product,
+  weather_data <- switch(product,
     "observation" = .extract_weather_observation(data),
-    "forecast_hourly" = .extract_weather_forecast_hourly(data),
-    "forecast_astronomy" = .extract_weather_forecast_astronomy(data),
+    "forecastHourly" = .extract_weather_forecast_hourly(data),
+    "forecastAstronomy" = .extract_weather_forecast_astronomy(data),
     "alerts" = .extract_weather_alerts(data)
   )
 
   # Create sf, data.table, data.frame
-  rownames(weather) <- NULL
+  rownames(weather_data) <- NULL
   return(
     sf::st_set_crs(
       sf::st_as_sf(
-        as.data.frame(weather),
+        as.data.frame(weather_data),
         coords = c("lng", "lat")
       ), 4326
     )
@@ -154,28 +154,40 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_forecast_hourly <- function(data) {
+  template <- data.table::data.table(
+    id = numeric(),
+    rank = numeric(),
+    country_code = character(),
+    country = character(),
+    state = character(),
+    city = character(),
+    lng = numeric(),
+    lat = numeric()
+  )
   ids <- .get_ids(data)
   count <- 0
-  dfs <- lapply(data, function(con) {
-    jsonlite::fromJSON(con)
-  })
+  forecasts <- list()
   forecast <- data.table::rbindlist(
-    lapply(dfs, function(df) {
-      count <<- count + 1
-      station <- data.table::data.table(
-        id = ids[count],
-        station = df$hourlyForecasts$forecastLocation$city[1],
-        lng = df$hourlyForecasts$forecastLocation$longitude[1],
-        lat = df$hourlyForecasts$forecastLocation$latitude[1],
-        distance = df$hourlyForecasts$forecastLocation$distance[1] * 1000,
-        state = df$hourlyForecasts$forecastLocation$state[1],
-        country = df$hourlyForecasts$forecastLocation$country[1]
-      )
-    })
-  )
-  forecast$forecast <- lapply(dfs, function(df) {
-    df$hourlyForecasts$forecastLocation$forecast
-  })
+    append(list(template), lapply(data, function(con) {
+    count <<- count + 1
+    rank_id <- 0
+    df <- jsonlite::fromJSON(con)
+    data.table::rbindlist(lapply(df$places$hourlyForecast, function(result) {
+        rank_id <<- rank_id + 1
+        forecasts <<- append(forecasts, result$forecasts)
+        data.table::data.table(
+          id = ids[count],
+          rank = rank_id,
+          country_code = result$place$address$countryCode,
+          country = result$place$address$countryName,
+          state = result$place$address$state,
+          city = result$place$address$city,
+          lng = result$place$location$lng,
+          lat = result$place$location$lat
+        )
+    }), fill = TRUE)
+  })), fill = TRUE)
+  forecast <- cbind(forecast, forecasts)
   return(forecast)
 }
 

@@ -207,8 +207,8 @@ qualified_keys <- c(
   weather_product_types <-
     c(
       "observation",
-      "forecast_hourly",
-      "forecast_astronomy",
+      "forecastHourly",
+      "forecastAstronomy",
       "alerts"
     )
   if (!product %in% weather_product_types) {
