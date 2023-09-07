@@ -120,72 +120,6 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   )
 }
 
-.format_na_values <- function(col) {
-  if (is.null(col)) {
-    return(NULL)
-  }
-  as.numeric(gsub("\\*", "", col))
-}
-
-.parse_weather_results <- function(df) {
-  return(
-    data.table::data.table(
-      time = .parse_datetime_tz(df$time),
-      daylight = df$daylight,
-      description = df$description,
-      sky_info = df$skyInfo,
-      sky_desc = df$skyDesc,
-      temperature = df$temperature,
-      temperature_desc = df$temperatureDesc,
-      comfort = df$comfort,
-      high_temperature = .format_na_values(df$highTemperature), # parse * into NA
-      low_temperature = .format_na_values(df$lowTemperature), # parse
-      humidity = df$humidity,
-      dew_point = df$dewPoint,
-      precipitation_probability = df$precipitationProbability,
-      rain_fall = df$rainFall,
-      wind_speed = df$windSpeed,
-      wind_direction = df$windDirection,
-      wind_descr = df$windDesc,
-      wind_descr_short = df$windDescShort,
-      uv_index = df$uvIndex,
-      uv_descr = df$uvDesc,
-      barometer_pressure = df$barometerPressure,
-      barometer_trend = df$barometerTrend,
-      age_minutes = df$ageMinutes,
-      active_alerts = df$activeAlerts
-    )
-  )
-}
-
-.parse_astronomy_results <- function(df) {
-  return(
-    data.table::data.table(
-      time = .parse_datetime_tz(df$time),
-      sun_rise = df$sunRise,
-      sun_set = df$sunSet,
-      moon_rise = df$moonRise,
-      moon_set = df$moonSet,
-      moon_phase = df$moonPhase,
-      moon_phase_description = df$moonPhaseDescription
-    )
-  )
-}
-
-.parse_locations <- function(df, req_id, rank_id) {
-  return(data.table::data.table(
-    id = req_id,
-    rank = rank_id,
-    country_code = df$place$address$countryCode,
-    country = df$place$address$countryName,
-    state = df$place$address$state,
-    city = df$place$address$city,
-    distance = df$place$distance,
-    lng = df$place$location$lng,
-    lat = df$place$location$lat
-  ))
-}
-
 .extract_weather_observation <- function(data) {
   ids <- .get_ids(data)
   count <- 0
@@ -249,83 +183,106 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   return(forecast)
 }
 
-.extract_weather_forecast_astronomyOLD <- function(data) {
-  ids <- .get_ids(data)
-  count <- 0
-  dfs <- lapply(data, function(con) {
-    jsonlite::fromJSON(con)
-  })
-  astronomy <- data.table::rbindlist(
-    lapply(dfs, function(df) {
-      count <<- count + 1
-      station <- data.table::data.table(
-        id = ids[count],
-        station = df$astronomy$city[1],
-        lng = df$astronomy$longitude[1],
-        lat = df$astronomy$latitude[1],
-        tz = df$astronomy$timezone[1],
-        state = df$astronomy$state[1],
-        country = df$astronomy$country[1]
-      )
-    })
-  )
-  astronomy$astronomy <- lapply(dfs, function(df) {
-    ast <- df$astronomy$astronomy
-    ast$date <- as.Date(.parse_datetime(ast$utcTime))
-    ast$utcTime <- NULL
-    ast
-  })
-  return(astronomy)
-}
-
 .extract_weather_alerts <- function(data) {
   ids <- .get_ids(data)
   count <- 0
-  dfs <- lapply(data, function(con) {
-    jsonlite::fromJSON(con)
-  })
-  alerts <- data.table::rbindlist(
-    lapply(dfs, function(df) {
+  alerts <- list()
+  locations <- data.table::rbindlist(
+    lapply(data, function(con) {
       count <<- count + 1
-      station <- data.table::data.table(
-        id = ids[count],
-        station = df$alerts$city[1],
-        lng = df$alerts$longitude[1],
-        lat = df$alerts$latitude[1],
-        state = df$alerts$state[1],
-        country = df$alerts$country[1]
-      )
-    })
+      rank_id <- 0
+      df <- jsonlite::fromJSON(con)
+      data.table::rbindlist(lapply(df$places$alerts, function(result) {
+        rank_id <<- rank_id + 1
+        append(alerts, list(.parse_alert_results(result)))
+        .parse_locations(result, count, rank_id)
+      }), fill = TRUE)
+    }),
+    fill = TRUE
   )
-  alerts$alerts <- lapply(dfs, function(df) {
-    df$alerts$alerts
-  })
-  return(alerts)
+  return(cbind(locations, alerts))
 }
 
-templateOLD <- data.table::data.table(
-  time = numeric(),
-  daylight = character(),
-  description = character(),
-  sky_info = numeric(),
-  sky_desc = character(),
-  temperature = numeric(),
-  temperature_desc = character(),
-  comfort = numeric(),
-  high_temperature = numeric(), # parse * into NA
-  low_temperature = numeric(), # parse
-  humidity = numeric(),
-  dew_point = numeric(),
-  precipitation_probability = numeric(),
-  rain_fall = numeric(),
-  wind_speed = numeric(),
-  wind_direction = numeric(),
-  wind_descr = character(),
-  wind_descr_short = character(),
-  uv_index = numeric(),
-  uv_descr = character(),
-  barometer_pressure = numeric(),
-  barometer_trend = character(),
-  age_minutes = numeric(),
-  active_alerts = numeric()
-)
+.parse_locations <- function(df, req_id, rank_id) {
+  return(data.table::data.table(
+    id = req_id,
+    rank = rank_id,
+    country_code = df$place$address$countryCode,
+    country = df$place$address$countryName,
+    state = df$place$address$state,
+    city = df$place$address$city,
+    distance = df$place$distance,
+    lng = df$place$location$lng,
+    lat = df$place$location$lat
+  ))
+}
+
+.parse_weather_results <- function(df) {
+  return(
+    data.table::data.table(
+      time = .parse_datetime_tz(df$time),
+      daylight = df$daylight,
+      description = df$description,
+      sky_info = df$skyInfo,
+      sky_desc = df$skyDesc,
+      temperature = df$temperature,
+      temperature_desc = df$temperatureDesc,
+      comfort = df$comfort,
+      high_temperature = .format_na_values(df$highTemperature), # parse * into NA
+      low_temperature = .format_na_values(df$lowTemperature), # parse
+      humidity = df$humidity,
+      dew_point = df$dewPoint,
+      precipitation_probability = df$precipitationProbability,
+      rain_fall = df$rainFall,
+      wind_speed = df$windSpeed,
+      wind_direction = df$windDirection,
+      wind_descr = df$windDesc,
+      wind_descr_short = df$windDescShort,
+      uv_index = df$uvIndex,
+      uv_descr = df$uvDesc,
+      barometer_pressure = df$barometerPressure,
+      barometer_trend = df$barometerTrend,
+      age_minutes = df$ageMinutes,
+      active_alerts = df$activeAlerts
+    )
+  )
+}
+
+.parse_astronomy_results <- function(df) {
+  return(
+    data.table::data.table(
+      time = .parse_datetime_tz(df$time),
+      sun_rise = df$sunRise,
+      sun_set = df$sunSet,
+      moon_rise = df$moonRise,
+      moon_set = df$moonSet,
+      moon_phase = df$moonPhase,
+      moon_phase_description = df$moonPhaseDescription
+    )
+  )
+}
+
+.parse_alert_results <- function(df) {
+  template <- data.table::data.table(
+    time_segments = list(),
+    type = numeric(),
+    descriction = character()
+  )
+  return(
+    cbind(
+      template,
+      data.table::data.table(
+        time_segments = df$timeSegments,
+        type = df$type,
+        descriction = df$description
+      )
+    )
+  )
+}
+
+.format_na_values <- function(col) {
+  if (is.null(col)) {
+    return(NULL)
+  }
+  as.numeric(gsub("\\*", "", col))
+}
