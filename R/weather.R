@@ -121,10 +121,13 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .format_na_values <- function(col) {
+  if (is.null(col)) {
+    return(NULL)
+  }
   as.numeric(gsub("\\*", "", col))
 }
 
-.format_measurement <- function(df) {
+.parse_weather_results <- function(df) {
   return(
     data.table::data.table(
       time = .parse_datetime_tz(df$time),
@@ -155,7 +158,21 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   )
 }
 
-.format_location <- function(df, req_id, rank_id) {
+.parse_astronomy_results <- function(df) {
+  return(
+    data.table::data.table(
+      time = .parse_datetime_tz(df$time),
+      sun_rise = df$sunRise,
+      sun_set = df$sunSet,
+      moon_rise = df$moonRise,
+      moon_set = df$moonSet,
+      moon_phase = df$moonPhase,
+      moon_phase_description = df$moonPhaseDescription
+    )
+  )
+}
+
+.parse_locations <- function(df, req_id, rank_id) {
   return(data.table::data.table(
     id = req_id,
     rank = rank_id,
@@ -180,7 +197,7 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
       data.table::rbindlist(
         lapply(df$places$observations, function(result) {
           rank_id <<- rank_id + 1
-          cbind(.format_location(result, count, rank_id), .format_measurement(result))
+          cbind(.parse_locations(result, count, rank_id), .parse_weather_results(result))
         }),
         fill = TRUE
       )
@@ -191,40 +208,20 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_forecast_hourly <- function(data) {
-  template <- data.table::data.table(
-    id = numeric(),
-    rank = numeric(),
-    country_code = character(),
-    country = character(),
-    state = character(),
-    city = character(),
-    # distance?
-    lng = numeric(),
-    lat = numeric()
-  )
   ids <- .get_ids(data)
   count <- 0
   forecasts <- list()
   forecast <- data.table::rbindlist(
-    append(list(template), lapply(data, function(con) {
+    lapply(data, function(con) {
       count <<- count + 1
       rank_id <- 0
       df <- jsonlite::fromJSON(con)
       data.table::rbindlist(lapply(df$places$hourlyForecast, function(result) {
         rank_id <<- rank_id + 1
-        forecasts <<- append(forecasts, result$forecasts)
-        data.table::data.table(
-          id = ids[count],
-          rank = rank_id,
-          country_code = result$place$address$countryCode,
-          country = result$place$address$countryName,
-          state = result$place$address$state,
-          city = result$place$address$city,
-          lng = result$place$location$lng,
-          lat = result$place$location$lat
-        )
+        forecasts <<- append(forecasts, lapply(result$forecasts, .parse_weather_results))
+        .parse_locations(result, count, rank_id)
       }), fill = TRUE)
-    })),
+    }),
     fill = TRUE
   )
   forecast <- cbind(forecast, forecasts)
@@ -232,6 +229,27 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_forecast_astronomy <- function(data) {
+  ids <- .get_ids(data)
+  count <- 0
+  forecasts <- list()
+  forecast <- data.table::rbindlist(
+    lapply(data, function(con) {
+      count <<- count + 1
+      rank_id <- 0
+      df <- jsonlite::fromJSON(con)
+      data.table::rbindlist(lapply(df$places$astronomyForecasts, function(result) {
+        rank_id <<- rank_id + 1
+        forecasts <<- append(forecasts, lapply(result$forecasts, .parse_astronomy_results))
+        .parse_locations(result, count, rank_id)
+      }), fill = TRUE)
+    }),
+    fill = TRUE
+  )
+  forecast <- cbind(forecast, forecasts)
+  return(forecast)
+}
+
+.extract_weather_forecast_astronomyOLD <- function(data) {
   ids <- .get_ids(data)
   count <- 0
   dfs <- lapply(data, function(con) {
@@ -285,7 +303,7 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   return(alerts)
 }
 
-template <- data.table::data.table(
+templateOLD <- data.table::data.table(
   time = numeric(),
   daylight = character(),
   description = character(),
