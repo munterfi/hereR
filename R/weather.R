@@ -120,37 +120,74 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   )
 }
 
+.format_na_values <- function(col) {
+  as.numeric(gsub("\\*", "", col))
+}
+
+.format_measurement <- function(df) {
+  return(
+    data.table::data.table(
+      time = .parse_datetime_tz(df$time),
+      daylight = df$daylight,
+      description = df$description,
+      sky_info = df$skyInfo,
+      sky_desc = df$skyDesc,
+      temperature = df$temperature,
+      temperature_desc = df$temperatureDesc,
+      comfort = df$comfort,
+      high_temperature = .format_na_values(df$highTemperature), # parse * into NA
+      low_temperature = .format_na_values(df$lowTemperature), # parse
+      humidity = df$humidity,
+      dew_point = df$dewPoint,
+      precipitation_probability = df$precipitationProbability,
+      rain_fall = df$rainFall,
+      wind_speed = df$windSpeed,
+      wind_direction = df$windDirection,
+      wind_descr = df$windDesc,
+      wind_descr_short = df$windDescShort,
+      uv_index = df$uvIndex,
+      uv_descr = df$uvDesc,
+      barometer_pressure = df$barometerPressure,
+      barometer_trend = df$barometerTrend,
+      age_minutes = df$ageMinutes,
+      active_alerts = df$activeAlerts
+    )
+  )
+}
+
+.format_location <- function(df, req_id, rank_id) {
+  return(data.table::data.table(
+    id = req_id,
+    rank = rank_id,
+    country_code = df$place$address$countryCode,
+    country = df$place$address$countryName,
+    state = df$place$address$state,
+    city = df$place$address$city,
+    distance = df$place$distance,
+    lng = df$place$location$lng,
+    lat = df$place$location$lat
+  ))
+}
+
 .extract_weather_observation <- function(data) {
   ids <- .get_ids(data)
   count <- 0
-  observation <- data.table::rbindlist(
+  observations <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
+      rank_id <- 0
       df <- jsonlite::fromJSON(con)
-      station <- data.table::data.table(
-        id = ids[count],
-        station = df$observations$location$city[1],
-        lng = df$observations$location$longitude[1],
-        lat = df$observations$location$latitude[1],
-        distance = df$observations$location$distance[1] * 1000,
-        timestamp = .parse_datetime(df$observations$location$observation[[1]]$utcTime),
-        state = df$observations$location$state[1],
-        country = df$observations$location$country[1]
+      data.table::rbindlist(
+        lapply(df$places$observations, function(result) {
+          rank_id <<- rank_id + 1
+          cbind(.format_location(result, count, rank_id), .format_measurement(result))
+        }),
+        fill = TRUE
       )
-      obs <- df$observations$location$observation[[1]]
-      obs <- obs[, !names(obs) %in% c(
-        "skyDescription", "airDescription", "precipitationDesc",
-        "temperatureDesc", "iconName", "iconLink", "windDesc", "icon",
-        "country", "state", "city", "latitude", "longitude", "distance",
-        "utcTime", "elevation"
-      ), ]
-      obs[, c(4:9)] <- vapply(obs[, c(4:9)], as.numeric, numeric(1))
-      return(
-        cbind(station, obs)
-      )
-    })
+    }),
+    fill = TRUE
   )
-  return(observation)
+  return(observations)
 }
 
 .extract_weather_forecast_hourly <- function(data) {
@@ -161,6 +198,7 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
     country = character(),
     state = character(),
     city = character(),
+    # distance?
     lng = numeric(),
     lat = numeric()
   )
@@ -169,10 +207,10 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   forecasts <- list()
   forecast <- data.table::rbindlist(
     append(list(template), lapply(data, function(con) {
-    count <<- count + 1
-    rank_id <- 0
-    df <- jsonlite::fromJSON(con)
-    data.table::rbindlist(lapply(df$places$hourlyForecast, function(result) {
+      count <<- count + 1
+      rank_id <- 0
+      df <- jsonlite::fromJSON(con)
+      data.table::rbindlist(lapply(df$places$hourlyForecast, function(result) {
         rank_id <<- rank_id + 1
         forecasts <<- append(forecasts, result$forecasts)
         data.table::data.table(
@@ -185,8 +223,10 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
           lng = result$place$location$lng,
           lat = result$place$location$lat
         )
-    }), fill = TRUE)
-  })), fill = TRUE)
+      }), fill = TRUE)
+    })),
+    fill = TRUE
+  )
   forecast <- cbind(forecast, forecasts)
   return(forecast)
 }
@@ -244,3 +284,30 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   })
   return(alerts)
 }
+
+template <- data.table::data.table(
+  time = numeric(),
+  daylight = character(),
+  description = character(),
+  sky_info = numeric(),
+  sky_desc = character(),
+  temperature = numeric(),
+  temperature_desc = character(),
+  comfort = numeric(),
+  high_temperature = numeric(), # parse * into NA
+  low_temperature = numeric(), # parse
+  humidity = numeric(),
+  dew_point = numeric(),
+  precipitation_probability = numeric(),
+  rain_fall = numeric(),
+  wind_speed = numeric(),
+  wind_direction = numeric(),
+  wind_descr = character(),
+  wind_descr_short = character(),
+  uv_index = numeric(),
+  uv_descr = character(),
+  barometer_pressure = numeric(),
+  barometer_trend = character(),
+  age_minutes = numeric(),
+  active_alerts = numeric()
+)
