@@ -228,8 +228,8 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
       temperature = df$temperature,
       temperature_desc = df$temperatureDesc,
       comfort = df$comfort,
-      high_temperature = .format_na_values(df$highTemperature), # parse * into NA
-      low_temperature = .format_na_values(df$lowTemperature), # parse
+      high_temperature = .format_na_values(df$highTemperature),
+      low_temperature = .format_na_values(df$lowTemperature),
       humidity = df$humidity,
       dew_point = df$dewPoint,
       precipitation_probability = df$precipitationProbability,
@@ -269,7 +269,7 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
     descriction = character()
   )
   return(
-    cbind(
+    rbind(
       template,
       data.table::data.table(
         time_segments = df$timeSegments,
