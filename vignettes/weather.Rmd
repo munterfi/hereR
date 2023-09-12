@@ -49,9 +49,11 @@ The return value is an `sf` object, which contains the `POINT` geometries of the
 
 ```{r table_obs, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE, screenshot.force=FALSE}
 cols <- c(
-  "station", "distance", "description",
-  "temperature", "humidity",
-  "windSpeed", "windDirection"
+  "id", "city", "distance", "daylight", "description", "sky_info", "sky_desc",
+  "temperature", "temperature_desc", "comfort", "high_temperature",
+  "low_temperature", "humidity", "dew_point", "precipitation_probability",
+  "rain_fall", "wind_speed", "wind_direction", "wind_descr", "wind_descr_short",
+  "uv_index", "uv_descr", "barometer_pressure", "barometer_trend"
 )
 knitr::kable(as.data.frame(observation)[, cols], format = "html")
 ```
@@ -63,7 +65,7 @@ if (requireNamespace("mapview", quietly = TRUE)) {
   m <-
     mapview::mapview(observation,
       zcol = "temperature",
-      cex = observation$humidity / 4,
+      # cex = observation$humidity / 4,
       layer.name = "Observation",
       map.types = c("Esri.WorldTopoMap"),
       homebutton = FALSE
@@ -81,12 +83,12 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 
 ## Forecast
 
-An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecast_hourly"`:
+An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecastHourly"`:
 
 ```{r forecast, eval = FALSE}
 forecast <- weather(
   poi = poi,
-  product = "forecast_hourly"
+  product = "forecastHourly"
 )
 ```
 
@@ -144,12 +146,12 @@ if (requireNamespace(c("ggplot2", "mapview", "leafpop"), quietly = TRUE)) {
 
 ## Astronomy
 
-An astronomical forecast is requested by setting the `product` parameter to `"forecast_astronomy"`:
+An astronomical forecast is requested by setting the `product` parameter to `"forecastAstronomy"`:
 
 ```{r astronomy, eval = FALSE}
 astronomy <- weather(
   poi = poi,
-  product = "forecast_astronomy"
+  product = "forecastAstronomy"
 )
 ```
 

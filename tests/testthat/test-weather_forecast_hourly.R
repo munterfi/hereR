@@ -10,7 +10,7 @@ test_that("weather forecast_hourly works", {
     "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$weather_forecast_hourly_response
     },
-    weather_forecast_hourly <- weather(poi = poi, product = "forecast_hourly"),
+    weather_forecast_hourly <- weather(poi = poi, product = "forecastHourly"),
 
     # Tests
     expect_equal(any(sf::st_geometry_type(weather_forecast_hourly) != "POINT"), FALSE),

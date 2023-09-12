@@ -230,7 +230,7 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
       comfort = df$comfort,
       high_temperature = .format_na_values(df$highTemperature),
       low_temperature = .format_na_values(df$lowTemperature),
-      humidity = df$humidity,
+      humidity = .format_na_values(df$humidity),
       dew_point = df$dewPoint,
       precipitation_probability = df$precipitationProbability,
       rain_fall = df$rainFall,
