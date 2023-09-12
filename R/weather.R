@@ -194,7 +194,7 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
       df <- jsonlite::fromJSON(con)
       data.table::rbindlist(lapply(df$places$alerts, function(result) {
         rank_id <<- rank_id + 1
-        append(alerts, list(.parse_alert_results(result)))
+        alerts <<- append(alerts, list(.parse_alert_results(result)))
         .parse_locations(result, count, rank_id)
       }), fill = TRUE)
     }),
@@ -273,8 +273,8 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
       template,
       data.table::data.table(
         time_segments = df$timeSegments,
-        type = df$type,
-        descriction = df$description
+        type = ifelse(is.null(df$type), NA, df$type),
+        descriction = ifelse(is.null(df$description), NA, df$description)
       )
     )
   )
