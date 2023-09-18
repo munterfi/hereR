@@ -2,6 +2,9 @@
 
 S3method(geocode,character)
 S3method(geocode,list)
+S3method(weather,character)
+S3method(weather,sf)
+S3method(weather,sfc)
 export(autocomplete)
 export(autosuggest)
 export(connection)

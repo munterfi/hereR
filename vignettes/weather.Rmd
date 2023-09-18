@@ -49,9 +49,11 @@ The return value is an `sf` object, which contains the `POINT` geometries of the
 
 ```{r table_obs, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE, screenshot.force=FALSE}
 cols <- c(
-  "station", "distance", "description",
-  "temperature", "humidity",
-  "windSpeed", "windDirection"
+  "id", "city", "distance", "daylight", "description", "sky_info", "sky_desc",
+  "temperature", "temperature_desc", "comfort", "high_temperature",
+  "low_temperature", "humidity", "dew_point", "precipitation_probability",
+  "rain_fall", "wind_speed", "wind_direction", "wind_descr", "wind_descr_short",
+  "uv_index", "uv_descr", "barometer_pressure", "barometer_trend"
 )
 knitr::kable(as.data.frame(observation)[, cols], format = "html")
 ```
@@ -63,7 +65,7 @@ if (requireNamespace("mapview", quietly = TRUE)) {
   m <-
     mapview::mapview(observation,
       zcol = "temperature",
-      cex = observation$humidity / 4,
+      cex = observation$humidity / 10,
       layer.name = "Observation",
       map.types = c("Esri.WorldTopoMap"),
       homebutton = FALSE
@@ -81,12 +83,12 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 
 ## Forecast
 
-An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecast_hourly"`:
+An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecastHourly"`:
 
 ```{r forecast, eval = FALSE}
 forecast <- weather(
   poi = poi,
-  product = "forecast_hourly"
+  product = "forecastHourly"
 )
 ```
 
@@ -97,18 +99,14 @@ Print the weather observation information on an interactive leaflet map with pop
 ```{r plots_forecast, eval=TRUE, out.width='100%'}
 if (requireNamespace("ggplot2", quietly = TRUE)) {
   g <- lapply(seq_len(nrow(forecast)), function(x) {
-    fc <- data.frame(
-      dt = as.POSIXct(forecast$forecast[[x]]$utcTime, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
-      te = as.numeric(forecast$forecast[[x]]$temperature),
-      rh = as.numeric(forecast$forecast[[x]]$humidity)
-    )
-    ggplot2::ggplot(fc, ggplot2::aes(x = dt)) +
-      ggplot2::geom_line(ggplot2::aes(y = te, colour = "Temperature")) +
-      ggplot2::geom_line(ggplot2::aes(y = rh / 5, colour = "Humidity")) +
+    df <- forecast$forecasts[[x]]
+    ggplot2::ggplot(df, ggplot2::aes(x = time)) +
+      ggplot2::geom_line(ggplot2::aes(y = temperature, color = "Temperature")) +
+      ggplot2::geom_line(ggplot2::aes(y = humidity / 5, color = "Humidity")) +
       ggplot2::scale_y_continuous(sec.axis = ggplot2::sec_axis(~ . * 5, name = "Relative humidity [%]")) +
-      ggplot2::scale_colour_manual(values = c("blue", "red")) +
+      ggplot2::scale_color_manual(values = c("blue", "red")) +
       ggplot2::labs(y = "Air temperature [°C]", x = "", colour = "") +
-      ggplot2::ggtitle(forecast$station[x]) +
+      ggplot2::ggtitle(forecast$city[x]) +
       ggplot2::theme_minimal() +
       ggplot2::theme(legend.position = "bottom", panel.background = ggplot2::element_rect(color = NA))
   })
@@ -124,7 +122,7 @@ if (requireNamespace(c("ggplot2", "mapview", "leafpop"), quietly = TRUE)) {
       color = "black",
       col.region = "yellow",
       layer.name = "Weather station",
-      zcol = "station",
+      zcol = "city",
       map.types = c("Esri.WorldTopoMap"),
       homebutton = FALSE,
       legend = FALSE,
@@ -144,22 +142,19 @@ if (requireNamespace(c("ggplot2", "mapview", "leafpop"), quietly = TRUE)) {
 
 ## Astronomy
 
-An astronomical forecast is requested by setting the `product` parameter to `"forecast_astronomy"`:
+An astronomical forecast is requested by setting the `product` parameter to `"forecastAstronomy"`:
 
 ```{r astronomy, eval = FALSE}
 astronomy <- weather(
   poi = poi,
-  product = "forecast_astronomy"
+  product = "forecastAstronomy"
 )
 ```
 
 Print a table for the sun and moon times of the first example POI, where the nearest station is 'Emmenbrücke':
 
 ```{r table_ast, eval=TRUE, fig.align='center', out.width='100%', echo=FALSE, screenshot.force=FALSE}
-ast <- astronomy$astronomy[[1]]
-ast$phase <- ast$moonPhaseDesc
-cols <- c("date", "sunrise", "sunset", "moonrise", "moonset", "phase")
-knitr::kable(ast[, cols], format = "html", )
+knitr::kable(astronomy$forecasts[[1]], format = "html")
 ```
 
 ## Alerts
@@ -173,7 +168,8 @@ alerts <- weather(
 )
 ```
 
-This returns an `sf` object with the POIs and the attribute `"alerts"`, which is a `data.table`, which contains the current weather alerts. If no alerts are recorded near a POI the attribute `"alerts"` is `NULL`.
+This returns an `sf` object with the POIs and the attribute `"alerts"`, which contains the current weather alerts.
+If no alerts are recorded near a POI the attribute `"alerts"` is `NULL`.
 
 ## API Reference
 

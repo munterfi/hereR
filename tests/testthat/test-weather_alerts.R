@@ -6,9 +6,9 @@ test_that("weather alerts works", {
   data(poi)
 
   # Input checks
-  expect_error(weather(poi = c(1, 2, 3)), "Invalid input for 'poi'.")
+  expect_error(weather(poi = c(1, 2, 3)))
   expect_error(weather(poi = c("character", NA)), "'poi' contains NAs.")
-  expect_error(weather(poi = poi, product = "not_a_product"), "'product' must be 'observation', 'forecast_hourly', 'forecast_astronomy', 'alerts'.")
+  expect_error(weather(poi = poi, product = "not_a_product"), "'product' must be 'observation', 'forecastHourly', 'forecastAstronomy', 'alerts'.")
   expect_error(weather(poi = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
   # Test with API response mock

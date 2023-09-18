@@ -1,6 +1,7 @@
 # version 0.9.1.9000
 
 - Upgrade HERE Traffic API to v7 for `flow()` and `incident()` requests (closes [#158](https://github.com/munterfi/hereR/issues/158))
+- Upgrade HERE Destination Weather API to v3 for `weather()`.
 - Update description to create a new API key to the HERE Platform (closes [#157](https://github.com/munterfi/hereR/issues/157)).
 - In addition to `sf`, `data.frames`, the input for points and areas of interest now also allows for `sfc` geometry columns.
 - Change the example data set of the package for the area of interest `aoi` from the country border of Switzerland to the districts of Zurich. This change was necessary because the `flow()` and `incident()` requests have a maximum allowed width and height of 1 degree for the bounding box of the input AOIs.
