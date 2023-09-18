@@ -202,17 +202,17 @@ route_matrix <- function(origin, destination = origin, datetime = Sys.time(),
   route_mat <- data.table::rbindlist(
     append(
       list(template),
-      lapply(data, function(con) {
+      lapply(data, function(res) {
         count <<- count + 1
 
         # Parse JSON
-        df <- jsonlite::fromJSON(con)
+        df <- jsonlite::fromJSON(res)
         if (is.null(df$matrix)) {
           return(NULL)
         }
 
         # Matrix
-        routes <- data.table::data.table(
+        data.table::data.table(
           data.table::CJ(
             orig_id = orig_idx[[count]][1:df$matrix$numOrigins] + 1,
             dest_id = dest_idx[[count]][1:df$matrix$numDestinations] + 1

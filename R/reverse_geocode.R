@@ -135,9 +135,9 @@ reverse_geocode <- function(poi, results = 1, sf = TRUE, url_only = FALSE) {
   result <- data.table::rbindlist(
     append(
       list(template),
-      lapply(data, function(con) {
+      lapply(data, function(res) {
         count <<- count + 1
-        df <- jsonlite::fromJSON(con)
+        df <- jsonlite::fromJSON(res)
         if (length(nrow(df$items)) == 0) {
           return(NULL)
         }

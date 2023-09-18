@@ -24,7 +24,9 @@ qualified_keys <- c(
 )
 
 .check_qualified_query_list <- function(query) {
-  if (any(names(query) %in% qualified_keys) || length(query) == 0) stop("Invalid format, needs to be 'list(query, ...)'.")
+  if (any(names(query) %in% qualified_keys) || length(query) == 0) {
+    stop("Invalid format, needs to be 'list(query, ...)'.")
+  }
 }
 
 .check_qualified_query <- function(query) {

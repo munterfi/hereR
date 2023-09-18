@@ -1,4 +1,6 @@
-# version 0.9.1.9000
+# version 1.0.0
+
+Please note that there are breaking changes introduced in this major version release for the `weather()`, `flow()`, and `incidents()` functions. Be sure to review the updated documentation to understand how these changes may affect your usage.
 
 - Upgrade HERE Traffic API to v7 for `flow()` and `incident()` requests (closes [#158](https://github.com/munterfi/hereR/issues/158))
 - Upgrade HERE Destination Weather API to v3 for `weather()`.
@@ -8,6 +10,7 @@
 - Replace GitHub actions with current versions from **r-lib/actions**.
 - Bugfix: Fix decoding of polylines with NA value in `intermodal_route()`.
 - Bugfix: NAs introduced by coercion, do not convert `snowFall` column to numeric in weather observation request.
+- Bugfix: Remove `defunct.R` and `deprecated.R` to avoid NOTE (closes [#162](https://github.com/munterfi/hereR/issues/162)).
 
 # version 0.9.1
 

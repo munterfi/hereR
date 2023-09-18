@@ -194,18 +194,18 @@ connection <- function(origin, destination, datetime = Sys.time(),
   routes <- data.table::rbindlist(
     append(
       list(template),
-      lapply(data, function(con) {
+      lapply(data, function(res) {
         count <<- count + 1
 
         # Parse JSON
-        df <- jsonlite::fromJSON(con)
+        df <- jsonlite::fromJSON(res)
         if (is.null(df$routes$sections)) {
           return(NULL)
         }
 
         # Connections
         rank <- 0
-        connections <- data.table::data.table(
+        data.table::data.table(
           id = ids[count],
 
           # Segments

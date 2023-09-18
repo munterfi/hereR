@@ -98,9 +98,9 @@ flow <- function(aoi, min_jam_factor = 0, url_only = FALSE) {
   ids <- .get_ids(data)
   count <- 0
   geoms <- list()
-  flow_data <- data.table::rbindlist(lapply(data, function(con) {
+  flow_data <- data.table::rbindlist(lapply(data, function(res) {
     count <<- count + 1
-    df <- jsonlite::fromJSON(con)
+    df <- jsonlite::fromJSON(res)
     # parse geometries
     geoms <<- append(
       geoms,
