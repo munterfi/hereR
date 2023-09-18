@@ -10,7 +10,7 @@ test_that("weather forecast_astronomy works", {
     "hereR:::.async_request" = function(url, rps) {
       hereR:::mock$weather_forecast_astronomy_response
     },
-    weather_forecast_astronomy <- weather(poi = poi, product = "forecastAstronomy"),
+    weather_forecast_astronomy <- weather(poi = poi, product = "forecast_astronomy"),
 
     # Tests
     expect_equal(any(sf::st_geometry_type(weather_forecast_astronomy) != "POINT"), FALSE),

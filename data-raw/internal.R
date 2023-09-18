@@ -33,9 +33,9 @@ url_isoline <-
 url_weather_observation <-
   weather(poi = poi, product = "observation", url_only = TRUE)
 url_weather_forecast_hourly <-
-  weather(poi = poi, product = "forecastHourly", url_only = TRUE)
+  weather(poi = poi, product = "forecast_hourly", url_only = TRUE)
 url_weather_forecast_astronomy <-
-  weather(poi = poi, product = "forecastAstronomy", url_only = TRUE)
+  weather(poi = poi, product = "forecast_astronomy", url_only = TRUE)
 url_weather_alerts <-
   weather(poi = poi, product = "alerts", url_only = TRUE)
 url_flow <-
@@ -76,8 +76,8 @@ example <- list(
   intermodal_route = intermodal_route(origin = poi[1:3, ], destination = poi[4:6, ]),
   isoline = isoline(poi = poi),
   weather_observation = weather(poi = poi, product = "observation"),
-  weather_forecast_hourly = weather(poi = poi, product = "forecastHourly"),
-  weather_forecast_astronomy = weather(poi = poi, product = "forecastAstronomy"),
+  weather_forecast_hourly = weather(poi = poi, product = "forecast_hourly"),
+  weather_forecast_astronomy = weather(poi = poi, product = "forecast_astronomy"),
   weather_alerts = weather(poi = poi, product = "alerts"),
   flow = flow(aoi = aoi[1, ]),
   incident = incident(aoi = aoi[1, ]),

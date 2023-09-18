@@ -205,19 +205,19 @@ qualified_keys <- c(
 }
 
 .check_weather_product <- function(product) {
-  weather_product_types <-
-    c(
-      "observation",
-      "forecastHourly",
-      "forecastAstronomy",
-      "alerts"
-    )
-  if (!product %in% weather_product_types) {
+  product_mapping <- list(
+    observation = "observation",
+    forecast_hourly = "forecastHourly",
+    forecast_astronomy = "forecastAstronomy",
+    alerts = "alerts"
+  )
+  if (!product %in% names(product_mapping)) {
     stop(sprintf(
       "'product' must be '%s'.",
-      paste(weather_product_types, collapse = "', '")
+      paste(names(product_mapping), collapse = "', '")
     ))
   }
+  return(product_mapping[[product]])
 }
 
 .check_min_jam_factor <- function(min_jam_factor) {

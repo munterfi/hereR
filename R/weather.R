@@ -25,10 +25,10 @@
 #' observation <- weather(poi = poi, product = "observation", url_only = TRUE)
 #'
 #' # Forecast
-#' forecast <- weather(poi = poi, product = "forecastHourly", url_only = TRUE)
+#' forecast <- weather(poi = poi, product = "forecast_hourly", url_only = TRUE)
 #'
 #' # Astronomy
-#' astronomy <- weather(poi = poi, product = "forecastAstronomy", url_only = TRUE)
+#' astronomy <- weather(poi = poi, product = "forecast_astronomy", url_only = TRUE)
 #'
 #' # Alerts
 #' alerts <- weather(poi = poi, product = "alerts", url_only = TRUE)
@@ -65,7 +65,7 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 
 .weather.default <- function(poi, product = "observation", url_only = FALSE) {
   # Checks
-  .check_weather_product(product)
+  product <- .check_weather_product(product)
   .check_boolean(url_only)
 
   # Add API key

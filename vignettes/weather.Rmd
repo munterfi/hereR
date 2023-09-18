@@ -83,12 +83,12 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 
 ## Forecast
 
-An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecastHourly"`:
+An hourly forecast of the predicted weather for the following seven days can be obtained by setting the `product` parameter to `"forecast_hourly"`:
 
 ```{r forecast, eval = FALSE}
 forecast <- weather(
   poi = poi,
-  product = "forecastHourly"
+  product = "forecast_hourly"
 )
 ```
 
@@ -142,12 +142,12 @@ if (requireNamespace(c("ggplot2", "mapview", "leafpop"), quietly = TRUE)) {
 
 ## Astronomy
 
-An astronomical forecast is requested by setting the `product` parameter to `"forecastAstronomy"`:
+An astronomical forecast is requested by setting the `product` parameter to `"forecast_astronomy"`:
 
 ```{r astronomy, eval = FALSE}
 astronomy <- weather(
   poi = poi,
-  product = "forecastAstronomy"
+  product = "forecast_astronomy"
 )
 ```
 
