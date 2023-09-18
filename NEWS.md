@@ -8,6 +8,7 @@
 - Replace GitHub actions with current versions from **r-lib/actions**.
 - Bugfix: Fix decoding of polylines with NA value in `intermodal_route()`.
 - Bugfix: NAs introduced by coercion, do not convert `snowFall` column to numeric in weather observation request.
+- Bugfix: Remove `defunct.R` and `deprecated.R` to avoid NOTE (closes [#162](https://github.com/munterfi/hereR/issues/162)).
 
 # version 0.9.1
 
