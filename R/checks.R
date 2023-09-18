@@ -1,5 +1,5 @@
 .check_character <- function(text) {
-  if (!is.character(text) & !is.null(text)) {
+  if (!is.character(text) && !is.null(text)) {
     stop(sprintf(
       "'%s' must be a 'character' vector.",
       deparse(substitute(text, environment()))
@@ -24,7 +24,7 @@ qualified_keys <- c(
 )
 
 .check_qualified_query_list <- function(query) {
-  if (any(names(query) %in% qualified_keys) | length(query) == 0) stop("Invalid format, needs to be 'list(query, ...)'.")
+  if (any(names(query) %in% qualified_keys) || length(query) == 0) stop("Invalid format, needs to be 'list(query, ...)'.")
 }
 
 .check_qualified_query <- function(query) {
@@ -99,8 +99,7 @@ qualified_keys <- c(
 }
 
 .check_datetime <- function(datetime) {
-  if (!any(class(datetime) %in% c("POSIXct", "POSIXt")) &
-    !is.null(datetime)) {
+  if (!any(class(datetime) %in% c("POSIXct", "POSIXt")) && !is.null(datetime)) {
     stop(sprintf(
       "'%s' must be of type 'POSIXct', 'POSIXt'.",
       deparse(substitute(datetime, environment()))
@@ -195,7 +194,7 @@ qualified_keys <- c(
 }
 
 .check_key <- function(api_key) {
-  if (!(is.character(api_key) & api_key != "")) {
+  if (!(is.character(api_key) && api_key != "")) {
     stop(
       "Please provide an 'API key' for a HERE project.
       Get your login here: https://developer.here.com/"
@@ -223,7 +222,7 @@ qualified_keys <- c(
   if (!is.numeric(min_jam_factor)) {
     stop("'min_jam_factor' must be of type 'numeric'.")
   }
-  if (min_jam_factor < 0 | min_jam_factor > 10) {
+  if (min_jam_factor < 0 || min_jam_factor > 10) {
     stop("'min_jam_factor' must be in the valid range from 0 to 10.")
   }
 }
@@ -233,7 +232,7 @@ qualified_keys <- c(
   if (!is.numeric(num)) {
     stop(sprintf("'%s' must be of type 'numeric'.", var_name))
   }
-  if (num < lower | num > upper) {
+  if (num < lower || num > upper) {
     stop(sprintf(
       "'%s' must be in the valid range from %s to %s.",
       var_name,

@@ -121,17 +121,15 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_observation <- function(data) {
-  ids <- .get_ids(data)
   count <- 0
   observations <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
-      rank_id <- 0
       df <- jsonlite::fromJSON(con)
       data.table::rbindlist(
         lapply(df$places$observations, function(result) {
-          rank_id <<- rank_id + 1
-          cbind(.parse_locations(result, count, rank_id), .parse_weather_results(result))
+          res <- .parse_weather_results(result)
+          cbind(.parse_locations(result, count, nrow(res)), res)
         }),
         fill = TRUE
       )
@@ -142,18 +140,15 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_forecast_hourly <- function(data) {
-  ids <- .get_ids(data)
   count <- 0
   forecasts <- list()
   forecast <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
-      rank_id <- 0
       df <- jsonlite::fromJSON(con)
       data.table::rbindlist(lapply(df$places$hourlyForecast, function(result) {
-        rank_id <<- rank_id + 1
         forecasts <<- append(forecasts, lapply(result$forecasts, .parse_weather_results))
-        .parse_locations(result, count, rank_id)
+        .parse_locations(result, count, 1)
       }), fill = TRUE)
     }),
     fill = TRUE
@@ -163,18 +158,15 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_forecast_astronomy <- function(data) {
-  ids <- .get_ids(data)
   count <- 0
   forecasts <- list()
   forecast <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
-      rank_id <- 0
       df <- jsonlite::fromJSON(con)
       data.table::rbindlist(lapply(df$places$astronomyForecasts, function(result) {
-        rank_id <<- rank_id + 1
         forecasts <<- append(forecasts, lapply(result$forecasts, .parse_astronomy_results))
-        .parse_locations(result, count, rank_id)
+        .parse_locations(result, count, 1)
       }), fill = TRUE)
     }),
     fill = TRUE
@@ -184,18 +176,15 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 }
 
 .extract_weather_alerts <- function(data) {
-  ids <- .get_ids(data)
   count <- 0
   alerts <- list()
   locations <- data.table::rbindlist(
     lapply(data, function(con) {
       count <<- count + 1
-      rank_id <- 0
       df <- jsonlite::fromJSON(con)
       data.table::rbindlist(lapply(df$places$alerts, function(result) {
-        rank_id <<- rank_id + 1
         alerts <<- append(alerts, list(.parse_alert_results(result)))
-        .parse_locations(result, count, rank_id)
+        .parse_locations(result, count, 1)
       }), fill = TRUE)
     }),
     fill = TRUE
@@ -203,10 +192,10 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   return(cbind(locations, alerts))
 }
 
-.parse_locations <- function(df, req_id, rank_id) {
+.parse_locations <- function(df, req_id, max_rank_id) {
   return(data.table::data.table(
     id = req_id,
-    rank = rank_id,
+    rank = seq_len(max_rank_id),
     country_code = df$place$address$countryCode,
     country = df$place$address$countryName,
     state = df$place$address$state,
