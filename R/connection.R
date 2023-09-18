@@ -205,7 +205,7 @@ connection <- function(origin, destination, datetime = Sys.time(),
 
         # Connections
         rank <- 0
-        connections <- data.table::data.table(
+        data.table::data.table(
           id = ids[count],
 
           # Segments

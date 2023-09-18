@@ -249,7 +249,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
 
         # Routes
         rank <- 0
-        routes <- data.table::data.table(
+        data.table::data.table(
           id = ids[count],
 
           # Segments
