@@ -1,4 +1,6 @@
-# version 0.9.1.9000
+# version 1.0.0
+
+Please note that there are breaking changes introduced in this major version release for the `weather()`, `flow()`, and `incidents()` functions. Be sure to review the updated documentation to understand how these changes may affect your usage.
 
 - Upgrade HERE Traffic API to v7 for `flow()` and `incident()` requests (closes [#158](https://github.com/munterfi/hereR/issues/158))
 - Upgrade HERE Destination Weather API to v3 for `weather()`.

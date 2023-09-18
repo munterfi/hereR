@@ -123,9 +123,9 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
 .extract_weather_observation <- function(data) {
   count <- 0
   observations <- data.table::rbindlist(
-    lapply(data, function(con) {
+    lapply(data, function(res) {
       count <<- count + 1
-      df <- jsonlite::fromJSON(con)
+      df <- jsonlite::fromJSON(res)
       data.table::rbindlist(
         lapply(df$places$observations, function(result) {
           res <- .parse_weather_results(result)
@@ -143,9 +143,9 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   count <- 0
   forecasts <- list()
   forecast <- data.table::rbindlist(
-    lapply(data, function(con) {
+    lapply(data, function(res) {
       count <<- count + 1
-      df <- jsonlite::fromJSON(con)
+      df <- jsonlite::fromJSON(res)
       data.table::rbindlist(lapply(df$places$hourlyForecast, function(result) {
         forecasts <<- append(forecasts, lapply(result$forecasts, .parse_weather_results))
         .parse_locations(result, count, 1)
@@ -161,9 +161,9 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   count <- 0
   forecasts <- list()
   forecast <- data.table::rbindlist(
-    lapply(data, function(con) {
+    lapply(data, function(res) {
       count <<- count + 1
-      df <- jsonlite::fromJSON(con)
+      df <- jsonlite::fromJSON(res)
       data.table::rbindlist(lapply(df$places$astronomyForecasts, function(result) {
         forecasts <<- append(forecasts, lapply(result$forecasts, .parse_astronomy_results))
         .parse_locations(result, count, 1)
@@ -179,9 +179,9 @@ weather.sfc <- function(poi, product = "observation", url_only = FALSE) {
   count <- 0
   alerts <- list()
   locations <- data.table::rbindlist(
-    lapply(data, function(con) {
+    lapply(data, function(res) {
       count <<- count + 1
-      df <- jsonlite::fromJSON(con)
+      df <- jsonlite::fromJSON(res)
       data.table::rbindlist(lapply(df$places$alerts, function(result) {
         alerts <<- append(alerts, list(.parse_alert_results(result)))
         .parse_locations(result, count, 1)
