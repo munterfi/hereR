@@ -49,9 +49,6 @@
     <loc>/reference/aoi.html</loc>
   </url>
   <url>
-    <loc>/reference/autocomplete-defunct.html</loc>
-  </url>
-  <url>
     <loc>/reference/autosuggest.html</loc>
   </url>
   <url>
@@ -62,12 +59,6 @@
   </url>
   <url>
     <loc>/reference/geocode.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hereR-defunct.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hereR-deprecated.html</loc>
   </url>
   <url>
     <loc>/reference/hereR-package.html</loc>
@@ -97,9 +88,6 @@
     <loc>/reference/route_matrix.html</loc>
   </url>
   <url>
-    <loc>/reference/set_auth-defunct.html</loc>
-  </url>
-  <url>
     <loc>/reference/set_currency.html</loc>
   </url>
   <url>
@@ -109,28 +97,13 @@
     <loc>/reference/set_key.html</loc>
   </url>
   <url>
-    <loc>/reference/set_proxy-defunct.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_rate_limit-deprecated.html</loc>
-  </url>
-  <url>
     <loc>/reference/set_verbose.html</loc>
   </url>
   <url>
     <loc>/reference/station.html</loc>
   </url>
   <url>
-    <loc>/reference/traffic-defunct.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unset_auth-defunct.html</loc>
-  </url>
-  <url>
     <loc>/reference/unset_key.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unset_proxy-defunct.html</loc>
   </url>
   <url>
     <loc>/reference/weather.html</loc>

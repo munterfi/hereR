@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -88,6 +88,19 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0" id="version-100">version 1.0.0<small>2023-09-18</small><a class="anchor" aria-label="anchor" href="#version-100"></a></h2>
+<p>Please note that there are breaking changes introduced in this major version release for the <code><a href="../reference/weather.html">weather()</a></code>, <code><a href="../reference/flow.html">flow()</a></code>, and <code>incidents()</code> functions. Be sure to review the updated documentation to understand how these changes may affect your usage.</p>
+<ul><li>Upgrade HERE Traffic API to v7 for <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code> requests (closes <a href="https://github.com/munterfi/hereR/issues/158" class="external-link">#158</a>)</li>
+<li>Upgrade HERE Destination Weather API to v3 for <code><a href="../reference/weather.html">weather()</a></code>.</li>
+<li>Update description to create a new API key to the HERE Platform (closes <a href="https://github.com/munterfi/hereR/issues/157" class="external-link">#157</a>).</li>
+<li>In addition to <code>sf</code>, <code>data.frames</code>, the input for points and areas of interest now also allows for <code>sfc</code> geometry columns.</li>
+<li>Change the example data set of the package for the area of interest <code>aoi</code> from the country border of Switzerland to the districts of Zurich. This change was necessary because the <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code> requests have a maximum allowed width and height of 1 degree for the bounding box of the input AOIs.</li>
+<li>Replace GitHub actions with current versions from <strong>r-lib/actions</strong>.</li>
+<li>Bugfix: Fix decoding of polylines with NA value in <code><a href="../reference/intermodal_route.html">intermodal_route()</a></code>.</li>
+<li>Bugfix: NAs introduced by coercion, do not convert <code>snowFall</code> column to numeric in weather observation request.</li>
+<li>Bugfix: Remove <code>defunct.R</code> and <code>deprecated.R</code> to avoid NOTE (closes <a href="https://github.com/munterfi/hereR/issues/162" class="external-link">#162</a>).</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.1" id="version-091">version 0.9.1<small>2023-01-09</small><a class="anchor" aria-label="anchor" href="#version-091"></a></h2>
 <ul><li>Resubmit to CRAN due to since the package was archived on 2022-12-27 as email to the maintainer was temporarily not deliverable.</li>
 <li>Updated r-lib/actions in github action <code>R-CMD-check.yaml</code> and <code>pkgdown.yaml</code>.</li>
@@ -118,8 +131,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.0" id="version-080">version 0.8.0<small>2021-09-28</small><a class="anchor" aria-label="anchor" href="#version-080"></a></h2>
-<ul><li>Rename the rate-limit-related variable <code>HERE_RPS</code> to <code>HERE_FREEMIUM</code>, and the function <code><a href="../reference/hereR-deprecated.html">hereR::set_rate_limit()</a></code> to <code><a href="../reference/set_freemium.html">hereR::set_freemium()</a></code>. Use the <code>HERE_FREEMIUM</code> environment variable to determine a plan-specific size of sub-matrices in the <code><a href="../reference/route_matrix.html">hereR::route_matrix()</a></code> function (<a href="https://github.com/szaboildi" class="external-link">@szaboildi</a>, <a href="https://github.com/munterfi/hereR/pull/138" class="external-link">#138</a>).</li>
-<li>Deprecate <code><a href="../reference/hereR-deprecated.html">hereR::set_rate_limit()</a></code> (closes <a href="https://github.com/munterfi/hereR/issues/137" class="external-link">#137</a>).</li>
+<ul><li>Rename the rate-limit-related variable <code>HERE_RPS</code> to <code>HERE_FREEMIUM</code>, and the function <code>hereR::set_rate_limit()</code> to <code><a href="../reference/set_freemium.html">hereR::set_freemium()</a></code>. Use the <code>HERE_FREEMIUM</code> environment variable to determine a plan-specific size of sub-matrices in the <code><a href="../reference/route_matrix.html">hereR::route_matrix()</a></code> function (<a href="https://github.com/szaboildi" class="external-link">@szaboildi</a>, <a href="https://github.com/munterfi/hereR/pull/138" class="external-link">#138</a>).</li>
+<li>Deprecate <code>hereR::set_rate_limit()</code> (closes <a href="https://github.com/munterfi/hereR/issues/137" class="external-link">#137</a>).</li>
 <li>Add option to use qualified queries in <code><a href="../reference/geocode.html">geocode()</a></code> (closes <a href="https://github.com/munterfi/hereR/issues/136" class="external-link">#136</a>).</li>
 </ul></div>
     <div class="section level2">
@@ -174,10 +187,10 @@
 <li>Change default geometry in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> to position coordinates (display position) and return access coordinates (navigation position) as additional column in well-known text format (closes <a href="https://github.com/munterfi/hereR/issues/53" class="external-link">#53</a>).</li>
 <li>Consistent columns in the return value of <code><a href="../reference/geocode.html">geocode()</a></code> and <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> independent of the input address level (closes <a href="https://github.com/munterfi/hereR/issues/58" class="external-link">#58</a>).</li>
 <li>Upgrade Geocoder API version used in <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> from v6.2 to v7. <strong>Note:</strong> The argument <code>landmarks</code> is defunct.</li>
-<li>Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. <strong>Note:</strong> The function <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code> is defunct, please use <code><a href="../reference/autosuggest.html">autosuggest()</a></code>.</li>
+<li>Replace Geocoder API Autocomplete v6.2 with Geocoder API Autosuggest v7. <strong>Note:</strong> The function <code>autocomplete()</code> is defunct, please use <code><a href="../reference/autosuggest.html">autosuggest()</a></code>.</li>
 <li>Upgrade Public Transit API version used in <code><a href="../reference/connection.html">connection()</a></code> and <code><a href="../reference/station.html">station()</a></code> from v3 to v8 (closes <a href="https://github.com/munterfi/hereR/issues/62" class="external-link">#62</a>). <strong>Note:</strong> Now the geometries (LINESTRING) of the pedestrian sections are also included in the public transport routes returned by <code><a href="../reference/connection.html">connection()</a></code>.</li>
 <li>Sign in to CodeFactor.io and add badge to track code quality.</li>
-<li>Defunct <code><a href="../reference/hereR-defunct.html">set_proxy()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_proxy()</a></code>. Use a global proxy configuration for R in <code>~/.Renviron</code> instead.</li>
+<li>Defunct <code>set_proxy()</code> and <code>unset_proxy()</code>. Use a global proxy configuration for R in <code>~/.Renviron</code> instead.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.1" id="version-041">version 0.4.1<small>2020-08-24</small><a class="anchor" aria-label="anchor" href="#version-041"></a></h2>
@@ -203,7 +216,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.2" id="version-032">version 0.3.2<small>2020-03-29</small><a class="anchor" aria-label="anchor" href="#version-032"></a></h2>
-<ul><li>Defunct the deprecated <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function, which has been replaced by the functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code>.</li>
+<ul><li>Defunct the deprecated <code>traffic()</code> function, which has been replaced by the functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code>.</li>
 <li>Recreated package test data, api mocks and examples with <strong>sf</strong> 0.9-0 (see <a href="https://github.com/munterfi/hereR/issues/36" class="external-link">#36</a>).</li>
 <li>Increased the dependency on the <strong>sf</strong> package to version 0.9-0 due to a different CRS handling (for more information about the changes in <strong>sf</strong>, see <a href="https://r-spatial.org/r/2020/03/17/wkt.html" class="external-link">here</a>). <strong>Note: Older versions of the sf package are no longer supported.</strong>
 </li>
@@ -213,12 +226,12 @@
 <h2 class="page-header" data-toc-text="0.3.1" id="version-031">version 0.3.1<small>2020-01-29</small><a class="anchor" aria-label="anchor" href="#version-031"></a></h2>
 <ul><li>There are no more missing M:N route combinations in the the edge list returned by <code><a href="../reference/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfi/hereR/issues/30" class="external-link">#30</a>).</li>
 <li>All lengths of <code>origin</code> and <code>destination</code> are now accepted as input in <code><a href="../reference/route_matrix.html">route_matrix()</a></code> (see <a href="https://github.com/munterfi/hereR/issues/31" class="external-link">#31</a>).</li>
-<li>Added two new functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code> to access traffic flow and incidents from the Traffic API. Deprecated the <code><a href="../reference/hereR-defunct.html">traffic()</a></code> function.</li>
+<li>Added two new functions <code><a href="../reference/flow.html">flow()</a></code> and <code><a href="../reference/incident.html">incident()</a></code> to access traffic flow and incidents from the Traffic API. Deprecated the <code>traffic()</code> function.</li>
 <li>Reduced the dependent version of R from 3.5.0 to 3.3.0 as the package is still functional but runs on more systems.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="version-030">version 0.3.0<small>2020-01-07</small><a class="anchor" aria-label="anchor" href="#version-030"></a></h2>
-<ul><li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code><a href="../reference/hereR-defunct.html">set_auth()</a></code> and <code><a href="../reference/hereR-defunct.html">unset_auth()</a></code> are defunct and replaced by <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfi/hereR/issues/23" class="external-link">#23</a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
+<ul><li>HERE has updated the authentication process and changed from APP_ID and APP_CODE to a single API_KEY. Therefore <code>set_auth()</code> and <code>unset_auth()</code> are defunct and replaced by <code><a href="../reference/set_key.html">set_key()</a></code> and <code><a href="../reference/unset_key.html">unset_key()</a></code> (see <a href="https://github.com/munterfi/hereR/issues/23" class="external-link">#23</a>).<br><strong>NOTE:</strong> <code><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">.Deprecated()</a></code> was skipped because the API endpoints have also changed. After updating to a version greater than 0.2.1 <strong>the authentication must be adjusted</strong>.</li>
 <li>Added a minimum jam factor filter to <code>traffic(..., product = "flow")</code>. Now it is possible to only retrieve flow information of severe congestion with a jam factor greater than <code>min_jam_factor</code>, which speeds up requests.</li>
 <li>
 <strong>Public Transit API: Transit route</strong> The new feature <code><a href="../reference/connection.html">connection()</a></code> implements requesting the most efficient and relevant transit connections between given pairs of locations.</li>
@@ -232,10 +245,10 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.1" id="version-021">version 0.2.1<small>2019-12-16</small><a class="anchor" aria-label="anchor" href="#version-021"></a></h2>
-<ul><li>Enhanced <code><a href="../reference/hereR-defunct.html">traffic()</a></code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
+<ul><li>Enhanced <code>traffic()</code>: Clarified that <code>from_dt</code> and <code>to_dt</code> have no effect on the traffic flow (<code>product = "flow"</code>). Traffic flow is always real-time. Detailed documentation of the variables in the return value.</li>
 <li>Improved coverage of <code>testthat</code>.</li>
 <li>Added an <code>id</code> column to the output of <code><a href="../reference/geocode.html">geocode()</a></code> and removed the id ordered <code>row.names</code> in order to be consistent with other functions of the package. Using the <code>id</code> column the addresses to geocode can be joined to the coordinates after geocoding (see <a href="https://github.com/munterfi/hereR/issues/9" class="external-link">#9</a>).</li>
-<li>Added an <code>id</code> column also to <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code>, <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code>, <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code>, <code><a href="../reference/hereR-defunct.html">traffic()</a></code> and <code><a href="../reference/weather.html">weather()</a></code>. Using the <code>id</code> column the result can be joined to the input.</li>
+<li>Added an <code>id</code> column also to <code>autocomplete()</code>, <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code>, <code><a href="../reference/route.html">route()</a></code>, <code><a href="../reference/isoline.html">isoline()</a></code>, <code>traffic()</code> and <code><a href="../reference/weather.html">weather()</a></code>. Using the <code>id</code> column the result can be joined to the input.</li>
 <li>Fixed the handling of failing requests in <code>.get_content()</code>. The <code>id</code> column is still in correct order, even if there are failing requests in a function call (see <a href="https://github.com/munterfi/hereR/issues/17" class="external-link">#17</a>).</li>
 <li>Added <code>rownames() &lt;- NULL</code> to all functions before returning the result.</li>
 <li>Renamed the <code>city</code> column in the returned object of <code><a href="../reference/weather.html">weather()</a></code> to <code>station</code>, as it stands for the name of the nearest meteorological station.</li>
@@ -245,7 +258,7 @@
 <h2 class="page-header" data-toc-text="0.2.0" id="version-020">version 0.2.0<small>2019-11-13</small><a class="anchor" aria-label="anchor" href="#version-020"></a></h2>
 <ul><li>Enhanced <code><a href="../reference/geocode.html">geocode()</a></code>: In the case of empty responses the row names match the index of the geocoded addresses. Improved input checks. Option to use autocomplete by setting <code>autocomplete = TRUE</code>.</li>
 <li>
-<strong>Geocoder API: Autocomplete</strong> The new feature <code><a href="../reference/hereR-defunct.html">autocomplete()</a></code> allows autocompleting addresses.</li>
+<strong>Geocoder API: Autocomplete</strong> The new feature <code>autocomplete()</code> allows autocompleting addresses.</li>
 <li>
 <strong>Geocoder API: Reverse geocode</strong> The new feature <code><a href="../reference/reverse_geocode.html">reverse_geocode()</a></code> implements reverse geocoding POIs in order to retrieve suggestions for addresses or landmarks.</li>
 </ul></div>
@@ -276,7 +289,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
