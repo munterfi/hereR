@@ -1,6 +1,7 @@
 # version 1.0.1
 
-- Avoid consumption model to be added to request when transport mode is pedestrian (closes [#167](https://github.com/munterfi/hereR/issues/167)).
+- Prevent the consumption model from being added to the request when the transport mode is set to `"pedestrian"` in `isoline()` and `route()` functions (closes [#167](https://github.com/munterfi/hereR/issues/167)).
+- Adjust the rate limit in `route()` to 7 requests per second (RPS). Although HERE's documentation specifies a 10 RPS limit, it has been lowered to 7 RPS to avoid frequent 429 "Too Many Requests" errors.
 
 # version 1.0.0
 
