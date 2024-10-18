@@ -1,3 +1,7 @@
+# version 1.0.1
+
+- Avoid consumption model to be added to request when transport mode is pedestrian (closes [#167](https://github.com/munterfi/hereR/issues/167)).
+
 # version 1.0.0
 
 Please note that there are breaking changes introduced in this major version release for the `weather()`, `flow()`, and `incidents()` functions. Be sure to review the updated documentation to understand how these changes may affect your usage.

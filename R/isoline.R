@@ -107,29 +107,24 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     optimize
   )
 
-  # Add consumption model if specified, otherwise set to default electric vehicle
-  if (is.null(consumption_model)) {
-    url <- paste0(
-      url,
-      "&ev[freeFlowSpeedTable]=0,0.239,27,0.239,45,0.259,60,0.196,75,0.207,90,0.238,100,0.26,110,0.296,120,0.337,130,0.351,250,0.351",
-      "&ev[trafficSpeedTable]=0,0.349,27,0.319,45,0.329,60,0.266,75,0.287,90,0.318,100,0.33,110,0.335,120,0.35,130,0.36,250,0.36",
-      "&ev[ascent]=9",
-      "&ev[descent]=4.3",
-      "&ev[auxiliaryConsumption]=1.8"
-    )
-  } else {
-    url <- paste0(
-      url,
-      consumption_model
-    )
+  if (transport_mode != "pedestrian") {
+    # Add consumption model if specified, otherwise set to default electric vehicle
+    if (is.null(consumption_model)) {
+      url <- paste0(
+        url,
+        "&ev[freeFlowSpeedTable]=0,0.239,27,0.239,45,0.259,60,0.196,75,0.207,90,0.238,100,0.26,110,0.296,120,0.337,130,0.351,250,0.351",
+        "&ev[trafficSpeedTable]=0,0.349,27,0.319,45,0.329,60,0.266,75,0.287,90,0.318,100,0.33,110,0.335,120,0.35,130,0.36,250,0.36",
+        "&ev[ascent]=9",
+        "&ev[descent]=4.3",
+        "&ev[auxiliaryConsumption]=1.8"
+      )
+    } else {
+      url <- paste0(
+        url,
+        consumption_model
+      )
+    }
   }
-
-  # Add departure time
-  url <- .add_datetime(
-    url,
-    datetime,
-    if (arrival) "arrival" else "departure"
-  )
 
   # Return urls if chosen
   if (url_only) {
