@@ -126,13 +126,6 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     }
   }
 
-  # Add departure time
-  url <- .add_datetime(
-    url,
-    datetime,
-    if (arrival) "arrival" else "departure"
-  )
-
   # Return urls if chosen
   if (url_only) {
     return(url)
