@@ -19,6 +19,10 @@
 #'
 #' @return
 #' A \code{data.frame}, which is an edge list containing the requested M:N route combinations.
+#'
+#' @note This feature is no longer available with new freemium keys on the HERE platform.
+#' For more details, refer to the HERE API documentation.
+#'
 #' @export
 #'
 #' @examples
