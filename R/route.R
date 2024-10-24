@@ -132,7 +132,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
     )
   }
 
-  if (transport_mode != "pedestrian") {
+  if (!(transport_mode %in% c("pedestrian", "bicycle"))) {
     # Add consumption model if specified, otherwise set to default electric vehicle
     if (is.null(consumption_model)) {
       url <- paste0(
@@ -179,7 +179,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   # Request and get content
   data <- .async_request(
     url = url,
-    rps = 7
+    rps = 5
   )
   if (length(data) == 0) {
     return(NULL)
