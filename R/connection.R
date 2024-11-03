@@ -216,24 +216,16 @@ connection <- function(origin, destination, datetime = Sys.time(),
                 rank = rank,
                 section = seq_len(nrow(sec)),
                 departure = sec$departure$time,
-                origin = vapply(
-                  sec$departure$place$name,
-                  function(x) if (is.na(x)) "ORIG" else x,
-                  character(1)
-                ),
+                origin = sec$departure$place$name %||% "ORIG",
                 arrival = sec$arrival$time,
-                destination = vapply(
-                  sec$arrival$place$name,
-                  function(x) if (is.na(x)) "DEST" else x,
-                  character(1)
-                ),
-                mode = sec$transport$mode,
-                category = sec$transport$category,
-                vehicle = sec$transport$name,
-                provider = sec$agency$name,
-                direction = sec$transport$headsign,
-                distance = sec$travelSummary$length,
-                duration = sec$travelSummary$duration,
+                destination = sec$arrival$place$name %||% "DEST",
+                mode = sec$transport$mode %||% NA_character_,
+                category = sec$transport$category %||% NA_character_,
+                vehicle = sec$transport$name %||% NA_character_,
+                provider = sec$agency$name %||% NA_character_,
+                direction = sec$transport$headsign %||% NA_character_,
+                distance = sec$travelSummary$length %||% NA_real_,
+                duration = sec$travelSummary$duration %||% NA_real_,
                 geometry = sec$polyline
               )
             }),
@@ -277,4 +269,9 @@ connection <- function(origin, destination, datetime = Sys.time(),
     geometry = suppressMessages(sf::st_union(sf::st_cast(geometry, "LINESTRING")))
   ), by = list(id, rank)]
   return(summary)
+}
+
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
 }
