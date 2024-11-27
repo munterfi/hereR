@@ -42,5 +42,5 @@ set_key("<YOUR API KEY>")
 addresses <- reverse_geocode(poi = poi, results = 3, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html}{HERE Geocoder API: Reverse Geocode}
+\href{https://www.here.com/docs/bundle/geocoding-and-search-api-v7-api-reference/page/index.html}{HERE Geocoder API: Reverse Geocode}
 }

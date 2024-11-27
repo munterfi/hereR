@@ -3,7 +3,7 @@
 #' Calculates route geometries (\code{LINESTRING}) between given pairs of points using the HERE 'Intermodal Routing' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html}{HERE Intermodal Routing API: Routes}
+#' \href{https://www.here.com/docs/bundle/intermodal-routing-api-developer-guide/page/README.html}{HERE Intermodal Routing API: Routes}
 #'
 #' @param origin \code{sf} object, the origin locations of geometry type \code{POINT}.
 #' @param destination \code{sf} object, the destination locations of geometry type \code{POINT}.

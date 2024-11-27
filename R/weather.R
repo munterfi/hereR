@@ -6,7 +6,7 @@
 #' The information comes from the nearest available weather station and is not interpolated.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/destination-weather/api-reference-v3.html}{HERE Destination Weather API}
+#' \href{https://www.here.com/docs/bundle/destination-weather-api-v3-api-reference/page/index.html}{HERE Destination Weather API}
 #'
 #' @param poi \code{sf} object or character, Points of Interest (POIs) of geometry type \code{POINT} or location names (e.g. cities or regions).
 #' @param product character, weather product of the 'Destination Weather API'. Supported products: \code{"observation"}, \code{"forecastHourly"}, \code{"forecastAstronomy"} and \code{"alerts"}.

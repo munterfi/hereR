@@ -63,5 +63,5 @@ summary <- connection(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html}{HERE Public Transit API: Transit Route}
+\href{https://www.here.com/docs/bundle/public-transit-api-developer-guide/page/README.html}{HERE Public Transit API: Transit Route}
 }

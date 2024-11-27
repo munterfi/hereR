@@ -42,5 +42,5 @@ set_key("<YOUR API KEY>")
 locs <- geocode(address = poi$city, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
+\href{https://www.here.com/docs/bundle/geocoding-and-search-api-v7-api-reference/page/index.html}{HERE Geocoding & Search API: Geocode}
 }

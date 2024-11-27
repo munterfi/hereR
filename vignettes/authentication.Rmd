@@ -86,5 +86,4 @@ For overwriting the application credentials use again the `set_key()` function.
 
 ## Reference
 
-- [Sign up as developer](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
-- [Pricing and plans](https://developer.here.com/pricing)
+- [Pricing and plans](https://www.here.com/get-started/pricing)

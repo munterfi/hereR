@@ -5,7 +5,7 @@
 #' with suggestions for addresses near the provided POIs.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html}{HERE Geocoder API: Reverse Geocode}
+#' \href{https://www.here.com/docs/bundle/geocoding-and-search-api-v7-api-reference/page/index.html}{HERE Geocoder API: Reverse Geocode}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
 #' @param results numeric, maximum number of results (Valid range: 1 and 100).

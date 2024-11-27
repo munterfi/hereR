@@ -54,5 +54,5 @@ mat <- route_matrix(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/matrix-routing-api/dev_guide/index.html}{HERE Matrix Routing API}
+\href{https://www.here.com/docs/bundle/matrix-routing-api-developer-guide/page/README.html}{HERE Matrix Routing API}
 }

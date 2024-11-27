@@ -36,5 +36,5 @@ flow_data <- flow(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/traffic-api/api-reference.html}{HERE Traffic API: Flow}
+\href{https://www.here.com/docs/bundle/traffic-api-v7-api-reference/page/index.html}{HERE Traffic API: Flow}
 }

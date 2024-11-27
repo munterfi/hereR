@@ -173,4 +173,4 @@ If no alerts are recorded near a POI the attribute `"alerts"` is `NULL`.
 
 ## API Reference
 
-- [Destination Weather API](https://developer.here.com/documentation/destination-weather/dev_guide/topics/guide.html)
+- [Destination Weather API](https://www.here.com/docs/bundle/destination-weather-api-developer-guide/page/topics/guide.html)

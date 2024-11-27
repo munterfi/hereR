@@ -40,5 +40,5 @@ astronomy <- weather(poi = poi, product = "forecast_astronomy", url_only = TRUE)
 alerts <- weather(poi = poi, product = "alerts", url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/destination-weather/api-reference-v3.html}{HERE Destination Weather API}
+\href{https://www.here.com/docs/bundle/destination-weather-api-v3-api-reference/page/index.html}{HERE Destination Weather API}
 }

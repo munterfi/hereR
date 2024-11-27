@@ -3,7 +3,7 @@
 #' Retrieve stations with the corresponding line information around given locations using the HERE 'Public Transit' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html}{HERE Public Transit API: Station Search}
+#' \href{https://www.here.com/docs/bundle/public-transit-api-developer-guide/page/README.html}{HERE Public Transit API: Station Search}
 #'
 #' @param poi \code{sf} object, Points of Interest (POIs) of geometry type \code{POINT}.
 #' @param radius numeric, the search radius in meters (\code{default = 500}).

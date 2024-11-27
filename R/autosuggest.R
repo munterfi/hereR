@@ -3,7 +3,7 @@
 #' Completes addresses using the HERE 'Geocoder Autosuggest' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html}{HERE Geocoder API: Autosuggest}
+#' \href{https://www.here.com/docs/bundle/geocoding-and-search-api-v7-api-reference/page/index.html}{HERE Geocoder API: Autosuggest}
 #'
 #' @param address character, address text to propose suggestions.
 #' @param results numeric, maximum number of suggestions (Valid range: 1 and 100).

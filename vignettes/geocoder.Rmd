@@ -149,6 +149,4 @@ If no addresses or landmarks are found near a POI, `NULL` for this POI is return
 
 ## API Reference
 
-- [Geocoding & Search: Autosuggest](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html)
-- [Geocoding & Search: Geocode](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-geocode-brief.html)
-- [Geocoding & Search: Reverse Geocode](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-reverse-geocode-brief.html)
+- [Geocoding & Search API](https://www.here.com/docs/bundle/geocoding-and-search-api-v7-api-reference/page/index.html)

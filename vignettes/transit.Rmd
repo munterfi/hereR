@@ -130,5 +130,4 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 
 ## API Reference
 
-- [Public Transit Routing: Routing](https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html)
-- [Public Transit Routing: Station Search](https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html)
+- [Public Transit Routing API](https://www.here.com/docs/bundle/public-transit-api-developer-guide/page/README.html)

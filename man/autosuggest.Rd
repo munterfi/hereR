@@ -26,5 +26,5 @@ set_key("<YOUR API KEY>")
 suggestions <- autosuggest(address = poi$city, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autosuggest-brief.html}{HERE Geocoder API: Autosuggest}
+\href{https://www.here.com/docs/bundle/geocoding-and-search-api-v7-api-reference/page/index.html}{HERE Geocoder API: Autosuggest}
 }

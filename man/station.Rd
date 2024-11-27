@@ -29,5 +29,5 @@ set_key("<YOUR API KEY>")
 stations <- station(poi = poi, url_only = TRUE)
 }
 \references{
-\href{https://developer.here.com/documentation/public-transit/dev_guide/station-search/index.html}{HERE Public Transit API: Station Search}
+\href{https://www.here.com/docs/bundle/public-transit-api-developer-guide/page/README.html}{HERE Public Transit API: Station Search}
 }

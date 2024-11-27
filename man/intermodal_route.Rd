@@ -44,5 +44,5 @@ routes <- intermodal_route(
 )
 }
 \references{
-\href{https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html}{HERE Intermodal Routing API: Routes}
+\href{https://www.here.com/docs/bundle/intermodal-routing-api-developer-guide/page/README.html}{HERE Intermodal Routing API: Routes}
 }

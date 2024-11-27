@@ -61,4 +61,4 @@ if (requireNamespace("mapview", quietly = TRUE)) {
 
 ## API Reference
 
-- [Intermodal Routing API](https://developer.here.com/documentation/intermodal-routing/dev_guide/index.html)
+- [Intermodal Routing API](https://www.here.com/docs/bundle/intermodal-routing-api-developer-guide/page/README.html)

@@ -5,7 +5,7 @@
 #' severity, type, description and further details.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/traffic-api/api-reference.html}{HERE Traffic API: Incidents}
+#' \href{https://www.here.com/docs/bundle/traffic-api-v7-api-reference/page/index.html}{HERE Traffic API: Incidents}
 #'
 #' @param aoi \code{sf} object, Areas of Interest (POIs) of geometry type \code{POLYGON}.
 #' @param from \code{POSIXct} object, start time of the earliest traffic incidents (\code{default = NULL}).

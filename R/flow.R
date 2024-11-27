@@ -5,7 +5,7 @@
 #' corresponds to the status of the traffic at the time of the query.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/traffic-api/api-reference.html}{HERE Traffic API: Flow}
+#' \href{https://www.here.com/docs/bundle/traffic-api-v7-api-reference/page/index.html}{HERE Traffic API: Flow}
 #'
 #' @param aoi \code{sf} object, Areas of Interest (POIs) of geometry type \code{POLYGON}.
 #' @param min_jam_factor numeric, only retrieve flow information with a jam factor greater than the value provided (\code{default = 0}).

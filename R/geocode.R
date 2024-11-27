@@ -3,7 +3,7 @@
 #' Geocodes addresses using the HERE 'Geocoding & Search API' API.
 #'
 #' @references
-#' \href{https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html}{HERE Geocoding & Search API: Geocode}
+#' \href{https://www.here.com/docs/bundle/geocoding-and-search-api-v7-api-reference/page/index.html}{HERE Geocoding & Search API: Geocode}
 #'
 #' @param address character, addresses to geocode or a list containing qualified queries with the keys "country", "state", "county", "city", "district", "street", "houseNumber" or "postalCode".
 #' @param alternatives boolean, return also alternative results (\code{default = FALSE})?
