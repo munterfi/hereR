@@ -6,14 +6,16 @@ test_that("weather forecast_astronomy works", {
   data(poi)
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$weather_forecast_astronomy_response
     },
-    weather_forecast_astronomy <- weather(poi = poi, product = "forecast_astronomy"),
+    {
+      weather_forecast_astronomy <- weather(poi = poi, product = "forecast_astronomy")
 
-    # Tests
-    expect_equal(any(sf::st_geometry_type(weather_forecast_astronomy) != "POINT"), FALSE),
-    expect_equal(nrow(weather_forecast_astronomy), nrow(poi))
+      # Tests
+      expect_equal(any(sf::st_geometry_type(weather_forecast_astronomy) != "POINT"), FALSE)
+      expect_equal(nrow(weather_forecast_astronomy), nrow(poi))
+    }
   )
 })

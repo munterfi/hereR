@@ -16,14 +16,16 @@ test_that("intermodal_route works", {
   expect_error(intermodal_route(origin = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$intermodal_route_response
     },
-    intermodal_routes <- intermodal_route(origin = poi[1:2, ], destination = poi[3:4, ]),
+    {
+      intermodal_routes <- intermodal_route(origin = poi[1:2, ], destination = poi[3:4, ])
 
-    # Tests
-    expect_s3_class(intermodal_routes, c("sf", "data.frame"), exact = TRUE),
-    expect_true(all(sf::st_geometry_type(intermodal_routes) == "LINESTRING"))
+      # Tests
+      expect_s3_class(intermodal_routes, c("sf", "data.frame"), exact = TRUE)
+      expect_true(all(sf::st_geometry_type(intermodal_routes) == "LINESTRING"))
+    }
   )
 })

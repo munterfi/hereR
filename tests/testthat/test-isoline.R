@@ -18,17 +18,18 @@ test_that("isoline works", {
   expect_error(isoline(poi = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$isoline_response
     },
+    {
+      # With and without aggregation
+      isolines_aggr <- isoline(poi = poi, aggregate = TRUE)
+      isolines_mult <- isoline(poi = poi, aggregate = FALSE)
 
-    # With and without aggregation
-    isolines_aggr <- isoline(poi = poi, aggregate = TRUE),
-    isolines_mult <- isoline(poi = poi, aggregate = FALSE),
-
-    # Tests
-    expect_equal(any(sf::st_geometry_type(isolines_aggr) != "MULTIPOLYGON"), FALSE),
-    expect_equal(any(sf::st_geometry_type(isolines_mult) != "POLYGON"), FALSE)
+      # Tests
+      expect_equal(any(sf::st_geometry_type(isolines_aggr) != "MULTIPOLYGON"), FALSE)
+      expect_equal(any(sf::st_geometry_type(isolines_mult) != "POLYGON"), FALSE)
+    }
   )
 })

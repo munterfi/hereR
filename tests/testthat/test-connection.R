@@ -22,26 +22,30 @@ test_that("connection works", {
 
   ## Test with API response mock
   # Route segments: "summary = FALSE"
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$connection_response
     },
-    connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = FALSE),
+    {
+      connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = FALSE)
 
-    # Tests
-    expect_equal(any(sf::st_geometry_type(connections) != "LINESTRING"), FALSE),
-    expect_equal(length(unique(connections$id)), 2)
+      # Tests
+      expect_equal(any(sf::st_geometry_type(connections) != "LINESTRING"), FALSE)
+      expect_equal(length(unique(connections$id)), 2)
+    }
   )
 
   # Route summary: "summary = FALSE"
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$connection_response
     },
-    connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = TRUE),
+    {
+      connections <- connection(origin = poi[3:4, ], destination = poi[5:6, ], summary = TRUE)
 
-    # Tests
-    expect_equal(any(sf::st_geometry_type(connections) != "MULTILINESTRING"), FALSE),
-    expect_equal(length(unique(connections$id)), 2)
+      # Tests
+      expect_equal(any(sf::st_geometry_type(connections) != "MULTILINESTRING"), FALSE)
+      expect_equal(length(unique(connections$id)), 2)
+    }
   )
 })

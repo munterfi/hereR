@@ -14,14 +14,16 @@ test_that("station works", {
   expect_error(weather(poi = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$station_response
     },
-    stations <- station(poi = poi),
+    {
+      stations <- station(poi = poi)
 
-    # Tests
-    expect_equal(any(sf::st_geometry_type(stations) != "POINT"), FALSE),
-    expect_equal(length(unique(stations$id)), nrow(poi))
+      # Tests
+      expect_equal(any(sf::st_geometry_type(stations) != "POINT"), FALSE)
+      expect_equal(length(unique(stations$id)), nrow(poi))
+    }
   )
 })

@@ -22,14 +22,16 @@ test_that("flow works", {
   expect_is(flow(aoi = aoi[aoi$code == "LI", ], url_only = TRUE), "character")
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$flow_response
     },
-    flows <- flow(aoi = aoi[aoi$code == "LI", ]),
+    {
+      flows <- flow(aoi = aoi[aoi$code == "LI", ])
 
-    # Tests
-    expect_equal(class(flows), c("sf", "data.frame")),
-    expect_equal(any(sf::st_geometry_type(flows) != "MULTILINESTRING"), FALSE)
+      # Tests
+      expect_equal(class(flows), c("sf", "data.frame"))
+      expect_equal(any(sf::st_geometry_type(flows) != "MULTILINESTRING"), FALSE)
+    }
   )
 })
