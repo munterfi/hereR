@@ -15,14 +15,16 @@ test_that("route_matrix works", {
   expect_error(route_matrix(origin = poi, destination = poi, url_only = "not_a_bool"), "'url_only' must be a 'boolean' value.")
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$route_matrix_response
     },
-    r_mat <- route_matrix(origin = poi),
+    {
+      r_mat <- route_matrix(origin = poi)
 
-    # Tests
-    expect_is(r_mat, "data.frame"),
-    expect_equal(nrow(r_mat), nrow(poi)**2)
+      # Tests
+      expect_is(r_mat, "data.frame")
+      expect_equal(nrow(r_mat), nrow(poi)**2)
+    }
   )
 })

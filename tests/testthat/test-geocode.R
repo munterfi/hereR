@@ -40,29 +40,33 @@ test_that("geocode works", {
 
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$geocode_response
     },
-    geocoded <- geocode(address = poi$city),
+    {
+      geocoded <- geocode(address = poi$city)
 
-    # Tests
-    expect_s3_class(geocoded, c("sf", "data.frame"), exact = TRUE),
-    expect_true(all(sf::st_geometry_type(geocoded) == "POINT")),
-    expect_equal(nrow(geocoded), length(poi$city))
+      # Tests
+      expect_s3_class(geocoded, c("sf", "data.frame"), exact = TRUE)
+      expect_true(all(sf::st_geometry_type(geocoded) == "POINT"))
+      expect_equal(nrow(geocoded), length(poi$city))
+    }
   )
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$geocode_response
     },
-    geocoded <- geocode(address = poi$city, alternatives = TRUE, sf = FALSE),
+    {
+      geocoded <- geocode(address = poi$city, alternatives = TRUE, sf = FALSE)
 
-    # Tests
-    expect_s3_class(geocoded, "data.frame", exact = TRUE),
-    expect_gt(nrow(geocoded), length(poi$city)),
-    expect_type(geocoded[["lat_position"]], "double"),
-    expect_type(geocoded[["lng_position"]], "double"),
-    expect_type(geocoded[["lat_access"]], "double"),
-    expect_type(geocoded[["lng_access"]], "double")
+      # Tests
+      expect_s3_class(geocoded, "data.frame", exact = TRUE)
+      expect_gt(nrow(geocoded), length(poi$city))
+      expect_type(geocoded[["lat_position"]], "double")
+      expect_type(geocoded[["lng_position"]], "double")
+      expect_type(geocoded[["lat_access"]], "double")
+      expect_type(geocoded[["lng_access"]], "double")
+    }
   )
 })

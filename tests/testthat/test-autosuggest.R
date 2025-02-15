@@ -12,14 +12,16 @@ test_that("autosuggest works", {
   expect_error(autosuggest("  "), "'address' contains empty strings.")
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$autosuggest_response
     },
-    suggestion <- autosuggest(address = poi$city),
+    {
+      suggestion <- autosuggest(address = poi$city)
 
-    # Tests
-    expect_s3_class(suggestion, "data.frame", exact = TRUE),
-    expect_equal(length(unique(suggestion$id)), length(poi$city))
+      # Tests
+      expect_s3_class(suggestion, "data.frame", exact = TRUE)
+      expect_equal(length(unique(suggestion$id)), length(poi$city))
+    }
   )
 })

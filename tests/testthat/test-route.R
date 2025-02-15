@@ -25,14 +25,16 @@ test_that("route works", {
   expect_false(all(grepl(",tolls&tolls[summaries]=total&tolls[vignettes]=all", route(origin = poi, destination = poi, transport_mode = "bicycle", vignettes = FALSE, url_only = TRUE), fixed = TRUE)))
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$route_response
     },
-    routes <- route(origin = poi[1:2, ], destination = poi[3:4, ]),
+    {
+      routes <- route(origin = poi[1:2, ], destination = poi[3:4, ])
 
-    # Tests
-    expect_equal(any(sf::st_geometry_type(routes) != "LINESTRING"), FALSE),
-    expect_equal(nrow(routes), nrow(poi[1:2, ]))
+      # Tests
+      expect_equal(any(sf::st_geometry_type(routes) != "LINESTRING"), FALSE)
+      expect_equal(nrow(routes), nrow(poi[1:2, ]))
+    }
   )
 })

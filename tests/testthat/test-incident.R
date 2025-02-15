@@ -16,14 +16,16 @@ test_that("incidents works", {
   ), "character")
 
   # Test with API response mock
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$incident_response
     },
-    incidents <- incident(aoi = aoi),
+    {
+      incidents <- incident(aoi = aoi)
 
-    # Tests
-    expect_equal(class(incidents), c("sf", "data.frame")),
-    expect_equal(any(sf::st_geometry_type(incidents) != "MULTILINESTRING"), FALSE)
+      # Tests
+      expect_equal(class(incidents), c("sf", "data.frame"))
+      expect_equal(any(sf::st_geometry_type(incidents) != "MULTILINESTRING"), FALSE)
+    }
   )
 })

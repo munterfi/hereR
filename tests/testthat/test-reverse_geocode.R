@@ -19,29 +19,33 @@ test_that("reverse_geocode works", {
   expect_error(reverse_geocode(poi = poi, results = "-100"), "'results' must be of type 'numeric'.")
 
   # Test with API response mock: sf
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$reverse_geocode_response
     },
-    reverse <- reverse_geocode(poi = poi, results = 3, sf = TRUE),
+    {
+      reverse <- reverse_geocode(poi = poi, results = 3, sf = TRUE)
 
-    # Tests
-    expect_s3_class(reverse, c("sf", "data.frame"), exact = TRUE),
-    expect_true(all(sf::st_geometry_type(reverse) == "POINT"))
+      # Tests
+      expect_s3_class(reverse, c("sf", "data.frame"), exact = TRUE)
+      expect_true(all(sf::st_geometry_type(reverse) == "POINT"))
+    }
   )
 
   # Test with API response mock: data.frame
-  with_mock(
-    "hereR:::.async_request" = function(url, rps) {
+  with_mocked_bindings(
+    .async_request = function(url, rps) {
       hereR:::mock$reverse_geocode
     },
-    reverse <- reverse_geocode(poi = poi, results = 3, sf = FALSE),
+    {
+      reverse <- reverse_geocode(poi = poi, results = 3, sf = FALSE)
 
-    # Tests
-    expect_s3_class(reverse, "data.frame", exact = TRUE),
-    expect_type(reverse[["lat_position"]], "double"),
-    expect_type(reverse[["lng_position"]], "double"),
-    expect_type(reverse[["lat_access"]], "double"),
-    expect_type(reverse[["lng_access"]], "double")
+      # Tests
+      expect_s3_class(reverse, "data.frame", exact = TRUE)
+      expect_type(reverse[["lat_position"]], "double")
+      expect_type(reverse[["lng_position"]], "double")
+      expect_type(reverse[["lat_access"]], "double")
+      expect_type(reverse[["lng_access"]], "double")
+    }
   )
 })
