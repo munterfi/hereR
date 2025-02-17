@@ -1,3 +1,7 @@
+# version 1.0.1.9000
+
+- Replace deprecated `with_mock()` from **testthat** with `with_mocked_bindings()` in all test cases (closes [#174](https://github.com/munterfi/hereR/issues/174)).
+
 # version 1.0.1
 
 - Prevent the consumption model from being added to the request when the transport mode is set to `"pedestrian"` in `isoline()` and `route()` functions (closes [#167](https://github.com/munterfi/hereR/issues/167)).
