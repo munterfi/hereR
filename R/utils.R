@@ -24,7 +24,7 @@
   }
 
   if (transport_mode == "bicycle") {
-    warning("Setting a 'speed_limit' with transport mode 'bicycle' is not supported, omitting...")
+    warning("Setting a 'speed_limit' with transport mode 'bicycle' is not supported, omitting...\n")
     return(url)
   }
 
