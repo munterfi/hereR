@@ -2,6 +2,7 @@
 
 - Replace deprecated `with_mock()` from **testthat** with `with_mocked_bindings()` in all test cases (closes [#174](https://github.com/munterfi/hereR/issues/174)).
 - Updated the test coverage GitHub Action workflow to use `actions/upload-artifact@v4`, fixing a deprecation issue.
+- Add support for configuring speed limits in `isoline()` and `route()` requests via the `speed_limit` parameter. This sets `&pedestrian[speed]=<LIMIT>` for pedestrian mode and `&vehicle[speedCap]=<LIMIT>` for vehicle-based modes in API requests (refs [#175](https://github.com/munterfi/hereR/issues/175)).
 
 # version 1.0.1
 

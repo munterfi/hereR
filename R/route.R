@@ -15,6 +15,7 @@
 #' @param arrival boolean, calculate routes for arrival at the defined time (\code{default = FALSE})?
 #' @param results numeric, maximum number of suggested routes (Valid range: 1 and 7).
 #' @param routing_mode character, set the routing type: \code{"fast"} or \code{"short"} (\code{default = "fast"}).
+#' @param speed_limit numeric, sets the maximum allowed speed in meters per second (\code{default = 0}). For \code{"pedestrian"} mode, the value must be between 0.5 and 2 m/s. For vehicle-based modes (\code{"car"} and \code{"truck"}), the value must be between 1 and 70 m/s.
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"}, \code{"scooter"}, \code{"taxi"}, \code{"bus"} or \code{"privateBus"} (\code{default = "car"}).
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param avoid_area, \code{sf} object, area (only bounding box is taken) to avoid in routes (\code{default = NULL}).
@@ -50,8 +51,9 @@
 #' )
 route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
                   results = 1, routing_mode = "fast", transport_mode = "car",
-                  traffic = TRUE, avoid_area = NULL, avoid_feature = NULL,
-                  consumption_model = NULL, vignettes = TRUE, url_only = FALSE) {
+                  speed_limit = 0, traffic = TRUE, avoid_area = NULL,
+                  avoid_feature = NULL, consumption_model = NULL,
+                  vignettes = TRUE, url_only = FALSE) {
   # Checks
   .check_points(origin)
   .check_points(destination)
@@ -61,6 +63,7 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
   .check_numeric_range(results, 1, 7)
   .check_routing_mode(routing_mode)
   .check_transport_mode(transport_mode, request = "route")
+  .check_numeric_range(speed_limit, 0, Inf)
   .check_boolean(traffic)
   .check_polygon(avoid_area)
   .check_character(avoid_feature)
@@ -103,6 +106,11 @@ route <- function(origin, destination, datetime = Sys.time(), arrival = FALSE,
 
   # Add transport mode
   url <- .add_transport_mode(url, transport_mode)
+
+  # Add speed limit
+  if (speed_limit > 0) {
+    url <- .add_speed_limit(url, speed_limit, transport_mode)
+  }
 
   # Add alternatives (results minus 1)
   url <- paste0(
