@@ -18,6 +18,23 @@
   )
 }
 
+.add_speed_limit <- function(url, speed_limit, transport_mode) {
+  if (is.null(speed_limit)) {
+    return(url)
+  }
+
+  if (transport_mode == "bicycle") {
+    warning("Setting a 'speed_limit' with transport mode 'bicycle' is not supported, omitting...\n")
+    return(url)
+  }
+
+  paste0(
+    url,
+    ifelse(transport_mode == "pedestrian", "&pedestrian[speed]=", "&vehicle[speedCap]="),
+    speed_limit
+  )
+}
+
 .add_bbox <- function(url, aoi) {
   bbox <- vapply(sf::st_geometry(aoi), sf::st_bbox, numeric(4))
   .check_bbox(bbox)

@@ -12,6 +12,7 @@ isoline(
   range_type = "time",
   routing_mode = "fast",
   transport_mode = "car",
+  speed_limit = 0,
   traffic = TRUE,
   optimize = "balanced",
   consumption_model = NULL,
@@ -34,6 +35,8 @@ isoline(
 
 \item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.}
 
+\item{speed_limit}{numeric, sets the maximum allowed speed in meters per second (\code{default = 0}). For \code{"pedestrian"} mode, the value must be between 0.5 and 2 m/s. For vehicle-based modes (e.g. \code{"car"} or \code{"truck"}), the value must be between 1 and 70 m/s.}
+
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
 
 \item{optimize, }{character, specifies how isoline calculation is optimized: \code{"balanced"}, \code{"quality"} or \code{"performance"} (\code{default = "balanced"}).}
@@ -48,7 +51,7 @@ isoline(
 An \code{sf} object containing the requested isolines.
 }
 \description{
-Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Isoline Routing' API
+Calculates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Isoline Routing' API
 that connect the end points of all routes leaving from defined centers (POIs) with either
 a specified length, a specified travel time or consumption (only the default E-car available).
 }

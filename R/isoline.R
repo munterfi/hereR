@@ -1,6 +1,6 @@
 #' HERE Isoline Routing API: Calculate Isoline
 #'
-#' Calcuates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Isoline Routing' API
+#' Calculates isolines (\code{POLYGON} or \code{MULTIPOLYGON}) using the HERE 'Isoline Routing' API
 #' that connect the end points of all routes leaving from defined centers (POIs) with either
 #' a specified length, a specified travel time or consumption (only the default E-car available).
 #'
@@ -14,6 +14,7 @@
 #' @param range_type character, unit of the isolines: \code{"distance"}, \code{"time"} or \code{"consumption"}.
 #' @param routing_mode character, set the routing mode: \code{"fast"} or \code{"short"}.
 #' @param transport_mode character, set the transport mode: \code{"car"}, \code{"pedestrian"} or \code{"truck"}.
+#' @param speed_limit numeric, sets the maximum allowed speed in meters per second (\code{default = 0}). For \code{"pedestrian"} mode, the value must be between 0.5 and 2 m/s. For vehicle-based modes (e.g. \code{"car"} or \code{"truck"}), the value must be between 1 and 70 m/s.
 #' @param traffic boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.
 #' @param optimize, character, specifies how isoline calculation is optimized: \code{"balanced"}, \code{"quality"} or \code{"performance"} (\code{default = "balanced"}).
 #' @param consumption_model character, specify the consumption model of the vehicle (\code{default = NULL} an average electric car is set).
@@ -37,7 +38,7 @@
 isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
                     range = seq(5, 30, 5) * 60, range_type = "time",
                     routing_mode = "fast", transport_mode = "car",
-                    traffic = TRUE, optimize = "balanced",
+                    speed_limit = 0, traffic = TRUE, optimize = "balanced",
                     consumption_model = NULL, aggregate = FALSE,
                     url_only = FALSE) {
   # Checks
@@ -46,6 +47,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   .check_range_type(range_type)
   .check_routing_mode(routing_mode)
   .check_transport_mode(transport_mode, request = "isoline")
+  .check_numeric_range(speed_limit, 0, Inf)
   .check_optimize(optimize)
   .check_boolean(traffic)
   .check_boolean(arrival)
@@ -91,6 +93,11 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
   # Add transport mode
   url <- .add_transport_mode(url, transport_mode)
 
+  # Add speed limit
+  if (speed_limit > 0) {
+    url <- .add_speed_limit(url, speed_limit, transport_mode)
+  }
+
   # Add range and range type
   url <- paste0(
     url,
@@ -107,7 +114,7 @@ isoline <- function(poi, datetime = Sys.time(), arrival = FALSE,
     optimize
   )
 
-  if (transport_mode != "pedestrian") {
+  if (!(transport_mode %in% c("pedestrian", "bicycle"))) {
     # Add consumption model if specified, otherwise set to default electric vehicle
     if (is.null(consumption_model)) {
       url <- paste0(
