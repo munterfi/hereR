@@ -36,7 +36,7 @@ route(
 
 \item{transport_mode}{character, set the transport mode: \code{"car"}, \code{"truck"}, \code{"pedestrian"}, \code{"bicycle"}, \code{"scooter"}, \code{"taxi"}, \code{"bus"} or \code{"privateBus"} (\code{default = "car"}).}
 
-\item{speed_limit}{numeric, sets the maximum allowed speed in meters per second (\code{default = 0}). For \code{"pedestrian"} mode, the value must be between 0.5 and 2 m/s. For vehicle-based modes (\code{"car"} and \code{"truck"}), the value must be between 1 and 70 m/s.}
+\item{speed_limit}{numeric, sets the maximum allowed speed in meters per second (\code{default = 0}). For \code{"pedestrian"} mode, the value must be between 0.5 and 2 m/s. For vehicle-based modes (e.g. \code{"car"} or \code{"truck"}), the value must be between 1 and 70 m/s.}
 
 \item{traffic}{boolean, use real-time traffic or prediction in routing (\code{default = TRUE})? If no traffic is selected, the \code{datetime} is set to \code{"any"} and the request is processed independently from time.}
 

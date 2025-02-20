@@ -21,13 +21,18 @@
 .add_speed_limit <- function(url, speed_limit, transport_mode) {
   if (is.null(speed_limit)) {
     return(url)
-  } else {
-    paste0(
-      url,
-      ifelse(transport_mode == "pedestrian", "&pedestrian[speed]=", "&vehicle[speedCap]="),
-      speed_limit
-    )
   }
+
+  if (transport_mode == "bicycle") {
+    warning("Setting a 'speed_limit' with transport mode 'bicycle' is not supported, omitting...")
+    return(url)
+  }
+
+  paste0(
+    url,
+    ifelse(transport_mode == "pedestrian", "&pedestrian[speed]=", "&vehicle[speedCap]="),
+    speed_limit
+  )
 }
 
 .add_bbox <- function(url, aoi) {
