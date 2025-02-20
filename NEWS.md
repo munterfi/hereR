@@ -1,4 +1,4 @@
-# version 1.0.1.9000
+# version 1.1.0
 
 - Replace deprecated `with_mock()` from **testthat** with `with_mocked_bindings()` in all test cases (closes [#174](https://github.com/munterfi/hereR/issues/174)).
 - Updated the test coverage GitHub Action workflow to use `actions/upload-artifact@v4`, fixing a deprecation issue.

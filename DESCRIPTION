@@ -1,7 +1,7 @@
 Package: hereR
 Type: Package
 Title: 'sf'-Based Interface to the 'HERE' REST APIs
-Version: 1.0.1.9000
+Version: 1.1.0
 Authors@R: c(
     person("Merlin", "Unterfinger", role = c("aut", "cre"), email = "info@munterfinger.ch", comment = c(ORCID = "0000-0003-2020-2366")),
     person("Daniel", "Possenriede", role = "ctb", comment = c(ORCID = "0000-0002-6738-9845")))
@@ -18,7 +18,7 @@ Description: Interface to the 'HERE' REST APIs <https://developer.here.com/devel
   information and alerts at a specific location from the 'Destination Weather' API.
   Locations, routes and isolines are returned as 'sf' objects.
 Depends: R (>= 3.3.0)
-Imports: 
+Imports:
     crul (>= 1.1.0),
     curl (>= 4.3),
     data.table (>= 1.13.0),
