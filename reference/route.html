@@ -21,7 +21,7 @@ to obtain an estimate of the consumption."><meta property="og:image" content="/l
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@ to obtain an estimate of the consumption."><meta property="og:image" content="/l
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>HERE Routing API: Calculate Route</h1>
-    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/v1.0.1/R/route.R" class="external-link"><code>R/route.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/munterfi/hereR/blob/v1.1.0/R/route.R" class="external-link"><code>R/route.R</code></a></small>
     <div class="hidden name"><code>route.Rd</code></div>
     </div>
 
@@ -109,6 +109,7 @@ to obtain an estimate of the consumption.</p>
 <span>  results <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  routing_mode <span class="op">=</span> <span class="st">"fast"</span>,</span>
 <span>  transport_mode <span class="op">=</span> <span class="st">"car"</span>,</span>
+<span>  speed_limit <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  traffic <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  avoid_area <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  avoid_feature <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -148,6 +149,10 @@ to obtain an estimate of the consumption.</p>
 
 <dt id="arg-transport-mode">transport_mode<a class="anchor" aria-label="anchor" href="#arg-transport-mode"></a></dt>
 <dd><p>character, set the transport mode: <code>"car"</code>, <code>"truck"</code>, <code>"pedestrian"</code>, <code>"bicycle"</code>, <code>"scooter"</code>, <code>"taxi"</code>, <code>"bus"</code> or <code>"privateBus"</code> (<code>default = "car"</code>).</p></dd>
+
+
+<dt id="arg-speed-limit">speed_limit<a class="anchor" aria-label="anchor" href="#arg-speed-limit"></a></dt>
+<dd><p>numeric, sets the maximum allowed speed in meters per second (<code>default = 0</code>). For <code>"pedestrian"</code> mode, the value must be between 0.5 and 2 m/s. For vehicle-based modes (e.g. <code>"car"</code> or <code>"truck"</code>), the value must be between 1 and 70 m/s.</p></dd>
 
 
 <dt id="arg-traffic">traffic<a class="anchor" aria-label="anchor" href="#arg-traffic"></a></dt>

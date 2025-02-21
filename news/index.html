@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hereR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -84,9 +84,16 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/munterfi/hereR/blob/v1.0.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/munterfi/hereR/blob/v1.1.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.0" id="version-110">version 1.1.0<small>2025-02-20</small><a class="anchor" aria-label="anchor" href="#version-110"></a></h2>
+<ul><li>Replace deprecated <code>with_mock()</code> from <strong>testthat</strong> with <code>with_mocked_bindings()</code> in all test cases (closes <a href="https://github.com/munterfi/hereR/issues/174" class="external-link">#174</a>).</li>
+<li>Updated the test coverage GitHub Action workflow to use <code>actions/upload-artifact@v4</code>, fixing a deprecation issue.</li>
+<li>Add support for configuring speed limits in <code><a href="../reference/isoline.html">isoline()</a></code> and <code><a href="../reference/route.html">route()</a></code> requests via the <code>speed_limit</code> parameter. This sets <code>&amp;pedestrian[speed]=&lt;LIMIT&gt;</code> for pedestrian mode and <code>&amp;vehicle[speedCap]=&lt;LIMIT&gt;</code> for vehicle-based modes in API requests (refs <a href="https://github.com/munterfi/hereR/issues/175" class="external-link">#175</a>).</li>
+<li>Expand transport mode support in <code><a href="../reference/isoline.html">isoline()</a></code> routing by enabling <code>"bicycle"</code>, <code>"scooter"</code>, <code>"taxi"</code>, <code>"bus"</code>, and <code>"privateBus"</code>, in line with newly available API options.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.1" id="version-101">version 1.0.1<small>2024-11-27</small><a class="anchor" aria-label="anchor" href="#version-101"></a></h2>
 <ul><li>Prevent the consumption model from being added to the request when the transport mode is set to <code>"pedestrian"</code> in <code><a href="../reference/isoline.html">isoline()</a></code> and <code><a href="../reference/route.html">route()</a></code> functions (closes <a href="https://github.com/munterfi/hereR/issues/167" class="external-link">#167</a>).</li>
